@@ -1,0 +1,7 @@
+/META-INF/
+/applicationContext/
+/applicationContext.xml
+/com/
+/ehcache.xml
+/log4j.properties
+/shiro.ini

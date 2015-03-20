@@ -1,0 +1,42 @@
+
+.pv-table {
+	width: 100%;	
+    border-collapse: collapse;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #517FC4;    
+}
+
+.pv-corner {
+	background-color: #5F9AF4;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #517FC4;	
+	padding: 1px;
+}
+
+.pv-col-hdr {
+	background-color: #5F9AF4;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #517FC4;	
+    text-align:center;
+    padding:4px 10px;
+}
+
+.pv-row-hdr {
+	background-color: #A1C7FF;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #517FC4;	
+    text-align: left;
+    padding:2px 5px;
+}
+
+.pv-cell {
+	background-color: #F4F9FF;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #517FC4;
+    padding:4px 10px;
+}

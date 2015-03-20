@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+    
+    <context:annotation-config />
+    
+    <!--
+    放在CORE的 JOB 要能在 CORE, GSBSC 兩個區域都能跑,
+    如果只能在 GSBSC 跑, 卻無法在CORE跑  那請把
+    applicationContext-STANDARD-QUARTZ.xml 與 applicationContext-STANDARD-QUARTZ-JOB.xml
+    疑到 GSBSC 項目中 
+     -->
+	<!-- Scheduler -->		
+   	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="applicationContextSchedulerContextKey" value="applicationContext" />    	     
+    	<property name="dataSource" ref="dataSource"/> 
+    	<property name="transactionManager" ref="transactionManager"/>        
+    	<property name="overwriteExistingJobs" value="true"/>        
+    	<property name="autoStartup" value="true" />        	
+		<property name="triggers">
+	    	<list>
+				<ref bean="core.job.SendMailHelperJobCronTrigger" />
+	    	</list>
+		</property>
+    	<property name="quartzProperties">            
+    		<props>    
+    			<prop key="org.quartz.scheduler.instanceId">AUTO</prop>                
+    			<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>                
+    			<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>		               
+    			<prop key="org.quartz.jobStore.tablePrefix">qrtz_</prop>                
+    			<prop key="org.quartz.jobStore.isClustered">true</prop>                
+    			<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>                
+    			<prop key="org.quartz.threadPool.threadCount">8</prop>                
+    			<prop key="org.quartz.threadPool.threadPriority">5</prop>            
+    		</props>      
+    	</property> 			
+   	</bean>    
+	     		
+</beans>
