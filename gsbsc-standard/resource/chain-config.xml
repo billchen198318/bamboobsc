@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog name="gsbsc-chain-catalog">
+	
+	<!-- KPI tree items 資料產生用的 chain -->
+	<chain name="kpiTreeItemsChain">
+		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="ProcessBscTreeItemsCommand" 	className="com.netsteadfast.greenstep.bsc.command.ProcessBscTreeItemsCommand"/>
+	</chain>
+	
+	<!-- WEIGHT 權重設定資料產生用的 chain -->
+	<chain name="weightItemsChain">
+		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="WeightBodyCommand" 			className="com.netsteadfast.greenstep.bsc.command.WeightBodyCommand"/>				
+	</chain>	
+	
+	<!-- 績效分數資料產生用的 chain -->
+	<chain name="performanceScoreChain">
+		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+	</chain>		
+	
+	<!-- KPI報表html版產生內容用的 chain -->
+	<chain name="kpiReportHtmlContentChain">
+		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>		
+		<command id="KpiReportBodyCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiReportBodyCommand"/>
+	</chain>	
+
+	<!-- KPI報表Excel版產生內容用的 chain -->
+	<chain name="kpiReportExcelContentChain">
+		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>		
+		<command id="KpiReportExcelCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiReportExcelCommand"/>
+	</chain>	
+	
+	<!-- KPI報表PDF版產生內容用的 chain -->
+	<chain name="kpiReportPdfContentChain">
+		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>		
+		<command id="KpiReportPdfCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiReportPdfCommand"/>
+	</chain>	
+	
+	<!-- 個人報表html版產生內容用的 chain -->
+	<chain name="personalReportHtmlContentChain">
+		<command id="LoadBscMixDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 								className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>	
+		<command id="PersonalAndOrganizationReportDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.PersonalAndOrganizationReportDateRangeScoreCommand"/>
+		<command id="PersonalReportBodyCommand" 							className="com.netsteadfast.greenstep.bsc.command.PersonalReportBodyCommand"/>
+	</chain>
+	
+	<!-- 個人報表Excel版產生內容用的 chain -->
+	<chain name="personalReportExcelContentChain">
+		<command id="LoadBscMixDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 								className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>	
+		<command id="PersonalAndOrganizationReportDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.PersonalAndOrganizationReportDateRangeScoreCommand"/>
+		<command id="PersonalReportExcelCommand" 							className="com.netsteadfast.greenstep.bsc.command.PersonalReportExcelCommand"/>
+	</chain>	
+
+	<!-- 個人報表PDF版產生內容用的 chain -->
+	<chain name="personalReportPdfContentChain">
+		<command id="LoadBscMixDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 								className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>	
+		<command id="PersonalAndOrganizationReportDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.PersonalAndOrganizationReportDateRangeScoreCommand"/>
+		<command id="PersonalReportPdfCommand" 								className="com.netsteadfast.greenstep.bsc.command.PersonalReportPdfCommand"/>
+	</chain>	
+	
+	<!-- 部門報表html版產生內容用的 chain -->
+	<chain name="organizationReportHtmlContentChain">
+		<command id="LoadBscMixDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 								className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>	
+		<command id="PersonalAndOrganizationReportDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.PersonalAndOrganizationReportDateRangeScoreCommand"/>
+		<command id="OrganizationReportBodyCommand" 						className="com.netsteadfast.greenstep.bsc.command.OrganizationReportBodyCommand"/>
+	</chain>
+	
+	<!-- 部門報表Excel版產生內容用的 chain -->
+	<chain name="organizationReportExcelContentChain">
+		<command id="LoadBscMixDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 								className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>	
+		<command id="PersonalAndOrganizationReportDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.PersonalAndOrganizationReportDateRangeScoreCommand"/>
+		<command id="OrganizationReportExcelCommand" 						className="com.netsteadfast.greenstep.bsc.command.OrganizationReportExcelCommand"/>
+	</chain>
+
+	<!-- 部門報表PDF版產生內容用的 chain -->
+	<chain name="organizationReportPdfContentChain">
+		<command id="LoadBscMixDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 								className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 								className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>	
+		<command id="PersonalAndOrganizationReportDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.PersonalAndOrganizationReportDateRangeScoreCommand"/>
+		<command id="OrganizationReportPdfCommand" 							className="com.netsteadfast.greenstep.bsc.command.OrganizationReportPdfCommand"/>
+	</chain>
+	
+	<!-- 策略地圖資料產生用的 chain -->
+	<chain name="strategyMapItemsForNewChain">
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadStrategyMapItemsForNewCommand"	className="com.netsteadfast.greenstep.bsc.command.LoadStrategyMapItemsForNewCommand"/>				
+	</chain>	
+	
+	<!-- 策略地圖資料產生用的 chain -->
+	<!-- 
+	讀取策略地圖資料 BB_STRATEGY_MAP, BB_STRATEGY_MAP_NODES, BB_STRATEGY_MAP_CONNS 並不需要 LoadBscMixDataCommand 與 LoadBscStructTreeCommand
+	但願景Vision 之下沒有 Perspectives, Objective, KPI 本來就不因該有策略地圖
+	 -->
+	<chain name="strategyMapItemsForRecChain">
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadStrategyMapItemsForRecCommand"	className="com.netsteadfast.greenstep.bsc.command.LoadStrategyMapItemsForRecCommand"/>				
+	</chain>			
+	
+	<!-- SWOT頁面產生的 chain -->
+	<chain name="swotHtmlContentChain">
+		<command id="SwotDataProvideCommand" 	className="com.netsteadfast.greenstep.bsc.command.SwotDataProvideCommand"/> 
+		<command id="SwotBodyCommand" 			className="com.netsteadfast.greenstep.bsc.command.SwotBodyCommand"/>
+	</chain>		
+	
+	<!-- SWOT報表Jasperreport PDF 產生要用資料的 chain -->
+	<!--
+	產生 BB_SWOT_REPORT_MST, BB_SWOT_REPORT_DTL 資料 
+	 -->
+	<chain name="swotPdfDataContentChain">
+		<command id="SwotDataProvideCommand" 	className="com.netsteadfast.greenstep.bsc.command.SwotDataProvideCommand"/> 
+		<command id="SwotReportPdfDataCommand" 	className="com.netsteadfast.greenstep.bsc.command.SwotReportPdfDataCommand"/>
+	</chain>	
+				
+</catalog>  

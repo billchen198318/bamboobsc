@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-organization.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-employee.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-vision.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-perspective.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-objective.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-formula.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-kpi.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-measureData.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-weight.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-strategyMap.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-swot.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-workspace.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-aggregationMethod.xml" />    
+    
+</beans>    
