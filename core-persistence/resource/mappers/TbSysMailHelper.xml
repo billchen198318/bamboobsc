@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysMailHelper">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysMailHelper" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="MAIL_ID" property="mailId"/>
+		<result column="SUBJECT" property="subject"/>
+		<result column="TEXT" property="text"/>
+		<result column="MAIL_FROM" property="mailFrom"/>		
+		<result column="MAIL_TO" property="mailTo"/>		
+		<result column="MAIL_CC" property="mailCc"/>		
+		<result column="MAIL_BCC" property="mailBcc"/>		
+		<result column="SUCCESS_FLAG" property="successFlag"/>		
+		<result column="SUCCESS_TIME" property="successTime"/>		
+		<result column="RETAIN_FLAG" property="retainFlag"/>	
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_mail_helper where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="mailId != null">
+			AND MAIL_ID = #{mailId}
+		</if>					
+		<if test="successFlag != null">
+			AND SUCCESS_FLAG = #{successFlag}
+		</if>						
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_mail_helper where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="mailId != null">
+			AND MAIL_ID = #{mailId}
+		</if>					
+		<if test="successFlag != null">
+			AND SUCCESS_FLAG = #{successFlag}
+		</if>						
+	</select>	
+	
+</mapper>

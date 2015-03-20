@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysBeanHelp">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysBeanHelp" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="BEAN_ID" property="beanId"/>
+		<result column="METHOD" property="method"/>
+		<result column="SYSTEM" property="system"/>
+		<result column="ENABLE_FLAG" property="enableFlag"/>				
+		<result column="DESCRIPTION" property="description"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_bean_help where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="beanId != null">
+			AND BEAN_ID = #{beanId}
+		</if>			
+		<if test="method != null">
+			AND METHOD = #{method}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>	
+		<if test="enableFlag != null">
+			AND ENABLE_FLAG = #{enableFlag}
+		</if>														
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_bean_help where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="beanId != null">
+			AND BEAN_ID = #{beanId}
+		</if>			
+		<if test="method != null">
+			AND METHOD = #{method}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>	
+		<if test="enableFlag != null">
+			AND ENABLE_FLAG = #{enableFlag}
+		</if>				
+	</select>	
+	
+</mapper>

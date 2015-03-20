@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbStrategyMapConns">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbStrategyMapConns" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="MASTER_OID" property="masterOid"/>		
+		<result column="CONNECTION_ID" property="connectionId"/>		
+		<result column="SOURCE_ID" property="sourceId"/>
+		<result column="TARGET_ID" property="targetId"/>		
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_strategy_map_conns where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>			
+		<if test="masterOid != null">
+			AND MASTER_OID = #{masterOid}
+		</if>							
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_strategy_map_conns where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>			
+		<if test="masterOid != null">
+			AND MASTER_OID = #{masterOid}
+		</if>				
+	</select>	
+	
+</mapper>

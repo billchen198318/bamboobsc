@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="measureData.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbMeasureData</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.MeasureDataVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>kpiId</a>
+			<b>kpiId</b>
+		</field>		
+		<field>
+			<a>date</a>
+			<b>date</b>
+		</field>	
+		<field>
+			<a>target</a>
+			<b>target</b>
+		</field>	
+		<field>
+			<a>actual</a>
+			<b>actual</b>
+		</field>
+		<field>
+			<a>frequency</a>
+			<b>frequency</b>
+		</field>			
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>							
+	</mapping>
+
+	<mapping map-id="measureData.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.MeasureDataVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbMeasureData</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>kpiId</a>
+			<b>kpiId</b>
+		</field>		
+		<field>
+			<a>date</a>
+			<b>date</b>
+		</field>	
+		<field>
+			<a>target</a>
+			<b>target</b>
+		</field>	
+		<field>
+			<a>actual</a>
+			<b>actual</b>
+		</field>
+		<field>
+			<a>frequency</a>
+			<b>frequency</b>
+		</field>			
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>	
+	</mapping>
+	
+</mappings>

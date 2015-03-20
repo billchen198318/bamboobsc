@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbWorkspaceTemplate">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbWorkspaceTemplate" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="TEMPLATE_ID" property="templateId"/>		
+		<result column="NAME" property="name"/>				
+		<result column="RESOURCE" property="resource"/>		
+		<result column="RESOURCE_CONF" property="resourceConf"/>
+		<result column="POSITION_SIZE" property="positionSize"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_workspace_template where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="templateId != null">
+			AND TEMPLATE_ID = #{templateId}
+		</if>													
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_workspace_template where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="templateId != null">
+			AND TEMPLATE_ID = #{templateId}
+		</if>				
+	</select>	
+	
+</mapper>

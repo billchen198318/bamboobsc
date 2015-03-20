@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="kpiOrga.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbKpiOrga</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.KpiOrgaVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>kpiId</a>
+			<b>kpiId</b>
+		</field>				
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>						
+	</mapping>
+
+	<mapping map-id="kpiOrga.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.KpiOrgaVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbKpiOrga</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>kpiId</a>
+			<b>kpiId</b>
+		</field>				
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+	</mapping>
+	
+</mappings>

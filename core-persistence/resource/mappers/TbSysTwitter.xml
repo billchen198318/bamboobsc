@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysTwitter">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysTwitter" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="SYSTEM" property="system"/>		
+		<result column="TITLE" property="title"/>				
+		<result column="ENABLE_FLAG" property="enableFlag"/>		
+		<result column="CONTENT" property="content"/>	
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_twitter where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>													
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_twitter where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>				
+	</select>	
+	
+</mapper>

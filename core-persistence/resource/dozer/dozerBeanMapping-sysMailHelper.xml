@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysMailHelper.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysMailHelper</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysMailHelperVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>mailId</a>
+			<b>mailId</b>
+		</field>	
+		<field>
+			<a>subject</a>
+			<b>subject</b>
+		</field>					
+		<field>
+			<a>text</a>
+			<b>text</b>
+		</field>		
+		<field>
+			<a>mailFrom</a>
+			<b>mailFrom</b>
+		</field>	
+		
+		<field>
+			<a>mailTo</a>
+			<b>mailTo</b>
+		</field>			
+		<field>
+			<a>mailCc</a>
+			<b>mailCc</b>
+		</field>	
+		<field>
+			<a>mailBcc</a>
+			<b>mailBcc</b>
+		</field>
+		<field>
+			<a>successFlag</a>
+			<b>successFlag</b>
+		</field>
+		<field>
+			<a>successTime</a>
+			<b>successTime</b>
+		</field>
+		<field>
+			<a>retainFlag</a>
+			<b>retainFlag</b>
+		</field>														
+	</mapping>
+
+	<mapping map-id="sysMailHelper.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysMailHelperVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysMailHelper</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>mailId</a>
+			<b>mailId</b>
+		</field>	
+		<field>
+			<a>subject</a>
+			<b>subject</b>
+		</field>					
+		<field>
+			<a>text</a>
+			<b>text</b>
+		</field>		
+		<field>
+			<a>mailFrom</a>
+			<b>mailFrom</b>
+		</field>	
+		
+		<field>
+			<a>mailTo</a>
+			<b>mailTo</b>
+		</field>			
+		<field>
+			<a>mailCc</a>
+			<b>mailCc</b>
+		</field>	
+		<field>
+			<a>mailBcc</a>
+			<b>mailBcc</b>
+		</field>
+		<field>
+			<a>successFlag</a>
+			<b>successFlag</b>
+		</field>
+		<field>
+			<a>successTime</a>
+			<b>successTime</b>
+		</field>
+		<field>
+			<a>retainFlag</a>
+			<b>retainFlag</b>
+		</field>					
+	</mapping>
+	
+</mappings>

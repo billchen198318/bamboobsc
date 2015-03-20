@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysBeanHelpExprMap">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysBeanHelpExprMap" id="baseResultMap">
+		<id column="OID" property="oid"/>	
+		<result column="HELP_EXPR_OID" property="helpExprOid"/>
+		<result column="METHOD_RESULT_FLAG" property="methodResultFlag"/>
+		<result column="METHOD_PARAM_CLASS" property="methodParamClass"/>		
+		<result column="METHOD_PARAM_INDEX" property="methodParamIndex"/>
+		<result column="VAR_NAME" property="varName"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_bean_help_expr_map where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="helpExprOid != null">
+			AND HELP_EXPR_OID = #{helpExprOid}
+		</if>																
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_bean_help_expr_map where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="helpExprOid != null">
+			AND HELP_EXPR_OID = #{helpExprOid}
+		</if>		
+	</select>	
+	
+</mapper>

@@ -1,0 +1,63 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbKpi">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbKpi" id="baseResultMap">
+		<id column="OID" property="oid"/>			
+		<id column="ID" property="id"/>
+		<id column="OBJ_ID" property="objId"/>		
+		<id column="NAME" property="name"/>		
+		<id column="DESCRIPTION" property="description"/>
+		<id column="WEIGHT" property="weight"/>
+		<id column="FOR_ID" property="forId"/>		
+		<id column="UNIT" property="unit"/>
+		<id column="TARGET" property="target"/>
+		<id column="MIN" property="min"/>
+		<id column="MANAGEMENT" property="management"/>
+		<id column="COMPARE_TYPE" property="compareType"/>
+		<id column="CAL" property="cal"/>
+		<id column="DATA_TYPE" property="dataType"/>
+		<id column="ORGA_MEASURE_SEPARATE" property="orgaMeasureSeparate"/>
+		<id column="USER_MEASURE_SEPARATE" property="userMeasureSeparate"/>
+		<id column="QUASI_RANGE" property="quasiRange"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_kpi where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="id != null">
+			AND ID = #{id}
+		</if>			
+		<if test="objId != null">
+			AND OBJ_ID = #{objId}
+		</if>						
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>										
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_kpi where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="id != null">
+			AND ID = #{id}
+		</if>			
+		<if test="objId != null">
+			AND OBJ_ID = #{objId}
+		</if>						
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>						
+	</select>	
+	
+</mapper>

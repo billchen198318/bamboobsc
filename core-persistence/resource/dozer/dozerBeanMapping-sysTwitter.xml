@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysTwitter.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysTwitter</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysTwitterVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>	
+		<field>
+			<a>title</a>
+			<b>title</b>
+		</field>					
+		<field>
+			<a>enableFlag</a>
+			<b>enableFlag</b>
+		</field>		
+		<field>
+			<a>content</a>
+			<b>content</b>
+		</field>				
+	</mapping>
+
+	<mapping map-id="sysTwitter.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysTwitterVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysTwitter</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>	
+		<field>
+			<a>title</a>
+			<b>title</b>
+		</field>					
+		<field>
+			<a>enableFlag</a>
+			<b>enableFlag</b>
+		</field>		
+		<field>
+			<a>content</a>
+			<b>content</b>
+		</field>					
+	</mapping>
+	
+</mappings>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="objective.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbObjective</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.ObjectiveVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>objId</a>
+			<b>objId</b>
+		</field>		
+		<field>
+			<a>perId</a>
+			<b>perId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>
+		<field>
+			<a>weight</a>
+			<b>weight</b>
+		</field>
+		<field>
+			<a>target</a>
+			<b>target</b>
+		</field>	
+		<field>
+			<a>min</a>
+			<b>min</b>
+		</field>
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>																			
+	</mapping>
+
+	<mapping map-id="objective.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.ObjectiveVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbObjective</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>objId</a>
+			<b>objId</b>
+		</field>		
+		<field>
+			<a>perId</a>
+			<b>perId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>
+		<field>
+			<a>weight</a>
+			<b>weight</b>
+		</field>
+		<field>
+			<a>target</a>
+			<b>target</b>
+		</field>	
+		<field>
+			<a>min</a>
+			<b>min</b>
+		</field>
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>
+	</mapping>
+	
+</mappings>

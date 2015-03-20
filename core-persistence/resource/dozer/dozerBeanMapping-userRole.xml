@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="userRole.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbUserRole</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.UserRoleVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>role</a>
+			<b>role</b>
+		</field>	
+		<field>
+			<a>account</a>
+			<b>account</b>
+		</field>			
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>					
+	</mapping>
+
+	<mapping map-id="userRole.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.UserRoleVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbUserRole</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>role</a>
+			<b>role</b>
+		</field>	
+		<field>
+			<a>account</a>
+			<b>account</b>
+		</field>			
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>	
+	</mapping>
+	
+</mappings>

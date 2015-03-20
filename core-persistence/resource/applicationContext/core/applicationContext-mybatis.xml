@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+	
+	<bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	    <property name="properties">
+	        <props>
+	            <prop key="SQL Server">sqlserver</prop>
+	            <prop key="DB2">db2</prop>
+	            <prop key="Oracle">oracle</prop>
+	            <prop key="MySQL">mysql</prop>
+	        </props>
+	    </property>
+	</bean>
+	
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+    	<property name="properties" ref="vendorProperties"/>
+	</bean>	
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  		<property name="dataSource" ref="dataSource" />  			
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mappers/TbAccount.xml</value>
+                <value>classpath*:mappers/TbSysCode.xml</value>
+                <value>classpath*:mappers/TbRole.xml</value>
+                <value>classpath*:mappers/TbRolePermission.xml</value>               
+                <value>classpath*:mappers/TbUserRole.xml</value>
+                <value>classpath*:mappers/TbSys.xml</value>
+                <value>classpath*:mappers/TbSysMenu.xml</value>      
+                <value>classpath*:mappers/TbSysMenuRole.xml</value>
+                <value>classpath*:mappers/TbSysIcon.xml</value>        
+                <value>classpath*:mappers/TbSysProg.xml</value>                       
+                <value>classpath*:mappers/TbSysCalendarNote.xml</value>                
+                <value>classpath*:mappers/TbSysMsgNotice.xml</value>                
+                <value>classpath*:mappers/TbSysTemplate.xml</value>                
+                <value>classpath*:mappers/TbSysTemplateParam.xml</value>     
+                <value>classpath*:mappers/TbSysMsgNoticeConfig.xml</value>  
+                <value>classpath*:mappers/TbSysWsConfig.xml</value>                
+                <value>classpath*:mappers/TbSysExpression.xml</value>                
+                <value>classpath*:mappers/TbSysBeanHelp.xml</value>   
+                <value>classpath*:mappers/TbSysBeanHelpExpr.xml</value>                
+                <value>classpath*:mappers/TbSysBeanHelpExprMap.xml</value>                
+                <value>classpath*:mappers/TbSysUpload.xml</value>  
+                <value>classpath*:mappers/TbSysJreport.xml</value>                
+                <value>classpath*:mappers/TbSysJreportParam.xml</value>                   
+                <value>classpath*:mappers/TbSysCtxBean.xml</value>                
+                <value>classpath*:mappers/TbSysTwitter.xml</value>                
+                <value>classpath*:mappers/TbSysMailHelper.xml</value>
+                <value>classpath*:mappers/BbOrganization.xml</value>
+                <value>classpath*:mappers/BbOrganizationPar.xml</value>
+                <value>classpath*:mappers/BbEmployee.xml</value>
+                <value>classpath*:mappers/BbEmployeeOrga.xml</value>                
+                <value>classpath*:mappers/BbVision.xml</value>
+                <value>classpath*:mappers/BbPerspective.xml</value>
+                <value>classpath*:mappers/BbObjective.xml</value>                  
+                <value>classpath*:mappers/BbKpi.xml</value>
+                <value>classpath*:mappers/BbFormula.xml</value>
+                <value>classpath*:mappers/BbMeasureData.xml</value>
+                <value>classpath*:mappers/BbKpiOrga.xml</value>
+                <value>classpath*:mappers/BbKpiEmpl.xml</value>                
+                <value>classpath*:mappers/BbScoreColor.xml</value>
+                <value>classpath*:mappers/BbStrategyMap.xml</value>
+                <value>classpath*:mappers/BbStrategyMapNodes.xml</value>
+                <value>classpath*:mappers/BbStrategyMapConns.xml</value>
+                <value>classpath*:mappers/BbSwot.xml</value>                
+                <value>classpath*:mappers/BbSwotReportMst.xml</value>
+                <value>classpath*:mappers/BbSwotReportDtl.xml</value>  
+                <value>classpath*:mappers/BbWorkspace.xml</value>
+                <value>classpath*:mappers/BbWorkspaceCompoment.xml</value>
+                <value>classpath*:mappers/BbWorkspaceConfig.xml</value>
+                <value>classpath*:mappers/BbWorkspaceTemplate.xml</value>
+                <value>classpath*:mappers/BbWorkspaceLabel.xml</value>                
+                <value>classpath*:mappers/BbAggregationMethod.xml</value>
+                <value>classpath*:mappers/QcDataSourceDriver.xml</value>
+                <value>classpath*:mappers/QcDataSourceConf.xml</value>
+                <value>classpath*:mappers/QcDataQuery.xml</value>
+                <value>classpath*:mappers/QcDataQueryMapper.xml</value>
+                <value>classpath*:mappers/QcDataQueryMapperSet.xml</value>                
+                <value>classpath*:mappers/QcOlapConf.xml</value>
+                <value>classpath*:mappers/QcOlapCatalog.xml</value>
+                <value>classpath*:mappers/QcOlapMdx.xml</value>                  
+            </list>
+        </property>          		  		
+  		<property name="databaseIdProvider" ref="databaseIdProvider"/>
+	</bean>
+		
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+  		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+</beans>

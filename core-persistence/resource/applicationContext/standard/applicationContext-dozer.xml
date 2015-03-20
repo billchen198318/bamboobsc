@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+    
+    <context:annotation-config />
+    
+	<bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+		<property name="mappingFiles"> 
+			<list>
+				<value>classpath*:dozer/dozerBeanMapping.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-account.xml</value> 	
+				<value>classpath*:dozer/dozerBeanMapping-sysCode.xml</value>					
+				<value>classpath*:dozer/dozerBeanMapping-role.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-userRole.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-rolePermission.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sys.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysMenu.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysMenuRole.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysIcon.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysProg.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysCalendarNote.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysMsgNotice.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysTemplate.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysTemplateParam.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysMsgNoticeConfig.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysWsConfig.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysExpression.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysBeanHelp.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysBeanHelpExpr.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysBeanHelpExprMap.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysUpload.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysJreport.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysJreportParam.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysCtxBean.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysTwitter.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysMailHelper.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-organization.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-organizationPar.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-employee.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-employeeOrga.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-vision.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-perspective.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-objective.xml</value>	
+				<value>classpath*:dozer/dozerBeanMapping-kpi.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-formula.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-measureData.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-kpiOrga.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-kpiEmpl.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-scoreColor.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-strategyMap.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-strategyMapNodes.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-strategyMapConns.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-swot.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-swotReportMst.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-swotReportDtl.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-workspace.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-workspaceCompoment.xml</value>	
+				<value>classpath*:dozer/dozerBeanMapping-workspaceConfig.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-workspaceTemplate.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-workspaceLabel.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-dataSourceDriver.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-dataSourceConf.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-dataQuery.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-dataQueryMapper.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-dataQueryMapperSet.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-olapConf.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-olapCatalog.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-olapMdx.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-aggregationMethod.xml</value>				
+			</list> 
+		</property> 
+	</bean>
+	
+</beans>

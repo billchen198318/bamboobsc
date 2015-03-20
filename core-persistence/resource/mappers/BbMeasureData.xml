@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbMeasureData">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbMeasureData" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="KPI_ID" property="kpiId"/>
+		<result column="DATE" property="date"/>
+		<result column="TARGET" property="target"/>
+		<result column="ACTUAL" property="actual"/>
+		<result column="FREQUENCY" property="frequency"/>
+		<result column="ORG_ID" property="orgId"/>
+		<result column="EMP_ID" property="empId"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_measure_data where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="kpiId != null">
+			AND KPI_ID = #{kpiId}
+		</if>		
+		<if test="date != null">
+			AND DATE = #{date}
+		</if>	
+		<if test="frequency != null">
+			AND FREQUENCY = #{frequency}
+		</if>									
+		<if test="orgId != null">
+			AND ORG_ID = #{orgId}
+		</if>
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>							
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_measure_data where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="kpiId != null">
+			AND KPI_ID = #{kpiId}
+		</if>		
+		<if test="date != null">
+			AND DATE = #{date}
+		</if>	
+		<if test="frequency != null">
+			AND FREQUENCY = #{frequency}
+		</if>									
+		<if test="orgId != null">
+			AND ORG_ID = #{orgId}
+		</if>
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>					
+	</select>	
+	
+</mapper>

@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbWorkspaceCompoment">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbWorkspaceCompoment" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="COMP_ID" property="compId"/>		
+		<result column="NAME" property="name"/>	
+		<result column="IMAGE" property="image"/>
+		<result column="CLASS_NAME" property="className"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_workspace_compoment where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="compId != null">
+			AND COMP_ID = #{compId}
+		</if>													
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_workspace_compoment where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="compId != null">
+			AND COMP_ID = #{compId}
+		</if>					
+	</select>	
+	
+</mapper>

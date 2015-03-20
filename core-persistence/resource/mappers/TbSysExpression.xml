@@ -1,0 +1,46 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysExpression">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysExpression" id="baseResultMap">
+		<id column="OID" property="oid"/>					
+		<result column="EXPR_ID" property="exprId"/>
+		<result column="TYPE" property="type"/>
+		<result column="NAME" property="name"/>
+		<result column="CONTENT" property="content"/>
+		<result column="DESCRIPTION" property="description"/>				
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_expression where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="exprId != null">
+			AND EXPR_ID = #{exprId}
+		</if>					
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>																
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_expression where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="exprId != null">
+			AND EXPR_ID = #{exprId}
+		</if>					
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>			
+	</select>	
+	
+</mapper>

@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysUpload">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysUpload" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="SYSTEM" property="system"/>
+		<result column="SUB_DIR" property="subDir"/>		
+		<result column="TYPE" property="type"/>	
+		<result column="FILE_NAME" property="fileName"/>
+		<result column="SHOW_NAME" property="showName"/>
+		<result column="IS_FILE" property="isFile"/>
+		<result column="CONTENT" property="content"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_upload where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>			
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>	
+		<if test="isFile != null">
+			AND IS_FILE = #{isFile}
+		</if>											
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_upload where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>			
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>	
+		<if test="isFile != null">
+			AND IS_FILE = #{isFile}
+		</if>		
+	</select>	
+	
+</mapper>

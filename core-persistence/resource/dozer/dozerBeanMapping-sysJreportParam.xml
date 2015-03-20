@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysJreportParam.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysJreportParam</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysJreportParamVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>reportId</a>
+			<b>reportId</b>
+		</field>	
+		<field>
+			<a>urlParam</a>
+			<b>urlParam</b>
+		</field>
+		<field>
+			<a>rptParam</a>
+			<b>rptParam</b>
+		</field>																												
+	</mapping>
+
+	<mapping map-id="sysJreportParam.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysJreportParamVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysJreportParam</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>reportId</a>
+			<b>reportId</b>
+		</field>	
+		<field>
+			<a>urlParam</a>
+			<b>urlParam</b>
+		</field>
+		<field>
+			<a>rptParam</a>
+			<b>rptParam</b>
+		</field>	
+	</mapping>
+	
+</mappings>

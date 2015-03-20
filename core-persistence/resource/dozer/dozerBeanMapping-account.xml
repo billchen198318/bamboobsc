@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="account.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbAccount</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.AccountVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>account</a>
+			<b>account</b>			
+		</field>
+		<field>
+			<a>password</a>
+			<b>password</b>			
+		</field>				
+		<field>
+			<a>onJob</a>
+			<b>onJob</b>			
+		</field>				
+	</mapping>
+
+	<mapping map-id="account.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.AccountVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbAccount</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>account</a>
+			<b>account</b>			
+		</field>
+		<field>
+			<a>password</a>
+			<b>password</b>			
+		</field>	
+		<field>
+			<a>onJob</a>
+			<b>onJob</b>			
+		</field>		
+	</mapping>
+	
+</mappings>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysMsgNoticeConfig.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysMsgNoticeConfig</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysMsgNoticeConfigVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>msgId</a>
+			<b>msgId</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>
+		<field>
+			<a>className</a>
+			<b>className</b>
+		</field>																																							
+	</mapping>
+
+	<mapping map-id="sysMsgNoticeConfig.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysMsgNoticeConfigVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysMsgNoticeConfig</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>msgId</a>
+			<b>msgId</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>
+		<field>
+			<a>className</a>
+			<b>className</b>
+		</field>				
+	</mapping>
+	
+</mappings>

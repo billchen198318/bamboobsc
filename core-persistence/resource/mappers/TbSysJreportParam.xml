@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysJreportParam">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysJreportParam" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="REPORT_ID" property="reportId"/>	
+		<result column="URL_PARAM" property="urlParam"/>
+		<result column="RPT_PARAM" property="rptParam"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_jreport_param where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="reportId != null">
+			AND REPORT_ID = #{reportId}
+		</if>	
+		<if test="urlParam != null">
+			AND URL_PARAM = #{urlParam}
+		</if>		
+		<if test="rptParam != null">
+			AND RPT_PARAM = #{rptParam}
+		</if>														
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_jreport_param where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="reportId != null">
+			AND REPORT_ID = #{reportId}
+		</if>	
+		<if test="urlParam != null">
+			AND URL_PARAM = #{urlParam}
+		</if>		
+		<if test="rptParam != null">
+			AND RPT_PARAM = #{rptParam}
+		</if>			
+	</select>	
+	
+</mapper>
