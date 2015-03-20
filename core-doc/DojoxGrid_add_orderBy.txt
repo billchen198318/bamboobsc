@@ -1,0 +1,12 @@
+DOJO 的 Grid 可在 header 中增加 html , 範例如下
+
+function CORE_PROG001D0001Q_GridFieldStructure() {
+	return [
+			{ name: "View&nbsp;/&nbsp;Edit&nbsp;&nbsp;<img src='asc.png' border='0' onclick='sortASC();' />&nbsp;<img src='desc.png' border='0' onclick='sortDESC();' />", field: "oid", formatter: CORE_PROG001D0001Q_GridButtonClick, width: "15%" },  
+			{ name: "System Id", field: "sysId", width: "20%" },
+			{ name: "Name", field: "name", width: "25%" },
+			{ name: "Host", field: "host", width: "20%" },
+			{ name: "Context path", field: "contextPath", width: "20%" }			
+		];
+}
+

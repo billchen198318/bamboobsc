@@ -1,0 +1,33 @@
+2015-03-12
+-----------------------------------------------------------
+add new feature analytics(OLAP) on QCHARTS-WEB
+and modify KPI calculation(aggregation method) .
+
+add new database table:
+	bb_aggregation_method
+	qc_olap_conf
+	qc_olap_catalog
+	qc_olap_mdx
+	
+modifier to the database table:
+	bb_kpi.CAL VARCHAR(1) to VARCHAR(14)
+	and bb_kpi.CAL related-to bb_aggregation_method.AGGR_ID
+	
+*** please re-import bbcore.sql to MySQL
+
+
+2015-02-16
+-----------------------------------------------------------
+add KPI-Report/Personal-Report/Department-Report signature function
+
+
+2015-02-12
+-----------------------------------------------------------
+fix some login error, the same account login on another devices
+and modify tb_sys_usess UK_1(SESSION_ID, ACCOUNT) 
+
+
+2015-02-11
+-----------------------------------------------------------
+fix "05 - Measure data" T(Target value), A(Actual value) cannot input float number value.
+

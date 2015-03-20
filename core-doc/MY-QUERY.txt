@@ -1,0 +1,7 @@
+
+KPIs 2015 year Actual value.
+
+select K.NAME, MD.ACTUAL, MD.TARGET, MD.DATE from bb_measure_data MD, bb_KPI K
+where K.ID=MD.KPI_ID and MD.FREQUENCY='6' and MD.ORG_ID='*' and MD.EMP_ID='*'
+and MD.DATE LIKE '2015%'
+

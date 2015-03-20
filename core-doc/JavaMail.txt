@@ -1,0 +1,11 @@
+			JavaMailSender mailSender = (JavaMailSender)AppContext.getBean("mailSender");
+			
+			MimeMessage mm = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mm, true, "UTF-8");
+			helper.setFrom("root@localhost");
+			helper.setTo("chen.xin.nien@gmail.com");
+			helper.setSubject("TEST");
+			helper.setText("test message!");
+			
+			mailSender.send(mm);
+			

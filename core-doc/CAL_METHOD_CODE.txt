@@ -1,0 +1,107 @@
+----------------------------------------------------------------------------------------------------------------
+正常分數
+----------------------------------------------------------------------------------------------------------------
+	private float calculationMeasureData(KpiVO kpi) throws Exception {
+		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
+		Float score = 0.0f;
+		int size = 0;
+		for (BbMeasureData measureData : measureDatas) {
+			BscMeasureData data = new BscMeasureData();
+			data.setActual( measureData.getActual() );
+			data.setTarget( measureData.getTarget() );
+			Object value = null;
+			try {
+				value = BscFormulaUtils.parse(kpi.getFormula(), data);
+				if (value == null) {
+					continue;
+				}
+				if ( !(value instanceof Integer || value instanceof Float || value instanceof Long) ) {
+					continue;
+				}
+				score += NumberUtils.toFloat( String.valueOf(value), 0.0f);
+				size++;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (BscKpiCode.CAL_AVERAGE.equals(kpi.getCal()) && score != 0.0f ) {
+			score = score / size;
+		}
+		return score;
+	}
+----------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------
+日期區間分數
+----------------------------------------------------------------------------------------------------------------
+	private void calculateDateRangeScore(KpiVO kpi, String frequency) throws Exception {
+		for (DateRangeScoreVO dateScore : kpi.getDateRangeScores()) {
+			float score = 0.0f;
+			int size = 0;
+			for (BbMeasureData measureData : kpi.getMeasureDatas()) {
+				String date = dateScore.getDate().replaceAll("/", "");
+				if (BscMeasureDataFrequency.FREQUENCY_QUARTER.equals(frequency)) { // Q1, Q2, Q3, Q4
+					String yyyy = date.substring(0, 4);
+					if (date.endsWith(QUARTER_1)) {
+						if (!(yyyy+"0101").equals(measureData.getDate())) { // 一季
+							continue;
+						}
+					}
+					if (date.endsWith(QUARTER_2)) {
+						if (!(yyyy+"0401").equals(measureData.getDate())) { // 二季
+							continue;
+						}						
+					}
+					if (date.endsWith(QUARTER_3)) {
+						if (!(yyyy+"0701").equals(measureData.getDate())) { // 三季
+							continue;
+						}							
+					}
+					if (date.endsWith(QUARTER_4)) {
+						if (!(yyyy+"1001").equals(measureData.getDate())) { // 四季
+							continue;
+						}						
+					}					
+				} else if (BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency)) { // first, last
+					String yyyy = date.substring(0, 4);
+					if (date.endsWith(HALF_YEAR_FIRST)) {
+						if (!(yyyy+"0101").equals(measureData.getDate())) { // 前半年
+							continue;
+						}						
+					}
+					if (date.endsWith(HALF_YEAR_LAST)) {
+						if (!(yyyy+"0701").equals(measureData.getDate())) { // 後半年
+							continue;
+						}							
+					}										
+				} else { // DAY, WEEK, MONTH, YEAR
+					if (!measureData.getDate().startsWith(date)) {
+						continue;
+					}					
+				}				
+				BscMeasureData data = new BscMeasureData();
+				data.setActual( measureData.getActual() );
+				data.setTarget( measureData.getTarget() );
+				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
+				if (value == null) {
+					continue;
+				}
+				if ( !(value instanceof Integer || value instanceof Float || value instanceof Long) ) {
+					continue;
+				}
+				score += NumberUtils.toFloat( String.valueOf(value), 0.0f);
+				size++;
+			}
+			if (BscKpiCode.CAL_AVERAGE.equals(kpi.getCal()) && score != 0.0f ) {
+				score = score / size;
+			}
+			dateScore.setScore(score);
+			dateScore.setFontColor( BscScoreColorUtils.getFontColor(score) );
+			dateScore.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
+			dateScore.setImgIcon( BscReportSupportUtils.getHtmlIcon(kpi, score) );
+		}		
+	}
+----------------------------------------------------------------------------------------------------------------	
+
