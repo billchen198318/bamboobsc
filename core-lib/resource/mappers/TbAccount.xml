@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbAccount">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbAccount" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="ACCOUNT" property="account"/>		
+		<result column="PASSWORD" property="password"/>		
+		<result column="ON_JOB" property="onJob"/>			
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_account where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>			
+		<if test="account != null">
+			AND ACCOUNT = #{account}
+		</if>	
+		<if test="password != null">
+			AND PASSWORD = #{password}
+		</if>					
+		<if test="onJob != null">
+			AND ON_JOB = #{onJob}
+		</if>				
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_account where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>			
+		<if test="account != null">
+			AND ACCOUNT = #{account}
+		</if>	
+		<if test="password != null">
+			AND PASSWORD = #{password}
+		</if>					
+		<if test="onJob != null">
+			AND ON_JOB = #{onJob}
+		</if>				
+	</select>	
+	
+</mapper>
