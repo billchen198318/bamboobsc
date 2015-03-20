@@ -10,6 +10,8 @@ Features:<br/>
 4. Can custom SQL query results show as Charts ( PIE, BAR, LINE, AREA ) on QCHARTS-WEB.<br/>
 5. Provides a simple OLAP query.<br/>
 <br/><br/>
+<h2>Download:</h2> http://sourceforge.net/projects/bamboobsc/
+<br/><br/>
 contact: chen.xin.nien@gmail.com
 <br/><br/>
 how to create a measure project demo video:<br/>
