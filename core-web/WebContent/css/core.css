@@ -1,0 +1,110 @@
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0; 
+	padding: 0;
+	overflow: hidden;
+	font-size: 13px !important; 
+	background: white; 
+	color: #333;
+}
+
+#borderContainer {
+	width: 100%; height: 100%;
+}
+
+#topBar {
+	margin: 0; padding: 0; border: none;
+}
+
+h1 {
+	margin: 0; padding: 1px; background-color: #ffffff; color: #000000;
+}
+
+#loader {
+			padding:0;
+			margin:0;
+			position:absolute;
+			top:0; left:0;
+			width:100%; height:100%;
+			background:#ededed;
+			z-index:999;
+			vertical-align:middle;
+}
+ 
+#loaderInner {
+			padding:5px;
+			position:relative;
+			left:0;
+			top:0;
+			width:450px;
+			background:#224388;
+			color:#fff;
+}
+
+ul{  
+	border: 0px solid #ccc;  
+	padding: 2em;  
+	margin: 5em;  	
+	cursor: default;  
+}  
+
+.dijitToasterContainer {
+	display: block;
+	position: absolute;
+	width: 35em;
+	margin: 0px;
+	font:0.75em;
+}
+
+.dijitReadOnly * {
+	background-color: #E6E6E6;	
+}
+
+/*
+.dijitReadOnly * {
+	background-color: #E6E6E6;
+	background-image: url("../icons/lock.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 16px auto;	
+}
+*/
+
+/**
+.dijitTextBoxReadOnly {
+	background-image: url("../icons/lock.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 16px auto;
+}
+**/
+
+/** Dojo claro style Override : Start **/
+
+
+/**
+.claro .dijitFolderOpened {
+    display: none;
+}
+
+.claro .dijitFolderClosed {
+    display: none;
+}
+**/
+
+
+.claro .dijitLeaf {
+    display: none;
+}
+
+.claro .dijitTreeNodeSelected {
+    font-size: 12px;
+}
+
+.claro .dijitTreeLabel {
+    font-size: 12px;
+}
+
+/** Dojo claro style Override : End **/
+
