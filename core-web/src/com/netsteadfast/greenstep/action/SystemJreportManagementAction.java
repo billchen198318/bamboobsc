@@ -21,6 +21,9 @@
  */
 package com.netsteadfast.greenstep.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,9 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 	private static final long serialVersionUID = -2810740119507303251L;
 	private ISysJreportService<SysJreportVO, TbSysJreport, String> sysJreportService;
 	private SysJreportVO sysJreport = new SysJreportVO(); // edit模式要用
+	private InputStream inputStream = null;
+	private String filename = "";
+	private String contentType = "";
 	
 	public SystemJreportManagementAction() {
 		super();
@@ -76,6 +82,12 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 		}
 		this.sysJreport = result.getValue();
 	}
+	
+	private void exportReportData() throws ServiceException, Exception {
+		this.inputStream = new ByteArrayInputStream( this.sysJreport.getContent() ); 
+		this.filename = this.sysJreport.getReportId() + ".zip";
+		this.contentType = "application/octet-stream";
+	}	
 	
 	/**
 	 * core.systemJreportManagementAction.action
@@ -166,6 +178,28 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 		}
 		return forward;		
 	}
+	
+	/**
+	 * core.systemJreportExportAction.action
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG001D0008Q")
+	public String export() throws Exception {
+		String forward = RESULT_SEARCH_NO_DATA;
+		try {
+			this.initData();
+			this.loadSysJreportData();
+			this.exportReportData();
+			forward = SUCCESS;
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return forward;				
+	}	
 
 	@Override
 	public String getProgramName() {
@@ -190,6 +224,33 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 
 	public void setSysJreport(SysJreportVO sysJreport) {
 		this.sysJreport = sysJreport;
+	}
+	
+	public InputStream getInputStream() {
+		if ( this.inputStream == null ) {
+			this.inputStream = new ByteArrayInputStream( "".getBytes() );
+		}
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 	
 }
