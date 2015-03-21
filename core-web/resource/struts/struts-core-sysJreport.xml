@@ -27,6 +27,14 @@
 			<result name="input">/pages/sys-jreport/sys-jreport-editParam.jsp</result>		
 			<result name="success">/pages/sys-jreport/sys-jreport-editParam.jsp</result>
 		</action>	
+		
+		<action name="core.systemJreportExportAction" class="core.web.controller.SystemJreportManagementAction" method="export">
+		    <result name="success" type="stream">
+		        <param name="contentType">${contentType}</param>
+		        <param name="contentDisposition">filename="${filename}"</param>
+		        <param name="inputName">inputStream</param>
+		    </result>
+		</action>		
 					   	
 	</package>
 	
