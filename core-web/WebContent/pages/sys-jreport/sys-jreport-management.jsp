@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0008Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0008Q_GridButtonClick, width: "10%" },  
+			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0008Q_GridButtonClick, width: "15%" },  
 			{ name: "Report Id", field: "reportId", width: "20%" },
 			{ name: "File", field: "file", width: "25%" },
 			{ name: "Compile", field: "isCompile", width: "10%" },
-			{ name: "Description", field: "description", width: "35%" }			
+			{ name: "Description", field: "description", width: "30%" }			
 		];
 }
 
@@ -42,6 +42,8 @@ function CORE_PROG001D0008Q_GridButtonClick(itemOid) {
 	var rd="";
 	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0008Q_edit('" + itemOid + "');\" />";
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
+	rd += "<img src=\"" + _getSystemIconUrl('EXPORT') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0008Q_downloadFile('" + itemOid + "');\" />";
+	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";	
 	rd += "<img src=\"" + _getSystemIconUrl('IMPORTANT') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0008Q_editParam('" + itemOid + "');\" />";	
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
 	rd += "<img src=\"" + _getSystemIconUrl('REMOVE') + "\" border=\"0\" alt=\"delete\" onclick=\"CORE_PROG001D0008Q_confirmDelete('" + itemOid + "');\" />";
@@ -55,6 +57,13 @@ function CORE_PROG001D0008Q_clear() {
 
 function CORE_PROG001D0008Q_edit(oid) {
 	CORE_PROG001D0008E_TabShow(oid);
+}
+
+function CORE_PROG001D0008Q_downloadFile(oid) {
+	window.open(
+			"<%=basePath%>/core.systemJreportExportAction.action?fields.oid=" + oid,
+			"report-source-file-export",
+            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    		
 }
 
 function CORE_PROG001D0008Q_editParam(oid) {
