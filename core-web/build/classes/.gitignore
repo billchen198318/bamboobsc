@@ -1,8 +1,8 @@
-/applicationContext/
-/com/
+/applicationContext
+/com
 /log4j.properties
 /n2a.sh
-/org/
+/org
 /shiro.ini
-/struts/
+/struts
 /struts.xml
