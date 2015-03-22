@@ -132,4 +132,15 @@ public interface IRoleLogicService {
 	 */
 	public DefaultResult<Boolean> updateMenuRole(String progOid, List<String> roles) throws ServiceException, Exception;
 	
+	/**
+	 * 拷備一份role
+	 * 
+	 * @param fromRoleOid
+	 * @param role
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	public DefaultResult<RoleVO> copyAsNew(String fromRoleOid, RoleVO role) throws ServiceException, Exception;
+	
 }

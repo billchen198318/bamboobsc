@@ -522,4 +522,45 @@ public class RoleLogicServiceImpl extends BaseLogicService implements IRoleLogic
 		return result;
 	}
 
+	/**
+	 * 拷備一份role
+	 * 
+	 * @param fromRoleOid
+	 * @param role
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */	
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<RoleVO> copyAsNew(String fromRoleOid, RoleVO role) throws ServiceException, Exception {
+		if (role==null || super.isBlank(role.getRole()) || super.isBlank(fromRoleOid)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		super.setStringValueMaxLength(role, "description", MAX_DESCRIPTION_LENGTH);
+		DefaultResult<RoleVO> result = this.roleService.saveObject(role);
+		RoleVO oldRole = new RoleVO();
+		oldRole.setOid(fromRoleOid);
+		DefaultResult<RoleVO> fromResult = this.roleService.findObjectByOid(oldRole);
+		if ( fromResult.getValue() == null ) {
+			throw new ServiceException( fromResult.getSystemMessage().getValue() );
+		}
+		oldRole = fromResult.getValue();		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("role", oldRole.getRole());
+		List<TbRolePermission> permissions = this.rolePermissionService.findListByParams(paramMap);
+		for (int i=0; permissions!=null && i<permissions.size(); i++) {
+			RolePermissionVO permission = new RolePermissionVO();
+			this.rolePermissionService.fillToValueObject(permission, permissions.get(i));
+			permission.setOid(null);
+			permission.setRole( result.getValue().getRole() );
+			this.rolePermissionService.saveObject(permission);
+		}
+		return result;
+	}
+
 }
