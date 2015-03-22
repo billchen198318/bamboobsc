@@ -1,6 +1,6 @@
-/META-INF/
-/applicationContext/
+/META-INF
+/applicationContext
 /chain-config.xml
-/com/
+/com
 /log4j.properties
 /shiro.ini
