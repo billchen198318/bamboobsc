@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -134,6 +135,25 @@ public class RoleManagementAction extends BaseSupportAction implements IBaseAddi
 			this.setPageMessage(e.getMessage().toString());
 		}
 		return forward;		
+	}
+	
+	/**
+	 * core.roleCopyAsNewAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG002D0001A_S00")	
+	public String copyAsNew() throws Exception {
+		String forward = this.edit();
+		if ( SUCCESS.equals(forward) ) {
+			if ( Constants.SUPER_ROLE_ADMIN.equals(this.role.getRole()) 
+					|| Constants.SUPER_ROLE_ALL.equals(this.role.getRole()) ) {
+				super.setErrorMessage("Super role or all role can not copy new as!");
+				forward = ERROR;
+			}
+		}
+		return forward;
 	}
 	
 	@Override

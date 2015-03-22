@@ -149,6 +149,19 @@ public class RoleSaveOrUpdateAction extends BaseJsonAction {
 		this.success = IS_YES;			
 	}
 	
+	private void saveCopyAsNew() throws ControllerException, AuthorityException, ServiceException, Exception {
+		this.checkFields();
+		RoleVO role = new RoleVO();
+		this.transformFields2ValueObject(role, new String[]{"role", "description"});
+		DefaultResult<RoleVO> result = this.roleLogicService.copyAsNew(
+				this.getFields().get("fromRoleOid"), role);
+		this.message = result.getSystemMessage().getValue();
+		if (result.getValue()==null) {
+			return;
+		}
+		this.success = IS_YES;
+	}	
+	
 	/**
 	 * core.roleSaveAction.action
 	 * 
@@ -235,6 +248,35 @@ public class RoleSaveOrUpdateAction extends BaseJsonAction {
 		}
 		return SUCCESS;				
 	}
+	
+	/**
+	 * core.roleSaveCopyAsNewAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG002D0001A_S00")
+	public String doSaveCopyAsNew() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.saveCopyAsNew();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}	
 
 	@JSON
 	@Override

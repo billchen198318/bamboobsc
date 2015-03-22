@@ -42,6 +42,8 @@ function CORE_PROG002D0001Q_GridButtonClick(itemOid) {
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
 	rd += "<img src=\"" + _getSystemIconUrl('IMPORTANT') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG002D0001Q_editPermitted('" + itemOid + "');\" />";
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";	
+	rd += "<img src=\"" + _getSystemIconUrl('SHARED') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG002D0001A_S00_DlgShow('" + itemOid + "');\" />";
+	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";	
 	rd += "<img src=\"" + _getSystemIconUrl('REMOVE') + "\" border=\"0\" alt=\"delete\" onclick=\"CORE_PROG002D0001Q_confirmDelete('" + itemOid + "');\" />";
 	return rd;	
 }
