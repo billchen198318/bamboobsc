@@ -54,7 +54,7 @@ public class ReportRoleViewServiceImpl extends BaseService<ReportRoleViewVO, BbR
 	}
 
 	@Autowired
-	@Resource(name="core.dao.ReportRoleViewDAO")
+	@Resource(name="bsc.dao.ReportRoleViewDAO")
 	@Required		
 	public void setReportRoleViewDAO(
 			IReportRoleViewDAO<BbReportRoleView, String> reportRoleViewDAO) {
