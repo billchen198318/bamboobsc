@@ -19,7 +19,7 @@
 	</resultMap>
 	
 	<select id="selectByParams" resultMap="baseResultMap" >
-		select * from bb_kpi where 1=1
+		select * from bb_aggregation_method where 1=1
 		<if test="oid != null">
 			AND OID = #{oid}
 		</if>
@@ -35,7 +35,7 @@
 	</select>
 	
 	<select id="selectByValue" resultMap="baseResultMap" >
-		select * from bb_kpi where 1=1
+		select * from bb_aggregation_method where 1=1
 		<if test="oid != null">
 			AND OID = #{oid}
 		</if>
