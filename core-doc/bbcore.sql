@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.15, for FreeBSD10.0 (amd64)
+-- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.6.15
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -424,6 +424,36 @@ LOCK TABLES `bb_perspective` WRITE;
 /*!40000 ALTER TABLE `bb_perspective` DISABLE KEYS */;
 INSERT INTO `bb_perspective` VALUES ('a7473cdc-e0eb-4b81-8f94-f3cac5aeccae','PER20141115002','VIS20141114001','Customer',25.00,100,70,'','admin','2014-11-15 12:23:23',NULL,NULL),('dd3f6f6b-a851-4a36-a647-e1473a85060c','PER20141115003','VIS20141114001','Internal business processes',25.00,90,40,'','admin','2014-11-15 12:23:45',NULL,NULL),('e6670f2f-0462-45c9-b0de-2682e7a5f08c','PER20141115001','VIS20141114001','Financial',25.00,100,50,'','admin','2014-11-15 12:21:09',NULL,NULL),('f1410495-88a9-4c6a-ab32-f896956f8827','PER20141115004','VIS20141114001','Learning and growth',25.00,100,55,'','admin','2014-11-15 12:24:01',NULL,NULL);
 /*!40000 ALTER TABLE `bb_perspective` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bb_report_role_view`
+--
+
+DROP TABLE IF EXISTS `bb_report_role_view`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bb_report_role_view` (
+  `OID` char(36) NOT NULL,
+  `TYPE` varchar(10) NOT NULL,
+  `ROLE` varchar(50) NOT NULL,
+  `ID_NAME` varchar(24) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TYPE`,`ROLE`,`ID_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bb_report_role_view`
+--
+
+LOCK TABLES `bb_report_role_view` WRITE;
+/*!40000 ALTER TABLE `bb_report_role_view` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bb_report_role_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2325,4 +2355,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-22 13:12:49
+-- Dump completed on 2015-03-23  9:43:55
