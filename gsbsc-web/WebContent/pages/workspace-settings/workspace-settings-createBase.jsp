@@ -43,19 +43,26 @@ function ${programId}_page_message() {
 
 <body class="claro" bgcolor="#EEEEEE" >
 
-	<table border="0" width="100%" height="150px" cellpadding="1" cellspacing="0" >	
+	<table border="0" width="100%" height="225px" cellpadding="1" cellspacing="0" >	
 		<tr>
-    		<td height="25px" width="10%"  align="right"><font color='RED'>*</font>Id:</td>
-    		<td height="25px" width="90%"  align="left"><gs:textBox name="BSC_PROG004D0002A_C00_workspaceId" id="BSC_PROG004D0002A_C00_workspaceId" value="" maxlength="20"></gs:textBox></td>
+    		<td height="50px" width="100%"  align="left">
+    			<font color='RED'>*</font><b>Id</b>:
+    			<br/>
+    			<gs:textBox name="BSC_PROG004D0002A_C00_workspaceId" id="BSC_PROG004D0002A_C00_workspaceId" value="" maxlength="20"></gs:textBox>
+    		</td>
     	</tr>     		
 		<tr>
-    		<td height="25px" width="10%"  align="right"><font color='RED'>*</font>Name:</td>
-    		<td height="25px" width="90%"  align="left"><gs:textBox name="BSC_PROG004D0002A_C00_workspaceName" id="BSC_PROG004D0002A_C00_workspaceName" value="" maxlength="100" width="400"></gs:textBox></td>
+    		<td height="50px" width="100%"  align="left">
+    			<font color='RED'>*</font><b>Name</b>:
+    			<br/>
+    			<gs:textBox name="BSC_PROG004D0002A_C00_workspaceName" id="BSC_PROG004D0002A_C00_workspaceName" value="" maxlength="100" width="400"></gs:textBox>
+    		</td>
     	</tr> 
 		<tr>
-		    <td height="100px" width="10%" align="right">description:</td>
-		    <td height="100px" width="90%"  align="left">
-		    	<textarea id="BSC_PROG004D0002A_C00_description" name="BSC_PROG004D0002A_C00_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>	
+		    <td height="125px" width="100%" align="left">
+		    	<b>Description</b>:
+		    	<br/>
+		    	<textarea id="BSC_PROG004D0002A_C00_description" name="BSC_PROG004D0002A_C00_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
 		    </td>
 		</tr>     	   	
     </table>	
