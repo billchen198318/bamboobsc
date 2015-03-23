@@ -6,12 +6,12 @@
 
 	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbAggregationMethod" id="baseResultMap">
 		<id column="OID" property="oid"/>				
-		<id column="AGGR_ID" property="aggrId"/>
-		<id column="NAME" property="name"/>
-		<id column="TYPE" property="type"/>
-		<id column="EXPRESSION1" property="expression1"/>
-		<id column="EXPRESSION2" property="expression2"/>		
-		<id column="DESCRIPTION" property="description"/>
+		<result column="AGGR_ID" property="aggrId"/>
+		<result column="NAME" property="name"/>
+		<result column="TYPE" property="type"/>
+		<result column="EXPRESSION1" property="expression1"/>
+		<result column="EXPRESSION2" property="expression2"/>		
+		<result column="DESCRIPTION" property="description"/>
 		<result column="CUSERID" property="cuserid"/>
 		<result column="CDATE" property="cdate"/>
 		<result column="UUSERID" property="uuserid"/>		
