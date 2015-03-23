@@ -23,5 +23,6 @@
 	<include file="struts/struts-bsc-swot.xml" />
 	<include file="struts/struts-bsc-workspaceSettings.xml" />
 	<include file="struts/struts-bsc-aggregationMethod.xml" />
+	<include file="struts/struts-bsc-reportRoleView.xml" />
 	
 </struts>

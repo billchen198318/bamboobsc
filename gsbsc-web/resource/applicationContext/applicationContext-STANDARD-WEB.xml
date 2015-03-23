@@ -31,5 +31,7 @@
     <import resource="classpath*:applicationContext/controller/applicationContext-swot-web.xml" />
     <import resource="classpath*:applicationContext/controller/applicationContext-workspaceSettings-web.xml" />
     <import resource="classpath*:applicationContext/controller/applicationContext-aggregationMethod-web.xml" />
-        
+    <import resource="classpath*:applicationContext/controller/applicationContext-reportRoleView-web.xml" />
+    
+    
 </beans>
