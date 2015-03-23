@@ -35,6 +35,7 @@
     <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspaceConfig.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspaceLabel.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/applicationContext-aggregationMethod.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-reportRoleView.xml" />
     
         
 </beans>    
