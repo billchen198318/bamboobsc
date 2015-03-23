@@ -74,7 +74,8 @@
 				<value>classpath*:dozer/dozerBeanMapping-olapConf.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-olapCatalog.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-olapMdx.xml</value>
-				<value>classpath*:dozer/dozerBeanMapping-aggregationMethod.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-aggregationMethod.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-reportRoleView.xml</value>				
 			</list> 
 		</property> 
 	</bean>

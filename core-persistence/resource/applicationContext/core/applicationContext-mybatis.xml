@@ -78,7 +78,8 @@
                 <value>classpath*:mappers/BbWorkspaceConfig.xml</value>
                 <value>classpath*:mappers/BbWorkspaceTemplate.xml</value>
                 <value>classpath*:mappers/BbWorkspaceLabel.xml</value>                
-                <value>classpath*:mappers/BbAggregationMethod.xml</value>
+                <value>classpath*:mappers/BbAggregationMethod.xml</value>                
+                <value>classpath*:mappers/BbReportRoleView.xml</value>                
                 <value>classpath*:mappers/QcDataSourceDriver.xml</value>
                 <value>classpath*:mappers/QcDataSourceConf.xml</value>
                 <value>classpath*:mappers/QcDataQuery.xml</value>
