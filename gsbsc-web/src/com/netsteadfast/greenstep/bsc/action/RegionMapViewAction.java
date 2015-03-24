@@ -51,6 +51,7 @@ import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.bsc.service.logic.IReportRoleViewLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
@@ -65,6 +66,7 @@ public class RegionMapViewAction extends BaseSupportAction implements IBaseAddit
 	private static final long serialVersionUID = 1561474757352388077L;
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IVisionService<VisionVO, BbVision, String> visionService; 
+	private IReportRoleViewLogicService reportRoleViewLogicService;
 	private List<BbOrganization> organizations = new ArrayList<BbOrganization>();
 	private int discreteValues = 3;
 	private int maximum = 0;
@@ -99,9 +101,27 @@ public class RegionMapViewAction extends BaseSupportAction implements IBaseAddit
 			IVisionService<VisionVO, BbVision, String> visionService) {
 		this.visionService = visionService;
 	}	
+	
+	public IReportRoleViewLogicService getReportRoleViewLogicService() {
+		return reportRoleViewLogicService;
+	}
 
-	private void initData() throws ServiceException, Exception {
-		this.organizations = this.organizationService.findListByParams(null);
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.logic.ReportRoleViewLogicService")		
+	public void setReportRoleViewLogicService(
+			IReportRoleViewLogicService reportRoleViewLogicService) {
+		this.reportRoleViewLogicService = reportRoleViewLogicService;
+	}	
+
+	private void initData() throws ServiceException, Exception {		
+		if ( !YesNo.YES.equals(super.getIsSuperRole()) ) {
+			this.organizations = this.reportRoleViewLogicService.findForOrganization(
+					super.getAccountId());
+		}
+		if ( this.organizations==null || this.organizations.size()<1 ) { // 這個使用者沒被限只能看某些部門
+			this.organizations = this.organizationService.findListByParams(null);
+		}
 		this.maximum=Integer.parseInt(SimpleUtils.getStrYMD(SimpleUtils.IS_YEAR));
 		this.minimum=this.maximum-(this.discreteValues-1);		
 		for (int year=this.minimum; year<=this.maximum; year++) {
