@@ -23,5 +23,7 @@
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-swot.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-workspace.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-aggregationMethod.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-reportRoleView.xml" />
+    
     
 </beans>    
