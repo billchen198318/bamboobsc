@@ -36,10 +36,12 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.bsc.service.logic.IReportRoleViewLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
@@ -56,6 +58,7 @@ public class KpiReportAction extends BaseSupportAction implements IBaseAdditiona
 	private IVisionService<VisionVO, BbVision, String> visionService;
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
+	private IReportRoleViewLogicService reportRoleViewLogicService;
 	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(true);
 	private Map<String, String> measureDataOrganizationMap = this.providedSelectZeroDataMap(true);
@@ -101,10 +104,37 @@ public class KpiReportAction extends BaseSupportAction implements IBaseAdditiona
 		this.employeeService = employeeService;
 	}
 
+	public IReportRoleViewLogicService getReportRoleViewLogicService() {
+		return reportRoleViewLogicService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.logic.ReportRoleViewLogicService")		
+	public void setReportRoleViewLogicService(
+			IReportRoleViewLogicService reportRoleViewLogicService) {
+		this.reportRoleViewLogicService = reportRoleViewLogicService;
+	}
+
 	private void initData() throws ServiceException, Exception {
-		this.visionMap = this.visionService.findForMap(true);
-		this.measureDataOrganizationMap = this.organizationService.findForMap(true);
-		this.measureDataEmployeeMap = this.employeeService.findForMap(true);
+		this.visionMap = this.visionService.findForMap(true);		
+		if ( YesNo.YES.equals(super.getIsSuperRole()) ) {
+			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);
+			return;
+		} 
+		this.measureDataOrganizationMap = this.reportRoleViewLogicService.findForOrganizationMap(
+				true, this.getAccountId());
+		this.measureDataEmployeeMap = this.reportRoleViewLogicService.findForEmployeeMap(
+				true, this.getAccountId());
+		/**
+		 * 沒有資料表示,沒有限定使用者的角色,只能選取某些部門或某些員工
+		 * 因為沒有限定就全部取出
+		 */
+		if ( this.measureDataOrganizationMap.size() <= 1 && this.measureDataEmployeeMap.size() <= 1 ) { // 第1筆是 - Please select -
+			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);			
+		}		
 	}
 	
 	/**

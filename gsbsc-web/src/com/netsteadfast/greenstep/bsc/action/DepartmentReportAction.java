@@ -38,9 +38,11 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.bsc.service.logic.IReportRoleViewLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
@@ -55,6 +57,7 @@ public class DepartmentReportAction extends BaseSupportAction implements IBaseAd
 	private static final long serialVersionUID = -3146590533336727054L;
 	private IVisionService<VisionVO, BbVision, String> visionService;
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private IReportRoleViewLogicService reportRoleViewLogicService;
 	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> organizationMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(true);
@@ -91,9 +94,33 @@ public class DepartmentReportAction extends BaseSupportAction implements IBaseAd
 		this.organizationService = organizationService;
 	}
 	
+	public IReportRoleViewLogicService getReportRoleViewLogicService() {
+		return reportRoleViewLogicService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.logic.ReportRoleViewLogicService")		
+	public void setReportRoleViewLogicService(
+			IReportRoleViewLogicService reportRoleViewLogicService) {
+		this.reportRoleViewLogicService = reportRoleViewLogicService;
+	}		
+	
 	private void initData() throws ServiceException, Exception {
 		this.visionMap = this.visionService.findForMap(true);
-		this.organizationMap = this.organizationService.findForMap(true);
+		if ( YesNo.YES.equals(super.getIsSuperRole()) ) {
+			this.organizationMap = this.organizationService.findForMap(true);
+			return;
+		}
+		this.organizationMap = this.reportRoleViewLogicService.findForOrganizationMap(
+				true, this.getAccountId());		
+		/**
+		 * 沒有資料表示,沒有限定使用者的角色,只能選取某些部門或某些員工
+		 * 因為沒有限定就全部取出
+		 */
+		if ( this.organizationMap.size() <= 1 ) { // 第1筆是 - Please select -
+			this.organizationMap = this.organizationService.findForMap(true);
+		}		
 	}
 	
 	private void initYearRange() {
