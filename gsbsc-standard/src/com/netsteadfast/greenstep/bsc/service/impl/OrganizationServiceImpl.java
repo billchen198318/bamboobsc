@@ -141,4 +141,12 @@ public class OrganizationServiceImpl extends BaseService<OrganizationVO, BbOrgan
 		return dataMap;
 	}
 
+	@Override
+	public List<String> findForAppendOrganizationOidsByReportRoleViewOrga(String roleId) throws Exception {
+		if (StringUtils.isBlank(roleId)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		return this.organizationDAO.findForAppendOrganizationOidsByReportRoleViewOrga(roleId);		
+	}
+
 }

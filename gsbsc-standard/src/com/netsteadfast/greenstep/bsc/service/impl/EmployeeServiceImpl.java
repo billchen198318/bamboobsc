@@ -188,4 +188,12 @@ public class EmployeeServiceImpl extends BaseService<EmployeeVO, BbEmployee, Str
 		return dataMap;
 	}
 
+	@Override
+	public List<String> findForAppendEmployeeOidsByReportRoleViewEmpl(String roleId) throws Exception {
+		if (StringUtils.isBlank(roleId)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}				
+		return this.employeeDAO.findForAppendEmployeeOidsByReportRoleViewEmpl(roleId);
+	}
+
 }

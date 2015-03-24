@@ -34,4 +34,6 @@ public interface IEmployeeDAO<T extends java.io.Serializable, PK extends java.io
 	
 	public List<BbEmployee> findForInKpiEmpl(String kpiId) throws Exception;
 	
+	public List<String> findForAppendEmployeeOidsByReportRoleViewEmpl(String roleId) throws Exception;
+	
 }

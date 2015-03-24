@@ -39,4 +39,6 @@ public interface IOrganizationDAO<T extends java.io.Serializable, PK extends jav
 	
 	public List<BbOrganization> findForInKpiOrga(String kpiId) throws Exception;
 	
+	public List<String> findForAppendOrganizationOidsByReportRoleViewOrga(String roleId) throws Exception;
+	
 }

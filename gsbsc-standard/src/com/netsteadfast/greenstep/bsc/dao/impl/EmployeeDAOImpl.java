@@ -28,6 +28,7 @@ import org.springframework.stereotype.Repository;
 
 import com.netsteadfast.greenstep.base.dao.BaseDAO;
 import com.netsteadfast.greenstep.bsc.dao.IEmployeeDAO;
+import com.netsteadfast.greenstep.bsc.model.ReportRoleViewTypes;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 
 @Repository("bsc.dao.EmployeeDAO")
@@ -62,6 +63,16 @@ public class EmployeeDAOImpl extends BaseDAO<BbEmployee, String> implements IEmp
 		return this.getCurrentSession()
 				.createQuery("FROM BbEmployee m WHERE m.empId IN ( SELECT b.empId FROM BbKpiEmpl b WHERE b.kpiId = :kpiId ) ")
 				.setString("kpiId", kpiId)
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findForAppendEmployeeOidsByReportRoleViewEmpl(String roleId) throws Exception {
+		return this.getCurrentSession()
+				.createQuery("SELECT m.oid FROM BbEmployee m WHERE m.account IN ( SELECT b.idName FROM BbReportRoleView b WHERE b.role = :role and b.type = :type ) ")
+				.setString("role", roleId)
+				.setString("type", ReportRoleViewTypes.IS_EMPLOYEE)
 				.list();
 	}
 	

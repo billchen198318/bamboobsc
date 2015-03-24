@@ -48,4 +48,6 @@ public interface IEmployeeService<T extends java.io.Serializable, E extends java
 	
 	public Map<String, String> findForMap(boolean pleaseSelect) throws ServiceException, Exception;
 	
+	public List<String> findForAppendEmployeeOidsByReportRoleViewEmpl(String roleId) throws Exception;
+	
 }

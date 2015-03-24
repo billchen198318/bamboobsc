@@ -27,6 +27,7 @@ import org.springframework.stereotype.Repository;
 
 import com.netsteadfast.greenstep.base.dao.BaseDAO;
 import com.netsteadfast.greenstep.bsc.dao.IOrganizationDAO;
+import com.netsteadfast.greenstep.bsc.model.ReportRoleViewTypes;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
 
@@ -78,6 +79,16 @@ public class OrganizationDAOImpl extends BaseDAO<BbOrganization, String> impleme
 		return this.getCurrentSession()
 				.createQuery("FROM BbOrganization m WHERE m.orgId IN ( SELECT b.orgId FROM BbKpiOrga b WHERE b.kpiId = :kpiId ) ")
 				.setString("kpiId", kpiId)
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findForAppendOrganizationOidsByReportRoleViewOrga(String roleId) throws Exception {
+		return this.getCurrentSession()
+				.createQuery("SELECT m.oid FROM BbOrganization m WHERE m.orgId IN ( SELECT b.idName FROM BbReportRoleView b WHERE b.role = :role and b.type = :type ) ")
+				.setString("role", roleId)
+				.setString("type", ReportRoleViewTypes.IS_ORGANIZATION)
 				.list();
 	}
 	

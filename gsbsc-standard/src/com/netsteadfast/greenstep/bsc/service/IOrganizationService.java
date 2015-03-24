@@ -47,4 +47,6 @@ public interface IOrganizationService<T extends java.io.Serializable, E extends 
 	
 	public Map<String, String> findForMap(boolean pleaseSelect) throws ServiceException, Exception;
 	
+	public List<String> findForAppendOrganizationOidsByReportRoleViewOrga(String roleId) throws Exception;
+	
 }
