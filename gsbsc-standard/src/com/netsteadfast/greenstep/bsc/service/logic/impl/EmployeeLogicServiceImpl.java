@@ -49,10 +49,12 @@ import com.netsteadfast.greenstep.base.service.logic.BaseLogicService;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeOrgaService;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.bsc.service.IReportRoleViewService;
 import com.netsteadfast.greenstep.bsc.service.logic.IEmployeeLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbEmployeeOrga;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
+import com.netsteadfast.greenstep.po.hbm.BbReportRoleView;
 import com.netsteadfast.greenstep.po.hbm.TbAccount;
 import com.netsteadfast.greenstep.po.hbm.TbRole;
 import com.netsteadfast.greenstep.po.hbm.TbSysCalendarNote;
@@ -70,6 +72,7 @@ import com.netsteadfast.greenstep.vo.AccountVO;
 import com.netsteadfast.greenstep.vo.EmployeeOrgaVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.ReportRoleViewVO;
 import com.netsteadfast.greenstep.vo.RoleVO;
 import com.netsteadfast.greenstep.vo.SysCalendarNoteVO;
 import com.netsteadfast.greenstep.vo.SysCodeVO;
@@ -92,6 +95,7 @@ public class EmployeeLogicServiceImpl extends BaseLogicService implements IEmplo
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private ISysMsgNoticeService<SysMsgNoticeVO, TbSysMsgNotice, String> sysMsgNoticeService;
 	private ISysCalendarNoteService<SysCalendarNoteVO, TbSysCalendarNote, String> sysCalendarNoteService;
+	private IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> reportRoleViewService;
 	
 	public EmployeeLogicServiceImpl() {
 		super();
@@ -204,6 +208,18 @@ public class EmployeeLogicServiceImpl extends BaseLogicService implements IEmplo
 		this.sysCalendarNoteService = sysCalendarNoteService;
 	}
 	
+	public IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> getReportRoleViewService() {
+		return reportRoleViewService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.ReportRoleViewService")
+	@Required		
+	public void setReportRoleViewService(
+			IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> reportRoleViewService) {
+		this.reportRoleViewService = reportRoleViewService;
+	}
+
 	private boolean isAdministrator(String account) {
 		if (account.equals("admin") || account.equals(Constants.SYSTEM_BACKGROUND_USER)) {
 			return true;
@@ -375,6 +391,15 @@ public class EmployeeLogicServiceImpl extends BaseLogicService implements IEmplo
 		for (int i=0; userRoles!=null && i<userRoles.size(); i++) {
 			TbUserRole uRole = userRoles.get(i);
 			this.userRoleService.delete(uRole);
+		}
+		
+		// delete BB_REPORT_ROLE_VIEW
+		params.clear();
+		params.put("idName", account.getAccount());
+		List<BbReportRoleView> reportRoleViews = this.reportRoleViewService.findListByParams(params);
+		for (int i=0; reportRoleViews!=null && i<reportRoleViews.size(); i++) {
+			BbReportRoleView reportRoleView = reportRoleViews.get( i );
+			this.reportRoleViewService.delete(reportRoleView);
 		}
 		
 		this.accountService.deleteByPKng(account.getOid());

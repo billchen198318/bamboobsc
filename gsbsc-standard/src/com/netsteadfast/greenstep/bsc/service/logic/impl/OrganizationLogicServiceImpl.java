@@ -55,18 +55,21 @@ import com.netsteadfast.greenstep.bsc.service.IEmployeeOrgaService;
 import com.netsteadfast.greenstep.bsc.service.IKpiOrgaService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationParService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.bsc.service.IReportRoleViewService;
 import com.netsteadfast.greenstep.bsc.service.ISwotService;
 import com.netsteadfast.greenstep.bsc.service.logic.IOrganizationLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployeeOrga;
 import com.netsteadfast.greenstep.po.hbm.BbKpiOrga;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbOrganizationPar;
+import com.netsteadfast.greenstep.po.hbm.BbReportRoleView;
 import com.netsteadfast.greenstep.po.hbm.BbSwot;
 import com.netsteadfast.greenstep.util.IconUtils;
 import com.netsteadfast.greenstep.vo.EmployeeOrgaVO;
 import com.netsteadfast.greenstep.vo.KpiOrgaVO;
 import com.netsteadfast.greenstep.vo.OrganizationParVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.ReportRoleViewVO;
 import com.netsteadfast.greenstep.vo.SwotVO;
 
 @ServiceAuthority(check=true)
@@ -81,6 +84,7 @@ public class OrganizationLogicServiceImpl extends BaseLogicService implements IO
 	private IEmployeeOrgaService<EmployeeOrgaVO, BbEmployeeOrga, String> employeeOrgaService; 
 	private IKpiOrgaService<KpiOrgaVO, BbKpiOrga, String> kpiOrgaService;
 	private ISwotService<SwotVO, BbSwot, String> swotService;
+	private IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> reportRoleViewService;
 	
 	public OrganizationLogicServiceImpl() {
 		super();
@@ -143,6 +147,18 @@ public class OrganizationLogicServiceImpl extends BaseLogicService implements IO
 	@Required		
 	public void setSwotService(ISwotService<SwotVO, BbSwot, String> swotService) {
 		this.swotService = swotService;
+	}	
+	
+	public IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> getReportRoleViewService() {
+		return reportRoleViewService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.ReportRoleViewService")
+	@Required		
+	public void setReportRoleViewService(
+			IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> reportRoleViewService) {
+		this.reportRoleViewService = reportRoleViewService;
 	}	
 
 	private void handlerLongitudeAndLatitude(OrganizationVO organization) {
@@ -226,6 +242,16 @@ public class OrganizationLogicServiceImpl extends BaseLogicService implements IO
 		}
 		this.deleteParent(oldResult.getValue());
 		this.swotService.deleteForOrgId(oldResult.getValue().getOrgId());
+		
+		// delete BB_REPORT_ROLE_VIEW
+		params.clear();
+		params.put("idName", oldResult.getValue().getOrgId());
+		List<BbReportRoleView> reportRoleViews = this.reportRoleViewService.findListByParams(params);
+		for (int i=0; reportRoleViews!=null && i<reportRoleViews.size(); i++) {
+			BbReportRoleView reportRoleView = reportRoleViews.get( i );
+			this.reportRoleViewService.delete(reportRoleView);
+		}		
+		
 		return this.organizationService.deleteObject(organization);
 	}	
 	
