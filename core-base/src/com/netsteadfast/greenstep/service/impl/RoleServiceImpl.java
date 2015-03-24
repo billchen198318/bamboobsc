@@ -192,11 +192,14 @@ public class RoleServiceImpl extends BaseService<RoleVO, TbRole, String> impleme
 	}
 
 	@Override
-	public Map<String, String> findForMap(boolean pleaseSelect) throws ServiceException, Exception {
+	public Map<String, String> findForMap(boolean pleaseSelect, boolean normal) throws ServiceException, Exception {
 		Map<String, String> dataMap = this.providedSelectZeroDataMap(pleaseSelect);
 		List<TbRole> roles = this.findListByParams(null);
 		for (int i=0; roles!=null && i<roles.size(); i++) {
 			TbRole role = roles.get( i );
+			if (normal && (Constants.SUPER_ROLE_ADMIN.equals(role.getRole()) || Constants.SUPER_ROLE_ALL.equals(role.getRole())) ) {
+				continue;
+			}
 			dataMap.put(role.getOid(), role.getRole());
 		}
 		return dataMap;

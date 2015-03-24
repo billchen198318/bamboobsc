@@ -82,6 +82,6 @@ public interface IRoleService<T extends java.io.Serializable, E extends java.io.
 	 */
 	public List<RoleVO> findForProgram(String progId) throws ServiceException, Exception;
 	
-	public Map<String, String> findForMap(boolean pleaseSelect) throws ServiceException, Exception;
+	public Map<String, String> findForMap(boolean pleaseSelect, boolean normal) throws ServiceException, Exception;
 	
 }
