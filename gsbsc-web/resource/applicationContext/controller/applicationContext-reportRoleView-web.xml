@@ -12,5 +12,7 @@
     
     <bean id="bsc.web.controller.ReportRoleViewManagementAction" 
     	class="com.netsteadfast.greenstep.bsc.action.ReportRoleViewManagementAction" scope="prototype" />
-    	  	    	    	    	    	
+    <bean id="bsc.web.controller.ReportRoleViewSaveOrUpdateAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.ReportRoleViewSaveOrUpdateAction" scope="prototype" />
+    	    	  	    	    	    	    	
 </beans>

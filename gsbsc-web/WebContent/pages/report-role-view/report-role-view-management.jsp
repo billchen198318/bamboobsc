@@ -215,7 +215,7 @@ function ${programId}_page_message() {
     			<gs:button name="BSC_PROG004D0003Q_save" id="BSC_PROG004D0003Q_save" onClick="BSC_PROG004D0003Q_save();"
     				handleAs="json"
     				sync="N"
-    				xhrUrl="${basePath}/bsc.kpiSaveAction.action"
+    				xhrUrl="${basePath}/bsc.reportRoleViewSaveAction.action"
     				parameterType="postData"
     				xhrParameter=" 
     					{ 
