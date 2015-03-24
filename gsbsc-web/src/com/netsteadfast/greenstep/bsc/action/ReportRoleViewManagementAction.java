@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -30,6 +31,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
@@ -37,7 +39,12 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.TbRole;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
 import com.netsteadfast.greenstep.po.hbm.TbSysProg;
@@ -45,6 +52,8 @@ import com.netsteadfast.greenstep.service.IRoleService;
 import com.netsteadfast.greenstep.service.ISysProgService;
 import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.RoleVO;
 import com.netsteadfast.greenstep.vo.SysProgVO;
 import com.netsteadfast.greenstep.vo.SysVO;
@@ -57,6 +66,8 @@ public class ReportRoleViewManagementAction extends BaseSupportAction implements
 	private IRoleService<RoleVO, TbRole, String> roleService;
 	private ISysService<SysVO, TbSys, String> sysService;
 	private ISysProgService<SysProgVO, TbSysProg, String> sysProgService;
+	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService; 
+	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;	
 	private Map<String, String> roleMap = this.providedSelectZeroDataMap(true);
 	private String defaultUrl = ""; // 沒有代入 oid 參術的 url
 	
@@ -98,6 +109,30 @@ public class ReportRoleViewManagementAction extends BaseSupportAction implements
 		this.roleService = roleService;
 	}
 
+	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
+		return employeeService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.EmployeeService")
+	@Required	
+	public void setEmployeeService(
+			IEmployeeService<EmployeeVO, BbEmployee, String> employeeService) {
+		this.employeeService = employeeService;
+	}
+
+	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
+		return organizationService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.OrganizationService")
+	@Required		
+	public void setOrganizationService(
+			IOrganizationService<OrganizationVO, BbOrganization, String> organizationService) {
+		this.organizationService = organizationService;
+	}	
+	
 	private void initData() throws ServiceException, Exception {
 		String progId = super.getActionMethodProgramId();
 		TbSysProg prog = new TbSysProg();
@@ -124,7 +159,38 @@ public class ReportRoleViewManagementAction extends BaseSupportAction implements
 		if ( super.isNoSelectId(this.getFields().get("oid")) ) {
 			return;
 		}
+		RoleVO role = new RoleVO();
+		role.setOid( this.getFields().get("oid") );
+		DefaultResult<RoleVO> result = this.roleService.findObjectByOid(role);
+		if ( result.getValue() == null ) {
+			throw new ServiceException(result.getSystemMessage().getValue());
+		}
+		role = result.getValue();
+		List<String> emplOids = this.employeeService.findForAppendEmployeeOidsByReportRoleViewEmpl( role.getRole() );
+		List<String> orgaOids = this.organizationService.findForAppendOrganizationOidsByReportRoleViewOrga( role.getRole() );
+		List<String> emplNames = this.employeeService.findForAppendNames( emplOids );
+		List<String> orgaNames = this.organizationService.findForAppendNames( orgaOids );
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; emplOids!=null && i<emplOids.size(); i++) {
+			sb.append(emplOids.get(i)).append(Constants.ID_DELIMITER);
+		}
+		this.getFields().put("appendEmplOids", sb.toString());
+		sb.setLength(0);
+		for (int i=0; emplNames!=null && i<emplNames.size(); i++) {
+			sb.append(emplNames.get(i)).append(Constants.ID_DELIMITER);
+		}
+		this.getFields().put("appendEmplNames", sb.toString());
 		
+		sb.setLength(0);
+		for (int i=0; orgaOids!=null && i<orgaOids.size(); i++) {
+			sb.append(orgaOids.get(i)).append(Constants.ID_DELIMITER);
+		}
+		this.getFields().put("appendOrgaOids", sb.toString());
+		sb.setLength(0);
+		for (int i=0; orgaNames!=null && i<orgaNames.size(); i++) {
+			sb.append(orgaNames.get(i)).append(Constants.ID_DELIMITER);
+		}
+		this.getFields().put("appendOrgaNames", sb.toString());	
 	}
 	
 	/**

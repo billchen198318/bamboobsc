@@ -151,8 +151,8 @@ function ${programId}_page_message() {
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>
 	
-	<input type="hidden" name="BSC_PROG004D0003Q_appendOrganizationOid" id="BSC_PROG004D0003Q_appendOrganizationOid" value="" />
-	<input type="hidden" name="BSC_PROG004D0003Q_appendEmployeeOid" id="BSC_PROG004D0003Q_appendEmployeeOid" value="" />
+	<input type="hidden" name="BSC_PROG004D0003Q_appendOrganizationOid" id="BSC_PROG004D0003Q_appendOrganizationOid" value="<s:property value="fields.appendOrgaOids"/>" />
+	<input type="hidden" name="BSC_PROG004D0003Q_appendEmployeeOid" id="BSC_PROG004D0003Q_appendEmployeeOid" value="<s:property value="fields.appendEmplOids"/>" />
 	
 	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >	
 		<tr>
@@ -183,7 +183,7 @@ function ${programId}_page_message() {
 						}
 					"></button>	
 				<br/>	    			    			
-    			<span id="BSC_PROG004D0003Q_organizationAppendName"></span>    			
+    			<span id="BSC_PROG004D0003Q_organizationAppendName"><s:property value="fields.appendOrgaNames"/></span>    			
     		</td>
     	</tr>     
 		<tr>
@@ -207,7 +207,7 @@ function ${programId}_page_message() {
 						}
 					"></button>		
 				<br/>
-				<span id="BSC_PROG004D0003Q_employeeAppendName"></span>	    			
+				<span id="BSC_PROG004D0003Q_employeeAppendName"><s:property value="fields.appendEmplNames"/></span>	    			
     		</td>    
     	</tr>	
     	<tr>
