@@ -105,7 +105,7 @@ public class MenuSupportUtils {
 		MenuSupportUtils.sysMenuService = sysMenuService;
 	}
 	
-	protected static TbSysProg loadSysProg(String progId) throws ServiceException, Exception {
+	public static TbSysProg loadSysProg(String progId) throws ServiceException, Exception {
 		
 		TbSysProg tbSysProg = new TbSysProg();
 		tbSysProg.setProgId(progId);
@@ -116,7 +116,7 @@ public class MenuSupportUtils {
 		return tbSysProg;
 	}
 
-	protected static String getUrl(String basePath, TbSys sys, TbSysProg sysProg, String jsessionId) throws Exception {
+	public static String getUrl(String basePath, TbSys sys, TbSysProg sysProg, String jsessionId) throws Exception {
 		String url = "";
 		if (YesNo.YES.equals(sys.getIsLocal())) {
 			url = basePath + "/" + sysProg.getUrl() + "?" + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
