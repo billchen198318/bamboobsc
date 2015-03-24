@@ -26,6 +26,7 @@ import java.util.Map;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 
 public interface IReportRoleViewLogicService {
 	
@@ -34,5 +35,7 @@ public interface IReportRoleViewLogicService {
 	public Map<String, String> findForEmployeeMap(boolean pleaseSelect, String accountId) throws ServiceException, Exception;
 	
 	public Map<String, String> findForOrganizationMap(boolean pleaseSelect, String accountId) throws ServiceException, Exception;
+	
+	public List<BbOrganization> findForOrganization(String accountId) throws ServiceException, Exception;
 	
 }

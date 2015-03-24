@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.bsc.service.logic.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -247,6 +248,7 @@ public class ReportRoleViewLogicServiceImpl extends BaseLogicService implements 
 		if (pleaseSelect) {
 			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
 		}
+		/*
 		List<TbUserRole> roles = this.getUserRoles(accountId);
 		for (int i=0; roles!=null && i<roles.size(); i++) {
 			Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -266,7 +268,49 @@ public class ReportRoleViewLogicServiceImpl extends BaseLogicService implements 
 				dataMap.put(organization.getOid(), organization.getName());				
 			}
 		}		
+		*/
+		List<BbOrganization> organizations = this.findForOrganization(accountId);
+		for (BbOrganization entity : organizations) {
+			if ( dataMap.get(entity.getOid()) != null ) {
+				continue;
+			}
+			dataMap.put(entity.getOid(), entity.getName());				
+		}
 		return dataMap;
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})
+	@Override
+	public List<BbOrganization> findForOrganization(String accountId) throws ServiceException, Exception {
+		if ( super.isBlank(accountId) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		List<BbOrganization> searchList = new ArrayList<BbOrganization>();
+		List<TbUserRole> roles = this.getUserRoles(accountId);
+		for (int i=0; roles!=null && i<roles.size(); i++) {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("role", roles.get(i).getRole());
+			paramMap.put("type", ReportRoleViewTypes.IS_ORGANIZATION);
+			List<BbReportRoleView> views = this.reportRoleViewService.findListByParams(paramMap);
+			for (int j=0; views!=null && j<views.size(); j++) {
+				BbOrganization organization = new BbOrganization();
+				organization.setOrgId(views.get(j).getIdName());
+				organization = this.organizationService.findByEntityUK(organization);
+				if ( organization == null ) {
+					continue;
+				}
+				boolean isFound = false;
+				for (BbOrganization entity : searchList) {
+					if ( entity.getOid().equals(organization.getOid()) ) {
+						isFound = true;
+					}
+				}
+				if (!isFound) {
+					searchList.add( organization );
+				}
+			}
+		}		
+		return searchList;
 	}
 
 }
