@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.15, for FreeBSD10.0 (amd64)
+-- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.6.15
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -453,6 +453,7 @@ CREATE TABLE `bb_report_role_view` (
 
 LOCK TABLES `bb_report_role_view` WRITE;
 /*!40000 ALTER TABLE `bb_report_role_view` DISABLE KEYS */;
+INSERT INTO `bb_report_role_view` VALUES ('2cf4dfaa-b3c5-4776-b3c6-630a9e49160a','ORG','BSC_STANDARD','0003','admin','2015-03-24 13:42:57',NULL,NULL),('77e293f8-b212-458f-8282-e535f90876b1','ORG','BSC_STANDARD','0002','admin','2015-03-24 13:42:57',NULL,NULL),('a144eb48-b586-4793-872d-fa7d837e30d5','EMP','BSC_STANDARD','admin','admin','2015-03-24 13:42:57',NULL,NULL),('d32ac12e-5c62-4c7e-8904-2383ac9e9911','ORG','BSC_STANDARD','0001','admin','2015-03-24 13:42:57',NULL,NULL),('fd90f1a9-ee0a-4044-a6ca-7657087d89b9','EMP','BSC_STANDARD','tester','admin','2015-03-24 13:42:57',NULL,NULL);
 /*!40000 ALTER TABLE `bb_report_role_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1344,7 +1345,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861427116620221',1427116952538,7500),('scheduler','localX861427116645261',1427116953511,7500),('scheduler','localX861427116665792',1427116959113,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1427175416941',1427175846738,7500),('scheduler','4753PC1427175462969',1427175847460,7500),('scheduler','4753PC1427175531550',1427175847735,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1448,7 +1449,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1427116980000,1427116920000,0,'WAITING','CRON',1427116665000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1427175900000,1427175840000,0,'WAITING','CRON',1427175462000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2354,4 +2355,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-23 21:23:03
+-- Dump completed on 2015-03-24 13:44:48
