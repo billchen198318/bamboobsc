@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.bsc.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -29,5 +30,9 @@ import com.netsteadfast.greenstep.base.model.DefaultResult;
 public interface IReportRoleViewLogicService {
 	
 	public DefaultResult<Boolean> create(String roleOid, List<String> emplOids, List<String> orgaOids) throws ServiceException, Exception;
-
+	
+	public Map<String, String> findForEmployeeMap(boolean pleaseSelect, String accountId) throws ServiceException, Exception;
+	
+	public Map<String, String> findForOrganizationMap(boolean pleaseSelect, String accountId) throws ServiceException, Exception;
+	
 }

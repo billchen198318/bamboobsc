@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.bsc.service.logic.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -53,11 +55,14 @@ import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbReportRoleView;
 import com.netsteadfast.greenstep.po.hbm.TbRole;
+import com.netsteadfast.greenstep.po.hbm.TbUserRole;
 import com.netsteadfast.greenstep.service.IRoleService;
+import com.netsteadfast.greenstep.service.IUserRoleService;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.ReportRoleViewVO;
 import com.netsteadfast.greenstep.vo.RoleVO;
+import com.netsteadfast.greenstep.vo.UserRoleVO;
 
 @ServiceAuthority(check=true)
 @Service("bsc.service.logic.ReportRoleViewLogicService")
@@ -68,6 +73,7 @@ public class ReportRoleViewLogicServiceImpl extends BaseLogicService implements 
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IRoleService<RoleVO, TbRole, String> roleService;
 	private IReportRoleViewService<ReportRoleViewVO, BbReportRoleView, String> reportRoleViewService;
+	private IUserRoleService<UserRoleVO, TbUserRole, String> userRoleService;
 	
 	public ReportRoleViewLogicServiceImpl() {
 		super();
@@ -120,6 +126,18 @@ public class ReportRoleViewLogicServiceImpl extends BaseLogicService implements 
 		this.reportRoleViewService = reportRoleViewService;
 	}	
 	
+	public IUserRoleService<UserRoleVO, TbUserRole, String> getUserRoleService() {
+		return userRoleService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.UserRoleService")
+	@Required		
+	public void setUserRoleService(
+			IUserRoleService<UserRoleVO, TbUserRole, String> userRoleService) {
+		this.userRoleService = userRoleService;
+	}
+
 	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
 	@Transactional(
 			propagation=Propagation.REQUIRED, 
@@ -179,6 +197,76 @@ public class ReportRoleViewLogicServiceImpl extends BaseLogicService implements 
 		for (int i=0; rRoleViews!=null && i<rRoleViews.size(); i++) {
 			this.reportRoleViewService.delete( rRoleViews.get(i) );
 		}
+	}
+	
+	private List<TbUserRole> getUserRoles(String account) throws ServiceException, Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("account", account);
+		return userRoleService.findListByParams(paramMap);
+	}
+	
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})
+	@Override
+	public Map<String, String> findForEmployeeMap(boolean pleaseSelect, String accountId) throws ServiceException, Exception {
+		if ( super.isBlank(accountId) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		Map<String, String> dataMap = new LinkedHashMap<String, String>();
+		if (pleaseSelect) {
+			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
+		}
+		List<TbUserRole> roles = this.getUserRoles(accountId);
+		for (int i=0; roles!=null && i<roles.size(); i++) {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("role", roles.get(i).getRole());
+			paramMap.put("type", ReportRoleViewTypes.IS_EMPLOYEE);
+			List<BbReportRoleView> views = this.reportRoleViewService.findListByParams(paramMap);
+			for (int j=0; views!=null && j<views.size(); j++) {
+				paramMap.clear();
+				paramMap.put("account", views.get(j).getIdName());
+				List<BbEmployee> employees = this.employeeService.findListByParams(paramMap);
+				for (int e=0; employees!=null && e<employees.size(); e++) {
+					BbEmployee employee = employees.get(e);
+					if ( dataMap.get( employee.getOid() )!=null ) {
+						continue;
+					}
+					dataMap.put( employee.getOid(), employee.getFullName() );
+				}
+			}
+		}
+		return dataMap;
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})
+	@Override
+	public Map<String, String> findForOrganizationMap(boolean pleaseSelect, String accountId) throws ServiceException, Exception {
+		if ( super.isBlank(accountId) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		Map<String, String> dataMap = new LinkedHashMap<String, String>();
+		if (pleaseSelect) {
+			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
+		}
+		List<TbUserRole> roles = this.getUserRoles(accountId);
+		for (int i=0; roles!=null && i<roles.size(); i++) {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("role", roles.get(i).getRole());
+			paramMap.put("type", ReportRoleViewTypes.IS_ORGANIZATION);
+			List<BbReportRoleView> views = this.reportRoleViewService.findListByParams(paramMap);
+			for (int j=0; views!=null && j<views.size(); j++) {
+				BbOrganization organization = new BbOrganization();
+				organization.setOrgId(views.get(j).getIdName());
+				organization = this.organizationService.findByEntityUK(organization);
+				if ( organization == null ) {
+					continue;
+				}
+				if ( dataMap.get(organization.getOid()) != null ) {
+					continue;
+				}
+				dataMap.put(organization.getOid(), organization.getName());				
+			}
+		}		
+		return dataMap;
 	}
 
 }
