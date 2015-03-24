@@ -21,28 +21,109 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.po.hbm.TbRole;
+import com.netsteadfast.greenstep.po.hbm.TbSys;
+import com.netsteadfast.greenstep.po.hbm.TbSysProg;
+import com.netsteadfast.greenstep.service.IRoleService;
+import com.netsteadfast.greenstep.service.ISysProgService;
+import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.RoleVO;
+import com.netsteadfast.greenstep.vo.SysProgVO;
+import com.netsteadfast.greenstep.vo.SysVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.ReportRoleViewManagementAction")
 @Scope
 public class ReportRoleViewManagementAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = -2883835026713254011L;
+	private IRoleService<RoleVO, TbRole, String> roleService;
+	private ISysService<SysVO, TbSys, String> sysService;
+	private ISysProgService<SysProgVO, TbSysProg, String> sysProgService;
+	private Map<String, String> roleMap = this.providedSelectZeroDataMap(true);
+	private String defaultUrl = ""; // 沒有代入 oid 參術的 url
 	
 	public ReportRoleViewManagementAction() {
 		super();
 	}
+
+	public ISysService<SysVO, TbSys, String> getSysService() {
+		return sysService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysService")
+	@Required		
+	public void setSysService(ISysService<SysVO, TbSys, String> sysService) {
+		this.sysService = sysService;
+	}
+
+	public ISysProgService<SysProgVO, TbSysProg, String> getSysProgService() {
+		return sysProgService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysProgService")
+	@Required		
+	public void setSysProgService(
+			ISysProgService<SysProgVO, TbSysProg, String> sysProgService) {
+		this.sysProgService = sysProgService;
+	}	
 	
+	public IRoleService<RoleVO, TbRole, String> getRoleService() {
+		return roleService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.RoleService")
+	@Required	
+	public void setRoleService(IRoleService<RoleVO, TbRole, String> roleService) {
+		this.roleService = roleService;
+	}
+
 	private void initData() throws ServiceException, Exception {
+		String progId = super.getActionMethodProgramId();
+		TbSysProg prog = new TbSysProg();
+		prog.setProgId(progId);
+		prog = this.sysProgService.findByEntityUK(prog);
+		if ( prog == null ) {
+			throw new ServiceException( SysMessageUtil.get(GreenStepSysMsgConstants.DATA_ERRORS) );
+		}		
+		TbSys sys = new TbSys();
+		sys.setSysId( prog.getProgSystem() );
+		sys = this.sysService.findByEntityUK(sys);
+		if ( sys == null ) {
+			throw new ServiceException( SysMessageUtil.get(GreenStepSysMsgConstants.DATA_ERRORS) );
+		}		
+		this.defaultUrl = MenuSupportUtils.getUrl(
+				super.getBasePath(), 
+				sys, 
+				prog, 
+				super.getHttpServletRequest().getSession().getId());
+		this.roleMap = this.roleService.findForMap(true, true);
+	}
+	
+	private void loadAppendDatas() throws ServiceException, Exception {
+		if ( super.isNoSelectId(this.getFields().get("oid")) ) {
+			return;
+		}
 		
 	}
 	
@@ -53,6 +134,7 @@ public class ReportRoleViewManagementAction extends BaseSupportAction implements
 	public String execute() throws Exception {
 		try {
 			this.initData();
+			this.loadAppendDatas();
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
@@ -79,6 +161,14 @@ public class ReportRoleViewManagementAction extends BaseSupportAction implements
 	@Override
 	public String getProgramId() {
 		return super.getActionMethodProgramId();
+	}
+
+	public Map<String, String> getRoleMap() {
+		return roleMap;
+	}
+
+	public String getDefaultUrl() {
+		return defaultUrl;
 	}
 
 }

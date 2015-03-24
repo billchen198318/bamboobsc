@@ -22,15 +22,106 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="bambooCORE">
-	<meta http-equiv="description" content="bambooCORE">
-	
-	<link rel="stylesheet" href="<%=ApplicationSiteUtils.getBasePath(Constants.getMainSystem(), request)%>/css/ColorPicker.css" >
+	<meta http-equiv="description" content="bambooCORE">	
 	
 <style type="text/css">
 
 </style>
 
 <script type="text/javascript">
+
+var BSC_PROG004D0003Q_defaultUrl = '${defaultUrl}';
+
+var BSC_PROG004D0003Q_fieldsId = new Object();
+BSC_PROG004D0003Q_fieldsId['employeeOid'] 		= 'BSC_PROG004D0003Q_roleOid';
+
+function BSC_PROG004D0003Q_saveSuccess(data) { // data 是 json 資料
+	setFieldsBackgroundDefault(BSC_PROG004D0003Q_fieldsId);
+	alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);	
+	if ('Y' != data.success) {						
+		setFieldsBackgroundAlert(data.fieldsId, BSC_PROG004D0003Q_fieldsId);		
+		return;
+	}	
+	//BSC_PROG004D0003Q_clear();
+}
+
+function BSC_PROG004D0003Q_roleChange() {
+	BSC_PROG004D0003Q_clearOrgaAppendId();
+	BSC_PROG004D0003Q_clearEmplAppendId();		
+	var roleOid = dijit.byId('BSC_PROG004D0003Q_roleOid').get('value');
+	if ( roleOid == null || roleOid == '' || roleOid == _gscore_please_select_id ) {	
+		return;
+	}
+	var nowTabPane = dijit.byId('BSC_PROG004D0003Q_ChildTab');
+	nowTabPane.attr("href", BSC_PROG004D0003Q_defaultUrl + "?<%=Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD%>=Y&fields.oid=" + roleOid );
+	nowTabPane.refresh();   	
+}
+
+function BSC_PROG004D0003Q_reloadOrganizationAppendName() {
+	var appendOid = dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value;
+	if (''==appendOid || null==appendOid ) {
+		dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value = '';
+		dojo.byId('BSC_PROG004D0003Q_organizationAppendName').innerHTML = '';		
+		return;
+	}
+	xhrSendParameter(
+			'${basePath}/bsc.commonGetOrganizationNamesAction.action', 
+			{ 'fields.appendId' : dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if (data!=null && data.appendName!=null) {
+					dojo.byId('BSC_PROG004D0003Q_organizationAppendName').innerHTML = data.appendName;
+				}								
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);		
+}
+
+function BSC_PROG004D0003Q_reloadEmployeeAppendName() {
+	var appendOid = dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value;
+	if (''==appendOid || null==appendOid ) {
+		dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value = '';
+		dojo.byId('BSC_PROG004D0003Q_employeeAppendName').innerHTML = '';		
+		return;
+	}
+	xhrSendParameter(
+			'${basePath}/bsc.commonGetEmployeeNamesAction.action', 
+			{ 'fields.appendId' : dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if (data!=null && data.appendName!=null) {
+					dojo.byId('BSC_PROG004D0003Q_employeeAppendName').innerHTML = data.appendName;
+				}								
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+
+function BSC_PROG004D0003Q_clear() {
+	BSC_PROG004D0003Q_clearOrgaAppendId();
+	BSC_PROG004D0003Q_clearEmplAppendId();
+	dijit.byId("BSC_PROG004D0003Q_roleOid").set("value", _gscore_please_select_id );
+}
+
+function BSC_PROG004D0003Q_clearOrgaAppendId() {
+	dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value = '';
+	dojo.byId('BSC_PROG004D0003Q_organizationAppendName').innerHTML = '';
+}
+
+function BSC_PROG004D0003Q_clearEmplAppendId() {
+	dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value = '';
+	dojo.byId('BSC_PROG004D0003Q_employeeAppendName').innerHTML = '';
+}
 
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
@@ -59,6 +150,91 @@ function ${programId}_page_message() {
 		refreshJsMethod="${programId}_TabRefresh();" 		
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>
+	
+	<input type="hidden" name="BSC_PROG004D0003Q_appendOrganizationOid" id="BSC_PROG004D0003Q_appendOrganizationOid" value="" />
+	<input type="hidden" name="BSC_PROG004D0003Q_appendEmployeeOid" id="BSC_PROG004D0003Q_appendEmployeeOid" value="" />
+	
+	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >	
+		<tr>
+    		<td height="50px" width="100%"  align="left">
+    			<font color='RED'>*</font><b>Role</b>:
+    			<br/>
+    			<gs:select name="BSC_PROG004D0003Q_roleOid" dataSource="roleMap" id="BSC_PROG004D0003Q_roleOid" onChange="BSC_PROG004D0003Q_roleChange();" value="fields.oid"></gs:select>
+    		</td>  		
+		</tr>
+		<tr>
+    		<td height="50px" width="100%"  align="left">
+    			<b>Department</b>:
+    			&nbsp;&nbsp;
+				<button name="BSC_PROG004D0003Q_deptSelect" id="BSC_PROG004D0003Q_deptSelect" data-dojo-type="dijit.form.Button"
+					data-dojo-props="
+						showLabel:false,
+						iconClass:'dijitIconFolderOpen',
+						onClick:function(){ 
+							BSC_PROG001D0002Q_S00_DlgShow('BSC_PROG004D0003Q_appendOrganizationOid;BSC_PROG004D0003Q_reloadOrganizationAppendName');
+						}
+					"></button>
+				<button name="BSC_PROG004D0003Q_deptClear" id="BSC_PROG004D0003Q_deptClear" data-dojo-type="dijit.form.Button"
+					data-dojo-props="
+						showLabel:false,
+						iconClass:'dijitIconClear',
+						onClick:function(){ 
+							BSC_PROG004D0003Q_clearOrgaAppendId();
+						}
+					"></button>	
+				<br/>	    			    			
+    			<span id="BSC_PROG004D0003Q_organizationAppendName"></span>    			
+    		</td>
+    	</tr>     
+		<tr>
+    		<td height="50px" width="100%"  align="left">
+    			<b>Employee</b>:
+    			&nbsp;&nbsp;
+				<button name="BSC_PROG004D0003Q_emplSelect" id="BSC_PROG004D0003Q_emplSelect" data-dojo-type="dijit.form.Button"
+					data-dojo-props="
+						showLabel:false,
+						iconClass:'dijitIconFolderOpen',
+						onClick:function(){ 
+							BSC_PROG001D0001Q_S00_DlgShow('BSC_PROG004D0003Q_appendEmployeeOid;BSC_PROG004D0003Q_reloadEmployeeAppendName');
+						}
+					"></button>
+				<button name="BSC_PROG004D0003Q_emplClear" id="BSC_PROG004D0003Q_emplClear" data-dojo-type="dijit.form.Button"
+					data-dojo-props="
+						showLabel:false,
+						iconClass:'dijitIconClear',
+						onClick:function(){ 
+							BSC_PROG004D0003Q_clearEmplAppendId();
+						}
+					"></button>		
+				<br/>
+				<span id="BSC_PROG004D0003Q_employeeAppendName"></span>	    			
+    		</td>    
+    	</tr>	
+    	<tr>
+    		<td height="50px" width="100%"  align="left">
+    			<gs:button name="BSC_PROG004D0003Q_save" id="BSC_PROG004D0003Q_save" onClick="BSC_PROG004D0003Q_save();"
+    				handleAs="json"
+    				sync="N"
+    				xhrUrl="${basePath}/bsc.kpiSaveAction.action"
+    				parameterType="postData"
+    				xhrParameter=" 
+    					{ 
+    						'fields.employeeOid'		: dijit.byId('BSC_PROG004D0003Q_roleOid').get('value'),
+    						'fields.orgaOids'			: dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value,
+    						'fields.emplOids'			: dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value
+    					} 
+    				"
+    				errorFn=""
+    				loadFn="BSC_PROG004D0003Q_saveSuccess(data);" 
+    				programId="${programId}"
+    				label="Save" 
+    				iconClass="dijitIconSave"></gs:button>    			
+    			<gs:button name="BSC_PROG004D0003Q_clear" id="BSC_PROG004D0003Q_clear" onClick="BSC_PROG004D0003Q_clear();" 
+    				label="Clear" 
+    				iconClass="dijitIconClear"></gs:button>    	    		
+    		</td>
+    	</tr>    		
+	</table>			
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
