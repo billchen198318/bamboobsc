@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 var BSC_PROG004D0003Q_defaultUrl = '${defaultUrl}';
 
 var BSC_PROG004D0003Q_fieldsId = new Object();
-BSC_PROG004D0003Q_fieldsId['employeeOid'] 		= 'BSC_PROG004D0003Q_roleOid';
+BSC_PROG004D0003Q_fieldsId['roleOid'] 		= 'BSC_PROG004D0003Q_roleOid';
 
 function BSC_PROG004D0003Q_saveSuccess(data) { // data 是 json 資料
 	setFieldsBackgroundDefault(BSC_PROG004D0003Q_fieldsId);
@@ -219,9 +219,9 @@ function ${programId}_page_message() {
     				parameterType="postData"
     				xhrParameter=" 
     					{ 
-    						'fields.employeeOid'		: dijit.byId('BSC_PROG004D0003Q_roleOid').get('value'),
-    						'fields.orgaOids'			: dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value,
-    						'fields.emplOids'			: dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value
+    						'fields.roleOid'		: dijit.byId('BSC_PROG004D0003Q_roleOid').get('value'),
+    						'fields.orgaOids'		: dojo.byId('BSC_PROG004D0003Q_appendOrganizationOid').value,
+    						'fields.emplOids'		: dojo.byId('BSC_PROG004D0003Q_appendEmployeeOid').value
     					} 
     				"
     				errorFn=""
