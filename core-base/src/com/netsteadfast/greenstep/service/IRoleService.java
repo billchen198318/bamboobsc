@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.PageOf;
@@ -80,5 +81,7 @@ public interface IRoleService<T extends java.io.Serializable, E extends java.io.
 	 * @throws Exception
 	 */
 	public List<RoleVO> findForProgram(String progId) throws ServiceException, Exception;
+	
+	public Map<String, String> findForMap(boolean pleaseSelect) throws ServiceException, Exception;
 	
 }
