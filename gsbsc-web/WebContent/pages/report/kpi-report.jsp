@@ -301,6 +301,16 @@ function BSC_PROG003D0001Q_uploadSignatureClear() {
 	);
 }
 
+function BSC_PROG003D0001Q_openPerspective(id) {
+	alert( id );
+}
+function BSC_PROG003D0001Q_openObjective(id) {
+	alert( id );
+}
+function BSC_PROG003D0001Q_openKPI(id) {
+	alert( id );
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';

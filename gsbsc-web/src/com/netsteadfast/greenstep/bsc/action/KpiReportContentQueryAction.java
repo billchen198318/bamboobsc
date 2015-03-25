@@ -51,6 +51,7 @@ import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.action.utils.SelectItemFieldCheckUtils;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
@@ -322,6 +323,7 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		context.put("pieCanvasToData", SimpleUtils.deHex( this.defaultString( this.getFields().get("pieCanvasToData") ) ) );
 		context.put("barCanvasToData", SimpleUtils.deHex( this.defaultString( this.getFields().get("barCanvasToData") ) ) );
 		context.put("uploadSignatureOid", this.getFields().get("uploadSignatureOid") );
+		context.put("ngVer", YesNo.YES); // 有 javascript click 事件的版本
 		if (!this.isNoSelectId(this.getFields().get("measureDataOrganizationOid"))) {
 			OrganizationVO organization = new OrganizationVO();
 			organization.setOid( this.getFields().get("measureDataOrganizationOid") );

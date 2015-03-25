@@ -33,6 +33,7 @@ import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.BaseChainCommandSupport;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
@@ -47,6 +48,7 @@ import com.netsteadfast.greenstep.vo.OrganizationVO;
 
 public class KpiReportBodyCommand extends BaseChainCommandSupport implements Command {
 	private static final String templateResource = "META-INF/resource/kpi-report-body.ftl";
+	private static final String templateResource_NG = "META-INF/resource/kpi-report-body-ng.ftl"; // 有 javascript click 事件的版本
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
 	
@@ -86,10 +88,14 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 		parameter.put("headContent", "");
 		this.fillHeadContent(context, parameter);
 		this.fillReportProperty(parameter);
+		String templateResourceSrc = templateResource;
+		if ( YesNo.YES.equals((String)context.get("ngVer")) ) { // 有 javascript click 事件的版本
+			templateResourceSrc = templateResource_NG;
+		}
 		String content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				KpiReportBodyCommand.class.getClassLoader(), 
-				templateResource, 
+				templateResourceSrc, 
 				parameter);
 		this.setResult(context, content);		
 		return false;
