@@ -301,14 +301,39 @@ function BSC_PROG003D0001Q_uploadSignatureClear() {
 	);
 }
 
+function BSC_PROG003D0001Q_getOpenWindowUrl(nextType, id) {
+	var url = "<%=basePath%>/bsc.kpiReportOpenWindowAction.action";
+	url += "?fields.visionOid=" 	+ dijit.byId("BSC_PROG003D0001Q_visionOid").get("value");
+	url += "&fields.startYearDate=" + dijit.byId("BSC_PROG003D0001Q_startYearDate").get('displayedValue');
+	url += "&fields.endYearDate=" 	+ dijit.byId("BSC_PROG003D0001Q_endYearDate").get('displayedValue');
+	url += "&fields.startDate=" 	+ dijit.byId("BSC_PROG003D0001Q_startDate").get('displayedValue');
+	url += "&fields.endDate=" 		+ dijit.byId("BSC_PROG003D0001Q_endDate").get('displayedValue');
+	url += "&fields.dataFor=" 		+ dijit.byId("BSC_PROG003D0001Q_dataFor").get("value");
+	url += "&fields.measureDataOrganizationOid=" 	+ dijit.byId("BSC_PROG003D0001Q_measureDataOrganizationOid").get("value");
+	url += "&fields.measureDataEmployeeOid=" 		+ dijit.byId("BSC_PROG003D0001Q_measureDataEmployeeOid").get("value");
+	url += "&fields.frequency=" 	+ dijit.byId("BSC_PROG003D0001Q_frequency").get("value");
+	url += "&fields.nextType=" 		+ nextType;
+	url += "&fields.nextId=" 		+ id;
+	return url;	
+}
+
 function BSC_PROG003D0001Q_openPerspective(id) {
-	alert( id );
+	window.open(			
+			BSC_PROG003D0001Q_getOpenWindowUrl('PER', id),		
+			"KPI-Report",
+            "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800"); 
 }
 function BSC_PROG003D0001Q_openObjective(id) {
-	alert( id );
+	window.open(			
+			BSC_PROG003D0001Q_getOpenWindowUrl('OBJ', id),		
+			"KPI-Report",
+            "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800");
 }
 function BSC_PROG003D0001Q_openKPI(id) {
-	alert( id );
+	window.open(			
+			BSC_PROG003D0001Q_getOpenWindowUrl('KPI', id),		
+			"KPI-Report",
+            "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800");
 }
 
 //------------------------------------------------------------------------------

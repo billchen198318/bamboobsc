@@ -154,6 +154,24 @@ public class KpiReportAction extends BaseSupportAction implements IBaseAdditiona
 		}
 		return SUCCESS;				
 	}
+	
+	/**
+	 * bsc.kpiReportOpenWindowAction.action
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG003D0001Q")	
+	public String openWindow() throws Exception {
+		try {
+			
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;			
+	}
 
 	@Override
 	public String getProgramName() {

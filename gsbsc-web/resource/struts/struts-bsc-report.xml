@@ -13,6 +13,10 @@
 			<result name="success">/pages/report/kpi-report.jsp</result>
 		</action>	
 		
+		<action name="bsc.kpiReportOpenWindowAction" class="bsc.web.controller.KpiReportAction" method="openWindow">
+			<result name="input">/pages/report/kpi-report-opw.jsp</result>		
+			<result name="success">/pages/report/kpi-report-opw.jsp</result>
+		</action>			
 		
 		<!-- Personal BSC Report -->
 		<action name="bsc.personalReportAction" class="bsc.web.controller.PersonalReportAction">
