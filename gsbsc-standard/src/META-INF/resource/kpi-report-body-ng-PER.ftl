@@ -3,16 +3,6 @@
 	
 	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="${backgroundColor}">
 		<tr>
-			<td colspan="3" bgcolor="${vision.bgColor}" align="center" onclick="BSC_PROG003D0001Q_openNew();">
-				<b>
-				<font color="${vision.fontColor}" size="+2">
-					${vision.title}<BR/>
-					score:&nbsp;${vision.score?string(',###.##')}
-				</font>
-				</b>
-			</td>
-		</tr>
-		<tr>
 			<td width="25%" align="left" bgcolor="${backgroundColor}"><b><font color='${fontColor}' size="+1">${perspectiveTitle}</font></b></td>
 			<td width="25%" align="left" bgcolor="${backgroundColor}"><b><font color='${fontColor}' size="+1">${objectiveTitle}</font></b></td>
 			<td width="50%" align="left" bgcolor="${backgroundColor}"><b><font color='${fontColor}' size="+1">${kpiTitle}</font></b></td>
@@ -20,7 +10,7 @@
 		
 	<#list vision.perspectives as perspective >
 		<tr>
-			<td width="25%" bgcolor="${perspective.bgColor}" rowspan="${perspective.row}" onclick="BSC_PROG003D0001Q_openPerspective('${perspective.perId}');">
+			<td width="25%" bgcolor="${perspective.bgColor}" rowspan="${perspective.row}" >
 				<table border="0" width="100%">
 					<tr>
 						<td width="100%" colspan="2" bgcolor="${perspective.bgColor}">
@@ -94,7 +84,7 @@
 				<tr>
 			</#if>
 			
-			<td width="25%" bgcolor="${objective.bgColor}" rowspan="${objective.row}" onclick="BSC_PROG003D0001Q_openObjective('${objective.objId}');">
+			<td width="25%" bgcolor="${objective.bgColor}" rowspan="${objective.row}" >
 				<table border="0" width="100%">
 					<tr>
 						<td width="100%" colspan="2" bgcolor="${objective.bgColor}">
@@ -164,7 +154,7 @@
 					
 				<#list objective.kpis as kpi >
 					
-					<td width="50%" bgcolor="${kpi.bgColor}" onclick="BSC_PROG003D0001Q_openKPI('${kpi.id}');">
+					<td width="50%" bgcolor="${kpi.bgColor}" >
 						<table border="0" width="100%">
 							<tr>
 								<td width="100%" colspan="2" bgcolor="${kpi.bgColor}">
@@ -288,66 +278,6 @@
 		</#list>
 				
 	</#list>
-	
-		<tr>
-			<td colspan="3" bgcolor="${backgroundColor}" align="left">
-				<b>
-				<font color="${fontColor}" size="2">
-					Frequency:&nbsp;${frequency}&nbsp;&nbsp;Date range:&nbsp;${date1}&nbsp;~&nbsp;${date2}
-					${headContent}
-				</font>
-				</b>
-			</td>
-		</tr>		
-		
-		
-		<tr>
-			<td colspan="3">
-				<table width="100%" border="0" cellspacing="1" cellpadding="0" >
-						
-				<#list vision.perspectives as perspective >
-					<#list perspective.objectives as objective >
-						<#list objective.kpis as kpi >						
-								
-					<tr>
-						<td rowspan="2" align="left" bgcolor="${kpi.bgColor}" width="200px">
-							<font color="${kpi.fontColor}" >
-							<b>${kpi.name}</b>
-							</font>			
-						</td>
-						
-						<#list kpi.dateRangeScores as dateRangeScore >
-						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
-							<font color="${dateRangeScore.fontColor}" >
-							<b>${dateRangeScore.date}</b>
-							</font>
-						</td>						
-						</#list>
-						
-					</tr>
-					<tr>
-					
-						<#list kpi.dateRangeScores as dateRangeScore >
-						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
-							<font color="${dateRangeScore.fontColor}" >
-							${dateRangeScore.score?string(',###.##')}
-							</font>
-							${dateRangeScore.imgIcon}
-						</td>						
-						</#list>
-						
-					</tr>
-
-						</#list>
-					</#list>
-				</#list>	
-			
-				</table>
-			</td>						
-		</tr>	
-				
-
-
 		
 	</table>	
 		

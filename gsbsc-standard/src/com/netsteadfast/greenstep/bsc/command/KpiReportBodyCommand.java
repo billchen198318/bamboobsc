@@ -49,6 +49,9 @@ import com.netsteadfast.greenstep.vo.OrganizationVO;
 public class KpiReportBodyCommand extends BaseChainCommandSupport implements Command {
 	private static final String templateResource = "META-INF/resource/kpi-report-body.ftl";
 	private static final String templateResource_NG = "META-INF/resource/kpi-report-body-ng.ftl"; // 有 javascript click 事件的版本
+	private static final String templateResource_NG_PER = "META-INF/resource/kpi-report-body-ng-PER.ftl"; // 點選perspective打開OPW後的報表
+	private static final String templateResource_NG_OBJ = "META-INF/resource/kpi-report-body-ng-OBJ.ftl"; // 點選objective打開OPW後的報表
+	private static final String templateResource_NG_KPI = "META-INF/resource/kpi-report-body-ng-KPI.ftl"; // 點選KPI打開OPW後的報表
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
 	
@@ -92,6 +95,17 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 		if ( YesNo.YES.equals((String)context.get("ngVer")) ) { // 有 javascript click 事件的版本
 			templateResourceSrc = templateResource_NG;
 		}
+		String nextType = (String)context.get("nextType");
+		String nextId = (String)context.get("nextId");
+		if ( BscConstants.HEAD_FOR_PER_ID.equals( nextType ) && !StringUtils.isBlank(nextId) ) {
+			templateResourceSrc = templateResource_NG_PER;
+		}
+		if ( BscConstants.HEAD_FOR_OBJ_ID.equals( nextType ) && !StringUtils.isBlank(nextId) ) {
+			templateResourceSrc = templateResource_NG_OBJ;
+		}
+		if ( BscConstants.HEAD_FOR_KPI_ID.equals( nextType ) && !StringUtils.isBlank(nextId) ) {
+			templateResourceSrc = templateResource_NG_KPI;
+		}		
 		String content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				KpiReportBodyCommand.class.getClassLoader(), 
