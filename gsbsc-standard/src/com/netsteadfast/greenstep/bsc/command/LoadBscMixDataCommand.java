@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.commons.lang3.StringUtils;
 
 import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.AppContext;
@@ -50,7 +51,12 @@ public class LoadBscMixDataCommand extends BaseChainCommandSupport implements Co
 		if (BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(empId)) {
 			empId = "";
 		}
-		DefaultResult<List<BscMixDataVO>> result = kpiService.findForMixData( (String)context.get("visionOid"), orgId, empId);
+		DefaultResult<List<BscMixDataVO>> result = kpiService.findForMixData( 
+				(String)context.get("visionOid"), 
+				orgId, 
+				empId,
+				StringUtils.defaultString( (String)context.get("nextType") ),
+				StringUtils.defaultString( (String)context.get("nextId")) );
 		if (result.getValue()!=null) {
 			this.setResult(context, result.getValue());
 		} else {

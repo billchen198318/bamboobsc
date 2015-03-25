@@ -39,8 +39,8 @@ public interface IKpiService<T extends java.io.Serializable, E extends java.io.S
 	
 	public QueryResult<List<KpiVO>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception;
 	
-	public DefaultResult<List<BscMixDataVO>> findForMixData(String visionOid, String orgId, String empId) throws ServiceException, Exception;
+	public DefaultResult<List<BscMixDataVO>> findForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws ServiceException, Exception;
 	
-	public int countForMixData(String visionOid, String orgId, String empId) throws ServiceException, Exception;
+	public int countForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws ServiceException, Exception;
 	
 }

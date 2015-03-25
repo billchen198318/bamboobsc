@@ -51,8 +51,8 @@ public interface IKpiDAO<T extends java.io.Serializable, PK extends java.io.Seri
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BscMixDataVO> findForMixData(String visionOid, String orgId, String empId) throws Exception;
+	public List<BscMixDataVO> findForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws Exception;
 	
-	public int countForMixData(String visionOid, String orgId, String empId) throws Exception;
+	public int countForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws Exception;
 	
 }

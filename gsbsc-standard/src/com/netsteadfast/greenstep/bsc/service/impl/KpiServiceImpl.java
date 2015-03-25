@@ -166,9 +166,9 @@ public class KpiServiceImpl extends BaseService<KpiVO, BbKpi, String> implements
 	}
 
 	@Override
-	public DefaultResult<List<BscMixDataVO>> findForMixData(String visionOid, String orgId, String empId) throws ServiceException, Exception {
+	public DefaultResult<List<BscMixDataVO>> findForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws ServiceException, Exception {
 		DefaultResult<List<BscMixDataVO>> result = new DefaultResult<List<BscMixDataVO>>();
-		List<BscMixDataVO> searchList = this.kpiDAO.findForMixData(visionOid, orgId, empId);
+		List<BscMixDataVO> searchList = this.kpiDAO.findForMixData(visionOid, orgId, empId, nextType, nextId);
 		if (null!=searchList && searchList.size()>0) {
 			result.setValue(searchList);
 		} else {
@@ -178,8 +178,8 @@ public class KpiServiceImpl extends BaseService<KpiVO, BbKpi, String> implements
 	}
 
 	@Override
-	public int countForMixData(String visionOid, String orgId, String empId) throws ServiceException, Exception {		
-		return this.kpiDAO.countForMixData(visionOid, orgId, empId);
+	public int countForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws ServiceException, Exception {		
+		return this.kpiDAO.countForMixData(visionOid, orgId, empId, nextType, nextId);
 	}
 
 }

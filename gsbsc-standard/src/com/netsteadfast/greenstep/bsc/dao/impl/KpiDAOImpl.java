@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
+import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.dao.BaseDAO;
 import com.netsteadfast.greenstep.bsc.dao.IKpiDAO;
@@ -43,7 +44,7 @@ public class KpiDAOImpl extends BaseDAO<BbKpi, String> implements IKpiDAO<BbKpi,
 		super();
 	}
 	
-	private String getMixDataHql(String type, String visionOid, String orgId, String empId) {
+	private String getMixDataHql(String type, String visionOid, String orgId, String empId, String nextType, String nextId) {
 		StringBuilder hql = new StringBuilder();
 		if (Constants.QUERY_TYPE_OF_SELECT.equals(type)) {
 			hql.append("SELECT new com.netsteadfast.greenstep.bsc.vo.BscMixDataVO(");
@@ -69,14 +70,23 @@ public class KpiDAOImpl extends BaseDAO<BbKpi, String> implements IKpiDAO<BbKpi,
 		}
 		if (!StringUtils.isBlank(empId)) {
 			hql.append("AND k.id IN ( SELECT b.kpiId FROM BbKpiEmpl b WHERE b.empId = :empId ) ");
+		}		
+		if (BscConstants.HEAD_FOR_PER_ID.equals(nextType) && !StringUtils.isBlank(nextId)) {
+			hql.append("AND p.perId = :perId ");
 		}
+		if (BscConstants.HEAD_FOR_OBJ_ID.equals(nextType) && !StringUtils.isBlank(nextId)) {
+			hql.append("AND o.objId = :objId ");
+		}
+		if (BscConstants.HEAD_FOR_KPI_ID.equals(nextType) && !StringUtils.isBlank(nextId)) {
+			hql.append("AND k.id = :kpiId ");
+		}			
 		if (Constants.QUERY_TYPE_OF_SELECT.equals(type)) {
 			hql.append("ORDER BY v.visId, p.perId, o.objId, k.id ASC ");
 		}
 		return hql.toString();
 	}
 	
-	private void setQueryMixDataParameter(Query query, String visionOid, String orgId, String empId) {
+	private void setQueryMixDataParameter(Query query, String visionOid, String orgId, String empId, String nextType, String nextId) {
 		if (!StringUtils.isBlank(visionOid)) {
 			query.setString("visionOid", visionOid);
 		}		
@@ -86,6 +96,15 @@ public class KpiDAOImpl extends BaseDAO<BbKpi, String> implements IKpiDAO<BbKpi,
 		if (!StringUtils.isBlank(empId)) {
 			query.setString("empId", empId);
 		}			
+		if (BscConstants.HEAD_FOR_PER_ID.equals(nextType) && !StringUtils.isBlank(nextId)) {
+			query.setString("perId", nextId);
+		}
+		if (BscConstants.HEAD_FOR_OBJ_ID.equals(nextType) && !StringUtils.isBlank(nextId)) {
+			query.setString("objId", nextId);
+		}
+		if (BscConstants.HEAD_FOR_KPI_ID.equals(nextType) && !StringUtils.isBlank(nextId)) {
+			query.setString("kpiId", nextId);
+		}		
 	}
 
 	/**
@@ -112,18 +131,18 @@ public class KpiDAOImpl extends BaseDAO<BbKpi, String> implements IKpiDAO<BbKpi,
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BscMixDataVO> findForMixData(String visionOid, String orgId, String empId) throws Exception {
+	public List<BscMixDataVO> findForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws Exception {
 		Query query = this.getCurrentSession().createQuery( 
-				this.getMixDataHql(Constants.QUERY_TYPE_OF_SELECT, visionOid, orgId, empId) );	
-		this.setQueryMixDataParameter(query, visionOid, orgId, empId);
+				this.getMixDataHql(Constants.QUERY_TYPE_OF_SELECT, visionOid, orgId, empId, nextType, nextId) );	
+		this.setQueryMixDataParameter(query, visionOid, orgId, empId, nextType, nextId);
 		return query.list();
 	}
 
 	@Override
-	public int countForMixData(String visionOid, String orgId, String empId) throws Exception {	
+	public int countForMixData(String visionOid, String orgId, String empId, String nextType, String nextId) throws Exception {	
 		Query query = this.getCurrentSession().createQuery( 
-				this.getMixDataHql(Constants.QUERY_TYPE_OF_COUNT, visionOid, orgId, empId) );
-		this.setQueryMixDataParameter(query, visionOid, orgId, empId);
+				this.getMixDataHql(Constants.QUERY_TYPE_OF_COUNT, visionOid, orgId, empId, nextType, nextId) );
+		this.setQueryMixDataParameter(query, visionOid, orgId, empId, nextType, nextId);
 		return DataAccessUtils.intResult( query.list() );
 	}
 	
