@@ -26,8 +26,10 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<meta http-equiv="keywords" content="bambooCORE">
 	<meta http-equiv="description" content="bambooCORE">
 	
-	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-1.9.0-min.js"></script>
-	
+    <script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	  
+    	
 <style type="text/css">
 
 </style>
@@ -61,6 +63,18 @@ function BSC_PROG003D0001Q_getOpenWindowView() {
     			return;
     		}
     		$("#BSC_PROG003D0001Q_content").html( data.body );
+			html2canvas( $('#BSC_PROG003D0001Q_content'), {
+				onrendered: function(canvas) {
+			        var a = document.createElement('a');
+			        a.download = 'kpi-report.png';
+			        a.href = canvas.toDataURL('image/png');
+			        document.body.appendChild(a);
+			        a.click();							
+				},
+				allowTaint 	: true,
+				useCORS		: true,
+				taintTest	: true
+			});    		
     	},
      	error: function(data) {
      		alert(data);

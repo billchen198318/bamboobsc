@@ -335,6 +335,12 @@ function BSC_PROG003D0001Q_openKPI(id) {
 			"KPI-Report",
             "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800");
 }
+function BSC_PROG003D0001Q_openNew() {
+	window.open(			
+			BSC_PROG003D0001Q_getOpenWindowUrl('', ''),		
+			"KPI-Report",
+            "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800");	
+}
 
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
@@ -392,6 +398,9 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 											
+												BSC_PROG003D0001Q_openNew();
+												
+												/*
 												html2canvas( $('#BSC_PROG003D0001Q_content'), {
 													onrendered: function(canvas) {
 												        var a = document.createElement('a');
@@ -404,7 +413,7 @@ function ${programId}_page_message() {
 													useCORS		: true,
 													taintTest	: true
 												});
-																							  
+												*/											  
 											}">export as PNG</button>	
 					
 									<button id="BSC_PROG003D0001Q_btnPdf" data-dojo-type="dijit.form.Button"
