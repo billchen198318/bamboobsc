@@ -91,7 +91,7 @@ public class KpiTreeJsonAction extends BaseJsonAction {
 	}
 	
 	private void countTreeItems() throws ServiceException, Exception {
-		if (this.kpiService.countForMixData(null, null, null) > 0) {
+		if (this.kpiService.countForMixData(null, null, null, null, null) > 0) {
 			this.success = IS_YES;
 		}
 	}
