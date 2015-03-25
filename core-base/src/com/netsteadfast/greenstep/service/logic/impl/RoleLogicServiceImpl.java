@@ -560,6 +560,15 @@ public class RoleLogicServiceImpl extends BaseLogicService implements IRoleLogic
 			permission.setRole( result.getValue().getRole() );
 			this.rolePermissionService.saveObject(permission);
 		}
+		// 選單menu role 也copy一份
+		List<TbSysMenuRole> menuRoles = this.sysMenuRoleService.findListByParams(paramMap);
+		for (int i=0; menuRoles!=null && i<menuRoles.size(); i++) {
+			SysMenuRoleVO menuRole = new SysMenuRoleVO();
+			this.sysMenuRoleService.fillToValueObject(menuRole, menuRoles.get(i) );
+			menuRole.setOid(null);
+			menuRole.setRole( result.getValue().getRole() );
+			this.sysMenuRoleService.saveObject(menuRole);
+		}
 		return result;
 	}
 
