@@ -55,6 +55,11 @@ public class BscConstants {
 	public final static String HEAD_FOR_OBJ_ID = "OBJ";
 	
 	/**
+	 * 給KPI報表 opw , 參數 nextType 要用的
+	 */
+	public final static String HEAD_FOR_KPI_ID = "KPI";
+	
+	/**
 	 * 員工grid選擇取checkbox 的 id 與 name , 其組成方式為 GRID_CBOX:加上OID , 如 GRID_CBOX:3ba52439-6756-45e8-8269-ae7b4fb6a3dc
 	 */	
 	public final static String EMPL_SELECT_CHECKBOX_ID_DELIMITER = "GRID_CBOX:";
