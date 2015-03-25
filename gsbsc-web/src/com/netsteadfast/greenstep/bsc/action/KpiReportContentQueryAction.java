@@ -345,8 +345,24 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 			context.put("empId", employee.getEmpId() );
 			context.put("account", employee.getAccount() );
 		}		
+		this.setContextForSingleObject(context);
 		return context;
 	}
+	
+	@SuppressWarnings("unchecked")
+	private void setContextForSingleObject( Context context ) throws Exception {
+		String nextType = this.getFields().get("nextType");
+		String nextId = this.getFields().get("nextId");
+		if ( StringUtils.isBlank(nextType) || StringUtils.isBlank(nextId) ) {
+			return;
+		}
+		if ( ! (BscConstants.HEAD_FOR_PER_ID.equals(nextType) 
+				|| BscConstants.HEAD_FOR_OBJ_ID.equals(nextType) || BscConstants.HEAD_FOR_KPI_ID.equals(nextType)) ) {
+			return;
+		}
+		context.put("nextType", nextType );
+		context.put("nextId", nextId );
+	}	
 	
 	private void fillPerspectivesPieChartData(BscStructTreeObj treeObj) throws Exception {
 		List<VisionVO> visions = treeObj.getVisions();

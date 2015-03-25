@@ -146,23 +146,7 @@ public class PersonalReportContentQueryAction extends BaseJsonAction {
 		context.put("account", employee.getAccount() );
 		context.put("orgId", BscConstants.MEASURE_DATA_ORGANIZATION_FULL );
 		context.put("uploadSignatureOid", this.getFields().get("uploadSignatureOid") );
-		this.setContextForSingleObject(context);
 		return context;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private void setContextForSingleObject( Context context ) throws Exception {
-		String nextType = this.getFields().get("nextType");
-		String nextId = this.getFields().get("nextId");
-		if ( StringUtils.isBlank(nextType) || StringUtils.isBlank(nextId) ) {
-			return;
-		}
-		if ( ! (BscConstants.HEAD_FOR_PER_ID.equals(nextType) 
-				|| BscConstants.HEAD_FOR_OBJ_ID.equals(nextType) || BscConstants.HEAD_FOR_KPI_ID.equals(nextType)) ) {
-			return;
-		}
-		context.put("nextType", nextType );
-		context.put("nextId", nextId );
 	}
 	
 	private void getContent() throws ControllerException, AuthorityException, ServiceException, Exception {
