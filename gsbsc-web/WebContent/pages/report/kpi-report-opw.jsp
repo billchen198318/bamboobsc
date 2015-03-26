@@ -96,9 +96,18 @@ function ${programId}_page_message() {
 
 </head>
 
-<body class="claro" bgcolor="#EEEEEE" >
+<body class="claro" bgcolor="#ffffff" >
 		
-	<div id="BSC_PROG003D0001Q_content"><h1>Please wait!</h1></div>
+	<div id="BSC_PROG003D0001Q_content">
+		<table border="0">
+			<tr>
+				<td align="center" width="500px"><img alt="please wait" src="./images/please-wait.gif"></td>
+			</tr>
+			<tr>
+				<td align="center" width="500px"><h2>Please wait!</h2></td>
+			</tr>
+		</table>		
+	</div>
 	
 <script type="text/javascript">
 ${programId}_page_message();
