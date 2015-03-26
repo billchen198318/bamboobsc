@@ -453,7 +453,6 @@ CREATE TABLE `bb_report_role_view` (
 
 LOCK TABLES `bb_report_role_view` WRITE;
 /*!40000 ALTER TABLE `bb_report_role_view` DISABLE KEYS */;
-INSERT INTO `bb_report_role_view` VALUES ('18ec6b06-acee-4be0-a49b-1a0a745c6c42','ORG','BSC_STANDARD','0001','admin','2015-03-24 19:46:46',NULL,NULL),('5704b62f-9b84-4daa-811e-a56ab589f319','EMP','BSC_STANDARD','admin','admin','2015-03-24 19:46:45',NULL,NULL),('7b35c458-e0be-4496-938a-0413ce04a1c6','EMP','BSC_STANDARD','tester','admin','2015-03-24 19:46:45',NULL,NULL),('96e6e193-0ee5-43b0-b27a-bef1d13059db','ORG','BSC_STANDARD','0002','admin','2015-03-24 19:46:46',NULL,NULL),('dc5c5e6e-17ab-4b96-9a09-6bf38b388330','ORG','BSC_STANDARD','0003','admin','2015-03-24 19:46:46',NULL,NULL);
 /*!40000 ALTER TABLE `bb_report_role_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1345,7 +1344,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861427197420934',1427197684063,7500),('scheduler','localX861427197443540',1427197684102,7500),('scheduler','localX861427197464938',1427197682897,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861427373870619',1427374555254,7500),('scheduler','localX861427373895581',1427374557391,7500),('scheduler','localX861427373919109',1427374558437,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1449,7 +1448,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1427197740000,1427197680000,0,'WAITING','CRON',1427197464000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1427374620000,1427374560000,0,'WAITING','CRON',1427373918000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2277,7 +2276,6 @@ CREATE TABLE `tb_sys_usess` (
 
 LOCK TABLES `tb_sys_usess` WRITE;
 /*!40000 ALTER TABLE `tb_sys_usess` DISABLE KEYS */;
-INSERT INTO `tb_sys_usess` VALUES ('f4fed2f4-aeae-48b3-ad69-333db907b001','3995E5249DB9163898A8281B8500ED26','tester','ed6f4bac-a170-41c4-a188-626e8ce4c207','SYS','2015-03-24 19:47:15',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_usess` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2356,4 +2354,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-24 19:48:14
+-- Dump completed on 2015-03-26 20:56:21

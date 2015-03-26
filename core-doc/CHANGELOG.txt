@@ -1,6 +1,6 @@
-2015-03-25
+2015-03-27
 -----------------------------------------------------------
-add Report role limit (BSC_PROG004D0003Q)
+Some modifications
 
 add new database table:
 	bb_report_role_view
