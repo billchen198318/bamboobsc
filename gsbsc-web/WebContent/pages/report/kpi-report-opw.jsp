@@ -40,7 +40,7 @@ function BSC_PROG003D0001Q_getOpenWindowView() {
     $.ajax({
     	type	: "POST",
     	dataType: 'json',
-    	async	: false,
+    	async	: true,
     	timeout	: 24000,
     	cache	: false,
     	url		: '<%=basePath%>/bsc.kpiReportContentQueryAction.action',
