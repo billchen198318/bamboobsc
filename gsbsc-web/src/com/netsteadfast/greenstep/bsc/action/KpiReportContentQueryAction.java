@@ -120,12 +120,15 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		try {
 			super.checkFields(
 					new String[]{
-							"visionOid"
+							"visionOid",
+							"frequency"
 					}, 
 					new String[]{
-							"Please select vision!<BR/>"
+							"Please select vision!<BR/>",
+							"Please select frequency!<BR/>"
 					}, 
 					new Class[]{
+							SelectItemFieldCheckUtils.class,
 							SelectItemFieldCheckUtils.class
 					},
 					this.getFieldsId() );			

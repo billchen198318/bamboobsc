@@ -130,7 +130,6 @@ public class PersonalReportContentQueryAction extends BaseJsonAction {
 		Context context = new ContextBase();
 		context.put("visionOid", this.getFields().get("visionOid"));
 		context.put("frequency", this.getFields().get("frequency"));
-		context.put("frequency", this.getFields().get("frequency"));
 		context.put("startYearDate", this.getFields().get("year"));
 		context.put("endYearDate", this.getFields().get("year"));
 		context.put("dateType", this.getFields().get("dateType"));

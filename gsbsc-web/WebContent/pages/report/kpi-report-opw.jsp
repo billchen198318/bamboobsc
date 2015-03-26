@@ -45,17 +45,17 @@ function BSC_PROG003D0001Q_getOpenWindowView() {
     	cache	: false,
     	url		: '<%=basePath%>/bsc.kpiReportContentQueryAction.action',
     	data	: { 
-			'fields.visionOid' 					: 	'${fields.visionOid}',
-			'fields.startYearDate'				:	'${fields.startYearDate}',
-			'fields.endYearDate'				:	'${fields.endYearDate}',
-			'fields.startDate'					:	'${fields.startDate}',
-			'fields.endDate'					:	'${fields.endDate}',
-			'fields.dataFor'					:	'${fields.dataFor}',
-			'fields.measureDataOrganizationOid'	:	'${fields.measureDataOrganizationOid}',
-			'fields.measureDataEmployeeOid'		:	'${fields.measureDataEmployeeOid}',
-			'fields.frequency'					:	'${fields.frequency}',
-			'fields.nextType'					:	'${fields.nextType}',
-			'fields.nextId'						:	'${fields.nextId}'
+			'fields.visionOid' 					: 	'${fields.opw_visionOid}',
+			'fields.startYearDate'				:	'${fields.opw_startYearDate}',
+			'fields.endYearDate'				:	'${fields.opw_endYearDate}',
+			'fields.startDate'					:	'${fields.opw_startDate}',
+			'fields.endDate'					:	'${fields.opw_endDate}',
+			'fields.dataFor'					:	'${fields.opw_dataFor}',
+			'fields.measureDataOrganizationOid'	:	'${fields.opw_measureDataOrganizationOid}',
+			'fields.measureDataEmployeeOid'		:	'${fields.opw_measureDataEmployeeOid}',
+			'fields.frequency'					:	'${fields.opw_frequency}',
+			'fields.nextType'					:	'${fields.opw_nextType}',
+			'fields.nextId'						:	'${fields.opw_nextId}'
     	},
     	success	: function(data) {
     		if ('Y' != data.success) {

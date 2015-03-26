@@ -64,6 +64,7 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 
 var BSC_PROG003D0001Q_fieldsId = new Object();
 BSC_PROG003D0001Q_fieldsId['visionOid'] 					= 'BSC_PROG003D0001Q_visionOid';
+BSC_PROG003D0001Q_fieldsId['frequency'] 					= 'BSC_PROG003D0001Q_frequency';
 BSC_PROG003D0001Q_fieldsId['startYearDate'] 				= 'BSC_PROG003D0001Q_startYearDate';
 BSC_PROG003D0001Q_fieldsId['endYearDate'] 					= 'BSC_PROG003D0001Q_endYearDate';
 BSC_PROG003D0001Q_fieldsId['startDate'] 					= 'BSC_PROG003D0001Q_startDate';
@@ -303,17 +304,17 @@ function BSC_PROG003D0001Q_uploadSignatureClear() {
 
 function BSC_PROG003D0001Q_getOpenWindowUrl(nextType, id) {
 	var url = "<%=basePath%>/bsc.kpiReportOpenWindowAction.action";
-	url += "?fields.visionOid=" 	+ dijit.byId("BSC_PROG003D0001Q_visionOid").get("value");
-	url += "&fields.startYearDate=" + dijit.byId("BSC_PROG003D0001Q_startYearDate").get('displayedValue');
-	url += "&fields.endYearDate=" 	+ dijit.byId("BSC_PROG003D0001Q_endYearDate").get('displayedValue');
-	url += "&fields.startDate=" 	+ dijit.byId("BSC_PROG003D0001Q_startDate").get('displayedValue');
-	url += "&fields.endDate=" 		+ dijit.byId("BSC_PROG003D0001Q_endDate").get('displayedValue');
-	url += "&fields.dataFor=" 		+ dijit.byId("BSC_PROG003D0001Q_dataFor").get("value");
-	url += "&fields.measureDataOrganizationOid=" 	+ dijit.byId("BSC_PROG003D0001Q_measureDataOrganizationOid").get("value");
-	url += "&fields.measureDataEmployeeOid=" 		+ dijit.byId("BSC_PROG003D0001Q_measureDataEmployeeOid").get("value");
-	url += "&fields.frequency=" 	+ dijit.byId("BSC_PROG003D0001Q_frequency").get("value");
-	url += "&fields.nextType=" 		+ nextType;
-	url += "&fields.nextId=" 		+ id;
+	url += "?fields.opw_visionOid=" 	+ dijit.byId("BSC_PROG003D0001Q_visionOid").get("value");
+	url += "&fields.opw_startYearDate=" + dijit.byId("BSC_PROG003D0001Q_startYearDate").get('displayedValue');
+	url += "&fields.opw_endYearDate=" 	+ dijit.byId("BSC_PROG003D0001Q_endYearDate").get('displayedValue');
+	url += "&fields.opw_startDate=" 	+ dijit.byId("BSC_PROG003D0001Q_startDate").get('displayedValue');
+	url += "&fields.opw_endDate=" 		+ dijit.byId("BSC_PROG003D0001Q_endDate").get('displayedValue');
+	url += "&fields.opw_dataFor=" 		+ dijit.byId("BSC_PROG003D0001Q_dataFor").get("value");
+	url += "&fields.opw_measureDataOrganizationOid=" 	+ dijit.byId("BSC_PROG003D0001Q_measureDataOrganizationOid").get("value");
+	url += "&fields.opw_measureDataEmployeeOid=" 		+ dijit.byId("BSC_PROG003D0001Q_measureDataEmployeeOid").get("value");
+	url += "&fields.opw_frequency=" 	+ dijit.byId("BSC_PROG003D0001Q_frequency").get("value");
+	url += "&fields.opw_nextType=" 		+ nextType;
+	url += "&fields.opw_nextId=" 		+ id;
 	return url;	
 }
 
