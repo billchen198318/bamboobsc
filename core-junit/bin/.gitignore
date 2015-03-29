@@ -1,3 +1,14 @@
-/applicationContext
-/com
-/test
+debug
+codegen
+*.local
+*.class
+javadoc
+Thumbs.db
+.project
+.children
+*.classpath
+*/.settings/*.prefs
+*/.settings/*.component
+*/.settings/*.xml
+*/bin/*
+/*
