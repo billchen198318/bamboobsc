@@ -21,6 +21,12 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -30,19 +36,39 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
+import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.PerspectivesDashboardAction")
 @Scope
 public class PerspectivesDashboardAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = -2448544036438639172L;
+	private IVisionService<VisionVO, BbVision, String> visionService;
+	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
+	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(true);
 	
 	public PerspectivesDashboardAction() {
 		super();
 	}
 	
+	public IVisionService<VisionVO, BbVision, String> getVisionService() {
+		return visionService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.VisionService")	
+	public void setVisionService(
+			IVisionService<VisionVO, BbVision, String> visionService) {
+		this.visionService = visionService;
+	}	
+	
 	private void initData() throws ServiceException, Exception {
+		this.visionMap = this.visionService.findForMap(true);
 		
 	}
 	
@@ -79,6 +105,14 @@ public class PerspectivesDashboardAction extends BaseSupportAction implements IB
 	@Override
 	public String getProgramId() {
 		return super.getActionMethodProgramId();
+	}
+
+	public Map<String, String> getVisionMap() {
+		return visionMap;
+	}
+
+	public Map<String, String> getFrequencyMap() {
+		return frequencyMap;
 	}
 
 }

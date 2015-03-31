@@ -87,6 +87,8 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	private List<Map<String, String>> lineChartNames = new LinkedList<Map<String, String>>();
 	private List<List<List<Object>>> lineChartValues = new LinkedList<List<List<Object>>>();
 	
+	private List<PerspectiveVO> perspectiveItems = new LinkedList<PerspectiveVO>(); // 給 04 - Perspectives Dashboard 用的
+	
 	public KpiReportContentQueryAction() {
 		super();
 	}
@@ -412,6 +414,9 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 				continue;
 			}
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
+				
+				this.perspectiveItems.add( perspective ); // 給 04 - Perspectives Dashboard 用的
+				
 				for (ObjectiveVO objective : perspective.getObjectives()) {
 					for (KpiVO kpi : objective.getKpis()) {
 						
@@ -662,6 +667,11 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	@JSON
 	public List<List<List<Object>>> getLineChartValues() {
 		return lineChartValues;
+	}
+
+	@JSON
+	public List<PerspectiveVO> getPerspectiveItems() {
+		return perspectiveItems;
 	}
 	
 }
