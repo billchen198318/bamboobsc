@@ -131,17 +131,16 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 	var content = '';
 	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#c1c7d0" >';
 	content += '<tr>';
-	content += '<td colspan="2" bgcolor="DFFAFF" align="center" ><b>Perspectives meter gauge</b></td>';
+	content += '<td colspan="2" bgcolor="DFFAFF" align="center" ><font size="4"><b>Perspectives metrics gauge ( ' + dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue') + ' )</b></font></td>';
 	content += '</tr>';	
 	for (var n in data.perspectiveItems) {
 		content += '<tr>';
-		content += '<td colspan="2" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0004Q_charts_' + data.perspectiveItems[n].perId + '" style="width:450px;height:360px;" ></td>';
-		content += '</tr>';					
-		
+		content += '<td width="50%" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0004Q_charts_' + data.perspectiveItems[n].perId + '" style="width:450px;height:360px;" ></td>';
+		content += '<td width="50%" bgcolor="#ffffff" align="center">' + BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( data.perspectiveItems[n] ) + '<td>';
+		content += '</tr>';							
 	}	
 	content += '</table>';
-	dojo.html.set(dojo.byId("BSC_PROG003D0004Q_contentPerspectives"), content, {extractContent: true, parseContent: true});
-	
+	dojo.html.set(dojo.byId("BSC_PROG003D0004Q_contentPerspectives"), content, {extractContent: true, parseContent: true});	
 	for (var n in data.perspectiveItems) {
 		var perspective = data.perspectiveItems[n];
 		var target = perspective.target;
@@ -176,6 +175,28 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 		});	
 	}	
 }
+function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
+	var content = '';
+	content += '<table width="100%" border="0" cellpadding="1" cellspacing="0" bgcolor="#EEEEEE" >';
+	content += '<tr>';
+	content += '<td bgcolor="' + perspective.bgColor + ' " align="center" ><b><font size="4" color="' + perspective.fontColor + '" >' + perspective.name + '</font></b></td>';
+	content += '</tr>';		
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Target:&nbsp;</b>' + perspective.target + '</td>';
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Min:&nbsp;</b>' + perspective.min + '</td>';
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Score:&nbsp;</b>' + perspective.score + '</td>';
+	content += '</tr>';				
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" >' + perspective.description + '</td>';
+	content += '</tr>';	
+	content += '</table>';
+	return content;
+}
+
 
 function BSC_PROG003D0004Q_clearContent() {
 	
