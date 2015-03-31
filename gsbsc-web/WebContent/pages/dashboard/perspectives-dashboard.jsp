@@ -34,6 +34,22 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 <style type="text/css">
 
+.btnExcelIcon {
+  	background-image: url(./icons/excel.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
+.btnPdfIcon {
+  	background-image: url(./icons/application-pdf.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -128,6 +144,14 @@ function BSC_PROG003D0004Q_paintBarCharts(data) {
 }
 
 function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
+	
+	// 清除要上傳的資料
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_meterGaugeChartDatas:')>-1) {
+			dojo.destroy(node.id);
+		}	
+	});	
+	
 	var content = '';
 	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#c1c7d0" >';
 	content += '<tr>';
@@ -135,7 +159,7 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 	content += '</tr>';	
 	for (var n in data.perspectiveItems) {
 		content += '<tr>';
-		content += '<td width="50%" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0004Q_charts_' + data.perspectiveItems[n].perId + '" style="width:450px;height:360px;" ></td>';
+		content += '<td width="50%" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0004Q_charts_' + data.perspectiveItems[n].perId + '" style="width:450px;height:320px;" ></td>';
 		content += '<td width="50%" bgcolor="#ffffff" align="center">' + BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( data.perspectiveItems[n] ) + '<td>';
 		content += '</tr>';							
 	}	
@@ -173,11 +197,37 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 		           }
 		       }
 		});	
+		
+		var inputDataId = 'BSC_PROG003D0004Q_meterGaugeChartDatas:' + perspective.perId;
+		var datas = [];
+		datas.push({
+			id: perspective.perId,
+			name: perspective.name,
+			target: perspective.target,
+			min: perspective.min,
+			score: perspective.score,
+			bgColor: perspective.bgColor,
+			fontColor: perspective.fontColor,
+			outerHTML: $('#' + id).jqplotToImageElem().outerHTML
+		});
+		var chartDatas = {};
+		chartDatas.id = id;
+		chartDatas.datas = datas;
+		dojo.create(
+				"input", {
+					id: 	inputDataId,
+					name:	inputDataId,
+					type: 	"hidden",
+					value:	btoa( encodeURIComponent( escape( JSON.stringify(chartDatas) ) ) )
+				},
+				"BSC_PROG003D0004Q_form"
+		);			
+		
 	}	
 }
 function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
 	var content = '';
-	content += '<table width="100%" border="0" cellpadding="1" cellspacing="0" bgcolor="#EEEEEE" >';
+	content += '<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE" >';
 	content += '<tr>';
 	content += '<td bgcolor="' + perspective.bgColor + ' " align="center" ><b><font size="4" color="' + perspective.fontColor + '" >' + perspective.name + '</font></b></td>';
 	content += '</tr>';		
@@ -197,6 +247,11 @@ function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
 	return content;
 }
 
+function BSC_PROG003D0004Q_generateExport(type) {
+	
+	alert(type);
+	
+}
 
 function BSC_PROG003D0004Q_clearContent() {
 	
@@ -230,6 +285,8 @@ function ${programId}_page_message() {
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>	
 	
+	<form name="BSC_PROG003D0004Q_form" id="BSC_PROG003D0004Q_form" action="."></form>
+	
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="35%">
@@ -248,7 +305,13 @@ function ${programId}_page_message() {
 												BSC_PROG003D0004Q_query();
 											}">Query</button>		
 											
-											
+									<button id="BSC_PROG003D0004Q_btnXls" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											iconClass:'btnExcelIcon',
+											showLabel:false,
+											onClick:function(){
+												BSC_PROG003D0004Q_generateExport('EXCEL');																			  
+											}">Excel</button>												
 											
 								</td>
 							</tr>
