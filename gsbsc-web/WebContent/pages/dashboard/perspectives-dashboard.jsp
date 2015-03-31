@@ -150,6 +150,9 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_meterGaugeChartDatas:')>-1) {
 			dojo.destroy(node.id);
 		}	
+		if (node.id!=null && ( node.id.indexOf('BSC_PROG003D0004Q_barChartDatas')>-1 || node.id.indexOf('BSC_PROG003D0004Q_pieChartDatas')>-1 ) ) {
+			dojo.destroy(node.id);
+		}
 	});	
 	
 	var content = '';
@@ -248,8 +251,24 @@ function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
 }
 
 function BSC_PROG003D0004Q_generateExport(type) {
-	
-	alert(type);
+	dojo.create(
+			"input", {
+				id: 	'BSC_PROG003D0004Q_barChartDatas',
+				name:	'BSC_PROG003D0004Q_barChartDatas',
+				type: 	"hidden",
+				value:	viewPage.getStrToHex( viewPage.getSVGImage2CanvasToDataUrlPNG('#BSC_PROG003D0004Q_barChart svg') )
+			},
+			"BSC_PROG003D0004Q_form"
+	);
+	dojo.create(
+			"input", {
+				id: 	'BSC_PROG003D0004Q_pieChartDatas',
+				name:	'BSC_PROG003D0004Q_pieChartDatas',
+				type: 	"hidden",
+				value:	viewPage.getStrToHex( viewPage.getSVGImage2CanvasToDataUrlPNG('#BSC_PROG003D0004Q_pieChart svg') )
+			},
+			"BSC_PROG003D0004Q_form"
+	);	
 	
 }
 
