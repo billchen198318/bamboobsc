@@ -48,12 +48,12 @@ import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 
-public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport implements Command {
+public class ObjectivesDashboardExcelCommand extends BaseChainCommandSupport implements Command {
 	
-	public PerspectivesDashboardExcelCommand() {
+	public ObjectivesDashboardExcelCommand() {
 		super();
 	}
-
+	
 	@Override
 	public boolean execute(Context context) throws Exception {
 		String uploadOid = this.createExcel(context);
@@ -76,26 +76,14 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
         
         File file = new File(fileFullPath);
 		String oid = UploadSupportUtils.create(
-				Constants.getSystem(), UploadTypes.IS_TEMP, false, file, "perspectives-dashboard.xlsx");
+				Constants.getSystem(), UploadTypes.IS_TEMP, false, file, "objectives-dashboard.xlsx");
 		file = null;
 		return oid;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private int putCharts(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {
-		String pieBase64Content = SimpleUtils.getPNGBase64Content( (String)context.get("pieCanvasToData") );
-		String barBase64Content = SimpleUtils.getPNGBase64Content( (String)context.get("barCanvasToData") );
-		BufferedImage pieImage = SimpleUtils.decodeToImage( pieBase64Content );
-		BufferedImage barImage = SimpleUtils.decodeToImage( barBase64Content );
-		ByteArrayOutputStream pieBos = new ByteArrayOutputStream();
-		ImageIO.write( pieImage, "png", pieBos );
-		pieBos.flush();
-		ByteArrayOutputStream barBos = new ByteArrayOutputStream();
-		ImageIO.write( barImage, "png", barBos );
-		barBos.flush();		
-		SimpleUtils.setCellPicture(wb, sh, pieBos.toByteArray(), 0, 0);		
-		SimpleUtils.setCellPicture(wb, sh, barBos.toByteArray(), 0, 9);		
-		int row = 25;
+	private int putCharts(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {	
+		int row = 0;
 		
 		List< Map<String, Object> > chartDatas = (List< Map<String, Object> >)context.get("chartDatas");
 		String year = (String)context.get("year");
@@ -106,20 +94,19 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
 		
 		XSSFFont cellHeadFont = wb.createFont();
-		cellHeadFont.setBold(true);
-		//cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ) ) );		
+		cellHeadFont.setBold(true);		
 		cellHeadStyle.setFont( cellHeadFont );
 		
-		int titleRow = row - 2;
 		int titleCellSize = 14;
-		Row headRow = sh.createRow( titleRow );
+		Row headRow = sh.createRow( row );
 		for (int i=0; i<titleCellSize; i++) {
 			Cell headCell = headRow.createCell( i );
 			headCell.setCellStyle(cellHeadStyle);
-			headCell.setCellValue( "Perspectives metrics gauge ( " + year + " )" );					
+			headCell.setCellValue( "Objectives metrics gauge ( " + year + " )" );					
 		}
-		sh.addMergedRegion( new CellRangeAddress(titleRow, titleRow, 0, titleCellSize-1) );
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, titleCellSize-1) );
 		
+		row = row+1;
 		int cellLeft = 10;
 		int rowSpace = 17;
 		for (Map<String, Object> data : chartDatas) {							

@@ -54,6 +54,209 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 
 <script type="text/javascript">
 
+var BSC_PROG003D0005Q_fieldsId = new Object();
+BSC_PROG003D0005Q_fieldsId['visionOid'] 					= 'BSC_PROG003D0005Q_visionOid';
+BSC_PROG003D0005Q_fieldsId['frequency'] 					= 'BSC_PROG003D0005Q_frequency';
+BSC_PROG003D0005Q_fieldsId['startYearDate'] 				= 'BSC_PROG003D0005Q_startYearDate';
+
+function BSC_PROG003D0005Q_query() {
+	BSC_PROG003D0005Q_clearContent();
+	setFieldsBackgroundDefault(BSC_PROG003D0005Q_fieldsId);
+	xhrSendParameter(
+			'${basePath}/bsc.kpiReportContentQueryAction.action', 
+			{ 
+				'fields.visionOid' 					: 	dijit.byId("BSC_PROG003D0005Q_visionOid").get("value"),
+				'fields.startYearDate'				:	dijit.byId("BSC_PROG003D0005Q_startYearDate").get('displayedValue'),
+				'fields.endYearDate'				:	dijit.byId("BSC_PROG003D0005Q_startYearDate").get('displayedValue'),
+				'fields.startDate'					:	'',
+				'fields.endDate'					:	'',
+				'fields.dataFor'					:	'all',
+				'fields.measureDataOrganizationOid'	:	_gscore_please_select_id,
+				'fields.measureDataEmployeeOid'		:	_gscore_please_select_id,
+				'fields.frequency'					:	'6'
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if ('Y' != data.success) {
+					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0005Q_fieldsId);
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				BSC_PROG003D0005Q_showObjectivesMeterGauge( data );
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+
+function BSC_PROG003D0005Q_showObjectivesMeterGauge( data ) {
+	
+	// 清除要上傳的資料
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0005Q_meterGaugeChartDatas:')>-1) {
+			dojo.destroy(node.id);
+		}	
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0005Q_year')>-1 ) {
+			dojo.destroy(node.id);
+		}
+	});	
+	
+	var content = '';
+	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#c1c7d0" >';
+	content += '<tr>';
+	content += '<td colspan="2" bgcolor="DFFAFF" align="center" ><font size="4"><b>Objectives metrics gauge ( ' + dijit.byId("BSC_PROG003D0005Q_startYearDate").get('displayedValue') + ' )</b></font></td>';
+	content += '</tr>';	
+	for (var n in data.perspectiveItems) {
+		for ( var o in data.perspectiveItems[n].objectives ) {
+			var objective = data.perspectiveItems[n].objectives[o];
+			content += '<tr>';
+			content += '<td width="50%" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0005Q_charts_' + objective.objId + '" style="width:450px;height:320px;" ></td>';
+			content += '<td width="50%" bgcolor="#ffffff" align="center">' + BSC_PROG003D0005Q_showObjectiveItemsDataContentTable( objective ) + '<td>';
+			content += '</tr>';				
+		}						
+	}	
+	content += '</table>';
+	dojo.html.set(dojo.byId("BSC_PROG003D0005Q_contentObjectives"), content, {extractContent: true, parseContent: true});	
+	for (var n in data.perspectiveItems) {
+		for ( var o in data.perspectiveItems[n].objectives ) {
+			var objective = data.perspectiveItems[n].objectives[o];
+			var target = objective.target;
+			var score = objective.score;
+			var id = 'BSC_PROG003D0005Q_charts_' + objective.objId;
+			
+			if (document.getElementById(id)==null) {
+				alert('error lost id of div: ' + id);
+				continue;
+			} 
+			
+			var maxValue = 100;
+			if (maxValue < score) {
+				maxValue = score;
+			}
+			if (maxValue < target) {
+				maxValue = target;
+			}		
+			
+			var labelString = objective.name + " ( " + score + " ) ";
+			
+			$.jqplot(id, [ [score] ], {
+			       seriesDefaults: {
+			           renderer: $.jqplot.MeterGaugeRenderer,
+			           rendererOptions: {
+			               label: labelString,
+			               labelPosition: 'bottom',
+			               intervals:[parseInt((maxValue*0.6)+'', 10), parseInt((maxValue*0.8)+'', 10), maxValue],
+			               intervalColors:['#cc6666', '#E7E658', '#66cc66']
+			           }
+			       }
+			});	
+			
+			var inputDataId = 'BSC_PROG003D0005Q_meterGaugeChartDatas:' + objective.objId;
+			var datas = [];
+			datas.push({
+				id: objective.objId,
+				name: objective.name,
+				target: objective.target,
+				min: objective.min,
+				score: objective.score,
+				bgColor: objective.bgColor,
+				fontColor: objective.fontColor,
+				outerHTML: $('#' + id).jqplotToImageElem().outerHTML
+			});
+			var chartDatas = {};
+			chartDatas.id = id;
+			chartDatas.datas = datas;
+			dojo.create(
+					"input", {
+						id: 	inputDataId,
+						name:	inputDataId,
+						type: 	"hidden",
+						value:	JSON.stringify(chartDatas)
+					},
+					"BSC_PROG003D0005Q_form"
+			);		
+			
+		}
+	}		
+}
+function BSC_PROG003D0005Q_showObjectiveItemsDataContentTable( objective ) {
+	var content = '';
+	content += '<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE" >';
+	content += '<tr>';
+	content += '<td bgcolor="' + objective.bgColor + '" align="center" ><b><font size="4" color="' + objective.fontColor + '" >' + objective.name + '</font></b></td>';
+	content += '</tr>';		
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Target:&nbsp;</b>' + objective.target + '</td>';
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Min:&nbsp;</b>' + objective.min + '</td>';
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Score:&nbsp;</b>' + objective.score + '</td>';
+	content += '</tr>';				
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" >' + objective.description + '</td>';
+	content += '</tr>';	
+	content += '</table>';
+	return content;	
+}
+
+function BSC_PROG003D0005Q_generateExport(type) {
+
+	var chartsCount = 0;
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0005Q_meterGaugeChartDatas:')>-1) {
+			chartsCount++;
+		}	
+	});
+	if ( chartsCount < 1 ) {
+		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please first query!', function(){}, 'Y');
+		return;
+	}
+	
+	dojo.create(
+			"input", {
+				id: 	'BSC_PROG003D0005Q_year',
+				name:	'BSC_PROG003D0005Q_year',
+				type: 	"hidden",
+				value:	dijit.byId("BSC_PROG003D0005Q_startYearDate").get('displayedValue')
+			},
+			"BSC_PROG003D0005Q_form"
+	);		
+	setFieldsBackgroundDefault(BSC_PROG003D0005Q_fieldsId);
+	xhrSendForm(
+			'${basePath}/bsc.objectivesDashboardExcelAction.action', 
+			'BSC_PROG003D0005Q_form', 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if ('Y' != data.success) {
+					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0005Q_fieldsId);
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				window.open(
+						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
+						"Objectives-dashboard-export",
+			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);
+	
+}
+
+function BSC_PROG003D0005Q_clearContent() {
+	
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -82,7 +285,64 @@ function ${programId}_page_message() {
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>	
 	
+	<table border="0" width="100%" >
+		<tr valign="top">
+			<td width="100%" align="center" height="35%">
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:80px">
+					
+						<table border="0" width="100%" >
+							<tr valign="top">
+								<td width="100%" align="left" height="25px" bgcolor="#d7e3ed">	
+								
+									<button id="BSC_PROG003D0005Q_btnQuery" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											iconClass:'dijitIconSearch',
+											showLabel:false,
+											onClick:function(){  
+												BSC_PROG003D0005Q_query();
+											}">Query</button>		
+											
+									<button id="BSC_PROG003D0005Q_btnXls" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											iconClass:'btnExcelIcon',
+											showLabel:false,
+											onClick:function(){
+												BSC_PROG003D0005Q_generateExport('EXCEL');																			  
+											}">Excel</button>												
+											
+								</td>
+							</tr>
+							<tr valign="top">
+								<td width="100%" align="left" height="25px">	
+								
+									Vision: 
+									<gs:select name="BSC_PROG003D0005Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0005Q_visionOid"></gs:select>
+						    		&nbsp;		    			
+					    																	
+									Measure data frequency:
+									<gs:select name="BSC_PROG003D0005Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0005Q_frequency" value="6" width="140" readonly="Y"></gs:select>
+									&nbsp;
+									
+							    	Measure data Year:
+							    	<input id="BSC_PROG003D0005Q_startYearDate" name="BSC_PROG003D0005Q_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
+							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
+							    	&nbsp;				
+							    										
+								</td>											
+							</tr>								
+														
+						</table>										
+					
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>	
 	
+	<div id="BSC_PROG003D0005Q_contentObjectives" style="height:100%; width:1100px"></div>
+	
+	<form name="BSC_PROG003D0005Q_form" id="BSC_PROG003D0005Q_form" action="."></form>	
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>

@@ -151,5 +151,10 @@
 	<chain name="perspectivesDashboardExcelContentChain">
 		<command id="PerspectivesDashboardExcelCommand"		className="com.netsteadfast.greenstep.bsc.command.PerspectivesDashboardExcelCommand"/> 
 	</chain>	
-				
+	
+	<!-- Objectives Dashboard 輸出 Excel 產生用的 chain -->
+	<chain name="objectivesDashboardExcelContentChain">
+		<command id="ObjectivesDashboardExcelCommand"		className="com.netsteadfast.greenstep.bsc.command.ObjectivesDashboardExcelCommand"/> 
+	</chain>	
+					
 </catalog>  
