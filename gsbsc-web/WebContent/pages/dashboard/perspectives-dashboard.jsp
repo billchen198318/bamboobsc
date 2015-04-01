@@ -150,7 +150,9 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_meterGaugeChartDatas:')>-1) {
 			dojo.destroy(node.id);
 		}	
-		if (node.id!=null && ( node.id.indexOf('BSC_PROG003D0004Q_barChartDatas')>-1 || node.id.indexOf('BSC_PROG003D0004Q_pieChartDatas')>-1 ) ) {
+		if (node.id!=null && ( node.id.indexOf('BSC_PROG003D0004Q_barChartDatas')>-1 
+				|| node.id.indexOf('BSC_PROG003D0004Q_pieChartDatas')>-1
+				|| node.id.indexOf('BSC_PROG003D0004Q_year')>-1 ) ) {
 			dojo.destroy(node.id);
 		}
 	});	
@@ -221,7 +223,7 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 					id: 	inputDataId,
 					name:	inputDataId,
 					type: 	"hidden",
-					value:	btoa( encodeURIComponent( escape( JSON.stringify(chartDatas) ) ) )
+					value:	JSON.stringify(chartDatas)
 				},
 				"BSC_PROG003D0004Q_form"
 		);			
@@ -251,6 +253,18 @@ function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
 }
 
 function BSC_PROG003D0004Q_generateExport(type) {
+	
+	var chartsCount = 0;
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_meterGaugeChartDatas:')>-1) {
+			chartsCount++;
+		}	
+	});
+	if ( chartsCount < 1 ) {
+		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please first query!', function(){}, 'Y');
+		return;
+	}
+	
 	dojo.create(
 			"input", {
 				id: 	'BSC_PROG003D0004Q_barChartDatas',
@@ -269,6 +283,38 @@ function BSC_PROG003D0004Q_generateExport(type) {
 			},
 			"BSC_PROG003D0004Q_form"
 	);	
+	dojo.create(
+			"input", {
+				id: 	'BSC_PROG003D0004Q_year',
+				name:	'BSC_PROG003D0004Q_year',
+				type: 	"hidden",
+				value:	dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue')
+			},
+			"BSC_PROG003D0004Q_form"
+	);		
+	setFieldsBackgroundDefault(BSC_PROG003D0004Q_fieldsId);
+	xhrSendForm(
+			'${basePath}/bsc.perspectivesDashboardExcelAction.action', 
+			'BSC_PROG003D0004Q_form', 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if ('Y' != data.success) {
+					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0004Q_fieldsId);
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				window.open(
+						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
+						"KPI-Report-export",
+			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);
 	
 }
 
@@ -303,8 +349,6 @@ function ${programId}_page_message() {
 		refreshJsMethod="${programId}_TabRefresh();" 		
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>	
-	
-	<form name="BSC_PROG003D0004Q_form" id="BSC_PROG003D0004Q_form" action="."></form>
 	
 	<table border="0" width="100%" >
 		<tr valign="top">
@@ -380,6 +424,8 @@ function ${programId}_page_message() {
 	<br/>
 	
 	<div id="BSC_PROG003D0004Q_contentPerspectives" style="height:100%; width:1100px"></div>
+	
+	<form name="BSC_PROG003D0004Q_form" id="BSC_PROG003D0004Q_form" action="."></form>
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>

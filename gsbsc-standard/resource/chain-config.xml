@@ -146,5 +146,10 @@
 		<command id="SwotDataProvideCommand" 	className="com.netsteadfast.greenstep.bsc.command.SwotDataProvideCommand"/> 
 		<command id="SwotReportPdfDataCommand" 	className="com.netsteadfast.greenstep.bsc.command.SwotReportPdfDataCommand"/>
 	</chain>	
+	
+	<!-- Perspectives Dashboard 輸出 Excel 產生用的 chain -->
+	<chain name="perspectivesDashboardExcelContentChain">
+		<command id="PerspectivesDashboardExcelCommand"		className="com.netsteadfast.greenstep.bsc.command.PerspectivesDashboardExcelCommand"/> 
+	</chain>	
 				
 </catalog>  
