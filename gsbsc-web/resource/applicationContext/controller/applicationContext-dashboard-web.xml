@@ -12,5 +12,7 @@
     
     <bean id="bsc.web.controller.PerspectivesDashboardAction" 
     	class="com.netsteadfast.greenstep.bsc.action.PerspectivesDashboardAction" scope="prototype" />
-    	    	    	    	    	    	    	
+    <bean id="bsc.web.controller.ObjectivesDashboardAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.ObjectivesDashboardAction" scope="prototype" />
+    	    	    	    	    	    	    	    	
 </beans>

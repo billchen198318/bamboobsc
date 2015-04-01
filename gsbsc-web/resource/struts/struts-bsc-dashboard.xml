@@ -11,7 +11,12 @@
 			<result name="input">/pages/dashboard/perspectives-dashboard.jsp</result>		
 			<result name="success">/pages/dashboard/perspectives-dashboard.jsp</result>
 		</action>			
-														   	
+		
+		<action name="bsc.objectivesDashboardAction" class="bsc.web.controller.ObjectivesDashboardAction">
+			<result name="input">/pages/dashboard/objectives-dashboard.jsp</result>		
+			<result name="success">/pages/dashboard/objectives-dashboard.jsp</result>
+		</action>	
+																   	
 	</package>
 	
 	<package name="bsc-dashboard-json" extends="bsc-default,json-default" namespace="/" >			
