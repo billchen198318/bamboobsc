@@ -35,6 +35,7 @@ import org.apache.commons.chain.Context;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -109,10 +110,15 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		//cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ) ) );		
 		cellHeadStyle.setFont( cellHeadFont );
 		
-		Row headRow = sh.createRow( row-2 );
-		Cell headCell = headRow.createCell(0);
-		headCell.setCellStyle(cellHeadStyle);
-		headCell.setCellValue( "Perspectives metrics gauge ( " + year + " )" );		
+		int titleRow = row - 2;
+		int titleCellSize = 14;
+		Row headRow = sh.createRow( titleRow );
+		for (int i=0; i<titleCellSize; i++) {
+			Cell headCell = headRow.createCell( i );
+			headCell.setCellStyle(cellHeadStyle);
+			headCell.setCellValue( "Perspectives metrics gauge ( " + year + " )" );					
+		}
+		sh.addMergedRegion( new CellRangeAddress(titleRow, titleRow, 0, titleCellSize-1) );
 		
 		int cellLeft = 10;
 		int rowSpace = 18;
@@ -137,11 +143,15 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 			cellFont.setColor(fnColor);			
 			
 			cellStyle.setFont(cellFont);
-						
+			
+			int perTitleCellSize = 4;
 			Row nowRow = sh.createRow(row);
-			Cell cell1 = nowRow.createCell(cellLeft);
-			cell1.setCellStyle(cellStyle);
-			cell1.setCellValue( (String)nodeData.get("name") );
+			for (int i=0; i<perTitleCellSize; i++) {
+				Cell cell1 = nowRow.createCell(cellLeft);
+				cell1.setCellStyle(cellStyle);
+				cell1.setCellValue( (String)nodeData.get("name") );				
+			}
+			sh.addMergedRegion( new CellRangeAddress(row, row, cellLeft, cellLeft+perTitleCellSize-1) );
 			
 			nowRow = sh.createRow(row+1);
 			Cell cell2 = nowRow.createCell(cellLeft);
