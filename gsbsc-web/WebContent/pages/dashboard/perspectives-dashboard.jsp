@@ -234,7 +234,7 @@ function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
 	var content = '';
 	content += '<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE" >';
 	content += '<tr>';
-	content += '<td bgcolor="' + perspective.bgColor + ' " align="center" ><b><font size="4" color="' + perspective.fontColor + '" >' + perspective.name + '</font></b></td>';
+	content += '<td bgcolor="' + perspective.bgColor + '" align="center" ><b><font size="4" color="' + perspective.fontColor + '" >' + perspective.name + '</font></b></td>';
 	content += '</tr>';		
 	content += '<tr>';
 	content += '<td bgcolor="#ffffff" align="center" ><b>Target:&nbsp;</b>' + perspective.target + '</td>';
@@ -308,7 +308,7 @@ function BSC_PROG003D0004Q_generateExport(type) {
 				}
 				window.open(
 						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
-						"KPI-Report-export",
+						"Perspectives-dashboard-export",
 			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
 			}, 
 			function(error) {
