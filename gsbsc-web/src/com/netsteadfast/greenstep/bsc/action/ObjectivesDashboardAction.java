@@ -120,6 +120,7 @@ public class ObjectivesDashboardAction extends BaseJsonAction implements IBaseAd
 		Context context = new ContextBase();
 		context.put("chartDatas", chartDatas);
 		context.put("year", this.getHttpServletRequest().getParameter("BSC_PROG003D0005Q_year") );
+		context.put("barChartsData", this.getHttpServletRequest().getParameter("BSC_PROG003D0005Q_objectivesBarChartsData") );
 		return context;
 	}	
 	

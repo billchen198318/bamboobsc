@@ -82,8 +82,16 @@ public class ObjectivesDashboardExcelCommand extends BaseChainCommandSupport imp
 	}
 	
 	@SuppressWarnings("unchecked")
-	private int putCharts(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {	
-		int row = 0;
+	private int putCharts(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {
+		
+		String barBase64Content = SimpleUtils.getPNGBase64Content( (String)context.get("barChartsData") );
+		BufferedImage barImage = SimpleUtils.decodeToImage( barBase64Content );
+		ByteArrayOutputStream barBos = new ByteArrayOutputStream();
+		ImageIO.write( barImage, "png", barBos );
+		barBos.flush();	
+		SimpleUtils.setCellPicture(wb, sh, barBos.toByteArray(), 0, 0);	
+		
+		int row = 28;
 		
 		List< Map<String, Object> > chartDatas = (List< Map<String, Object> >)context.get("chartDatas");
 		String year = (String)context.get("year");
