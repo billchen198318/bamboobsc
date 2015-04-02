@@ -95,7 +95,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		barBos.flush();		
 		SimpleUtils.setCellPicture(wb, sh, pieBos.toByteArray(), 0, 0);		
 		SimpleUtils.setCellPicture(wb, sh, barBos.toByteArray(), 0, 9);		
-		int row = 25;
+		int row = 21;
 		
 		List< Map<String, Object> > chartDatas = (List< Map<String, Object> >)context.get("chartDatas");
 		String year = (String)context.get("year");
@@ -110,7 +110,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		//cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ) ) );		
 		cellHeadStyle.setFont( cellHeadFont );
 		
-		int titleRow = row - 2;
+		int titleRow = row - 1;
 		int titleCellSize = 14;
 		Row headRow = sh.createRow( titleRow );
 		for (int i=0; i<titleCellSize; i++) {
