@@ -1,10 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+%>
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr valign="top">
-			<td width="250px" align="left" bgcolor="#CFECEC">&nbsp;</td>
-			<td align="center" bgcolor="#CFECEC"><font size='3' color='#3090C7'><b><s:property value="programName"/></b></font></td>
-			<td width="250px" align="right" bgcolor="#CFECEC"><font size='1'>ID:&nbsp;<s:property value="programId"/></font></td>
+			<td align="left" valign="middle" bgcolor="#F5F5F5">
+				<img src="<%=basePath%>/images/head_logo.jpg" border="0" alt="logo"/>&nbsp;&nbsp;<font size='2' color='#000000'><b><s:property value="programName"/></b></font>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size='1' color="#F5F5F5">ID:&nbsp;<s:property value="programId"/></font>
+				<br/>
+				<hr color="#3794E5" size="2">
+			</td>
 		</tr>
 	</table>	
 	
