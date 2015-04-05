@@ -14,5 +14,7 @@
     	class="com.netsteadfast.greenstep.bsc.action.PerspectivesDashboardAction" scope="prototype" />
     <bean id="bsc.web.controller.ObjectivesDashboardAction" 
     	class="com.netsteadfast.greenstep.bsc.action.ObjectivesDashboardAction" scope="prototype" />
-    	    	    	    	    	    	    	    	
+    <bean id="bsc.web.controller.KpisDashboardAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.KpisDashboardAction" scope="prototype" />
+    	    	    	    	    	    	    	    	    	
 </beans>

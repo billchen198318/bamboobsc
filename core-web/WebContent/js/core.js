@@ -62,8 +62,11 @@ dojo.declare("GS.CORE", null ,{
     },
     getStrToBase64 : function(str) {
     	return dojox.encoding.base64.encode(this.getStrToBytes(str));
-    }
-   
+    },
+    roundFloat : function(num, pos) {
+    	return ( Math.round( num * Math.pow(10,pos) ) / Math.pow(10,pos) ).toFixed(pos);
+    } 
+    
 });
 
 dojo.declare("GS.ViewPage", GS.CORE, {	

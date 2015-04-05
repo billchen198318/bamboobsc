@@ -16,7 +16,12 @@
 			<result name="input">/pages/dashboard/objectives-dashboard.jsp</result>		
 			<result name="success">/pages/dashboard/objectives-dashboard.jsp</result>
 		</action>	
-																   	
+		
+		<action name="bsc.kpisDashboardAction" class="bsc.web.controller.KpisDashboardAction">
+			<result name="input">/pages/dashboard/kpis-dashboard.jsp</result>		
+			<result name="success">/pages/dashboard/kpis-dashboard.jsp</result>
+		</action>
+																		   	
 	</package>
 	
 	<package name="bsc-dashboard-json" extends="bsc-default,json-default" namespace="/" >			
