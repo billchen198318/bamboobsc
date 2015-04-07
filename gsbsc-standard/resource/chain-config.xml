@@ -156,5 +156,11 @@
 	<chain name="objectivesDashboardExcelContentChain">
 		<command id="ObjectivesDashboardExcelCommand"		className="com.netsteadfast.greenstep.bsc.command.ObjectivesDashboardExcelCommand"/> 
 	</chain>	
+
+	<!-- KPIs Dashboard 輸出 Excel 產生用的 chain -->
+	<chain name="kpisDashboardExcelContentChain">
+		<command id="KpisDashboardExcelCommand"				className="com.netsteadfast.greenstep.bsc.command.KpisDashboardExcelCommand"/> 
+	</chain>			
+					
 					
 </catalog>  

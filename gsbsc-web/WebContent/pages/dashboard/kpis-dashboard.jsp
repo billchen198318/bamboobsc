@@ -26,6 +26,22 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<meta http-equiv="keywords" content="bambooCORE">
 	<meta http-equiv="description" content="bambooCORE">
 	
+	<!-- jqPlot -->
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/jquery.jqplot.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.meterGaugeRenderer.min.js"></script>	
+	
+	<!-- jqPlot plugins -->
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.pointLabels.min.js"></script>	
+	
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+
+	
+	<link rel="stylesheet" type="text/css" href="<%=mainSysBasePath%>/jqplot/jquery.jqplot.min.css" />
+			
 <style type="text/css">
 
 .btnExcelIcon {
@@ -85,6 +101,8 @@ function BSC_PROG003D0006Q_query() {
 					return;
 				}
 				BSC_PROG003D0006Q_showTables( data );
+				BSC_PROG003D0006Q_showKpisBarCharts( data );
+				BSC_PROG003D0006Q_showKpisMeterGauge( data );
 			}, 
 			function(error) {
 				alert(error);
@@ -176,7 +194,274 @@ function BSC_PROG003D0006Q_showTables( data ) {
 	dojo.byId("BSC_PROG003D0006Q_table").innerHTML = t;	
 }
 
+var BSC_PROG003D0006Q_kpisBarCharts = null;
+function BSC_PROG003D0006Q_showKpisBarCharts( data ) {
+	
+	// 清除要上傳的資料
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0006Q_kpisBarChartsData')>-1) {
+			dojo.destroy(node.id);
+		}	
+	});		
+	
+    var target = [ ];
+    var score = [ ];
+    var min = [ ];	
+    var ticks = [ ];
+	for (var n in data.perspectiveItems) {
+		for ( var o in data.perspectiveItems[n].objectives ) {
+			var objective = data.perspectiveItems[n].objectives[o];
+			for ( var k in objective.kpis ) {
+				var kpi = objective.kpis[k];
+				target.push( kpi.target );
+				score.push( kpi.score );
+				min.push( kpi.min );
+				ticks.push( kpi.name );				
+			}
+		}
+	}
+	
+	if ( BSC_PROG003D0006Q_kpisBarCharts != null ) {
+		BSC_PROG003D0006Q_kpisBarCharts.destroy();
+		BSC_PROG003D0006Q_kpisBarCharts = null;
+	}
+	
+	// var target = [ 100, 110, 80 ];
+	// var score = [ 100, 110, 80 ];
+	// var min = [ 50, 55, 30 ];
+	
+    // Can specify a custom tick Array.
+    // Ticks should match up one for each y value (category) in the series.
+    // var ticks = ['Obj1', 'Obj2', 'Obj3', 'Obj4'];
+     
+    BSC_PROG003D0006Q_kpisBarCharts = $.jqplot('BSC_PROG003D0006Q_kpisBarCharts', [target, score, min], {
+        // The "seriesDefaults" option is an options object that will
+        // be applied to all series in the chart.
+        seriesDefaults:{
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions: {fillToZero: true}
+        },
+        // Custom labels for the series are specified with the "label"
+        // option on the series option.  Here a series option object
+        // is specified for each series.
+        series:[
+            {label:'Target'},
+            {label:'Score'},
+            {label:'Min'}
+        ],
+        // Show the legend and put it outside the grid, but inside the
+        // plot container, shrinking the grid to accomodate the legend.
+        // A value of "outside" would not shrink the grid and allow
+        // the legend to overflow the container.
+        legend: {
+            show: true,
+            placement: 'outsideGrid'
+        },
+        axesDefaults: { // axesDefaults 增加tick項目斜度 30 的效果
+            tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+            tickOptions: {
+              angle: -30
+            }
+        },        
+        axes: {
+            // Use a category axis on the x axis and use our custom ticks.
+            xaxis: {
+                renderer: $.jqplot.CategoryAxisRenderer,
+                ticks: ticks
+            },
+            // Pad the y axis just a little so bars can get close to, but
+            // not touch, the grid boundaries.  1.2 is the default padding.
+            yaxis: {
+                pad: 1.05,
+                tickOptions: {formatString: '%d'}
+            }
+        }
+    });
+    
+	dojo.create(
+			"input", {
+				id: 	'BSC_PROG003D0006Q_kpisBarChartsData',
+				name:	'BSC_PROG003D0006Q_kpisBarChartsData',
+				type: 	"hidden",
+				value:	$('#BSC_PROG003D0006Q_kpisBarCharts').jqplotToImageElem().outerHTML
+			},
+			"BSC_PROG003D0006Q_form"
+	);    
+    
+}
+
+function BSC_PROG003D0006Q_showKpisMeterGauge( data ) {
+	
+	// 清除要上傳的資料
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0006Q_meterGaugeChartDatas:')>-1 
+				|| node.id!=null && node.id.indexOf('BSC_PROG003D0006Q_dateRangeLabel')>-1 ) { 
+			dojo.destroy(node.id);
+		}	
+	});	
+	
+	var frequency = dijit.byId("BSC_PROG003D0006Q_frequency").get("value");
+	var dateRangeStr = dijit.byId("BSC_PROG003D0006Q_startYearDate").get('displayedValue') + ' - ' + dijit.byId("BSC_PROG003D0006Q_endYearDate").get('displayedValue');
+	if ( '1' == frequency || '2' == frequency || '3' == frequency ) {
+		dateRangeStr = dijit.byId("BSC_PROG003D0006Q_startDate").get('displayedValue') + ' - ' + dijit.byId("BSC_PROG003D0006Q_endDate").get('displayedValue');
+	}
+	dateRangeStr += ' Frequency: ' + dijit.byId("BSC_PROG003D0006Q_frequency").get('displayedValue');
+	
+	dojo.create(
+			"input", {
+				id: 	'BSC_PROG003D0006Q_dateRangeLabel',
+				name:	'BSC_PROG003D0006Q_dateRangeLabel',
+				type: 	"hidden",
+				value:	dateRangeStr
+			},
+			"BSC_PROG003D0006Q_form"
+	);	
+	
+	var content = '';
+	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#c1c7d0" >';
+	content += '<tr>';
+	content += '<td colspan="2" bgcolor="DFFAFF" align="center" ><font size="4"><b>KPIs metrics gauge ( ' + dateRangeStr + ' )</b></font></td>';
+	content += '</tr>';		
+	for (var n in data.perspectiveItems) {
+		for ( var o in data.perspectiveItems[n].objectives ) {
+			var objective = data.perspectiveItems[n].objectives[o];
+			for ( var k in objective.kpis ) {
+				var kpi = objective.kpis[k];
+				content += '<tr>';
+				content += '<td width="50%" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0006Q_charts_' + kpi.id + '" style="width:450px;height:320px;" ></td>';
+				content += '<td width="50%" bgcolor="#ffffff" align="center">' + BSC_PROG003D0006Q_showKpiItemsDataContentTable( kpi ) + '<td>';
+				content += '</tr>';					
+			}
+		}
+	}
+	content += '</table>';
+	dojo.html.set(dojo.byId("BSC_PROG003D0006Q_contentKpis"), content, {extractContent: true, parseContent: true});	
+	for (var n in data.perspectiveItems) {
+		for ( var o in data.perspectiveItems[n].objectives ) {
+			var objective = data.perspectiveItems[n].objectives[o];
+			for ( var k in objective.kpis ) {
+				var kpi = objective.kpis[k];
+				
+				var target = kpi.target;
+				var score = kpi.score;
+				var id = 'BSC_PROG003D0006Q_charts_' + kpi.id;
+				
+				if (document.getElementById(id)==null) {
+					alert('error lost id of div: ' + id);
+					continue;
+				} 
+				
+				var maxValue = 100;
+				if (maxValue < score) {
+					maxValue = score;
+				}
+				if (maxValue < target) {
+					maxValue = target;
+				}		
+				
+				var labelString = kpi.name + " ( " + score + " ) ";
+				
+				$.jqplot(id, [ [score] ], {
+				       seriesDefaults: {
+				           renderer: $.jqplot.MeterGaugeRenderer,
+				           rendererOptions: {
+				               label: labelString,
+				               labelPosition: 'bottom',
+				               intervals:[parseInt((maxValue*0.6)+'', 10), parseInt((maxValue*0.8)+'', 10), maxValue],
+				               intervalColors:['#cc6666', '#E7E658', '#66cc66']
+				           }
+				       }
+				});	
+				
+				var inputDataId = 'BSC_PROG003D0006Q_meterGaugeChartDatas:' + kpi.objId;
+				var datas = [];
+				datas.push({
+					id: kpi.id,
+					name: kpi.name,
+					target: kpi.target,
+					min: kpi.min,
+					score: kpi.score,
+					bgColor: kpi.bgColor,
+					fontColor: kpi.fontColor,
+					outerHTML: $('#' + id).jqplotToImageElem().outerHTML,
+					dateRangeScores: kpi.dateRangeScores // 只有KPI才有的日期區間分數
+				});
+				var chartDatas = {};
+				chartDatas.id = id;
+				chartDatas.datas = datas;
+				dojo.create(
+						"input", {
+							id: 	inputDataId,
+							name:	inputDataId,
+							type: 	"hidden",
+							value:	JSON.stringify(chartDatas)
+						},
+						"BSC_PROG003D0006Q_form"
+				);	
+				
+			}
+		}
+	}
+	
+}
+function BSC_PROG003D0006Q_showKpiItemsDataContentTable( kpi ) {
+	var content = '';
+	content += '<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE" >';
+	content += '<tr>';
+	content += '<td bgcolor="' + kpi.bgColor + '" align="center" ><b><font size="4" color="' + kpi.fontColor + '" >' + kpi.name + '</font></b></td>';
+	content += '</tr>';		
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Target:&nbsp;</b>' + kpi.target + '</td>';
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Min:&nbsp;</b>' + kpi.min + '</td>';
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Score:&nbsp;</b>' + kpi.score + '</td>';
+	content += '</tr>';				
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" >' + kpi.description + '</td>';
+	content += '</tr>';	
+	content += '</table>';
+	return content;		
+}
+
 function BSC_PROG003D0006Q_generateExport(type) {
+	
+	var chartsCount = 0;
+	dojo.query("input").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0006Q_meterGaugeChartDatas:')>-1) {
+			chartsCount++;
+		}	
+	});
+	if ( chartsCount < 1 ) {
+		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please first query!', function(){}, 'Y');
+		return;
+	}
+		
+	setFieldsBackgroundDefault(BSC_PROG003D0006Q_fieldsId);
+	xhrSendForm(
+			'${basePath}/bsc.kpisDashboardExcelAction.action', 
+			'BSC_PROG003D0006Q_form', 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if ('Y' != data.success) {
+					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0006Q_fieldsId);
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				window.open(
+						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
+						"Objectives-dashboard-export",
+			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);
 	
 }
 
@@ -308,6 +593,10 @@ function ${programId}_page_message() {
 	</table>	
 	
 	<div id="BSC_PROG003D0006Q_table" style="width:1100px"></div>		
+	
+	<div id="BSC_PROG003D0006Q_kpisBarCharts" style="height:540px; width:1100px"></div>
+	
+	<div id="BSC_PROG003D0006Q_contentKpis" style="height:100%; width:1100px"></div>
 	
 	<form name="BSC_PROG003D0006Q_form" id="BSC_PROG003D0006Q_form" action="."></form>	
 	
