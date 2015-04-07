@@ -52,7 +52,7 @@ function pageMessage() {
 <s:form name="loginForm" id="loginForm" action="login" method="post">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
-      <td bgcolor="#ffffff"><img src="./images/original.jpg" width="260" height="30" /></td>
+      <td bgcolor="#ffffff"><img src="./images/original.jpg" width="220" height="30" /></td>
     </tr>
     <tr>
       <td height="180" bgcolor="#ffffff">
