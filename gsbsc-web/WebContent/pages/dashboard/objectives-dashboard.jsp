@@ -103,7 +103,7 @@ function BSC_PROG003D0005Q_showObjectivesBarCharts( data ) {
 	
 	// 清除要上傳的資料
 	dojo.query("input").forEach(function(node){
-		if (node.id!=null && node.id.indexOf('BSC_PROG003D0005Q_objectivesBarCharts')>-1) {
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0005Q_objectivesBarChartsData')>-1) {
 			dojo.destroy(node.id);
 		}	
 	});		
