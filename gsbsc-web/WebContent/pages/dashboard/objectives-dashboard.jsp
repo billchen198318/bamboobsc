@@ -104,6 +104,7 @@ function BSC_PROG003D0005Q_query() {
 	);	
 }
 
+var BSC_PROG003D0005Q_objectivesBarCharts = null;
 function BSC_PROG003D0005Q_showObjectivesBarCharts( data ) {
 	
 	// 清除要上傳的資料
@@ -127,6 +128,11 @@ function BSC_PROG003D0005Q_showObjectivesBarCharts( data ) {
 		}
 	}
 	
+	if ( BSC_PROG003D0005Q_objectivesBarCharts != null ) {
+		BSC_PROG003D0005Q_objectivesBarCharts.destroy();
+		BSC_PROG003D0005Q_objectivesBarCharts = null;
+	}
+	
 	// var target = [ 100, 110, 80 ];
 	// var score = [ 100, 110, 80 ];
 	// var min = [ 50, 55, 30 ];
@@ -135,7 +141,7 @@ function BSC_PROG003D0005Q_showObjectivesBarCharts( data ) {
     // Ticks should match up one for each y value (category) in the series.
     // var ticks = ['Obj1', 'Obj2', 'Obj3', 'Obj4'];
      
-    var plot1 = $.jqplot('BSC_PROG003D0005Q_objectivesBarCharts', [target, score, min], {
+    BSC_PROG003D0005Q_objectivesBarCharts = $.jqplot('BSC_PROG003D0005Q_objectivesBarCharts', [target, score, min], {
         // The "seriesDefaults" option is an options object that will
         // be applied to all series in the chart.
         seriesDefaults:{
