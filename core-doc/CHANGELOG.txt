@@ -1,3 +1,11 @@
+2015-04-08
+-----------------------------------------------------------
+add new feature 
+	"04 - Perspectives Dashboard" 
+	"05 - Objectives Dashboard"
+	"06 - KPIs Dashboard"
+
+
 2015-03-27
 -----------------------------------------------------------
 Some modifications
