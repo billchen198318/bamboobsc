@@ -35,6 +35,11 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.pointLabels.min.js"></script>	
 	
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+
+	
 	<link rel="stylesheet" type="text/css" href="<%=mainSysBasePath%>/jqplot/jquery.jqplot.min.css" />		
 	
 <style type="text/css">
@@ -153,6 +158,12 @@ function BSC_PROG003D0005Q_showObjectivesBarCharts( data ) {
             show: true,
             placement: 'outsideGrid'
         },
+        axesDefaults: { // axesDefaults 增加tick項目斜度 30 的效果
+            tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+            tickOptions: {
+              angle: -30
+            }
+        },           
         axes: {
             // Use a category axis on the x axis and use our custom ticks.
             xaxis: {
@@ -163,7 +174,7 @@ function BSC_PROG003D0005Q_showObjectivesBarCharts( data ) {
             // not touch, the grid boundaries.  1.2 is the default padding.
             yaxis: {
                 pad: 1.05,
-                tickOptions: {formatString: '$%d'}
+                tickOptions: {formatString: '%d'}
             }
         }
     });
