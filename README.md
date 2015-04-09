@@ -19,4 +19,12 @@ contact: chen.xin.nien@gmail.com
 <br/><br/>
 how to create a measure project demo video:<br/>
 https://www.youtube.com/watch?v=A27wnMTtfOc 
+<br/><br/>
+<h2>Screenshot</h2>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/0001.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/0002.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/A.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/C.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/D.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/E.png"/><br/>
 
