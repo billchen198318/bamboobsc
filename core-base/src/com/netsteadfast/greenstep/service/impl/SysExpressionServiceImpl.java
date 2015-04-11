@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,7 @@ import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.dao.IBaseDAO;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.PageOf;
 import com.netsteadfast.greenstep.base.model.QueryResult;
@@ -160,4 +162,12 @@ public class SysExpressionServiceImpl extends BaseService<SysExpressionVO, TbSys
 		return dataMap;
 	}
 
+	// 2015-04-10 add
+	@Cacheable(value="default", key="#sysExpression.exprId")
+	@Override
+	public DefaultResult<SysExpressionVO> findByUkCacheable(
+			SysExpressionVO sysExpression) throws ServiceException, Exception {
+		return this.findByUK(sysExpression);
+	}
+	
 }

@@ -21,11 +21,14 @@
  */
 package com.netsteadfast.greenstep.bsc.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -85,6 +88,13 @@ public class ScoreColorServiceImpl extends BaseService<ScoreColorVO, BbScoreColo
 			return BscConstants.SCORE_COLOR_MIN_VALUE;
 		}
 		return max.intValue();
+	}
+
+	// 2015-04-10 add
+	@Cacheable(value="default")
+	@Override
+	public List<BbScoreColor> findListByParamsCacheable() throws Exception {
+		return this.findListByParams(null);
 	}
 
 }

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.PageOf;
 import com.netsteadfast.greenstep.base.model.QueryResult;
 import com.netsteadfast.greenstep.base.model.SearchValue;
@@ -39,5 +40,7 @@ public interface ISysExpressionService<T extends java.io.Serializable, E extends
 	public QueryResult<List<SysExpressionVO>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception;
 	
 	public Map<String, String> findExpressionMap(boolean pleaseSelect) throws ServiceException, Exception;
+	
+	public DefaultResult<SysExpressionVO> findByUkCacheable(SysExpressionVO sysExpression) throws ServiceException, Exception; // 2015-04-10 add
 	
 }

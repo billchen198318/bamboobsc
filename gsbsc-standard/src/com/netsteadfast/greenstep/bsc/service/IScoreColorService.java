@@ -21,8 +21,11 @@
  */
 package com.netsteadfast.greenstep.bsc.service;
 
+import java.util.List;
+
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.service.IBaseService;
+import com.netsteadfast.greenstep.po.hbm.BbScoreColor;
 
 public interface IScoreColorService<T extends java.io.Serializable, E extends java.io.Serializable, PK extends java.io.Serializable> extends IBaseService<T, E, PK> {
 	
@@ -30,5 +33,8 @@ public interface IScoreColorService<T extends java.io.Serializable, E extends ja
 	public static String MAPPER_ID_VO2PO="scoreColor.vo2po";
 	
 	public int findForMaxValue() throws ServiceException, Exception;
+	
+	// 2015-04-10 add
+	public List<BbScoreColor> findListByParamsCacheable() throws Exception;
 	
 }

@@ -57,20 +57,25 @@ public class BscReportSupportUtils {
 	}
 	
 	public static void loadExpression() throws ServiceException, Exception {
-		SysExpressionVO sysExpression01 = new SysExpressionVO();
-		sysExpression01.setExprId( REPORT_UP_DOWN_HTML_ICON_STATUS_EXPR_ID );
-		DefaultResult<SysExpressionVO> result01 = sysExpressionService.findByUK(sysExpression01);
-		if (result01.getValue()!=null) {
-			sysExpression01 = result01.getValue();
-			exprThreadLocal01.set(sysExpression01);
+		if ( exprThreadLocal01.get() == null ) { // 2015-04-10 add if block
+			SysExpressionVO sysExpression01 = new SysExpressionVO();
+			sysExpression01.setExprId( REPORT_UP_DOWN_HTML_ICON_STATUS_EXPR_ID );
+			//DefaultResult<SysExpressionVO> result01 = sysExpressionService.findByUK(sysExpression01); // 2015-04-10 rem
+			DefaultResult<SysExpressionVO> result01 = sysExpressionService.findByUkCacheable(sysExpression01); // 2015-04-10 add
+			if (result01.getValue()!=null) {
+				sysExpression01 = result01.getValue();
+				exprThreadLocal01.set(sysExpression01);
+			}			
 		}
-		
-		SysExpressionVO sysExpression02 = new SysExpressionVO();
-		sysExpression02.setExprId( REPORT_UP_DOWN_BYTE_ICON_STATUS_EXPR_ID );
-		DefaultResult<SysExpressionVO> result02 = sysExpressionService.findByUK(sysExpression02);
-		if (result02.getValue()!=null) {
-			sysExpression02 = result02.getValue();
-			exprThreadLocal02.set(sysExpression02);
+		if ( exprThreadLocal02.get() == null ) { // 2015-04-10 add if block
+			SysExpressionVO sysExpression02 = new SysExpressionVO();
+			sysExpression02.setExprId( REPORT_UP_DOWN_BYTE_ICON_STATUS_EXPR_ID );
+			//DefaultResult<SysExpressionVO> result02 = sysExpressionService.findByUK(sysExpression02); // 2015-04-10 rem
+			DefaultResult<SysExpressionVO> result02 = sysExpressionService.findByUkCacheable(sysExpression02); // 2015-04-10 add
+			if (result02.getValue()!=null) {
+				sysExpression02 = result02.getValue();
+				exprThreadLocal02.set(sysExpression02);
+			}			
 		}
 		
 	}

@@ -42,7 +42,11 @@ public class BscScoreColorUtils {
 	}
 	
 	public static void loadScoreColors() throws ServiceException, Exception {
-		List<BbScoreColor> scoreColors = scoreColorService.findListByParams(null);
+		if ( scoreColorsThreadLocal.get()!=null && scoreColorsThreadLocal.get().size()>0 ) { // 2015-04-10 add
+			return;
+		}
+		//List<BbScoreColor> scoreColors = scoreColorService.findListByParams(null); // 2015-04-10 rem
+		List<BbScoreColor> scoreColors = scoreColorService.findListByParamsCacheable(); // 2015-04-10 add
 		scoreColorsThreadLocal.set(scoreColors);
 	}
 	
