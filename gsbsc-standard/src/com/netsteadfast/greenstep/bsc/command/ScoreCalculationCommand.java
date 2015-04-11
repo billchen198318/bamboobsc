@@ -23,13 +23,16 @@ package com.netsteadfast.greenstep.bsc.command;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
 import com.netsteadfast.greenstep.base.BaseChainCommandSupport;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
-import com.netsteadfast.greenstep.bsc.util.AggregationMethodUtils;
+import com.netsteadfast.greenstep.bsc.support.ScoreCalculationCallable;
+import com.netsteadfast.greenstep.bsc.support.ScoreCalculationCallableData;
 import com.netsteadfast.greenstep.bsc.util.BscScoreColorUtils;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
@@ -100,54 +103,70 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 	}
 	
 	private void processKpisScore(List<VisionVO> visions) throws Exception {
+		long beg = System.currentTimeMillis();
 		for (VisionVO vision : visions) {
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				for (ObjectiveVO objective : perspective.getObjectives()) {
+					// 2015-04-11 add
+					ExecutorService kpiCalculationPool = 
+							Executors.newFixedThreadPool( 3 );
 					for (KpiVO kpi : objective.getKpis()) {
+						/* 2015-04-11 rem
 						float score = this.calculationMeasureData(kpi);
 						kpi.setScore(score);
 						kpi.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
 						kpi.setFontColor( BscScoreColorUtils.getFontColor(score) );
-					}
+						*/
+						
+						// 2015-04-11 add
+						ScoreCalculationCallableData data = new ScoreCalculationCallableData();
+						data.setDefaultMode(true);
+						data.setKpi(kpi);
+						data = kpiCalculationPool.submit( new ScoreCalculationCallable(data) ).get();
+						
+					}	
+					kpiCalculationPool.shutdown();
 				}
 			}
 		}
+		long end = System.currentTimeMillis();
+		System.out.println( this.getClass().getName() + " use time(MS) = " + (end-beg) );		
 	}
 	
-	private float calculationMeasureData(KpiVO kpi) throws Exception {
-		// 2015-03-11 更換成以 bb_aggregation_method.EXPRESSION1 處理計算方式
-		/*
-		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
-		Float score = 0.0f;
-		int size = 0;
-		for (BbMeasureData measureData : measureDatas) {
-			BscMeasureData data = new BscMeasureData();
-			data.setActual( measureData.getActual() );
-			data.setTarget( measureData.getTarget() );
-			Object value = null;
-			try {
-				value = BscFormulaUtils.parse(kpi.getFormula(), data);
-				if (value == null) {
-					continue;
-				}
-				if ( !(value instanceof Integer || value instanceof Float || value instanceof Long) ) {
-					continue;
-				}
-				score += NumberUtils.toFloat( String.valueOf(value), 0.0f);
-				size++;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (BscKpiCode.CAL_AVERAGE.equals(kpi.getCal()) && score != 0.0f ) {
-			score = score / size;
-		}
-		return score;
-		*/
-		
-		// 2015-03-11 更換成以 bb_aggregation_method.EXPRESSION1 處理計算方式		
-		return AggregationMethodUtils.processDefaultMode(kpi);		
-	}
+//	private float calculationMeasureData(KpiVO kpi) throws Exception {
+//		// 2015-03-11 更換成以 bb_aggregation_method.EXPRESSION1 處理計算方式
+//		/*
+//		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
+//		Float score = 0.0f;
+//		int size = 0;
+//		for (BbMeasureData measureData : measureDatas) {
+//			BscMeasureData data = new BscMeasureData();
+//			data.setActual( measureData.getActual() );
+//			data.setTarget( measureData.getTarget() );
+//			Object value = null;
+//			try {
+//				value = BscFormulaUtils.parse(kpi.getFormula(), data);
+//				if (value == null) {
+//					continue;
+//				}
+//				if ( !(value instanceof Integer || value instanceof Float || value instanceof Long) ) {
+//					continue;
+//				}
+//				score += NumberUtils.toFloat( String.valueOf(value), 0.0f);
+//				size++;
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		if (BscKpiCode.CAL_AVERAGE.equals(kpi.getCal()) && score != 0.0f ) {
+//			score = score / size;
+//		}
+//		return score;
+//		*/
+//		
+//		// 2015-03-11 更換成以 bb_aggregation_method.EXPRESSION1 處理計算方式		
+//		return AggregationMethodUtils.processDefaultMode(kpi);		
+//	}
 	
 	private float getWeightPercentage(BigDecimal weight) {
 		if (weight==null) {
