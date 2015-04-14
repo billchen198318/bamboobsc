@@ -2,3 +2,14 @@
    BSC_PROG004D0003Q 完成了.
 
 2. 計分卡報表連結功能 ( 不一定??, 沒想好怎樣表現 )
+
+
+
+2015-04-14
+
+Thanks for the reply Chen. Do you have sample script I can use to achieve the restriction. An example being;
+
+At the end of March, I would not want anyone to be able to update KPIs for 
+January and February. 
+
+Also another scenario maybe how to deny updates of specific KPIs(measured data) per month per user.
