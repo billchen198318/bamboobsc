@@ -27,6 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.AppContext;
@@ -70,6 +74,7 @@ public class MeasureDataCalendarUtils {
 	private static IMeasureDataService<MeasureDataVO, BbMeasureData, String> measureDataService;
 	private static IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private static IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
+	private static TransactionTemplate transactionTemplate;
 	
 	static {
 		kpiService = (IKpiService<KpiVO, BbKpi, String>)AppContext.getBean("bsc.service.KpiService");
@@ -80,6 +85,7 @@ public class MeasureDataCalendarUtils {
 				AppContext.getBean("bsc.service.OrganizationService");
 		employeeService = (IEmployeeService<EmployeeVO, BbEmployee, String>)
 				AppContext.getBean("bsc.service.EmployeeService");
+		transactionTemplate = (TransactionTemplate)AppContext.getBean("transactionTemplate");
 	}
 	
 	private static String getTemplateResource(String frequency) {
@@ -134,6 +140,61 @@ public class MeasureDataCalendarUtils {
 		}
 		organization = result.getValue();
 		return organization;
+	}
+	
+
+	/**
+	 * 這個 method 主要給 Expression 使用, 避免近入LogicService 處理時影響到 Transaction
+	 * 
+	 * @param kpiId
+	 * @param date
+	 * @param frequency
+	 * @param orgaId
+	 * @param emplId
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	@SuppressWarnings("rawtypes")
+	public static MeasureDataVO findMeasureData(String kpiId, String date, String frequency, 
+			String orgaId, String emplId) throws ServiceException, Exception {
+		
+		transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+		transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_DEFAULT);
+		transactionTemplate.setReadOnly(true);		
+		MeasureDataVO measureData = null;
+		try {
+			measureData = (MeasureDataVO) transactionTemplate.execute( 
+					new TransactionCallback() {
+						
+						@Override
+						public Object doInTransaction(TransactionStatus status) {
+							MeasureDataVO value = new MeasureDataVO();
+							value.setKpiId( kpiId );
+							value.setDate( date );
+							value.setFrequency( frequency );
+							value.setOrgId( orgaId );
+							value.setEmpId( emplId );
+							try {
+								DefaultResult<MeasureDataVO> mdResult = measureDataService.findByUK(value);
+								if ( mdResult.getValue() != null ) {
+									value = mdResult.getValue();
+								} else {
+									value = null;
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+								value = null;
+							}							
+							return value;
+						}
+						
+					}
+			);
+		} catch (Exception e) {
+			throw e;
+		}
+		return measureData;
 	}
 	
 	private static List<BbMeasureData> findMeasureData(KpiVO kpi, String date, String frequency, 

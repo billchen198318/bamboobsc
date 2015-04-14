@@ -170,6 +170,7 @@ public class ServiceScriptExpressionUtils {
 			}
 			expression = eResult.getValue();
 			List<TbSysBeanHelpExprMap> exprMaps = loadSysBeanHelpExprMapsData(helpExpr);
+			/* 2015-04-14 rem
 			try {
 				ScriptExpressionUtils.execute(
 						expression.getType(), 
@@ -179,6 +180,13 @@ public class ServiceScriptExpressionUtils {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
+			*/
+			// 不要 try catch 包起來, 讓外面也能接到 Exception 
+			ScriptExpressionUtils.execute(
+					expression.getType(), 
+					expression.getContent(), 
+					null, 
+					getParameters(helpExpr, exprMaps, resultObj, pjp));					
 		}
 	}
 
