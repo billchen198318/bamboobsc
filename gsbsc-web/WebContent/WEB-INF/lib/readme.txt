@@ -284,12 +284,13 @@ jstl-api-1.2.jar
 
 JasperReports
 -------------------------
-jasperreports-6.0.0.jar
-jasperreports-fonts-6.0.0.jar
+jasperreports-6.0.4.jar
+jasperreports-fonts-6.0.4.jar
 jasperreports-chart-themes-5.6.0.jar
 jasperreports-core-renderer.jar
 jasperreports-htmlcomponent-5.0.1.jar
 commons-javaflow-20060411.jar
+iText-2.1.7.js2.jar
 text-pdfa-5.5.0.jar 	(remove)
 itextpdf-5.5.0.jar		(remove)
 jdt-compiler-3.1.1.jar  (remove) conflict with Drools , core-3.3.0-v_771.jar Replace
