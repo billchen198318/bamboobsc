@@ -104,6 +104,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 			}
 		}
 		BscReportPropertyUtils.loadData();
+		BscReportSupportUtils.loadExpression(); // 2015-04-18 add
 		String fileName = SimpleUtils.getUUIDStr() + ".xlsx";
 		String fileFullPath = Constants.getWorkTmpDir() + "/" + fileName;	
 		int row = 24;

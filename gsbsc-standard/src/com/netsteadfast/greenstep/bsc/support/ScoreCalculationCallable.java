@@ -33,7 +33,6 @@ import org.joda.time.Years;
 
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.util.AggregationMethodUtils;
-import com.netsteadfast.greenstep.bsc.util.BscReportSupportUtils;
 import com.netsteadfast.greenstep.bsc.util.BscScoreColorUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
@@ -56,7 +55,7 @@ public class ScoreCalculationCallable implements Callable<ScoreCalculationCallab
 	@Override
 	public ScoreCalculationCallableData call() throws Exception {
 		BscScoreColorUtils.loadScoreColors();
-		BscReportSupportUtils.loadExpression();
+		//BscReportSupportUtils.loadExpression(); // 2014-04-18 rem 移到 aggregation method 的 expression 去呼叫
 		if ( this.data.isDefaultMode() ) { // KPI分數
 			float score = AggregationMethodUtils.processDefaultMode( this.data.getKpi() );
 			this.data.getKpi().setScore(score);

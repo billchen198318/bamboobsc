@@ -102,6 +102,7 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 	
 	private String createPdf(Context context) throws Exception {
 		BscReportPropertyUtils.loadData();
+		BscReportSupportUtils.loadExpression(); // 2015-04-18 add
 		String visionOid = (String)context.get("visionOid");
 		VisionVO vision = null;
 		BscStructTreeObj treeObj = (BscStructTreeObj)this.getResult(context);
