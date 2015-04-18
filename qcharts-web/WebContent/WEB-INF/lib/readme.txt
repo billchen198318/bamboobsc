@@ -15,26 +15,26 @@ xwork-core-2.3.20.jar
 
 Spring4
 -------------------------
-spring-aop-4.1.3.RELEASE.jar
-spring-aspects-4.1.3.RELEASE.jar
-spring-beans-4.1.3.RELEASE.jar
-spring-context-4.1.3.RELEASE.jar
-spring-context-support-4.1.3.RELEASE.jar
-spring-core-4.1.3.RELEASE.jar
-spring-expression-4.1.3.RELEASE.jar
-spring-instrument-4.1.3.RELEASE.jar
-spring-instrument-tomcat-4.1.3.RELEASE.jar
-spring-jdbc-4.1.3.RELEASE.jar
-spring-jms-4.1.3.RELEASE.jar
-spring-messaging-4.1.3.RELEASE.jar
-spring-orm-4.1.3.RELEASE.jar
-spring-oxm-4.1.3.RELEASE.jar
-spring-test-4.1.3.RELEASE.jar
-spring-tx-4.1.3.RELEASE.jar
-spring-web-4.1.3.RELEASE.jar
-spring-webmvc-4.1.3.RELEASE.jar
-spring-webmvc-portlet-4.1.3.RELEASE.jar
-spring-websocket-4.1.3.RELEASE.jar
+spring-aop-4.1.6.RELEASE.jar
+spring-aspects-4.1.6.RELEASE.jar
+spring-beans-4.1.6.RELEASE.jar
+spring-context-4.1.6.RELEASE.jar
+spring-context-support-4.1.6.RELEASE.jar
+spring-core-4.1.6.RELEASE.jar
+spring-expression-4.1.6.RELEASE.jar
+spring-instrument-4.1.6.RELEASE.jar
+spring-instrument-tomcat-4.1.6.RELEASE.jar
+spring-jdbc-4.1.6.RELEASE.jar
+spring-jms-4.1.6.RELEASE.jar
+spring-messaging-4.1.6.RELEASE.jar
+spring-orm-4.1.6.RELEASE.jar
+spring-oxm-4.1.6.RELEASE.jar
+spring-test-4.1.6.RELEASE.jar
+spring-tx-4.1.6.RELEASE.jar
+spring-web-4.1.6.RELEASE.jar
+spring-webmvc-4.1.6.RELEASE.jar
+spring-webmvc-portlet-4.1.6.RELEASE.jar
+spring-websocket-4.1.6.RELEASE.jar
 
 
 AOP
@@ -62,7 +62,7 @@ json-lib-2.4-jdk15.jar
 
 MySQL
 -------------------------
-mysql-connector-java-5.1.34-bin.jar
+mysql-connector-java-5.1.35-bin.jar
 
 
 http://code.google.com/p/beanshell2/
@@ -73,14 +73,14 @@ bsh-2.1.8.jar
 
 MYBATIS(iBATIS)
 -------------------------
-mybatis-3.2.7.jar
+mybatis-3.2.8.jar
 mybatis-spring-1.2.2.jar
 
 
 JFreeChart
 -------------------------
-jcommon-1.0.22.jar
-jfreechart-1.0.17.jar
+jcommon-1.0.23.jar
+jfreechart-1.0.19.jar
 
 
 Hibernate
@@ -88,9 +88,9 @@ Hibernate
 dom4j-1.6.1.jar
 antlr-2.7.7.jar
 hibernate-commons-annotations-4.0.5.Final.jar
-hibernate-core-4.3.7.Final.jar
-hibernate-entitymanager-4.3.7.Final.jar
-hibernate-envers-4.3.7.Final.jar
+hibernate-core-4.3.9.Final.jar
+hibernate-entitymanager-4.3.9.Final.jar
+hibernate-envers-4.3.9.Final.jar
 hibernate-jpa-2.1-api-1.0.0.Final.jar
 jandex-1.1.0.Final.jar
 javassist-3.18.1-GA.jar
@@ -167,9 +167,9 @@ hamcrest-core-1.3.jar
 
 c3p0
 -------------------------
-c3p0-0.9.5-pre10.jar
-c3p0-oracle-thin-extras-0.9.5-pre10.jar
-mchange-commons-java-0.2.8.jar
+c3p0-0.9.5.jar
+c3p0-oracle-thin-extras-0.9.5.jar
+mchange-commons-java-0.2.9.jar
 
 
 ASM	(require by Apache CXF ... etc )
