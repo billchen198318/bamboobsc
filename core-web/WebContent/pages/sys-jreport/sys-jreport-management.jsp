@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0008Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0008Q_GridButtonClick, width: "15%" },  
+			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0008Q_GridButtonClick, width: "20%" },  
 			{ name: "Report Id", field: "reportId", width: "20%" },
 			{ name: "File", field: "file", width: "25%" },
 			{ name: "Compile", field: "isCompile", width: "10%" },
-			{ name: "Description", field: "description", width: "30%" }			
+			{ name: "Description", field: "description", width: "25%" }			
 		];
 }
 
@@ -42,6 +42,8 @@ function CORE_PROG001D0008Q_GridButtonClick(itemOid) {
 	var rd="";
 	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0008Q_edit('" + itemOid + "');\" />";
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
+	rd += "<img src=\"" + _getSystemIconUrl('APPLICATION_PDF') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0008Q_previewParam('" + itemOid + "');\" />";
+	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";		
 	rd += "<img src=\"" + _getSystemIconUrl('EXPORT') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0008Q_downloadFile('" + itemOid + "');\" />";
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";	
 	rd += "<img src=\"" + _getSystemIconUrl('IMPORTANT') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0008Q_editParam('" + itemOid + "');\" />";	
@@ -97,6 +99,10 @@ function CORE_PROG001D0008Q_confirmDelete(oid) {
 			}, 
 			(window.event ? window.event : null) 
 	);			
+}
+
+function CORE_PROG001D0008Q_previewParam(oid) {
+	CORE_PROG001D0008Q_S00_DlgShow(oid);
 }
 
 //------------------------------------------------------------------------------

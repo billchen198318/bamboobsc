@@ -23,6 +23,10 @@ package com.netsteadfast.greenstep.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -39,8 +43,11 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.po.hbm.TbSysJreport;
+import com.netsteadfast.greenstep.po.hbm.TbSysJreportParam;
+import com.netsteadfast.greenstep.service.ISysJreportParamService;
 import com.netsteadfast.greenstep.service.ISysJreportService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.SysJreportParamVO;
 import com.netsteadfast.greenstep.vo.SysJreportVO;
 
 @ControllerAuthority(check=true)
@@ -49,10 +56,12 @@ import com.netsteadfast.greenstep.vo.SysJreportVO;
 public class SystemJreportManagementAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = -2810740119507303251L;
 	private ISysJreportService<SysJreportVO, TbSysJreport, String> sysJreportService;
+	private ISysJreportParamService<SysJreportParamVO, TbSysJreportParam, String> sysJreportParamService;
 	private SysJreportVO sysJreport = new SysJreportVO(); // edit模式要用
 	private InputStream inputStream = null;
 	private String filename = "";
 	private String contentType = "";
+	private List<TbSysJreportParam> jreportParams = new ArrayList<TbSysJreportParam>();
 	
 	public SystemJreportManagementAction() {
 		super();
@@ -68,6 +77,18 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 	public void setSysJreportService(
 			ISysJreportService<SysJreportVO, TbSysJreport, String> sysJreportService) {
 		this.sysJreportService = sysJreportService;
+	}
+
+	public ISysJreportParamService<SysJreportParamVO, TbSysJreportParam, String> getSysJreportParamService() {
+		return sysJreportParamService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysJreportParamService")
+	@Required			
+	public void setSysJreportParamService(
+			ISysJreportParamService<SysJreportParamVO, TbSysJreportParam, String> sysJreportParamService) {
+		this.sysJreportParamService = sysJreportParamService;
 	}
 
 	private void initData() throws ServiceException, Exception {
@@ -200,6 +221,33 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 		}
 		return forward;				
 	}	
+	
+	/**
+	 * core.systemJreportPreviewParamAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG001D0008Q_S00")
+	public String previewParam() throws Exception {
+		String forward = RESULT_SEARCH_NO_DATA;
+		try {
+			this.initData();
+			this.loadSysJreportData();		
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("reportId", this.sysJreport.getReportId());
+			this.jreportParams = this.sysJreportParamService.findListByParams(paramMap);
+			forward = SUCCESS;
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return forward;	
+	}
 
 	@Override
 	public String getProgramName() {
@@ -251,6 +299,10 @@ public class SystemJreportManagementAction extends BaseSupportAction implements 
 
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+
+	public List<TbSysJreportParam> getJreportParams() {
+		return jreportParams;
 	}
 	
 }

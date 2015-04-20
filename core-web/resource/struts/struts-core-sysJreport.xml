@@ -35,6 +35,12 @@
 		        <param name="inputName">inputStream</param>
 		    </result>
 		</action>		
+		
+		<!-- preview Param settings -->
+		<action name="core.systemJreportPreviewParamAction" class="core.web.controller.SystemJreportManagementAction" method="previewParam">
+			<result name="input">/pages/sys-jreport/sys-jreport-preview-param.jsp</result>		
+			<result name="success">/pages/sys-jreport/sys-jreport-preview-param.jsp</result>
+		</action>			
 					   	
 	</package>
 	
