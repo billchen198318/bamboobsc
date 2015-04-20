@@ -210,6 +210,7 @@ function BSC_PROG002D0005Q_saveSuccess(data) {
 		setFieldsBackgroundAlert(data.fieldsId, BSC_PROG002D0005Q_fieldsId);
 		return;
 	}	
+	BSC_PROG002D0005Q_renderBody(); // 2015-04-20 add reload input measure-data!
 }
 
 function BSC_PROG002D0005Q_prevCalendar() {
