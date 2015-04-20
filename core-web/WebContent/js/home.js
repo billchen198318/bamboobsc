@@ -349,6 +349,22 @@ function openCommonSignatureDialog(system, uploadOidField, callJsFunction, callJ
 }
 
 /**
+ * 打開JASPER Report 的 OpwnWindow
+ * 
+ * @param title			openWindow的title
+ * @param jreportId		報表id
+ * @param format		報表format 目前請帶入 'PDF'
+ * @param paramData		報表url要的參數, 如 { oid : '0123456789', type : 'A' }
+ */
+function openCommonJasperReportLoadWindow( title, jreportId, format, paramData ) {
+	var url = "./" + _gscore_common_jasperreport_load_action + "?jreportId=" + jreportId + "&format=" + format;
+	for (var key in paramData) {
+		url += "&" + key + "=" + paramData[key];
+	}
+	window.open(url, title, "resizable=yes,scrollbars=yes,status=yes");		
+}
+
+/**
  * 主要是把輸入條件不合的欄位背景變顏色
  * 
  * @param fieldsId

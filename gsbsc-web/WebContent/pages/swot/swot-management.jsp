@@ -96,10 +96,7 @@ function BSC_PROG002D0008Q_pdf() {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
-				window.open(
-						"<%=mainSysBasePath%>/core.commonJasperReportAction.action?jreportId=BSC_RPT002&format=PDF&reportId=" + data.reportId,
-						"SWOT-Report",
-			            "resizable=yes,scrollbars=yes,status=yes");	
+				openCommonJasperReportLoadWindow( "SWOT-Report", "BSC_RPT002", "PDF", { 'reportId' : data.reportId } );
 			}, 
 			function(error) {
 				alert(error);

@@ -89,10 +89,7 @@ function BSC_PROG002D0001Q_confirmDelete(oid) {
 }
 
 function BSC_PROG002D0001Q_pdf(oid) {
-	window.open(
-			"<%=mainSysBasePath%>/core.commonJasperReportAction.action?jreportId=BSC_RPT001&format=PDF&oid=" + oid,
-			"Vision-Report",
-            "resizable=yes,scrollbars=yes,status=yes");	
+	openCommonJasperReportLoadWindow( "Vision-Report", "BSC_RPT001", "PDF", { 'oid' : oid } );
 }
 
 //------------------------------------------------------------------------------
