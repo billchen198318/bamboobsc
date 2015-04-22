@@ -563,7 +563,7 @@ public class MenuSupportUtils {
 		StringBuilder sb = new StringBuilder();
 		String title = StringEscapeUtils.escapeHtml4( sysTwitter.getTitle() );
 		String id = "_" + systemId + "_twitter_AccordionPane";
-		sb.append("<div data-dojo-type=\"dijit/layout/AccordionPane\" title=\"" + title + "\" id=\"" + id + "\"> \n");
+		sb.append("<div data-dojo-type=\"dijit/layout/AccordionPane\" title=\"<img src='./icons/twitter.png' border='0'/>&nbsp;" + title + "\" id=\"" + id + "\"> \n");
 		sb.append(content);
 		sb.append("\n");
 		sb.append("</div>");

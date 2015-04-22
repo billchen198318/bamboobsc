@@ -11,15 +11,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
  	<div data-dojo-type="dijit/layout/AccordionContainer" data-dojo-props="minSize:20, region:'leading', splitter:true" style="width: 300px;" selected="true">
         
-        <div data-dojo-type="dijit/layout/AccordionPane" title="Application" id="_application_AccordionPane">
+        <div data-dojo-type="dijit/layout/AccordionPane" title="<img src='./icons/system-run.png' border='0'/>&nbsp;Application" id="_application_AccordionPane">
         	<div id="menuTree"></div>
         </div>
         
-        <div data-dojo-type="dijit/layout/AccordionPane" title="Message" id="_message_AccordionPane">
+        <div data-dojo-type="dijit/layout/AccordionPane" title="<img src='./icons/help-about.png' border='0'/>&nbsp;Message" id="_message_AccordionPane">
         	<p id="_my_message"></p>
         </div>    
             
-        <div data-dojo-type="dijit/layout/AccordionPane" title="${accountId} note" id="_account_AccordionPane">
+        <div data-dojo-type="dijit/layout/AccordionPane" title="<img src='./icons/xfcalendar.png' border='0'/>&nbsp;${accountId} note" id="_account_AccordionPane">
 			<div data-dojo-type="dijit/Calendar" value="${nowDate2}" id="_my_note_historyCalendar">
 			    <script type="dojo/method" data-dojo-event="onChange" data-dojo-args="value">
         			require(["dojo/dom", "dojo/date/locale"], function(dom, locale){
@@ -93,7 +93,7 @@ function repaintSysCalendarNoteMessage(dateStr) {
 
 setTimeout(function(){ 
 	loadMessagePublish();
-}, 12000);
+}, 5000);
 
 setTimeout(function(){ 
 	repaintSysCalendarNoteMessage('${nowDate2}'); 
