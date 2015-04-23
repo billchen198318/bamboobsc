@@ -50,6 +50,7 @@ import com.netsteadfast.greenstep.po.hbm.BbFormula;
 import com.netsteadfast.greenstep.po.hbm.BbKpi;
 import com.netsteadfast.greenstep.po.hbm.BbMeasureData;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
+import com.netsteadfast.greenstep.util.DataUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.TemplateUtils;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
@@ -85,7 +86,7 @@ public class MeasureDataCalendarUtils {
 				AppContext.getBean("bsc.service.OrganizationService");
 		employeeService = (IEmployeeService<EmployeeVO, BbEmployee, String>)
 				AppContext.getBean("bsc.service.EmployeeService");
-		transactionTemplate = (TransactionTemplate)AppContext.getBean("transactionTemplate");
+		transactionTemplate = DataUtils.getTransactionTemplate();
 	}
 	
 	private static String getTemplateResource(String frequency) {
