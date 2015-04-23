@@ -53,7 +53,10 @@
                 <value>classpath*:mappers/TbSysJreportParam.xml</value>                   
                 <value>classpath*:mappers/TbSysCtxBean.xml</value>                
                 <value>classpath*:mappers/TbSysTwitter.xml</value>                
-                <value>classpath*:mappers/TbSysMailHelper.xml</value>
+                <value>classpath*:mappers/TbSysMailHelper.xml</value>                
+                <value>classpath*:mappers/TbSysFormTemplate.xml</value>
+                <value>classpath*:mappers/TbSysForm.xml</value>                
+                <value>classpath*:mappers/TbSysFormMethod.xml</value>
                 <value>classpath*:mappers/BbOrganization.xml</value>
                 <value>classpath*:mappers/BbOrganizationPar.xml</value>
                 <value>classpath*:mappers/BbEmployee.xml</value>

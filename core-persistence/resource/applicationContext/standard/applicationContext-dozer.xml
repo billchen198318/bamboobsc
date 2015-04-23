@@ -41,7 +41,10 @@
 				<value>classpath*:dozer/dozerBeanMapping-sysJreportParam.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-sysCtxBean.xml</value>				
 				<value>classpath*:dozer/dozerBeanMapping-sysTwitter.xml</value>				
-				<value>classpath*:dozer/dozerBeanMapping-sysMailHelper.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysMailHelper.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysFormTemplate.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysForm.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysFormMethod.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-organization.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-organizationPar.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-employee.xml</value>

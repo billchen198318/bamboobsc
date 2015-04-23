@@ -37,7 +37,9 @@
     <import resource="classpath*:applicationContext/standard/applicationContext-sysCtxBean.xml" />
     <import resource="classpath*:applicationContext/standard/applicationContext-sysTwitter.xml" />
     <import resource="classpath*:applicationContext/standard/applicationContext-sysMailHelper.xml" />    
-    
+    <import resource="classpath*:applicationContext/standard/applicationContext-sysFormTemplate.xml" />
+    <import resource="classpath*:applicationContext/standard/applicationContext-sysForm.xml" />
+    <import resource="classpath*:applicationContext/standard/applicationContext-sysFormMethod.xml" />
     
     <!-- common util -->
     <!--  
