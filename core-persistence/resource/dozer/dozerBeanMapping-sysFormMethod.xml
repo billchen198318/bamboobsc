@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysFormMethod.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysFormMethod</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysFormMethodVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>formId</a>
+			<b>formId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>
+		<field>
+			<a>resultType</a>
+			<b>resultType</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>					
+		<field>
+			<a>expression</a>
+			<b>expression</b>
+		</field>			
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>							
+	</mapping>
+
+	<mapping map-id="sysFormMethod.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysFormMethodVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysFormMethod</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>formId</a>
+			<b>formId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>
+		<field>
+			<a>resultType</a>
+			<b>resultType</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>					
+		<field>
+			<a>expression</a>
+			<b>expression</b>
+		</field>			
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>													
+	</mapping>
+	
+</mappings>

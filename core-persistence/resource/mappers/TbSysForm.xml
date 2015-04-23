@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysForm">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysForm" id="baseResultMap">
+		<id column="OID" property="oid"/>				
+		<result column="FORM_ID" property="formId"/>
+		<result column="TEMPLATE_ID" property="templateId"/>
+		<result column="NAME" property="name"/>
+		<result column="DESCRIPTION" property="description"/>				
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_form where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="formId != null">
+			AND FORM_ID = #{formId}
+		</if>																					
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_form where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="formId != null">
+			AND FORM_ID = #{formId}
+		</if>		
+	</select>	
+	
+</mapper>
