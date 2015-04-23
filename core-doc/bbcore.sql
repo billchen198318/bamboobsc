@@ -286,7 +286,7 @@ CREATE TABLE `bb_measure_data` (
 
 LOCK TABLES `bb_measure_data` WRITE;
 /*!40000 ALTER TABLE `bb_measure_data` DISABLE KEYS */;
-INSERT INTO `bb_measure_data` VALUES ('06eb8c80-5f3b-4243-ae8c-4b6f01468430','KPI0003','20140101',100,71,'6','*','*','admin','2014-12-14 16:28:58',NULL,NULL),('0bc8d078-81cf-4a8b-a6ce-9e33e7c091b6','KPI0001','20150101',100,60,'3','*','*','admin','2015-04-14 12:22:54',NULL,NULL),('1165b729-81cc-4920-a3af-f5e61a503804','KPI0006','20150101',100,81,'6','*','*','admin','2015-01-05 19:06:20',NULL,NULL),('1414abd2-a05d-4dce-9405-1487e9b96025','KPI0001','20140701',100,65,'5','0001','*','admin','2014-12-14 15:19:51',NULL,NULL),('1614689d-52ea-4cca-9af2-2589518be90e','KPI0001','20140101',100,72,'6','0002','*','admin','2014-12-14 15:20:41',NULL,NULL),('17c150da-b202-4a77-b812-8cfc82f5d593','KPI0003','20140701',100,70,'5','*','0001','admin','2014-12-13 09:02:32',NULL,NULL),('1be25fdb-65d7-4059-9992-dafd6425bc30','KPI0001','20150101',100,56,'6','0001','*','tester','2015-01-22 19:10:15',NULL,NULL),('1fc614d5-8c2d-42aa-9893-293debdc18da','KPI0003','20150101',100,52,'3','*','*','admin','2015-01-05 19:04:38',NULL,NULL),('2147e78e-c38d-4f56-bb4e-d74fb2c705c3','KPI0005','20140101',100,90,'6','*','*','admin','2014-12-14 16:29:25',NULL,NULL),('23d724d1-97bc-4f35-860e-82ac37cbd447','KPI0004','20150101',100,65,'3','*','*','admin','2015-01-05 19:05:09',NULL,NULL),('2e373413-1db4-405e-be2b-8deeb1ac3ba4','KPI0006','20140101',100,97,'6','*','*','admin','2014-12-14 16:29:37',NULL,NULL),('31e45287-40a9-40af-ae92-1b3b9d665607','KPI0005','20150101',100,72,'3','*','*','admin','2015-01-05 19:06:10',NULL,NULL),('3f98c8ab-a15d-4051-85fe-f6c1c262e018','KPI0006','20140101',100,87,'6','*','0001','admin','2014-12-12 21:33:34',NULL,NULL),('43a07cf3-969e-49f8-a602-b335081871c4','KPI0002','20150101',100,65,'3','*','*','admin','2015-01-05 19:04:05',NULL,NULL),('5758fa25-fd80-4d21-ad17-3e017bf3f34b','KPI0003','20140101',100,67,'6','*','0001','admin','2014-12-13 09:02:21',NULL,NULL),('591a4395-8ed9-4c18-9e84-0b00d3f04e4d','KPI0005','20150101',100,75,'6','0001','*','tester','2015-01-22 19:11:09',NULL,NULL),('5a44df97-be72-44a0-979c-dd869b28be9e','KPI0006','20140101',100,82,'5','*','0001','admin','2014-12-12 21:33:53',NULL,NULL),('5f58aada-85cd-41e4-b53f-19f2efc090f4','KPI0001','20140101',100,56,'5','0001','*','admin','2014-12-14 15:19:51',NULL,NULL),('663b8ef4-be75-4ebd-abc2-0904cb56bb09','KPI0006','20140701',100,90,'5','*','0001','admin','2014-12-12 21:33:53',NULL,NULL),('889a7701-e2c1-467b-b849-7630ebbf2e6c','KPI0004','20150101',100,66,'6','*','*','admin','2015-01-05 19:04:52',NULL,NULL),('92d50c2f-a838-4bfd-aa19-85e1d684be7c','KPI0002','20140101',100,75,'6','*','*','admin','2014-12-14 16:28:47',NULL,NULL),('98e23dcc-3749-4a25-bc27-e6ed7c5c935a','KPI0002','20150101',100,61,'6','0001','*','tester','2015-01-22 19:10:27',NULL,NULL),('af3b8666-7327-457a-9675-6d6c501f0cec','KPI0001','20150101',100,55,'6','*','*','admin','2015-04-22 14:35:14',NULL,NULL),('b8ac4db3-6e78-4521-b1e6-83c123a63644','KPI0003','20150101',100,53,'6','0001','*','tester','2015-01-22 19:10:42',NULL,NULL),('bc6d54fd-38ee-4818-8945-73947a4d0866','KPI0003','20150101',100,48,'6','*','*','admin','2015-01-05 19:04:23',NULL,NULL),('bff452f4-90d6-46e6-9151-b99714c344e4','KPI0001','20140101',100,73,'5','0002','*','admin','2014-12-14 15:20:32',NULL,NULL),('c31e0f53-5a91-4d58-a5b8-7b57ea9dc877','KPI0004','20140101',100,81,'6','*','*','admin','2014-12-14 16:29:12',NULL,NULL),('c47f1f21-3a2b-43bb-adf5-a65c88346b8c','KPI0006','20150101',100,83,'3','*','*','admin','2015-01-05 19:06:27',NULL,NULL),('cc755370-d42e-4636-8997-a0dc39261bf2','KPI0001','20140101',100,61,'6','0001','*','admin','2014-12-14 15:19:35',NULL,NULL),('d4f6403a-0d67-4dc9-8b00-34ef1c3a9ba0','KPI0003','20140101',100,55,'5','*','0001','admin','2014-12-13 09:02:32',NULL,NULL),('de665c71-4f84-4ac2-9ed9-be04426f3002','KPI0001','20140101',100,64,'6','*','*','admin','2014-12-14 16:28:29',NULL,NULL),('e2517d83-6a87-4110-9cac-48cdad44e7ab','KPI0005','20150101',100,70,'6','*','*','admin','2015-01-05 19:06:02',NULL,NULL),('f1c276b4-2dfb-48b6-992f-8ef3ad860c20','KPI0002','20150101',100,63,'6','*','*','admin','2015-01-05 19:03:56',NULL,NULL),('fa308b4f-f915-4636-942b-e95a1c17a85d','KPI0001','20140701',100,70,'5','0002','*','admin','2014-12-14 15:20:32',NULL,NULL);
+INSERT INTO `bb_measure_data` VALUES ('06eb8c80-5f3b-4243-ae8c-4b6f01468430','KPI0003','20140101',100,71,'6','*','*','admin','2014-12-14 16:28:58',NULL,NULL),('0bc8d078-81cf-4a8b-a6ce-9e33e7c091b6','KPI0001','20150101',100,60,'3','*','*','admin','2015-04-14 12:22:54',NULL,NULL),('1165b729-81cc-4920-a3af-f5e61a503804','KPI0006','20150101',100,81,'6','*','*','admin','2015-01-05 19:06:20',NULL,NULL),('1414abd2-a05d-4dce-9405-1487e9b96025','KPI0001','20140701',100,65,'5','0001','*','admin','2014-12-14 15:19:51',NULL,NULL),('1614689d-52ea-4cca-9af2-2589518be90e','KPI0001','20140101',100,72,'6','0002','*','admin','2014-12-14 15:20:41',NULL,NULL),('17c150da-b202-4a77-b812-8cfc82f5d593','KPI0003','20140701',100,70,'5','*','0001','admin','2014-12-13 09:02:32',NULL,NULL),('1be25fdb-65d7-4059-9992-dafd6425bc30','KPI0001','20150101',100,56,'6','0001','*','tester','2015-01-22 19:10:15',NULL,NULL),('1fc614d5-8c2d-42aa-9893-293debdc18da','KPI0003','20150101',100,52,'3','*','*','admin','2015-01-05 19:04:38',NULL,NULL),('2147e78e-c38d-4f56-bb4e-d74fb2c705c3','KPI0005','20140101',100,90,'6','*','*','admin','2014-12-14 16:29:25',NULL,NULL),('23d724d1-97bc-4f35-860e-82ac37cbd447','KPI0004','20150101',100,65,'3','*','*','admin','2015-01-05 19:05:09',NULL,NULL),('2e373413-1db4-405e-be2b-8deeb1ac3ba4','KPI0006','20140101',100,97,'6','*','*','admin','2014-12-14 16:29:37',NULL,NULL),('31e45287-40a9-40af-ae92-1b3b9d665607','KPI0005','20150101',100,72,'3','*','*','admin','2015-01-05 19:06:10',NULL,NULL),('3f98c8ab-a15d-4051-85fe-f6c1c262e018','KPI0006','20140101',100,87,'6','*','0001','admin','2014-12-12 21:33:34',NULL,NULL),('43a07cf3-969e-49f8-a602-b335081871c4','KPI0002','20150101',100,65,'3','*','*','admin','2015-01-05 19:04:05',NULL,NULL),('5758fa25-fd80-4d21-ad17-3e017bf3f34b','KPI0003','20140101',100,67,'6','*','0001','admin','2014-12-13 09:02:21',NULL,NULL),('591a4395-8ed9-4c18-9e84-0b00d3f04e4d','KPI0005','20150101',100,75,'6','0001','*','tester','2015-01-22 19:11:09',NULL,NULL),('5a44df97-be72-44a0-979c-dd869b28be9e','KPI0006','20140101',100,82,'5','*','0001','admin','2014-12-12 21:33:53',NULL,NULL),('5f58aada-85cd-41e4-b53f-19f2efc090f4','KPI0001','20140101',100,56,'5','0001','*','admin','2014-12-14 15:19:51',NULL,NULL),('663b8ef4-be75-4ebd-abc2-0904cb56bb09','KPI0006','20140701',100,90,'5','*','0001','admin','2014-12-12 21:33:53',NULL,NULL),('889a7701-e2c1-467b-b849-7630ebbf2e6c','KPI0004','20150101',100,66,'6','*','*','admin','2015-01-05 19:04:52',NULL,NULL),('92d50c2f-a838-4bfd-aa19-85e1d684be7c','KPI0002','20140101',100,75,'6','*','*','admin','2014-12-14 16:28:47',NULL,NULL),('98e23dcc-3749-4a25-bc27-e6ed7c5c935a','KPI0002','20150101',100,61,'6','0001','*','tester','2015-01-22 19:10:27',NULL,NULL),('b8ac4db3-6e78-4521-b1e6-83c123a63644','KPI0003','20150101',100,53,'6','0001','*','tester','2015-01-22 19:10:42',NULL,NULL),('bc6d54fd-38ee-4818-8945-73947a4d0866','KPI0003','20150101',100,48,'6','*','*','admin','2015-01-05 19:04:23',NULL,NULL),('bdc67b1b-c313-46c1-a099-7623906f3640','KPI0001','20150101',100,55,'6','*','*','admin','2015-04-23 14:44:58',NULL,NULL),('bff452f4-90d6-46e6-9151-b99714c344e4','KPI0001','20140101',100,73,'5','0002','*','admin','2014-12-14 15:20:32',NULL,NULL),('c31e0f53-5a91-4d58-a5b8-7b57ea9dc877','KPI0004','20140101',100,81,'6','*','*','admin','2014-12-14 16:29:12',NULL,NULL),('c47f1f21-3a2b-43bb-adf5-a65c88346b8c','KPI0006','20150101',100,83,'3','*','*','admin','2015-01-05 19:06:27',NULL,NULL),('cc755370-d42e-4636-8997-a0dc39261bf2','KPI0001','20140101',100,61,'6','0001','*','admin','2014-12-14 15:19:35',NULL,NULL),('d4f6403a-0d67-4dc9-8b00-34ef1c3a9ba0','KPI0003','20140101',100,55,'5','*','0001','admin','2014-12-13 09:02:32',NULL,NULL),('de665c71-4f84-4ac2-9ed9-be04426f3002','KPI0001','20140101',100,64,'6','*','*','admin','2014-12-14 16:28:29',NULL,NULL),('e2517d83-6a87-4110-9cac-48cdad44e7ab','KPI0005','20150101',100,70,'6','*','*','admin','2015-01-05 19:06:02',NULL,NULL),('f1c276b4-2dfb-48b6-992f-8ef3ad860c20','KPI0002','20150101',100,63,'6','*','*','admin','2015-01-05 19:03:56',NULL,NULL),('fa308b4f-f915-4636-942b-e95a1c17a85d','KPI0001','20140701',100,70,'5','0002','*','admin','2014-12-14 15:20:32',NULL,NULL);
 /*!40000 ALTER TABLE `bb_measure_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1344,7 +1344,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1429759444143',1429759737010,7500),('scheduler','4753PC1429759477922',1429759740862,7500),('scheduler','4753PC1429759513858',1429759739313,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1429775947530',1429776488028,7500),('scheduler','4753PC1429775985002',1429776487960,7500),('scheduler','4753PC1429776023456',1429776489146,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1448,7 +1448,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1429759800000,1429759740000,0,'WAITING','CRON',1429759513000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1429776540000,1429776480000,0,'WAITING','CRON',1429776023000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1845,6 +1845,103 @@ LOCK TABLES `tb_sys_expression` WRITE;
 /*!40000 ALTER TABLE `tb_sys_expression` DISABLE KEYS */;
 INSERT INTO `tb_sys_expression` VALUES ('07ddaf7e-2acf-492f-a522-39fe686d0e59','BSC_RPT_EXPR0003','GROOVY','KPI Report(html) UP/DOWN icon status!','icon = \"\";\nrange = 0.0f;\nif (score==null || kpi==null || kpi.compareType==null) {\n	icon = \" \";\n}\nif (kpi.management == \"3\") {\n	if (kpi.compareType == \"1\" ) {\n		if ( kpi.quasiRange != 0 ) {\n			range = kpi.target * ( kpi.quasiRange / 100.0 );\n		}\n	}	\n	if (kpi.compareType == \"2\" ) {\n		if ( kpi.quasiRange != 0 ) {\n			range = kpi.min * ( kpi.quasiRange / 100.0 );\n		}\n	}\n}\nif ( range != 0.0f ) {\n	if (kpi.compareType == \"1\" ) {\n		if ( score >= kpi.target-range && score <= kpi.target+range ) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n	if (kpi.compareType == \"2\" ) {\n		if ( score >= kpi.min-range && score <= kpi.min+range ) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n} else {\n	if (kpi.compareType == \"1\" ) {\n		if ( score >= kpi.target) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n	if (kpi.compareType == \"2\" ) {\n		if ( score >= kpi.min ) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n}\n','provide KPI Report UP/DOWN icon status!','admin','2014-12-04 20:36:43','admin','2014-12-22 19:14:17'),('2305b1d3-34be-47f2-b0a2-61c91dc54064','BSC_MD_EXPR0001','GROOVY','Measure datas update/input settings for (Christopher Hayden)!','// bsc.service.logic.MeasureDataLogicService\n// saveOrUpdate\n// frequency args index 2\n// measureDatas args index 6\n// kpiOid args index 0\n// organizationId args index 4\n// employeeId args index 5\n\n/*\n * The require for Christopher Hayden\n */\nif ( measureDatas==null || !(measureDatas instanceof java.util.ArrayList) ) {\n	return;\n}\n\ndef denyUsers = [ \"need-deny-user-id\" ]; // the is need deny users\n\ndef nowYear = com.netsteadfast.greenstep.util.SimpleUtils.getStrYMD( com.netsteadfast.greenstep.util.SimpleUtils.IS_YEAR ); // not modify me\ndef nowMonth = com.netsteadfast.greenstep.util.SimpleUtils.getStrYMD( com.netsteadfast.greenstep.util.SimpleUtils.IS_MONTH ); // not modify me\ndef nowUserId = ((java.lang.String)org.apache.shiro.SecurityUtils.getSubject().getPrincipal());\ncom.netsteadfast.greenstep.vo.KpiVO kpi = com.netsteadfast.greenstep.bsc.util.MeasureDataCalendarUtils.findKpi(kpiOid);\njava.util.List<com.netsteadfast.greenstep.vo.MeasureDataVO> newMeasureDatas = new java.util.ArrayList<com.netsteadfast.greenstep.vo.MeasureDataVO>();\n\nfor ( com.netsteadfast.greenstep.vo.MeasureDataVO measureData : measureDatas ) {	\n	\n	/*\n	 * frequency 1 is Day\n	 * frequency 2 is Week\n	 * frequency 3 is Month\n	 * frequency 4 is QUARTER\n	 * frequency 5 is HALF OF YEAR\n	 * frequency 6 is Year\n	 */\n	// At the end of March, I would not want anyone to be able to update KPIs for January and February. \n	if ( \"3\".equals( frequency ) ) { // the frequency 3 is of month\n		//System.out.println( \"measureData.date=\" + measureData.date);\n		//System.out.println( \"nowYear+nowMonth=\" + nowYear+nowMonth);	\n		if ( !measureData.date.startsWith(nowYear+nowMonth) ) {\n			//throw new com.netsteadfast.greenstep.base.exception.ServiceException( \"Only can update current month measures data. please contact system administrator!\" );\n			com.netsteadfast.greenstep.vo.MeasureDataVO beforeMeasureData = \n				com.netsteadfast.greenstep.bsc.util.MeasureDataCalendarUtils.findMeasureData(\n					kpi.id,\n					measureData.date,\n					frequency,\n					organizationId,\n					employeeId\n				);\n			if ( beforeMeasureData !=null ) {\n				measureData.setActual( beforeMeasureData.actual );\n				measureData.setTarget( beforeMeasureData.target );\n				newMeasureDatas.add( measureData );				\n			} 	\n		} else {\n			newMeasureDatas.add( measureData );\n		}\n	}	\n\n	// Also another scenario maybe how to deny updates of specific KPIs(measured data) per month per user.\n	// an example ( deny admin update March data )\n	for (String denyUser : denyUsers) {\n		if ( \"3\".equals( frequency ) && denyUser.equals( nowUserId ) /* && denyUser.equals( measureData.empId ) */ ) { // the frequency 3 is of month\n			if ( measureData.date.startsWith(nowYear+nowMonth) ) { // cannot update current month\n				throw new com.netsteadfast.greenstep.base.exception.ServiceException( denyUser + \" you cannot update measures data. please contact system administrator!\" );\n			}\n		}\n	}\n	\n}\n\nmeasureDatas.clear();\nmeasureDatas.addAll( newMeasureDatas );\n','Christopher Hayden\'s require','admin','2015-04-14 09:10:15','admin','2015-04-14 12:22:24'),('771301f0-6b3d-46c2-8323-28fe8a34786f','BSC_RPT_EXPR0004','GROOVY','KPI Report(EXCEL/PDF) UP/DOWN icon status!','icon = \"\";\nrange = 0.0f;\nif (score==null || kpi==null || kpi.compareType==null) {\n	icon = \" \";\n}\nif (kpi.management == \"3\") {\n	if (kpi.compareType == \"1\" ) {\n		if ( kpi.quasiRange != 0 ) {\n			range = kpi.target * ( kpi.quasiRange / 100.0 );\n		}\n	}	\n	if (kpi.compareType == \"2\" ) {\n		if ( kpi.quasiRange != 0 ) {\n			range = kpi.min * ( kpi.quasiRange / 100.0 );\n		}\n	}\n}\nif ( range != 0.0f ) {\n	if (kpi.compareType == \"1\" ) {\n		if ( score >= kpi.target-range && score <= kpi.target+range ) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n	if (kpi.compareType == \"2\" ) {\n		if ( score >= kpi.min-range && score <= kpi.min+range ) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n} else {\n	if (kpi.compareType == \"1\" ) {\n		if ( score >= kpi.target) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n	if (kpi.compareType == \"2\" ) {\n		if ( score >= kpi.min ) {\n			icon = \"go-up.png\";\n		} else {\n			icon = \"go-down.png\";\n		}\n	}\n}\nif ( icon.endsWith(\"png\") ) {\n	icon = \"META-INF/resource/\" + icon;\n}\n','provide KPI Report UP/DOWN icon status!','admin','2014-12-10 19:54:03','admin','2014-12-22 19:14:38'),('79cf3dcb-1346-46c6-9ed5-bd17debf9502','BSC_KPI_EXPR0002','BSH','KPI create success message plus!','if (resultObj==null || !(resultObj instanceof com.netsteadfast.greenstep.base.model.DefaultResult ) ) {\n	return;\n}\nif (resultObj.getValue()==null || resultObj.getSystemMessage().getValue()==null ) {\n	return;\n}\nresultObj.setSystemMessage(\n	new com.netsteadfast.greenstep.base.model.SystemMessage(\n		resultObj.getSystemMessage().getValue() + \n		\"<BR/>Please to maintain measure data of the KPI.<BR/>\")\n);\n','message plus!','admin','2014-11-23 14:27:08','admin','2014-11-24 09:16:21'),('dc17c074-916b-4f62-a50a-9ab8e1a919c8','BSC_KPI_EXPR0001','BSH','KPI\'s weight check for create/update!','if ( kpi==null || !(kpi instanceof com.netsteadfast.greenstep.vo.KpiVO ) ) {\n	return;\n}\nif (kpi.getWeight()==null || kpi.getWeight().longValue() < 1 ) {\n	kpi.setWeight( new java.math.BigDecimal(\"1\") );\n}\n','KPI\'s weight check for create or update!','admin','2014-11-23 14:26:14','admin','2014-11-23 16:48:41');
 /*!40000 ALTER TABLE `tb_sys_expression` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_form`
+--
+
+DROP TABLE IF EXISTS `tb_sys_form`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_form` (
+  `OID` char(36) NOT NULL,
+  `FORM_ID` varchar(50) NOT NULL,
+  `TEMPLATE_ID` varchar(50) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`FORM_ID`),
+  KEY `IDX_1` (`TEMPLATE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_form`
+--
+
+LOCK TABLES `tb_sys_form` WRITE;
+/*!40000 ALTER TABLE `tb_sys_form` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_form` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_form_method`
+--
+
+DROP TABLE IF EXISTS `tb_sys_form_method`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_form_method` (
+  `OID` char(36) NOT NULL,
+  `FORM_ID` varchar(50) NOT NULL,
+  `NAME` varchar(25) NOT NULL,
+  `RESULT_TYPE` varchar(25) NOT NULL,
+  `TYPE` varchar(10) NOT NULL,
+  `EXPRESSION` blob NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`FORM_ID`,`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_form_method`
+--
+
+LOCK TABLES `tb_sys_form_method` WRITE;
+/*!40000 ALTER TABLE `tb_sys_form_method` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_form_method` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_form_template`
+--
+
+DROP TABLE IF EXISTS `tb_sys_form_template`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_form_template` (
+  `OID` char(36) NOT NULL,
+  `TPL_ID` varchar(50) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `CONTENT` blob NOT NULL,
+  `FILE_NAME` varchar(100) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TPL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_form_template`
+--
+
+LOCK TABLES `tb_sys_form_template` WRITE;
+/*!40000 ALTER TABLE `tb_sys_form_template` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_form_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2413,4 +2510,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-23 11:29:42
+-- Dump completed on 2015-04-23 16:49:42
