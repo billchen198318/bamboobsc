@@ -1,0 +1,6 @@
+*.js linguist-vendored=false
+*.htm linguist-vendored=false
+*.html linguist-vendored=false
+*.js linguist-language=Java
+*.htm linguist-language=Java
+*.html linguist-language=Java
