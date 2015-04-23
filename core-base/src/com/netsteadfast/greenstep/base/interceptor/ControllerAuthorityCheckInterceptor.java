@@ -36,6 +36,7 @@ import org.springframework.stereotype.Component;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.sys.SysEventLogSupport;
 import com.netsteadfast.greenstep.util.ControllerAuthorityCheckUtils;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
@@ -56,6 +57,7 @@ public class ControllerAuthorityCheckInterceptor extends AbstractInterceptor {
 			subject = SecurityUtils.getSubject();			
 		}
 		if (subject.hasRole(Constants.SUPER_ROLE_ALL) || subject.hasRole(Constants.SUPER_ROLE_ADMIN)) {
+			SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, true );
 			return actionInvocation.invoke();
 		}		
 		Annotation[] annotations = actionInvocation.getAction().getClass().getAnnotations();
@@ -67,14 +69,17 @@ public class ControllerAuthorityCheckInterceptor extends AbstractInterceptor {
 			}
 		}		
 		if (this.isControllerAuthority(annotations, actionMethodAnnotations, subject)) {
+			SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, true );
 			return actionInvocation.invoke();
 		}		
 		if (subject.isPermitted(url) || subject.isPermitted("/"+url)) {
+			SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, true );
 			return actionInvocation.invoke();
 		}
 		logger.warn("[decline] user=" + subject.getPrincipal() + " url=" + url);
 		String isDojoxContentPane = ServletActionContext.getRequest().getParameter(Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD);
 		if (YesNo.YES.equals(isDojoxContentPane)) { // dojox.layout.ContentPane 它的 X-Requested-With 是 XMLHttpRequest
+			SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, false );
 			return Constants._S2_RESULT_NO_AUTHORITH;
 		}
 		String header = ServletActionContext.getRequest().getHeader("X-Requested-With");
@@ -83,8 +88,10 @@ public class ControllerAuthorityCheckInterceptor extends AbstractInterceptor {
 			printWriter.print(Constants.NO_AUTHZ_JSON_DATA);
             printWriter.flush();
             printWriter.close();
+            SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, false );
 			return null;
 		}
+		SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, false );
 		return Constants._S2_RESULT_NO_AUTHORITH;
 	}
 	

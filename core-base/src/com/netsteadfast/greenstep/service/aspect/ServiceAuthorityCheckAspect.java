@@ -44,6 +44,7 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.ServiceAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
+import com.netsteadfast.greenstep.sys.SysEventLogSupport;
 
 @Order(0)
 @Aspect
@@ -55,21 +56,29 @@ public class ServiceAuthorityCheckAspect {
 	public Object aroundMethod(ProceedingJoinPoint pjp) throws AuthorityException, ServiceException, Throwable {
 		
 		MethodSignature signature=(MethodSignature)pjp.getSignature();
+		Annotation[] annotations=pjp.getTarget().getClass().getAnnotations();
+		String serviceId = this.getServiceId(annotations);		
 		Subject subject = SecurityUtils.getSubject();
+		Method method = signature.getMethod();
 		if (subject.hasRole(Constants.SUPER_ROLE_ALL) || subject.hasRole(Constants.SUPER_ROLE_ADMIN)) {
+			SysEventLogSupport.log( 
+					(String)subject.getPrincipal(), Constants.getSystem(), this.getEventId(serviceId, method.getName()), true );
 			return pjp.proceed();
 		}
-		Annotation[] annotations=pjp.getTarget().getClass().getAnnotations();
-		String serviceId = this.getServiceId(annotations);
 		if (StringUtils.isBlank(serviceId)) { // 沒有 service id 無法判斷檢查 
+			SysEventLogSupport.log( 
+					(String)subject.getPrincipal(), Constants.getSystem(), this.getEventId(serviceId, method.getName()), true );
 			return pjp.proceed();
 		}
 		if (!this.isServiceAuthorityCheck(annotations)) { // 沒有 ServiceAuthority 或 check=false 就不用檢查了 
+			SysEventLogSupport.log( 
+					(String)subject.getPrincipal(), Constants.getSystem(), this.getEventId(serviceId, method.getName()), true );
 			return pjp.proceed();
-		}
-		Method method = signature.getMethod();
+		}		
 		Annotation[] methodAnnotations = method.getAnnotations();
 		if (this.isServiceMethodAuthority(serviceId, methodAnnotations, subject)) {
+			SysEventLogSupport.log( 
+					(String)subject.getPrincipal(), Constants.getSystem(), this.getEventId(serviceId, method.getName()), true );
 			return pjp.proceed();
 		}
 		logger.warn(
@@ -77,6 +86,8 @@ public class ServiceAuthorityCheckAspect {
 						+ pjp.getTarget().getClass().getName() 
 						+ " - " 
 						+ signature.getMethod().getName());		
+		SysEventLogSupport.log( 
+				(String)subject.getPrincipal(), Constants.getSystem(), this.getEventId(serviceId, method.getName()), false );
 		throw new AuthorityException(SysMessageUtil.get(GreenStepSysMsgConstants.NO_PERMISSION));
 	}
 	
@@ -122,6 +133,10 @@ public class ServiceAuthorityCheckAspect {
 			}
 		}
 		return status;
+	}
+	
+	private String getEventId(String serviceId, String methodName) {
+		return serviceId + "@" + methodName;
 	}
 	
 }

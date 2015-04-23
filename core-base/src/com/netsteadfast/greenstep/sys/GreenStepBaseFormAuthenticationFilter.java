@@ -158,7 +158,8 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
 		List<String> currs = uSessLogHelper.findCurrenrIdByAccount(account.getAccount(), httpSessionId);
 		if (currs!=null && currs.size()>0) {
 			UserCurrentCookie.setCurrentId(response, currs.get(0), request.getSession().getId(), account.getAccount());
-		}		
+		}
+		SysLoginLogSupport.log( account.getAccount() );		
 	}
 	
 	private AccountVO queryUser(String account) throws Exception {
