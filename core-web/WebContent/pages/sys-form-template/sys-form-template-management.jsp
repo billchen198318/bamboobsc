@@ -32,8 +32,9 @@ function CORE_PROG001D0012Q_GridFieldStructure() {
 	return [
 			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0012Q_GridButtonClick, width: "10%" },  
 			{ name: "Id", field: "tplId", width: "10%" },
-			{ name: "Name", field: "name", width: "40%" },
-			{ name: "Description", field: "description", width: "40%" }
+			{ name: "Name", field: "name", width: "20%" },
+			{ name: "File", field: "fileName", width: "25%" },
+			{ name: "Description", field: "description", width: "35%" }
 		];	
 }
 
@@ -128,8 +129,8 @@ function ${programId}_page_message() {
     				parameterType="postData"
     				xhrParameter=" 
     					{ 
-    						'searchValue.parameter.templateId'	: dijit.byId('CORE_PROG001D0012Q_tplId').get('value'), 
-    						'searchValue.parameter.title'		: dijit.byId('CORE_PROG001D0012Q_name').get('value'),
+    						'searchValue.parameter.tplId'		: dijit.byId('CORE_PROG001D0012Q_tplId').get('value'), 
+    						'searchValue.parameter.name'		: dijit.byId('CORE_PROG001D0012Q_name').get('value'),
     						'pageOf.size'						: getGridQueryPageOfSize_${programId}_grid(),
     						'pageOf.select'						: getGridQueryPageOfSelect_${programId}_grid(),
     						'pageOf.showRow'					: getGridQueryPageOfShowRow_${programId}_grid()

@@ -11,6 +11,11 @@
 			<result name="input">/pages/sys-form-template/sys-form-template-management.jsp</result>		
 			<result name="success">/pages/sys-form-template/sys-form-template-management.jsp</result>
 		</action>	
+		
+		<action name="core.systemFormTemplateCreateAction" class="core.web.controller.SystemFormTemplateManagementAction" method="create">
+			<result name="input">/pages/sys-form-template/sys-form-template-create.jsp</result>		
+			<result name="success">/pages/sys-form-template/sys-form-template-create.jsp</result>
+		</action>			
 							
 	</package>
 	
@@ -18,6 +23,12 @@
 		
 		<default-interceptor-ref name="greenStepDefaultCustomStack" />
 		
+		<action name="core.systemFormTemplateManagementGridQueryAction" class="core.web.controller.SystemFormTemplateManagementGridQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>			
 														
 	</package>
 			

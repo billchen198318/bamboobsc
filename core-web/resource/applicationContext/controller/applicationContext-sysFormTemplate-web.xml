@@ -12,5 +12,7 @@
     
     <bean id="core.web.controller.SystemFormTemplateManagementAction" 
     	class="com.netsteadfast.greenstep.action.SystemFormTemplateManagementAction" scope="prototype" />
-    	    	    	    	    	    
+    <bean id="core.web.controller.SystemFormTemplateManagementGridQueryAction" 
+    	class="com.netsteadfast.greenstep.action.SystemFormTemplateManagementGridQueryAction" scope="prototype" />
+    	    	    	    	    	    	    
 </beans>

@@ -63,6 +63,27 @@ public class SystemFormTemplateManagementAction extends BaseSupportAction implem
 		}
 		return SUCCESS;
 	}	
+	
+	/**
+	 * core.systemFormTemplateCreateAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG001D0012A")	
+	public String create() throws Exception {
+		try {
+			this.initData();
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;		
+	}	
 
 	@Override
 	public String getProgramName() {

@@ -21,11 +21,20 @@
  */
 package com.netsteadfast.greenstep.service;
 
+import java.util.List;
+
+import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.PageOf;
+import com.netsteadfast.greenstep.base.model.QueryResult;
+import com.netsteadfast.greenstep.base.model.SearchValue;
 import com.netsteadfast.greenstep.base.service.IBaseService;
+import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
 
 public interface ISysFormTemplateService<T extends java.io.Serializable, E extends java.io.Serializable, PK extends java.io.Serializable> extends IBaseService<T, E, PK> {
 	
 	public static String MAPPER_ID_PO2VO="sysFormTemplate.po2vo";
 	public static String MAPPER_ID_VO2PO="sysFormTemplate.vo2po";
+	
+	public QueryResult<List<SysFormTemplateVO>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception;
 	
 }
