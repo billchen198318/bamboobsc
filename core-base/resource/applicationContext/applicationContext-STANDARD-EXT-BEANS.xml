@@ -21,7 +21,7 @@
     <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysExpression.xml" />
     <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysBeanHelp.xml" />
     <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysJreport.xml" />
-    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysCtxBean.xml" /> 
-    
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysCtxBean.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysForm.xml" /> 
         
 </beans>    

@@ -41,13 +41,8 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
-import com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate;
-import com.netsteadfast.greenstep.po.hbm.TbSysUpload;
-import com.netsteadfast.greenstep.service.ISysFormTemplateService;
-import com.netsteadfast.greenstep.service.ISysUploadService;
-import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.service.logic.ISystemFormLogicService;
 import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
-import com.netsteadfast.greenstep.vo.SysUploadVO;
 
 @ControllerAuthority(check=true)
 @Controller("core.web.controller.SystemFormTemplateSaveOrUpdateAction")
@@ -55,8 +50,7 @@ import com.netsteadfast.greenstep.vo.SysUploadVO;
 public class SystemFormTemplateSaveOrUpdateAction extends BaseJsonAction {
 	private static final long serialVersionUID = 2151158467965309656L;
 	protected Logger logger=Logger.getLogger(SystemFormTemplateSaveOrUpdateAction.class);
-	private ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> sysFormTemplateService;
-	private ISysUploadService<SysUploadVO, TbSysUpload, String> sysUploadService;
+	private ISystemFormLogicService systemFormLogicService;
 	private String message = "";
 	private String success = IS_NO;
 	
@@ -65,27 +59,15 @@ public class SystemFormTemplateSaveOrUpdateAction extends BaseJsonAction {
 	}
 
 	@JSON(serialize=false)
-	public ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> getSysFormTemplateService() {
-		return sysFormTemplateService;
+	public ISystemFormLogicService getSystemFormLogicService() {
+		return systemFormLogicService;
 	}
 
 	@Autowired
-	@Resource(name="core.service.SysFormTemplateService")			
-	public void setSysFormTemplateService(
-			ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> sysFormTemplateService) {
-		this.sysFormTemplateService = sysFormTemplateService;
-	}
-	
-	@JSON(serialize=false)
-	public ISysUploadService<SysUploadVO, TbSysUpload, String> getSysUploadService() {
-		return sysUploadService;
-	}
-
-	@Autowired
-	@Resource(name="core.service.SysUploadService")		
-	public void setSysUploadService(
-			ISysUploadService<SysUploadVO, TbSysUpload, String> sysUploadService) {
-		this.sysUploadService = sysUploadService;
+	@Resource(name="core.service.logic.SystemFormLogicService")		
+	public void setSystemFormLogicService(
+			ISystemFormLogicService systemFormLogicService) {
+		this.systemFormLogicService = systemFormLogicService;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -119,20 +101,37 @@ public class SystemFormTemplateSaveOrUpdateAction extends BaseJsonAction {
 		if ( StringUtils.isBlank(this.getFields().get("uploadOid")) ) {
 			throw new ControllerException( "Please upload JSP file!" );
 		}
-		byte[] content = UploadSupportUtils.getDataBytes( this.getFields().get("uploadOid") );
 		SysFormTemplateVO template = new SysFormTemplateVO();
 		this.transformFields2ValueObject(template, new String[]{"tplId", "name", "description"});
-		if ( super.defaultString(template.getDescription()).length()>500 ) {
-			template.setDescription( template.getDescription().substring(0, 500) );			
-		}
-		template.setFileName( template.getTplId() + ".jsp" );
-		template.setContent( content );
-		DefaultResult<SysFormTemplateVO> result = this.sysFormTemplateService.saveObject(template);
+		DefaultResult<SysFormTemplateVO> result = this.systemFormLogicService.createTmplate(
+				template, this.getFields().get("uploadOid") );
 		this.message = result.getSystemMessage().getValue();
 		if ( result.getValue() != null ) {
 			this.success = IS_YES;
 		}		
 	}	
+	
+	private void update() throws ControllerException, AuthorityException, ServiceException, Exception {
+		this.checkFields();
+		SysFormTemplateVO template = new SysFormTemplateVO();
+		this.transformFields2ValueObject(template, new String[]{"oid", "tplId", "name", "description"});
+		DefaultResult<SysFormTemplateVO> result = this.systemFormLogicService.updateTemplate(
+				template, this.getFields().get("uploadOid") );
+		this.message = result.getSystemMessage().getValue();
+		if (result.getValue()!=null) {
+			this.success = IS_YES;
+		}
+	}
+	
+	private void delete() throws ControllerException, AuthorityException, ServiceException, Exception {
+		SysFormTemplateVO template = new SysFormTemplateVO();
+		this.transformFields2ValueObject(template, new String[]{"oid"});
+		DefaultResult<Boolean> result = this.systemFormLogicService.deleteTemplate(template);
+		this.message = result.getSystemMessage().getValue();
+		if (result.getValue()!=null && result.getValue()) {
+			this.success = IS_YES;
+		}		
+	}
 
 	/**
 	 * core.systemFormTemplateSaveAction.action
@@ -148,6 +147,64 @@ public class SystemFormTemplateSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.save();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}	
+	
+	/**
+	 * core.systemFormTemplateUpdateAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG001D0012E")
+	public String doUpdate() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.update();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}		
+	
+	/**
+	 * core.systemFormTemplateDeleteAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG001D0012Q")
+	public String doDelete() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.delete();;
 		} catch (ControllerException ce) {
 			this.message=ce.getMessage().toString();
 		} catch (AuthorityException ae) {
