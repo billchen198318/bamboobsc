@@ -21,9 +21,14 @@
  */
 package com.netsteadfast.greenstep.dao;
 
+import java.util.List;
+
 import com.netsteadfast.greenstep.base.dao.IBaseDAO;
 import com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate;
+import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
 
 public interface ISysFormTemplateDAO<T extends java.io.Serializable, PK extends java.io.Serializable> extends IBaseDAO<TbSysFormTemplate, String> {
+	
+	public List<SysFormTemplateVO> findAllForSimpleList() throws Exception;
 	
 }

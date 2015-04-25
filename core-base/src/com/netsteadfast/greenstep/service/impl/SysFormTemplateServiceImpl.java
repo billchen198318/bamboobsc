@@ -141,4 +141,14 @@ public class SysFormTemplateServiceImpl extends BaseService<SysFormTemplateVO, T
 		return result;
 	}
 
+	@Override
+	public Map<String, String> findForAllMap(boolean pleaseSelect) throws ServiceException, Exception {
+		Map<String, String> dataMap = this.providedSelectZeroDataMap(pleaseSelect);
+		List<SysFormTemplateVO> searchList = this.sysFormTemplateDAO.findAllForSimpleList();
+		for (int i=0; searchList!=null && i<searchList.size(); i++) {
+			dataMap.put(searchList.get(i).getOid(), searchList.get(i).getName());
+		}
+		return dataMap;
+	}
+
 }

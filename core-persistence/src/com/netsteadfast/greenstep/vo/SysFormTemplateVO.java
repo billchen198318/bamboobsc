@@ -57,6 +57,13 @@ public class SysFormTemplateVO extends BaseValueObj implements java.io.Serializa
 		this.description = description;
 	}
 
+	public SysFormTemplateVO(String oid, String tplId, String name) {
+		super();
+		this.oid = oid;
+		this.tplId = tplId;
+		this.name = name;
+	}
+
 	@Override
 	public String getOid() {
 		return this.oid;

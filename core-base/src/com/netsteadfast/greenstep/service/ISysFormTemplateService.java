@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.PageOf;
@@ -36,5 +37,7 @@ public interface ISysFormTemplateService<T extends java.io.Serializable, E exten
 	public static String MAPPER_ID_VO2PO="sysFormTemplate.vo2po";
 	
 	public QueryResult<List<SysFormTemplateVO>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception;
+	
+	public Map<String, String> findForAllMap(boolean pleaseSelect) throws ServiceException, Exception;
 	
 }

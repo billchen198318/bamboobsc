@@ -21,12 +21,15 @@
  */
 package com.netsteadfast.greenstep.dao.impl;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import com.netsteadfast.greenstep.base.dao.BaseDAO;
 import com.netsteadfast.greenstep.dao.ISysFormTemplateDAO;
 import com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate;
+import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
 
 @Repository("core.dao.SysFormTemplateDAO")
 @Scope("prototype")
@@ -34,6 +37,14 @@ public class SysFormTemplateDAOImpl extends BaseDAO<TbSysFormTemplate, String> i
 	
 	public SysFormTemplateDAOImpl() {
 		super();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SysFormTemplateVO> findAllForSimpleList() throws Exception {
+		return this.getCurrentSession()
+				.createQuery("SELECT new com.netsteadfast.greenstep.vo.SysFormTemplateVO(m.oid, m.tplId, m.name) FROM TbSysFormTemplate m ORDER BY m.tplId ASC ")
+				.list();
 	}
 	
 }
