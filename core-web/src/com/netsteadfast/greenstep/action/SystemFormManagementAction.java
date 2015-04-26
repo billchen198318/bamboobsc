@@ -36,6 +36,7 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.po.hbm.TbSysForm;
 import com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate;
 import com.netsteadfast.greenstep.service.ISysFormService;
@@ -52,6 +53,7 @@ public class SystemFormManagementAction extends BaseSupportAction implements IBa
 	private ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> sysFormTemplateService;
 	private ISysFormService<SysFormVO, TbSysForm, String> sysFormService;
 	private Map<String, String> templateMap = this.providedSelectZeroDataMap( true );
+	private SysFormVO form = new SysFormVO();
 	
 	public SystemFormManagementAction() {
 		super();
@@ -82,8 +84,23 @@ public class SystemFormManagementAction extends BaseSupportAction implements IBa
 	}
 
 	private void initData(String  type) throws ServiceException, Exception {
-		if ("create".equals(type)) {
+		if ("create".equals(type) || "edit".equals(type)) {
 			this.templateMap = this.sysFormTemplateService.findForAllMap(true);
+		}
+	}
+	
+	private void loadFormData() throws ServiceException, Exception {
+		this.transformFields2ValueObject(this.form, new String[]{"oid"});
+		DefaultResult<SysFormVO> result = this.sysFormService.findObjectByOid(form);
+		if ( result.getValue()==null ) {
+			throw new ServiceException( result.getSystemMessage().getValue() );
+		}
+		this.form = result.getValue();
+		SysFormTemplateVO template = new SysFormTemplateVO();
+		template.setTplId( this.form.getTemplateId() );
+		DefaultResult<SysFormTemplateVO> tplResult = this.sysFormTemplateService.findByUK(template);
+		if (tplResult.getValue()!=null) {
+			this.getFields().put("templateOid", tplResult.getValue().getOid());
 		}
 	}
 	
@@ -122,6 +139,30 @@ public class SystemFormManagementAction extends BaseSupportAction implements IBa
 		}
 		return SUCCESS;		
 	}
+	
+	/**
+	 * core.systemFormEditAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="CORE_PROG001D0013E")		
+	public String edit() throws Exception {
+		String forward = RESULT_SEARCH_NO_DATA;
+		try {
+			this.initData("edit");
+			this.loadFormData();
+			forward = SUCCESS;
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return forward;				
+	}
 
 	@Override
 	public String getProgramName() {
@@ -142,6 +183,10 @@ public class SystemFormManagementAction extends BaseSupportAction implements IBa
 
 	public Map<String, String> getTemplateMap() {
 		return templateMap;
+	}
+
+	public SysFormVO getForm() {
+		return form;
 	}
 
 }

@@ -225,7 +225,7 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 		super.setStringValueMaxLength(form, "description", MAX_DESCRIPTION_LENGTH);
 		SysFormTemplateVO template = this.findTemplate(templateOid);
 		form.setTemplateId( template.getTplId() );		
-		return null;
+		return this.sysFormService.updateObject(form);
 	}
 
 	@ServiceMethodAuthority(type={ServiceMethodType.DELETE})
@@ -249,7 +249,7 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 	private SysFormTemplateVO findTemplate(String templateOid) throws ServiceException, Exception {
 		SysFormTemplateVO template = new SysFormTemplateVO();
 		template.setOid(templateOid);
-		DefaultResult<SysFormTemplateVO> result = new DefaultResult<SysFormTemplateVO>();
+		DefaultResult<SysFormTemplateVO> result = this.sysFormTemplateService.findObjectByOid(template);
 		if ( result.getValue()==null ) {
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}

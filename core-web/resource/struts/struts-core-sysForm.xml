@@ -16,7 +16,12 @@
 			<result name="input">/pages/sys-form/sys-form-create.jsp</result>		
 			<result name="success">/pages/sys-form/sys-form-create.jsp</result>
 		</action>
-											
+
+		<action name="core.systemFormEditAction" class="core.web.controller.SystemFormManagementAction" method="edit">
+			<result name="input">/pages/sys-form/sys-form-edit.jsp</result>		
+			<result name="success">/pages/sys-form/sys-form-edit.jsp</result>
+		</action>
+													
 	</package>
 	
 	<package name="core-sysForm-json" extends="core-default,json-default" namespace="/" >				
