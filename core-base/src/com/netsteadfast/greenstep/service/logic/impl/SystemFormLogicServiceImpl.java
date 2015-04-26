@@ -246,6 +246,58 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 		return this.sysFormService.deleteObject(form);
 	}
 	
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<SysFormMethodVO> createMethod(SysFormMethodVO formMethod, String formOid) throws ServiceException, Exception {
+		if ( null == formMethod || super.isBlank(formOid) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		SysFormVO form = this.findForm(formOid);
+		super.setStringValueMaxLength(formMethod, "description", MAX_DESCRIPTION_LENGTH);
+		formMethod.setFormId( form.getFormId() );
+		return this.sysFormMethodService.saveObject(formMethod);
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<SysFormMethodVO> updateMethod(SysFormMethodVO formMethod, String formOid) throws ServiceException, Exception {
+		if ( null == formMethod || super.isBlank(formMethod.getOid()) || super.isBlank(formOid) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		DefaultResult<SysFormMethodVO> oldResult = this.sysFormMethodService.findObjectByOid(formMethod);
+		if ( oldResult.getValue() == null ) {
+			throw new ServiceException( oldResult.getSystemMessage().getValue() );
+		}
+		oldResult.getValue().setExpression( null ); // clear blob expression
+		this.sysFormMethodService.updateObject( oldResult.getValue() );
+		
+		SysFormVO form = this.findForm(formOid);
+		super.setStringValueMaxLength(formMethod, "description", MAX_DESCRIPTION_LENGTH);
+		formMethod.setFormId( form.getFormId() );
+		return this.sysFormMethodService.updateObject(formMethod);
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.DELETE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<Boolean> deleteMethod(SysFormMethodVO formMethod) throws ServiceException, Exception {
+		if ( null == formMethod || super.isBlank(formMethod.getOid()) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		return this.sysFormMethodService.deleteObject(formMethod);
+	}	
+	
 	private SysFormTemplateVO findTemplate(String templateOid) throws ServiceException, Exception {
 		SysFormTemplateVO template = new SysFormTemplateVO();
 		template.setOid(templateOid);
@@ -254,6 +306,16 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}
 		return result.getValue();
+	}
+	
+	private SysFormVO findForm(String formOid) throws ServiceException, Exception {
+		SysFormVO form = new SysFormVO();
+		form.setOid(formOid);
+		DefaultResult<SysFormVO> formResult = this.sysFormService.findObjectByOid(form);
+		if ( formResult.getValue() == null ) {
+			throw new ServiceException( formResult.getSystemMessage().getValue() );
+		}
+		return formResult.getValue();		
 	}
 	
 	private void deleteMethods(String formId) throws ServiceException, Exception {

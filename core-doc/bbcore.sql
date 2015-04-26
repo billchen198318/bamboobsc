@@ -1344,7 +1344,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861430038596868',1430039167787,7500),('scheduler','localX861430038622675',1430039170962,7500),('scheduler','localX861430038646841',1430039165174,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861430042222210',1430042530317,7500),('scheduler','localX861430042246931',1430042525033,7500),('scheduler','localX861430042269133',1430042524620,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1448,7 +1448,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1430039220000,1430039160000,0,'WAITING','CRON',1430038646000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1430042580000,1430042520000,0,'WAITING','CRON',1430042268000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1910,6 +1910,7 @@ CREATE TABLE `tb_sys_form_method` (
 
 LOCK TABLES `tb_sys_form_method` WRITE;
 /*!40000 ALTER TABLE `tb_sys_form_method` DISABLE KEYS */;
+INSERT INTO `tb_sys_form_method` VALUES ('0dc99fa8-742c-4ecb-ba2e-7864276adab5','FORM001','init','default','GROOVY',0x2F2A206E6F7468696E67202A2F,'test','admin','2015-04-26 18:01:47',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_form_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2512,4 +2513,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-26 17:08:56
+-- Dump completed on 2015-04-26 18:03:39

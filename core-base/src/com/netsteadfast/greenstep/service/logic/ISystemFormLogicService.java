@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.service.logic;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.vo.SysFormMethodVO;
 import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
 import com.netsteadfast.greenstep.vo.SysFormVO;
 
@@ -39,5 +40,11 @@ public interface ISystemFormLogicService {
 	public DefaultResult<SysFormVO> update(SysFormVO form, String templateOid) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> delete(SysFormVO form) throws ServiceException, Exception;
+	
+	public DefaultResult<SysFormMethodVO> createMethod(SysFormMethodVO formMethod, String formOid) throws ServiceException, Exception;
+	
+	public DefaultResult<SysFormMethodVO> updateMethod(SysFormMethodVO formMethod, String formOid) throws ServiceException, Exception;
+	
+	public DefaultResult<Boolean> deleteMethod(SysFormMethodVO formMethod) throws ServiceException, Exception;
 	
 }

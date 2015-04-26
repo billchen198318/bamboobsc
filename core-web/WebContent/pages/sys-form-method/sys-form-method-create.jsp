@@ -29,8 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 var CORE_PROG001D0014A_fieldsId = new Object();
-CORE_PROG001D0014A_fieldsId['templateOid'] 	= 'CORE_PROG001D0014A_templateOid';
 CORE_PROG001D0014A_fieldsId['name'] 		= 'CORE_PROG001D0014A_name';
+CORE_PROG001D0014A_fieldsId['resultType'] 	= 'CORE_PROG001D0014A_resultType';
+CORE_PROG001D0014A_fieldsId['type'] 		= 'CORE_PROG001D0014A_type';
 
 function CORE_PROG001D0014A_saveSuccess(data) { // data 是 json 資料
 	setFieldsBackgroundDefault(CORE_PROG001D0014A_fieldsId);
