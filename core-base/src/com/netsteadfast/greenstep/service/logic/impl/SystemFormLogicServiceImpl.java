@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.service.logic.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -44,13 +45,16 @@ import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.service.logic.BaseLogicService;
 import com.netsteadfast.greenstep.po.hbm.TbSysForm;
+import com.netsteadfast.greenstep.po.hbm.TbSysFormMethod;
 import com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate;
 import com.netsteadfast.greenstep.po.hbm.TbSysUpload;
+import com.netsteadfast.greenstep.service.ISysFormMethodService;
 import com.netsteadfast.greenstep.service.ISysFormService;
 import com.netsteadfast.greenstep.service.ISysFormTemplateService;
 import com.netsteadfast.greenstep.service.ISysUploadService;
 import com.netsteadfast.greenstep.service.logic.ISystemFormLogicService;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.SysFormMethodVO;
 import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
 import com.netsteadfast.greenstep.vo.SysFormVO;
 import com.netsteadfast.greenstep.vo.SysUploadVO;
@@ -63,6 +67,7 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 	private final static int MAX_DESCRIPTION_LENGTH = 500;
 	private ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> sysFormTemplateService;
 	private ISysFormService<SysFormVO, TbSysForm, String> sysFormService;
+	private ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> sysFormMethodService;
 	private ISysUploadService<SysUploadVO, TbSysUpload, String> sysUploadService;
 	
 	public SystemFormLogicServiceImpl() {
@@ -93,6 +98,18 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 		this.sysFormService = sysFormService;
 	}	
 	
+	public ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> getSysFormMethodService() {
+		return sysFormMethodService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysFormMethodService")	
+	@Required	
+	public void setSysFormMethodService(
+			ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> sysFormMethodService) {
+		this.sysFormMethodService = sysFormMethodService;
+	}
+
 	public ISysUploadService<SysUploadVO, TbSysUpload, String> getSysUploadService() {
 		return sysUploadService;
 	}
@@ -172,6 +189,80 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
 		}		
 		return this.sysFormTemplateService.deleteObject(template);
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<SysFormVO> create(SysFormVO form, String templateOid) throws ServiceException, Exception {
+		if ( null == form || super.isBlank(form.getFormId()) || super.isNoSelectId(templateOid) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		super.setStringValueMaxLength(form, "description", MAX_DESCRIPTION_LENGTH);
+		SysFormTemplateVO template = this.findTemplate(templateOid);
+		form.setTemplateId( template.getTplId() );
+		return this.sysFormService.saveObject(form);
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<SysFormVO> update(SysFormVO form, String templateOid) throws ServiceException, Exception {
+		if ( null == form || super.isBlank(templateOid) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		DefaultResult<SysFormVO> oldResult = this.sysFormService.findObjectByOid(form);
+		if ( oldResult.getValue() == null ) {
+			throw new ServiceException( oldResult.getSystemMessage().getValue() );
+		}
+		form.setFormId( oldResult.getValue().getFormId() );
+		super.setStringValueMaxLength(form, "description", MAX_DESCRIPTION_LENGTH);
+		SysFormTemplateVO template = this.findTemplate(templateOid);
+		form.setTemplateId( template.getTplId() );		
+		return null;
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.DELETE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<Boolean> delete(SysFormVO form) throws ServiceException, Exception {
+		if (null==form || super.isBlank(form.getOid())) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		DefaultResult<SysFormVO> oldResult = this.sysFormService.findObjectByOid(form);
+		if ( oldResult.getValue() == null ) {
+			throw new ServiceException( oldResult.getSystemMessage().getValue() );
+		}
+		this.deleteMethods( oldResult.getValue().getFormId() );
+		return this.sysFormService.deleteObject(form);
+	}
+	
+	private SysFormTemplateVO findTemplate(String templateOid) throws ServiceException, Exception {
+		SysFormTemplateVO template = new SysFormTemplateVO();
+		template.setOid(templateOid);
+		DefaultResult<SysFormTemplateVO> result = new DefaultResult<SysFormTemplateVO>();
+		if ( result.getValue()==null ) {
+			throw new ServiceException( result.getSystemMessage().getValue() );
+		}
+		return result.getValue();
+	}
+	
+	private void deleteMethods(String formId) throws ServiceException, Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("formId", formId);	
+		List<TbSysFormMethod> methods = this.sysFormMethodService.findListByParams(paramMap);
+		for (TbSysFormMethod method : methods) {
+			this.sysFormMethodService.delete(method);
+		}
 	}
 
 }

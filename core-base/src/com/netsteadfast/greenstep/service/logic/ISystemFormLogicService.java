@@ -24,6 +24,7 @@ package com.netsteadfast.greenstep.service.logic;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
+import com.netsteadfast.greenstep.vo.SysFormVO;
 
 public interface ISystemFormLogicService {
 	
@@ -32,5 +33,11 @@ public interface ISystemFormLogicService {
 	public DefaultResult<SysFormTemplateVO> updateTemplate(SysFormTemplateVO template, String uploadOid) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> deleteTemplate(SysFormTemplateVO template) throws ServiceException, Exception;
+	
+	public DefaultResult<SysFormVO> create(SysFormVO form, String templateOid) throws ServiceException, Exception;
+	
+	public DefaultResult<SysFormVO> update(SysFormVO form, String templateOid) throws ServiceException, Exception;
+	
+	public DefaultResult<Boolean> delete(SysFormVO form) throws ServiceException, Exception;
 	
 }

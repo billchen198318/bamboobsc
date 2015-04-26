@@ -65,7 +65,7 @@ function CORE_PROG001D0013Q_confirmDelete(oid) {
 					return;
 				}	
 				xhrSendParameter(
-						'core.systemFormTemplateDeleteAction.action', 
+						'core.systemFormDeleteAction.action', 
 						{ 'fields.oid' : oid }, 
 						'json', 
 						_gscore_dojo_ajax_timeout,

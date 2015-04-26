@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 var CORE_PROG001D0013A_fieldsId = new Object();
 CORE_PROG001D0013A_fieldsId['formId'] 		= 'CORE_PROG001D0013A_formId';
-CORE_PROG001D0013A_fieldsId['templateId'] 	= 'CORE_PROG001D0013A_templateId';
+CORE_PROG001D0013A_fieldsId['templateOid'] 	= 'CORE_PROG001D0013A_templateOid';
 CORE_PROG001D0013A_fieldsId['name'] 		= 'CORE_PROG001D0013A_name';
 
 function CORE_PROG001D0013A_saveSuccess(data) { // data 是 json 資料
@@ -46,7 +46,7 @@ function CORE_PROG001D0013A_saveSuccess(data) { // data 是 json 資料
 function CORE_PROG001D0013A_clear() {
 	setFieldsBackgroundDefault(CORE_PROG001D0013A_fieldsId);
 	dijit.byId('CORE_PROG001D0013A_formId').set("value", "");
-	dijit.byId('CORE_PROG001D0013A_templateId').set("value", _gscore_please_select_id);
+	dijit.byId('CORE_PROG001D0013A_templateOid').set("value", _gscore_please_select_id);
 	dijit.byId('CORE_PROG001D0013A_name').set("value", "");
 	dijit.byId('CORE_PROG001D0013A_description').set("value", "");	
 
@@ -92,7 +92,7 @@ function ${programId}_page_message() {
     		<td height="50px" width="100%"  align="left">
     			<font color='RED'>*</font><b>Template</b>:
     			<br/>
-    			<gs:select name="CORE_PROG001D0013A_templateId" dataSource="templateMap" id="CORE_PROG001D0013A_templateId"></gs:select>
+    			<gs:select name="CORE_PROG001D0013A_templateOid" dataSource="templateMap" id="CORE_PROG001D0013A_templateOid"></gs:select>
     		</td>    		
     	</tr>    	
 		<tr>
@@ -119,7 +119,7 @@ function ${programId}_page_message() {
     				xhrParameter=" 
     					{ 
     						'fields.formId'			: dijit.byId('CORE_PROG001D0013A_formId').get('value'),
-    						'fields.templateId'		: dijit.byId('CORE_PROG001D0013A_templateId').get('value'),
+    						'fields.templateOid'	: dijit.byId('CORE_PROG001D0013A_templateOid').get('value'),
     						'fields.name'			: dijit.byId('CORE_PROG001D0013A_name').get('value'),    						
     						'fields.description'	: dijit.byId('CORE_PROG001D0013A_description').get('value')
     					} 

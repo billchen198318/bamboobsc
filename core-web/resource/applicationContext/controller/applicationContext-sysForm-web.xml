@@ -14,5 +14,7 @@
     	class="com.netsteadfast.greenstep.action.SystemFormManagementAction" scope="prototype" />
     <bean id="core.web.controller.SystemFormManagementGridQueryAction" 
     	class="com.netsteadfast.greenstep.action.SystemFormManagementGridQueryAction" scope="prototype" />
-    	    	    	    	    	    	    	    	    
+    <bean id="core.web.controller.SystemFormSaveOrUpdateAction" 
+    	class="com.netsteadfast.greenstep.action.SystemFormSaveOrUpdateAction" scope="prototype" />
+    	    	    	    	    	    	    	    	    	    
 </beans>
