@@ -276,6 +276,15 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 		if ( oldResult.getValue() == null ) {
 			throw new ServiceException( oldResult.getSystemMessage().getValue() );
 		}
+		
+		// check UK(same "name" and "formId" ) is found. because can update formMethod's UK , so need to check it.
+		DefaultResult<SysFormMethodVO> ukResult = this.sysFormMethodService.findByUK(formMethod);
+		if (ukResult.getValue()!=null) {
+			if ( !ukResult.getValue().getOid().equals(formMethod.getOid()) ) { // same UK found, but is another data.
+				throw new ServiceException( "Please change another name!" );
+			}
+		}
+		
 		oldResult.getValue().setExpression( null ); // clear blob expression
 		this.sysFormMethodService.updateObject( oldResult.getValue() );
 		
