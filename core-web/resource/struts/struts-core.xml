@@ -26,7 +26,8 @@
 	<include file="struts/struts-core-sysTwitter.xml" />	
 	<include file="struts/struts-core-settings.xml" />	
 	<include file="struts/struts-core-sysFormTemplate.xml" />	
-	<include file="struts/struts-core-sysForm.xml" />
+	<include file="struts/struts-core-sysForm.xml" />	
+	<include file="struts/struts-core-sysFormMethod.xml" />
 	<include file="struts/struts-core-test.xml" />
 	
 </struts>

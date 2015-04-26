@@ -28,40 +28,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
-function CORE_PROG001D0013Q_GridFieldStructure() {
+function CORE_PROG001D0014Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0013Q_GridButtonClick, width: "15%" },  
-			{ name: "Id", field: "formId", width: "20%" },
-			{ name: "Name", field: "name", width: "30%" },
-			{ name: "Description", field: "description", width: "35%" }
+			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0014Q_GridButtonClick, width: "10%" },  
+			{ name: "Name", field: "name", width: "20%" },
+			{ name: "Result", field: "resultType", width: "20%" },
+			{ name: "Type", field: "type", width: "20%" },
+			{ name: "Description", field: "description", width: "30%" }
 		];	
 }
 
-function CORE_PROG001D0013Q_GridButtonClick(itemOid) {
+function CORE_PROG001D0014Q_GridButtonClick(itemOid) {
 	var rd="";
-	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0013Q_edit('" + itemOid + "');\" />";	
+	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0014Q_edit('" + itemOid + "');\" />";	
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
-	rd += "<img src=\"" + _getSystemIconUrl('SYSTEM') + "\" border=\"0\" alt=\"mgr method\" onclick=\"CORE_PROG001D0013Q_mgrMethod('" + itemOid + "');\" />";	
-	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";	
-	rd += "<img src=\"" + _getSystemIconUrl('REMOVE') + "\" border=\"0\" alt=\"delete\" onclick=\"CORE_PROG001D0013Q_confirmDelete('" + itemOid + "');\" />";
+	rd += "<img src=\"" + _getSystemIconUrl('REMOVE') + "\" border=\"0\" alt=\"delete\" onclick=\"CORE_PROG001D0014Q_confirmDelete('" + itemOid + "');\" />";
 	return rd;	
 }
 
-function CORE_PROG001D0013Q_clear() {
-	dijit.byId('CORE_PROG001D0013Q_formId').set('value', '');
-	dijit.byId('CORE_PROG001D0013Q_name').set('value', '');
+function CORE_PROG001D0014Q_clear() {
 	clearQuery_${programId}_grid();	
 }
 
-function CORE_PROG001D0013Q_edit(oid) {
-	CORE_PROG001D0013E_TabShow(oid);
+function CORE_PROG001D0014Q_edit(oid) {
+	CORE_PROG001D0014E_TabShow(oid);
 }
 
-function CORE_PROG001D0013Q_mgrMethod(oid) {
-	CORE_PROG001D0014Q_TabShow(oid);
-}
-
-function CORE_PROG001D0013Q_confirmDelete(oid) {
+function CORE_PROG001D0014Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
@@ -71,7 +64,7 @@ function CORE_PROG001D0013Q_confirmDelete(oid) {
 					return;
 				}	
 				xhrSendParameter(
-						'core.systemFormDeleteAction.action', 
+						'core.systemFormMethodDeleteAction.action', 
 						{ 'fields.oid' : oid }, 
 						'json', 
 						_gscore_dojo_ajax_timeout,
@@ -110,7 +103,7 @@ function ${programId}_page_message() {
 		cancelEnable="Y" 
 		cancelJsMethod="${programId}_TabClose();" 
 		createNewEnable="Y"
-		createNewJsMethod="CORE_PROG001D0013A_TabShow()"		 
+		createNewJsMethod="CORE_PROG001D0014A_TabShow('${form.oid}')"		 
 		saveEnabel="N" 
 		saveJsMethod=""
 		refreshEnable="Y" 		 
@@ -119,23 +112,16 @@ function ${programId}_page_message() {
 	<jsp:include page="../header.jsp"></jsp:include>	
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
-		<tr>
-    		<td height="25px" width="10%"  align="right">Id:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="CORE_PROG001D0013Q_formId" id="CORE_PROG001D0013Q_formId" value="" width="200" maxlength="10"></gs:textBox></td>
-    		<td height="25px" width="10%"  align="right">Name:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="CORE_PROG001D0013Q_name" id="CORE_PROG001D0013Q_name" value="" width="200" maxlength="200"></gs:textBox></td>  					
-    	</tr>
     	<tr>
     		<td  height="25px" width="100%"  align="center" colspan="4">
-    			<gs:button name="CORE_PROG001D0013Q_query" id="CORE_PROG001D0013Q_query" onClick="getQueryGrid_${programId}_grid();"
+    			<gs:button name="CORE_PROG001D0014Q_query" id="CORE_PROG001D0014Q_query" onClick="getQueryGrid_${programId}_grid();"
     				handleAs="json"
     				sync="N"
-    				xhrUrl="core.systemFormManagementGridQueryAction.action"
+    				xhrUrl="core.systemFormMethodManagementGridQueryAction.action"
     				parameterType="postData"
     				xhrParameter=" 
     					{ 
-    						'searchValue.parameter.formId'		: dijit.byId('CORE_PROG001D0013Q_formId').get('value'), 
-    						'searchValue.parameter.name'		: dijit.byId('CORE_PROG001D0013Q_name').get('value'),
+    						'searchValue.parameter.formId'		: '${form.formId}', 
     						'pageOf.size'						: getGridQueryPageOfSize_${programId}_grid(),
     						'pageOf.select'						: getGridQueryPageOfSelect_${programId}_grid(),
     						'pageOf.showRow'					: getGridQueryPageOfShowRow_${programId}_grid()
@@ -146,14 +132,14 @@ function ${programId}_page_message() {
     				programId="${programId}"
     				label="Query" 
     				iconClass="dijitIconSearch"></gs:button>
-    			<gs:button name="CORE_PROG001D0013Q_clear" id="CORE_PROG001D0013Q_clear" onClick="CORE_PROG001D0013Q_clear();" 
+    			<gs:button name="CORE_PROG001D0014Q_clear" id="CORE_PROG001D0014Q_clear" onClick="CORE_PROG001D0014Q_clear();" 
     				label="Clear" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr>     	    	
     </table>	
     
-    <gs:grid gridFieldStructure="CORE_PROG001D0013Q_GridFieldStructure()" clearQueryFn="" id="_${programId}_grid" programId="${programId}"></gs:grid>	
+    <gs:grid gridFieldStructure="CORE_PROG001D0014Q_GridFieldStructure()" clearQueryFn="" id="_${programId}_grid" programId="${programId}"></gs:grid>	
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
