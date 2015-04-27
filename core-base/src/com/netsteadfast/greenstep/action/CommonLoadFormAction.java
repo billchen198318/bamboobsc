@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.netsteadfast.greenstep.base.action.BaseJsonAction;
+import com.netsteadfast.greenstep.base.action.BaseQueryGridJsonAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -58,7 +59,7 @@ import com.netsteadfast.greenstep.vo.SysFormVO;
 @SystemForm
 @Controller("core.web.controller.CommonLoadFormAction")
 @Scope
-public class CommonLoadFormAction extends BaseJsonAction implements IBaseAdditionalSupportAction {
+public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = 1616413828281190977L;
 	protected Logger logger=Logger.getLogger(CommonLoadFormAction.class);
 	private static final String FORM_PAGE_PATH = "pages/sys-form-pages/";
@@ -68,6 +69,7 @@ public class CommonLoadFormAction extends BaseJsonAction implements IBaseAdditio
 	private String message = "";
 	private String success = IS_NO;
 	private Map<String, Object> datas = new HashMap<String, Object>(); // 備用放資料用的
+	private List<Map<String, String>> items=new ArrayList<Map<String, String>>(); // 如果用查詢事件, 拿來放結果
 	private String prog_id = ""; // 程式id 與 TB_SYS_PROG.PROG_ID 配合
 	private String form_id = ""; // form 的 id
 	private String form_method = ""; // form 的 method
@@ -117,11 +119,13 @@ public class CommonLoadFormAction extends BaseJsonAction implements IBaseAdditio
 	private Map<String, Object> getParameters(SysFormMethodVO formMethod) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("formMethodObj", formMethod);
-		paramMap.put("form_id", form_id);
-		paramMap.put("form_method", form_method);
+		paramMap.put("form_id", this.form_id);
+		paramMap.put("form_method", this.form_method);
 		paramMap.put("actionObj", this);
-		paramMap.put("redirectUrl", redirectUrl);
-		paramMap.put("datas", datas);
+		paramMap.put("redirectUrl", this.redirectUrl);
+		paramMap.put("datas", this.datas);
+		paramMap.put("pageOf", this.getPageOf());
+		paramMap.put("searchValue", this.getSearchValue());
 		return paramMap;
 	}
 	
@@ -266,6 +270,36 @@ public class CommonLoadFormAction extends BaseJsonAction implements IBaseAdditio
 	public Map<String, Object> getDatas() {
 		return datas;
 	}
+	
+	@JSON
+	@Override
+	public String getPageOfShowRow() {
+		return super.getPageOf().getShowRow();
+	}
+	
+	@JSON
+	@Override
+	public String getPageOfSelect() {
+		return super.getPageOf().getSelect();
+	}
+	
+	@JSON
+	@Override
+	public String getPageOfCountSize() {
+		return super.getPageOf().getCountSize();
+	}
+	
+	@JSON
+	@Override
+	public String getPageOfSize() {
+		return super.getPageOf().getSize();
+	}		
+	
+	@JSON
+	@Override
+	public List<Map<String, String>> getItems() {
+		return items;
+	}	
 
 	@JSON
 	public String getProg_id() {
