@@ -126,6 +126,7 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 		paramMap.put("datas", this.datas);
 		paramMap.put("pageOf", this.getPageOf());
 		paramMap.put("searchValue", this.getSearchValue());
+		paramMap.put("items", this.items);
 		return paramMap;
 	}
 	
