@@ -119,7 +119,7 @@ public class MenuSupportUtils {
 	public static String getUrl(String basePath, TbSys sys, TbSysProg sysProg, String jsessionId) throws Exception {
 		String url = "";
 		if (YesNo.YES.equals(sys.getIsLocal())) {
-			url = basePath + "/" + sysProg.getUrl() + "?" + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
+			url = basePath + "/" + sysProg.getUrl() + ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
 		} else {
 			String head = "http://";
 			if (basePath.startsWith("https")) {
@@ -128,10 +128,10 @@ public class MenuSupportUtils {
 			url = head + sys.getHost() + "/" + sys.getContextPath() + "/" + sysProg.getUrl()
 					+ ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
 					//+ "&" + Constants.APP_SITE_CROSS_JSESS_ID_PARAM + "=" + jsessionId;
-			if ( url.indexOf("commomLoadForm.action") > -1 ) { // common form 要用到參數 prog_id
-				url += "&prog_id=" + sysProg.getProgId();
-			}
 		}			
+		if ( sysProg.getUrl().indexOf("commomLoadForm.action") > -1 ) { // common form 要用到參數 prog_id
+			url += "&prog_id=" + sysProg.getProgId();
+		}		
 		if ( YesNo.YES.equals(sysProg.getIsWindow()) ) {
 			url += "&" + Constants.IS_IFRAME_MODE + "=" + YesNo.YES;
 		}
