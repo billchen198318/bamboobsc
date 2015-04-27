@@ -65,6 +65,8 @@
 	</package>
 	
 	<package name="core-common-json" extends="core-default,json-default" namespace="/" >	
+	
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
 		
 		<action name="core.commonSelectItemsDataAction" class="core.web.controller.CommonSelectItemsDataAction" >
 			<result type="json">

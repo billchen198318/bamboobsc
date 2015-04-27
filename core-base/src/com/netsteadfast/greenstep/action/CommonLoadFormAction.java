@@ -35,6 +35,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
+import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -48,6 +49,7 @@ import com.netsteadfast.greenstep.service.ISysFormMethodService;
 import com.netsteadfast.greenstep.service.ISysFormService;
 import com.netsteadfast.greenstep.service.ISysFormTemplateService;
 import com.netsteadfast.greenstep.util.FSUtils;
+import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.util.ScriptExpressionUtils;
 import com.netsteadfast.greenstep.vo.SysFormMethodVO;
 import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
@@ -56,7 +58,7 @@ import com.netsteadfast.greenstep.vo.SysFormVO;
 @SystemForm
 @Controller("core.web.controller.CommonLoadFormAction")
 @Scope
-public class CommonLoadFormAction extends BaseJsonAction {
+public class CommonLoadFormAction extends BaseJsonAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = 1616413828281190977L;
 	protected Logger logger=Logger.getLogger(CommonLoadFormAction.class);
 	private static final String FORM_PAGE_PATH = "pages/sys-form-pages/";
@@ -66,6 +68,7 @@ public class CommonLoadFormAction extends BaseJsonAction {
 	private String message = "";
 	private String success = IS_NO;
 	private Map<String, Object> datas = new HashMap<String, Object>(); // 備用放資料用的
+	private String prog_id = ""; // 程式id 與 TB_SYS_PROG.PROG_ID 配合
 	private String form_id = ""; // form 的 id
 	private String form_method = ""; // form 的 method
 	private String viewPage = ""; // jsp 位置
@@ -182,6 +185,7 @@ public class CommonLoadFormAction extends BaseJsonAction {
 	}
 	
 	@JSON(serialize=false)
+	@SystemForm
 	public String execute() throws Exception {
 		String resultName = RESULT_SEARCH_NO_DATA;
 		if ( StringUtils.isBlank(form_id) || StringUtils.isBlank(form_method) ) {
@@ -208,6 +212,25 @@ public class CommonLoadFormAction extends BaseJsonAction {
 		}
 		return resultName;
 	}
+	
+	@JSON
+	@Override
+	public String getProgramName() {
+		try {
+			return MenuSupportUtils.getProgramName(this.getProgramId());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	@JSON
+	@Override
+	public String getProgramId() {
+		return super.getActionMethodProgramId();
+	}	
 	
 	@JSON
 	@Override
@@ -242,6 +265,15 @@ public class CommonLoadFormAction extends BaseJsonAction {
 	@JSON
 	public Map<String, Object> getDatas() {
 		return datas;
+	}
+
+	@JSON
+	public String getProg_id() {
+		return prog_id;
+	}
+
+	public void setProg_id(String prog_id) {
+		this.prog_id = prog_id;
 	}
 
 	@JSON

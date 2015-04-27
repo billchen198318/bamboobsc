@@ -59,6 +59,7 @@ import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.util.ControllerAuthorityCheckUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.opensymphony.xwork2.ActionContext;
 
 public class BaseSupportAction extends BaseAction implements ServletRequestAware, ServletResponseAware, ServletContextAware {
 	private static final long serialVersionUID = -6660355550728049961L;
@@ -186,6 +187,9 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 			if (annotation instanceof ControllerMethodAuthority) {
 				progId = this.defaultString( ((ControllerMethodAuthority)annotation).programId() );
 			}
+		}
+		if ( StringUtils.isBlank(progId) ) { // 沒有ControllerMethodAuthority , 就找 url 的 prog_id 參數 , 主要是 COMMON FORM 會用到
+			progId = this.defaultString( ActionContext.getContext().getValueStack().findString("prog_id") );			
 		}
 		return progId;
 	}
