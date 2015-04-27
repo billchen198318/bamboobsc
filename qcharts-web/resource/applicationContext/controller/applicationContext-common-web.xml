@@ -12,5 +12,8 @@
     
     <bean id="qcharts.web.controller.CommonLoadDataAction" 
     	class="com.netsteadfast.greenstep.qcharts.action.CommonLoadDataAction" scope="prototype" />
-    	    	    	    	    	    
+    	    	    
+    <!-- 每個系統都要加上這個action -->
+    <bean id="core.web.controller.CommonLoadFormAction" class="com.netsteadfast.greenstep.action.CommonLoadFormAction" scope="prototype" />
+        	    	    	    	    	    
 </beans>

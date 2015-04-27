@@ -20,5 +20,8 @@
     	class="com.netsteadfast.greenstep.bsc.action.RegionMapViewAction" scope="prototype" />
     <bean id="bsc.web.controller.RegionMapRelationKpisAction" 
     	class="com.netsteadfast.greenstep.bsc.action.RegionMapRelationKpisAction" scope="prototype" />
-    	    	    	    	    	    
+    
+    <!-- 每個系統都要加上這個action -->
+    <bean id="core.web.controller.CommonLoadFormAction" class="com.netsteadfast.greenstep.action.CommonLoadFormAction" scope="prototype" />
+        	    	    	    	    	    
 </beans>

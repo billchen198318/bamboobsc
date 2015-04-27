@@ -22,4 +22,7 @@
     <bean id="core.web.controller.CommonSignatureSaveAction" class="com.netsteadfast.greenstep.action.CommonSignatureSaveAction" scope="prototype" />
     <bean id="core.web.controller.CommonCodeEditorAction" class="com.netsteadfast.greenstep.action.CommonCodeEditorAction" scope="prototype" />
     
+    <!-- 每個系統都要加上這個action -->
+    <bean id="core.web.controller.CommonLoadFormAction" class="com.netsteadfast.greenstep.action.CommonLoadFormAction" scope="prototype" />
+    
 </beans>
