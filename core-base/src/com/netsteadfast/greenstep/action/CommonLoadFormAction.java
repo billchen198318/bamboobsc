@@ -127,6 +127,8 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 		paramMap.put("pageOf", this.getPageOf());
 		paramMap.put("searchValue", this.getSearchValue());
 		paramMap.put("items", this.items);
+		paramMap.put("fields", this.getFields());
+		paramMap.put("fieldsId", this.getFieldsId());
 		return paramMap;
 	}
 	
@@ -173,18 +175,24 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 		}		
 	}
 
+	@SuppressWarnings("unchecked")
 	public void processExpression(SysFormMethodVO formMethod) throws ControllerException, ServiceException, Exception {		
 		SysFormVO form = this.findForm(formMethod);
 		String expression = new String(formMethod.getExpression(), "utf-8");
+		Map<String, Object> paramMap = this.getParameters(formMethod);
 		ScriptExpressionUtils.execute(
 				formMethod.getType(), 
 				expression, 
 				null, 
-				this.getParameters(formMethod));		
+				paramMap);		
 		if (FormResultType.DEFAULT.equals(formMethod.getResultType())) {
 			SysFormTemplateVO template = this.findTemplate(form);
 			this.viewPage = FORM_PAGE_PATH + template.getFileName();
 		}		
+		if (FormResultType.JSON.equals(formMethod.getResultType())) {
+			this.message = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("jsonMessage") );
+			this.success = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("jsonSuccess") );
+		}
 	}
 	
 	@JSON(serialize=false)

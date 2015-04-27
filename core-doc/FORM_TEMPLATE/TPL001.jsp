@@ -49,7 +49,7 @@ function CORE_PROG001D0015Q_clear() {
 }
 
 function CORE_PROG001D0015Q_edit(oid) {
-	CORE_PROG001D0002E_TabShow(oid);
+	CORE_PROG001D0015E_TabShow(oid);
 }
 
 //------------------------------------------------------------------------------
