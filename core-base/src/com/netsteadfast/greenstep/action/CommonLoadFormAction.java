@@ -172,8 +172,7 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 		}		
 	}
 
-	public String processExpression() throws ControllerException, ServiceException, Exception {
-		SysFormMethodVO formMethod = this.findFormMethod();
+	public void processExpression(SysFormMethodVO formMethod) throws ControllerException, ServiceException, Exception {		
 		SysFormVO form = this.findForm(formMethod);
 		String expression = new String(formMethod.getExpression(), "utf-8");
 		ScriptExpressionUtils.execute(
@@ -185,24 +184,33 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 			SysFormTemplateVO template = this.findTemplate(form);
 			this.viewPage = FORM_PAGE_PATH + template.getFileName();
 		}		
-		return formMethod.getResultType();
 	}
 	
 	@JSON(serialize=false)
 	@SystemForm
 	public String execute() throws Exception {
 		String resultName = RESULT_SEARCH_NO_DATA;
-		if ( StringUtils.isBlank(form_id) || StringUtils.isBlank(form_method) ) {
+		if ( StringUtils.isBlank(form_id) || StringUtils.isBlank(form_method) ) {			
+			this.message = "no settings data to init form!";
+			this.setErrorMessage( this.message );
 			return resultName;
 		}
 		try {
-			resultName = this.processExpression();
+			SysFormMethodVO formMethod = this.findFormMethod();
+			resultName = formMethod.getResultType();
+			this.processExpression(formMethod);
 		} catch (ControllerException ce) {
 			this.message=ce.getMessage().toString();
+			this.setErrorMessage( this.message );							
 		} catch (AuthorityException ae) {
 			this.message=ae.getMessage().toString();
+			this.setErrorMessage( this.message );
+			if (FormResultType.DEFAULT.equals(resultName)) {
+				resultName = RESULT_NO_AUTHORITH;
+			}						
 		} catch (ServiceException se) {
 			this.message=se.getMessage().toString();
+			this.setErrorMessage( this.message );	
 		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
 			e.printStackTrace();
 			if (e.getMessage()==null) { 
@@ -212,7 +220,11 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 				this.message=e.getMessage().toString();
 				this.logger.error(e.getMessage());
 			}						
-			this.success = IS_EXCEPTION;
+			this.setErrorMessage( this.message );
+			this.success = IS_EXCEPTION;				
+			if (FormResultType.DEFAULT.equals(resultName)) {
+				resultName = ERROR;
+			}
 		}
 		return resultName;
 	}
