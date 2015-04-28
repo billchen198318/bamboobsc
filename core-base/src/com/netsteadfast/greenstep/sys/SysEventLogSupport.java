@@ -30,6 +30,7 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.netsteadfast.greenstep.base.AppContext;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 
 public class SysEventLogSupport {
@@ -40,6 +41,10 @@ public class SysEventLogSupport {
 			log.warn("null userId=" + userId + ", sysId=" + sysId + ", executeEventId=" + executeEventId);
 			return;
 		}		
+		if ( executeEventId.indexOf(Constants._COMMON_LOAD_FORM_ACTION) > -1 ) {
+			log.warn("Common load form no need event log : " + executeEventId + " , permit = " + permit);
+			return;
+		}
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = (NamedParameterJdbcTemplate)AppContext.getBean("namedParameterJdbcTemplate");
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("oid", SimpleUtils.getUUIDStr());

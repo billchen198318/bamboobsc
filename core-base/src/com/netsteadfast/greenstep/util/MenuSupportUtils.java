@@ -129,7 +129,7 @@ public class MenuSupportUtils {
 					+ ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
 					//+ "&" + Constants.APP_SITE_CROSS_JSESS_ID_PARAM + "=" + jsessionId;
 		}			
-		if ( sysProg.getUrl().indexOf("commomLoadForm.action") > -1 ) { // common form 要用到參數 prog_id
+		if ( sysProg.getUrl().indexOf(Constants._COMMON_LOAD_FORM_ACTION) > -1 ) { // common form 要用到參數 prog_id
 			url += "&prog_id=" + sysProg.getProgId();
 		}		
 		if ( YesNo.YES.equals(sysProg.getIsWindow()) ) {

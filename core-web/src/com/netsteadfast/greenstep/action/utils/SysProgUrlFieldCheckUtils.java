@@ -35,7 +35,7 @@ public class SysProgUrlFieldCheckUtils implements IActionFieldsCheckUtils {
 		if (StringUtils.isBlank(value)) {
 			return true;
 		}
-		if ( value.indexOf("commomLoadForm.action")>-1 && value.indexOf("form_id")>-1 && value.indexOf("form_method")>-1 ) { // common form
+		if ( value.indexOf(Constants._COMMON_LOAD_FORM_ACTION)>-1 && value.indexOf("form_id")>-1 && value.indexOf("form_method")>-1 ) { // common form
 			return true;
 		}
 		boolean f = false;

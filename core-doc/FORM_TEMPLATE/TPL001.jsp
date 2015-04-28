@@ -30,9 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0015Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "OID", formatter: CORE_PROG001D0015Q_GridButtonClick, width: "20%" },  
+			{ name: "View&nbsp;/&nbsp;Edit", field: "OID", formatter: CORE_PROG001D0015Q_GridButtonClick, width: "15%" },  
 			{ name: "Code", field: "CODE", width: "30%" },
-			{ name: "Name", field: "NAME", width: "50%" }
+			{ name: "Name", field: "NAME", width: "55%" }
 		];	
 }
 

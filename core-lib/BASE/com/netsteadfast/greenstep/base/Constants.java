@@ -116,6 +116,12 @@ public class Constants {
 	 */
 	public static final boolean JASPER_REPORTS_RESULT_LOCATION_REPLACE_MODE = true;
 	
+	/**
+	 * common load form 的預定action
+	 * 有分 core.commomLoadForm.action , bsc.commomLoadForm.action , qcharts.commomLoadForm.action
+	 */
+	public static final String _COMMON_LOAD_FORM_ACTION = "commomLoadForm" + _S2_ACTION_EXTENSION;
+	
 	public static String getTmpDir() {
 		return System.getProperty("java.io.tmpdir");
 	}

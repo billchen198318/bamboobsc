@@ -122,7 +122,6 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 		paramMap.put("form_id", this.form_id);
 		paramMap.put("form_method", this.form_method);
 		paramMap.put("actionObj", this);
-		paramMap.put("redirectUrl", this.redirectUrl);
 		paramMap.put("datas", this.datas);
 		paramMap.put("pageOf", this.getPageOf());
 		paramMap.put("searchValue", this.getSearchValue());
@@ -192,6 +191,9 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 		if (FormResultType.JSON.equals(formMethod.getResultType())) {
 			this.message = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("jsonMessage") );
 			this.success = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("jsonSuccess") );
+		}
+		if (FormResultType.REDIRECT.equals(formMethod.getResultType())) {
+			this.redirectUrl = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("redirectUrl") );
 		}
 	}
 	
