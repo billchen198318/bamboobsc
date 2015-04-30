@@ -77,7 +77,7 @@ function CORE_PROG001D0012Q_editTemplate(oid) {
 				openCommonCodeEditorWindow(
 						data.uploadOid, 
 						"CORE_PROG001D0012Q_templateContent", 
-						"CORE_PROG001D0012Q_updateTemplate('$oid');".replace('$oid', oid) );			
+						"CORE_PROG001D0012Q_updateTemplate('" + oid + "')");			
 			}, 
 			function(error) {
 				alert(error);
@@ -101,7 +101,8 @@ function CORE_PROG001D0012Q_updateTemplate(oid) {
 			_gscore_dojo_ajax_sync, 
 			true, 
 			function(data) {
-				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);	
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				getQueryGrid_${programId}_grid();
 			}, 
 			function(error) {
 				alert(error);

@@ -89,10 +89,18 @@ function clear() {
 }
 
 function setCbFieldValue() {
+	if ( window.opener.document.getElementById("${valueFieldId}") == null ) {
+		alert('ERROR: lost value field!');
+		return;
+	}
 	window.opener.document.getElementById("${valueFieldId}").value = getValue();
 	window.close();
 	<s:if test=" null != okFn && \"\" != okFn && \" \" != okFn ">
-	window.opener.${okFn}
+	if ( eval("typeof " + window.opener.${okFn} + "=='function'") ) {
+		window.opener.${okFn};
+	} else {
+		alert('ERROR: ok button event function is no found!');
+	}
 	</s:if>	
 }
 
