@@ -45,6 +45,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 .lighter {
     background: #666;
 }
+
+<s:if test=" \"Y\" == cbMode ">
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+</s:if>
+
 </style>
 
 
@@ -52,6 +60,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body bgcolor="#ffffff">
 
 <!-- CORE_PROGCOMM0004Q -->
+
+<s:if test=" \"Y\" == cbMode ">
+
+<input type="button" name="okBtn" id="okBtn" value="OK" class="flat lighter" onClick="setCbFieldValue();">
+<input type="button" name="clBtn" id="clBtn" value="Close" class="flat lighter" onClick="window.close();">
+<br/>
+
+</s:if>
 
 <div style="border-top: 1px solid black; border-bottom: 1px solid black;">
 	<textarea id="code">${codeContent}</textarea>
@@ -81,11 +97,6 @@ function setCbFieldValue() {
 }
 
 </script>
-<s:if test=" \"Y\" == cbMode ">
-<hr color="#585858" size="1">
-<input type="button" name="okBtn" id="okBtn" value="OK" class="flat lighter" onClick="setCbFieldValue();">
-<input type="button" name="clBtn" id="clBtn" value="Close" class="flat lighter" onClick="window.close();">
-</s:if>
 
 </body>
 </html>
