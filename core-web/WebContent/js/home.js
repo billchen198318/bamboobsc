@@ -365,6 +365,21 @@ function openCommonJasperReportLoadWindow( title, jreportId, format, paramData )
 }
 
 /**
+ * 打開 code 編輯器 OpwnWindow 模式
+ * 
+ * @param uploadOid
+ * @param valueFieldId
+ * @param okFn
+ */
+function openCommonCodeEditorWindow( uploadOid, valueFieldId, okFn ) {
+	var url = "./core.commonCodeEditorAction.action?cbMode=Y&valueFieldId=" + valueFieldId + "&okFn=" + okFn;
+	if ( null != uploadOid && '' != uploadOid ) {
+		url += '&oid=' + uploadOid;
+	}
+	window.open(url, 'Common code editor', "resizable=yes,scrollbars=yes,status=yes");
+}
+
+/**
  * 主要是把輸入條件不合的欄位背景變顏色
  * 
  * @param fieldsId

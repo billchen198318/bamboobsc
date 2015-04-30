@@ -168,6 +168,25 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 		super.setStringValueMaxLength(template, "description", MAX_DESCRIPTION_LENGTH);
 		return this.sysFormTemplateService.updateObject(template);
 	}
+	
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )			
+	@Override
+	public DefaultResult<SysFormTemplateVO> updateTemplateContentOnly(SysFormTemplateVO template, 
+			String content) throws ServiceException, Exception {
+		DefaultResult<SysFormTemplateVO> oldResult = this.sysFormTemplateService.findObjectByOid(template);
+		if ( oldResult.getValue() == null ) {
+			throw new ServiceException(oldResult.getSystemMessage().getValue());
+		}
+		oldResult.getValue().setContent( null ); // clear blob-content
+		this.sysFormTemplateService.updateObject( oldResult.getValue() ); // clear blob-content
+		template = oldResult.getValue();
+		template.setContent( super.defaultString( content ).getBytes() );
+		return this.sysFormTemplateService.updateObject(template);		
+	}	
 
 	@ServiceMethodAuthority(type={ServiceMethodType.DELETE})
 	@Transactional(

@@ -33,6 +33,8 @@ public interface ISystemFormLogicService {
 
 	public DefaultResult<SysFormTemplateVO> updateTemplate(SysFormTemplateVO template, String uploadOid) throws ServiceException, Exception;
 	
+	public DefaultResult<SysFormTemplateVO> updateTemplateContentOnly(SysFormTemplateVO template, String content) throws ServiceException, Exception;
+	
 	public DefaultResult<Boolean> deleteTemplate(SysFormTemplateVO template) throws ServiceException, Exception;
 	
 	public DefaultResult<SysFormVO> create(SysFormVO form, String templateOid) throws ServiceException, Exception;

@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0012Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0012Q_GridButtonClick, width: "10%" },  
-			{ name: "Id", field: "tplId", width: "10%" },
+			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0012Q_GridButtonClick, width: "15%" },  
+			{ name: "Id", field: "tplId", width: "15%" },
 			{ name: "Name", field: "name", width: "20%" },
 			{ name: "File", field: "fileName", width: "25%" },
-			{ name: "Description", field: "description", width: "35%" }
+			{ name: "Description", field: "description", width: "25%" }
 		];	
 }
 
@@ -42,6 +42,10 @@ function CORE_PROG001D0012Q_GridButtonClick(itemOid) {
 	var rd="";
 	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0012Q_edit('" + itemOid + "');\" />";	
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
+	rd += "<img src=\"" + _getSystemIconUrl('TEXT_SOURCE') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0012Q_editTemplate('" + itemOid + "');\" />";
+	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";			
+	rd += "<img src=\"" + _getSystemIconUrl('EXPORT') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0012Q_downloadFile('" + itemOid + "');\" />";
+	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";		
 	rd += "<img src=\"" + _getSystemIconUrl('REMOVE') + "\" border=\"0\" alt=\"delete\" onclick=\"CORE_PROG001D0012Q_confirmDelete('" + itemOid + "');\" />";
 	return rd;	
 }
@@ -54,6 +58,79 @@ function CORE_PROG001D0012Q_clear() {
 
 function CORE_PROG001D0012Q_edit(oid) {
 	CORE_PROG001D0012E_TabShow(oid);
+}
+
+function CORE_PROG001D0012Q_editTemplate(oid) {
+	document.getElementById("CORE_PROG001D0012Q_templateContent").value = "";
+	xhrSendParameter(
+			'core.systemFormTemplateCopy2UploadAction.action', 
+			{ 'fields.oid' : oid }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ( 'Y' != data.success ) {
+					return;
+				}
+				openCommonCodeEditorWindow(
+						data.uploadOid, 
+						"CORE_PROG001D0012Q_templateContent", 
+						"CORE_PROG001D0012Q_updateTemplate('$oid');".replace('$oid', oid) );			
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+
+function CORE_PROG001D0012Q_updateTemplate(oid) {
+	var content = document.getElementById("CORE_PROG001D0012Q_templateContent").value;
+	if ( null == content ) {
+		return;
+	}
+	xhrSendParameter(
+			'core.systemFormTemplateContentUploadAction.action', 
+			{ 
+				'fields.oid' 		: oid,
+				'fields.content'	: content
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);	
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+
+function CORE_PROG001D0012Q_downloadFile(oid) {
+	xhrSendParameter(
+			'core.systemFormTemplateCopy2UploadAction.action', 
+			{ 'fields.oid' : oid }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ( 'Y' != data.success ) {
+					return;
+				}
+				window.open(
+						"<%=basePath%>/core.commonLoadUploadFileAction.action?oid=" + data.uploadOid + "&type=download",
+						"form-template-file-export",
+			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200"); 				
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
 }
 
 function CORE_PROG001D0012Q_confirmDelete(oid) {
@@ -112,6 +189,8 @@ function ${programId}_page_message() {
 		refreshJsMethod="${programId}_TabRefresh();" 		
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>	
+	
+	<s:hidden name="CORE_PROG001D0012Q_templateContent" id="CORE_PROG001D0012Q_templateContent"></s:hidden>
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>

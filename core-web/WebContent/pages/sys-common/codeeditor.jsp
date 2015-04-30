@@ -29,6 +29,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/codemirror-5.0/doc/docs.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/codemirror-5.0/lib/codemirror.css" />		
 	<link rel="stylesheet" href="<%=basePath%>/codemirror-5.0/addon/hint/show-hint.css">	
+	
+	
+<style type="text/css">
+
+.flat {
+    border: 1px;
+    background: #222;
+    color: #FFF;
+    padding: 2px 20px;
+    font-size: 12px;
+    font-family: Palatino;    
+}
+
+.lighter {
+    background: #666;
+}
+</style>
+
 
 </head>
 <body bgcolor="#ffffff">
@@ -54,8 +72,20 @@ function clear() {
 	return javaEditor.setValue("");
 }
 
+function setCbFieldValue() {
+	window.opener.document.getElementById("${valueFieldId}").value = getValue();
+	window.close();
+	<s:if test=" null != okFn && \"\" != okFn && \" \" != okFn ">
+	window.opener.${okFn}
+	</s:if>	
+}
 
 </script>
+<s:if test=" \"Y\" == cbMode ">
+<hr color="#585858" size="1">
+<input type="button" name="okBtn" id="okBtn" value="OK" class="flat lighter" onClick="setCbFieldValue();">
+<input type="button" name="clBtn" id="clBtn" value="Close" class="flat lighter" onClick="window.close();">
+</s:if>
 
 </body>
 </html>
