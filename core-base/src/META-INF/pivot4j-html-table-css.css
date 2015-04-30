@@ -4,39 +4,39 @@
     border-collapse: collapse;
     border-width: 1px;
     border-style: solid;
-    border-color: #517FC4;    
+    border-color: #F2F2F2;    
 }
 
 .pv-corner {
-	background-color: #5F9AF4;
+	background-color: #F8F8F8;
     border-width: 1px;
     border-style: solid;
-    border-color: #517FC4;	
+    border-color: #F2F2F2;	
 	padding: 1px;
 }
 
 .pv-col-hdr {
-	background-color: #5F9AF4;
+	background-color: #F8F8F8;
     border-width: 1px;
     border-style: solid;
-    border-color: #517FC4;	
+    border-color: #F2F2F2;	
     text-align:center;
     padding:4px 10px;
 }
 
 .pv-row-hdr {
-	background-color: #A1C7FF;
+	background-color: #F8F8F8;
     border-width: 1px;
     border-style: solid;
-    border-color: #517FC4;	
+    border-color: #F2F2F2;	
     text-align: left;
     padding:2px 5px;
 }
 
 .pv-cell {
-	background-color: #F4F9FF;
+	background-color: #FFFFFF;
     border-width: 1px;
     border-style: solid;
-    border-color: #517FC4;
+    border-color: #F2F2F2;
     padding:4px 10px;
 }
