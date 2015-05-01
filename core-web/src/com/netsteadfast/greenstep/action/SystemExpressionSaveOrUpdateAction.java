@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import com.netsteadfast.greenstep.action.utils.IdFieldCheckUtils;
 import com.netsteadfast.greenstep.action.utils.NotBlankFieldCheckUtils;
 import com.netsteadfast.greenstep.action.utils.SelectItemFieldCheckUtils;
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -42,7 +44,12 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.model.UploadTypes;
+import com.netsteadfast.greenstep.po.hbm.TbSysExpression;
+import com.netsteadfast.greenstep.service.ISysExpressionService;
 import com.netsteadfast.greenstep.service.logic.ISystemExpressionLogicService;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.SysExpressionVO;
 
 @ControllerAuthority(check=true)
@@ -52,6 +59,8 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 	private static final long serialVersionUID = 4652687376570734328L;
 	protected Logger logger=Logger.getLogger(SystemExpressionSaveOrUpdateAction.class);
 	private ISystemExpressionLogicService systemExpressionLogicService; 
+	private ISysExpressionService<SysExpressionVO, TbSysExpression, String> sysExpressionService;
+	private String uploadOid = "";
 	private String message = "";
 	private String success = IS_NO;
 	
@@ -71,6 +80,18 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 		this.systemExpressionLogicService = systemExpressionLogicService;
 	}
 	
+	@JSON(serialize=false)
+	public ISysExpressionService<SysExpressionVO, TbSysExpression, String> getSysExpressionService() {
+		return sysExpressionService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysExpressionService")	
+	public void setSysExpressionService(
+			ISysExpressionService<SysExpressionVO, TbSysExpression, String> sysExpressionService) {
+		this.sysExpressionService = sysExpressionService;
+	}
+
 	@SuppressWarnings("unchecked")
 	private void checkFields() throws ControllerException {
 		try {
@@ -137,6 +158,47 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 		if (result.getValue()!=null && result.getValue()) {
 			this.success = IS_YES;
 		}		
+	}
+	
+	private void copy2Upload() throws ControllerException, AuthorityException, ServiceException, Exception {
+		SysExpressionVO expression = new SysExpressionVO();
+		this.transformFields2ValueObject(expression, new String[]{"oid"});
+		DefaultResult<SysExpressionVO> result = this.sysExpressionService.findObjectByOid(expression);
+		if (result.getValue()==null) {
+			throw new ServiceException(result.getSystemMessage().getValue());
+		}
+		expression = result.getValue();
+		this.uploadOid = UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				expression.getContent().getBytes(), 
+				expression.getExprId() + "." + expression.getType());	
+		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS);
+		this.success = IS_YES;
+	}
+	
+	private void updateContent() throws ControllerException, AuthorityException, ServiceException, Exception {
+		String content = this.getFields().get("content");
+		if ( StringUtils.isBlank(content) ) {
+			throw new ControllerException("Expression is required!");
+		}
+		if ( content.length() > 8000 ) {
+			throw new ControllerException("Expression over max length!");
+		}
+		SysExpressionVO expression = new SysExpressionVO();
+		this.transformFields2ValueObject(expression, new String[]{"oid"});
+		DefaultResult<SysExpressionVO> oldResult = this.sysExpressionService.findObjectByOid(expression);
+		if (oldResult.getValue()==null) {
+			throw new ServiceException(oldResult.getSystemMessage().getValue());
+		}
+		expression = oldResult.getValue();
+		expression.setContent( content );
+		DefaultResult<SysExpressionVO> result = this.sysExpressionService.updateObject(expression);
+		this.message = result.getSystemMessage().getValue();
+		if (result.getValue()!=null) {
+			this.success = IS_YES;
+		}
 	}
 	
 	/**
@@ -225,6 +287,64 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 		}
 		return SUCCESS;		
 	}	
+	
+	/**
+	 * core.systemExpressionCopy2UpdateAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */	
+	@ControllerMethodAuthority(programId="CORE_PROG003D0002Q")
+	public String doCopy2Upload() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.copy2Upload();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}	
+	
+	/**
+	 * core.systemExpressionContentUpdateAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */	
+	@ControllerMethodAuthority(programId="CORE_PROG003D0002Q")
+	public String doUploadContent() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.updateContent();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}		
 
 	@JSON
 	@Override
@@ -254,6 +374,15 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 	@Override
 	public List<String> getFieldsId() {
 		return this.fieldsId;
+	}
+
+	@JSON
+	public String getUploadOid() {
+		return uploadOid;
+	}
+
+	public void setUploadOid(String uploadOid) {
+		this.uploadOid = uploadOid;
 	}
 
 }
