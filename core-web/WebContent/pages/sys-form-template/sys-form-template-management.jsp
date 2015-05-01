@@ -42,7 +42,7 @@ function CORE_PROG001D0012Q_GridButtonClick(itemOid) {
 	var rd="";
 	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0012Q_edit('" + itemOid + "');\" />";	
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
-	rd += "<img src=\"" + _getSystemIconUrl('TEXT_SOURCE') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0012Q_editTemplate('" + itemOid + "');\" />";
+	rd += "<img src=\"" + _getSystemIconUrl('TEXT_SOURCE') + "\" border=\"0\" alt=\"edit template\" onclick=\"CORE_PROG001D0012Q_editTemplate('" + itemOid + "');\" />";
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";			
 	rd += "<img src=\"" + _getSystemIconUrl('EXPORT') + "\" border=\"0\" alt=\"export\" onclick=\"CORE_PROG001D0012Q_downloadFile('" + itemOid + "');\" />";
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";		

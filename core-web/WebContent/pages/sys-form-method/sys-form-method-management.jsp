@@ -42,6 +42,8 @@ function CORE_PROG001D0014Q_GridButtonClick(itemOid) {
 	var rd="";
 	rd += "<img src=\"" + _getSystemIconUrl('PROPERTIES') + "\" border=\"0\" alt=\"edit\" onclick=\"CORE_PROG001D0014Q_edit('" + itemOid + "');\" />";	
 	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";
+	rd += "<img src=\"" + _getSystemIconUrl('TEXT_SOURCE') + "\" border=\"0\" alt=\"edit expression\" onclick=\"CORE_PROG001D0014Q_editExpression('" + itemOid + "');\" />";
+	rd += "&nbsp;&nbsp;&nbsp;&nbsp;";			
 	rd += "<img src=\"" + _getSystemIconUrl('REMOVE') + "\" border=\"0\" alt=\"delete\" onclick=\"CORE_PROG001D0014Q_confirmDelete('" + itemOid + "');\" />";
 	return rd;	
 }
@@ -52,6 +54,56 @@ function CORE_PROG001D0014Q_clear() {
 
 function CORE_PROG001D0014Q_edit(oid) {
 	CORE_PROG001D0014E_TabShow(oid);
+}
+
+function CORE_PROG001D0014Q_editExpression(oid) {
+	document.getElementById("CORE_PROG001D0014Q_expressionContent").value = "";
+	xhrSendParameter(
+			'core.systemFormMethodCopy2UploadAction.action',
+			{ 'fields.oid' : oid }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ( 'Y' != data.success ) {
+					return;
+				}
+				openCommonCodeEditorWindow(
+						data.uploadOid, 
+						"CORE_PROG001D0014Q_expressionContent", 
+						"CORE_PROG001D0014Q_updateExpression('" + oid + "')");			
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+
+function CORE_PROG001D0014Q_updateExpression(oid) {
+	var content = document.getElementById("CORE_PROG001D0014Q_expressionContent").value;
+	if ( null == content ) {
+		return;
+	}
+	xhrSendParameter(
+			'core.systemFormMethodExpressionUploadAction.action',
+			{ 
+				'fields.oid' 		: oid,
+				'fields.expression'	: content
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				getQueryGrid_${programId}_grid();
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);		
 }
 
 function CORE_PROG001D0014Q_confirmDelete(oid) {
@@ -110,6 +162,8 @@ function ${programId}_page_message() {
 		refreshJsMethod="${programId}_TabRefresh();" 		
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>	
+	
+	<input type="hidden" name="CORE_PROG001D0014Q_expressionContent" id="CORE_PROG001D0014Q_expressionContent">
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
     	<tr>

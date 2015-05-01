@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ import org.springframework.stereotype.Controller;
 import com.netsteadfast.greenstep.action.utils.IdFieldCheckUtils;
 import com.netsteadfast.greenstep.action.utils.NotBlankFieldCheckUtils;
 import com.netsteadfast.greenstep.action.utils.SelectItemFieldCheckUtils;
+import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -41,7 +44,12 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.model.UploadTypes;
+import com.netsteadfast.greenstep.po.hbm.TbSysFormMethod;
+import com.netsteadfast.greenstep.service.ISysFormMethodService;
 import com.netsteadfast.greenstep.service.logic.ISystemFormLogicService;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.SysFormMethodVO;
 
 @ControllerAuthority(check=true)
@@ -51,6 +59,8 @@ public class SystemFormMethodSaveOrUpdateAction extends BaseJsonAction {
 	private static final long serialVersionUID = 3750175370656378004L;
 	protected Logger logger=Logger.getLogger(SystemFormMethodSaveOrUpdateAction.class);
 	private ISystemFormLogicService systemFormLogicService;
+	private ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> sysFormMethodService;
+	private String uploadOid = "";
 	private String message = "";
 	private String success = IS_NO;
 	
@@ -70,6 +80,18 @@ public class SystemFormMethodSaveOrUpdateAction extends BaseJsonAction {
 		this.systemFormLogicService = systemFormLogicService;
 	}		
 	
+	@JSON(serialize=false)
+	public ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> getSysFormMethodService() {
+		return sysFormMethodService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysFormMethodService")			
+	public void setSysFormMethodService(
+			ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> sysFormMethodService) {
+		this.sysFormMethodService = sysFormMethodService;
+	}
+
 	@SuppressWarnings("unchecked")
 	private void checkFields() throws ControllerException {
 		try {
@@ -139,6 +161,39 @@ public class SystemFormMethodSaveOrUpdateAction extends BaseJsonAction {
 		if ( result.getValue() != null && result.getValue() ) {
 			this.success = IS_YES;
 		}		
+	}
+	
+	private void copy2Upload() throws ControllerException, AuthorityException, ServiceException, Exception {
+		SysFormMethodVO formMethod = new SysFormMethodVO();
+		this.transformFields2ValueObject(formMethod, new String[]{"oid"});
+		DefaultResult<SysFormMethodVO> result = this.sysFormMethodService.findObjectByOid(formMethod);
+		if (result.getValue()==null) {
+			throw new ServiceException(result.getSystemMessage().getValue());
+		}
+		formMethod = result.getValue();
+		this.uploadOid = UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				formMethod.getExpression(), 
+				formMethod.getFormId() + "_" + formMethod.getName() + "." + formMethod.getType());	
+		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS);
+		this.success = IS_YES;
+	}
+	
+	private void updateExpression() throws ControllerException, AuthorityException, ServiceException, Exception {
+		String expression = this.getFields().get("expression");
+		if ( StringUtils.isBlank(expression) ) {
+			throw new ControllerException("Expression is required!");
+		}
+		SysFormMethodVO formMethod = new SysFormMethodVO();
+		this.transformFields2ValueObject(formMethod, new String[]{"oid"});
+		DefaultResult<SysFormMethodVO> result = this.systemFormLogicService.updateMethodExpressionOnly(
+				formMethod, expression);
+		this.message = result.getSystemMessage().getValue();
+		if (result.getValue()!=null) {
+			this.success = IS_YES;
+		}
 	}
 	
 	/**
@@ -227,6 +282,64 @@ public class SystemFormMethodSaveOrUpdateAction extends BaseJsonAction {
 		}
 		return SUCCESS;		
 	}			
+	
+	/**
+	 * core.systemFormMethodCopy2UploadAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */	
+	@ControllerMethodAuthority(programId="CORE_PROG001D0014Q")
+	public String doCopy2Upload() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.copy2Upload();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}	
+	
+	/**
+	 * core.systemFormMethodExpressionUploadAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */	
+	@ControllerMethodAuthority(programId="CORE_PROG001D0014Q")
+	public String doUploadExpression() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.updateExpression();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}		
 
 	@JSON
 	@Override
@@ -256,6 +369,15 @@ public class SystemFormMethodSaveOrUpdateAction extends BaseJsonAction {
 	@Override
 	public List<String> getFieldsId() {
 		return this.fieldsId;
+	}
+
+	@JSON
+	public String getUploadOid() {
+		return uploadOid;
+	}
+
+	public void setUploadOid(String uploadOid) {
+		this.uploadOid = uploadOid;
 	}
 
 }

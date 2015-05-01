@@ -49,4 +49,6 @@ public interface ISystemFormLogicService {
 	
 	public DefaultResult<Boolean> deleteMethod(SysFormMethodVO formMethod) throws ServiceException, Exception;
 	
+	public DefaultResult<SysFormMethodVO> updateMethodExpressionOnly(SysFormMethodVO formMethod, String expression) throws ServiceException, Exception;
+	
 }

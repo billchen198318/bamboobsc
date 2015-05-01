@@ -312,6 +312,28 @@ public class SystemFormLogicServiceImpl extends BaseLogicService implements ISys
 		formMethod.setFormId( form.getFormId() );
 		return this.sysFormMethodService.updateObject(formMethod);
 	}
+	
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<SysFormMethodVO> updateMethodExpressionOnly(SysFormMethodVO formMethod, 
+			String expression) throws ServiceException, Exception {
+		if ( super.isBlank(expression) ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		DefaultResult<SysFormMethodVO> oldResult = this.sysFormMethodService.findObjectByOid(formMethod);
+		if (oldResult.getValue()==null) {
+			throw new ServiceException(oldResult.getSystemMessage().getValue());
+		}
+		oldResult.getValue().setExpression( null ); // clear blob-expression
+		this.sysFormMethodService.updateObject(formMethod); // clear blob-expression
+		formMethod = oldResult.getValue();
+		formMethod.setExpression( expression.getBytes() );
+		return this.sysFormMethodService.updateObject(formMethod);
+	}	
 
 	@ServiceMethodAuthority(type={ServiceMethodType.DELETE})
 	@Transactional(
