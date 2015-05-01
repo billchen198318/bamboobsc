@@ -158,7 +158,7 @@ function BSC_PROG003D0006Q_setFrequencyValue() {
 
 function BSC_PROG003D0006Q_showTables( data ) {
 	var t = '';
-	t += '<table width="1100px" cellspacing="1" cellpadding="1" style="background-color:#B1B1B1" >';
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" style="background-color:#d8d8d8" >';
 	var c = 0;
 	for (var n in data.perspectiveItems) {
 		for ( var o in data.perspectiveItems[n].objectives ) {
@@ -167,12 +167,12 @@ function BSC_PROG003D0006Q_showTables( data ) {
 				var kpi = objective.kpis[k];
 				if ( c == 0 ) { // first line label
 					t += '<tr>';
-					t += '<td bgcolor="#EEEEEE" align="left" width="320px"><b>KPI</b></td>';
-					t += '<td bgcolor="#EEEEEE" align="left"><b>Target</b></td>';
-					t += '<td bgcolor="#EEEEEE" align="left"><b>Min</b></td>';	
-					t += '<td bgcolor="#EEEEEE" align="left"><b>Score</b></td>';
+					t += '<td bgcolor="#f5f5f5" align="left" width="320px"><b>KPI</b></td>';
+					t += '<td bgcolor="#f5f5f5" align="left"><b>Target</b></td>';
+					t += '<td bgcolor="#f5f5f5" align="left"><b>Min</b></td>';	
+					t += '<td bgcolor="#f5f5f5" align="left"><b>Score</b></td>';
 					for ( var r in kpi.dateRangeScores ) {
-						t += '<td bgcolor="#EEEEEE" align="left"><b>' + kpi.dateRangeScores[r].date + '</b></td>';					
+						t += '<td bgcolor="#f5f5f5" align="left"><b>' + kpi.dateRangeScores[r].date + '</b></td>';					
 					}
 					t += '</tr>';
 				}
@@ -318,9 +318,9 @@ function BSC_PROG003D0006Q_showKpisMeterGauge( data ) {
 	);	
 	
 	var content = '';
-	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#c1c7d0" >';
+	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#d8d8d8" >';
 	content += '<tr>';
-	content += '<td colspan="2" bgcolor="DFFAFF" align="center" ><font size="4"><b>KPIs metrics gauge ( ' + dateRangeStr + ' )</b></font></td>';
+	content += '<td colspan="2" bgcolor="#f5f5f5" align="center" ><font size="4"><b>KPIs metrics gauge ( ' + dateRangeStr + ' )</b></font></td>';
 	content += '</tr>';		
 	for (var n in data.perspectiveItems) {
 		for ( var o in data.perspectiveItems[n].objectives ) {

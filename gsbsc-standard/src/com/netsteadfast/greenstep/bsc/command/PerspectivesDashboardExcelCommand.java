@@ -102,7 +102,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#DFFAFF" ) ) );
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
 		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
 		
 		XSSFFont cellHeadFont = wb.createFont();

@@ -86,7 +86,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 	private int putTables(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#EEEEEE" ) ) );
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
 		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );	
 		cellHeadStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cellHeadStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
@@ -211,7 +211,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#DFFAFF" ) ) );
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
 		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
 		
 		XSSFFont cellHeadFont = wb.createFont();
