@@ -365,7 +365,7 @@ function openCommonJasperReportLoadWindow( title, jreportId, format, paramData )
 }
 
 /**
- * 打開 code 編輯器 OpwnWindow 模式
+ * 打開 code 編輯器 OpenWindow 模式
  * 
  * @param uploadOid
  * @param valueFieldId
