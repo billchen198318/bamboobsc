@@ -33,6 +33,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <style type="text/css">
 
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0; 
+	padding: 0;
+	/* overflow: hidden; */
+	font-size: 13px !important; 
+	background: white; 
+	color: #333;
+}
+
 .flat {
     border: 1px;
     background: #222;
