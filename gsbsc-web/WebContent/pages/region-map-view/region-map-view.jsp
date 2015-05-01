@@ -144,27 +144,27 @@ function BSC_PROG001D0006Q_map_initialize() {
 function BSC_PROG001D0006Q_showOrganizationInfo(organization) {
 	
 	var content = '';
-	content += '<table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#F2F2F2" >';
+	content += '<table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#d8d8d8" >';
 	content += '<tr>';
-	content += '<td colspan="2" bgcolor="#F2F2F2" align="center" ><b>Organization/Department</b></td>';
+	content += '<td colspan="2" bgcolor="#d8d8d8" align="center" ><b>Organization/Department</b></td>';
 	content += '</tr>';	
 	content += '<tr>';
-	content += '<td bgcolor="#F8F8F8" align="right" >Id:</td>';
+	content += '<td bgcolor="#f5f5f5" align="right" >Id:</td>';
 	content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.orgId + '</font></td>';
 	content += '</tr>';
 	content += '<tr>';
-	content += '<td bgcolor="#F8F8F8" align="right" >Name:</td>';
+	content += '<td bgcolor="#f5f5f5" align="right" >Name:</td>';
 	content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.name + '</font></td>';
 	content += '</tr>';	
 	if (organization.address!=null && ""!=organization.address) {
 		content += '<tr>';
-		content += '<td bgcolor="#F8F8F8" align="right" >Address:</td>';
+		content += '<td bgcolor="#f5f5f5" align="right" >Address:</td>';
 		content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.address + '</font></td>';
 		content += '</tr>';		
 	}	
 	if (organization.description!=null && ""!=organization.description) {
 		content += '<tr>';
-		content += '<td bgcolor="#F8F8F8" align="right" >Description:</td>';
+		content += '<td bgcolor="#f5f5f5" align="right" >Description:</td>';
 		content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.description + '</font></td>';
 		content += '</tr>';							
 	}
@@ -176,9 +176,9 @@ function BSC_PROG001D0006Q_showOrganizationInfo(organization) {
 function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 	
 	var content = '';
-	content += '<table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#F2F2F2" >';
+	content += '<table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#d8d8d8" >';
 	content += '<tr>';
-	content += '<td colspan="2" bgcolor="#F2F2F2" align="center" ><b>KPIs</b></td>';
+	content += '<td colspan="2" bgcolor="#d8d8d8" align="center" ><b>KPIs</b></td>';
 	content += '</tr>';	
 	
 	for (var k in kpis) {

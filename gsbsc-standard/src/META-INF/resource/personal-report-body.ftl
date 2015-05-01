@@ -1,9 +1,9 @@
 <!-- BSC_PROG003D0002Q -->
 <#list treeObj.visions as vision >
 
-	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#171717">
+	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">
 		<tr>
-			<td colspan="6" bgcolor="#C8C8C8" align="center">
+			<td colspan="6" bgcolor="#d8d8d8" align="center">
 				<b>
 				<font color="#000000" size="+3">
 					Personal Balance SourceCard
@@ -12,7 +12,7 @@
 			</td>
 		</tr>	
 		<tr>
-			<td colspan="6" bgcolor="#C8C8C8" align="center">
+			<td colspan="6" bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" size="+2">
 					${vision.title}
@@ -21,42 +21,42 @@
 			</td>
 		</tr>
 		<tr>
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Job title
 				</font>
 				</b>
 			</td>
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					${jobTitle}
 				</font>
 				</b>
 			</td>			
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Department
 				</font>
 				</b>
 			</td>			
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					${departmentName}
 				</font>
 				</b>
 			</td>	
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					name: ${fullName}
 				</font>
 				</b>
 			</td>	
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Annual assessment: ${year}
@@ -65,42 +65,42 @@
 			</td>										
 		</tr>		
 		<tr>
-			<td rowspan="2" bgcolor="#C8C8C8" align="center">
+			<td rowspan="2" bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					${objectiveTitle}
 				</font>
 				</b>
 			</td>
-			<td rowspan="2" bgcolor="#C8C8C8" align="center">
+			<td rowspan="2" bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					${kpiTitle}
 				</font>
 				</b>
 			</td>			
-			<td rowspan="2" bgcolor="#C8C8C8" align="center">
+			<td rowspan="2" bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Target
 				</font>
 				</b>
 			</td>
-			<td rowspan="2" bgcolor="#C8C8C8" align="center">
+			<td rowspan="2" bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Weight
 				</font>
 				</b>
 			</td>
-			<td rowspan="2" bgcolor="#C8C8C8" align="center">
+			<td rowspan="2" bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Formula
 				</font>
 				</b>
 			</td>
-			<td bgcolor="#C8C8C8" align="center">
+			<td bgcolor="#f5f5f5" align="center">
 				<b>
 				<font color="#000000" >
 					Score
