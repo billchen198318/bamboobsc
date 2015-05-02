@@ -38,5 +38,8 @@
 	
 	<!-- example sample -->
 	<bean id="core.webservice.HelloService" class="com.netsteadfast.greenstep.webservice.impl.HelloServiceImpl" />
+	
+	<!-- send mail webService -->
+	<bean id="core.webservice.SendMailService" class="com.netsteadfast.greenstep.webservice.impl.SendMailServiceImpl" />
 	                
 </beans>

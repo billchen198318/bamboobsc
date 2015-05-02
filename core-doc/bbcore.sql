@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.15, for FreeBSD10.0 (amd64)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.6.19
+-- Server version	5.6.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1240,6 +1240,7 @@ CREATE TABLE `qrtz_fired_triggers` (
 
 LOCK TABLES `qrtz_fired_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_fired_triggers` VALUES ('scheduler','localX8614305655510541430565551025','core.job.SendMailHelperJobCronTrigger','DEFAULT','localX861430565551054',1430565600000,0,'ACQUIRED',NULL,NULL,'0','0');
 /*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1344,7 +1345,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1430204492293',1430205558030,7500),('scheduler','4753PC1430204552238',1430205557744,7500),('scheduler','4753PC1430204602023',1430205562535,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861430565502790',1430565578580,7500),('scheduler','localX861430565526768',1430565572061,7500),('scheduler','localX861430565551054',1430565573953,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1448,7 +1449,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1430205600000,1430205540000,0,'WAITING','CRON',1430204601000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1430565600000,-1,0,'ACQUIRED','CRON',1430565550000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2469,7 +2470,7 @@ CREATE TABLE `tb_sys_ws_config` (
 
 LOCK TABLES `tb_sys_ws_config` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ws_config` DISABLE KEYS */;
-INSERT INTO `tb_sys_ws_config` VALUES ('17175451-80ed-4a9d-a490-6ae5857becb4','WS-CORE002','CORE','REST','core.webservice.HelloService','','example sample for REST!','admin','2014-10-22 19:55:03',NULL,NULL),('b4da1c48-4b6e-40cf-8232-aa23611b3cf7','WS-CORE001','CORE','SOAP','core.webservice.HelloService','/hello','example sample for SOAP!','admin','2014-10-22 19:54:31',NULL,NULL);
+INSERT INTO `tb_sys_ws_config` VALUES ('17175451-80ed-4a9d-a490-6ae5857becb4','WS-CORE002','CORE','REST','core.webservice.HelloService','','example sample for REST!','admin','2014-10-22 19:55:03',NULL,NULL),('6d8ece45-b11a-45fb-9671-e2fbc84c3aa2','WS-CORE003','CORE','SOAP','core.webservice.SendMailService','/sendmail','send mail webService.','admin','2015-05-02 18:35:44','admin','2015-05-02 18:35:58'),('b4da1c48-4b6e-40cf-8232-aa23611b3cf7','WS-CORE001','CORE','SOAP','core.webservice.HelloService','/hello','example sample for SOAP!','admin','2014-10-22 19:54:31',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ws_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2513,4 +2514,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-28 15:21:13
+-- Dump completed on 2015-05-02 19:20:59
