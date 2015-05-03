@@ -1,8 +1,8 @@
-<table boder='0' width='100%' cellspacing='1' cellpadding='0' bgcolor='#DCDCDC' >
+<table boder='0' width='100%' cellspacing='1' cellpadding='0' bgcolor='#d8d8d8' >
 
 	<tr>
 		<#list labels as label>
-			<td align='center' bgcolor='#959595'><B>${label}</B></td>
+			<td align='center' bgcolor='#f5f5f5'><B>${label}</B></td>
 		</#list>
 	</tr>
 	
