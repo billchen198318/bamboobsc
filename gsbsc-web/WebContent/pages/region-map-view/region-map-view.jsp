@@ -34,10 +34,6 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 <style type="text/css">
 
-.div-info { 
-    max-width: 1024px; 
-}
-
 </style>
 
 <script type="text/javascript">
@@ -81,7 +77,7 @@ function BSC_PROG001D0006Q_map_initialize() {
 			BSC_PROG001D0006Q_infowindow.close();
 		}
 		BSC_PROG001D0006Q_infowindow = new google.maps.InfoWindow({
-			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font><hr size="1"><iframe frameborder="1" width="480px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
+			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font><hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
 			maxWidth: 1024
 		});
 		BSC_PROG001D0006Q_infowindow.open(BSC_PROG001D0006Q_map, marker_${orgId});
