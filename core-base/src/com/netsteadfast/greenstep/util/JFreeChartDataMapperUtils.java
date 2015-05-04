@@ -36,6 +36,17 @@ import com.netsteadfast.greenstep.model.UploadTypes;
 
 public class JFreeChartDataMapperUtils {
 	
+	private static String createUploadData(Map<String, Object> dataMap) throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(dataMap);		
+		return UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				jsonData.getBytes(), 
+				SimpleUtils.getUUIDStr() + ".json");		
+	}
+	
 	public static Map<String, Object> fillBarDataMap(String categoryLabel, String valueLabel, String title,
 			List<String> names, List<Float> values, List<String> colors, int width, int height,
 			boolean horizontal) throws Exception {
@@ -63,28 +74,14 @@ public class JFreeChartDataMapperUtils {
 		Map<String, Object> barDataMap = fillBarDataMap(
 				categoryLabel, valueLabel, title, names, values, colors, width, height,
 				horizontal);
-		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonData = objectMapper.writeValueAsString(barDataMap);		
-		return UploadSupportUtils.create(
-				Constants.getSystem(), 
-				UploadTypes.IS_TEMP, 
-				false, 
-				jsonData.getBytes(), 
-				SimpleUtils.getUUIDStr() + ".json");
+		return createUploadData(barDataMap);
 	}
 	
 	public static String createPieData(String title,
 			List<String> names, List<Float> values, List<String> colors, int width, int height) throws Exception {
 		Map<String, Object> barDataMap = fillPieDataMap(
 				title, names, values, colors, width, height);
-		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonData = objectMapper.writeValueAsString(barDataMap);		
-		return UploadSupportUtils.create(
-				Constants.getSystem(), 
-				UploadTypes.IS_TEMP, 
-				false, 
-				jsonData.getBytes(), 
-				SimpleUtils.getUUIDStr() + ".json");
+		return createUploadData(barDataMap);
 	}	
 	
 	public static Map<String, Object> fillPieDataMap(String title, List<String> names, List<Float> values, 
