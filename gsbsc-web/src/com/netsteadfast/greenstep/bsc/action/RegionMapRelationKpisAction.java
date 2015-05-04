@@ -177,7 +177,10 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 							"", 
 							names, 
 							values, 
-							colors)
+							colors,
+							440,
+							350,
+							false)
 			);			
 		}
 	}

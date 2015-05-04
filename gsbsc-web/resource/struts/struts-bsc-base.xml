@@ -9,10 +9,10 @@
 		
 		<result-types>
 		    <result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
+		    <!--
 		    <result-type name="chart" class="org.apache.struts2.dispatcher.ChartResult"/>
-		    <!-- 
-		    <result-type name="chart" class="com.netsteadfast.greenstep.struts2.dispatcher.CustomJFreeChartResult"/>
-		    -->
+		    --> 
+		    <result-type name="chart" class="com.netsteadfast.greenstep.struts2.dispatcher.CustomJFreeChartResult"/>		    
 		</result-types>
 		
 		<interceptors>

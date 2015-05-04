@@ -44,6 +44,7 @@ import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.util.JFreeChartDataMapperUtils;
 
 @ControllerAuthority(check=false)
@@ -53,6 +54,8 @@ public class CommonBarChartAction extends BaseSupportAction {
 	private static final long serialVersionUID = 6793725011684681103L;
 	private JFreeChart chart = null;
 	private String oid = "";
+	private String width = "";
+	private String height = "";
 	
 	public CommonBarChartAction() {
 		super();
@@ -67,17 +70,21 @@ public class CommonBarChartAction extends BaseSupportAction {
 		List<String> names = (List<String>) dataMap.get("names");
 		List<Float> values = (List<Float>) dataMap.get("values");
 		List<String> colors = (List<String>) dataMap.get("colors");
+		String horizontal = (String) dataMap.get("horizontal");
+		this.width = String.valueOf( (Integer) dataMap.get("width") );
+		this.height = String.valueOf( (Integer) dataMap.get("height") );
 		this.fillChart(
 				(String)dataMap.get("title"), 
 				(String)dataMap.get("categoryLabel"), 
 				(String)dataMap.get("valueLabel"), 
 				names, 
 				values, 
-				colors);
+				colors,
+				(YesNo.YES.equals(horizontal) ? true : false) );
 	}
 	
 	private void fillChart(String title, String categoryLabel, String valueLabel, 
-			List<String> names, List<Float> values, List<String> colors) throws Exception {
+			List<String> names, List<Float> values, List<String> colors, boolean horizontal) throws Exception {
 		DefaultCategoryDataset data=new DefaultCategoryDataset();
 		for (int ix=0; ix<names.size(); ix++) {			
 			data.addValue(values.get(ix), "", names.get(ix));			
@@ -87,7 +94,7 @@ public class CommonBarChartAction extends BaseSupportAction {
         		categoryLabel,
         		valueLabel, 
         		data, 
-        		PlotOrientation.HORIZONTAL,
+        		( horizontal ? PlotOrientation.HORIZONTAL : PlotOrientation.VERTICAL ),
         		false,
         		false, 
         		false);		
@@ -142,6 +149,22 @@ public class CommonBarChartAction extends BaseSupportAction {
 	
 	public void setOid(String oid) {
 		this.oid = oid;
+	}
+
+	public String getWidth() {
+		return width;
+	}
+
+	public void setWidth(String width) {
+		this.width = width;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
 	}
 
 	/**

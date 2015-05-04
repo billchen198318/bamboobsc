@@ -31,12 +31,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.model.UploadTypes;
 
 public class JFreeChartDataMapperUtils {
 	
 	public static Map<String, Object> fillBarDataMap(String categoryLabel, String valueLabel, String title,
-			List<String> names, List<Float> values, List<String> colors) throws Exception {
+			List<String> names, List<Float> values, List<String> colors, int width, int height,
+			boolean horizontal) throws Exception {
 		if ( names == null || values == null || colors == null 
 				|| names.size() != values.size() || names.size() != colors.size() 
 				|| names.size() < 1 ) {
@@ -49,13 +51,18 @@ public class JFreeChartDataMapperUtils {
 		dataMap.put("names", names);
 		dataMap.put("values", values);
 		dataMap.put("colors", colors);
+		dataMap.put("width", width);
+		dataMap.put("height", height);
+		dataMap.put("horizontal", ( horizontal ? YesNo.YES : YesNo.NO ) );
 		return dataMap;
 	}
 	
 	public static String createBarData(String categoryLabel, String valueLabel, String title,
-			List<String> names, List<Float> values, List<String> colors) throws Exception {
+			List<String> names, List<Float> values, List<String> colors, int width, int height, 
+			boolean horizontal) throws Exception {
 		Map<String, Object> barDataMap = fillBarDataMap(
-				categoryLabel, valueLabel, title, names, values, colors);
+				categoryLabel, valueLabel, title, names, values, colors, width, height,
+				horizontal);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonData = objectMapper.writeValueAsString(barDataMap);		
 		return UploadSupportUtils.create(
