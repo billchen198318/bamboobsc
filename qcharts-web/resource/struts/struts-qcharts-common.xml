@@ -62,5 +62,18 @@
 		</action>		
 														
 	</package>
-			
+	
+	<package name="qcharts-common-chart" extends="qcharts-default" namespace="/" >
+		
+		<default-interceptor-ref name="greenStepProvideCustomStack" />
+		
+		<action name="qcharts.commonBarChartAction" class="core.web.controller.CommonBarChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">480</param>
+    			<param name="height">380</param> 
+  			</result>
+		</action>
+		
+	</package>
+				
 </struts>

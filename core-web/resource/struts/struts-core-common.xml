@@ -122,6 +122,18 @@
 		</action>
 		
 	</package>	
-			
-			
+	
+	<package name="core-common-chart" extends="core-default" namespace="/" >
+		
+		<default-interceptor-ref name="greenStepProvideCustomStack" />
+		
+		<action name="core.commonBarChartAction" class="core.web.controller.CommonBarChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">480</param>
+    			<param name="height">380</param> 
+  			</result>
+		</action>
+		
+	</package>				
+		
 </struts>

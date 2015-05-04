@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.bsc.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,7 @@ import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.util.BscReportSupportUtils;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
+import com.netsteadfast.greenstep.util.JFreeChartDataMapperUtils;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
@@ -68,6 +70,7 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 	private String success = IS_NO;
 	private List<Map<String, Object>> relationKpis = new ArrayList<Map<String, Object>>();
 	private String content = "";
+	private List<String> uploadOids = new ArrayList<String>();
 	
 	public RegionMapRelationKpisAction() {
 		super();
@@ -120,6 +123,7 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 			}
 			BscStructTreeObj treeObj = (BscStructTreeObj)context.get("treeObj");
 			this.fillRelationKpis(treeObj);
+			this.fillCharts(treeObj);
 		}		
 		this.success = IS_YES;
 		
@@ -155,12 +159,36 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 		}
 	}
 	
+	private void fillCharts(BscStructTreeObj treeObj) throws Exception {
+		List<VisionVO> visions = treeObj.getVisions();
+		for (VisionVO vision : visions) {
+			List<String> names = new LinkedList<String>();
+			List<Float> values = new LinkedList<Float>();
+			List<String> colors = new LinkedList<String>();
+			for (PerspectiveVO perspective : vision.getPerspectives()) {
+				names.add(perspective.getName());
+				values.add(perspective.getScore());
+				colors.add(perspective.getBgColor());
+			}
+			this.uploadOids.add(
+					JFreeChartDataMapperUtils.createBarData(
+							vision.getTitle(), 
+							"Score", 
+							"", 
+							names, 
+							values, 
+							colors)
+			);			
+		}
+	}
+	
 	/**
 	 * bsc.regionMapRelationKpisAction.action
 	 * 
 	 * @return
 	 * @throws Exception
 	 */	
+	@JSON(serialize=false) // *** 不加 @JSON(serialize=false) 會被觸發兩次 ***
 	@ControllerMethodAuthority(programId="BSC_PROG001D0006Q")
 	public String getKpis() throws Exception {
 		try {
@@ -222,6 +250,11 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 	@JSON
 	public String getContent() {
 		return content;
+	}
+
+	@JSON
+	public List<String> getUploadOids() {
+		return uploadOids;
 	}
 
 }

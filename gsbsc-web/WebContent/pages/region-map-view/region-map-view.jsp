@@ -79,7 +79,8 @@ function BSC_PROG001D0006Q_map_initialize() {
 			BSC_PROG001D0006Q_infowindow.close();
 		}
 		BSC_PROG001D0006Q_infowindow = new google.maps.InfoWindow({
-			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
+			//content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
+			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1">',
 			maxWidth: 1024
 		});
 		BSC_PROG001D0006Q_infowindow.open(BSC_PROG001D0006Q_map, marker_${orgId});
@@ -116,6 +117,22 @@ function BSC_PROG001D0006Q_map_initialize() {
 									return;
 								}
 								BSC_PROG001D0006Q_showRelationKpis( kData.relationKpis );
+								
+								
+								// 2015-05-04 add
+								var infoWinContent = '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1">';
+								for ( var nx in kData.uploadOids ) {
+									infoWinContent += '<BR/><img src="${basePath}/bsc.commonBarChartAction.action?oid=' + kData.uploadOids[nx] + '" border="0" />';
+								}
+								if (BSC_PROG001D0006Q_infowindow) {
+									BSC_PROG001D0006Q_infowindow.close();
+								}
+								BSC_PROG001D0006Q_infowindow = new google.maps.InfoWindow({
+									content: infoWinContent,
+									maxWidth: 1024
+								});
+								BSC_PROG001D0006Q_infowindow.open(BSC_PROG001D0006Q_map, marker_${orgId});		
+								
 								
 							}, 
 							function(error) {

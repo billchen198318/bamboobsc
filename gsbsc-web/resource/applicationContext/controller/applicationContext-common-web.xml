@@ -23,5 +23,7 @@
     
     <!-- 每個系統都要加上這個action -->
     <bean id="core.web.controller.CommonLoadFormAction" class="com.netsteadfast.greenstep.action.CommonLoadFormAction" scope="prototype" />
+    
+    <bean id="core.web.controller.CommonBarChartAction" class="com.netsteadfast.greenstep.action.CommonBarChartAction" scope="prototype" />
         	    	    	    	    	    
 </beans>
