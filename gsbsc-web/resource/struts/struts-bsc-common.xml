@@ -129,6 +129,13 @@
   			</result>
 		</action>
 		
+		<action name="bsc.commonPieChartAction" class="core.web.controller.CommonPieChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">480</param>
+    			<param name="height">380</param> 
+  			</result>
+		</action>
+				
 	</package>	
 			
 </struts>

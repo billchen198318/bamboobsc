@@ -73,6 +73,37 @@ public class JFreeChartDataMapperUtils {
 				SimpleUtils.getUUIDStr() + ".json");
 	}
 	
+	public static String createPieData(String title,
+			List<String> names, List<Float> values, List<String> colors, int width, int height) throws Exception {
+		Map<String, Object> barDataMap = fillPieDataMap(
+				title, names, values, colors, width, height);
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(barDataMap);		
+		return UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				jsonData.getBytes(), 
+				SimpleUtils.getUUIDStr() + ".json");
+	}	
+	
+	public static Map<String, Object> fillPieDataMap(String title, List<String> names, List<Float> values, 
+			List<String> colors, int width, int height) throws Exception {
+		if ( names == null || values == null || colors == null 
+				|| names.size() != values.size() || names.size() != colors.size() 
+				|| names.size() < 1 ) {
+			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_INCORRECT) );
+		}
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("title", title);
+		dataMap.put("names", names);
+		dataMap.put("values", values);
+		dataMap.put("colors", colors);
+		dataMap.put("width", width);
+		dataMap.put("height", height);
+		return dataMap;
+	}	
+	
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> getChartData2Map(String uploadOid) throws Exception {
 		if (StringUtils.isBlank(uploadOid)) {

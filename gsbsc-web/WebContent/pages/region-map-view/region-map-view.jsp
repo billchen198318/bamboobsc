@@ -121,8 +121,9 @@ function BSC_PROG001D0006Q_map_initialize() {
 								
 								// 2015-05-04 add
 								var infoWinContent = '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1">';
-								for ( var nx in kData.uploadOids ) {
-									infoWinContent += '<BR/><img src="${basePath}/bsc.commonBarChartAction.action?oid=' + kData.uploadOids[nx] + '" border="0" />';
+								for ( var nx in kData.barUploadOids ) {
+									infoWinContent += '<BR/><img src="${basePath}/bsc.commonBarChartAction.action?oid=' + kData.barUploadOids[nx] + '" border="0" />';
+									//infoWinContent += '<img src="${basePath}/bsc.commonPieChartAction.action?oid=' + kData.pieUploadOids[nx] + '" border="0" />';
 								}
 								if (BSC_PROG001D0006Q_infowindow) {
 									BSC_PROG001D0006Q_infowindow.close();

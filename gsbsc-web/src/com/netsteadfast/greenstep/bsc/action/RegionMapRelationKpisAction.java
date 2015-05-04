@@ -70,7 +70,8 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 	private String success = IS_NO;
 	private List<Map<String, Object>> relationKpis = new ArrayList<Map<String, Object>>();
 	private String content = "";
-	private List<String> uploadOids = new ArrayList<String>();
+	private List<String> barUploadOids = new ArrayList<String>();
+	private List<String> pieUploadOids = new ArrayList<String>();
 	
 	public RegionMapRelationKpisAction() {
 		super();
@@ -170,7 +171,7 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 				values.add(perspective.getScore());
 				colors.add(perspective.getBgColor());
 			}
-			this.uploadOids.add(
+			this.barUploadOids.add(
 					JFreeChartDataMapperUtils.createBarData(
 							vision.getTitle(), 
 							"Score", 
@@ -182,6 +183,15 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 							350,
 							false)
 			);			
+			this.pieUploadOids.add(
+					JFreeChartDataMapperUtils.createPieData(
+							vision.getTitle(), 
+							names, 
+							values, 
+							colors, 
+							440, 
+							350)
+			);
 		}
 	}
 	
@@ -256,8 +266,13 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 	}
 
 	@JSON
-	public List<String> getUploadOids() {
-		return uploadOids;
+	public List<String> getBarUploadOids() {
+		return barUploadOids;
 	}
 
+	@JSON
+	public List<String> getPieUploadOids() {
+		return pieUploadOids;
+	}
+	
 }
