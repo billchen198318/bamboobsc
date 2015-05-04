@@ -36,5 +36,5 @@ Basic layout<br/>
 5. SQL query results charts<br/>
 <img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/D.png"/><br/>
 6. Region view<br/>
-<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/E.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/E_fix01.png"/><br/>
 
