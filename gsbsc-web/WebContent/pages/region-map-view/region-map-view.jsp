@@ -71,13 +71,15 @@ function BSC_PROG001D0006Q_map_initialize() {
 	    draggable: false
 	});	
 	
+	var new_win_href_${orgId} = '&nbsp;&nbsp;&nbsp;<a href="#" onclick="BSC_PROG001D0006Q_openNew(\'${orgId}\'); return false;"><img src="./icons/help-about.png" border="0" /><b>Show new window.</b></a>';
+	
 	google.maps.event.addListener(marker_${orgId}, 'click', function(event) {	
 		
 		if (BSC_PROG001D0006Q_infowindow) {
 			BSC_PROG001D0006Q_infowindow.close();
 		}
 		BSC_PROG001D0006Q_infowindow = new google.maps.InfoWindow({
-			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font><hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
+			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
 			maxWidth: 1024
 		});
 		BSC_PROG001D0006Q_infowindow.open(BSC_PROG001D0006Q_map, marker_${orgId});
@@ -135,6 +137,13 @@ function BSC_PROG001D0006Q_map_initialize() {
 	
 	</s:iterator>
 	
+}
+
+function BSC_PROG001D0006Q_openNew(orgId) {	
+	window.open(			
+			"<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=" + orgId + "&fields.year=" + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value"),		
+			"KPI-Report",
+            "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800");	
 }
 
 function BSC_PROG001D0006Q_showOrganizationInfo(organization) {
