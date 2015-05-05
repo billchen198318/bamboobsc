@@ -4,19 +4,19 @@
 <center>
 <table width="1200px" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">		
 	<tr>
-		<td bgcolor="#d8d8d8" align="center" width="192px">
+		<td bgcolor="#F2F2F2" align="center" width="192px">
 			&nbsp;
 		</td>
-		<td bgcolor="#d8d8d8" align="center" width="252px">
+		<td bgcolor="#F2F2F2" align="center" width="252px">
 			<b><font color="#000000" size="+1">STRENGTHS</font></b>
 		</td>
-		<td bgcolor="#d8d8d8" align="center" width="252px">
+		<td bgcolor="#F2F2F2" align="center" width="252px">
 			<b><font color="#000000" size="+1">WEAKNESSES</font></b>
 		</td>
-		<td bgcolor="#d8d8d8" align="center" width="252px">
+		<td bgcolor="#F2F2F2" align="center" width="252px">
 			<b><font color="#000000" size="+1">OPPORTUNITIES</font></b>
 		</td>
-		<td bgcolor="#d8d8d8" align="center" width="252px">
+		<td bgcolor="#F2F2F2" align="center" width="252px">
 			<b><font color="#000000" size="+1">THREATS</font></b>
 		</td>								
 	</tr>	

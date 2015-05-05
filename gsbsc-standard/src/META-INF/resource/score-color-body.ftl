@@ -3,8 +3,8 @@
 
 <table width="800px" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">
 	<tr>
-		<td width="400px" align="center" bgcolor="#d8d8d8"><b><font color='#000000' size="+1">Range</font></b></td>
-		<td width="400px" align="center" bgcolor="#d8d8d8"><b><font color='#000000' size="+1">Color</font></b></td>
+		<td width="400px" align="center" bgcolor="#F2F2F2"><b><font color='#000000' size="+1">Range</font></b></td>
+		<td width="400px" align="center" bgcolor="#F2F2F2"><b><font color='#000000' size="+1">Color</font></b></td>
 	</tr>
 
 <#assign c=0 >

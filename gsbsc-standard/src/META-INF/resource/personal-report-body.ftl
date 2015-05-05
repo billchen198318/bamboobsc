@@ -3,7 +3,7 @@
 
 	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">
 		<tr>
-			<td colspan="6" bgcolor="#d8d8d8" align="center">
+			<td colspan="6" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" size="+3">
 					Personal Balance SourceCard
@@ -12,7 +12,7 @@
 			</td>
 		</tr>	
 		<tr>
-			<td colspan="6" bgcolor="#f5f5f5" align="center">
+			<td colspan="6" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" size="+2">
 					${vision.title}
@@ -21,42 +21,42 @@
 			</td>
 		</tr>
 		<tr>
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Job title
 				</font>
 				</b>
 			</td>
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					${jobTitle}
 				</font>
 				</b>
 			</td>			
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Department
 				</font>
 				</b>
 			</td>			
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					${departmentName}
 				</font>
 				</b>
 			</td>	
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					name: ${fullName}
 				</font>
 				</b>
 			</td>	
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Annual assessment: ${year}
@@ -65,42 +65,42 @@
 			</td>										
 		</tr>		
 		<tr>
-			<td rowspan="2" bgcolor="#f5f5f5" align="center">
+			<td rowspan="2" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					${objectiveTitle}
 				</font>
 				</b>
 			</td>
-			<td rowspan="2" bgcolor="#f5f5f5" align="center">
+			<td rowspan="2" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					${kpiTitle}
 				</font>
 				</b>
 			</td>			
-			<td rowspan="2" bgcolor="#f5f5f5" align="center">
+			<td rowspan="2" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Target
 				</font>
 				</b>
 			</td>
-			<td rowspan="2" bgcolor="#f5f5f5" align="center">
+			<td rowspan="2" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Weight
 				</font>
 				</b>
 			</td>
-			<td rowspan="2" bgcolor="#f5f5f5" align="center">
+			<td rowspan="2" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Formula
 				</font>
 				</b>
 			</td>
-			<td bgcolor="#f5f5f5" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					Score
@@ -109,7 +109,7 @@
 			</td>												
 		</tr>			
 		<tr>
-			<td bgcolor="#F5F4F4" align="center">
+			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
 					<#if dateType == "1" >

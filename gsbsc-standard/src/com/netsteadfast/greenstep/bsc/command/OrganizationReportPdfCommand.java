@@ -130,7 +130,7 @@ public class OrganizationReportPdfCommand extends BaseChainCommandSupport implem
 	}
 	
 	private void createHead(PdfPTable table, VisionVO vision, Context context) throws Exception {
-		String bgColor = "#d8d8d8";
+		String bgColor = "#F2F2F2";
 		String fnColor = "#000000";
 		PdfPCell cell = new PdfPCell();
 		cell.addElement( new Phrase("Department Balance SourceCard", this.getFont(fnColor, true)) );

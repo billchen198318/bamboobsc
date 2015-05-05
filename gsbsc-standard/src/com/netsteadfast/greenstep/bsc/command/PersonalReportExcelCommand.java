@@ -164,7 +164,7 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		Row headRow = sh.createRow(row);
 		headRow.setHeight( (short)700 );
 		
-		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#d8d8d8") );
+		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2") );
 		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000") );
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
