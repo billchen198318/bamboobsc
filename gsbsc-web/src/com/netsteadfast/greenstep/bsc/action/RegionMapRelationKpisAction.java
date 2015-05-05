@@ -167,7 +167,7 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 			List<Float> values = new LinkedList<Float>();
 			List<String> colors = new LinkedList<String>();
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
-				names.add(perspective.getName());
+				names.add( perspective.getName() + "(" + BscReportSupportUtils.parse2(perspective.getScore()) + ")" );
 				values.add(perspective.getScore());
 				colors.add(perspective.getBgColor());
 			}
@@ -180,7 +180,7 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 							values, 
 							colors,
 							440,
-							350,
+							320,
 							false)
 			);			
 			this.pieUploadOids.add(
@@ -190,7 +190,7 @@ public class RegionMapRelationKpisAction extends BaseJsonAction {
 							values, 
 							colors, 
 							440, 
-							350)
+							320)
 			);
 		}
 	}
