@@ -2,21 +2,21 @@
 
 <#list treeObj.visions as vision >
 	
-	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#232323">
+	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">
 		<tr>
-			<td colspan="3" bgcolor="#3796FF" align="center">
-				<b><font color="#FFFFFF" size="+2">${vision.title}</font></b>
+			<td colspan="3" bgcolor="#F5F5F5" align="center">
+				<b><font color="#000000" size="+2">${vision.title}</font></b>
 			</td>
 		</tr>
 		<tr>
-			<td width="33%" align="left" bgcolor="#232323"><b><font color='#FFFFFF' size="+1">Perspectives</font></b></td>
-			<td width="33%" align="left" bgcolor="#232323"><b><font color='#FFFFFF' size="+1">Objectives</font></b></td>
-			<td width="33%" align="left" bgcolor="#232323"><b><font color='#FFFFFF' size="+1">KPI</font></b></td>
+			<td width="33%" align="left" bgcolor="#d8d8d8"><b><font color='#000000' size="+1">Perspectives</font></b></td>
+			<td width="33%" align="left" bgcolor="#d8d8d8"><b><font color='#000000' size="+1">Objectives</font></b></td>
+			<td width="33%" align="left" bgcolor="#d8d8d8"><b><font color='#000000' size="+1">KPI</font></b></td>
 		</tr>
 		
 	<#list vision.perspectives as perspective >
 		<tr>
-			<td width="33%" bgcolor="#CDD7E2" rowspan="${perspective.row}" >
+			<td width="33%" bgcolor="#F5F5F5" rowspan="${perspective.row}" >
 				<b>${perspective.name}</b>
 				<BR/>
 				<font size="2" color="#6D6D6D">weight:</font>
@@ -37,7 +37,7 @@
 				<tr>
 			</#if>
 			
-			<td width="33%" bgcolor="#CDD7E2" rowspan="${objective.row}" >
+			<td width="33%" bgcolor="#F5F5F5" rowspan="${objective.row}" >
 				<b>${objective.name}</b>
 				<BR/>
 				<font size="2" color="#6D6D6D">weight:</font>
@@ -54,7 +54,7 @@
 					
 				<#list objective.kpis as kpi >
 					
-					<td width="33%" bgcolor="#CDD7E2" >
+					<td width="33%" bgcolor="#F5F5F5" >
 						<b>${kpi.name}</b>
 						<BR/>
 						<font size="2" color="#6D6D6D">weight:</font>
