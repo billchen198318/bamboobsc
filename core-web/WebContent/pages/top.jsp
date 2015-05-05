@@ -28,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="comboButtonHelp" data-dojo-type="dijit.form.ComboButton">
 					<span>Help</span>
 					<div dojoType="dijit.Menu" id="helpMenu">
+						<div dojoType="dijit.MenuItem" data-dojo-props='onClick:function(){ if (!confirm("leave the page, go to project site.")) { return; } window.location="https://github.com/billchen198318/bamboobsc/issues"; }' >Proposed issues</div>
 						<div dojoType="dijit.MenuItem" data-dojo-props='onClick:function(){ CORE_PROGCOMM0001Q_DlgShow(); }' >About</div>										
 					</div>
 				</div>								
