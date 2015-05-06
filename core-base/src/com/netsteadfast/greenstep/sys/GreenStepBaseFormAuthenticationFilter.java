@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.sys;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -53,6 +55,7 @@ import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.AccountVO;
 
 public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFilter {
+	protected static Logger logger = Logger.getLogger(GreenStepBaseFormAuthenticationFilter.class);
 	public static final String DEFAULT_CAPTCHA_PARAM = "captcha";
 	private String captchaParam = DEFAULT_CAPTCHA_PARAM;
 	private IAccountService<AccountVO, TbAccount, String> accountService;
@@ -194,6 +197,18 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
     }
     
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
+    	if ( !Constants.getSystem().equals( Constants.getMainSystem() ) && !isAjaxRequest((HttpServletRequest)request) ) { // 非 core-web
+    		try {
+				if ( this.loginUseCurrentCookieForGeneralPackage(request, response) ) { // no need to login-page
+					logger.warn("URL = " + ( (HttpServletRequest)request ).getRequestURL().toString() );					
+					WebUtils.issueRedirect(request, response, 
+							( (HttpServletRequest)request ).getRequestURL().toString() );
+					return;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    	}    	
     	if (isAjaxRequest((HttpServletRequest)request)) {
     		response.setCharacterEncoding("UTF-8");
     		response.setContentType("application/json");
@@ -213,6 +228,47 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
     		return true;
     	}
     	return false;
+    }
+    
+    /**
+     * 非 core-web 登入方式 , 給 gsbsc-web, qcharts-web 用的
+     * 
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    private boolean loginUseCurrentCookieForGeneralPackage(
+    		ServletRequest request, ServletResponse response) throws Exception {
+    	
+    	Map<String, String> dataMap = UserCurrentCookie.getCurrentData( (HttpServletRequest)request );
+    	if ( dataMap == null ) {
+    		return false;
+    	}
+    	String currentId = dataMap.get("currentId");
+    	String accountId = dataMap.get("account");
+    	if ( StringUtils.isBlank(currentId) || StringUtils.isBlank(accountId) ) {
+    		return false;
+    	}
+		// 先去 tb_sys_usess 用 current_id與帳戶 去查有沒有存在 db	
+    	if ( this.uSessLogHelper.countByCurrent(accountId, currentId) < 1 ) { // 沒有在 core-web 登入, 所以沒有 TB_SYS_USESS 的資料
+    		return false;
+    	}    	
+    	String captchaStr = "0123"; // 這理的 captcha 不須要比對了 , 因為不是 core-web 的登入畫面    	
+    	request.setAttribute(this.captchaParam, captchaStr);
+    	( (HttpServletRequest)request ).getSession().setAttribute(
+    			com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, captchaStr);
+		AccountVO account = this.queryUser( accountId );
+		this.userValidate(account);
+		Subject subject = this.getSubject(request, response); 
+		GreenStepBaseUsernamePasswordToken token = new GreenStepBaseUsernamePasswordToken();
+		token.setCaptcha(captchaStr);		
+		token.setUsername( accountId );		
+		token.setPassword( account.getPassword().toCharArray() );
+		subject.login(token);
+		// set session
+		this.setUserSession((HttpServletRequest)request, (HttpServletResponse)response, account);    	    	
+    	return true;
     }
 	
 }

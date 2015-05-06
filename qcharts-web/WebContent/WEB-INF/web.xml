@@ -50,7 +50,6 @@
 	</filter-mapping>	
 	
 	<!-- spring security or shiro-->
-	<!-- 
 	<filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -64,7 +63,6 @@
 	    <dispatcher>INCLUDE</dispatcher>
 	    <dispatcher>ERROR</dispatcher>		
 	</filter-mapping>	
-	-->
 	
 	<!-- 
     <filter-mapping>  

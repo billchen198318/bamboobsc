@@ -76,6 +76,7 @@
             <result name="blankValue">/pages/system/blankValue.jsp</result>
             <result name="noAuthorith">/pages/system/auth1.jsp</result>
             <result name="searchNoData">/pages/system/searchNoData.jsp</result>
+            <result name="refreshDojoContentPane">/pages/system/refreshDojoContentPane.jsp</result>
         </global-results>
         
         <global-exception-mappings>

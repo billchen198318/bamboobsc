@@ -27,13 +27,11 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.sys.SysEventLogSupport;
@@ -52,10 +50,12 @@ public class ControllerAuthorityCheckInterceptor extends AbstractInterceptor {
 		String actionName = actionInvocation.getProxy().getActionName();
 		String url = actionName + Constants._S2_ACTION_EXTENSION;		
 		Subject subject = SecurityUtils.getSubject();
+		/*
 		if ( !Constants.getSystem().equals(Constants.getMainSystem()) ) {
 			SecurityUtils.setSecurityManager( (DefaultSecurityManager)AppContext.getBean("securityManager") );
 			subject = SecurityUtils.getSubject();			
 		}
+		*/
 		if (subject.hasRole(Constants.SUPER_ROLE_ALL) || subject.hasRole(Constants.SUPER_ROLE_ADMIN)) {
 			SysEventLogSupport.log( (String)subject.getPrincipal(), Constants.getSystem(), url, true );
 			return actionInvocation.invoke();

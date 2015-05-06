@@ -82,6 +82,7 @@ public class WebSystemHttpSessionListener implements HttpSessionListener, HttpSe
 			if (this.uSessLogHelper.count(event.getSession().getId())>0) {
 				this.uSessLogHelper.delete(event.getSession().getId());
 				SecurityUtils.getSubject().logout();
+				log.info("sessionDestroyed: " + event.getSession().getId() + " and do SecurityUtils.getSubject().logout().... ");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

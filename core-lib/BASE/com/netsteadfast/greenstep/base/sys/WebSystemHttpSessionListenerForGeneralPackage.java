@@ -28,9 +28,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 
-import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.model.AccountObj;
 
@@ -62,7 +60,7 @@ public class WebSystemHttpSessionListenerForGeneralPackage implements HttpSessio
 		if (event.getSession().getAttribute(Constants.SESS_ACCOUNT)!=null
 				&& event.getSession().getAttribute(Constants.SESS_ACCOUNT) instanceof AccountObj) {
 			if (!Constants.getSystem().equals(Constants.getMainSystem())) {
-				SecurityUtils.setSecurityManager( (DefaultSecurityManager)AppContext.getBean("securityManager") );
+				// SecurityUtils.setSecurityManager( (DefaultSecurityManager)AppContext.getBean("securityManager") );
 				SecurityUtils.getSubject().logout();
 				log.info("sessionDestroyed: " + event.getSession().getId() + " and do SecurityUtils.getSubject().logout().... ");					
 			}		
