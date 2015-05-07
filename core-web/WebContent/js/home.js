@@ -370,9 +370,10 @@ function openCommonJasperReportLoadWindow( title, jreportId, format, paramData )
  * @param uploadOid
  * @param valueFieldId
  * @param okFn
+ * @param lang ( java or jsp )
  */
-function openCommonCodeEditorWindow( uploadOid, valueFieldId, okFn ) {
-	var url = "./core.commonCodeEditorAction.action?cbMode=Y&valueFieldId=" + valueFieldId + "&okFn=" + okFn;
+function openCommonCodeEditorWindow( uploadOid, valueFieldId, okFn, lang ) {
+	var url = "./core.commonCodeEditorAction.action?cbMode=Y&valueFieldId=" + valueFieldId + "&okFn=" + okFn + '&lang=' + lang;
 	if ( null != uploadOid && '' != uploadOid ) {
 		url += '&oid=' + uploadOid;
 	}

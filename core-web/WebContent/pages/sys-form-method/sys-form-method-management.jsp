@@ -73,7 +73,8 @@ function CORE_PROG001D0014Q_editExpression(oid) {
 				openCommonCodeEditorWindow(
 						data.uploadOid, 
 						"CORE_PROG001D0014Q_expressionContent", 
-						"CORE_PROG001D0014Q_updateExpression('" + oid + "')");			
+						"CORE_PROG001D0014Q_updateExpression('" + oid + "')",
+						"java");			
 			}, 
 			function(error) {
 				alert(error);

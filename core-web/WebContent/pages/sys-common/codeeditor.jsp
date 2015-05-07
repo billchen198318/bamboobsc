@@ -31,6 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath%>/codemirror-5.0/addon/hint/show-hint.css">	
 	
 	
+	<script src="<%=basePath%>/codemirror-5.0/mode/xml/xml.js"></script>
+	<script src="<%=basePath%>/codemirror-5.0/mode/javascript/javascript.js"></script>
+	<script src="<%=basePath%>/codemirror-5.0/mode/css/css.js"></script>
+	<script src="<%=basePath%>/codemirror-5.0/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="<%=basePath%>/codemirror-5.0/addon/mode/multiplex.js"></script>
+	<script src="<%=basePath%>/codemirror-5.0/mode/htmlembedded/htmlembedded.js"></script>
+	
+	
 <style type="text/css">
 
 body, html {
@@ -85,10 +93,15 @@ body, html {
 </div>	
 
 <script type="text/javascript">
+var langType = '${lang}';
+var modeType = 'text/x-java';
+if ( 'jsp' == langType) {
+	modeType = 'application/x-jsp';
+} 
 var javaEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	lineNumbers: true,
 	matchBrackets: true,
-	mode: "text/x-java"
+	mode: modeType
 });
 
 function getValue() {

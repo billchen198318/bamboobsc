@@ -77,7 +77,8 @@ function CORE_PROG001D0012Q_editTemplate(oid) {
 				openCommonCodeEditorWindow(
 						data.uploadOid, 
 						"CORE_PROG001D0012Q_templateContent", 
-						"CORE_PROG001D0012Q_updateTemplate('" + oid + "')");			
+						"CORE_PROG001D0012Q_updateTemplate('" + oid + "')",
+						"jsp");			
 			}, 
 			function(error) {
 				alert(error);

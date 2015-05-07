@@ -43,6 +43,7 @@ public class CommonCodeEditorAction extends BaseSupportAction {
 	private String cbMode = YesNo.NO; // 下方有 button 點選執行代入的 javascript function 模式
 	private String valueFieldId = ""; // 要放值的hidden field
 	private String okFn = ""; // ok button 會執行的 js function
+	private String lang = "java"; // java, jsp
 	
 	public CommonCodeEditorAction() {
 		super();
@@ -105,6 +106,14 @@ public class CommonCodeEditorAction extends BaseSupportAction {
 
 	public void setOkFn(String okFn) {
 		this.okFn = okFn;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 
 }
