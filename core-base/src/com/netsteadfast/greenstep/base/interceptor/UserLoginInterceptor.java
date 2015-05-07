@@ -86,6 +86,11 @@ public class UserLoginInterceptor extends AbstractInterceptor {
 			String currentId, String accountId) throws Exception {
 		if (session!=null) {
 			UserAccountHttpSessionSupport.remove(session);
+			if ( !Constants.getSystem().equals(Constants.getMainSystem()) ) { // for gsbsc-web, qcharts-web
+				if ( SecurityUtils.getSubject().isAuthenticated() ) {
+					SecurityUtils.getSubject().logout();
+				}				
+			}			
 		}		
 		String header = ServletActionContext.getRequest().getHeader("X-Requested-With");
 		String isDojoContentPaneXhrLoad = ServletActionContext.getRequest().getParameter(Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD);	
@@ -96,44 +101,48 @@ public class UserLoginInterceptor extends AbstractInterceptor {
             printWriter.flush();
             printWriter.close();
 			return null;
-		}				
+		}		
+		if ( !Constants.getSystem().equals(Constants.getMainSystem()) ) { // for gsbsc-web, qcharts-web
+			if ( !StringUtils.isBlank(accountId) && !StringUtils.isBlank(currentId) 
+					&& this.uSessLogHelper.countByCurrent(accountId, currentId) > 0 ) { 
+				/**
+				 * 
+				 * 有在 CORE-WEB 登入, 但是"這次的登入" 與 "上一次登入" 不同
+				 * 必須讓 shiroFilter 重新刷新過 , 所以樣頁面處理 refreshDojoContentPane
+				 * 
+				 * 如:
+				 * 1. 先用 admin 登入  
+				 * 2. 登出 此時 core-web 的 session 失效了, 但 gsbsc-web 還存在
+				 * 3. 用 tester 登入 , 此時使用 gsbsc-web 或 qcharts-web 時讓 shiroFilter 重新刷新一次
+				 * 
+				 */
+				Annotation[] actionMethodAnnotations = null;
+				Method[] methods = actionInvocation.getAction().getClass().getMethods();
+				for (Method method : methods) {
+					if (actionInvocation.getProxy().getMethod().equals(method.getName())) {
+						actionMethodAnnotations = method.getAnnotations();
+					}
+				}								
+				String progId = this.getProgramId( actionMethodAnnotations );
+				if ( !StringUtils.isBlank(progId) ) {
+					Map<String, Object> valueStackMap = new HashMap<String, Object>();
+					valueStackMap.put("progId", progId);
+					ActionContext.getContext().getValueStack().push(valueStackMap);							
+					return "refreshDojoContentPane"; // 重新調用 url , 讓 shiroFilter 重導
+				} else {
+					HttpServletRequest request = ServletActionContext.getRequest();
+					logger.warn("redirect URL = " + request.getRequestURL().toString() );
+					ServletActionContext.getResponse().sendRedirect( request.getRequestURL().toString() );							
+					return null;
+				}
+				
+			}
+		}		
 		if (YesNo.YES.equals(isIframeMode)) { // iframe 不要導向登入頁面, 這樣頁面怪怪的
 			ActionContext.getContext().getValueStack().setValue("errorMessage", "Login session expired, please login again!");
-			//ActionContext.getContext().getValueStack().setValue("errorContent", "chen.xin.nien@gmail.com");
 			return Constants._S2_RESULT_ERROR;
 		}
-		if (YesNo.YES.equals(isDojoContentPaneXhrLoad)) {
-			
-			if ( !Constants.getSystem().equals(Constants.getMainSystem()) ) { // for gsbsc-web, qcharts-web
-				if ( SecurityUtils.getSubject().isAuthenticated() ) {
-					SecurityUtils.getSubject().logout();
-					if ( !StringUtils.isBlank(accountId) && !StringUtils.isBlank(currentId) 
-							&& this.uSessLogHelper.countByCurrent(accountId, currentId) > 0 ) {
-						
-						Annotation[] actionMethodAnnotations = null;
-						Method[] methods = actionInvocation.getAction().getClass().getMethods();
-						for (Method method : methods) {
-							if (actionInvocation.getProxy().getMethod().equals(method.getName())) {
-								actionMethodAnnotations = method.getAnnotations();
-							}
-						}								
-						String progId = this.getProgramId( actionMethodAnnotations );
-						if ( !StringUtils.isBlank(progId) ) {
-							Map<String, Object> valueStackMap = new HashMap<String, Object>();
-							valueStackMap.put("progId", progId);
-							ActionContext.getContext().getValueStack().push(valueStackMap);							
-							return "refreshDojoContentPane"; // 重新調用 url , 讓 shiroFilter 重導
-						} else {
-							HttpServletRequest request = ServletActionContext.getRequest();
-							logger.warn("redirect URL = " + request.getRequestURL().toString() );
-							ServletActionContext.getResponse().sendRedirect( request.getRequestURL().toString() );							
-							return null;
-						}
-						
-					}
-				}
-			}
-			
+		if (YesNo.YES.equals(isDojoContentPaneXhrLoad)) {						
 			return Constants._S2_RESULT_LOGIN_AGAIN;
 		}
 		//return "login";		

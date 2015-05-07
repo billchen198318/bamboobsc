@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags" prefix="s" %>
 
 <%
 String path = request.getContextPath();
@@ -44,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </tr>
   <tr>
     <td width="48" bgcolor="#E9D8D8">&nbsp;</td>
-    <td bgcolor="#E9D8D8"><strong>content:</strong> <a href="mailto:<s:property value="errorContent"/>"><s:property value="errorContent"/></a> </td>
+    <td bgcolor="#E9D8D8">&nbsp;</td>
   </tr>
 </table>
 

@@ -215,6 +215,10 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
     		response.getWriter().write(Constants.NO_LOGIN_JSON_DATA);
     		return;
     	}
+    	if (this.isIframeMode((HttpServletRequest)request)) { // iframe 不要導向 login.action 因為畫面會怪怪的    		
+    		WebUtils.issueRedirect(request, response, "/pages/system/error_static.jsp");
+    		return;
+    	}    	
     	if (this.isDojoxContentPane((HttpServletRequest)request)) { // 在 dojox.layout.ContentPane 不要出現 login.action 頁面    		
     		WebUtils.issueRedirect(request, response, Constants.DOJOX_CONTENT_PANE_XHR_RE_LOGIN_PAGE);
     		return;
@@ -225,6 +229,14 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
     private boolean isDojoxContentPane(HttpServletRequest request) {
     	String isDojoxContentPane = request.getParameter(Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD);
     	if (YesNo.YES.equals(isDojoxContentPane)) { // dojox.layout.ContentPane 它的 X-Requested-With 是 XMLHttpRequest
+    		return true;
+    	}
+    	return false;
+    }
+    
+    private boolean isIframeMode(HttpServletRequest request) {
+    	String isIframeMode = request.getParameter(Constants.IS_IFRAME_MODE);
+    	if (YesNo.YES.equals(isIframeMode)) {
     		return true;
     	}
     	return false;
