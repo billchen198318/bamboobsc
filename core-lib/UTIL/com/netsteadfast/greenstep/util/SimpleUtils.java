@@ -31,6 +31,7 @@ import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.codec.DecoderException;
@@ -500,5 +502,21 @@ public class SimpleUtils {
 		Color c = Color.decode(color);
 		return new int[]{ c.getRed(), c.getGreen(), c.getBlue() };
 	}		
+	
+    public static String getHttpRequestUrl(HttpServletRequest request) {
+    	StringBuilder url = new StringBuilder(); 
+    	url.append( request.getRequestURL().toString() );
+    	Enumeration<String> paramNames = request.getParameterNames();
+    	for (int i=0; paramNames.hasMoreElements(); i++) {
+    		String paramName = paramNames.nextElement();    		
+    		if ( i == 0 ) {
+    			url.append("?");
+    		} else {
+    			url.append("&");
+    		}
+    		url.append(paramName).append("=").append( request.getParameter(paramName) );
+    	}
+    	return url.toString();
+    }	
 	
 }

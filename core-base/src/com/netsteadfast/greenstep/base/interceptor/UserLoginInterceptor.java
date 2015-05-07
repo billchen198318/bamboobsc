@@ -45,6 +45,7 @@ import com.netsteadfast.greenstep.base.sys.IUSessLogHelper;
 import com.netsteadfast.greenstep.base.sys.USessLogHelperImpl;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.base.sys.UserCurrentCookie;
+import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
@@ -127,12 +128,14 @@ public class UserLoginInterceptor extends AbstractInterceptor {
 				if ( !StringUtils.isBlank(progId) ) {
 					Map<String, Object> valueStackMap = new HashMap<String, Object>();
 					valueStackMap.put("progId", progId);
-					ActionContext.getContext().getValueStack().push(valueStackMap);							
+					ActionContext.getContext().getValueStack().push(valueStackMap);			
+					logger.warn("do page call refreshDojoContentPane event = " + progId);					
 					return "refreshDojoContentPane"; // 重新調用 url , 讓 shiroFilter 重導
 				} else {
 					HttpServletRequest request = ServletActionContext.getRequest();
-					logger.warn("redirect URL = " + request.getRequestURL().toString() );
-					ServletActionContext.getResponse().sendRedirect( request.getRequestURL().toString() );							
+					String url = SimpleUtils.getHttpRequestUrl( request );
+					logger.warn("redirect URL = " + url );					
+					ServletActionContext.getResponse().sendRedirect( url );							
 					return null;
 				}
 				

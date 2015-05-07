@@ -200,9 +200,9 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
     	if ( !Constants.getSystem().equals( Constants.getMainSystem() ) && !isAjaxRequest((HttpServletRequest)request) ) { // 非 core-web
     		try {
 				if ( this.loginUseCurrentCookieForGeneralPackage(request, response) ) { // no need to login-page
-					logger.warn("URL = " + ( (HttpServletRequest)request ).getRequestURL().toString() );					
-					WebUtils.issueRedirect(request, response, 
-							( (HttpServletRequest)request ).getRequestURL().toString() );
+					String url = SimpleUtils.getHttpRequestUrl( (HttpServletRequest)request );
+					logger.warn("URL = " + url );					
+					WebUtils.issueRedirect(request, response, url);
 					return;
 				}
 			} catch (Exception e) {
