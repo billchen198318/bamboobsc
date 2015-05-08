@@ -22,8 +22,9 @@ https://www.youtube.com/watch?v=A27wnMTtfOc
 <br/><br/>
 <h2>Screenshot</h2>
 <br/>
-
+<br/>1.
 <img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/E_fix01.png"/><br/>
+<br/>2.
 <img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/A_fix.png"/><br/>
 
 
