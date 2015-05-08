@@ -22,19 +22,8 @@ https://www.youtube.com/watch?v=A27wnMTtfOc
 <br/><br/>
 <h2>Screenshot</h2>
 <br/>
-Basic layout<br/>
-<img src="http://static.oschina.net/uploads/space/2015/0413/105325_Qjnz_1447407.png"/><br/>
-1. workspace<br/>
-<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/0001.png"/><br/>
-<br/>
-2. KPIs report<br/>
-<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/0002.png"/><br/>
-3. Employee report<br/>
-<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/A.png"/><br/>
-4. Strategy Map<br/>
-<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/C.png"/><br/>
-5. SQL query results charts<br/>
-<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/D.png"/><br/>
-6. Region view<br/>
+
 <img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/E_fix01.png"/><br/>
+<img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/A_fix.png"/><br/>
+
 
