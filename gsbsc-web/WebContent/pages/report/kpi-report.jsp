@@ -192,7 +192,7 @@ function BSC_PROG003D0001Q_paintBarCharts(data) {
 			.staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
 			.tooltips(false)        //Don't show tooltips
 			.showValues(true)       //...instead, show the bar value right on top of each bar.
-			.transitionDuration(350).color(d3.scale.myColors().range());
+			.color( myColors );
 
 		d3.select('#BSC_PROG003D0001Q_barChart svg')
 			.datum(data.perspectivesBarChartValue)
