@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -43,6 +44,7 @@ import com.netsteadfast.greenstep.util.UploadSupportUtils;
 @Scope
 public class CommonLoadUploadFileAction extends BaseSupportAction {
 	private static final long serialVersionUID = 582037391631119994L;
+	protected Logger logger=Logger.getLogger(CommonLoadUploadFileAction.class);
 	private InputStream inputStream = null;
 	private String filename = "";
 	private String contentType = "";
@@ -63,7 +65,11 @@ public class CommonLoadUploadFileAction extends BaseSupportAction {
 		}
 		this.inputStream = new ByteArrayInputStream( FileUtils.readFileToByteArray(file) );
 		if ("view".equals(this.type)) {
-			this.contentType = FSUtils.getMimeType4URL(file);
+			try {
+				this.contentType = FSUtils.getMimeType4URL(file);
+			} catch (Exception e) {
+				logger.warn( e.getMessage().toString() );
+			}
 		}
 		this.filename = file.getName();
 	}
