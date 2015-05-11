@@ -187,9 +187,9 @@ function ${programId}_page_message() {
 	
 	<!-- JS -->
 	<!-- support lib for bezier stuff -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/lib/jsBezier-0.7.js"></script>
+	<script src="<%=mainSysBasePath%>/jsPlumb/lib/jsBezier-0.6.js"></script>
 	<!-- event adapter -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/lib/mottle-0.6.js"></script>
+	<script src="<%=mainSysBasePath%>/jsPlumb/lib/mottle-0.4.js"></script>
 	<!-- geom functions -->
 	<script src="<%=mainSysBasePath%>/jsPlumb/lib/biltong-0.2.js"></script>
 	<!-- jsplumb util -->
