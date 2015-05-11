@@ -6,3 +6,9 @@
 *.bak linguist-vendored=false
 *.png linguist-vendored=false
 *.jpg linguist-vendored=false
+*.js linguist-language=Java
+*.htm linguist-language=Java
+*.html linguist-language=Java
+*.css linguist-language=Java
+*.txt linguist-language=Java
+*.bak linguist-language=Java
