@@ -23,7 +23,7 @@
 
  http://mrsharpoblunto.github.io/foswig.js/
 
- copyright 2014 jsPlumb
+ copyright 2015 jsPlumb
  */
 
 ;(function() {
@@ -72,6 +72,8 @@
             }
             return rv;
         })(),
+        DEFAULT_GRID_X = 50,
+        DEFAULT_GRID_Y = 50,
         isIELT9 = iev > -1 && iev < 9,
         _pl = function(e) {
             if (isIELT9) {
@@ -143,6 +145,7 @@
         this.params = params || {};
         this.el = el;
         this.params.addClass(this.el, this._class);
+        this.uuid = _uuid();
         var enabled = true;
         this.setEnabled = function(e) { enabled = e; };
         this.isEnabled = function() { return enabled; };
@@ -186,13 +189,42 @@
         var downAt = [0,0], posAtDown = null, moving = false,
             consumeStartEvent = this.params.consumeStartEvent !== false,
             dragEl = this.el,
-            clone = this.params.clone;
+            clone = this.params.clone,
+            scroll = this.params.scroll,
+            _multipleDrop = params.multipleDrop !== false;
+
+        var snapThreshold = params.snapThreshold || 5,
+            _snap = function(pos, x, y, thresholdX, thresholdY) {
+                thresholdX = thresholdX || snapThreshold;
+                thresholdY = thresholdY || snapThreshold;
+                var _dx = Math.floor(pos[0] / x),
+                    _dxl = x * _dx,
+                    _dxt = _dxl + x,
+                    _x = Math.abs(pos[0] - _dxl) <= thresholdX ? _dxl : Math.abs(_dxt - pos[0]) <= thresholdX ? _dxt : pos[0];
+
+                var _dy = Math.floor(pos[1] / y),
+                    _dyl = y * _dy,
+                    _dyt = _dyl + y,
+                    _y = Math.abs(pos[1] - _dyl) <= thresholdY ? _dyl : Math.abs(_dyt - pos[1]) <= thresholdY ? _dyt : pos[1];
+
+                return [ _x, _y];
+            };
+
         this.toGrid = function(pos) {
-            return this.params.grid == null ? pos :
-                [
-                        this.params.grid[0] * Math.floor(pos[0] / this.params.grid[0]),
-                        this.params.grid[1] * Math.floor(pos[1] / this.params.grid[1])
-                ];
+            if (this.params.grid == null) {
+                return pos;
+            }
+            else {
+                return _snap(pos, this.params.grid[0], this.params.grid[1]);
+            }
+        };
+
+        this.snap = function(x, y) {
+            if (dragEl == null) return;
+            x = x || (this.params.grid ? this.params.grid[0] : DEFAULT_GRID_X);
+            y = y || (this.params.grid ? this.params.grid[1] : DEFAULT_GRID_Y);
+            var p = this.params.getPosition(dragEl);
+            this.params.setPosition(dragEl, _snap(p, x, y, x, y));
         };
 
         this.constrain = typeof this.params.constrain === "function" ? this.params.constrain  : (this.params.constrain || this.params.containment) ? function(pos) {
@@ -202,19 +234,54 @@
             ];
         } : function(pos) { return pos; };
 
-        var filter = _true,
-            filterSpec = "",
-            filterExclude = this.params.filterExclude !== false,
+        var _assignId = function(obj) {
+                if (typeof obj == "function") {
+                    obj._katavorioId = _uuid();
+                    return obj._katavorioId;
+                } else {
+                    return obj;
+                }
+            },
+        // a map of { spec -> [ fn, exclusion ] } entries.
+            _filters = {},
+            _testFilter = function(e) {
+                for (var key in _filters) {
+                    var f = _filters[key];
+                    var rv = f[0](e);
+                    if (f[1]) rv = !rv;
+                    if (!rv) return false;
+                }
+                return true;
+            },
             _setFilter = this.setFilter = function(f, _exclude) {
                 if (f) {
-                    filterSpec = f;
-                    filterExclude = _exclude !== false;
-                    filter = function(e) {
-                        var t = e.srcElement || e.target, ms = matchesSelector(t, f, el);
-                        return filterExclude ? !ms : ms;
-                    };
+                    var key = _assignId(f);
+                    _filters[key] = [
+                        function(e) {
+                            var t = e.srcElement || e.target, m;
+                            if (typeof f === "string") {
+                                m = matchesSelector(t, f, el);
+                            }
+                            else if (typeof f === "function") {
+                                m = f(e, el);
+                            }
+                            return m;
+                        },
+                            _exclude !== false
+                    ];
+
                 }
+            },
+            _addFilter = this.addFilter = _setFilter,
+            _removeFilter = this.removeFilter = function(f) {
+                var key = typeof f == "function" ? f._katavorioId : f;
+                delete _filters[key];
             };
+
+        this.clearAllFilters = function() {
+            _filters = {};
+        };
+
         this.canDrag = this.params.canDrag || _true;
 
         var constrainRect,
@@ -223,7 +290,7 @@
         this.downListener = function(e) {
             var isNotRightClick = this.rightButtonCanDrag || (e.which !== 3 && e.button !== 2);
             if (isNotRightClick && this.isEnabled() && this.canDrag()) {
-                var _f =  filter(e) && _inputFilter(e, this.el, this.k);
+                var _f =  _testFilter(e) && _inputFilter(e, this.el, this.k);
                 if (_f) {
                     if (!clone)
                         dragEl = this.el;
@@ -255,39 +322,46 @@
         this.moveListener = function(e) {
             if (downAt) {
                 if (!moving) {
-                    this.params.events["start"]({el:this.el, pos:posAtDown, e:e, drag:this});
-                    this.mark();
-                    moving = true;
+                    var _continue = this.params.events["start"]({el:this.el, pos:posAtDown, e:e, drag:this});
+                    if (_continue !== false) {
+                        this.mark(true);
+                        moving = true;
+                    }
                 }
 
-                intersectingDroppables.length = 0;
-                var pos = _pl(e), dx = pos[0] - downAt[0], dy = pos[1] - downAt[1],
-                    z = this.params.ignoreZoom ? 1 : k.getZoom();
-                dx /= z;
-                dy /= z;
-                this.moveBy(dx, dy, e);
-                k.updateSelection(dx, dy, this);
+                // it is possible that the start event caused the drag to be aborted. So we check
+                // again that we are currently dragging.
+                if (downAt) {
+                    intersectingDroppables.length = 0;
+                    var pos = _pl(e), dx = pos[0] - downAt[0], dy = pos[1] - downAt[1],
+                        z = this.params.ignoreZoom ? 1 : k.getZoom();
+                    dx /= z;
+                    dy /= z;
+                    this.moveBy(dx, dy, e);
+                    k.updateSelection(dx, dy, this);
+                }
             }
         }.bind(this);
 
         this.upListener = function(e) {
-            downAt = null;
-            moving = false;
-            this.params.unbind(document, "mousemove", this.moveListener);
-            this.params.unbind(document, "mouseup", this.upListener);
-            this.params.removeClass(document.body, css.noSelect);
-            this.unmark(e);
-            k.unmarkSelection(this, e);
-            this.stop(e);
-            k.notifySelectionDragStop(this, e);
-            if (clone) {
-                dragEl && dragEl.parentNode && dragEl.parentNode.removeChild(dragEl);
-                dragEl = null;
+            if (downAt) {
+                downAt = null;
+                this.params.unbind(document, "mousemove", this.moveListener);
+                this.params.unbind(document, "mouseup", this.upListener);
+                this.params.removeClass(document.body, css.noSelect);
+                this.unmark(e);
+                k.unmarkSelection(this, e);
+                this.stop(e);
+                k.notifySelectionDragStop(this, e);
+                moving = false;
+                if (clone) {
+                    dragEl && dragEl.parentNode && dragEl.parentNode.removeChild(dragEl);
+                    dragEl = null;
+                }
             }
         }.bind(this);
 
-        this.getFilter = function() { return filterSpec; };
-        this.isFilterExclude = function() { return filterExclude; };
+        this.getFilters = function() { return _filters; };
 
         this.abort = function() {
             if (downAt != null)
@@ -298,11 +372,33 @@
             return dragEl || this.el;
         };
 
-        this.stop = function(e) {
-            this.params.events["stop"]({el:dragEl, pos:this.params.getPosition(dragEl), e:e, drag:this});
+        this.notifyStart = function(e) {
+            this.params.events["start"]({el:this.el, pos:this.params.getPosition(dragEl), e:e, drag:this});
         };
 
-        this.mark = function() {
+        this.stop = function(e, force) {
+            if (force || moving) {
+                var positions = [],
+                    sel = k.getSelection(),
+                    dPos = this.params.getPosition(dragEl);
+
+                if (sel.length > 1) {
+                    for (var i = 0; i < sel.length; i++) {
+                        var p = this.params.getPosition(sel[i].el);
+                        positions.push([ sel[i].el, { left: p[0], top: p[1] }, sel[i] ]);
+                    }
+                }
+                else {
+                    positions.push([ dragEl, {left:dPos[0], top:dPos[1]}, this ]);
+                }
+
+                this.params.events["stop"]({
+                    el: dragEl, pos: dPos, e: e, drag: this, selection:positions
+                });
+            }
+        };
+
+        this.mark = function(andNotify) {
             posAtDown = this.params.getPosition(dragEl);
             this.size = this.params.getSize(dragEl);
             matchingDroppables = k.getMatchingDroppables(this);
@@ -312,12 +408,18 @@
                 var cs = this.params.getSize(dragEl.parentNode);
                 constrainRect = { w:cs[0], h:cs[1] };
             }
+            if (andNotify) {
+                k.notifySelectionDragStart(this);
+            }
         };
         this.unmark = function(e) {
             _setDroppablesActive(matchingDroppables, false, true, this);
+            this.params.removeClass(dragEl, this.params.dragClass || css.drag);
             matchingDroppables.length = 0;
-            for (var i = 0; i < intersectingDroppables.length; i++)
-                intersectingDroppables[i].drop(this, e);
+            for (var i = 0; i < intersectingDroppables.length; i++) {
+                var retVal = intersectingDroppables[i].drop(this, e);
+                if (retVal === true) break;
+            }
         };
         this.moveBy = function(dx, dy, e) {
             intersectingDroppables.length = 0;
@@ -326,15 +428,22 @@
             this.params.setPosition(dragEl, cPos);
             for (var i = 0; i < matchingDroppables.length; i++) {
                 var r2 = { x:matchingDroppables[i].position[0], y:matchingDroppables[i].position[1], w:matchingDroppables[i].size[0], h:matchingDroppables[i].size[1]};
+                //if (this.params.intersects(rect, r2) && matchingDroppables[i].canDrop(this) && (_multipleDrop || intersectingDroppables.length == 0)) {
                 if (this.params.intersects(rect, r2) && matchingDroppables[i].canDrop(this)) {
                     intersectingDroppables.push(matchingDroppables[i]);
                     matchingDroppables[i].setHover(this, true, e);
                 }
-                else if (matchingDroppables[i].el._katavorioDragHover) {
+                else if (matchingDroppables[i].isHover()) {
                     matchingDroppables[i].setHover(this, false, e);
                 }
             }
             this.params.events["drag"]({el:this.el, pos:cPos, e:e, drag:this});
+
+            /* test to see if the parent needs to be scrolled
+             if (scroll) {
+             var pnsl = dragEl.parentNode.scrollLeft, pnst = dragEl.parentNode.scrollTop;
+             console.log("scroll!", pnsl, pnst);
+             }*/
         };
         this.destroy = function() {
             this.params.unbind(this.el, "mousedown", this.downListener);
@@ -365,7 +474,7 @@
         this.params = params || {};
         this._activeClass = params.activeClass || css.active;
         this._hoverClass = params.hoverClass || css.hover;
-        Super.apply(this, arguments)
+        Super.apply(this, arguments);
         var hover = false;
 
         this.setActive = function(val) {
@@ -381,10 +490,13 @@
             return true;
         };
 
+        this.isHover = function() { return hover; };
+
         this.setHover = function(drag, val, e) {
             // if turning off hover but this was not the drag that caused the hover, ignore.
             if (val || this.el._katavorioDragHover == null || this.el._katavorioDragHover == drag.el._katavorio) {
                 this.params[val ? "addClass" : "removeClass"](this.el, this._hoverClass);
+                //this.el._katavorioDragHover = val ? drag.el._katavorio : null;
                 this.el._katavorioDragHover = val ? drag.el._katavorio : null;
                 if (hover !== val)
                     this.params.events[val ? "over" : "out"]({el:this.el, e:e, drag:drag, drop:this});
@@ -393,7 +505,7 @@
         };
 
         this.drop = function(drag, event) {
-            this.params.events["drop"]({ drag:drag, e:event, drop:this });
+            return this.params.events["drop"]({ drag:drag, e:event, drop:this });
         };
 
         this.destroy = function() {
@@ -453,8 +565,9 @@
                     var _dd = this._dropsByScope[drag.scopes[i]];
                     if (_dd) {
                         for (var j = 0; j < _dd.length; j++) {
-                            if (_dd[j].canDrop(drag) &&  !_m[_dd[j].el._katavorio] && _dd[j].el !== drag.el) {
-                                _m[_dd[j].el._katavorio] = true;
+                            //if (_dd[j].canDrop(drag) &&  !_m[_dd[j].el._katavorio] && _dd[j].el !== drag.el) {
+                            if (_dd[j].canDrop(drag) &&  !_m[_dd[j].uuid] && _dd[j].el !== drag.el) {
+                                _m[_dd[j].uuid] = true;
                                 dd.push(_dd[j]);
                             }
                         }
@@ -603,8 +716,12 @@
         };
 
         this.notifySelectionDragStop = function(drag, evt) {
-            _foreach(_selection, function(e) { e.stop(evt); }, drag);
+            _foreach(_selection, function(e) { e.stop(evt, true); }, drag);
         };
+
+        this.notifySelectionDragStart = function(drag, evt) {
+            _foreach(_selection, function(e) { e.notifyStart(evt);}, drag);
+        }
 
         this.setZoom = function(z) { _zoom = z; };
         this.getZoom = function() { return _zoom; };
@@ -630,6 +747,12 @@
                 _scopeManip(el._katavorioDrop, scopes, this._dropsByScope, v + "Scope");
             }.bind(this);
         }.bind(this));
+
+        this.snapToGrid = function(x, y) {
+            for (var s in this._dragsByScope) {
+                _foreach(this._dragsByScope[s], function(d) { d.snap(x, y); });
+            }
+        };
 
         this.getDragsForScope = function(s) { return this._dragsByScope[s]; };
         this.getDropsForScope = function(s) { return this._dropsByScope[s]; };
