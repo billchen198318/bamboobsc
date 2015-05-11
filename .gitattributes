@@ -1,6 +1,8 @@
 *.js linguist-vendored=false
 *.htm linguist-vendored=false
 *.html linguist-vendored=false
-*.js linguist-language=Java
-*.htm linguist-language=Java
-*.html linguist-language=Java
+*.css linguist-vendored=false
+*.txt linguist-vendored=false
+*.bak linguist-vendored=false
+*.png linguist-vendored=false
+*.jpg linguist-vendored=false
