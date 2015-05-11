@@ -1,8 +1,8 @@
 /*!
- * Signature Pad v1.3.4
+ * Signature Pad v1.3.6
  * https://github.com/szimek/signature_pad
  *
- * Copyright 2014 Szymon Nowak
+ * Copyright 2015 Szymon Nowak
  * Released under the MIT license
  *
  * The main idea and some parts of the code (e.g. drawing variable width Bézier curve) are taken from:
