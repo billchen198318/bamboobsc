@@ -121,10 +121,15 @@ public class SettingsSaveOrUpdateAction extends BaseJsonAction {
 		this.checkFields();
 		String mailFrom = this.getFields().get("mailFrom");
 		String mailEnable = YesNo.YES;
+		String sysTemplateReWrite = YesNo.YES;
 		if ( "false".equals(this.getFields().get("mailEnable")) ) {
 			mailEnable = YesNo.NO;
 		}
-		if ( this.updateCode("CNF_CONF001", mailFrom) && this.updateCode("CNF_CONF002", mailEnable) ) {
+		if ( "false".equals(this.getFields().get("sysTemplateReWrite")) ) {
+			sysTemplateReWrite = YesNo.NO;
+		}
+		if ( this.updateCode("CNF_CONF001", mailFrom) && this.updateCode("CNF_CONF002", mailEnable) 
+				&& this.updateCode("CNF_CONF004", sysTemplateReWrite) ) {
 			this.success = IS_YES;
 		} else {
 			this.message = SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_FAIL);

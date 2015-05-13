@@ -35,9 +35,11 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.po.hbm.TbSysCode;
 import com.netsteadfast.greenstep.service.ISysCodeService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.util.SystemFormUtils;
 import com.netsteadfast.greenstep.vo.SysCodeVO;
 
 @ControllerAuthority(check=true)
@@ -83,6 +85,7 @@ public class SettingsManagementAction extends BaseSupportAction implements IBase
 		}
 		sysCode = result.getValue();
 		this.getFields().put("mailEnable", this.defaultString(sysCode.getParam1()).trim() );
+		this.getFields().put("sysTemplateReWrite", (SystemFormUtils.getEnableTemplateFileReWriteAlways() ? YesNo.YES : YesNo.NO) );
 	}
 	
 	/**

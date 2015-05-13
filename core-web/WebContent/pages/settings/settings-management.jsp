@@ -74,7 +74,7 @@ function ${programId}_page_message() {
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>		
 	
-	<table border="0" width="100%" height="150px" cellpadding="1" cellspacing="0" >
+	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
     			<font color='RED'>*</font><b>Mail system from</b>:
@@ -89,6 +89,13 @@ function ${programId}_page_message() {
     			<input id="CORE_PROG001D0011Q_mailEnable" name="CORE_PROG001D0011Q_mailEnable" data-dojo-type="dijit/form/CheckBox" value="true" <s:if test=" \"Y\" == fields.mailEnable "> checked="checked" </s:if> />
     		</td>    			
     	</tr>   
+		<tr>
+    		<td height="50px" width="100%"  align="left">
+    			<b>System Template file re-write enable</b>:
+    			<br/>
+    			<input id="CORE_PROG001D0011Q_sysTemplateReWrite" name="CORE_PROG001D0011Q_sysTemplateReWrite" data-dojo-type="dijit/form/CheckBox" value="true" <s:if test=" \"Y\" == fields.sysTemplateReWrite "> checked="checked" </s:if> />
+    		</td>    			
+    	</tr>       	
     	<tr>
     		<td height="50px" width="100%"  align="left">
 			    <gs:button name="CORE_PROG001D0011Q_save" id="CORE_PROG001D0011Q_save" onClick="CORE_PROG001D0011Q_save();"
@@ -98,8 +105,9 @@ function ${programId}_page_message() {
 	   				parameterType="postData"
 	   				xhrParameter="
 	   					{
-	   						'fields.mailFrom'	:	dijit.byId('CORE_PROG001D0011Q_mailFrom').get('value'),	   						
-	   						'fields.mailEnable'	:	( dijit.byId('CORE_PROG001D0011Q_mailEnable').checked ? 'true' : 'false' )
+	   						'fields.mailFrom'			:	dijit.byId('CORE_PROG001D0011Q_mailFrom').get('value'),	   						
+	   						'fields.mailEnable'			:	( dijit.byId('CORE_PROG001D0011Q_mailEnable').checked ? 'true' : 'false' ),
+	   						'fields.sysTemplateReWrite'	:	( dijit.byId('CORE_PROG001D0011Q_sysTemplateReWrite').checked ? 'true' : 'false' )
 	   					}
 					"
 	   				errorFn=""

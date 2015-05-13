@@ -26,12 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -40,21 +37,11 @@ import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
-import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.SystemForm;
 import com.netsteadfast.greenstep.model.FormResultType;
-import com.netsteadfast.greenstep.po.hbm.TbSysForm;
-import com.netsteadfast.greenstep.po.hbm.TbSysFormMethod;
-import com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate;
-import com.netsteadfast.greenstep.service.ISysFormMethodService;
-import com.netsteadfast.greenstep.service.ISysFormService;
-import com.netsteadfast.greenstep.service.ISysFormTemplateService;
-import com.netsteadfast.greenstep.util.FSUtils;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
-import com.netsteadfast.greenstep.util.ScriptExpressionUtils;
+import com.netsteadfast.greenstep.util.SystemFormUtils;
 import com.netsteadfast.greenstep.vo.SysFormMethodVO;
-import com.netsteadfast.greenstep.vo.SysFormTemplateVO;
-import com.netsteadfast.greenstep.vo.SysFormVO;
 
 @SystemForm
 @Controller("core.web.controller.CommonLoadFormAction")
@@ -62,10 +49,6 @@ import com.netsteadfast.greenstep.vo.SysFormVO;
 public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = 1616413828281190977L;
 	protected Logger logger=Logger.getLogger(CommonLoadFormAction.class);
-	private static final String FORM_PAGE_PATH = "pages/sys-form-pages/";
-	private ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> sysFormMethodService;
-	private ISysFormService<SysFormVO, TbSysForm, String> sysFormService;
-	private ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> sysFormTemplateService;
 	private String message = "";
 	private String success = IS_NO;
 	private Map<String, Object> datas = new HashMap<String, Object>(); // 備用放資料用的
@@ -79,121 +62,22 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 	public CommonLoadFormAction() {
 		super();
 	}
-	
-	@JSON(serialize=false)
-	public ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> getSysFormMethodService() {
-		return sysFormMethodService;
-	}
 
-	@Autowired
-	@Resource(name="core.service.SysFormMethodService")		
-	public void setSysFormMethodService(
-			ISysFormMethodService<SysFormMethodVO, TbSysFormMethod, String> sysFormMethodService) {
-		this.sysFormMethodService = sysFormMethodService;
-	}
-	
-	@JSON(serialize=false)
-	public ISysFormService<SysFormVO, TbSysForm, String> getSysFormService() {
-		return sysFormService;
-	}
-
-	@Autowired
-	@Resource(name="core.service.SysFormService")	
-	public void setSysFormService(
-			ISysFormService<SysFormVO, TbSysForm, String> sysFormService) {
-		this.sysFormService = sysFormService;
-	}
-
-	@JSON(serialize=false)
-	public ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> getSysFormTemplateService() {
-		return sysFormTemplateService;
-	}
-
-	@Autowired
-	@Resource(name="core.service.SysFormTemplateService")		
-	public void setSysFormTemplateService(
-			ISysFormTemplateService<SysFormTemplateVO, TbSysFormTemplate, String> sysFormTemplateService) {
-		this.sysFormTemplateService = sysFormTemplateService;
-	}
-
-	private Map<String, Object> getParameters(SysFormMethodVO formMethod) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("formMethodObj", formMethod);
-		paramMap.put("form_id", this.form_id);
-		paramMap.put("form_method", this.form_method);
-		paramMap.put("actionObj", this);
-		paramMap.put("datas", this.datas);
-		paramMap.put("pageOf", this.getPageOf());
-		paramMap.put("searchValue", this.getSearchValue());
-		paramMap.put("items", this.items);
-		paramMap.put("fields", this.getFields());
-		paramMap.put("fieldsId", this.getFieldsId());
-		return paramMap;
-	}
-	
-	private SysFormMethodVO findFormMethod() throws ServiceException, Exception {
-		SysFormMethodVO formMethod = new SysFormMethodVO();
-		formMethod.setFormId( this.form_id );
-		formMethod.setName( this.form_method );
-		DefaultResult<SysFormMethodVO> result = this.sysFormMethodService.findByUK(formMethod);
-		if (result.getValue()==null) {
-			throw new ServiceException(result.getSystemMessage().getValue());
-		}
-		formMethod = result.getValue();
-		return formMethod;
-	}
-	
-	private SysFormVO findForm(SysFormMethodVO formMethod) throws ServiceException, Exception {
-		SysFormVO form = new SysFormVO();
-		form.setFormId(formMethod.getFormId());
-		DefaultResult<SysFormVO> result = this.sysFormService.findByUK(form);
-		if (result.getValue()==null) {
-			throw new ServiceException(result.getSystemMessage().getValue());
-		}
-		form = result.getValue();
-		return form;
-	}
-	
-	private SysFormTemplateVO findTemplate(SysFormVO form) throws ServiceException, Exception {
-		SysFormTemplateVO template = new SysFormTemplateVO();
-		template.setTplId(form.getTemplateId());
-		DefaultResult<SysFormTemplateVO> result = this.sysFormTemplateService.findByUK(template);
-		if (result.getValue()==null) {
-			throw new ServiceException(result.getSystemMessage().getValue());
-		}
-		template = result.getValue();
-		this.writePage(template);		
-		return template;
-	}
-	
-	private void writePage(SysFormTemplateVO template) throws Exception {
-		String pageFileFullPath = this.getHttpServletRequest().getSession().getServletContext().getRealPath("/");
-		pageFileFullPath += FORM_PAGE_PATH + template.getFileName();
-		if ( !FSUtils.writeStr2(pageFileFullPath, new String(template.getContent(), "utf-8") ) ) {
-			throw new Exception("create page file error.");
-		}		
-	}
-
-	@SuppressWarnings("unchecked")
 	public void processExpression(SysFormMethodVO formMethod) throws ControllerException, ServiceException, Exception {		
-		SysFormVO form = this.findForm(formMethod);
-		String expression = new String(formMethod.getExpression(), "utf-8");
-		Map<String, Object> paramMap = this.getParameters(formMethod);
-		ScriptExpressionUtils.execute(
-				formMethod.getType(), 
-				expression, 
-				null, 
-				paramMap);		
+		Map<String, String> resultMap = SystemFormUtils.processExpression(
+				formMethod, 
+				this, this.datas, this.getPageOf(), this.getSearchValue(), this.items, 
+				this.getFields(), this.getFieldsId(),
+				super.getHttpServletRequest());	
 		if (FormResultType.DEFAULT.equals(formMethod.getResultType())) {
-			SysFormTemplateVO template = this.findTemplate(form);
-			this.viewPage = FORM_PAGE_PATH + template.getFileName();
+			this.viewPage = SystemFormUtils.getViewPage(resultMap);
 		}		
 		if (FormResultType.JSON.equals(formMethod.getResultType())) {
-			this.message = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("jsonMessage") );
-			this.success = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("jsonSuccess") );
+			this.message = SystemFormUtils.getJsonMessage(resultMap);
+			this.success = SystemFormUtils.getJsonSuccess(resultMap);
 		}
 		if (FormResultType.REDIRECT.equals(formMethod.getResultType())) {
-			this.redirectUrl = this.defaultString( (String)( (Map<String, Object>)paramMap.get("datas") ).get("redirectUrl") );
+			this.redirectUrl = SystemFormUtils.getRedirectUrl(resultMap);
 		}
 	}
 	
@@ -207,7 +91,8 @@ public class CommonLoadFormAction extends BaseQueryGridJsonAction implements IBa
 			return resultName;
 		}
 		try {
-			SysFormMethodVO formMethod = this.findFormMethod();
+			SysFormMethodVO formMethod = SystemFormUtils.findFormMethod(
+					this.form_id, this.form_method);
 			resultName = formMethod.getResultType();
 			this.processExpression(formMethod);
 		} catch (ControllerException ce) {
