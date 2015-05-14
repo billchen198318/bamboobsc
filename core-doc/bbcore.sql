@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.15, for FreeBSD10.0 (amd64)
+-- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.6.15
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1949,6 +1949,110 @@ INSERT INTO `tb_sys_form_template` VALUES ('1d34ec03-8345-44c0-a0f7-8770d56ac3b3
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_ftp`
+--
+
+DROP TABLE IF EXISTS `tb_sys_ftp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_ftp` (
+  `OID` char(36) NOT NULL,
+  `TYPE` varchar(5) NOT NULL DEFAULT 'FTP',
+  `ID` varchar(10) NOT NULL,
+  `ADDRESS` varchar(50) NOT NULL,
+  `NAME` varchar(20) NOT NULL,
+  `PORT` int(5) NOT NULL DEFAULT '0',
+  `USER` varchar(50) NOT NULL,
+  `PASS` varchar(50) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`),
+  KEY `IDX_1` (`TYPE`,`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_ftp`
+--
+
+LOCK TABLES `tb_sys_ftp` WRITE;
+/*!40000 ALTER TABLE `tb_sys_ftp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_ftp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_ftp_tran`
+--
+
+DROP TABLE IF EXISTS `tb_sys_ftp_tran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_ftp_tran` (
+  `OID` char(36) NOT NULL,
+  `FTP_ID` varchar(10) NOT NULL,
+  `TRAN_ID` varchar(10) NOT NULL,
+  `TRAN_TYPE` varchar(10) NOT NULL,
+  `USE_SEGM` varchar(1) NOT NULL,
+  `NAME_EXPRESSION` varchar(8000) NOT NULL,
+  `HELP_EXPRESSION` varchar(8000) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TRAN_ID`),
+  KEY `IDX_1` (`FTP_ID`,`TRAN_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_ftp_tran`
+--
+
+LOCK TABLES `tb_sys_ftp_tran` WRITE;
+/*!40000 ALTER TABLE `tb_sys_ftp_tran` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_ftp_tran` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_ftp_tran_segm`
+--
+
+DROP TABLE IF EXISTS `tb_sys_ftp_tran_segm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_ftp_tran_segm` (
+  `OID` char(36) NOT NULL,
+  `FTP_ID` varchar(10) NOT NULL,
+  `TRAN_ID` varchar(10) NOT NULL,
+  `NAME` varchar(50) NOT NULL,
+  `BEGIN` int(4) NOT NULL DEFAULT '0',
+  `END` int(4) NOT NULL DEFAULT '0',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`FTP_ID`,`TRAN_ID`,`NAME`),
+  KEY `IDX_1` (`FTP_ID`,`TRAN_ID`,`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_ftp_tran_segm`
+--
+
+LOCK TABLES `tb_sys_ftp_tran_segm` WRITE;
+/*!40000 ALTER TABLE `tb_sys_ftp_tran_segm` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_ftp_tran_segm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_icon`
 --
 
@@ -2514,4 +2618,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-13 19:25:38
+-- Dump completed on 2015-05-14 10:41:05
