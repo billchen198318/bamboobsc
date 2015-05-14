@@ -234,6 +234,7 @@ public class SystemFtpUtils {
 			fillStoreDirFiles(storeDir, resultObj);			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		} finally {
 			storeDir = null;			
 		}		
@@ -261,16 +262,17 @@ public class SystemFtpUtils {
 	}
 	
 	private static void putFileBySFtp(SysFtpVO ftp, SysFtpTranVO tran, List<String> fileFullPathNames) throws Exception {
-		List<String> files = new ArrayList<String>();
+		List<String> remoteFile = new ArrayList<String>();
 		for (String name : fileFullPathNames) {
 			File file = new File( name );
-			files.add( file.getName() );
+			remoteFile.add( file.getName() );
 		}
 		try {
 			SFtpClientUtils.put(ftp.getUser(), ftp.getPass(), ftp.getAddress(), ftp.getPort(), 
-					fileFullPathNames, files);			
+					fileFullPathNames, remoteFile);			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		} 
 	}
 	
