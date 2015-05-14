@@ -386,7 +386,9 @@ java-cup-11b.jar
 java-cup-11b-runtime.jar
 
 
-
+http://www.jcraft.com/jsch/	
+-------------------------
+jsch-0.1.50.jar				
 
 
 
@@ -445,8 +447,4 @@ http://scannotation.sourceforge.net/		(remove)
 -------------------------
 scannotation-1.0.2.jar						(remove)
 
-
-http://www.jcraft.com/jsch/	(remove)
--------------------------
-jsch-0.1.50.jar				(remove)
 
