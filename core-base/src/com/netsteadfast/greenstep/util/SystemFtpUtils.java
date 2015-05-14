@@ -117,6 +117,9 @@ public class SystemFtpUtils {
 		} else if (SystemFtpModel.TRAN_GET_XML.equals(tran.getTranType())) { // 處理 xml 檔案			
 			processXml(resultObj);			
 		}
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put(SystemFtpModel.RESULT_OBJ_VARIABLE, resultObj);
+		ScriptExpressionUtils.execute(tran.getExprType(), tran.getHelpExpression(), null, paramMap);
 		return resultObj;
 	}
 	
