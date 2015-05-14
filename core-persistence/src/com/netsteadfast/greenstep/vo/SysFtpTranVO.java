@@ -29,48 +29,57 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	private String ftpId;
 	private String tranId;
 	private String tranType;
+	private String cwd;
 	private String useSegm;
+	private String exprType;
 	private String nameExpression;
 	private String helpExpression;
 	private String description;	
 	
 	public SysFtpTranVO() {
 		
-	}
+	}	
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String useSegm, String nameExpression,
-			String helpExpression, String description) {
+			String tranType, String cwd, String useSegm, String exprType,
+			String nameExpression, String helpExpression, String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
 		this.tranId = tranId;
 		this.tranType = tranType;
+		this.cwd = cwd;
 		this.useSegm = useSegm;
+		this.exprType = exprType;
 		this.nameExpression = nameExpression;
 		this.helpExpression = helpExpression;
 		this.description = description;
 	}
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String useSegm) {
+			String tranType, String cwd, String useSegm, String exprType,
+			String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
 		this.tranId = tranId;
 		this.tranType = tranType;
+		this.cwd = cwd;
 		this.useSegm = useSegm;
+		this.exprType = exprType;
+		this.description = description;
 	}
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String useSegm, String description) {
+			String tranType, String cwd, String useSegm, String exprType) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
 		this.tranId = tranId;
 		this.tranType = tranType;
+		this.cwd = cwd;
 		this.useSegm = useSegm;
-		this.description = description;
+		this.exprType = exprType;
 	}
 
 	@Override
@@ -106,12 +115,28 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.tranType = tranType;
 	}
 
+	public String getCwd() {
+		return cwd;
+	}
+
+	public void setCwd(String cwd) {
+		this.cwd = cwd;
+	}
+
 	public String getUseSegm() {
 		return useSegm;
 	}
 
 	public void setUseSegm(String useSegm) {
 		this.useSegm = useSegm;
+	}
+
+	public String getExprType() {
+		return exprType;
+	}
+
+	public void setExprType(String exprType) {
+		this.exprType = exprType;
 	}
 
 	public String getNameExpression() {

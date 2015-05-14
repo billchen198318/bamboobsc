@@ -1240,7 +1240,6 @@ CREATE TABLE `qrtz_fired_triggers` (
 
 LOCK TABLES `qrtz_fired_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_fired_triggers` VALUES ('scheduler','localX8614315161220181431516121987','core.job.SendMailHelperJobCronTrigger','DEFAULT','localX861431516122018',1431516300000,0,'ACQUIRED',NULL,NULL,'0','0');
 /*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1345,7 +1344,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861431516096474',1431516291928,7500),('scheduler','localX861431516122018',1431516294950,7500),('scheduler','localX861431516145679',1431516296199,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1431575308481',1431575526396,7500),('scheduler','4753PC1431575368129',1431575526006,7500),('scheduler','4753PC1431575427512',1431575525408,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1449,7 +1448,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1431516300000,1431516240000,0,'ACQUIRED','CRON',1431516145000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1431575580000,1431575520000,0,'WAITING','CRON',1431575427000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1812,6 +1811,7 @@ CREATE TABLE `tb_sys_event_log` (
 
 LOCK TABLES `tb_sys_event_log` WRITE;
 /*!40000 ALTER TABLE `tb_sys_event_log` DISABLE KEYS */;
+INSERT INTO `tb_sys_event_log` VALUES ('30709070-1ded-4f20-852a-c0c90863c528','admin','BSC','bsc.employeeManagementAction.action','Y','SYS','2015-05-14 11:52:03',NULL,NULL),('6550cb5c-5ead-41f3-94f7-433cc4c0d8c3','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-14 11:51:16',NULL,NULL),('8cde1159-ec25-49bf-a1d8-6e71acb63add','admin','CORE','index.action','Y','SYS','2015-05-14 11:50:57',NULL,NULL),('da3a9c66-771c-4269-9feb-c45f9c6dbcf2','admin','BSC','bsc.employeeManagementGridQueryAction.action','Y','SYS','2015-05-14 11:52:05',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_event_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1996,7 +1996,9 @@ CREATE TABLE `tb_sys_ftp_tran` (
   `FTP_ID` varchar(10) NOT NULL,
   `TRAN_ID` varchar(10) NOT NULL,
   `TRAN_TYPE` varchar(10) NOT NULL,
+  `CWD` varchar(50) NOT NULL,
   `USE_SEGM` varchar(1) NOT NULL,
+  `EXPR_TYPE` varchar(10) NOT NULL,
   `NAME_EXPRESSION` varchar(8000) NOT NULL,
   `HELP_EXPRESSION` varchar(8000) NOT NULL,
   `DESCRIPTION` varchar(500) NOT NULL,
@@ -2171,6 +2173,7 @@ CREATE TABLE `tb_sys_login_log` (
 
 LOCK TABLES `tb_sys_login_log` WRITE;
 /*!40000 ALTER TABLE `tb_sys_login_log` DISABLE KEYS */;
+INSERT INTO `tb_sys_login_log` VALUES ('1ec673aa-29c9-41c1-b93f-ca2398732f1f','admin','SYS','2015-05-14 11:52:03',NULL,NULL),('6ac062c3-f216-4c8e-a5c2-89027937fe52','admin','SYS','2015-05-14 11:50:57',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_login_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2618,4 +2621,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-14 10:41:05
+-- Dump completed on 2015-05-14 15:20:04

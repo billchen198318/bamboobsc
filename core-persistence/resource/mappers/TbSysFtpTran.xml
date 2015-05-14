@@ -8,8 +8,10 @@
 		<id column="OID" property="oid"/>	
 		<result column="FTP_ID" property="ftpId"/>		
 		<result column="TRAN_ID" property="tranId"/>		
-		<result column="TRAN_TYPE" property="tranType"/>		
-		<result column="USE_SEGM" property="useSegm"/>		
+		<result column="TRAN_TYPE" property="tranType"/>
+		<result column="CWD" property="cwd"/>		
+		<result column="USE_SEGM" property="useSegm"/>
+		<result column="EXPR_TYPE" property="exprType"/>		
 		<result column="NAME_EXPRESSION" property="nameExpression"/>		
 		<result column="HELP_EXPRESSION" property="helpExpression"/>		
 		<result column="DESCRIPTION" property="description"/>				

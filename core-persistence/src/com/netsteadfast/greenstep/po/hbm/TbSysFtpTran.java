@@ -25,7 +25,9 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	private String ftpId;
 	private String tranId;
 	private String tranType;
+	private String cwd;
 	private String useSegm;
+	private String exprType;
 	private String nameExpression;
 	private String helpExpression;
 	private String description;	
@@ -74,6 +76,15 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 		this.tranType = tranType;
 	}
 	
+	@Column(name="CWD")
+	public String getCwd() {
+		return cwd;
+	}
+	
+	public void setCwd(String cwd) {
+		this.cwd = cwd;
+	}
+	
 	@Column(name="USE_SEGM")
 	public String getUseSegm() {
 		return useSegm;
@@ -81,6 +92,15 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	
 	public void setUseSegm(String useSegm) {
 		this.useSegm = useSegm;
+	}
+	
+	@Column(name="EXPR_TYPE")
+	public String getExprType() {
+		return exprType;
+	}
+	
+	public void setExprType(String exprType) {
+		this.exprType = exprType;
 	}
 	
 	@Column(name="NAME_EXPRESSION")
