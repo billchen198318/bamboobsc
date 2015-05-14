@@ -194,9 +194,9 @@ public class SystemFtpUtils {
 			throw e;
 		} finally {
 			storeDir = null;
+			ftpClient.close();
+			ftpClient = null;			
 		}
-		ftpClient.close();
-		ftpClient = null;
 	}
 	
 	private static void getFilesBySFtp(SystemFtpResultObj resultObj) throws Exception {
