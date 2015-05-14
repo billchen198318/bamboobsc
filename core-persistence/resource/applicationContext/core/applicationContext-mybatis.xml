@@ -56,7 +56,10 @@
                 <value>classpath*:mappers/TbSysMailHelper.xml</value>                
                 <value>classpath*:mappers/TbSysFormTemplate.xml</value>
                 <value>classpath*:mappers/TbSysForm.xml</value>                
-                <value>classpath*:mappers/TbSysFormMethod.xml</value>
+                <value>classpath*:mappers/TbSysFormMethod.xml</value>                
+                <value>classpath*:mappers/TbSysFtp.xml</value>                       
+                <value>classpath*:mappers/TbSysFtpTran.xml</value>                
+                <value>classpath*:mappers/TbSysFtpTranSegm.xml</value>                
                 <value>classpath*:mappers/BbOrganization.xml</value>
                 <value>classpath*:mappers/BbOrganizationPar.xml</value>
                 <value>classpath*:mappers/BbEmployee.xml</value>

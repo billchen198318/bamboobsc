@@ -1,0 +1,49 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysFtp">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysFtp" id="baseResultMap">
+		<id column="OID" property="oid"/>				
+		<result column="TYPE" property="type"/>		
+		<result column="ID" property="id"/>		
+		<result column="ADDRESS" property="address"/>		
+		<result column="NAME" property="name"/>		
+		<result column="PORT" property="port"/>		
+		<result column="USER" property="user"/>		
+		<result column="PASS" property="pass"/>		
+		<result column="DESCRIPTION" property="description"/>				
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_ftp where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>		
+		<if test="id != null">
+			AND ID = #{id}
+		</if>																					
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_ftp where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>		
+		<if test="id != null">
+			AND ID = #{id}
+		</if>	
+	</select>	
+	
+</mapper>

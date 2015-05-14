@@ -44,7 +44,10 @@
 				<value>classpath*:dozer/dozerBeanMapping-sysMailHelper.xml</value>				
 				<value>classpath*:dozer/dozerBeanMapping-sysFormTemplate.xml</value>				
 				<value>classpath*:dozer/dozerBeanMapping-sysForm.xml</value>				
-				<value>classpath*:dozer/dozerBeanMapping-sysFormMethod.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-sysFormMethod.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysFtp.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysFtpTran.xml</value>				
+				<value>classpath*:dozer/dozerBeanMapping-sysFtpTranSegm.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-organization.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-organizationPar.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-employee.xml</value>
