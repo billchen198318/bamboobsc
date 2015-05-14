@@ -28,8 +28,6 @@ public class SystemFtpModel {
 	
 	public static final String TRAN_GET_TEXT = "GET-TXT"; // 取檔for txt
 	public static final String TRAN_GET_XML = "GET-XML"; // 取檔for xml
-	public static final String TRAN_PUT_TEXT = "PUT-TXT"; // 放檔for txt
-	public static final String TRAN_PUT_XML = "PUT-XML"; // 放檔for xml
 	public static final String TRAN_GET = "GET"; // 取檔
 	public static final String TRAN_PUT = "PUT"; // 放檔
 	

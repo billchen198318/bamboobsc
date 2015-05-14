@@ -120,6 +120,28 @@ public class SystemFtpUtils {
 		return resultObj;
 	}
 	
+	public static boolean putFiles(String tranId) throws ServiceException, Exception {
+		if ( StringUtils.isBlank(tranId) ) {
+			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK) );
+		}
+		SysFtpTranVO tran = findSysFtpTran(tranId);
+		SysFtpVO ftp = findSysFtp( tran.getFtpId() );
+		if (!SystemFtpModel.TRAN_PUT.equals(tran.getTranType())) {
+			return false;
+		}
+		/**
+		 * 這編 NAME_EXPRESSION 回傳的 names 檔案文字路境必須 如 : /var/upload/20150514.txt
+		 * **不可** 是 20150514.txt
+		 */
+		List<String> fileFullPathNames = getFileNames(tran.getExprType(), tran.getNameExpression()); 
+		if (SystemFtpModel.FTP.equals(ftp.getType())) { // FTP
+			putFilesByFtp(ftp, tran, fileFullPathNames);
+		} else { // SFTP
+			putFileBySFtp(ftp, tran, fileFullPathNames);			
+		}
+		return true;
+	}
+	
 	private static void processText(SystemFtpResultObj resultObj) throws Exception {
 		List<SystemFtpData> datas = new LinkedList<SystemFtpData>();
 		List<TbSysFtpTranSegm> segms = resultObj.getSysFtpTranSegms();		
@@ -216,6 +238,41 @@ public class SystemFtpUtils {
 			storeDir = null;			
 		}		
 	}	
+	
+	private static void putFilesByFtp(SysFtpVO ftp, SysFtpTranVO tran, List<String> fileFullPathNames) throws Exception {
+		List<File> files = new ArrayList<File>();
+		for (String name : fileFullPathNames) {
+			File file = new File( name );
+			files.add(file);
+		}
+		FtpClientUtils ftpClient = new FtpClientUtils();
+		try {
+			ftpClient.login(ftp.getAddress(), ftp.getUser(), ftp.getPass());
+			for (File file : files) {
+				ftpClient.put(tran.getCwd(), file.getName(), file);				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			ftpClient.close();
+			ftpClient = null;
+		}
+	}
+	
+	private static void putFileBySFtp(SysFtpVO ftp, SysFtpTranVO tran, List<String> fileFullPathNames) throws Exception {
+		List<String> files = new ArrayList<String>();
+		for (String name : fileFullPathNames) {
+			File file = new File( name );
+			files.add( file.getName() );
+		}
+		try {
+			SFtpClientUtils.put(ftp.getUser(), ftp.getPass(), ftp.getAddress(), ftp.getPort(), 
+					fileFullPathNames, files);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
 	
 	private static List<String> getFileNames(String expressionType, String nameExpression) throws Exception {
 		List<String> names = new ArrayList<String>();	
