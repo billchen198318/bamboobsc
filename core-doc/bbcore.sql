@@ -1240,6 +1240,7 @@ CREATE TABLE `qrtz_fired_triggers` (
 
 LOCK TABLES `qrtz_fired_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_fired_triggers` VALUES ('scheduler','4753PC14316599896421431659989611','core.job.SendMailHelperJobCronTrigger','DEFAULT','4753PC1431659989642',1431660000000,0,'ACQUIRED',NULL,NULL,'0','0');
 /*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1344,7 +1345,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1431652332717',1431652715810,7500),('scheduler','4753PC1431652394720',1431652717947,7500),('scheduler','4753PC1431652452995',1431652716159,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1431659989642',1431659989908,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1448,7 +1449,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1431652740000,1431652680000,0,'WAITING','CRON',1431652452000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1431660000000,-1,0,'ACQUIRED','CRON',1431659989000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1981,6 +1982,7 @@ CREATE TABLE `tb_sys_ftp` (
 
 LOCK TABLES `tb_sys_ftp` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ftp` DISABLE KEYS */;
+INSERT INTO `tb_sys_ftp` VALUES ('111223344','FTP','FTP0001','127.0.0.1','test-ftp',0,'root','password123','for test','admin','2015-05-15 10:12:22',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ftp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2020,6 +2022,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
 
 LOCK TABLES `tb_sys_ftp_tran` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` DISABLE KEYS */;
+INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR','Y','TXT','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */','test','admin','2015-05-15 10:17:26',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2053,6 +2056,7 @@ CREATE TABLE `tb_sys_ftp_tran_segm` (
 
 LOCK TABLES `tb_sys_ftp_tran_segm` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ftp_tran_segm` DISABLE KEYS */;
+INSERT INTO `tb_sys_ftp_tran_segm` VALUES ('223132133','FTP0001','TRAN0001','ID',0,3,'admin','2015-05-15 10:27:09',NULL,NULL),('3453452','FTP0001','TRAN0001','PAY_NO',3,6,'admin','2015-05-15 10:28:00',NULL,NULL),('46456456','FTP0001','TRAN0001','NAME',6,9,'admin','2015-05-15 10:28:29',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ftp_tran_segm` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2623,4 +2627,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-15  9:28:28
+-- Dump completed on 2015-05-15 11:24:25

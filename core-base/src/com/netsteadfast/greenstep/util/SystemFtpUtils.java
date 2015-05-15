@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -315,9 +316,10 @@ public class SystemFtpUtils {
 		return names;
 	}
 	
-	private static File getStoreDir() {
+	private static File getStoreDir() throws IOException {
 		File storeDir = new File( Constants.getWorkTmpDir() + "/" + SystemFtpUtils.class.getSimpleName() + 
 				"/" + System.currentTimeMillis() );
+		FileUtils.forceMkdir( storeDir );		
 		return storeDir;
 	}
 	

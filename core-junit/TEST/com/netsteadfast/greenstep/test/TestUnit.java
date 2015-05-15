@@ -1,5 +1,6 @@
 package com.netsteadfast.greenstep.test;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ import com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand;
 import com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand;
 import com.netsteadfast.greenstep.bsc.service.IScoreColorService;
 import com.netsteadfast.greenstep.bsc.service.logic.IOrganizationLogicService;
+import com.netsteadfast.greenstep.model.SystemFtpData;
+import com.netsteadfast.greenstep.model.SystemFtpResultObj;
 import com.netsteadfast.greenstep.po.hbm.BbScoreColor;
 import com.netsteadfast.greenstep.po.hbm.TbAccount;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
@@ -41,6 +44,7 @@ import com.netsteadfast.greenstep.service.ISysMailHelperService;
 import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.service.ISysUploadService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.util.SystemFtpUtils;
 import com.netsteadfast.greenstep.vo.AccountVO;
 import com.netsteadfast.greenstep.vo.ScoreColorVO;
 import com.netsteadfast.greenstep.vo.SysCodeVO;
@@ -51,6 +55,31 @@ import com.netsteadfast.greenstep.vo.SysVO;
 @Configuration
 @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public class TestUnit {
+	
+	@Test
+	public void testSystemFtp() throws Exception {
+		/*
+		 SystemFtpResultObj resultObj = SystemFtpUtils.getFileOnly("TRAN0001");		 
+		 List<File> files = resultObj.getFiles();
+		 if ( files == null || files.size() < 1 ) {
+			 System.out.println("no file.");
+			 return;
+		 }
+		 for (File file : files) {
+			 System.out.println( file.getPath() );
+		 }
+		 */
+		SystemFtpResultObj resultObj = SystemFtpUtils.getDatas("TRAN0001");
+		List<SystemFtpData> datas = resultObj.getDatas();
+		if ( datas == null ) {
+			System.out.println("no data.");
+			return;
+		}
+		for (SystemFtpData data : datas ) {
+			System.out.println( data.getContent() );
+			System.out.println( String.valueOf( data.getDatas() ) );			
+		}
+	}
 	
 	/*
 	@SuppressWarnings("unchecked")
