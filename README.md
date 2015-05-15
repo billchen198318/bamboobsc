@@ -10,6 +10,9 @@ Features:<br/>
 4. Can custom SQL query results show as Charts ( PIE, BAR, LINE, AREA ) on QCHARTS-WEB.<br/>
 5. Provides a simple OLAP query.<br/>
 <br/><br/>
+<h2>bambooBSC 0.5 architecture</h2>
+<img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/bamboobsc_05_web_arch.png"/><br/>
+<br/><br/>
 <h2>License</h2>
 bambooBSC is released under version 2.0 of the Apache Version 2.0
 <br/><br/>
