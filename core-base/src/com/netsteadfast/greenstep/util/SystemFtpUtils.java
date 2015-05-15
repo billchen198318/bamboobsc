@@ -39,6 +39,7 @@ import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.model.SystemFtpData;
 import com.netsteadfast.greenstep.model.SystemFtpModel;
 import com.netsteadfast.greenstep.model.SystemFtpResultObj;
@@ -96,10 +97,11 @@ public class SystemFtpUtils {
 		return sysFtpTranSegmService.findListByParams(paramMap);
 	}
 	
-	public static SystemFtpResultObj getFileOnly(String tranId) throws ServiceException, Exception {
+	public static SystemFtpResultObj getFileOnly(String tranId) throws ServiceException, Exception {		
 		if ( StringUtils.isBlank(tranId) ) {
 			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK) );
 		}
+		logger.info("getFileOnly begin...");
 		SystemFtpResultObj resultObj = new SystemFtpResultObj();
 		SysFtpTranVO tran = findSysFtpTran(tranId);
 		SysFtpVO ftp = findSysFtp( tran.getFtpId() );
@@ -107,11 +109,13 @@ public class SystemFtpUtils {
 		resultObj.setSysFtp(ftp);
 		resultObj.setSysFtpTran(tran);
 		resultObj.setSysFtpTranSegms(segms);
-		getFiles(resultObj);		
+		getFiles(resultObj);	
+		logger.info("getFileOnly end...");
 		return resultObj;
 	}
 	
 	public static SystemFtpResultObj getDatas(String tranId) throws ServiceException, Exception {
+		logger.info("getDatas begin...");
 		SystemFtpResultObj resultObj = getFileOnly(tranId);
 		SysFtpTranVO tran = resultObj.getSysFtpTran();
 		if (SystemFtpModel.TRAN_GET_TEXT.equals(tran.getTranType())) { // 分割 txt 檔案
@@ -122,6 +126,7 @@ public class SystemFtpUtils {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put(SystemFtpModel.RESULT_OBJ_VARIABLE, resultObj);
 		ScriptExpressionUtils.execute(tran.getExprType(), tran.getHelpExpression(), null, paramMap);
+		logger.info("getDatas end...");
 		return resultObj;
 	}
 	
@@ -155,15 +160,17 @@ public class SystemFtpUtils {
 			List<Map<String, String>> fillDataList = new LinkedList<Map<String, String>>();
 			logWarnFileSize(file);
 			List<String> strLines = FileUtils.readLines(file, resultObj.getSysFtpTran().getEncoding());
-			for (String strData : strLines) {
-				Map<String, String> dataMap = new HashMap<String, String>();
-				if ( strData.length() < 1 ) {
-					logger.warn( "The file: " + file.getPath() + " found zero line." );					
-					continue;
-				}
-				fillStrLine2Map(resultObj.getSysFtpTran(), segms, dataMap, strData);				
-				fillDataList.add(dataMap);
-			}
+			if (YesNo.YES.equals(resultObj.getSysFtpTran().getUseSegm())) {
+				for (String strData : strLines) {
+					Map<String, String> dataMap = new HashMap<String, String>();
+					if ( strData.length() < 1 ) {
+						logger.warn( "The file: " + file.getPath() + " found zero line." );					
+						continue;
+					}
+					fillStrLine2Map(resultObj.getSysFtpTran(), segms, dataMap, strData);				
+					fillDataList.add(dataMap);
+				}				
+			}			
 			ftpData.setContent( getContent(strLines) );			
 			ftpData.setDatas( fillDataList );
 			ftpData.setFile( file );			
