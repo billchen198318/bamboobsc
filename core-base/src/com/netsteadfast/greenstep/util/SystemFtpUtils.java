@@ -135,7 +135,7 @@ public class SystemFtpUtils {
 			return false;
 		}
 		/**
-		 * 這編 NAME_EXPRESSION 回傳的 names 檔案文字路境必須 如 : /var/upload/20150514.txt
+		 * 這裡的 NAME_EXPRESSION 回傳的 names 檔案文字路徑必須 如 : /var/upload/20150514.txt
 		 * **不可** 是 20150514.txt
 		 */
 		List<String> fileFullPathNames = getFileNames(tran.getExprType(), tran.getNameExpression()); 
@@ -169,6 +169,7 @@ public class SystemFtpUtils {
 			ftpData.setFile( file );			
 			datas.add(ftpData);
 		}
+		resultObj.setDatas(datas);
 	}
 	
 	private static void fillStrLine2Map(SysFtpTranVO tran, List<TbSysFtpTranSegm> segms, Map<String, String> dataMap, 
@@ -198,6 +199,7 @@ public class SystemFtpUtils {
 			ftpData.setFile( file );
 			datas.add(ftpData);
 		}		
+		resultObj.setDatas(datas);
 	}
 	
 	private static String getContent(List<String> strLines) {
