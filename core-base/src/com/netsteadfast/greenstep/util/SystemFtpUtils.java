@@ -98,6 +98,14 @@ public class SystemFtpUtils {
 		return sysFtpTranSegmService.findListByParams(paramMap);
 	}
 	
+	/**
+	 * 取出FTP或SFTP上的檔案
+	 * 
+	 * @param tranId	TB_SYS_FTP_TRAN.TRAN_ID
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
 	public static SystemFtpResultObj getFileOnly(String tranId) throws ServiceException, Exception {		
 		if ( StringUtils.isBlank(tranId) ) {
 			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK) );
@@ -115,6 +123,14 @@ public class SystemFtpUtils {
 		return resultObj;
 	}
 	
+	/**
+	 * 取出FTP或SFTP上的檔案, 並將TXT文字檔切割成資料放至map中, XML則只將內容讀取至變數中
+	 * 
+	 * @param tranId	TB_SYS_FTP_TRAN.TRAN_ID
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
 	public static SystemFtpResultObj getDatas(String tranId) throws ServiceException, Exception {
 		logger.info("getDatas begin...");
 		SystemFtpResultObj resultObj = getFileOnly(tranId);
@@ -131,6 +147,14 @@ public class SystemFtpUtils {
 		return resultObj;
 	}
 	
+	/**
+	 * 放檔案至FTP或SFTP上
+	 * 
+	 * @param tranId	TB_SYS_FTP_TRAN.TRAN_ID
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
 	public static boolean putFiles(String tranId) throws ServiceException, Exception {
 		if ( StringUtils.isBlank(tranId) ) {
 			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK) );
@@ -138,6 +162,7 @@ public class SystemFtpUtils {
 		SysFtpTranVO tran = findSysFtpTran(tranId);
 		SysFtpVO ftp = findSysFtp( tran.getFtpId() );
 		if (!SystemFtpModel.TRAN_PUT.equals(tran.getTranType())) {
+			logger.warn("Not a PUT mode TB_SYS_FTP_TRAN.TRAN_ID: " + tranId);
 			return false;
 		}
 		/**
@@ -151,6 +176,50 @@ public class SystemFtpUtils {
 			putFileBySFtp(ftp, tran, fileFullPathNames);			
 		}
 		return true;
+	}
+	
+	/**
+	 * 取出FTP或SFTP上的檔案, 然後將檔案產出成 TB_SYS_UPLOAD, 回傳產完的 UPLOAD OID
+	 * 
+	 * @param system
+	 * @param uploadType
+	 * @param isFileMode
+	 * @param tranId		TB_SYS_FTP_TRAN.TRAN_ID
+	 * @return
+	 * @throws ServiceException
+	 * @throws IOException
+	 * @throws Exception
+	 */
+	public static List<String> copyFileToUpload(String system, String uploadType, boolean isFileMode, 
+			String tranId) throws ServiceException, IOException, Exception {
+		SystemFtpResultObj resultObj = getFileOnly(tranId);
+		return copyFileToUpload(system, uploadType, isFileMode, resultObj);
+	}
+	
+	/**
+	 * 將檔案產出成 TB_SYS_UPLOAD, 回傳產完的 UPLOAD OID
+	 * 
+	 * @param system
+	 * @param uploadType
+	 * @param isFileMode
+	 * @param resultObj
+	 * @return
+	 * @throws ServiceException
+	 * @throws IOException
+	 * @throws Exception
+	 */
+	public static List<String> copyFileToUpload(String system, String uploadType, boolean isFileMode,
+			SystemFtpResultObj resultObj) throws ServiceException, IOException, Exception {
+		List<String> oids = new ArrayList<String>();
+		if (resultObj==null || resultObj.getFiles()==null || resultObj.getFiles().size()<1) {
+			return oids;
+		}
+		for (File file : resultObj.getFiles()) {
+			oids.add(
+					UploadSupportUtils.create(system, uploadType, isFileMode, file, file.getName()) 
+			);
+		}
+		return oids;
 	}
 	
 	private static void processText(SystemFtpResultObj resultObj) throws Exception {
