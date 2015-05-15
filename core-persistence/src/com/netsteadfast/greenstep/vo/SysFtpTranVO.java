@@ -31,6 +31,8 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	private String tranType;
 	private String cwd;
 	private String useSegm;
+	private String segmMode;
+	private String encoding;	
 	private String exprType;
 	private String nameExpression;
 	private String helpExpression;
@@ -41,8 +43,9 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	}	
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String cwd, String useSegm, String exprType,
-			String nameExpression, String helpExpression, String description) {
+			String tranType, String cwd, String useSegm, String segmMode,
+			String encoding, String exprType, String nameExpression,
+			String helpExpression, String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
@@ -50,15 +53,17 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.tranType = tranType;
 		this.cwd = cwd;
 		this.useSegm = useSegm;
+		this.segmMode = segmMode;
+		this.encoding = encoding;
 		this.exprType = exprType;
 		this.nameExpression = nameExpression;
 		this.helpExpression = helpExpression;
 		this.description = description;
 	}
-
+	
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String cwd, String useSegm, String exprType,
-			String description) {
+			String tranType, String cwd, String useSegm, String segmMode,
+			String encoding, String exprType, String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
@@ -66,12 +71,15 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.tranType = tranType;
 		this.cwd = cwd;
 		this.useSegm = useSegm;
+		this.segmMode = segmMode;
+		this.encoding = encoding;
 		this.exprType = exprType;
 		this.description = description;
 	}
-
+	
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String cwd, String useSegm, String exprType) {
+			String tranType, String cwd, String useSegm, String segmMode,
+			String encoding, String exprType) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
@@ -79,6 +87,8 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.tranType = tranType;
 		this.cwd = cwd;
 		this.useSegm = useSegm;
+		this.segmMode = segmMode;
+		this.encoding = encoding;
 		this.exprType = exprType;
 	}
 
@@ -129,6 +139,22 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setUseSegm(String useSegm) {
 		this.useSegm = useSegm;
+	}
+
+	public String getSegmMode() {
+		return segmMode;
+	}
+
+	public void setSegmMode(String segmMode) {
+		this.segmMode = segmMode;
+	}
+
+	public String getEncoding() {
+		return encoding;
+	}
+
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 	public String getExprType() {

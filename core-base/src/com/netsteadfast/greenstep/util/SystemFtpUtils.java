@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -54,6 +55,7 @@ import com.netsteadfast.greenstep.vo.SysFtpVO;
 @SuppressWarnings("unchecked")
 public class SystemFtpUtils {
 	protected static Logger logger=Logger.getLogger(SystemFtpUtils.class);
+	private static final int MAX_SIZE_KB = 128;
 	private static ISysFtpService<SysFtpVO, TbSysFtp, String> sysFtpService;
 	private static ISysFtpTranService<SysFtpTranVO, TbSysFtpTran, String> sysFtpTranService;
 	private static ISysFtpTranSegmService<SysFtpTranSegmVO, TbSysFtpTranSegm, String> sysFtpTranSegmService;
@@ -151,15 +153,15 @@ public class SystemFtpUtils {
 		for (File file : resultObj.getFiles()) {
 			SystemFtpData ftpData = new SystemFtpData();
 			List<Map<String, String>> fillDataList = new LinkedList<Map<String, String>>();
-			List<String> strLines = FileUtils.readLines(file);
+			logWarnFileSize(file);
+			List<String> strLines = FileUtils.readLines(file, resultObj.getSysFtpTran().getEncoding());
 			for (String strData : strLines) {
 				Map<String, String> dataMap = new HashMap<String, String>();
 				if ( strData.length() < 1 ) {
+					logger.warn( "The file: " + file.getPath() + " found zero line." );					
 					continue;
 				}
-				for (TbSysFtpTranSegm segm : segms) {
-					dataMap.put(segm.getName(), strData.substring(segm.getBegin(), segm.getEnd()) );
-				}	
+				fillStrLine2Map(resultObj.getSysFtpTran(), segms, dataMap, strData);				
 				fillDataList.add(dataMap);
 			}
 			ftpData.setContent( getContent(strLines) );			
@@ -168,12 +170,29 @@ public class SystemFtpUtils {
 			datas.add(ftpData);
 		}
 	}
+	
+	private static void fillStrLine2Map(SysFtpTranVO tran, List<TbSysFtpTranSegm> segms, Map<String, String> dataMap, 
+			String strLine) throws Exception {
+		if (SystemFtpModel.TRAN_SEGM_TEXT_MODE.equals(tran.getSegmMode())) { // 用字串切割
+			for (TbSysFtpTranSegm segm : segms) {
+				dataMap.put(segm.getName(), strLine.substring(segm.getBegin(), segm.getEnd()) );
+			}			
+		} else { // 用 byte 切割
+			byte[] dataBytes = strLine.getBytes( tran.getEncoding() );
+			for (TbSysFtpTranSegm segm : segms) {
+				String dataStr = new String(
+						ArrayUtils.subarray(dataBytes, segm.getBegin(), segm.getEnd()), tran.getEncoding());
+				dataMap.put(segm.getName(), dataStr);
+			}
+		}
+	}
 
 	private static void processXml(SystemFtpResultObj resultObj) throws Exception {
 		List<SystemFtpData> datas = new LinkedList<SystemFtpData>();			
 		for (File file : resultObj.getFiles()) {
 			SystemFtpData ftpData = new SystemFtpData();
-			String content = FileUtils.readFileToString(file);			
+			logWarnFileSize(file);
+			String content = FileUtils.readFileToString(file, resultObj.getSysFtpTran().getEncoding());	
 			ftpData.setContent( content );			
 			ftpData.setDatas( null );
 			ftpData.setFile( file );
@@ -300,6 +319,14 @@ public class SystemFtpUtils {
 			files.add(file);
 		}
 		resultObj.setFiles(files);		
+	}
+	
+	private static void logWarnFileSize(File file) throws Exception {
+		long bytes = file.length();
+		if ( bytes > 0 && (bytes/1024)>MAX_SIZE_KB ) {
+			logger.warn("The file: " + file.getPath() + " is bigger then " + MAX_SIZE_KB + 
+					" kb size. please change SYS_FTP.TYPE type to " + SystemFtpModel.TRAN_GET );
+		}
 	}
 
 }

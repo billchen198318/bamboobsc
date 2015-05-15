@@ -27,6 +27,8 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	private String tranType;
 	private String cwd;
 	private String useSegm;
+	private String segmMode;
+	private String encoding;
 	private String exprType;
 	private String nameExpression;
 	private String helpExpression;
@@ -92,6 +94,24 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	
 	public void setUseSegm(String useSegm) {
 		this.useSegm = useSegm;
+	}
+	
+	@Column(name="SEGM_MODE")
+	public String getSegmMode() {
+		return segmMode;
+	}
+	
+	public void setSegmMode(String segmMode) {
+		this.segmMode = segmMode;
+	}
+	
+	@Column(name="ENCODING")
+	public String getEncoding() {
+		return encoding;
+	}
+	
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 	
 	@Column(name="EXPR_TYPE")

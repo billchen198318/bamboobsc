@@ -30,7 +30,15 @@
 		<field>
 			<a>useSegm</a>
 			<b>useSegm</b>
-		</field>		
+		</field>						
+		<field>
+			<a>segmMode</a>
+			<b>segmMode</b>
+		</field>
+		<field>
+			<a>encoding</a>
+			<b>encoding</b>
+		</field>						
 		<field>
 			<a>exprType</a>
 			<b>exprType</b>
@@ -76,6 +84,14 @@
 			<a>useSegm</a>
 			<b>useSegm</b>
 		</field>
+		<field>
+			<a>segmMode</a>
+			<b>segmMode</b>
+		</field>
+		<field>
+			<a>encoding</a>
+			<b>encoding</b>
+		</field>		
 		<field>
 			<a>exprType</a>
 			<b>exprType</b>

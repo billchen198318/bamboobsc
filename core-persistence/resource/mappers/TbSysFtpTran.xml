@@ -10,7 +10,9 @@
 		<result column="TRAN_ID" property="tranId"/>		
 		<result column="TRAN_TYPE" property="tranType"/>
 		<result column="CWD" property="cwd"/>		
-		<result column="USE_SEGM" property="useSegm"/>
+		<result column="USE_SEGM" property="useSegm"/>		
+		<result column="SEGM_MODE" property="segmMode"/>
+		<result column="ENCODING" property="encoding"/>		
 		<result column="EXPR_TYPE" property="exprType"/>		
 		<result column="NAME_EXPRESSION" property="nameExpression"/>		
 		<result column="HELP_EXPRESSION" property="helpExpression"/>		
