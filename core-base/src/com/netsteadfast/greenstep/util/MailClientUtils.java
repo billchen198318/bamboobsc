@@ -145,7 +145,7 @@ public class MailClientUtils {
 			}
 		}
 		MimeMessage message = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, Constants.BASE_ENCODING);
 		helper.setFrom(from);
 		helper.setTo(to);
 		helper.setSubject(subject);

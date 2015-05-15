@@ -190,7 +190,7 @@ public class AnalyticsProcessAction extends BaseJsonAction {
 		OlapCatalogVO catalog = this.loadOlapCatalog(this.getFields().get("catalogOid"));
 		OlapConfVO config = this.loadOlapConfig(this.getFields().get("configOid"));
 		catalogFile = OlapUtils.writeCatalogContentToFile( catalog.getId()+"_"+super.getAccountOid(), 
-				new String(catalog.getContent(), "utf-8") );
+				new String(catalog.getContent(), Constants.BASE_ENCODING) );
 		String mondrianUrl = OlapUtils.getMondrianUrl(config.getJdbcUrl(), config.getJdbcDrivers(), catalogFile.getPath());
 		this.content = Pivot4JUtils.rendererHtml(
 				mondrianUrl, this.getFields().get("expression"), showDimensionTitle, showParentMembers);	
@@ -204,7 +204,7 @@ public class AnalyticsProcessAction extends BaseJsonAction {
 		File file = null;
 		try {
 			file = new File( Constants.getWorkTmpDir() + "/" + super.getUuid() + ".htm" );
-			FileUtils.writeStringToFile(file, datas, "utf-8");
+			FileUtils.writeStringToFile(file, datas, Constants.BASE_ENCODING);
 			this.oid = UploadSupportUtils.create(Constants.getSystem(), UploadTypes.IS_TEMP, true, file, "analytics-export.xlsx");
 		} catch (Exception e) {
 			throw e;
@@ -227,7 +227,7 @@ public class AnalyticsProcessAction extends BaseJsonAction {
 		OlapCatalogVO catalog = this.loadOlapCatalog(this.getFields().get("catalogOid"));
 		OlapConfVO config = this.loadOlapConfig(this.getFields().get("configOid"));
 		catalogFile = OlapUtils.writeCatalogContentToFile( catalog.getId()+"_"+super.getAccountOid(), 
-				new String(catalog.getContent(), "utf-8") );
+				new String(catalog.getContent(), Constants.BASE_ENCODING) );
 		String mondrianUrl = OlapUtils.getMondrianUrl(config.getJdbcUrl(), config.getJdbcDrivers(), catalogFile.getPath());
 		File file = null;
 		try {

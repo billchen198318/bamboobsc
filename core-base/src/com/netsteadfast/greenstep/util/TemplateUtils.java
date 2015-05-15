@@ -36,6 +36,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.netsteadfast.greenstep.base.AppContext;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -93,7 +94,7 @@ public class TemplateUtils {
 		templateLoader.putTemplate("sysTemplate", resource);
 		Configuration cfg = new Configuration( Configuration.VERSION_2_3_21 );
 		cfg.setTemplateLoader(templateLoader);
-		Template template = cfg.getTemplate("sysTemplate", "utf-8");
+		Template template = cfg.getTemplate("sysTemplate", Constants.BASE_ENCODING);
 		Writer out = new StringWriter();
 		template.process(params, out);
 		return out.toString();
@@ -157,7 +158,7 @@ public class TemplateUtils {
 	public static String getResourceSrc(ClassLoader classLoader, String metaInfFile) {
 		String out = "";
 		try {
-			out = IOUtils.toString(classLoader.getResource(metaInfFile).openStream(), "UTF-8");
+			out = IOUtils.toString(classLoader.getResource(metaInfFile).openStream(), Constants.BASE_ENCODING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
@@ -181,7 +182,7 @@ public class TemplateUtils {
 		templateLoader.putTemplate("resourceTemplate", getResourceSrc(classLoader, templateResource) );
 		Configuration cfg = new Configuration( Configuration.VERSION_2_3_21 );
 		cfg.setTemplateLoader(templateLoader);
-		Template template = cfg.getTemplate("resourceTemplate", "utf-8");
+		Template template = cfg.getTemplate("resourceTemplate", Constants.BASE_ENCODING);
 		Writer out = new StringWriter();
 		template.process(parameter, out);
 		return out.toString();

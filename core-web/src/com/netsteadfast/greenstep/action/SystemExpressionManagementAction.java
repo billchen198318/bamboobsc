@@ -87,7 +87,7 @@ public class SystemExpressionManagementAction extends BaseSupportAction implemen
 				Constants.getSystem(), 
 				UploadTypes.IS_TEMP, 
 				false, 
-				this.sysExpression.getContent().getBytes("utf-8"), 
+				this.sysExpression.getContent().getBytes(Constants.BASE_ENCODING), 
 				this.sysExpression.getExprId()+".txt");			
 	}
 	

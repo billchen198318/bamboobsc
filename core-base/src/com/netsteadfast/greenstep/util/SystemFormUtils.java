@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.netsteadfast.greenstep.base.AppContext;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -148,7 +149,7 @@ public class SystemFormUtils {
 	public static void writePage(SysFormTemplateVO template, HttpServletRequest request) throws Exception {
 		String pageFileFullPath = request.getSession().getServletContext().getRealPath("/");
 		pageFileFullPath += FORM_PAGE_PATH + template.getFileName();
-		if ( !FSUtils.writeStr2(pageFileFullPath, new String(template.getContent(), "utf-8") ) ) {
+		if ( !FSUtils.writeStr2(pageFileFullPath, new String(template.getContent(), Constants.BASE_ENCODING) ) ) {
 			throw new Exception("create page file error.");
 		}		
 		logger.info("write template file: " + pageFileFullPath);
@@ -157,7 +158,7 @@ public class SystemFormUtils {
 	public static void writePage2(TbSysFormTemplate template, HttpServletRequest request) throws Exception {
 		String pageFileFullPath = request.getSession().getServletContext().getRealPath("/");
 		pageFileFullPath += FORM_PAGE_PATH + template.getFileName();
-		if ( !FSUtils.writeStr2(pageFileFullPath, new String(template.getContent(), "utf-8") ) ) {
+		if ( !FSUtils.writeStr2(pageFileFullPath, new String(template.getContent(), Constants.BASE_ENCODING) ) ) {
 			throw new Exception("create page file error.");
 		}
 		logger.info("write template file: " + pageFileFullPath);
@@ -170,7 +171,7 @@ public class SystemFormUtils {
 		
 		Map<String, String> resultMap = new HashMap<String, String>();
 		SysFormVO form = findForm( formMethod.getFormId() );
-		String expression = new String(formMethod.getExpression(), "utf-8");
+		String expression = new String(formMethod.getExpression(), Constants.BASE_ENCODING);
 		Map<String, Object> paramMap = getParameters(
 				formMethod, actionObj, actionDatas, pageOf, searchValue, items, fields, fieldsId);
 		ScriptExpressionUtils.execute(

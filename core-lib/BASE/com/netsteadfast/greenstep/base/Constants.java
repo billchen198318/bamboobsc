@@ -33,6 +33,11 @@ import com.netsteadfast.greenstep.base.model.YesNo;
 public class Constants {	
 	
 	/**
+	 * 不要更改這個設定
+	 */
+	public static final String BASE_ENCODING = "utf-8";
+	
+	/**
 	 * EncryptorUtils 要用的 key1
 	 */
 	public static final String ENCRYPTOR_KEY1 = "GS_98143BSC59043";

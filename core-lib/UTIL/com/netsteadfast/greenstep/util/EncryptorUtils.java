@@ -38,8 +38,8 @@ public class EncryptorUtils {
 	
 	public static String encrypt(String key1, String key2, String value) {
 		try {
-			IvParameterSpec iv = new IvParameterSpec(key2.getBytes("UTF-8"));
-            SecretKeySpec skeySpec = new SecretKeySpec(key1.getBytes("UTF-8"), "AES");
+			IvParameterSpec iv = new IvParameterSpec(key2.getBytes(Constants.BASE_ENCODING));
+            SecretKeySpec skeySpec = new SecretKeySpec(key1.getBytes(Constants.BASE_ENCODING), "AES");
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
             byte[] encrypted = cipher.doFinal(value.getBytes());
@@ -53,8 +53,8 @@ public class EncryptorUtils {
 
     public static String decrypt(String key1, String key2, String encrypted) {
         try {
-            IvParameterSpec iv = new IvParameterSpec(key2.getBytes("UTF-8"));
-            SecretKeySpec skeySpec = new SecretKeySpec(key1.getBytes("UTF-8"), "AES");
+            IvParameterSpec iv = new IvParameterSpec(key2.getBytes(Constants.BASE_ENCODING));
+            SecretKeySpec skeySpec = new SecretKeySpec(key1.getBytes(Constants.BASE_ENCODING), "AES");
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
             byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));

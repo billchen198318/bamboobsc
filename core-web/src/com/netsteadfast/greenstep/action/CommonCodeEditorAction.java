@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -59,7 +60,7 @@ public class CommonCodeEditorAction extends BaseSupportAction {
 	public String execute() throws Exception {
 		try {
 			if ( !StringUtils.isBlank(this.oid) ) {
-				this.codeContent = new String( UploadSupportUtils.getDataBytes(this.oid) , "utf-8" );
+				this.codeContent = new String( UploadSupportUtils.getDataBytes(this.oid) , Constants.BASE_ENCODING );
 			}			
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());

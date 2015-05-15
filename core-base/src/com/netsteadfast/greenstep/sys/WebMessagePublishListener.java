@@ -68,7 +68,7 @@ public class WebMessagePublishListener implements ServletContextListener {
 						for (AsyncContext context : asyncContexts) {
 							try {
 								WebMessagePublishBaseObj publishObj = null;
-								context.getResponse().setContentType("application/json; charset=utf-8");
+								context.getResponse().setContentType("application/json; charset=" + Constants.BASE_ENCODING );
 								String id = StringUtils.defaultString(context.getRequest().getParameter("id")).trim();
 								String key = id + ":" + Constants.getSystem();
 								if (!StringUtils.isBlank(id)) {

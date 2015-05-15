@@ -145,7 +145,7 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
         if (!this.isAjaxRequest(httpServletRequest)) {
         	httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + this.getSuccessUrl());
         } else {
-    		response.setCharacterEncoding("UTF-8");
+    		response.setCharacterEncoding( Constants.BASE_ENCODING );
     		response.setContentType("application/json");
     		response.getWriter().write(Constants.NO_AUTHZ_JSON_DATA);
         }
@@ -210,7 +210,7 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
 			}
     	}    	
     	if (isAjaxRequest((HttpServletRequest)request)) {
-    		response.setCharacterEncoding("UTF-8");
+    		response.setCharacterEncoding( Constants.BASE_ENCODING );
     		response.setContentType("application/json");
     		response.getWriter().write(Constants.NO_LOGIN_JSON_DATA);
     		return;

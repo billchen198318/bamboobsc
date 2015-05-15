@@ -88,13 +88,13 @@ public class AggregationMethodManagementAction extends BaseSupportAction impleme
 				Constants.getSystem(), 
 				UploadTypes.IS_TEMP, 
 				false, 
-				this.aggr.getExpression1().getBytes("utf-8"), 
+				this.aggr.getExpression1().getBytes(Constants.BASE_ENCODING), 
 				this.aggr.getAggrId()+"_p1.txt");
 		this.uploadExprOid2 = UploadSupportUtils.create(
 				Constants.getSystem(), 
 				UploadTypes.IS_TEMP, 
 				false, 
-				this.aggr.getExpression2().getBytes("utf-8"), 
+				this.aggr.getExpression2().getBytes(Constants.BASE_ENCODING), 
 				this.aggr.getAggrId()+"_p2.txt");		
 	}
 	

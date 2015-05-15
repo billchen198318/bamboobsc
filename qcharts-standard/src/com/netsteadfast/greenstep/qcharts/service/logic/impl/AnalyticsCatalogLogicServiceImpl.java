@@ -34,6 +34,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -102,7 +103,7 @@ public class AnalyticsCatalogLogicServiceImpl extends BaseLogicService implement
 			return;
 		}
 		olapCatalog.setContent( UploadSupportUtils.getDataBytes(uploadOid) );	
-		String schemaContent = new String( olapCatalog.getContent(), "utf-8" );
+		String schemaContent = new String( olapCatalog.getContent(), Constants.BASE_ENCODING );
 		OlapUtils.testMondrianCatalog(schemaContent);
 	}
 

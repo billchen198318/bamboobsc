@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -77,7 +78,7 @@ public class VisionManagementAction extends BaseSupportAction implements IBaseAd
 		}
 		this.vision = result.getValue();
 		if (this.vision.getContent() != null) {
-			this.visionContent = new String(this.vision.getContent(), "utf-8");
+			this.visionContent = new String(this.vision.getContent(), Constants.BASE_ENCODING);
 		}
 	}	
 	

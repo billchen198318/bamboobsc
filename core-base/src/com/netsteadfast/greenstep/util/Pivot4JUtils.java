@@ -45,7 +45,7 @@ import com.netsteadfast.greenstep.base.Constants;
 
 public class Pivot4JUtils {	
 	public static final String PIVOT4J_HTML_CSS = "META-INF/pivot4j-html-table-css.css";
-	private static final String _body_default = "<HTML><HEAD><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><style>${style}</style></HEAD><BODY>${body}</BODY></HTML>";
+	private static final String _body_default = "<HTML><HEAD><meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + Constants.BASE_ENCODING + "\"><style>${style}</style></HEAD><BODY>${body}</BODY></HTML>";
 	private static String _htmlCss = "";
 	
 	public static String getHtmlCss() throws Exception {
@@ -53,7 +53,7 @@ public class Pivot4JUtils {
 			return _htmlCss;
 		}
 		InputStream is = Pivot4JUtils.class.getClassLoader().getResource( PIVOT4J_HTML_CSS ).openStream();
-		_htmlCss = IOUtils.toString(is, "utf-8");
+		_htmlCss = IOUtils.toString(is, Constants.BASE_ENCODING);
 		return _htmlCss;
 	}
 	

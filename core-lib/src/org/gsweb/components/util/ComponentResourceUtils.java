@@ -29,6 +29,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.netsteadfast.greenstep.base.Constants;
+
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -52,7 +54,7 @@ public class ComponentResourceUtils {
 		if (out==null) {
 			try {
 				out=org.apache.commons.io.IOUtils.toString(
-						c.getClassLoader().getResource(metaInfJSFile).openStream(), "UTF-8");
+						c.getClassLoader().getResource(metaInfJSFile).openStream(), Constants.BASE_ENCODING);
 				put(key, out);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -67,7 +69,7 @@ public class ComponentResourceUtils {
 		if (out==null) {
 			try {
 				out=org.apache.commons.io.IOUtils.toString(
-						c.getClassLoader().getResource(metaInfFile).openStream(), "UTF-8");
+						c.getClassLoader().getResource(metaInfFile).openStream(), Constants.BASE_ENCODING);
 				put(key, out);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -81,7 +83,7 @@ public class ComponentResourceUtils {
 		templateLoader.putTemplate("resourceTemplate", getResourceSrc(c, type, metaInfFile) );
 		Configuration cfg = new Configuration( Configuration.VERSION_2_3_21 );
 		cfg.setTemplateLoader(templateLoader);
-		Template template = cfg.getTemplate("resourceTemplate", "utf-8");
+		Template template = cfg.getTemplate("resourceTemplate", Constants.BASE_ENCODING);
 		Writer out = new StringWriter();
 		template.process(params, out);
 		return out.toString();

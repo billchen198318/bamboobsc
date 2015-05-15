@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -105,7 +106,7 @@ public class AnalyticsCatalogSaveOrUpdateAction extends BaseJsonAction {
 		if ( null == datas ) {
 			throw new Exception("error, upload catalog xml file is null!");
 		}
-		String xmlContent = new String(datas, "utf-8");
+		String xmlContent = new String(datas, Constants.BASE_ENCODING);
 		if ( xmlContent.indexOf("Schema") == -1 ) {
 			throw new Exception("error, upload file not a Mondrian catalog xml!");
 		}

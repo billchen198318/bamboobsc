@@ -34,6 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -179,7 +180,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}
 		this.olapMdx = result.getValue();
-		this.getFields().put("expression", new String(this.olapMdx.getExpression(), "utf-8") );
+		this.getFields().put("expression", new String(this.olapMdx.getExpression(), Constants.BASE_ENCODING) );
 		this.success = IS_YES;
 	}
 	

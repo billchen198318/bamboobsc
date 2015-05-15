@@ -32,10 +32,12 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.netsteadfast.greenstep.base.Constants;
+
 public class CharsetFilter implements Filter {
 	private FilterConfig filterConfig;
-	private String contentType = "text/html; charset=UTF-8";
-	private String encoding = "UTF-8";
+	private String contentType = "text/html; charset=" + Constants.BASE_ENCODING;
+	private String encoding = Constants.BASE_ENCODING;
 	
 	@Override
 	public void destroy() {
