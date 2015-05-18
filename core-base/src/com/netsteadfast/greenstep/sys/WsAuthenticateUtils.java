@@ -40,7 +40,7 @@ public class WsAuthenticateUtils {
     		throw new Exception("null key.");
     	}
     	return EncryptorUtils.encrypt(Constants.ENCRYPTOR_KEY1, Constants.ENCRYPTOR_KEY2, 
-    			currentId + ";" + account );
+    			currentId + ";" + account + ";" + System.currentTimeMillis() );
     }
     
     public static boolean valid(String authenticate) throws Exception {
@@ -53,7 +53,7 @@ public class WsAuthenticateUtils {
     		throw new Exception("null key.");
     	}
     	String id[] = idStr.split(";");
-    	if ( id.length!=2 ) {
+    	if ( id.length!=3 ) {
     		return false;
     	}
     	if ( StringUtils.isBlank(id[0]) || StringUtils.isBlank(id[1]) ) {
