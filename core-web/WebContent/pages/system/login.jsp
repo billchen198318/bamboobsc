@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <style type="text/css">
 <!--
 .style1 {
-	color: #000000;
+	color: #585858;
 	font-weight: bold;
 }
 .style2 {
@@ -63,11 +63,11 @@ function pageMessage() {
           <td width="135" align="left"><s:textfield name="captcha" id="captcha" maxLength="12" maxSize="12" theme="simple"/></td>      
         </tr>  
         <tr>  
-          <td width="90" align="right"><span class="style1">ACCOUNT</span></td>
+          <td width="90" align="right"><span class="style1">Account:</span></td>
           <td width="135" align="left"><s:textfield name="username" id="username" maxLength="12" maxSize="12" theme="simple"/></td>
         </tr>
         <tr> 
-          <td width="90" align="right"><span class="style1">PASSWORD</span></td>
+          <td width="90" align="right"><span class="style1">Password:</span></td>
           <td width="135" align="left"><s:password name="password" id="password" maxLength="25" maxSize="12" theme="simple"/></td>
         </tr> 
         <tr> 

@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <style type="text/css">
 <!--
 .style1 {
-	color: #000000;
+	color: #585858;
 	font-weight: bold;
 }
 .style2 {
@@ -52,7 +52,7 @@ function pageMessage() {
 <s:form name="loginForm" id="loginForm" action="login" method="post">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
-      <td bgcolor="#ffffff"><img src="./images/original.jpg" width="260" height="30" /></td>
+      <td bgcolor="#ffffff"><img src="./images/original.jpg" width="220" height="30" /></td>
     </tr>
     <tr>
       <td height="180" bgcolor="#ffffff">
@@ -63,11 +63,11 @@ function pageMessage() {
           <td width="135" align="left"><s:textfield name="captcha" id="captcha" maxLength="12" maxSize="12" theme="simple"/></td>      
         </tr>  
         <tr>  
-          <td width="90" align="right"><span class="style1">ACCOUNT</span></td>
+          <td width="90" align="right"><span class="style1">Account:</span></td>
           <td width="135" align="left"><s:textfield name="username" id="username" maxLength="12" maxSize="12" theme="simple"/></td>
         </tr>
         <tr> 
-          <td width="90" align="right"><span class="style1">PASSWORD</span></td>
+          <td width="90" align="right"><span class="style1">Password:</span></td>
           <td width="135" align="left"><s:password name="password" id="password" maxLength="25" maxSize="12" theme="simple"/></td>
         </tr> 
         <tr> 
@@ -78,7 +78,7 @@ function pageMessage() {
 	  </td>
     </tr>
     <tr>
-      <td><span class="style2"><span class="style3">bamboo</span>CORE <span class="style4">0.5</span> </span></td>
+      <td><span class="style2"><span class="style3">bamboo</span>BSC <span class="style4">0.5</span> </span></td>
     </tr>
   </table>
 </s:form>
