@@ -1,6 +1,6 @@
 # bamboobsc
 
-<h2>bambooBSC is an opensource Balanced Scorecard (BSC) Business Intelligence, It was developed on the JAVA platform</h2>
+<h2>bambooBSC is an opensource Balanced Scorecard (BSC) Business Intelligence</h2>
 <br/>
 <br/>
 Features:<br/>
