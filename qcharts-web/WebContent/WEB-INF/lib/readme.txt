@@ -388,11 +388,16 @@ java-cup-11b-runtime.jar
 
 http://www.jcraft.com/jsch/	
 -------------------------
-jsch-0.1.50.jar				
+jsch-0.1.52.jar
 
 
-
-
+http://pdfbox.apache.org/index.html
+-------------------------
+pdfbox-1.8.9.jar
+fontbox-1.8.9.jar
+jempbox-1.8.9.jar
+preflight-1.8.9.jar
+xmpbox-1.8.9.jar
 
 
 
