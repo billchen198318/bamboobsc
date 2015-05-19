@@ -16,6 +16,12 @@ Features:<br/>
 <h2>License</h2>
 bambooBSC is released under version 2.0 of the Apache Version 2.0
 <br/><br/>
+<h2>install document:</h2>
+<a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/install.pdf">install.pdf</a>
+<br/><br/>
+<h2>manual document:</h2>
+<a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/bamboobsc-guide.pdf">bamboobsc-guide.pdf</a>
+<br/><br/>
 <h2>Download:</h2> http://sourceforge.net/projects/bamboobsc/
 <br/><br/>
 contact: chen.xin.nien@gmail.com
