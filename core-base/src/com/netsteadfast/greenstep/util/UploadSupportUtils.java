@@ -57,6 +57,7 @@ import com.netsteadfast.greenstep.vo.SysUploadVO;
 @SuppressWarnings("unchecked")
 public class UploadSupportUtils {
 	protected static Logger logger=Logger.getLogger(UploadSupportUtils.class);
+	public static final String HELP_EXPRESSION_VARIABLE = "datas";
 	private static ISysUploadService<SysUploadVO, TbSysUpload, String> sysUploadService;
 	private static ISysUploadTranService<SysUploadTranVO, TbSysUploadTran, String> sysUploadTranService;
 	private static ISysUploadTranSegmService<SysUploadTranSegmVO, TbSysUploadTranSegm, String> sysUploadTranSegmService;
@@ -105,6 +106,9 @@ public class UploadSupportUtils {
 		for (String str : txtLines) {			
 			datas.add( fillDataMap(tran, segms, str) );
 		}
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put(HELP_EXPRESSION_VARIABLE, datas);
+		ScriptExpressionUtils.execute(tran.getExprType(), tran.getHelpExpression(), null, paramMap);
 		return datas;
 	}
 	
