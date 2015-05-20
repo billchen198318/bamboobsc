@@ -21,17 +21,9 @@
  */
 package com.netsteadfast.greenstep.model;
 
-public class SystemFtpModel {
+public class TransformSegment {
 	
-	public static final String FTP = "FTP"; // ftp
-	public static final String SFTP = "SFTP"; // sftp
+	public static final String TEXT_MODE = "TEXT"; // 以字串分割文字檔
+	public static final String BYTE_MODE = "BYTE"; // 以byte分割文字檔
 	
-	public static final String TRAN_GET_TEXT = "GET-TXT"; // 取檔for txt
-	public static final String TRAN_GET_XML = "GET-XML"; // 取檔for xml
-	public static final String TRAN_GET = "GET"; // 取檔
-	public static final String TRAN_PUT = "PUT"; // 放檔	
-	
-	public static final String RETURN_FILE_VARIABLE = "fileName"; // 取出的檔名 tb_sys_ftp_tran.name_expression 固定的變數名稱
-	public static final String RESULT_OBJ_VARIABLE = "resultObj"; // 幫助 tb_sys_ftp_tran.help_expression 放入expression的變數名稱
-
 }

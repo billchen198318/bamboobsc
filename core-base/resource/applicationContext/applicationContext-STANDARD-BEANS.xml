@@ -43,6 +43,8 @@
     <import resource="classpath*:applicationContext/standard/applicationContext-sysFtp.xml" />
     <import resource="classpath*:applicationContext/standard/applicationContext-sysFtpTran.xml" />
     <import resource="classpath*:applicationContext/standard/applicationContext-sysFtpTranSegm.xml" />
+    <import resource="classpath*:applicationContext/standard/applicationContext-sysUploadTran.xml" />    
+    <import resource="classpath*:applicationContext/standard/applicationContext-sysUploadTranSegm.xml" />    
     
     
     <!-- common util -->

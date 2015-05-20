@@ -2522,6 +2522,71 @@ LOCK TABLES `tb_sys_upload` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_upload_tran`
+--
+
+DROP TABLE IF EXISTS `tb_sys_upload_tran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_upload_tran` (
+  `OID` char(36) NOT NULL,
+  `TRAN_ID` varchar(10) NOT NULL,
+  `SEGM_MODE` varchar(10) NOT NULL DEFAULT 'BYTE',
+  `ENCODING` varchar(10) NOT NULL,
+  `EXPR_TYPE` varchar(10) NOT NULL,
+  `HELP_EXPRESSION` varchar(8000) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TRAN_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_upload_tran`
+--
+
+LOCK TABLES `tb_sys_upload_tran` WRITE;
+/*!40000 ALTER TABLE `tb_sys_upload_tran` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_upload_tran` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_upload_tran_segm`
+--
+
+DROP TABLE IF EXISTS `tb_sys_upload_tran_segm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_upload_tran_segm` (
+  `OID` char(36) NOT NULL,
+  `TRAN_ID` varchar(10) NOT NULL,
+  `NAME` varchar(50) NOT NULL,
+  `BEGIN` int(4) NOT NULL,
+  `END` int(4) NOT NULL,
+  `CUSERID` varchar(50) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TRAN_ID`,`NAME`),
+  KEY `IDX_1` (`TRAN_ID`,`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_upload_tran_segm`
+--
+
+LOCK TABLES `tb_sys_upload_tran_segm` WRITE;
+/*!40000 ALTER TABLE `tb_sys_upload_tran_segm` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_upload_tran_segm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_usess`
 --
 
@@ -2627,4 +2692,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-15 11:24:25
+-- Dump completed on 2015-05-20 13:44:04

@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysUploadTranSegm">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysUploadTranSegm" id="baseResultMap">
+		<id column="OID" property="oid"/>	
+		<result column="TRAN_ID" property="tranId"/>		
+		<result column="NAME" property="name"/>		
+		<result column="BEGIN" property="begin"/>			
+		<result column="END" property="end"/>				
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_upload_tran_segm where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="tranId != null">
+			AND TRAN_ID = #{tranId}
+		</if>			
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>																						
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_upload_tran_segm where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="tranId != null">
+			AND TRAN_ID = #{tranId}
+		</if>			
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>			
+	</select>	
+	
+</mapper>

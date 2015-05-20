@@ -44,6 +44,7 @@ import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.model.SystemFtpData;
 import com.netsteadfast.greenstep.model.SystemFtpModel;
 import com.netsteadfast.greenstep.model.SystemFtpResultObj;
+import com.netsteadfast.greenstep.model.TransformSegment;
 import com.netsteadfast.greenstep.po.hbm.TbSysFtp;
 import com.netsteadfast.greenstep.po.hbm.TbSysFtpTran;
 import com.netsteadfast.greenstep.po.hbm.TbSysFtpTranSegm;
@@ -251,7 +252,7 @@ public class SystemFtpUtils {
 	
 	private static void fillStrLine2Map(SysFtpTranVO tran, List<TbSysFtpTranSegm> segms, Map<String, String> dataMap, 
 			String strLine) throws Exception {
-		if (SystemFtpModel.TRAN_SEGM_TEXT_MODE.equals(tran.getSegmMode())) { // 用字串切割
+		if (TransformSegment.TEXT_MODE.equals(tran.getSegmMode())) { // 用字串切割
 			for (TbSysFtpTranSegm segm : segms) {
 				dataMap.put(segm.getName(), strLine.substring(segm.getBegin(), segm.getEnd()) );
 			}			
