@@ -26,11 +26,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -39,19 +41,71 @@ import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.model.TransformSegment;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.TbSysUpload;
+import com.netsteadfast.greenstep.po.hbm.TbSysUploadTran;
+import com.netsteadfast.greenstep.po.hbm.TbSysUploadTranSegm;
 import com.netsteadfast.greenstep.service.ISysUploadService;
+import com.netsteadfast.greenstep.service.ISysUploadTranSegmService;
+import com.netsteadfast.greenstep.service.ISysUploadTranService;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.vo.SysUploadTranSegmVO;
+import com.netsteadfast.greenstep.vo.SysUploadTranVO;
 import com.netsteadfast.greenstep.vo.SysUploadVO;
 
 @SuppressWarnings("unchecked")
 public class UploadSupportUtils {
 	protected static Logger logger=Logger.getLogger(UploadSupportUtils.class);
 	private static ISysUploadService<SysUploadVO, TbSysUpload, String> sysUploadService;
+	private static ISysUploadTranService<SysUploadTranVO, TbSysUploadTran, String> sysUploadTranService;
+	private static ISysUploadTranSegmService<SysUploadTranSegmVO, TbSysUploadTranSegm, String> sysUploadTranSegmService;
 	
 	static {
 		sysUploadService = (ISysUploadService<SysUploadVO, TbSysUpload, String>)AppContext.getBean("core.service.SysUploadService");
+		sysUploadTranService = (ISysUploadTranService<SysUploadTranVO, TbSysUploadTran, String>)
+				AppContext.getBean("core.service.SysUploadTranService");
+		sysUploadTranSegmService = (ISysUploadTranSegmService<SysUploadTranSegmVO, TbSysUploadTranSegm, String>)
+				AppContext.getBean("core.service.SysUploadTranSegmService");
+	}
+	
+	public static SysUploadTranVO findSysUploadTran(String tranId) throws ServiceException, Exception {
+		SysUploadTranVO tran = new SysUploadTranVO();
+		tran.setTranId( tranId );
+		DefaultResult<SysUploadTranVO> result = sysUploadTranService.findByUK(tran);
+		if ( result.getValue()==null ) {
+			throw new ServiceException( result.getSystemMessage().getValue() );
+		}
+		tran = result.getValue();
+		return tran;
+	}
+	
+	public static List<TbSysUploadTranSegm> findSysUploadTranSegm(String tranId) throws ServiceException, Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("tranId", tranId);		
+		return sysUploadTranSegmService.findListByParams(paramMap);
+	}
+	
+	/**
+	 * 把 上傳(upload) 的文字檔切割成 map 
+	 * 
+	 * @param uploadOid
+	 * @param tranId
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	public static List<Map<String, String>> getTransformSegmentData(String uploadOid, String tranId) 
+			throws ServiceException, Exception {
+		List<Map<String, String>> datas = new LinkedList<Map<String, String>>();
+		File file = getRealFile(uploadOid);
+		SysUploadTranVO tran = findSysUploadTran(tranId);
+		List<TbSysUploadTranSegm> segms = findSysUploadTranSegm(tran.getTranId());
+		List<String> txtLines = FileUtils.readLines(file, tran.getEncoding());
+		for (String str : txtLines) {			
+			datas.add( fillDataMap(tran, segms, str) );
+		}
+		return datas;
 	}
 	
 	public static void cleanTempUpload() throws ServiceException, Exception {
@@ -277,6 +331,24 @@ public class UploadSupportUtils {
 			extension = tmp[i];
 		}
 		return extension;
+	}
+	
+	private static Map<String, String> fillDataMap(SysUploadTranVO tran, List<TbSysUploadTranSegm> segms, 
+			String strLine) throws Exception {
+		Map<String, String> dataMap = new HashMap<String, String>();
+		if (TransformSegment.TEXT_MODE.equals(tran.getSegmMode())) { // 用字串切割
+			for (TbSysUploadTranSegm segm : segms) {
+				dataMap.put(segm.getName(), strLine.substring(segm.getBegin(), segm.getEnd()) );
+			}			
+		} else { // 用 byte 切割
+			byte[] dataBytes = strLine.getBytes( tran.getEncoding() );
+			for (TbSysUploadTranSegm segm : segms) {
+				String dataStr = new String(
+						ArrayUtils.subarray(dataBytes, segm.getBegin(), segm.getEnd()), tran.getEncoding());
+				dataMap.put(segm.getName(), dataStr);
+			}
+		}		
+		return dataMap;
 	}
 	
 }
