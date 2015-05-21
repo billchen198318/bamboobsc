@@ -26,6 +26,7 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	private String tranId;
 	private String tranType;
 	private String cwd;
+	private String xmlClassName;
 	private String useSegm;
 	private String segmMode;
 	private String segmSymbol;
@@ -86,6 +87,15 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	
 	public void setCwd(String cwd) {
 		this.cwd = cwd;
+	}
+	
+	@Column(name="XML_CLASS_NAME")
+	public String getXmlClassName() {
+		return xmlClassName;
+	}
+	
+	public void setXmlClassName(String xmlClassName) {
+		this.xmlClassName = xmlClassName;
 	}
 	
 	@Column(name="USE_SEGM")

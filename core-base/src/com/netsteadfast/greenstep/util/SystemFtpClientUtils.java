@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -41,9 +45,9 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
-import com.netsteadfast.greenstep.model.SystemFtpData;
-import com.netsteadfast.greenstep.model.SystemFtpModel;
-import com.netsteadfast.greenstep.model.SystemFtpResultObj;
+import com.netsteadfast.greenstep.model.SystemFtpClientData;
+import com.netsteadfast.greenstep.model.SystemFtpClientModel;
+import com.netsteadfast.greenstep.model.SystemFtpClientResultObj;
 import com.netsteadfast.greenstep.model.TransformSegment;
 import com.netsteadfast.greenstep.po.hbm.TbSysFtp;
 import com.netsteadfast.greenstep.po.hbm.TbSysFtpTran;
@@ -56,8 +60,8 @@ import com.netsteadfast.greenstep.vo.SysFtpTranVO;
 import com.netsteadfast.greenstep.vo.SysFtpVO;
 
 @SuppressWarnings("unchecked")
-public class SystemFtpUtils {
-	protected static Logger logger=Logger.getLogger(SystemFtpUtils.class);
+public class SystemFtpClientUtils {
+	protected static Logger logger=Logger.getLogger(SystemFtpClientUtils.class);
 	private static final int MAX_SIZE_KB = 128;
 	private static ISysFtpService<SysFtpVO, TbSysFtp, String> sysFtpService;
 	private static ISysFtpTranService<SysFtpTranVO, TbSysFtpTran, String> sysFtpTranService;
@@ -107,12 +111,12 @@ public class SystemFtpUtils {
 	 * @throws ServiceException
 	 * @throws Exception
 	 */
-	public static SystemFtpResultObj getFileOnly(String tranId) throws ServiceException, Exception {		
+	public static SystemFtpClientResultObj getFileOnly(String tranId) throws ServiceException, Exception {		
 		if ( StringUtils.isBlank(tranId) ) {
 			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK) );
 		}
 		logger.info("getFileOnly begin...");
-		SystemFtpResultObj resultObj = new SystemFtpResultObj();
+		SystemFtpClientResultObj resultObj = new SystemFtpClientResultObj();
 		SysFtpTranVO tran = findSysFtpTran(tranId);
 		SysFtpVO ftp = findSysFtp( tran.getFtpId() );
 		List<TbSysFtpTranSegm> segms = findSysFtpTranSegm(tran.getFtpId(), tran.getTranId());
@@ -127,22 +131,23 @@ public class SystemFtpUtils {
 	/**
 	 * 取出FTP或SFTP上的檔案, 並將TXT文字檔切割成資料放至map中, XML則只將內容讀取至變數中
 	 * 
-	 * @param tranId	TB_SYS_FTP_TRAN.TRAN_ID
+	 * @param tranId			TB_SYS_FTP_TRAN.TRAN_ID
+	 * @param classesToBeBound	將xml轉成Object ( 只有在TRAN_TYPE = 'GET-XML' 才需要 ) 
 	 * @return
 	 * @throws ServiceException
 	 * @throws Exception
 	 */
-	public static SystemFtpResultObj getDatas(String tranId) throws ServiceException, Exception {
+	public static SystemFtpClientResultObj getDatas(String tranId) throws ServiceException, Exception {
 		logger.info("getDatas begin...");
-		SystemFtpResultObj resultObj = getFileOnly(tranId);
+		SystemFtpClientResultObj resultObj = getFileOnly(tranId);
 		SysFtpTranVO tran = resultObj.getSysFtpTran();
-		if (SystemFtpModel.TRAN_GET_TEXT.equals(tran.getTranType())) { // 分割 txt 檔案
+		if (SystemFtpClientModel.TRAN_GET_TEXT.equals(tran.getTranType())) { // 分割 txt 檔案
 			processText(resultObj);
-		} else if (SystemFtpModel.TRAN_GET_XML.equals(tran.getTranType())) { // 處理 xml 檔案			
+		} else if (SystemFtpClientModel.TRAN_GET_XML.equals(tran.getTranType())) { // 處理 xml 檔案			
 			processXml(resultObj);			
 		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put(SystemFtpModel.RESULT_OBJ_VARIABLE, resultObj);
+		paramMap.put(SystemFtpClientModel.RESULT_OBJ_VARIABLE, resultObj);
 		ScriptExpressionUtils.execute(tran.getExprType(), tran.getHelpExpression(), null, paramMap);
 		logger.info("getDatas end...");
 		return resultObj;
@@ -162,7 +167,7 @@ public class SystemFtpUtils {
 		}
 		SysFtpTranVO tran = findSysFtpTran(tranId);
 		SysFtpVO ftp = findSysFtp( tran.getFtpId() );
-		if (!SystemFtpModel.TRAN_PUT.equals(tran.getTranType())) {
+		if (!SystemFtpClientModel.TRAN_PUT.equals(tran.getTranType())) {
 			logger.warn("Not a PUT mode TB_SYS_FTP_TRAN.TRAN_ID: " + tranId);
 			return false;
 		}
@@ -171,7 +176,7 @@ public class SystemFtpUtils {
 		 * **不可** 是 20150514.txt
 		 */
 		List<String> fileFullPathNames = getFileNames(tran.getExprType(), tran.getNameExpression()); 
-		if (SystemFtpModel.FTP.equals(ftp.getType())) { // FTP
+		if (SystemFtpClientModel.FTP.equals(ftp.getType())) { // FTP
 			putFilesByFtp(ftp, tran, fileFullPathNames);
 		} else { // SFTP
 			putFileBySFtp(ftp, tran, fileFullPathNames);			
@@ -193,7 +198,7 @@ public class SystemFtpUtils {
 	 */
 	public static List<String> copyFileToUpload(String system, String uploadType, boolean isFileMode, 
 			String tranId) throws ServiceException, IOException, Exception {
-		SystemFtpResultObj resultObj = getFileOnly(tranId);
+		SystemFtpClientResultObj resultObj = getFileOnly(tranId);
 		return copyFileToUpload(system, uploadType, isFileMode, resultObj);
 	}
 	
@@ -210,7 +215,7 @@ public class SystemFtpUtils {
 	 * @throws Exception
 	 */
 	public static List<String> copyFileToUpload(String system, String uploadType, boolean isFileMode,
-			SystemFtpResultObj resultObj) throws ServiceException, IOException, Exception {
+			SystemFtpClientResultObj resultObj) throws ServiceException, IOException, Exception {
 		List<String> oids = new ArrayList<String>();
 		if (resultObj==null || resultObj.getFiles()==null || resultObj.getFiles().size()<1) {
 			return oids;
@@ -223,11 +228,11 @@ public class SystemFtpUtils {
 		return oids;
 	}
 	
-	private static void processText(SystemFtpResultObj resultObj) throws Exception {
-		List<SystemFtpData> datas = new LinkedList<SystemFtpData>();
+	private static void processText(SystemFtpClientResultObj resultObj) throws Exception {
+		List<SystemFtpClientData> datas = new LinkedList<SystemFtpClientData>();
 		List<TbSysFtpTranSegm> segms = resultObj.getSysFtpTranSegms();		
 		for (File file : resultObj.getFiles()) {
-			SystemFtpData ftpData = new SystemFtpData();
+			SystemFtpClientData ftpData = new SystemFtpClientData();
 			List<Map<String, String>> fillDataList = new LinkedList<Map<String, String>>();
 			logWarnFileSize(file);
 			List<String> strLines = FileUtils.readLines(file, resultObj.getSysFtpTran().getEncoding());
@@ -274,15 +279,28 @@ public class SystemFtpUtils {
 		}
 	}
 
-	private static void processXml(SystemFtpResultObj resultObj) throws Exception {
-		List<SystemFtpData> datas = new LinkedList<SystemFtpData>();			
+	private static void processXml(SystemFtpClientResultObj resultObj) throws Exception {
+		SysFtpTranVO tran = resultObj.getSysFtpTran();
+		List<SystemFtpClientData> datas = new LinkedList<SystemFtpClientData>();
+		JAXBContext jaxbContext = null;
+		Unmarshaller jaxbUnmarshaller = null;		
+		if (!StringUtils.isBlank(tran.getXmlClassName())) {
+			Class<?> xmlBeanClazz = Class.forName( tran.getXmlClassName() );			
+			jaxbContext = JAXBContext.newInstance(xmlBeanClazz);
+			jaxbUnmarshaller = jaxbContext.createUnmarshaller();			
+		}
 		for (File file : resultObj.getFiles()) {
-			SystemFtpData ftpData = new SystemFtpData();
+			SystemFtpClientData ftpData = new SystemFtpClientData();
 			logWarnFileSize(file);
-			String content = FileUtils.readFileToString(file, resultObj.getSysFtpTran().getEncoding());	
+			String content = FileUtils.readFileToString(file, Constants.BASE_ENCODING);	// xml 原則上都是用utf-8
 			ftpData.setContent( content );			
 			ftpData.setDatas( null );
 			ftpData.setFile( file );
+			if (jaxbUnmarshaller!=null) {				
+				Object obj = jaxbUnmarshaller.unmarshal( 
+						new ByteArrayInputStream(content.getBytes(Constants.BASE_ENCODING)) ); // xml 原則上都是用utf-8
+				ftpData.setXmlBean(obj);
+			}
 			datas.add(ftpData);
 		}		
 		resultObj.setDatas(datas);
@@ -296,21 +314,21 @@ public class SystemFtpUtils {
 		return sb.toString();
 	}
 	
-	private static void getFiles(SystemFtpResultObj resultObj) throws Exception {
+	private static void getFiles(SystemFtpClientResultObj resultObj) throws Exception {
 		List<String> names = getFileNames(resultObj.getSysFtpTran().getExprType(), 
 				resultObj.getSysFtpTran().getNameExpression());
 		if ( names == null || names.size() < 1 ) {
 			throw new Exception( "No file name, Please settings name expression ( TB_SYS_FTP_TRAN.NAME_EXPRESSION ) " );
 		}
 		resultObj.setNames(names);		
-		if (SystemFtpModel.FTP.equals(resultObj.getSysFtp().getType())) { // SFTP
+		if (SystemFtpClientModel.FTP.equals(resultObj.getSysFtp().getType())) { // SFTP
 			getFilesByFtp(resultObj);
 		} else { // FTP
 			getFilesBySFtp(resultObj);
 		}
 	}
 	
-	private static void getFilesByFtp(SystemFtpResultObj resultObj) throws Exception {
+	private static void getFilesByFtp(SystemFtpClientResultObj resultObj) throws Exception {
 		SysFtpVO ftp = resultObj.getSysFtp();
 		SysFtpTranVO tran = resultObj.getSysFtpTran();		
 		FtpClientUtils ftpClient = new FtpClientUtils();
@@ -331,7 +349,7 @@ public class SystemFtpUtils {
 		}
 	}
 	
-	private static void getFilesBySFtp(SystemFtpResultObj resultObj) throws Exception {
+	private static void getFilesBySFtp(SystemFtpClientResultObj resultObj) throws Exception {
 		SysFtpVO ftp = resultObj.getSysFtp();
 		File storeDir = getStoreDir();
 		List<String> localFile = new ArrayList<String>();
@@ -389,19 +407,19 @@ public class SystemFtpUtils {
 	private static List<String> getFileNames(String expressionType, String nameExpression) throws Exception {
 		List<String> names = new ArrayList<String>();	
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put( SystemFtpModel.RETURN_FILE_VARIABLE , names );
+		dataMap.put( SystemFtpClientModel.RETURN_FILE_VARIABLE , names );
 		dataMap = ScriptExpressionUtils.execute(expressionType, nameExpression, dataMap, dataMap);
 		return names;
 	}
 	
 	private static File getStoreDir() throws IOException {
-		File storeDir = new File( Constants.getWorkTmpDir() + "/" + SystemFtpUtils.class.getSimpleName() + 
+		File storeDir = new File( Constants.getWorkTmpDir() + "/" + SystemFtpClientUtils.class.getSimpleName() + 
 				"/" + System.currentTimeMillis() );
 		FileUtils.forceMkdir( storeDir );		
 		return storeDir;
 	}
 	
-	private static void fillStoreDirFiles(File storeDir, SystemFtpResultObj resultObj) throws Exception {
+	private static void fillStoreDirFiles(File storeDir, SystemFtpClientResultObj resultObj) throws Exception {
 		File[] localFiles = storeDir.listFiles();
 		List<File> files = new ArrayList<File>();
 		for (File file : localFiles) {
@@ -414,7 +432,7 @@ public class SystemFtpUtils {
 		long bytes = file.length();
 		if ( bytes > 0 && (bytes/1024)>MAX_SIZE_KB ) {
 			logger.warn("The file: " + file.getPath() + " is bigger then " + MAX_SIZE_KB + 
-					" kb size. please change SYS_FTP.TYPE type to " + SystemFtpModel.TRAN_GET );
+					" kb size. please change SYS_FTP.TYPE type to " + SystemFtpClientModel.TRAN_GET );
 		}
 	}
 

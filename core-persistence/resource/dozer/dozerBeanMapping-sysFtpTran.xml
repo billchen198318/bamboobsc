@@ -26,6 +26,10 @@
 		<field>
 			<a>cwd</a>
 			<b>cwd</b>
+		</field>		
+		<field>
+			<a>xmlClassName</a>
+			<b>xmlClassName</b>
 		</field>				
 		<field>
 			<a>useSegm</a>
@@ -83,6 +87,10 @@
 		<field>
 			<a>cwd</a>
 			<b>cwd</b>
+		</field>		
+		<field>
+			<a>xmlClassName</a>
+			<b>xmlClassName</b>
 		</field>							
 		<field>
 			<a>useSegm</a>

@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,6 +30,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -114,6 +118,24 @@ public class UploadSupportUtils {
 		paramMap.put(HELP_EXPRESSION_VARIABLE, datas);
 		ScriptExpressionUtils.execute(tran.getExprType(), tran.getHelpExpression(), null, paramMap);
 		return datas;
+	}
+	
+	/**
+	 * 把 上傳(upload) 的XML檔轉成Object 
+	 * 
+	 * @param uploadOid
+	 * @param classesToBeBound
+	 * @return
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	public Object getTransformObjectData(String uploadOid, Class<?> classesToBeBound) throws ServiceException, Exception {
+		Object result = null;
+		byte[] xmlBytes = getDataBytes(uploadOid);
+		JAXBContext jaxbContext = JAXBContext.newInstance(classesToBeBound);
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		result = jaxbUnmarshaller.unmarshal( new ByteArrayInputStream(xmlBytes) );		
+		return result;
 	}
 	
 	public static void cleanTempUpload() throws ServiceException, Exception {

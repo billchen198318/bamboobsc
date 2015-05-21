@@ -1997,6 +1997,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
   `TRAN_ID` varchar(10) NOT NULL,
   `TRAN_TYPE` varchar(10) NOT NULL DEFAULT 'GET',
   `CWD` varchar(50) NOT NULL,
+  `XML_CLASS_NAME` varchar(255) DEFAULT NULL,
   `USE_SEGM` varchar(1) NOT NULL,
   `SEGM_MODE` varchar(10) NOT NULL DEFAULT 'TXT',
   `SEGM_SYMBOL` varchar(1) NOT NULL DEFAULT ',',
@@ -2021,7 +2022,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
 
 LOCK TABLES `tb_sys_ftp_tran` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` DISABLE KEYS */;
-INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR','Y','TXT',',','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */','test','admin','2015-05-15 10:17:26',NULL,NULL);
+INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR',NULL,'Y','TXT',',','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */','test','admin','2015-05-15 10:17:26',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2691,4 +2692,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-21  9:11:09
+-- Dump completed on 2015-05-21 14:06:38

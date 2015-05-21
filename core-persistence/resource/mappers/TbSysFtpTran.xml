@@ -9,7 +9,8 @@
 		<result column="FTP_ID" property="ftpId"/>		
 		<result column="TRAN_ID" property="tranId"/>		
 		<result column="TRAN_TYPE" property="tranType"/>
-		<result column="CWD" property="cwd"/>		
+		<result column="CWD" property="cwd"/>
+		<result column="XML_CLASS_NAME" property="xmlClassName"/>
 		<result column="USE_SEGM" property="useSegm"/>		
 		<result column="SEGM_MODE" property="segmMode"/>		
 		<result column="SEGM_SYMBOL" property="segmSymbol"/>		

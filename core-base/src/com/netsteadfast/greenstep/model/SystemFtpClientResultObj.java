@@ -28,14 +28,14 @@ import com.netsteadfast.greenstep.po.hbm.TbSysFtpTranSegm;
 import com.netsteadfast.greenstep.vo.SysFtpTranVO;
 import com.netsteadfast.greenstep.vo.SysFtpVO;
 
-public class SystemFtpResultObj implements java.io.Serializable {	
+public class SystemFtpClientResultObj implements java.io.Serializable {	
 	private static final long serialVersionUID = -1582579875875921071L;
 	private SysFtpVO sysFtp;
 	private SysFtpTranVO sysFtpTran;
 	private List<TbSysFtpTranSegm> sysFtpTranSegms;
 	private List<String> names; // 要抓取的檔案名稱	
 	private List<File> files; // 抓在本機上的檔案	
-	private List<SystemFtpData> datas; // 轉過的資料
+	private List<SystemFtpClientData> datas; // 轉過的資料
 	
 	public SysFtpVO getSysFtp() {
 		return sysFtp;
@@ -77,11 +77,11 @@ public class SystemFtpResultObj implements java.io.Serializable {
 		this.files = files;
 	}
 
-	public List<SystemFtpData> getDatas() {
+	public List<SystemFtpClientData> getDatas() {
 		return datas;
 	}
 
-	public void setDatas(List<SystemFtpData> datas) {
+	public void setDatas(List<SystemFtpClientData> datas) {
 		this.datas = datas;
 	}
 	

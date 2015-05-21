@@ -21,33 +21,17 @@
  */
 package com.netsteadfast.greenstep.model;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
+public class SystemFtpClientModel {
+	
+	public static final String FTP = "FTP"; // ftp
+	public static final String SFTP = "SFTP"; // sftp
+	
+	public static final String TRAN_GET_TEXT = "GET-TXT"; // 取檔for txt
+	public static final String TRAN_GET_XML = "GET-XML"; // 取檔for xml
+	public static final String TRAN_GET = "GET"; // 取檔
+	public static final String TRAN_PUT = "PUT"; // 放檔	
+	
+	public static final String RETURN_FILE_VARIABLE = "fileName"; // 取出的檔名 tb_sys_ftp_tran.name_expression 固定的變數名稱
+	public static final String RESULT_OBJ_VARIABLE = "resultObj"; // 幫助 tb_sys_ftp_tran.help_expression 放入expression的變數名稱
 
-public class SystemFtpData implements java.io.Serializable {	
-	private static final long serialVersionUID = -1584520229910952899L;
-	private List<Map<String, String>> datas; // 切割文字檔後的資料 (只有TXT會填入此變數)
-	private String content; // 文字檔內容
-	private File file; // 檔案
-	
-	public List<Map<String, String>> getDatas() {
-		return datas;
-	}
-	public void setDatas(List<Map<String, String>> datas) {
-		this.datas = datas;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public File getFile() {
-		return file;
-	}
-	public void setFile(File file) {
-		this.file = file;
-	}
-	
 }

@@ -30,6 +30,7 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	private String tranId;
 	private String tranType;
 	private String cwd;
+	private String xmlClassName;
 	private String useSegm;
 	private String segmMode;
 	private String segmSymbol;
@@ -44,15 +45,17 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	}	
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String cwd, String useSegm, String segmMode,
-			String segmSymbol, String encoding, String exprType,
-			String nameExpression, String helpExpression, String description) {
+			String tranType, String cwd, String xmlClassName, String useSegm,
+			String segmMode, String segmSymbol, String encoding,
+			String exprType, String nameExpression, String helpExpression,
+			String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
 		this.tranId = tranId;
 		this.tranType = tranType;
 		this.cwd = cwd;
+		this.xmlClassName = xmlClassName;
 		this.useSegm = useSegm;
 		this.segmMode = segmMode;
 		this.segmSymbol = segmSymbol;
@@ -64,15 +67,16 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	}
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String cwd, String useSegm, String segmMode,
-			String segmSymbol, String encoding, String exprType,
-			String description) {
+			String tranType, String cwd, String xmlClassName, String useSegm,
+			String segmMode, String segmSymbol, String encoding,
+			String exprType, String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
 		this.tranId = tranId;
 		this.tranType = tranType;
 		this.cwd = cwd;
+		this.xmlClassName = xmlClassName;
 		this.useSegm = useSegm;
 		this.segmMode = segmMode;
 		this.segmSymbol = segmSymbol;
@@ -82,14 +86,15 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	}
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
-			String tranType, String cwd, String useSegm, String segmMode,
-			String segmSymbol, String encoding, String exprType) {
+			String tranType, String cwd, String xmlClassName, String useSegm,
+			String segmMode, String segmSymbol, String encoding, String exprType) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
 		this.tranId = tranId;
 		this.tranType = tranType;
 		this.cwd = cwd;
+		this.xmlClassName = xmlClassName;
 		this.useSegm = useSegm;
 		this.segmMode = segmMode;
 		this.segmSymbol = segmSymbol;
@@ -136,6 +141,14 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setCwd(String cwd) {
 		this.cwd = cwd;
+	}
+
+	public String getXmlClassName() {
+		return xmlClassName;
+	}
+
+	public void setXmlClassName(String xmlClassName) {
+		this.xmlClassName = xmlClassName;
 	}
 
 	public String getUseSegm() {
