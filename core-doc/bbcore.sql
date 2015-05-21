@@ -1240,7 +1240,6 @@ CREATE TABLE `qrtz_fired_triggers` (
 
 LOCK TABLES `qrtz_fired_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_fired_triggers` VALUES ('scheduler','4753PC14316599896421431659989611','core.job.SendMailHelperJobCronTrigger','DEFAULT','4753PC1431659989642',1431660000000,0,'ACQUIRED',NULL,NULL,'0','0');
 /*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1345,7 +1344,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1431659989642',1431659989908,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1432100700089',1432101015976,7500),('scheduler','4753PC1432100780708',1432101013720,7500),('scheduler','4753PC1432100897870',1432101018399,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1449,7 +1448,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1431660000000,-1,0,'ACQUIRED','CRON',1431659989000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1432101060000,1432101000000,0,'WAITING','CRON',1432100897000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1812,7 +1811,6 @@ CREATE TABLE `tb_sys_event_log` (
 
 LOCK TABLES `tb_sys_event_log` WRITE;
 /*!40000 ALTER TABLE `tb_sys_event_log` DISABLE KEYS */;
-INSERT INTO `tb_sys_event_log` VALUES ('028e373f-3d0a-4702-a2a5-86dae49911db','admin','CORE','core.systemFormTemplateManagementAction.action','Y','SYS','2015-05-15 09:18:05',NULL,NULL),('20f43e8e-f225-4427-bb02-523d70069fd4','admin','CORE','core.systemFormTemplateCopy2UploadAction.action','Y','SYS','2015-05-15 09:18:09',NULL,NULL),('30709070-1ded-4f20-852a-c0c90863c528','admin','BSC','bsc.employeeManagementAction.action','Y','SYS','2015-05-14 11:52:03',NULL,NULL),('362c13de-5e90-4ee5-9bda-048cc8e34762','admin','BSC','bsc.visionEditAction.action','Y','SYS','2015-05-15 09:17:32',NULL,NULL),('491d4e5e-ad6a-4902-bba2-999f3463c46b','admin','BSC','bsc.visionManagementGridQueryAction.action','Y','SYS','2015-05-15 09:17:30',NULL,NULL),('6483299b-1612-400a-88c2-2472b455b9dd','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-15 09:16:56',NULL,NULL),('6550cb5c-5ead-41f3-94f7-433cc4c0d8c3','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-14 11:51:16',NULL,NULL),('8cde1159-ec25-49bf-a1d8-6e71acb63add','admin','CORE','index.action','Y','SYS','2015-05-14 11:50:57',NULL,NULL),('8f74c75a-bb67-4aa0-89b1-bc5ea2c633b0','admin','CORE','index.action','Y','SYS','2015-05-15 09:16:41',NULL,NULL),('8fbf3656-a5f0-49f6-b99c-8313653a305c','admin','CORE','core.systemFormTemplateManagementGridQueryAction.action','Y','SYS','2015-05-15 09:18:07',NULL,NULL),('961ee0a5-3a67-400e-b632-c07a6b69df45','admin','CORE','core.commonCodeEditorAction.action','Y','SYS','2015-05-15 09:17:44',NULL,NULL),('a45e2892-0fe9-45be-851a-db26eabf24c7','admin','CORE','core.commonCodeEditorAction.action','Y','SYS','2015-05-15 09:17:44',NULL,NULL),('ae70728e-b812-4762-b358-e842f394f03f','admin','BSC','bsc.aggregationMethodEditAction.action','Y','SYS','2015-05-15 09:17:43',NULL,NULL),('d363f1f7-1ada-430c-b5f6-bb86be543bc7','admin','BSC','bsc.aggregationMethodManagementAction.action','Y','SYS','2015-05-15 09:17:41',NULL,NULL),('da3a9c66-771c-4269-9feb-c45f9c6dbcf2','admin','BSC','bsc.employeeManagementGridQueryAction.action','Y','SYS','2015-05-14 11:52:05',NULL,NULL),('e988488e-e4ad-4f3c-821a-f8ebb4921602','admin','CORE','core.commonCodeEditorAction.action','Y','SYS','2015-05-15 09:18:13',NULL,NULL),('ed61b122-7312-4750-8e34-90d1cd2e8eac','admin','BSC','bsc.aggregationMethodManagementGridQueryAction.action','Y','SYS','2015-05-15 09:17:42',NULL,NULL),('f4ee40a7-05bb-44de-a404-75fd3d0ff2c7','admin','BSC','bsc.visionManagementAction.action','Y','SYS','2015-05-15 09:17:29',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_event_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2001,6 +1999,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
   `CWD` varchar(50) NOT NULL,
   `USE_SEGM` varchar(1) NOT NULL,
   `SEGM_MODE` varchar(10) NOT NULL DEFAULT 'TXT',
+  `SEGM_SYMBOL` varchar(1) NOT NULL DEFAULT ',',
   `ENCODING` varchar(10) NOT NULL DEFAULT 'utf-8',
   `EXPR_TYPE` varchar(10) NOT NULL,
   `NAME_EXPRESSION` varchar(8000) NOT NULL,
@@ -2022,7 +2021,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
 
 LOCK TABLES `tb_sys_ftp_tran` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` DISABLE KEYS */;
-INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR','Y','TXT','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */','test','admin','2015-05-15 10:17:26',NULL,NULL);
+INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR','Y','TXT',',','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */','test','admin','2015-05-15 10:17:26',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2179,7 +2178,6 @@ CREATE TABLE `tb_sys_login_log` (
 
 LOCK TABLES `tb_sys_login_log` WRITE;
 /*!40000 ALTER TABLE `tb_sys_login_log` DISABLE KEYS */;
-INSERT INTO `tb_sys_login_log` VALUES ('1ec673aa-29c9-41c1-b93f-ca2398732f1f','admin','SYS','2015-05-14 11:52:03',NULL,NULL),('6ac062c3-f216-4c8e-a5c2-89027937fe52','admin','SYS','2015-05-14 11:50:57',NULL,NULL),('cc73099d-50c6-48f2-bc4f-08210c4a322a','admin','SYS','2015-05-15 09:17:28',NULL,NULL),('d4f4500a-4a3d-4863-9f1d-6a18813c9ad6','admin','SYS','2015-05-15 09:16:41',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_login_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2532,6 +2530,7 @@ CREATE TABLE `tb_sys_upload_tran` (
   `OID` char(36) NOT NULL,
   `TRAN_ID` varchar(10) NOT NULL,
   `SEGM_MODE` varchar(10) NOT NULL DEFAULT 'BYTE',
+  `SEGM_SYMBOL` varchar(1) NOT NULL DEFAULT ',',
   `ENCODING` varchar(10) NOT NULL,
   `EXPR_TYPE` varchar(10) NOT NULL,
   `HELP_EXPRESSION` varchar(8000) NOT NULL,
@@ -2692,4 +2691,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-20 13:44:04
+-- Dump completed on 2015-05-21  9:11:09

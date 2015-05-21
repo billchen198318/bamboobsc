@@ -8,6 +8,7 @@
 		<id column="OID" property="oid"/>	
 		<result column="TRAN_ID" property="tranId"/>		
 		<result column="SEGM_MODE" property="segmMode"/>
+		<result column="SEGM_SYMBOL" property="segmSymbol"/>
 		<result column="ENCODING" property="encoding"/>		
 		<result column="EXPR_TYPE" property="exprType"/>				
 		<result column="HELP_EXPRESSION" property="helpExpression"/>		

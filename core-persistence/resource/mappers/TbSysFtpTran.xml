@@ -11,7 +11,8 @@
 		<result column="TRAN_TYPE" property="tranType"/>
 		<result column="CWD" property="cwd"/>		
 		<result column="USE_SEGM" property="useSegm"/>		
-		<result column="SEGM_MODE" property="segmMode"/>
+		<result column="SEGM_MODE" property="segmMode"/>		
+		<result column="SEGM_SYMBOL" property="segmSymbol"/>		
 		<result column="ENCODING" property="encoding"/>		
 		<result column="EXPR_TYPE" property="exprType"/>		
 		<result column="NAME_EXPRESSION" property="nameExpression"/>		

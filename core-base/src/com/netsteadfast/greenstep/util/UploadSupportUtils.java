@@ -103,7 +103,11 @@ public class UploadSupportUtils {
 		SysUploadTranVO tran = findSysUploadTran(tranId);
 		List<TbSysUploadTranSegm> segms = findSysUploadTranSegm(tran.getTranId());
 		List<String> txtLines = FileUtils.readLines(file, tran.getEncoding());
-		for (String str : txtLines) {			
+		for (String str : txtLines) {	
+			if ( str.length()<1 ) {
+				logger.warn( "The file: " + file.getPath() + " found zero line." );
+				continue;
+			}
 			datas.add( fillDataMap(tran, segms, str) );
 		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -344,14 +348,22 @@ public class UploadSupportUtils {
 			for (TbSysUploadTranSegm segm : segms) {
 				dataMap.put(segm.getName(), strLine.substring(segm.getBegin(), segm.getEnd()) );
 			}			
-		} else { // 用 byte 切割
+		} else if (TransformSegment.BYTE_MODE.equals(tran.getSegmMode())) { // 用 byte 切割
 			byte[] dataBytes = strLine.getBytes( tran.getEncoding() );
 			for (TbSysUploadTranSegm segm : segms) {
 				String dataStr = new String(
 						ArrayUtils.subarray(dataBytes, segm.getBegin(), segm.getEnd()), tran.getEncoding());
 				dataMap.put(segm.getName(), dataStr);
 			}
-		}		
+		} else { // 用符號來分成array
+			String tmpStr[] = strLine.split(tran.getSegmSymbol());			
+			for (TbSysUploadTranSegm segm : segms) {
+				if (segm.getBegin() != segm.getEnd()) {
+					throw new Exception("segment config begin/end error.");
+				}
+				dataMap.put(segm.getName(), tmpStr[segm.getBegin()]);
+			}
+		}
 		return dataMap;
 	}
 	

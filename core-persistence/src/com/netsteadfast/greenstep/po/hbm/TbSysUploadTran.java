@@ -24,6 +24,7 @@ public class TbSysUploadTran extends BaseEntity<String> implements java.io.Seria
 	private String oid;
 	private String tranId;
 	private String segmMode;
+	private String segmSymbol;
 	private String encoding;
 	private String exprType;	
 	private String helpExpression;
@@ -62,6 +63,15 @@ public class TbSysUploadTran extends BaseEntity<String> implements java.io.Seria
 	
 	public void setSegmMode(String segmMode) {
 		this.segmMode = segmMode;
+	}
+	
+	@Column(name="SEGM_SYMBOL")
+	public String getSegmSymbol() {
+		return segmSymbol;
+	}
+	
+	public void setSegmSymbol(String segmSymbol) {
+		this.segmSymbol = segmSymbol;
 	}
 	
 	@Column(name="ENCODING")

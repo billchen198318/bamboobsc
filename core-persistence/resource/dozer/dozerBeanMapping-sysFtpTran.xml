@@ -36,6 +36,10 @@
 			<b>segmMode</b>
 		</field>
 		<field>
+			<a>segmSymbol</a>
+			<b>segmSymbol</b>
+		</field>		
+		<field>
 			<a>encoding</a>
 			<b>encoding</b>
 		</field>						
@@ -88,6 +92,10 @@
 			<a>segmMode</a>
 			<b>segmMode</b>
 		</field>
+		<field>
+			<a>segmSymbol</a>
+			<b>segmSymbol</b>
+		</field>		
 		<field>
 			<a>encoding</a>
 			<b>encoding</b>

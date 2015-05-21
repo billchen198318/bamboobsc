@@ -256,13 +256,21 @@ public class SystemFtpUtils {
 			for (TbSysFtpTranSegm segm : segms) {
 				dataMap.put(segm.getName(), strLine.substring(segm.getBegin(), segm.getEnd()) );
 			}			
-		} else { // 用 byte 切割
+		} else if (TransformSegment.BYTE_MODE.equals(tran.getSegmMode())) { // 用 byte 切割
 			byte[] dataBytes = strLine.getBytes( tran.getEncoding() );
 			for (TbSysFtpTranSegm segm : segms) {
 				String dataStr = new String(
 						ArrayUtils.subarray(dataBytes, segm.getBegin(), segm.getEnd()), tran.getEncoding());
 				dataMap.put(segm.getName(), dataStr);
 			}
+		} else { // 用符號來分成array
+			String tmpStr[] = strLine.split(tran.getSegmSymbol());
+			for (TbSysFtpTranSegm segm : segms) {
+				if (segm.getBegin() != segm.getEnd()) {
+					throw new Exception("segment config begin/end error.");
+				}
+				dataMap.put(segm.getName(), tmpStr[segm.getBegin()]);
+			}			
 		}
 	}
 

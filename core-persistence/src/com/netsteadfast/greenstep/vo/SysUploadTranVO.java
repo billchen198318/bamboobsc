@@ -28,6 +28,7 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 	private String oid;
 	private String tranId;
 	private String segmMode;
+	private String segmSymbol;
 	private String encoding;
 	private String exprType;	
 	private String helpExpression;
@@ -35,15 +36,16 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 	
 	public SysUploadTranVO() {
 		
-	}
-	
+	}	
+
 	public SysUploadTranVO(String oid, String tranId, String segmMode,
-			String encoding, String exprType, String helpExpression,
-			String description) {
+			String segmSymbol, String encoding, String exprType,
+			String helpExpression, String description) {
 		super();
 		this.oid = oid;
 		this.tranId = tranId;
 		this.segmMode = segmMode;
+		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
 		this.helpExpression = helpExpression;
@@ -51,22 +53,25 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 	}
 
 	public SysUploadTranVO(String oid, String tranId, String segmMode,
-			String encoding, String exprType, String description) {
+			String segmSymbol, String encoding, String exprType,
+			String helpExpression) {
 		super();
 		this.oid = oid;
 		this.tranId = tranId;
 		this.segmMode = segmMode;
+		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
-		this.description = description;
+		this.helpExpression = helpExpression;
 	}
 
 	public SysUploadTranVO(String oid, String tranId, String segmMode,
-			String encoding, String exprType) {
+			String segmSymbol, String encoding, String exprType) {
 		super();
 		this.oid = oid;
 		this.tranId = tranId;
 		this.segmMode = segmMode;
+		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
 	}
@@ -94,6 +99,14 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 
 	public void setSegmMode(String segmMode) {
 		this.segmMode = segmMode;
+	}
+
+	public String getSegmSymbol() {
+		return segmSymbol;
+	}
+
+	public void setSegmSymbol(String segmSymbol) {
+		this.segmSymbol = segmSymbol;
 	}
 
 	public String getEncoding() {

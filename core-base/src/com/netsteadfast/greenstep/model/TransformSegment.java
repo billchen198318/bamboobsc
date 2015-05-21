@@ -25,5 +25,6 @@ public class TransformSegment {
 	
 	public static final String TEXT_MODE = "TEXT"; // 以字串分割文字檔
 	public static final String BYTE_MODE = "BYTE"; // 以byte分割文字檔
+	public static final String SYMBOL_MODE = "SYMBOL"; // 以,或;符號來切分成array
 	
 }
