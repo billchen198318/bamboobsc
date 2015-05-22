@@ -60,10 +60,7 @@ function CORE_PROGCOMM0003Q_preview() {
 		alertDialog(_getApplicationProgramNameById('${programId}'), 'No before save signature!', function(){}, 'Y');	
 		return;
 	}
-	window.open(
-			"<%=basePath%>/core.commonLoadUploadFileAction.action?type=view&oid=" + uploadOid,
-			"Signature preview",
-            "resizable=yes,scrollbars=yes,status=yes,width=480,height=220");    	
+	openCommonLoadUpload( 'view', uploadOid, { 'title' : 'Signature preview', 'width' : 480, 'height' : 220 } );	
 }
 
 function ${programId}_page_message() {

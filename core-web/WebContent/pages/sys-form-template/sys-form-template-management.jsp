@@ -124,10 +124,7 @@ function CORE_PROG001D0012Q_downloadFile(oid) {
 				if ( 'Y' != data.success ) {
 					return;
 				}
-				window.open(
-						"<%=basePath%>/core.commonLoadUploadFileAction.action?oid=" + data.uploadOid + "&type=download",
-						"form-template-file-export",
-			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200"); 				
+				openCommonLoadUpload( 'download', data.uploadOid, { } );
 			}, 
 			function(error) {
 				alert(error);

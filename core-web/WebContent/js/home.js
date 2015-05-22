@@ -381,6 +381,35 @@ function openCommonCodeEditorWindow( uploadOid, valueFieldId, okFn, lang ) {
 }
 
 /**
+ * 下載檔案 or 檢視圖片
+ * 
+ * @param type
+ * @param uploadOid
+ * @param paramData
+ */
+function openCommonLoadUpload( type, uploadOid, paramData ) {
+	var downloadIFrameId = '_gs_downloadIFrame';
+	if ( 'view' == type ) {		
+		window.open(
+				"./core.commonLoadUploadFileAction.action?type=view&oid=" + uploadOid,
+				paramData["title"],
+	            "resizable=yes,scrollbars=yes,status=yes,width=" + paramData["width"] + ",height=" + paramData["height"] ); 
+	} else { // download	
+		// 用  window.location在FireFox或Chrome會產生殘影
+		// window.location = "./core.commonLoadUploadFileAction.action?type=download&oid=" + uploadOid;		
+		var downloadIframe = dojo.byId(downloadIFrameId);
+		var url = "./core.commonLoadUploadFileAction.action?type=download&oid=" + uploadOid;
+		if ( downloadIframe == null ) {
+			downloadIframe = dojo.io.iframe.create(downloadIFrameId);  
+		}
+		if ( paramData["url"] != null ) { // 自定下載的url
+			url = paramData["url"];
+		}
+		dojo.io.iframe.setSrc(downloadIframe, url, true);		
+	}
+}
+
+/**
  * 主要是把輸入條件不合的欄位背景變顏色
  * 
  * @param fieldsId

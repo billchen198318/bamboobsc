@@ -131,7 +131,7 @@ function BSC_PROG003D0004Q_paintBarCharts(data) {
 			.staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
 			.tooltips(false)        //Don't show tooltips
 			.showValues(true)       //...instead, show the bar value right on top of each bar.
-			.transitionDuration(350).color(d3.scale.myColors().range());
+			.color( myColors );
 
 		d3.select('#BSC_PROG003D0004Q_barChart svg')
 			.datum(data.perspectivesBarChartValue)
@@ -306,10 +306,7 @@ function BSC_PROG003D0004Q_generateExport(type) {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
-				window.open(
-						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
-						"Perspectives-dashboard-export",
-			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
+				openCommonLoadUpload( 'download', data.uploadOid, { } );  									
 			}, 
 			function(error) {
 				alert(error);

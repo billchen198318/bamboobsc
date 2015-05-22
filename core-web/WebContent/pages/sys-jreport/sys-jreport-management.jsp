@@ -62,10 +62,8 @@ function CORE_PROG001D0008Q_edit(oid) {
 }
 
 function CORE_PROG001D0008Q_downloadFile(oid) {
-	window.open(
-			"<%=basePath%>/core.systemJreportExportAction.action?fields.oid=" + oid,
-			"report-source-file-export",
-            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    		
+	var url = "<%=basePath%>/core.systemJreportExportAction.action?fields.oid=" + oid;
+	openCommonLoadUpload( 'download', '', { "url": url } );	
 }
 
 function CORE_PROG001D0008Q_editParam(oid) {

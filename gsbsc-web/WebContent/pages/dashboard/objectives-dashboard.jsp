@@ -345,10 +345,7 @@ function BSC_PROG003D0005Q_generateExport(type) {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
-				window.open(
-						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
-						"Objectives-dashboard-export",
-			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
+				openCommonLoadUpload( 'download', data.uploadOid, { } );				
 			}, 
 			function(error) {
 				alert(error);

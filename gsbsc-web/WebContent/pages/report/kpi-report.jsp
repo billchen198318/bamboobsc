@@ -257,10 +257,7 @@ function BSC_PROG003D0001Q_generateExport(docType) {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
-				window.open(
-						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.uploadOid,
-						"KPI-Report-export",
-			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    									
+				openCommonLoadUpload( 'download', data.uploadOid, { } );
 			}, 
 			function(error) {
 				alert(error);

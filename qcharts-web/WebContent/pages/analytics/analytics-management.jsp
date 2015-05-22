@@ -118,10 +118,7 @@ function QCHARTS_PROG002D0002Q_queryExport() {
 					return;
 				}
 				dojo.byId("QCHARTS_PROG002D0002Q_content").innerHTML = data.content;
-				window.open(
-						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.oid,
-						"analytics-export",
-			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200"); 				
+				openCommonLoadUpload( 'download', data.oid, { } );
 			}, 
 			function(error) {
 				alert(error);
@@ -144,10 +141,7 @@ function QCHARTS_PROG002D0002Q_excel() {
 					setFieldsBackgroundAlert(data.fieldsId, QCHARTS_PROG002D0002Q_fieldsId);					
 					return;
 				}
-				window.open(
-						"<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=download&oid=" + data.oid,
-						"analytics-export",
-			            "resizable=yes,scrollbars=yes,status=yes,width=400,height=200"); 				
+				openCommonLoadUpload( 'download', data.oid, { } );				 				
 			}, 
 			function(error) {
 				alert(error);
