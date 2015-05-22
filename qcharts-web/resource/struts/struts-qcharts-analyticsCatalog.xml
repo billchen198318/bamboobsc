@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Cataloguration 2.3//EN"
-    "struts-2.3.dtd">
-    
-    <!--
-    原本是 http://struts.apache.org/dtds/struts-2.3.dtd 後來改成 struts-2.3.dtd
-    並把 struts-2.3.dtd 放至同一目錄中
-    
-    原因:
-    不知道為什麼 struts-qcharts-analyticsCatalog.xml 要連至 struts2 網站抓取 struts-2.3.dtd
-    造成無法 internet 連線的環境會啟動不了     
-    -->
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
     
 <struts>
 	
