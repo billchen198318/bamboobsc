@@ -98,6 +98,7 @@ public class ExportData2CsvUtils {
 				}
 				out.append( config.getSeparateSymbol() );
 			}
+			out.append(config.getTitle()).append("\r\n");
 		}
 		return out.toString();
 	}
