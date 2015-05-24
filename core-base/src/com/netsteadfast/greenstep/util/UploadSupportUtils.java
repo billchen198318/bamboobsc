@@ -301,7 +301,7 @@ public class UploadSupportUtils {
 		if (isFile) {
 			String uploadDir = getUploadFileDir(system, type);
 			String uploadFileName = generateRealFileName(file);
-			mkdirUploadFileDir(system, uploadDir);
+			mkdirUploadFileDir(system, type);
 			FSUtils.cp( file.getPath(), uploadDir + "/" + uploadFileName );
 			upload.setFileName( uploadFileName );			
 		} else {
@@ -329,7 +329,7 @@ public class UploadSupportUtils {
 		if (isFile) {
 			String uploadDir = getUploadFileDir(system, type);
 			String uploadFileName = generateRealFileName(showName);
-			mkdirUploadFileDir(system, uploadDir);
+			mkdirUploadFileDir(system, type);
 			File file = null;
 			try {
 				file = new File( uploadDir + "/" + uploadFileName );
