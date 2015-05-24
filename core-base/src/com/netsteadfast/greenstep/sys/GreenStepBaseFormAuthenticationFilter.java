@@ -162,7 +162,9 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
 		if (currs!=null && currs.size()>0) {
 			UserCurrentCookie.setCurrentId(response, currs.get(0), request.getSession().getId(), account.getAccount());
 		}
-		SysLoginLogSupport.log( account.getAccount() );		
+		if ( Constants.getSystem().equals( Constants.getMainSystem() ) ) { // only core-system need log tb_sys_login_log
+			SysLoginLogSupport.log( account.getAccount() );	
+		}	
 	}
 	
 	private AccountVO queryUser(String account) throws Exception {
