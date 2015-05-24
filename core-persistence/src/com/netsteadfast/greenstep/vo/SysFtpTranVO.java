@@ -38,6 +38,7 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 	private String exprType;
 	private String nameExpression;
 	private String helpExpression;
+	private int beginLen;
 	private String description;	
 	
 	public SysFtpTranVO() {
@@ -48,7 +49,7 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 			String tranType, String cwd, String xmlClassName, String useSegm,
 			String segmMode, String segmSymbol, String encoding,
 			String exprType, String nameExpression, String helpExpression,
-			String description) {
+			int beginLen, String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
@@ -63,13 +64,14 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.exprType = exprType;
 		this.nameExpression = nameExpression;
 		this.helpExpression = helpExpression;
+		this.beginLen = beginLen;
 		this.description = description;
 	}
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
 			String tranType, String cwd, String xmlClassName, String useSegm,
 			String segmMode, String segmSymbol, String encoding,
-			String exprType, String description) {
+			String exprType, int beginLen, String description) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
@@ -82,12 +84,14 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
+		this.beginLen = beginLen;
 		this.description = description;
 	}
 
 	public SysFtpTranVO(String oid, String ftpId, String tranId,
 			String tranType, String cwd, String xmlClassName, String useSegm,
-			String segmMode, String segmSymbol, String encoding, String exprType) {
+			String segmMode, String segmSymbol, String encoding,
+			String exprType, int beginLen) {
 		super();
 		this.oid = oid;
 		this.ftpId = ftpId;
@@ -100,6 +104,7 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
+		this.beginLen = beginLen;
 	}
 
 	@Override
@@ -205,6 +210,14 @@ public class SysFtpTranVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setHelpExpression(String helpExpression) {
 		this.helpExpression = helpExpression;
+	}
+
+	public int getBeginLen() {
+		return beginLen;
+	}
+
+	public void setBeginLen(int beginLen) {
+		this.beginLen = beginLen;
 	}
 
 	public String getDescription() {

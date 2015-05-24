@@ -107,11 +107,15 @@ public class UploadSupportUtils {
 		SysUploadTranVO tran = findSysUploadTran(tranId);
 		List<TbSysUploadTranSegm> segms = findSysUploadTranSegm(tran.getTranId());
 		List<String> txtLines = FileUtils.readLines(file, tran.getEncoding());
-		for (String str : txtLines) {	
+		for (int i=0; i<txtLines.size(); i++) {
+			String str = txtLines.get(i);
 			if ( str.length()<1 ) {
 				logger.warn( "The file: " + file.getPath() + " found zero line." );
 				continue;
 			}
+			if (i<tran.getBeginLen()) { // not begin line.
+				continue;
+			}		
 			datas.add( fillDataMap(tran, segms, str) );
 		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();

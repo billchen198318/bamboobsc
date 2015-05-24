@@ -32,6 +32,7 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 	private String encoding;
 	private String exprType;	
 	private String helpExpression;
+	private int beginLen;
 	private String description;	
 	
 	public SysUploadTranVO() {
@@ -40,7 +41,7 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 
 	public SysUploadTranVO(String oid, String tranId, String segmMode,
 			String segmSymbol, String encoding, String exprType,
-			String helpExpression, String description) {
+			String helpExpression, int beginLen, String description) {
 		super();
 		this.oid = oid;
 		this.tranId = tranId;
@@ -49,12 +50,13 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 		this.encoding = encoding;
 		this.exprType = exprType;
 		this.helpExpression = helpExpression;
+		this.beginLen = beginLen;
 		this.description = description;
 	}
 
 	public SysUploadTranVO(String oid, String tranId, String segmMode,
-			String segmSymbol, String encoding, String exprType,
-			String helpExpression) {
+			String segmSymbol, String encoding, String exprType, int beginLen,
+			String description) {
 		super();
 		this.oid = oid;
 		this.tranId = tranId;
@@ -62,11 +64,12 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
-		this.helpExpression = helpExpression;
+		this.beginLen = beginLen;
+		this.description = description;
 	}
 
 	public SysUploadTranVO(String oid, String tranId, String segmMode,
-			String segmSymbol, String encoding, String exprType) {
+			String segmSymbol, String encoding, String exprType, int beginLen) {
 		super();
 		this.oid = oid;
 		this.tranId = tranId;
@@ -74,6 +77,7 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 		this.segmSymbol = segmSymbol;
 		this.encoding = encoding;
 		this.exprType = exprType;
+		this.beginLen = beginLen;
 	}
 
 	@Override
@@ -131,6 +135,14 @@ public class SysUploadTranVO extends BaseValueObj implements java.io.Serializabl
 
 	public void setHelpExpression(String helpExpression) {
 		this.helpExpression = helpExpression;
+	}
+
+	public int getBeginLen() {
+		return beginLen;
+	}
+
+	public void setBeginLen(int beginLen) {
+		this.beginLen = beginLen;
 	}
 
 	public String getDescription() {

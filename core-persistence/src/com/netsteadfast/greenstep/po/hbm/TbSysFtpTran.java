@@ -34,6 +34,7 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	private String exprType;
 	private String nameExpression;
 	private String helpExpression;
+	private int beginLen;
 	private String description;	
 	private String cuserid;
 	private Date cdate;
@@ -159,6 +160,15 @@ public class TbSysFtpTran extends BaseEntity<String> implements java.io.Serializ
 	
 	public void setHelpExpression(String helpExpression) {
 		this.helpExpression = helpExpression;
+	}
+	
+	@Column(name="BEGIN_LEN")
+	public int getBeginLen() {
+		return beginLen;
+	}
+	
+	public void setBeginLen(int beginLen) {
+		this.beginLen = beginLen;
 	}
 	
 	@Column(name="DESCRIPTION")

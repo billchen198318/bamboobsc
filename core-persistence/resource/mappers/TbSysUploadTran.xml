@@ -11,7 +11,8 @@
 		<result column="SEGM_SYMBOL" property="segmSymbol"/>
 		<result column="ENCODING" property="encoding"/>		
 		<result column="EXPR_TYPE" property="exprType"/>				
-		<result column="HELP_EXPRESSION" property="helpExpression"/>		
+		<result column="HELP_EXPRESSION" property="helpExpression"/>	
+		<result column="BEGIN_LEN" property="beginLen"/>	
 		<result column="DESCRIPTION" property="description"/>				
 		<result column="CUSERID" property="cuserid"/>
 		<result column="CDATE" property="cdate"/>

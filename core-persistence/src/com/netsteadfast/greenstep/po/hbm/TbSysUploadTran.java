@@ -28,6 +28,7 @@ public class TbSysUploadTran extends BaseEntity<String> implements java.io.Seria
 	private String encoding;
 	private String exprType;	
 	private String helpExpression;
+	private int beginLen;
 	private String description;	
 	private String cuserid;
 	private Date cdate;
@@ -99,6 +100,15 @@ public class TbSysUploadTran extends BaseEntity<String> implements java.io.Seria
 	
 	public void setHelpExpression(String helpExpression) {
 		this.helpExpression = helpExpression;
+	}
+	
+	@Column(name="BEGIN_LEN")
+	public int getBeginLen() {
+		return beginLen;
+	}
+	
+	public void setBeginLen(int beginLen) {
+		this.beginLen = beginLen;
 	}
 	
 	@Column(name="DESCRIPTION")

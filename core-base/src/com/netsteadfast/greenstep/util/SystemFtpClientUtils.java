@@ -229,6 +229,7 @@ public class SystemFtpClientUtils {
 	}
 	
 	private static void processText(SystemFtpClientResultObj resultObj) throws Exception {
+		SysFtpTranVO tran = resultObj.getSysFtpTran();
 		List<SystemFtpClientData> datas = new LinkedList<SystemFtpClientData>();
 		List<TbSysFtpTranSegm> segms = resultObj.getSysFtpTranSegms();		
 		for (File file : resultObj.getFiles()) {
@@ -237,12 +238,16 @@ public class SystemFtpClientUtils {
 			logWarnFileSize(file);
 			List<String> strLines = FileUtils.readLines(file, resultObj.getSysFtpTran().getEncoding());
 			if (YesNo.YES.equals(resultObj.getSysFtpTran().getUseSegm())) {
-				for (String strData : strLines) {
-					Map<String, String> dataMap = new HashMap<String, String>();
+				for (int i=0; i<strLines.size(); i++) { 
+					String strData = strLines.get(i);
 					if ( strData.length() < 1 ) {
 						logger.warn( "The file: " + file.getPath() + " found zero line." );					
 						continue;
 					}
+					if (i<tran.getBeginLen()) { // not begin line.
+						continue;
+					}					
+					Map<String, String> dataMap = new HashMap<String, String>();
 					fillStrLine2Map(resultObj.getSysFtpTran(), segms, dataMap, strData);				
 					fillDataList.add(dataMap);
 				}				

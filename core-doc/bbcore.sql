@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.15, for FreeBSD10.0 (amd64)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.6.19
+-- Server version	5.6.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1344,7 +1344,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','4753PC1432100700089',1432101015976,7500),('scheduler','4753PC1432100780708',1432101013720,7500),('scheduler','4753PC1432100897870',1432101018399,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861432432186440',1432432329416,7500),('scheduler','localX861432432211900',1432432324795,7500),('scheduler','localX861432432237021',1432432327554,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1448,7 +1448,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1432101060000,1432101000000,0,'WAITING','CRON',1432100897000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1432432380000,1432432320000,0,'WAITING','CRON',1432432236000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1811,6 +1811,7 @@ CREATE TABLE `tb_sys_event_log` (
 
 LOCK TABLES `tb_sys_event_log` WRITE;
 /*!40000 ALTER TABLE `tb_sys_event_log` DISABLE KEYS */;
+INSERT INTO `tb_sys_event_log` VALUES ('0093dba8-b788-4b63-bd6f-6b11d4c109a5','admin','CORE','index.action','Y','SYS','2015-05-24 09:35:36',NULL,NULL),('03281c56-df8f-4fb6-a05f-a9066bd420b2','admin','QCHARTS','qcharts.analyticsManagementAction.action','Y','SYS','2015-05-24 09:37:52',NULL,NULL),('0e083e35-9fdf-4b78-a81e-047912e93284','admin','CORE','index.action','Y','SYS','2015-05-24 09:43:56',NULL,NULL),('184b9e58-6c08-49a4-a56a-258b7bb1d1d1','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:37:56',NULL,NULL),('18c9a4c7-7e23-4111-95df-4a7e996f1927','admin','CORE','core.systemFormTemplateManagementGridQueryAction.action','Y','SYS','2015-05-22 19:13:08',NULL,NULL),('18edc793-40ef-4c93-b615-692c38467cd8','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-24 09:44:02',NULL,NULL),('1db302eb-54a2-4a73-9c90-b5b000f5247d','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:46:50',NULL,NULL),('1e2f50b1-a7f7-45a2-8acb-0e86de9facd8','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-22 19:13:10',NULL,NULL),('20eb542b-34e1-4bbd-87bc-37af05c93b62','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-24 09:35:43',NULL,NULL),('22ff4b0d-cbe6-4a26-9b57-16b290d984c5','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:39:24',NULL,NULL),('470c381e-6059-45de-acef-ef9fa23f5951','admin','CORE','index.action','Y','SYS','2015-05-24 09:51:04',NULL,NULL),('4732c776-9f96-4cf1-93e1-5e0e0c2c173d','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:40:35',NULL,NULL),('555fd212-820f-4ac5-82a1-a84a67c06771','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:31:08',NULL,NULL),('55d647d7-fe9f-4249-9a34-72b05613ffeb','admin','QCHARTS','qcharts.analyticsManagementAction.action','Y','SYS','2015-05-24 09:44:30',NULL,NULL),('56386cf5-2a43-40d1-982f-56cb748f8e6d','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:51:39',NULL,NULL),('569090d9-b432-4c54-884d-704ee3c2ced1','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:45:41',NULL,NULL),('57bede2b-987f-40a2-9f89-88307505d795','admin','QCHARTS','qcharts.commonGetMdxHistoryAction.action','Y','SYS','2015-05-24 09:31:03',NULL,NULL),('5d3d7b09-a132-4706-b545-d29ef613310a','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:44:36',NULL,NULL),('6307d357-4da2-4243-8e14-2238c0ee76dc','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:46:14',NULL,NULL),('631f23e3-2982-4fa7-a328-436f86a22e7e','admin','CORE','core.systemFormTemplateManagementAction.action','Y','SYS','2015-05-22 19:13:07',NULL,NULL),('64a65e9b-f3be-4464-8d67-c5ed62254b1b','admin','CORE','index.action','Y','SYS','2015-05-22 19:12:29',NULL,NULL),('6648f412-0cac-467c-a147-9422497a74a4','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:46:34',NULL,NULL),('66becd35-0881-4eb8-9953-b1107fda986d','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-22 19:13:18',NULL,NULL),('72613da4-120b-4639-89ea-f60d46565198','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-24 09:51:11',NULL,NULL),('7bfc6b93-9535-4f98-889f-f23a6c098541','admin','QCHARTS','qcharts.commonGetMdxHistoryAction.action','Y','SYS','2015-05-24 09:35:49',NULL,NULL),('7e7eeac9-2636-4f76-b904-565c54559463','admin','CORE','core.systemFormTemplateCopy2UploadAction.action','Y','SYS','2015-05-22 19:13:10',NULL,NULL),('96a60188-efa1-4253-b6bc-e5d997cae641','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-24 09:37:40',NULL,NULL),('971039f1-9171-4781-947f-6370e5e4e613','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:31:06',NULL,NULL),('9884749c-15eb-44e5-8269-b47bb80f3374','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-22 19:13:15',NULL,NULL),('9b027ad0-438a-4503-9472-932472f976bc','admin','CORE','core.systemFormTemplateCopy2UploadAction.action','Y','SYS','2015-05-22 19:13:18',NULL,NULL),('9e9212cc-31f8-4f9d-b59a-36f06da81f1e','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:45:33',NULL,NULL),('a09c98a8-bce3-41e6-8fcb-dbeb7bf97c7b','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:35:51',NULL,NULL),('aa11b12f-ef93-41ab-be87-3798ed1f2b55','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:44:34',NULL,NULL),('ace7899c-e3ca-489f-8927-126022692c7c','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:46:17',NULL,NULL),('b49d0158-4ffd-4557-bd3d-47303dad0213','admin','QCHARTS','qcharts.commonGetMdxHistoryAction.action','Y','SYS','2015-05-24 09:37:54',NULL,NULL),('b4ecf10e-b528-47ad-80c5-b50d134f435d','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:40:03',NULL,NULL),('b5da381b-a978-48f1-9d31-2696cb1b2e8c','admin','QCHARTS','qcharts.queryManagementAction.action','Y','SYS','2015-05-22 19:12:48',NULL,NULL),('b6718f90-6969-4a94-9003-a49dd68e980f','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:51:28',NULL,NULL),('b8e4d9d3-9ab1-4f95-824b-c8021db2edf9','admin','CORE','core.systemFormTemplateCopy2UploadAction.action','Y','SYS','2015-05-22 19:13:15',NULL,NULL),('bd96a5ef-47e1-4c85-bdfa-b357470dca3a','admin','CORE','index.action','Y','SYS','2015-05-24 09:37:34',NULL,NULL),('c4f82a73-a292-4c46-9aba-7dc0b1c6e750','admin','QCHARTS','qcharts.commonGetMdxHistoryAction.action','Y','SYS','2015-05-24 09:51:26',NULL,NULL),('cf3478f3-096e-4c47-ba19-e021cb0a2eaa','admin','QCHARTS','qcharts.analyticsManagementAction.action','Y','SYS','2015-05-24 09:51:22',NULL,NULL),('cf469810-7dfc-4577-a343-686cbc57c55f','admin','QCHARTS','qcharts.commonGetMdxHistoryAction.action','Y','SYS','2015-05-24 09:44:32',NULL,NULL),('d99577fd-c10c-4ea0-9622-9fa2f8e70287','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:51:24',NULL,NULL),('dae824a2-0374-4584-8f96-2adb824328dd','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:47:41',NULL,NULL),('db1aa1ec-a6b0-4ebe-a3cc-d53d9728ba10','admin','QCHARTS','qcharts.analyticsHtmlExportAction.action','Y','SYS','2015-05-24 09:40:23',NULL,NULL),('dcbf1765-6849-49ee-a5ba-2c9cf2fb953f','admin','QCHARTS','qcharts.analyticsManagementAction.action','Y','SYS','2015-05-24 09:30:59',NULL,NULL),('dd468971-962e-482a-af75-a96679cac814','admin','QCHARTS','qcharts.analyticsManagementAction.action','Y','SYS','2015-05-24 09:35:47',NULL,NULL),('e14a3ce0-7cbc-4dd7-811c-38661858a249','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-22 19:12:37',NULL,NULL),('e6234cba-0c93-490e-8ad4-692baa84e7e4','admin','CORE','index.action','Y','SYS','2015-05-24 09:30:43',NULL,NULL),('e6bedfff-4242-40ec-85df-c55acf721d9e','admin','CORE','core.systemCalendarNoteHistoryAction.action','Y','SYS','2015-05-24 09:30:52',NULL,NULL),('fac01459-a168-4d24-b4b3-abeb1b4bb2a4','admin','QCHARTS','qcharts.analyticsCatalogManagementAction.action','Y','SYS','2015-05-24 09:51:20',NULL,NULL),('ffd396ef-ef82-4c68-8e3d-c6589dde0727','admin','CORE','core.commonLoadUploadFileAction.action','Y','SYS','2015-05-24 09:39:04',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_event_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2005,6 +2006,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
   `EXPR_TYPE` varchar(10) NOT NULL,
   `NAME_EXPRESSION` varchar(8000) NOT NULL,
   `HELP_EXPRESSION` varchar(8000) NOT NULL,
+  `BEGIN_LEN` int(1) NOT NULL DEFAULT '0',
   `DESCRIPTION` varchar(500) NOT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -2022,7 +2024,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
 
 LOCK TABLES `tb_sys_ftp_tran` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` DISABLE KEYS */;
-INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR',NULL,'Y','TXT',',','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */','test','admin','2015-05-15 10:17:26',NULL,NULL);
+INSERT INTO `tb_sys_ftp_tran` VALUES ('22222','FTP0001','TRAN0001','GET-TXT','/TEST_DIR',NULL,'Y','TXT',',','utf-8','GROOVY','fileName.add( \"test.txt\" );','/* nothing */',0,'test','admin','2015-05-15 10:17:26',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ftp_tran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2179,6 +2181,7 @@ CREATE TABLE `tb_sys_login_log` (
 
 LOCK TABLES `tb_sys_login_log` WRITE;
 /*!40000 ALTER TABLE `tb_sys_login_log` DISABLE KEYS */;
+INSERT INTO `tb_sys_login_log` VALUES ('21bb73b9-ac5b-415e-b0bc-68a7ec1fe624','admin','SYS','2015-05-24 09:35:36',NULL,NULL),('27d9950c-f237-4e27-8234-0c5b138076bf','admin','SYS','2015-05-22 19:12:48',NULL,NULL),('81288fb3-7c83-47d7-9cda-cf879bdf0b6a','admin','SYS','2015-05-24 09:51:04',NULL,NULL),('bb19b7c9-afa7-48da-af0d-a6ebdcd288d4','admin','SYS','2015-05-22 19:12:29',NULL,NULL),('bd7c9439-2c11-47de-89df-b0eb34e686d1','admin','SYS','2015-05-24 09:43:55',NULL,NULL),('f0638032-b32b-418c-b982-71899418964e','admin','SYS','2015-05-24 09:30:42',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_login_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2517,6 +2520,7 @@ CREATE TABLE `tb_sys_upload` (
 
 LOCK TABLES `tb_sys_upload` WRITE;
 /*!40000 ALTER TABLE `tb_sys_upload` DISABLE KEYS */;
+INSERT INTO `tb_sys_upload` VALUES ('15fa372c-c2c8-45c8-90ce-b644268eb55f','QCHARTS','2015','tmp','83ee5776-1bac-4ab5-b7fd-030f48674365.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:46:17',NULL,NULL),('1ad18cfb-3a23-4b7e-8d67-da2ca5d678d9','QCHARTS','2015','tmp','c6281b5c-a3b4-4d07-a0ab-dd38fee3a876.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:40:34',NULL,NULL),('2f06fac7-210e-46fc-96f6-d31a32cef0ed','QCHARTS','2015','tmp','2a3add62-2630-4caa-abfe-49d0158edbce.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:39:04',NULL,NULL),('3b697fe0-4534-4cbd-afe7-bd89f977ad95','QCHARTS','2015','tmp','8a3c4352-61ef-4727-9130-1d6044f67669.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:31:08',NULL,NULL),('5e3a7e70-8835-4ef5-8ba1-80d0972b2e7e','QCHARTS','2015','tmp','86ad436d-14c4-4a57-9652-59234a048c6d.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:44:36',NULL,NULL),('71838e1b-2db7-4157-bbbe-2ccb522353f8','QCHARTS','2015','tmp','0bcf549f-f8f8-4544-a183-108f75ff8d7a.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:51:39',NULL,NULL),('8b74e153-0fbe-4078-a82c-da25ef5a8ba9','QCHARTS','2015','tmp','7fbd6921-0551-4d99-9273-5c9a89076521.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:45:40',NULL,NULL),('c81f6501-d290-44b4-9aca-b48cca26d071','QCHARTS','2015','tmp','d09f284f-2f18-4bb4-a02f-2b6e16228173.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:36:54',NULL,NULL),('d69a94ec-557e-4d7a-aece-4009f3344a02','QCHARTS','2015','tmp','8b611493-781e-404f-9e58-dd1b6941d72c.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:46:50',NULL,NULL),('e20f8e3b-9a68-4c2f-ab24-4b2fe12763fa','QCHARTS','2015','tmp','18f8886c-ed09-4f05-aca9-80cbf5afe700.htm','analytics-export.xlsx','Y',NULL,'admin','2015-05-24 09:40:02',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_upload` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2535,6 +2539,7 @@ CREATE TABLE `tb_sys_upload_tran` (
   `ENCODING` varchar(10) NOT NULL,
   `EXPR_TYPE` varchar(10) NOT NULL,
   `HELP_EXPRESSION` varchar(8000) NOT NULL,
+  `BEGIN_LEN` int(1) NOT NULL DEFAULT '0',
   `DESCRIPTION` varchar(500) NOT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -2692,4 +2697,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-21 14:06:38
+-- Dump completed on 2015-05-24 16:37:14

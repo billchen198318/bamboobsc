@@ -34,7 +34,11 @@
 		<field>
 			<a>helpExpression</a>
 			<b>helpExpression</b>
-		</field>																													
+		</field>				
+		<field>
+			<a>beginLen</a>
+			<b>beginLen</b>
+		</field>																											
 		<field>
 			<a>description</a>
 			<b>description</b>
@@ -71,7 +75,11 @@
 		<field>
 			<a>helpExpression</a>
 			<b>helpExpression</b>
-		</field>																													
+		</field>			
+		<field>
+			<a>beginLen</a>
+			<b>beginLen</b>
+		</field>																												
 		<field>
 			<a>description</a>
 			<b>description</b>
