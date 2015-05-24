@@ -124,6 +124,10 @@ public class DataUtils {
 		return jdbcTemplate;
 	}
 	
+	public static NamedParameterJdbcTemplate getJdbcTemplate() throws Exception {
+		return (NamedParameterJdbcTemplate)AppContext.getBean("namedParameterJdbcTemplate");
+	}	
+	
 	public static NamedParameterJdbcTemplate getManualJdbcTemplate(
 			Class<?> dataSourceClass, String url, String user, String password) throws Exception {
 		return getManualJdbcTemplate( ManualDataSourceFactory.getDataSource(dataSourceClass, url, user, password) );
