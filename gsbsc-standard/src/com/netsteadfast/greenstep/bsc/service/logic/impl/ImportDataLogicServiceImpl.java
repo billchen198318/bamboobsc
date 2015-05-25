@@ -252,11 +252,9 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			if ( this.visionService.countByParams(paramMap) < 1 ) {
 				throw new ServiceException( "row: " + row + " vision is not found " + visId );
 			}
-			BbVision vision = new BbVision();
-			vision.setVisId(visId);
-			vision = this.visionService.findByEntityUK(vision);
-			if ( null == vision || super.isBlank(vision.getOid()) ) {
-				throw new ServiceException( SysMessageUtil.get(GreenStepSysMsgConstants.DATA_NO_EXIST) );
+			DefaultResult<VisionVO> visionResult = this.visionService.findForSimpleByVisId(visId);
+			if ( visionResult.getValue()==null) {
+				throw new ServiceException( visionResult.getSystemMessage().getValue() );
 			}
 			PerspectiveVO perspective = new PerspectiveVO();
 			perspective.setPerId(perId);
@@ -271,9 +269,9 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			if ( this.perspectiveService.countByParams(paramMap) > 0 ) { // update
 				DefaultResult<PerspectiveVO> oldResult = this.perspectiveService.findByUK(perspective);
 				perspective.setOid( oldResult.getValue().getOid() );				
-				this.perspectiveLogicService.update(perspective, vision.getOid());
+				this.perspectiveLogicService.update(perspective, visionResult.getValue().getOid() );
 			} else { // insert
-				this.perspectiveLogicService.create(perspective, vision.getOid());
+				this.perspectiveLogicService.create(perspective, visionResult.getValue().getOid() );
 			}
 			success = true; 
 		}
