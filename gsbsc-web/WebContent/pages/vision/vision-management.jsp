@@ -113,6 +113,37 @@ function BSC_PROG002D0001Q_exportCsv() {
 	);		
 }
 
+function BSC_PROG002D0001Q_importCsv() {
+	openCommonUploadDialog('BSC', 'tmp', 'N', 'BSC_PROG002D0001Q_uploadCsvOid', 'BSC_PROG002D0001Q_importCsvProcess', 'BSC_PROG002D0001Q_importCsvUploadFail');
+}
+function BSC_PROG002D0001Q_importCsvProcess() {
+	hideCommonUploadDialog();
+	xhrSendParameter(
+			'${basePath}/bsc.commonDoImportCsvDataAction.action', 
+			{ 
+				'fields.importType' : 'vision',
+				'fields.uploadOid'	: dojo.byId("BSC_PROG002D0001Q_uploadCsvOid").value
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ('Y' == data.success) {
+					getQueryGrid_${programId}_grid();
+				}
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+function BSC_PROG002D0001Q_importCsvUploadFail() {
+	dojo.byId("BSC_PROG002D0001Q_uploadCsvOid").value = "";
+	hideCommonUploadDialog();
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -139,9 +170,13 @@ function ${programId}_page_message() {
 		refreshEnable="Y" 		 
 		refreshJsMethod="${programId}_TabRefresh();" 
 		exportEnable="Y"
-		exportJsMethod="BSC_PROG002D0001Q_exportCsv();"				
+		exportJsMethod="BSC_PROG002D0001Q_exportCsv();"	
+		importEnable="Y"
+		importJsMethod="BSC_PROG002D0001Q_importCsv();"				
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>		
+	
+	<input type="hidden" name="BSC_PROG002D0001Q_uploadCsvOid" id="BSC_PROG002D0001Q_uploadCsvOid" value=""/>
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>

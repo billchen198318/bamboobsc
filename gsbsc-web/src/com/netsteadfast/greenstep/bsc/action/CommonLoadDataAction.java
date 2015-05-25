@@ -28,6 +28,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
+import com.netsteadfast.greenstep.bsc.service.logic.IImportDataLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbKpi;
 import com.netsteadfast.greenstep.po.hbm.BbObjective;
@@ -75,6 +77,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	private IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
 	private IKpiService<KpiVO, BbKpi, String> kpiService;
+	private IImportDataLogicService importDataLogicService;
 	private String message = "";
 	private String success = IS_NO;
 	private String appendName = ""; // 放部門名稱
@@ -146,6 +149,18 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	@Resource(name="bsc.service.KpiService")	
 	public void setKpiService(IKpiService<KpiVO, BbKpi, String> kpiService) {
 		this.kpiService = kpiService;
+	}
+
+	@JSON(serialize=false)
+	public IImportDataLogicService getImportDataLogicService() {
+		return importDataLogicService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.logic.ImportDataLogicService")	
+	public void setImportDataLogicService(
+			IImportDataLogicService importDataLogicService) {
+		this.importDataLogicService = importDataLogicService;
 	}
 
 	private void loadOrganizationAppendNames() throws ControllerException, AuthorityException, ServiceException, Exception {
@@ -275,6 +290,30 @@ public class CommonLoadDataAction extends BaseJsonAction {
 				paramMap);		
 		this.success = IS_YES;
 		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS);
+	}
+	
+	public void importCsvData() throws ControllerException, ServiceException, Exception {
+		String importType = this.getFields().get("importType");
+		String uploadOid = this.getFields().get("uploadOid");
+		if (StringUtils.isBlank(uploadOid) || StringUtils.isBlank(importType)) {
+			throw new ControllerException( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK) );
+		}
+		DefaultResult<Boolean> result = null;
+		if ( "vision".equals( importType ) ) { // vision
+			result = this.importDataLogicService.importVisionCsv(uploadOid);			
+		} else if ( "perspective".equals( importType ) ) { // perspectives
+			
+		} else if ( "objective".equals( importType ) ) { // strategy-objectives
+			
+		} else if ( "kpi".equals( importType ) ) { // KPIs
+			
+		} else { // measure-data
+			
+		}
+		if ( result.getValue()!=null && result.getValue() ) {
+			this.success = IS_YES;
+		}
+		this.message = result.getSystemMessage().getValue();
 	}
 	
 	/**
@@ -476,6 +515,31 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		}
 		return SUCCESS;			
 	}
+	
+	/**
+	 * bsc.commonDoImportCsvDataAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@JSON(serialize=false)
+	public String doImportCsvData() throws Exception {
+		try {
+			this.importCsvData();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;			
+	}	
 	
 	@JSON
 	@Override

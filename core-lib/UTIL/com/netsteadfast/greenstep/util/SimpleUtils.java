@@ -539,4 +539,13 @@ public class SimpleUtils {
 		return str;		
 	}    
     
+	public static String unEscapeCsv2(String str) throws Exception {
+		str = unEscapeCsv(str);
+		if (str.startsWith("\"") && str.endsWith("\"")) {
+			str = str.substring(1, str.length());
+			str = str.substring(0, str.length()-1);				
+		}
+		return str;		
+	}  	
+	
 }

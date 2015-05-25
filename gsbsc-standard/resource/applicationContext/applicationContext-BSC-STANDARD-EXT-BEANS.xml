@@ -24,6 +24,6 @@
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-workspace.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-aggregationMethod.xml" />    
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-reportRoleView.xml" />
-    
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-importData.xml" />
     
 </beans>    
