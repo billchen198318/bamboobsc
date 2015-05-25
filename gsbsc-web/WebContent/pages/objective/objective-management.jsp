@@ -100,6 +100,27 @@ function BSC_PROG002D0003Q_triggerChangePerspectiveItems() {
 	);	
 }
 
+function BSC_PROG002D0003Q_exportCsv() {
+	xhrSendParameter(
+			'${basePath}/bsc.commonDoExportData2CsvAction.action', 
+			{ 'fields.exportId' : 'bb_objective_001' }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ('Y' != data.success) {
+					return;
+				}
+				openCommonLoadUpload( 'download', data.oid, { } );
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);		
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -124,7 +145,9 @@ function ${programId}_page_message() {
 		saveEnabel="N" 
 		saveJsMethod=""
 		refreshEnable="Y" 		 
-		refreshJsMethod="${programId}_TabRefresh();" 		
+		refreshJsMethod="${programId}_TabRefresh();" 
+		exportEnable="Y"
+		exportJsMethod="BSC_PROG002D0003Q_exportCsv();"					
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>		
 	
