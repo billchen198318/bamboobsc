@@ -519,4 +519,24 @@ public class SimpleUtils {
     	return url.toString();
     }	
 	
+	public static String escapeCsv(String str) throws Exception {
+		str = str.replaceAll("\r\n", "#GS_NRNL#");
+		str = str.replaceAll("\r", "#GS_NR#");
+		str = str.replaceAll("\n", "#GS_NL#");
+		str = str.replaceAll("\t", "#GS_TAB#");
+		str = str.replaceAll(";", "#GS_SEMICOLON#");
+		str = str.replaceAll(",", "#GS_COMMA#");
+		return str;
+	}
+	
+	public static String unEscapeCsv(String str) throws Exception {
+		str = str.replaceAll("#GS_NRNL#", "\r\n");
+		str = str.replaceAll("#GS_NR#", "\r");
+		str = str.replaceAll("#GS_NL#", "\n");
+		str = str.replaceAll("#GS_TAB#", "\t");
+		str = str.replaceAll("#GS_SEMICOLON#", ";");
+		str = str.replaceAll("#GS_COMMA#", ",");
+		return str;		
+	}    
+    
 }

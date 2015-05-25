@@ -77,6 +77,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <style type="text/css">
 
+.myExportIcon {
+  	background-image: url(./icons/document-export.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
+.myImportIcon {
+  	background-image: url(./icons/document-import.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
 </style>
 
 <script type="text/javascript">

@@ -92,6 +92,27 @@ function BSC_PROG002D0001Q_pdf(oid) {
 	openCommonJasperReportLoadWindow( "Vision-Report", "BSC_RPT001", "PDF", { 'oid' : oid } );
 }
 
+function BSC_PROG002D0001Q_exportCsv() {
+	xhrSendParameter(
+			'${basePath}/bsc.commonDoExportData2CsvAction.action', 
+			{ 'fields.exportId' : 'tb_vision_001' }, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ('Y' != data.success) {
+					return;
+				}
+				openCommonLoadUpload( 'download', data.oid, { } );
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);		
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -116,7 +137,9 @@ function ${programId}_page_message() {
 		saveEnabel="N" 
 		saveJsMethod=""
 		refreshEnable="Y" 		 
-		refreshJsMethod="${programId}_TabRefresh();" 		
+		refreshJsMethod="${programId}_TabRefresh();" 
+		exportEnable="Y"
+		exportJsMethod="BSC_PROG002D0001Q_exportCsv();"				
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>		
 	

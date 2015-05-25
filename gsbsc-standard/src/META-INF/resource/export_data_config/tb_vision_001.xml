@@ -2,8 +2,14 @@
 <ExportDataConfig>
 	<id>bb_vision_001</id>
 	<name>export vision data</name>
-	<title>"Vision Id"; "Title"; "Content"</title>
-	<sql>SELECT VIS_ID, TITLE, CONTENT FROM bb_vision LIMIT 1000</sql>
+	<title>"Vision Id"; "Title"; "Content";</title>
+	<sql>
+		SELECT 
+			VIS_ID, TITLE, CONTENT 
+		FROM bb_vision
+		ORDER BY	VIS_ID 	ASC 
+		LIMIT 100 		
+	</sql>
 	<separate_symbol>;</separate_symbol>
 	<escape_csv>true</escape_csv>
 	<description>export vision data to csv file.</description>

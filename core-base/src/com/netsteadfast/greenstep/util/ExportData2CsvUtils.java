@@ -30,7 +30,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -88,17 +88,26 @@ public class ExportData2CsvUtils {
 			Map<String, Object> dataMap = results.get(i);
 			for (Map.Entry<String, Object> entry : dataMap.entrySet()) {
 				if ( entry.getValue() != null ) {
-					String str = String.valueOf( entry.getValue() );
+					String str = "";
+					if (entry.getValue() instanceof byte[]) { // blob text
+						str = new String( (byte[])entry.getValue() , Constants.BASE_ENCODING );
+					} else {
+						str = String.valueOf( entry.getValue() );
+					}					
 					if (config.isEscapeCsv()) {
-						str = StringEscapeUtils.escapeCsv(str);
+						//str = StringEscapeUtils.escapeCsv(str);
+						str = SimpleUtils.escapeCsv(str);
 					}
-					out.append(str);
+					if (StringUtils.isBlank(str)) {
+						str = " ";
+					}
+					out.append("\"").append(str).append("\"");					
 				} else {
 					out.append(" ");
 				}
 				out.append( config.getSeparateSymbol() );
 			}
-			out.append(config.getTitle()).append("\r\n");
+			out.append("\r\n");
 		}
 		return out.toString();
 	}

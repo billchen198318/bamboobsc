@@ -35,12 +35,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
@@ -51,6 +53,7 @@ import com.netsteadfast.greenstep.po.hbm.BbKpi;
 import com.netsteadfast.greenstep.po.hbm.BbObjective;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbPerspective;
+import com.netsteadfast.greenstep.util.ExportData2CsvUtils;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
@@ -80,6 +83,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	private List<Map<String, String>> kpiOrga = new LinkedList<Map<String, String>>(); // 數據資料維護時, 點選KPI後要出現的 KPI所屬的部門
 	private KpiVO kpi = new KpiVO();
 	private OrganizationVO organization = new OrganizationVO();
+	private String oid = ""; // 匯出csv 產出的 TB_SYS_UPLOAD.OID
 	
 	public CommonLoadDataAction() {
 		super();
@@ -251,6 +255,26 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		}
 		this.organization = result.getValue();
 		this.success = IS_YES;
+	}
+	
+	/**
+	 * 匯出CSV 檔案
+	 * 
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	private void exportData2Csv() throws ServiceException, Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		for (Map.Entry<String, String> entry : this.getFields().entrySet()) {
+			if (!entry.getKey().equals("exportId")) {
+				paramMap.put(entry.getKey(), entry.getValue());
+			}
+		}
+		this.oid = ExportData2CsvUtils.create(
+				this.getFields().get("exportId")+".xml", 
+				paramMap);		
+		this.success = IS_YES;
+		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS);
 	}
 	
 	/**
@@ -428,6 +452,31 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		return SUCCESS;				
 	}
 	
+	/**
+	 * bsc.commonDoExportData2CsvAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@JSON(serialize=false)
+	public String doExportData2Csv() throws Exception {
+		try {
+			this.exportData2Csv();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;			
+	}
+	
 	@JSON
 	@Override
 	public String getLogin() {
@@ -480,6 +529,14 @@ public class CommonLoadDataAction extends BaseJsonAction {
 
 	public OrganizationVO getOrganization() {
 		return organization;
+	}
+
+	public String getOid() {
+		return oid;
+	}
+
+	public void setOid(String oid) {
+		this.oid = oid;
 	}
 
 }
