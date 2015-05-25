@@ -264,11 +264,17 @@ public class SystemFtpClientUtils {
 			String strLine) throws Exception {
 		if (TransformSegment.TEXT_MODE.equals(tran.getSegmMode())) { // 用字串切割
 			for (TbSysFtpTranSegm segm : segms) {
+				if ( strLine.length() < segm.getEnd() ) {
+					throw new Exception("data format error.");
+				}				
 				dataMap.put(segm.getName(), strLine.substring(segm.getBegin(), segm.getEnd()) );
 			}			
 		} else if (TransformSegment.BYTE_MODE.equals(tran.getSegmMode())) { // 用 byte 切割
 			byte[] dataBytes = strLine.getBytes( tran.getEncoding() );
 			for (TbSysFtpTranSegm segm : segms) {
+				if ( dataBytes.length < segm.getEnd() ) {
+					throw new Exception("data format error.");
+				}				
 				String dataStr = new String(
 						ArrayUtils.subarray(dataBytes, segm.getBegin(), segm.getEnd()), tran.getEncoding());
 				dataMap.put(segm.getName(), dataStr);
@@ -276,6 +282,9 @@ public class SystemFtpClientUtils {
 		} else { // 用符號來分成array
 			String tmpStr[] = strLine.split(tran.getSegmSymbol());
 			for (TbSysFtpTranSegm segm : segms) {
+				if (segm.getBegin() != segm.getEnd()) {
+					throw new Exception("segment config begin/end error.");
+				}				
 				if (segm.getBegin() != segm.getEnd()) {
 					throw new Exception("segment config begin/end error.");
 				}
