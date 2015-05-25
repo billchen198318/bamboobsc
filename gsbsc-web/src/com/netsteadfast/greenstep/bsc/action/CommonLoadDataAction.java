@@ -302,7 +302,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		if ( "vision".equals( importType ) ) { // vision
 			result = this.importDataLogicService.importVisionCsv(uploadOid);			
 		} else if ( "perspective".equals( importType ) ) { // perspectives
-			
+			result = this.importDataLogicService.importPerspectivesCsv(uploadOid);
 		} else if ( "objective".equals( importType ) ) { // strategy-objectives
 			
 		} else if ( "kpi".equals( importType ) ) { // KPIs

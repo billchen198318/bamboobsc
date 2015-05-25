@@ -520,6 +520,9 @@ public class SimpleUtils {
     }	
 	
 	public static String escapeCsv(String str) throws Exception {
+		if ( null == str ) {
+			return str;
+		}		
 		str = str.replaceAll("\r\n", "#GS_NRNL#");
 		str = str.replaceAll("\r", "#GS_NR#");
 		str = str.replaceAll("\n", "#GS_NL#");
@@ -530,6 +533,9 @@ public class SimpleUtils {
 	}
 	
 	public static String unEscapeCsv(String str) throws Exception {
+		if ( null == str ) {
+			return str;
+		}		
 		str = str.replaceAll("#GS_NRNL#", "\r\n");
 		str = str.replaceAll("#GS_NR#", "\r");
 		str = str.replaceAll("#GS_NL#", "\n");
@@ -540,6 +546,9 @@ public class SimpleUtils {
 	}    
     
 	public static String unEscapeCsv2(String str) throws Exception {
+		if ( null == str ) {
+			return str;
+		}
 		str = unEscapeCsv(str);
 		if (str.startsWith("\"") && str.endsWith("\"")) {
 			str = str.substring(1, str.length());

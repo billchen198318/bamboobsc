@@ -2555,7 +2555,7 @@ CREATE TABLE `tb_sys_upload_tran` (
 
 LOCK TABLES `tb_sys_upload_tran` WRITE;
 /*!40000 ALTER TABLE `tb_sys_upload_tran` DISABLE KEYS */;
-INSERT INTO `tb_sys_upload_tran` VALUES ('3e525db9-1645-4459-84d8-7fe16f799501','TRAN001','SYMBOL',';','utf-8','GROOVY','/* nothing */',1,'for import csv file to tb_vision.','admin','2015-05-25 13:25:07',NULL,NULL);
+INSERT INTO `tb_sys_upload_tran` VALUES ('3e525db9-1645-4459-84d8-7fe16f799501','TRAN001','SYMBOL',';','utf-8','GROOVY','/* nothing */',1,'for import csv file to bb_vision.','admin','2015-05-25 13:25:07',NULL,NULL),('3e525db9-1645-4459-84d8-7fe16f799502','TRAN002','SYMBOL',';','utf-8','GROOVY','/* nothing */',1,'for import csv file to bb_perspective.','admin','2015-05-25 15:04:15',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_upload_tran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2588,7 +2588,7 @@ CREATE TABLE `tb_sys_upload_tran_segm` (
 
 LOCK TABLES `tb_sys_upload_tran_segm` WRITE;
 /*!40000 ALTER TABLE `tb_sys_upload_tran_segm` DISABLE KEYS */;
-INSERT INTO `tb_sys_upload_tran_segm` VALUES ('1f13fe26-bac5-4018-a5f8-f3d10479c389','TRAN001','VIS_ID',0,0,'admin','2015-05-25 13:26:52',NULL,NULL),('cd88c4ce-b849-4d1e-bcaf-556e75f918a5','TRAN001','CONTENT',2,2,'admin','2015-05-25 13:27:47',NULL,NULL),('f336c34f-b939-46de-99df-8755ef794a7e','TRAN001','TITLE',1,1,'admin','2015-05-25 13:27:21',NULL,NULL);
+INSERT INTO `tb_sys_upload_tran_segm` VALUES ('1f13fe26-bac5-4018-a5f8-f3d10479c389','TRAN001','VIS_ID',0,0,'admin','2015-05-25 13:26:52',NULL,NULL),('241d818e-030c-4b68-b2db-cefcdb08d3c0','TRAN002','WEIGHT',3,3,'admin','2015-05-25 15:06:50',NULL,NULL),('573f3a7e-be78-4adc-b895-031d2e70adb9','TRAN002','VIS_ID',1,1,'admin','2015-05-25 15:05:54',NULL,NULL),('a7b0a3e8-dffd-4657-9270-d9f2c8781091','TRAN002','PER_ID',0,0,'admin','2015-05-25 15:05:24',NULL,NULL),('bc38b23f-b5e2-410e-9dcc-a5cc1e17c4ed','TRAN002','DESCRIPTION',6,6,'admin','2015-05-25 15:14:55',NULL,NULL),('cd88c4ce-b849-4d1e-bcaf-556e75f918a5','TRAN001','CONTENT',2,2,'admin','2015-05-25 13:27:47',NULL,NULL),('dd25a684-4775-4fdb-9d72-675d97180244','TRAN002','MIN',5,5,'admin','2015-05-25 15:14:26',NULL,NULL),('f1ed8d54-8042-4ab9-9d6d-a0bac03273da','TRAN002','TARGET',4,4,'admin','2015-05-25 15:14:00',NULL,NULL),('f336c34f-b939-46de-99df-8755ef794a7e','TRAN001','TITLE',1,1,'admin','2015-05-25 13:27:21',NULL,NULL),('f625df4a-19b0-4a38-975a-ee33953e5721','TRAN002','NAME',2,2,'admin','2015-05-25 15:06:20',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_upload_tran_segm` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2698,4 +2698,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-25 14:13:12
+-- Dump completed on 2015-05-25 16:06:29
