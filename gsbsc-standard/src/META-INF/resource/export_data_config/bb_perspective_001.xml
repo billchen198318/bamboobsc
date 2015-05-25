@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportDataConfig>
+	<id>bb_perspective_001</id>
+	<name>export perspectives data</name>
+	<title>"Perspective Id"; "Vision Id", "Name"; "Weight"; "Target", "Min", "Description";</title>
+	<sql>
+		select 
+			PER_ID, VIS_ID, NAME, WEIGHT, TARGET, MIN, DESCRIPTION 
+		from bb_perspective 
+		order by PER_ID asc 
+		limit 100 		
+	</sql>
+	<separate_symbol>;</separate_symbol>
+	<escape_csv>true</escape_csv>
+	<description>export perspectives data to csv file.</description>
+</ExportDataConfig>
