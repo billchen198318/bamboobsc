@@ -95,7 +95,7 @@ function BSC_PROG002D0001Q_pdf(oid) {
 function BSC_PROG002D0001Q_exportCsv() {
 	xhrSendParameter(
 			'${basePath}/bsc.commonDoExportData2CsvAction.action', 
-			{ 'fields.exportId' : 'tb_vision_001' }, 
+			{ 'fields.exportId' : 'bb_vision_001' }, 
 			'json', 
 			_gscore_dojo_ajax_timeout,
 			_gscore_dojo_ajax_sync, 
