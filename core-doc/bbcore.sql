@@ -2555,7 +2555,7 @@ CREATE TABLE `tb_sys_upload_tran` (
 
 LOCK TABLES `tb_sys_upload_tran` WRITE;
 /*!40000 ALTER TABLE `tb_sys_upload_tran` DISABLE KEYS */;
-INSERT INTO `tb_sys_upload_tran` VALUES ('3e525db9-1645-4459-84d8-7fe16f799501','TRAN001','SYMBOL',';','utf-8','GROOVY','/* nothing */',1,'for import csv file to bb_vision.','admin','2015-05-25 13:25:07',NULL,NULL),('3e525db9-1645-4459-84d8-7fe16f799502','TRAN002','SYMBOL',';','utf-8','GROOVY','/* nothing */',1,'for import csv file to bb_perspective.','admin','2015-05-25 15:04:15',NULL,NULL);
+INSERT INTO `tb_sys_upload_tran` VALUES ('3e525db9-1645-4459-84d8-7fe16f799501','TRAN001','SYMBOL',';','utf-8','GROOVY','import java.util.HashMap;\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\nimport java.util.Map;\r\nimport com.netsteadfast.greenstep.util.SimpleUtils;\r\n\r\nif (datas == null) {\r\n	return;\r\n}\r\nfor (int i=0; i<datas.size(); i++) {\r\n	Map<String, String> dataMap = datas.get(i);\r\n	for (Map.Entry<String, String> entry : dataMap.entrySet()) {\r\n		if ( entry.getValue() != null ) {\r\n			dataMap.put( entry.getKey(), SimpleUtils.unEscapeCsv2(entry.getValue()) );\r\n		}\r\n	}\r\n}\r\n',1,'for import csv file to bb_vision.','admin','2015-05-25 13:25:07',NULL,NULL),('3e525db9-1645-4459-84d8-7fe16f799502','TRAN002','SYMBOL',';','utf-8','GROOVY','import java.util.HashMap;\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\nimport java.util.Map;\r\nimport com.netsteadfast.greenstep.util.SimpleUtils;\r\n\r\nif (datas == null) {\r\n	return;\r\n}\r\nfor (int i=0; i<datas.size(); i++) {\r\n	Map<String, String> dataMap = datas.get(i);\r\n	for (Map.Entry<String, String> entry : dataMap.entrySet()) {\r\n		if ( entry.getValue() != null ) {\r\n			dataMap.put( entry.getKey(), SimpleUtils.unEscapeCsv2(entry.getValue()) );\r\n		}\r\n	}\r\n}\r\n',1,'for import csv file to bb_perspective.','admin','2015-05-25 15:04:15',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_upload_tran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2698,4 +2698,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-25 16:06:29
+-- Dump completed on 2015-05-25 17:06:51

@@ -54,7 +54,6 @@ import com.netsteadfast.greenstep.bsc.service.logic.IPerspectiveLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IVisionLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbPerspective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
-import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
@@ -153,9 +152,13 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				msg.append("row: " + row + " content is blank.\n");
 				continue;
 			}
+			/*
+			 * call unEscapeCsv2 write in HELP_EXPRESSION
+			 * 
 			visId = SimpleUtils.unEscapeCsv2(visId);
 			title = SimpleUtils.unEscapeCsv2(title);
 			content = SimpleUtils.unEscapeCsv2(content);
+			*/
 			VisionVO vision = new VisionVO();
 			vision.setVisId(visId);
 			vision.setTitle(title);			
@@ -228,13 +231,17 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				msg.append("row: " + row + " min is blank.\n");
 				continue;				
 			}
+			/*
+			 * call unEscapeCsv2 write in HELP_EXPRESSION
+			 * 
 			perId = SimpleUtils.unEscapeCsv2(perId);
 			visId = SimpleUtils.unEscapeCsv2(visId);
 			name = SimpleUtils.unEscapeCsv2(name);
 			weight = SimpleUtils.unEscapeCsv2(weight);
 			target = SimpleUtils.unEscapeCsv2(target);
 			min = SimpleUtils.unEscapeCsv2(min);
-			description = SimpleUtils.unEscapeCsv2(description);				
+			description = SimpleUtils.unEscapeCsv2(description);
+			*/				
 			if ( !NumberUtils.isNumber(weight) ) {
 				msg.append("row: " + row + " weight is not number.\n");
 				continue;					
