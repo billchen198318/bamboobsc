@@ -33,5 +33,7 @@ public interface IImportDataLogicService {
 	public DefaultResult<Boolean> importObjectivesCsv(String uploadOid) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> importKPIsCsv(String uploadOid) throws ServiceException, Exception;
+	
+	public DefaultResult<Boolean> importMeasureData(String uploadOid) throws ServiceException, Exception;
 
 }

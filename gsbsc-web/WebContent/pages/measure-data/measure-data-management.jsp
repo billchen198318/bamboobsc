@@ -261,6 +261,37 @@ function BSC_PROG002D0005Q_exportCsv() {
 	);		
 }
 
+function BSC_PROG002D0005Q_importCsv() {
+	openCommonUploadDialog('BSC', 'tmp', 'N', 'BSC_PROG002D0005Q_uploadCsvOid', 'BSC_PROG002D0005Q_importCsvProcess', 'BSC_PROG002D0005Q_importCsvUploadFail');
+}
+function BSC_PROG002D0005Q_importCsvProcess() {
+	hideCommonUploadDialog();
+	xhrSendParameter(
+			'${basePath}/bsc.commonDoImportCsvDataAction.action', 
+			{ 
+				'fields.importType' : 'measure-data',
+				'fields.uploadOid'	: dojo.byId("BSC_PROG002D0005Q_uploadCsvOid").value
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				if ( 'Y' == data.success ) {
+					BSC_PROG002D0005Q_clearContent();				
+				}
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+function BSC_PROG002D0005Q_importCsvUploadFail() {
+	dojo.byId("BSC_PROG002D0005Q_uploadCsvOid").value = "";
+	hideCommonUploadDialog();
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -287,10 +318,13 @@ function ${programId}_page_message() {
 		refreshEnable="Y" 		 
 		refreshJsMethod="${programId}_TabRefresh();" 	
 		exportEnable="Y"
-		exportJsMethod="BSC_PROG002D0005Q_exportCsv();"				
+		exportJsMethod="BSC_PROG002D0005Q_exportCsv();"	
+		importEnable="Y"
+		importJsMethod="BSC_PROG002D0005Q_importCsv();"						
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>			
 	
+	<input type="hidden" name="BSC_PROG002D0005Q_uploadCsvOid" id="BSC_PROG002D0005Q_uploadCsvOid" value=""/>
 	<input type="hidden" name="BSC_PROG002D0005Q_dateStatus" id="BSC_PROG002D0005Q_dateStatus" value="0" /> <!-- 0當前, -1上一個, 1下一個 -->
 	
 	<table border="0" width="100%" height="100%">

@@ -308,7 +308,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		} else if ( "kpi".equals( importType ) ) { // KPIs
 			result = this.importDataLogicService.importKPIsCsv(uploadOid);
 		} else { // measure-data
-			
+			result = this.importDataLogicService.importMeasureData(uploadOid);
 		}
 		if ( result.getValue()!=null && result.getValue() ) {
 			this.success = IS_YES;

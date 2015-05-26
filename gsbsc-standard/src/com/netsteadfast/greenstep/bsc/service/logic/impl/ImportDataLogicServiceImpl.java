@@ -38,6 +38,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -50,10 +51,14 @@ import com.netsteadfast.greenstep.base.model.SystemMessage;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.service.logic.BaseLogicService;
 import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IAggregationMethodService;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IFormulaService;
 import com.netsteadfast.greenstep.bsc.service.IKpiService;
+import com.netsteadfast.greenstep.bsc.service.IMeasureDataService;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.service.logic.IImportDataLogicService;
@@ -63,16 +68,23 @@ import com.netsteadfast.greenstep.bsc.service.logic.IPerspectiveLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IVisionLogicService;
 import com.netsteadfast.greenstep.bsc.util.AggregationMethodUtils;
 import com.netsteadfast.greenstep.po.hbm.BbAggregationMethod;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbFormula;
 import com.netsteadfast.greenstep.po.hbm.BbKpi;
+import com.netsteadfast.greenstep.po.hbm.BbMeasureData;
 import com.netsteadfast.greenstep.po.hbm.BbObjective;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbPerspective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
+import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.AggregationMethodVO;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.FormulaVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.MeasureDataVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
@@ -91,6 +103,9 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 	private IKpiService<KpiVO, BbKpi, String> kpiService;
 	private IFormulaService<FormulaVO, BbFormula, String> formulaService; 
 	private IAggregationMethodService<AggregationMethodVO, BbAggregationMethod, String> aggregationMethodService;
+	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService; 
+	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private IMeasureDataService<MeasureDataVO, BbMeasureData, String> measureDataService;
 	
 	public ImportDataLogicServiceImpl() {
 		super();
@@ -212,6 +227,42 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			IAggregationMethodService<AggregationMethodVO, BbAggregationMethod, String> aggregationMethodService) {
 		this.aggregationMethodService = aggregationMethodService;
 	}
+	
+	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
+		return employeeService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.EmployeeService")
+	@Required	
+	public void setEmployeeService(
+			IEmployeeService<EmployeeVO, BbEmployee, String> employeeService) {
+		this.employeeService = employeeService;
+	}
+
+	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
+		return organizationService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.OrganizationService")
+	@Required		
+	public void setOrganizationService(
+			IOrganizationService<OrganizationVO, BbOrganization, String> organizationService) {
+		this.organizationService = organizationService;
+	}	
+	
+	public IMeasureDataService<MeasureDataVO, BbMeasureData, String> getMeasureDataService() {
+		return measureDataService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.MeasureDataService")
+	@Required			
+	public void setMeasureDataService(
+			IMeasureDataService<MeasureDataVO, BbMeasureData, String> measureDataService) {
+		this.measureDataService = measureDataService;
+	}		
 
 	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
 	@Transactional(
@@ -641,6 +692,123 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 						organizationOids, 
 						employeeOids);
 			}			
+			success = true;
+		}
+		if ( msg.length() > 0 ) {
+			result.setSystemMessage( new SystemMessage(msg.toString()) );
+ 		} else {
+ 			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_SUCCESS)) ); 			
+ 		}
+		result.setValue(success);
+		return result;
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )			
+	@Override
+	public DefaultResult<Boolean> importMeasureData(String uploadOid) throws ServiceException, Exception {
+		List<Map<String, String>> csvResults = UploadSupportUtils.getTransformSegmentData(uploadOid, "TRAN005");
+		if (csvResults.size()<1) {
+			throw new ServiceException( SysMessageUtil.get(GreenStepSysMsgConstants.DATA_NO_EXIST) );
+		}		
+		boolean success = false;
+		DefaultResult<Boolean> result = new DefaultResult<Boolean>();		
+		StringBuilder msg = new StringBuilder();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		for (int i=0; i<csvResults.size(); i++) {
+			int row = i+1;
+			Map<String, String> data = csvResults.get(i);
+			String kpiId = data.get("KPI_ID");
+			String date = data.get("DATE");
+			String target = data.get("TARGET");
+			String actual = data.get("ACTUAL");
+			String frequency = data.get("FREQUENCY");
+			String orgId = data.get("ORG_ID");
+			String empId = data.get("EMP_ID");
+			if ( super.isBlank(kpiId) ) {
+				msg.append("row: " + row + " kpi id is blank.\n");
+				continue;
+			}				
+			if ( super.isBlank(date) ) {
+				msg.append("row: " + row + " date is blank.\n");
+				continue;
+			}							
+			if ( super.isBlank(target) ) {
+				msg.append("row: " + row + " target is blank.\n");
+				continue;
+			}
+			if ( super.isBlank(actual) ) {
+				msg.append("row: " + row + " actual is blank.\n");
+				continue;
+			}
+			if ( super.isBlank(frequency) ) {
+				msg.append("row: " + row + " frequency is blank.\n");
+				continue;
+			}
+			if ( super.isBlank(orgId) ) {
+				msg.append("row: " + row + " organization-id is blank.\n");
+				continue;
+			}
+			if ( super.isBlank(empId) ) {
+				msg.append("row: " + row + " employee-no is blank.\n");
+				continue;
+			}
+			if ( !SimpleUtils.isDate(date) ) {
+				msg.append("row: " + row + " is not date " + date + "\n");
+				continue;					
+			}			
+			if ( !NumberUtils.isNumber(target) ) {
+				msg.append("row: " + row + " target is not number.\n");
+				continue;					
+			}
+			if ( !NumberUtils.isNumber(actual) ) {
+				msg.append("row: " + row + " actual is not number.\n");
+				continue;					
+			}		
+			if ( BscMeasureDataFrequency.getFrequencyMap(false).get(frequency) == null ) {
+				msg.append("row: " + row + " frequency is not found.\n");
+				continue;			
+			}
+			paramMap.clear();
+			paramMap.put("id", kpiId);
+			if ( this.kpiService.countByParams(paramMap) < 1 ) {
+				msg.append("row: " + row + " KPI is not found " + kpiId + "\n");
+				continue;					
+			}
+			if ( !BscConstants.MEASURE_DATA_ORGANIZATION_FULL.equals(orgId) ) {
+				paramMap.clear();
+				paramMap.put("orgId", orgId);
+				if ( this.organizationService.countByParams(paramMap) < 1 ) {
+					msg.append("row: " + row + " organization-id is not found " + orgId + "\n");
+					continue;					
+				}				
+			}
+			if ( !BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(empId) ) {
+				paramMap.clear();
+				paramMap.put("empId", empId);
+				if ( this.employeeService.countByParams(paramMap) < 1 ) {
+					msg.append("row: " + row + " employee-no is not found " + empId + "\n");
+					continue;					
+				}				
+			}
+			MeasureDataVO measureData = new MeasureDataVO();
+			measureData.setKpiId(kpiId);
+			measureData.setDate(date);
+			measureData.setTarget( Float.valueOf(target) );
+			measureData.setActual( Float.valueOf(actual) );
+			measureData.setFrequency(frequency);
+			measureData.setOrgId(orgId);
+			measureData.setEmpId(empId);
+			DefaultResult<MeasureDataVO> oldResult = this.measureDataService.findByUK(measureData);
+			if (oldResult.getValue()!=null) { // update
+				measureData.setOid( oldResult.getValue().getOid() );
+				this.measureDataService.updateObject(measureData);
+			} else { // insert
+				this.measureDataService.saveObject(measureData);
+			}
 			success = true;
 		}
 		if ( msg.length() > 0 ) {
