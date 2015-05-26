@@ -47,14 +47,18 @@ import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.model.SystemMessage;
 import com.netsteadfast.greenstep.base.service.logic.BaseLogicService;
+import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
 import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.service.logic.IImportDataLogicService;
+import com.netsteadfast.greenstep.bsc.service.logic.IObjectiveLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IPerspectiveLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IVisionLogicService;
+import com.netsteadfast.greenstep.po.hbm.BbObjective;
 import com.netsteadfast.greenstep.po.hbm.BbPerspective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
@@ -67,6 +71,8 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 	private IVisionService<VisionVO, BbVision, String> visionService; 
 	private IPerspectiveLogicService perspectiveLogicService;
 	private IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService;
+	private IObjectiveLogicService objectiveLogicService;
+	private IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
 	
 	public ImportDataLogicServiceImpl() {
 		super();
@@ -117,6 +123,30 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 	public void setPerspectiveService(
 			IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService) {
 		this.perspectiveService = perspectiveService;
+	}
+
+	public IObjectiveLogicService getObjectiveLogicService() {
+		return objectiveLogicService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.logic.ObjectiveLogicService")
+	@Required			
+	public void setObjectiveLogicService(
+			IObjectiveLogicService objectiveLogicService) {
+		this.objectiveLogicService = objectiveLogicService;
+	}
+
+	public IObjectiveService<ObjectiveVO, BbObjective, String> getObjectiveService() {
+		return objectiveService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.ObjectiveService")
+	@Required		
+	public void setObjectiveService(
+			IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService) {
+		this.objectiveService = objectiveService;
 	}
 
 	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
@@ -281,6 +311,101 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				this.perspectiveLogicService.create(perspective, visionResult.getValue().getOid() );
 			}
 			success = true; 
+		}
+		if ( msg.length() > 0 ) {
+			result.setSystemMessage( new SystemMessage(msg.toString()) );
+ 		} else {
+ 			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_SUCCESS)) ); 			
+ 		}
+		result.setValue(success);
+		return result;
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<Boolean> importObjectivesCsv(String uploadOid) throws ServiceException, Exception {
+		List<Map<String, String>> csvResults = UploadSupportUtils.getTransformSegmentData(uploadOid, "TRAN003");
+		if (csvResults.size()<1) {
+			throw new ServiceException( SysMessageUtil.get(GreenStepSysMsgConstants.DATA_NO_EXIST) );
+		}		
+		boolean success = false;
+		DefaultResult<Boolean> result = new DefaultResult<Boolean>();		
+		StringBuilder msg = new StringBuilder();
+		for (int i=0; i<csvResults.size(); i++) {
+			int row = i+1;
+			Map<String, String> data = csvResults.get(i);
+			String objId = data.get("OBJ_ID");
+			String perId = data.get("PER_ID");			
+			String name = data.get("NAME");
+			String weight = data.get("WEIGHT");
+			String target = data.get("TARGET");
+			String min = data.get("MIN");
+			String description = data.get("DESCRIPTION");
+			if ( super.isBlank(objId) ) {
+				msg.append("row: " + row + " objective-id is blank.\n");
+				continue;
+			}					
+			if ( super.isBlank(perId) ) {
+				msg.append("row: " + row + " perspective-id is blank.\n");
+				continue;
+			}
+			if ( super.isBlank(name) ) {
+				msg.append("row: " + row + " name is blank.\n");
+				continue;
+			}			
+			if ( super.isBlank(weight) ) {
+				msg.append("row: " + row + " weight is blank.\n");
+				continue;				
+			}
+			if ( super.isBlank(target) ) {
+				msg.append("row: " + row + " target is blank.\n");
+				continue;				
+			}
+			if ( super.isBlank(min) ) {
+				msg.append("row: " + row + " min is blank.\n");
+				continue;				
+			}
+			if ( !NumberUtils.isNumber(weight) ) {
+				msg.append("row: " + row + " weight is not number.\n");
+				continue;					
+			}
+			if ( !NumberUtils.isNumber(target) ) {
+				msg.append("row: " + row + " target is not number.\n");
+				continue;					
+			}
+			if ( !NumberUtils.isNumber(min) ) {
+				msg.append("row: " + row + " min is not number.\n");
+				continue;					
+			}		
+			PerspectiveVO perspective = new PerspectiveVO();
+			perspective.setPerId(perId);
+			DefaultResult<PerspectiveVO> perResult = this.perspectiveService.findByUK(perspective);
+			if ( perResult.getValue() == null ) {
+				throw new ServiceException( "row: " + row + " perspective is not found " + perId );
+			}
+			perspective = perResult.getValue();
+			
+			ObjectiveVO objective = new ObjectiveVO();
+			objective.setObjId( objId );
+			DefaultResult<ObjectiveVO> oldResult = this.objectiveService.findByUK(objective);
+			objective.setObjId(objId);			
+			objective.setPerId(perId);
+			objective.setName(name);
+			objective.setWeight( new BigDecimal(weight) );
+			objective.setTarget( Float.valueOf(target) );
+			objective.setMin( Float.valueOf(min) );
+			objective.setDescription(description);			
+			if ( oldResult.getValue()!=null ) { // update
+				objective.setOid( oldResult.getValue().getOid() );
+				this.objectiveLogicService.update(objective, perspective.getOid());
+			} else { // insert
+				this.objectiveLogicService.create(objective, perspective.getOid());
+			}			
+			success = true;
 		}
 		if ( msg.length() > 0 ) {
 			result.setSystemMessage( new SystemMessage(msg.toString()) );

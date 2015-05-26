@@ -29,5 +29,7 @@ public interface IImportDataLogicService {
 	public DefaultResult<Boolean> importVisionCsv(String uploadOid) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> importPerspectivesCsv(String uploadOid) throws ServiceException, Exception;
+	
+	public DefaultResult<Boolean> importObjectivesCsv(String uploadOid) throws ServiceException, Exception;
 
 }
