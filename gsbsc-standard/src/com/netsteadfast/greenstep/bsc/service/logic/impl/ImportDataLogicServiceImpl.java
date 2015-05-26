@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.bsc.service.logic.impl;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,18 +47,31 @@ import com.netsteadfast.greenstep.base.model.ServiceAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.model.SystemMessage;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.service.logic.BaseLogicService;
+import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
+import com.netsteadfast.greenstep.bsc.service.IAggregationMethodService;
+import com.netsteadfast.greenstep.bsc.service.IFormulaService;
+import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
 import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.service.logic.IImportDataLogicService;
+import com.netsteadfast.greenstep.bsc.service.logic.IKpiLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IObjectiveLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IPerspectiveLogicService;
 import com.netsteadfast.greenstep.bsc.service.logic.IVisionLogicService;
+import com.netsteadfast.greenstep.bsc.util.AggregationMethodUtils;
+import com.netsteadfast.greenstep.po.hbm.BbAggregationMethod;
+import com.netsteadfast.greenstep.po.hbm.BbFormula;
+import com.netsteadfast.greenstep.po.hbm.BbKpi;
 import com.netsteadfast.greenstep.po.hbm.BbObjective;
 import com.netsteadfast.greenstep.po.hbm.BbPerspective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.AggregationMethodVO;
+import com.netsteadfast.greenstep.vo.FormulaVO;
+import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
@@ -73,6 +87,10 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 	private IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService;
 	private IObjectiveLogicService objectiveLogicService;
 	private IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
+	private IKpiLogicService kpiLogicService;
+	private IKpiService<KpiVO, BbKpi, String> kpiService;
+	private IFormulaService<FormulaVO, BbFormula, String> formulaService; 
+	private IAggregationMethodService<AggregationMethodVO, BbAggregationMethod, String> aggregationMethodService;
 	
 	public ImportDataLogicServiceImpl() {
 		super();
@@ -149,6 +167,52 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 		this.objectiveService = objectiveService;
 	}
 
+	public IKpiLogicService getKpiLogicService() {
+		return kpiLogicService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.logic.KpiLogicService")
+	@Required			
+	public void setKpiLogicService(IKpiLogicService kpiLogicService) {
+		this.kpiLogicService = kpiLogicService;
+	}
+
+	public IKpiService<KpiVO, BbKpi, String> getKpiService() {
+		return kpiService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.KpiService")
+	@Required			
+	public void setKpiService(IKpiService<KpiVO, BbKpi, String> kpiService) {
+		this.kpiService = kpiService;
+	}
+
+	public IFormulaService<FormulaVO, BbFormula, String> getFormulaService() {
+		return formulaService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.FormulaService")
+	@Required			
+	public void setFormulaService(
+			IFormulaService<FormulaVO, BbFormula, String> formulaService) {
+		this.formulaService = formulaService;
+	}
+
+	public IAggregationMethodService<AggregationMethodVO, BbAggregationMethod, String> getAggregationMethodService() {
+		return aggregationMethodService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.AggregationMethodService")
+	@Required		
+	public void setAggregationMethodService(
+			IAggregationMethodService<AggregationMethodVO, BbAggregationMethod, String> aggregationMethodService) {
+		this.aggregationMethodService = aggregationMethodService;
+	}
+
 	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
 	@Transactional(
 			propagation=Propagation.REQUIRED, 
@@ -182,13 +246,6 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				msg.append("row: " + row + " content is blank.\n");
 				continue;
 			}
-			/*
-			 * call unEscapeCsv2 write in HELP_EXPRESSION
-			 * 
-			visId = SimpleUtils.unEscapeCsv2(visId);
-			title = SimpleUtils.unEscapeCsv2(title);
-			content = SimpleUtils.unEscapeCsv2(content);
-			*/
 			VisionVO vision = new VisionVO();
 			vision.setVisId(visId);
 			vision.setTitle(title);			
@@ -260,18 +317,7 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			if ( super.isBlank(min) ) {
 				msg.append("row: " + row + " min is blank.\n");
 				continue;				
-			}
-			/*
-			 * call unEscapeCsv2 write in HELP_EXPRESSION
-			 * 
-			perId = SimpleUtils.unEscapeCsv2(perId);
-			visId = SimpleUtils.unEscapeCsv2(visId);
-			name = SimpleUtils.unEscapeCsv2(name);
-			weight = SimpleUtils.unEscapeCsv2(weight);
-			target = SimpleUtils.unEscapeCsv2(target);
-			min = SimpleUtils.unEscapeCsv2(min);
-			description = SimpleUtils.unEscapeCsv2(description);
-			*/				
+			}			
 			if ( !NumberUtils.isNumber(weight) ) {
 				msg.append("row: " + row + " weight is not number.\n");
 				continue;					
@@ -404,6 +450,196 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				this.objectiveLogicService.update(objective, perspective.getOid());
 			} else { // insert
 				this.objectiveLogicService.create(objective, perspective.getOid());
+			}			
+			success = true;
+		}
+		if ( msg.length() > 0 ) {
+			result.setSystemMessage( new SystemMessage(msg.toString()) );
+ 		} else {
+ 			result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_SUCCESS)) ); 			
+ 		}
+		result.setValue(success);
+		return result;
+	}
+	
+	private String checkKPIsDataError(
+			int row,
+			String id, String objId, String name, String weight, String target,
+			String min, String unit, String forId, String management, String compareType, String cal,
+			String dataType, String orgaMeasureSeparate, String userMeasureSeparate, String quasiRange,
+			String description) throws Exception {
+		if ( super.isBlank(id) ) {
+			return "row: " + row + " id is blank.\n";
+		}						
+		if ( super.isBlank(objId) ) {
+			return "row: " + row + " objective-id is blank.\n";
+		}					
+		if ( super.isBlank(name) ) {
+			return "row: " + row + " name is blank.\n";
+		}			
+		if ( super.isBlank(weight) ) {
+			return "row: " + row + " weight is blank.\n";				
+		}
+		if ( super.isBlank(target) ) {
+			return "row: " + row + " target is blank.\n";			
+		}
+		if ( super.isBlank(min) ) {
+			return "row: " + row + " min is blank.\n";			
+		}
+		if ( super.isBlank(unit) ) {
+			return "row: " + row + " unit is blank.\n";			
+		}			
+		if ( super.isBlank(forId) ) {
+			return "row: " + row + " formula-id is blank.\n";			
+		}			
+		if ( super.isBlank(management) ) {
+			return "row: " + row + " management method is blank.\n";			
+		}
+		if ( super.isBlank(compareType) ) {
+			return "row: " + row + " compare type is blank.\n";			
+		}
+		if ( super.isBlank(cal) ) {
+			return "row: " + row + " Calculation( aggregation method ) is blank.\n";			
+		}
+		if ( super.isBlank(dataType) ) {
+			return "row: " + row + " belong type is blank.\n";			
+		}			
+		if ( super.isBlank(orgaMeasureSeparate) ) {
+			return "row: " + row + " Organization measure-data separate flag is blank.\n";		
+		}	
+		if ( super.isBlank(userMeasureSeparate) ) {
+			return "row: " + row + " Personal measure-data separate flag is blank.\n";			
+		}			
+		if ( super.isBlank(quasiRange) ) {
+			return "row: " + row + " quasi range is blank.\n";
+		}				
+		if ( !NumberUtils.isNumber(weight) ) {
+			return "row: " + row + " weight is not number.\n";		
+		}
+		if ( !NumberUtils.isNumber(target) ) {
+			return "row: " + row + " target is not number.\n";				
+		}
+		if ( !NumberUtils.isNumber(min) ) {
+			return "row: " + row + " min is not number.\n";			
+		}		
+		if ( !NumberUtils.isNumber(quasiRange) ) {
+			return "row: " + row + " quasi range is not number.\n";			
+		}		
+		if ( BscKpiCode.getCompareTypeMap(false).get(compareType) == null ) {
+			return "row: " + row + " compare type is not accept.\n";
+		}
+		if ( BscKpiCode.getDataTypeMap(false).get(dataType) == null ) {
+			return "row: " + row + " belong type is not accept.\n";
+		}
+		if ( BscKpiCode.getManagementMap(false).get(management) == null ) {
+			return "row: " + row + " management method is not accept.\n";				
+		}			
+		if ( BscKpiCode.getQuasiRangeMap().get(quasiRange) == null ) {
+			return "row: " + row + " quasi range is not accept.\n";		
+		}		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("aggrId", cal);
+		if (this.aggregationMethodService.countByParams(paramMap) < 1) {
+			return "row: " + row + " Calculation( aggregation method ) is not accept.\n";
+		}
+		return "";
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT, ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<Boolean> importKPIsCsv(String uploadOid) throws ServiceException, Exception {
+		List<Map<String, String>> csvResults = UploadSupportUtils.getTransformSegmentData(uploadOid, "TRAN004");
+		if (csvResults.size()<1) {
+			throw new ServiceException( SysMessageUtil.get(GreenStepSysMsgConstants.DATA_NO_EXIST) );
+		}		
+		List<String> organizationOids = new ArrayList<String>();
+		List<String> employeeOids = new ArrayList<String>();
+		boolean success = false;
+		DefaultResult<Boolean> result = new DefaultResult<Boolean>();		
+		StringBuilder msg = new StringBuilder();
+		for (int i=0; i<csvResults.size(); i++) {
+			int row = i+1;
+			Map<String, String> data = csvResults.get(i);
+			String id = data.get("ID");
+			String objId = data.get("OBJ_ID");
+			String name = data.get("NAME");
+			String weight = data.get("WEIGHT");
+			String target = data.get("TARGET");
+			String min = data.get("MIN");
+			String unit = data.get("UNIT");
+			String forId = data.get("FOR_ID");
+			String management = data.get("MANAGEMENT");
+			String compareType = data.get("COMPARE_TYPE");
+			String cal = data.get("CAL");
+			String dataType = data.get("DATA_TYPE");
+			String orgaMeasureSeparate = data.get("ORGA_MEASURE_SEPARATE");
+			String userMeasureSeparate = data.get("USER_MEASURE_SEPARATE");
+			String quasiRange = data.get("QUASI_RANGE");
+			String description = data.get("DESCRIPTION");			
+			String errMsg = this.checkKPIsDataError(
+					row,
+					id, objId, name, weight, target, 
+					min, unit, forId, management, compareType, cal, 
+					dataType, orgaMeasureSeparate, userMeasureSeparate, quasiRange, 
+					description);
+			if ( !"".equals(errMsg) ) {
+				msg.append(errMsg);
+				continue;
+			}
+			ObjectiveVO objective = new ObjectiveVO();
+			objective.setObjId(objId);
+			DefaultResult<ObjectiveVO> objResult = this.objectiveService.findByUK(objective);
+			if ( objResult.getValue() == null ) {
+				throw new ServiceException( "row: " + row + " strategy-objectives is not found " + objId );
+			}
+			objective = objResult.getValue();
+			FormulaVO formula = new FormulaVO();
+			formula.setForId(forId);
+			DefaultResult<FormulaVO> forResult = this.formulaService.findByUK(formula);
+			if ( forResult.getValue() == null ) {
+				throw new ServiceException( "row: " + row + " formula is not found " + objId );
+			}
+			formula = forResult.getValue();
+			
+			KpiVO kpi = new KpiVO();
+			kpi.setId(id);
+			kpi.setName(name);
+			kpi.setWeight( new BigDecimal(weight) );
+			kpi.setTarget( Float.valueOf(target) );
+			kpi.setMin( Float.valueOf(min) );
+			kpi.setCompareType(compareType);
+			kpi.setUnit(unit);
+			kpi.setManagement(management);
+			kpi.setQuasiRange( Integer.parseInt(quasiRange) );
+			kpi.setDataType(dataType);
+			kpi.setDescription(description);
+			kpi.setOrgaMeasureSeparate(YesNo.NO);
+			kpi.setUserMeasureSeparate(YesNo.NO);
+			if ( YesNo.YES.equals(orgaMeasureSeparate) || YesNo.YES.equals(userMeasureSeparate) ) {
+				msg.append("row: " + row + " import mode no support organization/personal measure separate data. please manual settings.\n");
+			}
+			DefaultResult<KpiVO> kResult = this.kpiService.findByUK(kpi);
+			if (kResult.getValue()!=null) { // update
+				kpi.setOid( kResult.getValue().getOid() );
+				this.kpiLogicService.update(
+						kpi, 
+						objective.getOid(), 
+						formula.getOid(), 
+						AggregationMethodUtils.findSimpleById(cal).getOid(), 
+						organizationOids, 
+						employeeOids);
+			} else { // insert
+				this.kpiLogicService.create(
+						kpi, 
+						objective.getOid(), 
+						formula.getOid(), 
+						AggregationMethodUtils.findSimpleById(cal).getOid(), 
+						organizationOids, 
+						employeeOids);
 			}			
 			success = true;
 		}
