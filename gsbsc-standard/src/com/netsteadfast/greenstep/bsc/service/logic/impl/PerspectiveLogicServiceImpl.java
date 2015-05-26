@@ -156,7 +156,9 @@ public class PerspectiveLogicServiceImpl extends BaseLogicService implements IPe
 		}
 		VisionVO vision = vResult.getValue();
 		perspective.setVisId( vision.getVisId() );
-		perspective.setPerId( this.findForMaxPerId(SimpleUtils.getStrYMD("")) );
+		if ( !SimpleUtils.checkBeTrueOf_azAZ09(4, 14, perspective.getPerId()) ) { // for import-mode from csv file PER_ID is old(before id).
+			perspective.setPerId( this.findForMaxPerId(SimpleUtils.getStrYMD("")) );
+		}		
 		this.setStringValueMaxLength(perspective, "description", MAX_DESCRIPTION_LENGTH);
 		return this.perspectiveService.saveObject(perspective);
 	}

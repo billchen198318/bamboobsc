@@ -142,7 +142,9 @@ public class ObjectiveLogicServiceImpl extends BaseLogicService implements IObje
 		}
 		perspective = pResult.getValue();
 		objective.setPerId(perspective.getPerId());
-		objective.setObjId( this.findForMaxObjId(SimpleUtils.getStrYMD("")) );
+		if ( !SimpleUtils.checkBeTrueOf_azAZ09(4, 14, objective.getObjId()) ) { // for import-mode from csv file OBJ_ID is old(before id).
+			objective.setObjId( this.findForMaxObjId(SimpleUtils.getStrYMD("")) );
+		}		
 		this.setStringValueMaxLength(objective, "description", MAX_DESCRIPTION_LENGTH);
 		return this.objectiveService.saveObject(objective);
 	}

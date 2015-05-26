@@ -164,7 +164,9 @@ public class VisionLogicServiceImpl extends BaseLogicService implements IVisionL
 		if (null == vision) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
 		}
-		vision.setVisId( this.findForMaxVisId(SimpleUtils.getStrYMD("")) );		
+		if ( !SimpleUtils.checkBeTrueOf_azAZ09(4, 14, vision.getVisId()) ) { // for import-mode from csv file VIS_ID is old(before id).			
+			vision.setVisId( this.findForMaxVisId(SimpleUtils.getStrYMD("")) );
+		}				
 		return this.visionService.saveObject(vision);
 	}
 
