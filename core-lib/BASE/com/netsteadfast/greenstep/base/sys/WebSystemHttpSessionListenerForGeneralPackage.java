@@ -62,7 +62,7 @@ public class WebSystemHttpSessionListenerForGeneralPackage implements HttpSessio
 			if (!Constants.getSystem().equals(Constants.getMainSystem())) {
 				// SecurityUtils.setSecurityManager( (DefaultSecurityManager)AppContext.getBean("securityManager") );
 				SecurityUtils.getSubject().logout();
-				log.info("sessionDestroyed: " + event.getSession().getId() + " and do SecurityUtils.getSubject().logout().... ");					
+				log.info(Constants.getSystem() + " sessionDestroyed: " + event.getSession().getId() + " and do SecurityUtils.getSubject().logout().... ");					
 			}		
 		}
 	}
