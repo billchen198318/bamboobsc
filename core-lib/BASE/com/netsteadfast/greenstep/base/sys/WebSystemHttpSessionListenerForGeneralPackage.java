@@ -52,7 +52,7 @@ public class WebSystemHttpSessionListenerForGeneralPackage implements HttpSessio
 
 	@Override
 	public void sessionCreated(HttpSessionEvent event) {
-		log.info("sessionCreated: " + event.getSession().getId());
+		log.info(Constants.getSystem() + " sessionCreated: " + event.getSession().getId());
 	}
 
 	@Override
