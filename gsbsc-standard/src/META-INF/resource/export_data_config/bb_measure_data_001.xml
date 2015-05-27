@@ -2,7 +2,7 @@
 <ExportDataConfig>
 	<id>bb_measure_data_001</id>
 	<name>export measures-data</name>
-	<title>"KPI Id"; "Date"; "Target"; "Actual"; "Frequency"; "Organization Id"; "Employee No"</title>
+	<title>"KPI Id"; "Date"; "Target"; "Actual"; "Frequency"; "Organization Id"; "Employee No";</title>
 	<sql>
 		select 
 			KPI_ID, DATE, TARGET, ACTUAL, FREQUENCY, ORG_ID, EMP_ID 
