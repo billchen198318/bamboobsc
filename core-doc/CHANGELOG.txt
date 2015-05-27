@@ -1,3 +1,9 @@
+2015-05-26
+-----------------------------------------------------------
+Some modifications and database tables.
+add import/export csv file for Vision, Perspectives, strategy-objectives, KPIs, measure-data.
+
+
 2015-05-07
 -----------------------------------------------------------
 Some modifications
