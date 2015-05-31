@@ -132,7 +132,7 @@ dataSource.password=password
 
 ###9. Run bambooBSC 0.5
 ```
-# /home/pi/bamboobsc-05/apache-tomcat-7.0.62/bin
+# cd /home/pi/bamboobsc-05/apache-tomcat-7.0.62/bin
 # chmod a+x catalina.sh
 # chmod a+x shutdown.sh
 # chmod a+x startup.sh
