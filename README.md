@@ -47,7 +47,7 @@ https://www.youtube.com/watch?v=A27wnMTtfOc
 <br/>
 
 ###run on Raspberry pi 2
-
+<img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/IMGP4139.JPG"></img>
 ###1. must first install the MySQL and JDK8
 ```
 # apt-get install mysql-server
