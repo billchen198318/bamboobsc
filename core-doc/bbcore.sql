@@ -1576,7 +1576,7 @@ CREATE TABLE `tb_sys` (
 
 LOCK TABLES `tb_sys` WRITE;
 /*!40000 ALTER TABLE `tb_sys` DISABLE KEYS */;
-INSERT INTO `tb_sys` VALUES ('8e4f5372-d3f0-415c-9c6a-075e0fc0bdc7','QCHARTS','B. Query Charts','127.0.0.1:8080','qcharts-web','N','CHART_PIE','admin','2015-01-10 10:19:46','admin','2015-02-12 20:00:27'),('c6643182-85a5-4f91-9e73-10567ebd0dd5','CORE','Z. Core','127.0.0.1:8080','core-web','Y','SYSTEM','admin','2014-09-25 00:00:00','admin','2015-02-12 20:00:32'),('f0ad30f5-a23e-4fa8-aa16-ae2763a4a75a','BSC','A. Balanced Source Card','127.0.0.1:8080','gsbsc-web','N','STAR','admin','2014-11-03 15:23:11','admin','2015-05-29 19:13:59');
+INSERT INTO `tb_sys` VALUES ('8e4f5372-d3f0-415c-9c6a-075e0fc0bdc7','QCHARTS','B. Query Charts','127.0.0.1:8080','qcharts-web','N','CHART_PIE','admin','2015-01-10 10:19:46','admin','2015-02-12 20:00:27'),('c6643182-85a5-4f91-9e73-10567ebd0dd5','CORE','Z. Core','127.0.0.1:8080','core-web','Y','SYSTEM','admin','2014-09-25 00:00:00','admin','2015-02-12 20:00:32'),('f0ad30f5-a23e-4fa8-aa16-ae2763a4a75a','BSC','A. Balanced scorecard','127.0.0.1:8080','gsbsc-web','N','STAR','admin','2014-11-03 15:23:11','admin','2015-05-29 19:13:59');
 /*!40000 ALTER TABLE `tb_sys` ENABLE KEYS */;
 UNLOCK TABLES;
 
