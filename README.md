@@ -138,7 +138,7 @@ dataSource.password=password
 # chmod a+x startup.sh
 ```
 
-add JAVA_OPTS="-Xmx512M -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:ParallelGCThreads=8" to catalina.sh
+add JAVA_OPTS="-server -Xmx512M" to catalina.sh
 ```
 # ./startup.sh
 ```
