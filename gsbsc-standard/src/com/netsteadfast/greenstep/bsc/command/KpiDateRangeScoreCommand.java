@@ -33,6 +33,7 @@ import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.support.ScoreCalculationCallable;
 import com.netsteadfast.greenstep.bsc.support.ScoreCalculationCallableData;
+import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
@@ -66,7 +67,7 @@ public class KpiDateRangeScoreCommand extends BaseChainCommandSupport implements
 				for (ObjectiveVO objective : perspective.getObjectives()) {
 					// 2015-04-11 add
 					ExecutorService kpiCalculationPool = 
-							Executors.newFixedThreadPool( 3 );					
+							Executors.newFixedThreadPool( SimpleUtils.getAvailableProcessors(objective.getKpis().size()) );					
 					for (KpiVO kpi : objective.getKpis()) {
 						/* 2015-04-11 rem
 						if (BscMeasureDataFrequency.FREQUENCY_DAY.equals(frequency) 

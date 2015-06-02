@@ -557,4 +557,15 @@ public class SimpleUtils {
 		return str;		
 	}  	
 	
+	public static int getAvailableProcessors(int maxSize) {
+		int processors = Runtime.getRuntime().availableProcessors() - 1;
+		if (processors > maxSize) {
+			processors = maxSize;
+		}
+		if (processors < 1) {
+			processors = 1;
+		}		
+		return processors;
+	}
+	
 }
