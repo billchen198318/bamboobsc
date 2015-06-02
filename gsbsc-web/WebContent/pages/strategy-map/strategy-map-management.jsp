@@ -29,6 +29,8 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsplumb.css">
 	
+	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
+	
 	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-1.9.0-min.js"></script>
 	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-ui-1.9.2.min.js"></script>
 	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery.ui.touch-punch-0.2.2.min.js"></script>	
@@ -395,8 +397,8 @@ jsPlumb.ready(function() {
         $.ajax({
         	type	: "POST",
         	dataType: 'json',
-        	async	: false,
-        	timeout	: 24000,
+        	async	: !_gscore_dojo_ajax_sync,
+        	timeout	: _gscore_dojo_ajax_timeout,
         	cache	: false,
         	url		: '<%=basePath%>/bsc.strategyMapSaveAction.action',
         	data	: { 

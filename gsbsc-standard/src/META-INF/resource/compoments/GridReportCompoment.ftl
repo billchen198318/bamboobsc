@@ -16,8 +16,8 @@
 		},
 		type: "POST",
 		dataType: "json",
-		async: true,
-		timeout: 24000,
+		async: !_gscore_dojo_ajax_sync,
+		timeout: _gscore_dojo_ajax_timeout,
 		cache: false,
 		success: function(data) {
 			

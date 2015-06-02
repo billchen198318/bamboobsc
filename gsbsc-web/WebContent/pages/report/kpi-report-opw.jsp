@@ -26,6 +26,8 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<meta http-equiv="keywords" content="bambooCORE">
 	<meta http-equiv="description" content="bambooCORE">
 	
+	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
+	
     <script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	  
@@ -40,8 +42,8 @@ function BSC_PROG003D0001Q_getOpenWindowView() {
     $.ajax({
     	type	: "POST",
     	dataType: 'json',
-    	async	: true,
-    	timeout	: 24000,
+    	async	: !_gscore_dojo_ajax_sync,
+    	timeout	: _gscore_dojo_ajax_timeout,
     	cache	: false,
     	url		: '<%=basePath%>/bsc.kpiReportContentQueryAction.action',
     	data	: { 
