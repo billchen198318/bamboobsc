@@ -261,7 +261,7 @@ guava-gwt-13.0.1.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.3.jar
+groovy-all-2.4.3-indy.jar
 
 
 Apache ActiveMQ
@@ -332,7 +332,7 @@ kaptcha-2.3.2.jar
 Jython
 http://www.jython.org/
 -------------------------
-jython-standalone-2.5.4-rc1.jar
+jython-standalone-2.7.0.jar
 
 
 ZIP4J							

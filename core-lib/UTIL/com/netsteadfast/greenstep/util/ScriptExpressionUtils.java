@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.util;
 
 import java.util.Map;
 
+import org.codehaus.groovy.control.CompilerConfiguration;
 import org.python.util.PythonInterpreter;
 
 import com.netsteadfast.greenstep.base.model.ScriptTypeCode;
@@ -31,6 +32,12 @@ import groovy.lang.GroovyShell;
 import bsh.Interpreter;
 
 public class ScriptExpressionUtils {
+	private static CompilerConfiguration groovyCompilerConfig = new CompilerConfiguration();
+	
+	static {
+		groovyCompilerConfig.getOptimizationOptions().put("indy", true);
+		groovyCompilerConfig.getOptimizationOptions().put("int", false);		
+	}
 	
 	/**
 	 * 執行 script 
@@ -74,8 +81,8 @@ public class ScriptExpressionUtils {
 		}
 	}
 	
-	private static void executeGroovy(String scriptExpression, Map<String, Object> results, Map<String, Object> parameters) throws Exception {
-		GroovyShell groovyShell = new GroovyShell();
+	private static void executeGroovy(String scriptExpression, Map<String, Object> results, Map<String, Object> parameters) throws Exception {	
+		GroovyShell groovyShell = new GroovyShell(groovyCompilerConfig);		
 		if (parameters!=null) {
 			for (Map.Entry<String, Object> entry : parameters.entrySet()) {
 				groovyShell.setProperty(entry.getKey(), entry.getValue());

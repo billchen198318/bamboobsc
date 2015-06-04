@@ -106,7 +106,7 @@ function ${programId}_page_message() {
 				<td align="center" width="500px"><img alt="please wait" src="./images/please-wait.gif"></td>
 			</tr>
 			<tr>
-				<td align="center" width="500px"><h2>Please wait!</h2></td>
+				<td align="center" width="500px" bgcolor="#FAFAFA"><h2><font color="#7E7E7E">Please wait!</font></h2></td>
 			</tr>
 		</table>		
 	</div>

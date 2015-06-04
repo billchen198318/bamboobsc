@@ -87,7 +87,7 @@ function BSC_PROG001D0006Q_map_initialize() {
 		
 		dojo.byId("BSC_PROG001D0006Q_contentOrganizationInfo").innerHTML = '';
 		dojo.byId("BSC_PROG001D0006Q_contentRelationKpis").innerHTML = '';
-		xhrSendParameter(
+		xhrSendParameterNoWatitDlg(
 				'${basePath}/bsc.commonGetOrganizationDataAction.action', 
 				{ 'fields.oid' : '${oid}' }, 
 				'json', 
