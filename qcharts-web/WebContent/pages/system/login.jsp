@@ -1,3 +1,4 @@
+<%@page import="com.netsteadfast.greenstep.util.LocaleLanguageUtils"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%
@@ -62,7 +63,7 @@ function pageMessage() {
       <td bgcolor="#ffffff"><img src="./images/original.jpg" width="220" height="30" /></td>
     </tr>
     <tr>
-      <td height="220" bgcolor="#ffffff">
+      <td height="240" bgcolor="#ffffff">
 	  <center>
 	  <table id="loginTable" width="225" border="0" cellpadding="2" cellspacing="2">	  
         <tr>
@@ -77,6 +78,22 @@ function pageMessage() {
           <td width="90" align="right"><span class="style1">Password:</span></td>
           <td width="135" align="left"><s:password name="password" id="password" maxLength="25" maxSize="12" theme="simple"/></td>
         </tr> 
+        <tr> 
+          <td width="90" align="right"><span class="style1">Language:</span></td>
+          <td width="135" align="left">
+          	<select name="lang" id="lang">
+          	<%
+          	String defaultLang = LocaleLanguageUtils.getDefault();
+          	Map<String, Object> langs = LocaleLanguageUtils.getMap();
+          	for (Map.Entry<String, Object> entry : langs.entrySet()) {
+          	%>
+          	<option value="<%=entry.getKey()%>" <% if ( entry.getKey().equals(defaultLang) ) { %> selected <% } %> ><%=String.valueOf( entry.getValue() )%></option>
+          	<% 	
+          	}
+          	%>
+          	</select>
+          </td>
+        </tr>         
         <tr>         
           <td width="225" align="center" colspan="2"><s:submit value="login" theme="simple" id="btnLogin" name="btnLogin" onclick="submit_login();"/></td>          
         </tr>

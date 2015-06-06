@@ -84,42 +84,42 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="350px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System ID</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001E_sysId')"/></b> <s:property value="getText('CORE_PROG001D0001E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001E_sysId" id="CORE_PROG001D0001E_sysId" value="sys.sysId" width="200" maxlength="10" readonly="Y" ></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001E_name')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001E_name" id="CORE_PROG001D0001E_name" value="sys.name" width="200" maxlength="100"></gs:textBox>
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Host</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001E_host')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001E_host" id="CORE_PROG001D0001E_host" value="sys.host" width="200" maxlength="200"></gs:textBox>
     		</td>
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Context path</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001E_contextPath')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001E_contextPath" id="CORE_PROG001D0001E_contextPath" value="sys.contextPath" width="200" maxlength="100"></gs:textBox>
     		</td>
     	</tr>    
  		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Local</b>:
+    			<b><s:property value="getText('CORE_PROG001D0001E_isLocal')"/></b>:
     			<br/>   			
 				<input id="CORE_PROG001D0001E_isLocal" name="CORE_PROG001D0001E_isLocal" data-dojo-type="dijit/form/CheckBox" value="true" <s:if test=" \"Y\" == sys.isLocal "> checked </s:if> />   		
     		</td>
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Icon</b>:
+    			<b><s:property value="getText('CORE_PROG001D0001E_icon')"/></b>:
     			<br/>
     			<gs:select id="CORE_PROG001D0001E_icon" name="CORE_PROG001D0001E_icon" 
     				dataSource="iconDataMap" value="editIconValue" >
@@ -147,10 +147,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0001E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0001E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0001E_clear" id="CORE_PROG001D0001E_clear" onClick="CORE_PROG001D0001E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0001E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

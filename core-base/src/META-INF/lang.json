@@ -1,0 +1,12 @@
+{ 
+	"default" 	: "en",
+	"langs"		: {
+		"en"		:	"English (default)",
+		"de"		:	"Deutsch",
+		"es"		:	"español",
+		"fr"		:	"Français",
+		"tw"		:	"繁體中文",
+		"cn"		:	"简体中文",
+		"ja"		:	"日本語"				
+	} 
+}

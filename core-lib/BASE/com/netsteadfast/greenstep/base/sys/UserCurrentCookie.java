@@ -52,9 +52,12 @@ public class UserCurrentCookie {
 		return f;
 	}
 	
-	public static void setCurrentId(HttpServletResponse response, String currentId, String sessionId, String account) {
+	public static void setCurrentId(HttpServletResponse response, String currentId, String sessionId, 
+			String account, String language) {
 		try {
-			String value = currentId + Constants.ID_DELIMITER + sessionId + Constants.ID_DELIMITER + account;
+			String value = currentId + Constants.ID_DELIMITER + sessionId 
+					+ Constants.ID_DELIMITER + account
+					+ Constants.ID_DELIMITER + language;
 			String encValue = EncryptorUtils.encrypt(Constants.ENCRYPTOR_KEY1, Constants.ENCRYPTOR_KEY2, value);
 			encValue = SimpleUtils.toHex(encValue);
 			Cookie cookie = new Cookie(Constants.APP_SITE_CURRENTID_COOKIE_NAME, encValue);		
@@ -81,10 +84,11 @@ public class UserCurrentCookie {
 					String decVal = SimpleUtils.deHex( cookie.getValue() );
 					decVal = EncryptorUtils.decrypt(Constants.ENCRYPTOR_KEY1, Constants.ENCRYPTOR_KEY2, decVal);
 					String tmp[] = decVal.split(Constants.ID_DELIMITER);
-					if (tmp!=null && tmp.length==3) {
+					if (tmp!=null && tmp.length==4) {
 						dataMap.put("currentId", tmp[0]);
 						dataMap.put("sessionId", tmp[1]);
 						dataMap.put("account", tmp[2]);
+						dataMap.put("lang", tmp[3]);
 					}
 				}
 			}			

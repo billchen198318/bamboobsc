@@ -54,6 +54,8 @@ public class Pivot4JUtils {
 		}
 		InputStream is = Pivot4JUtils.class.getClassLoader().getResource( PIVOT4J_HTML_CSS ).openStream();
 		_htmlCss = IOUtils.toString(is, Constants.BASE_ENCODING);
+		is.close();
+		is = null;
 		return _htmlCss;
 	}
 	

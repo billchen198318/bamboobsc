@@ -85,42 +85,42 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="350px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System ID</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001A_sysId')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001A_sysId" id="CORE_PROG001D0001A_sysId" value="" width="200" maxlength="10"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001A_name')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001A_name" id="CORE_PROG001D0001A_name" value="" width="200" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Host</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001A_host')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001A_host" id="CORE_PROG001D0001A_host" value="" width="200" maxlength="200"></gs:textBox>
     		</td>    		
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Context path</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0001A_contextPath')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0001A_contextPath" id="CORE_PROG001D0001A_contextPath" value="" width="200" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>    
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Local</b>:
+    			<b><s:property value="getText('CORE_PROG001D0001A_isLocal')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0001A_isLocal" name="CORE_PROG001D0001A_isLocal" data-dojo-type="dijit/form/CheckBox" value="true" />
     		</td>    		
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Icon</b>:
+    			<b><s:property value="getText('CORE_PROG001D0001A_icon')"/></b>:
     			<br/>
     			<gs:select id="CORE_PROG001D0001A_icon" name="CORE_PROG001D0001A_icon" 
     				dataSource="iconDataMap" >
@@ -147,10 +147,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0001A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0001A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0001A_clear" id="CORE_PROG001D0001A_clear" onClick="CORE_PROG001D0001A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0001A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>        		
     		</td>
     	</tr>     	 	  	    	

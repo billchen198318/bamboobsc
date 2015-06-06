@@ -75,6 +75,11 @@ public class UserLoginInterceptor extends AbstractInterceptor {
 			if ( StringUtils.isBlank(currentId) ) {
 				currentId = "NULL";
 			}
+			String sessSysCurrentId = (String)session.get(Constants.SESS_SYSCURRENT_ID);
+			if ( !currentId.equals(sessSysCurrentId) ) {
+				logger.warn( "currentId: " + currentId + " not equals session variable currentId: " + sessSysCurrentId );
+				return this.redirectLogin(actionInvocation, session, currentId, accountId);
+			}
 			if (uSessLogHelper.countByCurrent(accountObj.getAccount(), currentId)<1) {
 				return this.redirectLogin(actionInvocation, session, currentId, accountId);
 			}						

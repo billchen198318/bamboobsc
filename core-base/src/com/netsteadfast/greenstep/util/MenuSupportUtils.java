@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.apache.struts2.ServletActionContext;
 
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
@@ -41,6 +42,7 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.model.MenuItemType;
 import com.netsteadfast.greenstep.model.MenuResultObj;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
@@ -128,6 +130,7 @@ public class MenuSupportUtils {
 			url = head + sys.getHost() + "/" + sys.getContextPath() + "/" + sysProg.getUrl()
 					+ ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
 					//+ "&" + Constants.APP_SITE_CROSS_JSESS_ID_PARAM + "=" + jsessionId;
+			url += "&" + Constants.SYS_CURRENT_ID + "=" + UserAccountHttpSessionSupport.getSysCurrentId(ServletActionContext.getRequest());
 		}			
 		if ( sysProg.getUrl().indexOf(Constants._COMMON_LOAD_FORM_ACTION) > -1 ) { // common form 要用到參數 prog_id
 			url += "&prog_id=" + sysProg.getProgId();

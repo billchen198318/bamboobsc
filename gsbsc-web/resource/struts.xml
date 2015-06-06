@@ -12,7 +12,7 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.objectFactory.spring.autoWire" value="name" />
 	<constant name="struts.objectFactory.spring.useClassCache" value="true" />	
-	<constant name="struts.custom.i18n.resources" value="application,message" />
+	<constant name="struts.custom.i18n.resources" value="global" />
 	<constant name="struts.multipart.maxSize" value="102400000" />
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.multipart.saveDir" value="/tmp"></constant>

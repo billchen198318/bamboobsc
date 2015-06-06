@@ -31,13 +31,23 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class UserAccountHttpSessionSupport {
 	
-	public static void create(HttpServletRequest request, AccountObj account) {
+	public static void create(HttpServletRequest request, AccountObj account, String language) {
 		request.getSession().setAttribute(Constants.SESS_ACCOUNT, account);
+		request.getSession().setAttribute(Constants.SESS_LANG, language);
 	}
 	
-	public static void create(ActionContext actionContext, AccountObj account) {
+	public static void create(ActionContext actionContext, AccountObj account, String language) {
 		actionContext.getSession().put(Constants.SESS_ACCOUNT, account);
+		actionContext.getSession().put(Constants.SESS_LANG, language);
 	}
+	
+	public static void createSysCurrentId(HttpServletRequest request, String sysCurrentId) {
+		request.getSession().setAttribute(Constants.SESS_SYSCURRENT_ID, sysCurrentId);
+	}
+	
+	public static void createSysCurrentId(ActionContext actionContext, String sysCurrentId) {
+		actionContext.getSession().put(Constants.SESS_SYSCURRENT_ID, sysCurrentId);
+	}	
 	
 	public static AccountObj get(HttpServletRequest request) {
 		return (AccountObj)request.getSession().getAttribute(Constants.SESS_ACCOUNT);
@@ -53,14 +63,44 @@ public class UserAccountHttpSessionSupport {
 	
 	public static void remove(HttpServletRequest request) {
 		request.getSession().removeAttribute(Constants.SESS_ACCOUNT);
+		request.getSession().removeAttribute(Constants.SESS_LANG);
+		request.getSession().removeAttribute(Constants.SESS_SYSCURRENT_ID);
 	}
 	
 	public static void remove(ActionContext actionContext) {
 		actionContext.getSession().remove(Constants.SESS_ACCOUNT);
+		actionContext.getSession().remove(Constants.SESS_LANG);
+		actionContext.getSession().remove(Constants.SESS_SYSCURRENT_ID);
 	}	
 	
 	public static void remove(Map<String, Object> session) {
 		session.remove(Constants.SESS_ACCOUNT);
+		session.remove(Constants.SESS_LANG);
+		session.remove(Constants.SESS_SYSCURRENT_ID);
 	}
+	
+	public static String getLang(HttpServletRequest request) {
+		return (String)request.getSession().getAttribute(Constants.SESS_LANG);
+	}
+	
+	public static String getLang(ActionContext actionContext) {
+		return (String)actionContext.getSession().get(Constants.SESS_LANG);
+	}
+
+	public static String getLang(Map<String, Object> session) {
+		return (String)session.get(Constants.SESS_LANG);
+	}
+	
+	public static String getSysCurrentId(HttpServletRequest request) {
+		return (String)request.getSession().getAttribute(Constants.SESS_SYSCURRENT_ID);
+	}
+	
+	public static String getSysCurrentId(ActionContext actionContext) {
+		return (String)actionContext.getSession().get(Constants.SESS_SYSCURRENT_ID);
+	}
+
+	public static String getSysCurrentId(Map<String, Object> session) {
+		return (String)session.get(Constants.SESS_SYSCURRENT_ID);
+	}	
 	
 }

@@ -58,12 +58,15 @@ public class Constants {
 	public static final String IS_DOJOX_CONTENT_PANE_XHR_LOAD = "isDojoxContentPane"; 
 	public static final String DOJOX_CONTENT_PANE_XHR_RE_LOGIN_PAGE = "/pages/system/login_again.jsp"; // 當session timeout 時在 dojox.layout.ContentPane 出現重登訊息頁面
 	public static final String IS_IFRAME_MODE = "isIframeMode";
+	public static final String SYS_CURRENT_ID = "gscoreSysCurrentId"; // 主要給 GSBSC-WEB, QCHARTS-WEB 點選 menu 時, url會代入 CORE-WEB 的 current-id 
 	
 	public static final String QUERY_TYPE_OF_SELECT="select"; // BaseService 查詢 grid 要用
 	public static final String QUERY_TYPE_OF_COUNT="count"; // BaseService 查詢 grid 要用
 	
 	public static final String SESS_ACCOUNT="SESSION_GSCORE_ACCOUNT"; // 登入 account id 放到 session 變數名
-		
+	public static final String SESS_LANG = "SESSION_GSCORE_LANG";
+	public static final String SESS_SYSCURRENT_ID = "SESSION_GSCORE_SYSCURRENT_ID";
+	
 	public static final String SESS_PAGE_INFO_NAMESPACE_ByInterceptor="SESSION_pageInfoNamespaceByInterceptor";
 	public static final String SESS_PAGE_INFO_ACTION_ByInterceptor="SESSION_pageInfoActionNameByInterceptor";
 	public static final String SESS_PAGE_INFO_RemoteAddr_ByInterceptor="SESSION_pageInfoRemoteAddrByInterceptor";

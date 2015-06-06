@@ -127,6 +127,10 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 		return this.getAccountObj().getOid();		
 	}
 	
+	public String getSysCurrentId() {
+		return UserAccountHttpSessionSupport.getSysCurrentId(this.getHttpServletRequest());
+	}
+	
 	public String getIsSuperRole() {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(Constants.SUPER_ROLE_ADMIN) || subject.hasRole(Constants.SUPER_ROLE_ALL)) {

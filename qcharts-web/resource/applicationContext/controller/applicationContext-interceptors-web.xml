@@ -19,5 +19,6 @@
     <bean id="greenstep.web.interceptor.JsonOutermostBracketsInterceptor" class="com.netsteadfast.greenstep.base.interceptor.JsonOutermostBracketsInterceptor" scope="prototype" />
     <bean id="greenstep.web.interceptor.JasperReportCloseConnHelperInterceptor" class="com.netsteadfast.greenstep.base.interceptor.JasperReportCloseConnHelperInterceptor" scope="prototype" />
     <bean id="greenstep.web.interceptor.UserAgentRejectInterceptor" class="com.netsteadfast.greenstep.base.interceptor.UserAgentRejectInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.LocaleLangInterceptor" class="com.netsteadfast.greenstep.base.interceptor.LocaleLangInterceptor" scope="prototype" />
     
 </beans>

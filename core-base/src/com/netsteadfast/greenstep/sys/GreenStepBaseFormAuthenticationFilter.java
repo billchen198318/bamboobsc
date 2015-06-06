@@ -153,18 +153,25 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
 	}
 	
 	private void setUserSession(HttpServletRequest request, HttpServletResponse response, AccountVO account) throws Exception {		
-		UserAccountHttpSessionSupport.create(request, account);
+		UserAccountHttpSessionSupport.create(request, account, this.getLanguage(request));
 		String httpSessionId = request.getSession().getId();
 		if (StringUtils.isBlank(httpSessionId)) {
 			httpSessionId = "NULL";
 		}
-		List<String> currs = uSessLogHelper.findCurrenrIdByAccount(account.getAccount(), httpSessionId);
-		if (currs!=null && currs.size()>0) {
-			UserCurrentCookie.setCurrentId(response, currs.get(0), request.getSession().getId(), account.getAccount());
+		if ( Constants.getSystem().equals( Constants.getMainSystem() ) ) { // core-web
+			List<String> currs = uSessLogHelper.findCurrenrIdByAccount(account.getAccount(), httpSessionId);
+			if (currs!=null && currs.size()>0) {
+				UserCurrentCookie.setCurrentId(response, currs.get(0), request.getSession().getId(), 
+						account.getAccount(), this.getLanguage(request));			
+				UserAccountHttpSessionSupport.createSysCurrentId(request, currs.get(0));
+			}			
+			SysLoginLogSupport.log( account.getAccount() );	 // only core-system need log tb_sys_login_log
+		} else { // gsbsc-web, qcharts-web
+			String sysCurrentId = request.getParameter( Constants.SYS_CURRENT_ID );
+			if (!StringUtils.isBlank(sysCurrentId)) {
+				UserAccountHttpSessionSupport.createSysCurrentId(request, sysCurrentId);
+			}
 		}
-		if ( Constants.getSystem().equals( Constants.getMainSystem() ) ) { // only core-system need log tb_sys_login_log
-			SysLoginLogSupport.log( account.getAccount() );	
-		}	
 	}
 	
 	private AccountVO queryUser(String account) throws Exception {
@@ -283,6 +290,21 @@ public class GreenStepBaseFormAuthenticationFilter extends FormAuthenticationFil
 		// set session
 		this.setUserSession((HttpServletRequest)request, (HttpServletResponse)response, account);    	    	
     	return true;
+    }
+    
+    private String getLanguage(HttpServletRequest request) {
+		String lang = request.getParameter("lang"); // core-system 取出登入頁面帶入的 lang 參數
+    	if ( !Constants.getSystem().equals( Constants.getMainSystem() ) ) { // 非 core-system 所以 lang 參數在 cookie 中取出
+        	Map<String, String> dataMap = UserCurrentCookie.getCurrentData( request );
+        	if ( dataMap != null ) {
+        		//System.out.println(dataMap);
+        		lang = (String)dataMap.get("lang");
+        	}
+    	}		
+		if ( StringUtils.isBlank(lang) ) {
+			lang = "en";
+		}  	
+		return lang;
     }
 	
 }
