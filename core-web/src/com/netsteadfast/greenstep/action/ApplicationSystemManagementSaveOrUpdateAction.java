@@ -82,10 +82,10 @@ public class ApplicationSystemManagementSaveOrUpdateAction extends BaseJsonActio
 							"contextPath"
 					}, 
 					new String[]{
-							"ID is required and only normal characters!<BR/>",
-							"Name is required!<BR/>",
-							"Host is required!<BR/>",
-							"Context path is required!"
+							this.getText("MESSAGE.CORE_PROG001D0001A_sysId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0001A_name") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0001A_host") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0001A_contextPath")
 					}, 
 					new Class[]{
 							NormalFieldCheckUtils.class,
