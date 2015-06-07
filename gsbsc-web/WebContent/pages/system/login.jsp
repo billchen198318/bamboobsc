@@ -47,6 +47,10 @@ function submit_login() {
 	document.loginForm.submit();
 }
 
+function redirectLogin(sel) {
+	window.location = '<%=basePath%>login.action?lang=' + sel.value;
+}
+
 function pageMessage() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
 	if (null!=pageMessage && ''!=pageMessage && ' '!=pageMessage) {
@@ -65,25 +69,13 @@ function pageMessage() {
     <tr>
       <td height="240" bgcolor="#ffffff">
 	  <center>
-	  <table id="loginTable" width="225" border="0" cellpadding="2" cellspacing="2">	  
-        <tr>
-          <td width="90" align="right"><img src="./kaptcha.jpg?n=<%=System.currentTimeMillis()%>"/></td>
-          <td width="135" align="left"><s:textfield name="captcha" id="captcha" maxLength="12" maxSize="12" theme="simple"/></td>      
-        </tr>  
-        <tr>  
-          <td width="90" align="right"><span class="style1">Account:</span></td>
-          <td width="135" align="left"><s:textfield name="username" id="username" maxLength="12" maxSize="12" theme="simple"/></td>
-        </tr>
+	  <table id="loginTable" width="270" border="0" cellpadding="2" cellspacing="2">	 
         <tr> 
-          <td width="90" align="right"><span class="style1">Password:</span></td>
-          <td width="135" align="left"><s:password name="password" id="password" maxLength="25" maxSize="12" theme="simple"/></td>
-        </tr> 
-        <tr> 
-          <td width="90" align="right"><span class="style1">Language:</span></td>
+          <td width="130" align="right"><span class="style1"><s:property value="getText('LOGIN_language')"/>:</span></td>
           <td width="135" align="left">
-          	<select name="lang" id="lang">
+          	<select name="lang" id="lang" onchange="redirectLogin(this);">
           	<%
-          	String defaultLang = LocaleLanguageUtils.getDefault();
+          	String defaultLang = (String)request.getAttribute("lang");
           	Map<String, Object> langs = LocaleLanguageUtils.getMap();
           	for (Map.Entry<String, Object> entry : langs.entrySet()) {
           	%>
@@ -93,9 +85,21 @@ function pageMessage() {
           	%>
           	</select>
           </td>
-        </tr>         
+        </tr>  	   
+        <tr>
+          <td width="130" align="right"><img src="./kaptcha.jpg?n=<%=System.currentTimeMillis()%>"/></td>
+          <td width="135" align="left"><s:textfield name="captcha" id="captcha" maxLength="12" maxSize="12" theme="simple"/></td>      
+        </tr>  
+        <tr>  
+          <td width="130" align="right"><span class="style1"><s:property value="getText('LOGIN_username')"/>:</span></td>
+          <td width="135" align="left"><s:textfield name="username" id="username" maxLength="12" maxSize="12" theme="simple"/></td>
+        </tr>
+        <tr> 
+          <td width="130" align="right"><span class="style1"><s:property value="getText('LOGIN_password')"/>:</span></td>
+          <td width="135" align="left"><s:password name="password" id="password" maxLength="25" maxSize="12" theme="simple"/></td>
+        </tr>        
         <tr>         
-          <td width="225" align="center" colspan="2"><s:submit value="login" theme="simple" id="btnLogin" name="btnLogin" onclick="submit_login();"/></td>          
+          <td width="225" align="center" colspan="2"><s:submit key="LOGIN_btnLogin" theme="simple" id="btnLogin" name="btnLogin" onclick="submit_login();"/></td>          
         </tr>
         <tr> 
           <td width="225" align="center" colspan="2" bgcolor="#FAFAFA">

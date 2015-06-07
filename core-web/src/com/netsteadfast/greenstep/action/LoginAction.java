@@ -21,6 +21,9 @@
  */
 package com.netsteadfast.greenstep.action;
 
+import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.context.annotation.Scope;
@@ -29,6 +32,8 @@ import org.springframework.stereotype.Component;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
+import com.netsteadfast.greenstep.util.LocaleLanguageUtils;
+import com.opensymphony.xwork2.ActionContext;
 
 @ControllerAuthority(check=false)
 @Component("core.web.controller.LoginAction")
@@ -36,6 +41,7 @@ import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 public class LoginAction extends BaseSupportAction {
 	private static final long serialVersionUID = -5036757280302854465L;
 	protected Logger logger=Logger.getLogger(LoginAction.class);
+	private String lang = "";
 	
 	public LoginAction() {
 		super();
@@ -55,14 +61,27 @@ public class LoginAction extends BaseSupportAction {
 		}
 	}
 	
+	private void setLocaleLanguage() {
+		if (StringUtils.isBlank(this.lang)) {
+			this.lang = LocaleLanguageUtils.getDefault();
+		}
+		if (LocaleLanguageUtils.getMap().get(this.lang)==null) {
+			this.lang = LocaleLanguageUtils.getDefault();
+		}
+		Locale locale = new Locale(this.lang);
+		ActionContext.getContext().setLocale(locale);			
+	}
+	
 	public String doLogout() throws Exception {
 		SecurityUtils.getSubject().logout();		
 		UserAccountHttpSessionSupport.remove(super.getHttpServletRequest());
+		this.setLocaleLanguage();
 		return SUCCESS;
 	}
 	
 	public String execute() throws Exception {		
 		String forward = LOGIN;
+		this.setLocaleLanguage();
 		try {
 			if (SecurityUtils.getSubject().isAuthenticated()) {
 				forward = SUCCESS;
@@ -75,6 +94,14 @@ public class LoginAction extends BaseSupportAction {
 			}			
 		}
 		return forward;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 	
 }
