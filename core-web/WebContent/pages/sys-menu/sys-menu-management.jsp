@@ -167,13 +167,13 @@ function ${programId}_page_message() {
 <form action="" name="CORE_PROG001D0003Q_form" id="CORE_PROG001D0003Q_form">	
 	<table border="0" width="100%" height="60px" cellpadding="1" cellspacing="0" >
 		<tr>
-			<td height="30px" width="20%"  align="right">System:</td>
+			<td height="30px" width="20%"  align="right"><s:property value="getText('CORE_PROG001D0003Q_system')"/>:</td>
 			<td height="30px" width="80%"  align="left">
 				<gs:select name="CORE_PROG001D0003Q_system" dataSource="sysMap" id="CORE_PROG001D0003Q_system" onChange="CORE_PROG001D0003Q_system_change()"></gs:select>
 			</td>
 		</tr>
 		<tr>
-			<td height="30px" width="20%"  align="right">Folder:</td>
+			<td height="30px" width="20%"  align="right"><s:property value="getText('CORE_PROG001D0003Q_sysProg')"/>:</td>
 			<td height="30px" width="80%"  align="left">
 				<gs:select name="CORE_PROG001D0003Q_sysProg" dataSource="sysProgMap" id="CORE_PROG001D0003Q_sysProg" onChange="CORE_PROG001D0003Q_sysProg_change()"></gs:select>
 			</td>
@@ -182,7 +182,7 @@ function ${programId}_page_message() {
 	<table width="750px" height="160px" border="0" cellpadding="1" cellspacing="0" >
 		<tr>
 			<td align="center" width="350px" height="200px">
-				<center><b>Enable menu:</b></center>
+				<center><b><s:property value="getText('CORE_PROG001D0003Q_enable')"/>:</b></center>
 				<select data-dojo-type="dijit/form/MultiSelect" id="CORE_PROG001D0003Q_enable" name="CORE_PROG001D0003Q_enable" size="10" style="width:320px;height:300px" >			    
 				</select>					
 			</td>
@@ -207,7 +207,7 @@ function ${programId}_page_message() {
 					">→</button>					
 			</td>
 			<td align="center" width="350px" height="200px">
-				<center><b>Disable menu:</b></center>
+				<center><b><s:property value="getText('CORE_PROG001D0003Q_disable')"/>:</b></center>
 				<select data-dojo-type="dijit/form/MultiSelect" id="CORE_PROG001D0003Q_disable" name="CORE_PROG001D0003Q_disable" size="10" style="width:320px;height:300px" >
 				</select>					
 			</td>
@@ -230,10 +230,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0003Q_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0003Q_save')}" 
     				iconClass="dijitIconSave"></gs:button> 			
     			<gs:button name="CORE_PROG001D0003Q_clear" id="CORE_PROG001D0003Q_clear" onClick="CORE_PROG001D0003Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0003Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>   			
 			</td>
 		</tr>
