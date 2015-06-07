@@ -96,70 +96,70 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="550px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0002A_progSystem')"/></b>:
     			<br/>
     			<gs:select name="fields.CORE_PROG001D0002A_progSystem" dataSource="progSystemDataMap" id="CORE_PROG001D0002A_progSystem"></gs:select>
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Program ID</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0002A_progId')"/></b>:
     			<br/>
     			<gs:textBox name="fields.CORE_PROG001D0002A_progId" id="CORE_PROG001D0002A_progId" value="" width="200" maxlength="50"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0002A_name')"/></b>:
     			<br/>
     			<gs:textBox name="fields.CORE_PROG001D0002A_name" id="CORE_PROG001D0002A_name" value="" width="300" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>URL</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_url')"/></b>:
     			<br/>
     			<gs:textBox name="fields.CORE_PROG001D0002A_url" id="CORE_PROG001D0002A_url" value="" width="400" maxlength="255"></gs:textBox>
     		</td>    		
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Edit mode</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_editMode')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0002A_editMode" name="fields.CORE_PROG001D0002A_editMode" data-dojo-type="dijit/form/CheckBox" value="true" />
     		</td>    		
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Dialog mode</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_isDialog')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0002A_isDialog" name="fields.CORE_PROG001D0002A_isDialog" data-dojo-type="dijit/form/CheckBox" value="true" />
     		</td>    		
     	</tr>    
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Dialog width</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_dialogW')"/></b>:
     			<br/>
     			<gs:textBox name="fields.CORE_PROG001D0002A_dialogW" id="CORE_PROG001D0002A_dialogW" value="" width="50" maxlength="4"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Dialog heigh</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_dialogH')"/></b>:
     			<br/>
     			<gs:textBox name="fields.CORE_PROG001D0002A_dialogH" id="CORE_PROG001D0002A_dialogH" value="" width="50" maxlength="4"></gs:textBox>
     		</td>    		
     	</tr>    	 		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Item type</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_itemType')"/></b>:
     			<br/>
     			<gs:select name="fields.CORE_PROG001D0002A_itemType" dataSource="{ \"FOLDER\":\"FOLDER\", \"ITEM\":\"ITEM\" }" id="CORE_PROG001D0002A_itemType"></gs:select>
     		</td>    		
     	</tr>    	    	    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Icon</b>:
+    			<b><s:property value="getText('CORE_PROG001D0002A_icon')"/></b>:
     			<br/>
     			<gs:select id="CORE_PROG001D0002A_icon" name="fields.CORE_PROG001D0002A_icon" dataSource="iconDataMap" ></gs:select>
     		</td>    		
@@ -175,10 +175,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0002A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0002A_save')}" 
     				iconClass="dijitIconSave"></gs:button> 			
     			<gs:button name="CORE_PROG001D0002A_clear" id="CORE_PROG001D0002A_clear" onClick="CORE_PROG001D0002A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0002A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    	    		    		
     		</td>
     	</tr>    	    	    	    	    	

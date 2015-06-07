@@ -87,10 +87,10 @@ public class SystemProgramManagementSaveOrUpdateAction extends BaseJsonAction {
 							"CORE_PROG001D0002"+workType+"_url"
 					}, 
 					new String[]{
-							"Please select system!<BR/>",
-							"ID is required and only normal characters!<BR/>",
-							"Name is required!<BR/>",
-							"Incorrect url!<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0002A_progSystem") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0002A_progId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0002A_name") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0002A_url") + "<BR/>",
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -110,7 +110,7 @@ public class SystemProgramManagementSaveOrUpdateAction extends BaseJsonAction {
 		String type = this.getFields().get("CORE_PROG001D0002"+workType+"_itemType");
 		if (MenuItemType.ITEM.equals(type) && StringUtils.isBlank(url) ) {
 			this.getFieldsId().add("CORE_PROG001D0002"+workType+"_url");
-			throw new ControllerException("ITEM type item need input Url!");			
+			throw new ControllerException("ITEM type item need input URL!");			
 		}
 		if (MenuItemType.FOLDER.equals(type) && "true".equals(this.getFields().get("CORE_PROG001D0002"+workType+"_editMode")) ) {
 			this.getFieldsId().add("CORE_PROG001D0002"+workType+"_itemType");
