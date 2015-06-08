@@ -80,21 +80,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0005E_system')"/></b> <s:property value="getText('CORE_PROG001D0005E_readOnly')"/>:
     			<br/>
     			<gs:select name="CORE_PROG001D0005E_system" dataSource="systemDataMap" id="CORE_PROG001D0005E_system" value="selectValue" readonly="Y"></gs:select>
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0005E_msgId')"/></b> <s:property value="getText('CORE_PROG001D0005E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0005E_msgId" id="CORE_PROG001D0005E_msgId" value="sysMsgNoticeConfig.msgId" width="200" maxlength="10" readonly="Y"></gs:textBox>
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Class</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0005E_className')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0005E_className" id="CORE_PROG001D0005E_className" value="sysMsgNoticeConfig.className" width="400" maxlength="255"></gs:textBox>
     		</td>
@@ -117,10 +117,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0005E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0005E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0005E_clear" id="CORE_PROG001D0005E_clear" onClick="CORE_PROG001D0005E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0005E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

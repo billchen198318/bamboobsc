@@ -81,21 +81,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0005A_system')"/></b>:
     			<br/>
     			<gs:select name="CORE_PROG001D0005A_system" dataSource="systemDataMap" id="CORE_PROG001D0005A_system"></gs:select>	
     		</td>    		
     	</tr>	    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0005A_msgId')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0005A_msgId" id="CORE_PROG001D0005A_msgId" value="" width="200" maxlength="10"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Class</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0005A_className')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0005A_className" id="CORE_PROG001D0005A_className" value="" width="400" maxlength="255"></gs:textBox>
     		</td>
@@ -117,10 +117,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0005A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0005A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0005A_clear" id="CORE_PROG001D0005A_clear" onClick="CORE_PROG001D0005A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0005A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>      		
     		</td>
     	</tr>     	 	  	    	

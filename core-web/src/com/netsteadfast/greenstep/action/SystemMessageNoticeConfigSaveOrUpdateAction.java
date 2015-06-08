@@ -80,9 +80,9 @@ public class SystemMessageNoticeConfigSaveOrUpdateAction extends BaseJsonAction 
 							"className"
 					}, 
 					new String[]{
-							"Please select system!<BR/>",
-							"Message ID is required and only normal characters!<BR/>",
-							"Class is required!<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0005A_system") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0005A_msgId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0005A_className") + "<BR/>",
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
