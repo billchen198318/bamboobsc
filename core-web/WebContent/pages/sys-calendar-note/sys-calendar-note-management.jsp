@@ -30,10 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0004Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0004Q_GridButtonClick, width: "10%" },  
-			{ name: "owner", field: "account", width: "15%" },
-			{ name: "Title", field: "title", width: "65%" },
-			{ name: "Date", field: "date", width: "10%" }
+			{ name: "${action.getText('CORE_PROG001D0004Q_grid_01')}", field: "oid", formatter: CORE_PROG001D0004Q_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG001D0004Q_grid_02')}", field: "account", width: "15%" },
+			{ name: "${action.getText('CORE_PROG001D0004Q_grid_03')}", field: "title", width: "65%" },
+			{ name: "${action.getText('CORE_PROG001D0004Q_grid_04')}", field: "date", width: "10%" }
 		];	
 }
 
@@ -62,7 +62,7 @@ function CORE_PROG001D0004Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG001D0004Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -117,9 +117,9 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="10%"  align="right">Account:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0004Q_accountOid')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:select name="CORE_PROG001D0004Q_accountOid" dataSource="accountMap" id="CORE_PROG001D0004Q_accountOid" readonly="${selectReadonly}" value="${selectValue}"></gs:select></td>    		
-    		<td height="25px" width="10%"  align="right">Date:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0004Q_date')"/></td>
     		<td height="25px" width="40%"  align="left"><input id="CORE_PROG001D0004Q_date" type="text" name="CORE_PROG001D0004Q_date" data-dojo-type="dijit.form.DateTextBox" maxlength="10" constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" required="true" style="width:120px;" /></td>  					
     	</tr>
     	<tr>
@@ -141,10 +141,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('CORE_PROG001D0004Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="CORE_PROG001D0004Q_clear" id="CORE_PROG001D0004Q_clear" onClick="CORE_PROG001D0004Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0004Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr>     	    	

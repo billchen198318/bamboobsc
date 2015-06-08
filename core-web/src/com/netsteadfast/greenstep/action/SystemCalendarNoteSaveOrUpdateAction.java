@@ -100,11 +100,11 @@ public class SystemCalendarNoteSaveOrUpdateAction extends BaseJsonAction {
 							"accountOid"
 					}, 
 					new String[]{
-							"Title is required!<BR/>",
-							"Note is required!<BR/>",
-							"Date is required!<BR/>",
-							"Email format error!<BR/>",
-							"Please select a account!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0004A_title") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0004A_note") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0004A_date") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0004A_contact") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0004A_accountOid") + "<BR/>"
 					},					
 					new Class[]{
 							NotBlankFieldCheckUtils.class,
@@ -125,17 +125,17 @@ public class SystemCalendarNoteSaveOrUpdateAction extends BaseJsonAction {
 		// date check
 		if ( !SimpleUtils.isDate(this.getFields().get("date")) ) {
 			this.getFieldsId().add("date");
-			throw new ControllerException("Date format error!");				
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0004A_date") );				
 		}
 		
 		// time check
 		String time = super.defaultString( this.getFields().get("time") );
 		String timeStartEnd[] = time.split(Constants.DATETIME_DELIMITER);
 		if (timeStartEnd==null || timeStartEnd.length!=2) {
-			throw new ControllerException("Time start and end error!");	
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0004A_dateTimeStartEnd") );	
 		}
 		if ( SimpleUtils.getInt(timeStartEnd[1], -1)<SimpleUtils.getInt(timeStartEnd[0], 0) ) {
-			throw new ControllerException("Time start and end error!");	
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0004A_dateTimeStartEnd") );	
 		}
 		
 	}	

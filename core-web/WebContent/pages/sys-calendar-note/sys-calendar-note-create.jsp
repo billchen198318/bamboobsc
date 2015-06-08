@@ -100,58 +100,58 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="575px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Owner</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004A_accountOid')"/></b>:
     			<br/>
     			<gs:select name="CORE_PROG001D0004A_accountOid" dataSource="accountMap" id="CORE_PROG001D0004A_accountOid" readonly="${selectReadonly}" value="${selectValue}"></gs:select>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Title</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004A_title')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0004A_title" id="CORE_PROG001D0004A_title" value="" width="400" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="225px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Note</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004A_note')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG001D0004A_note" name="CORE_PROG001D0004A_note" data-dojo-type="dijit/form/Textarea" rows="9" cols="50" style="width:300px;height:190px;max-height:200px"></textarea>
     		</td>    		
     	</tr>	   
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Date</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004A_date')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0004A_date" type="text" name="CORE_PROG001D0004A_date" data-dojo-type="dijit.form.DateTextBox" maxlength="10" constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" required="true" style="width:120px;" />
     		</td>    		
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Time</b>:
+    			<b><s:property value="getText('CORE_PROG001D0004A_time')"/></b>:
     			<br/>
-    			<b>start</b>&nbsp;
-    			hour<gs:select name="CORE_PROG001D0004A_time_startHour" dataSource="hourMap" id="CORE_PROG001D0004A_time_startHour" width="50"></gs:select>
-    			minutes<gs:select name="CORE_PROG001D0004A_time_startMinutes" dataSource="minutesMap" id="CORE_PROG001D0004A_time_startMinutes" width="50"></gs:select>
+    			<b><s:property value="getText('CORE_PROG001D0004A_time_start')"/></b>&nbsp;
+    			<s:property value="getText('CORE_PROG001D0004A_time_startHour')"/><gs:select name="CORE_PROG001D0004A_time_startHour" dataSource="hourMap" id="CORE_PROG001D0004A_time_startHour" width="50"></gs:select>
+    			<s:property value="getText('CORE_PROG001D0004A_time_startMinutes')"/><gs:select name="CORE_PROG001D0004A_time_startMinutes" dataSource="minutesMap" id="CORE_PROG001D0004A_time_startMinutes" width="50"></gs:select>
     			&nbsp;&nbsp;&nbsp;
     			
-    			<b>end</b>&nbsp;
-    			hour<gs:select name="CORE_PROG001D0004A_time_endHour" dataSource="hourMap" id="CORE_PROG001D0004A_time_endHour" width="50"></gs:select>
-    			minutes<gs:select name="CORE_PROG001D0004A_time_endMinutes" dataSource="minutesMap" id="CORE_PROG001D0004A_time_endMinutes" width="50"></gs:select>    			
+    			<b><s:property value="getText('CORE_PROG001D0004A_time_end')"/></b>&nbsp;
+    			<s:property value="getText('CORE_PROG001D0004A_time_endHour')"/><gs:select name="CORE_PROG001D0004A_time_endHour" dataSource="hourMap" id="CORE_PROG001D0004A_time_endHour" width="50"></gs:select>
+    			<s:property value="getText('CORE_PROG001D0004A_time_endMinutes')"/><gs:select name="CORE_PROG001D0004A_time_endMinutes" dataSource="minutesMap" id="CORE_PROG001D0004A_time_endMinutes" width="50"></gs:select>    			
     			    			
     		</td>
     		<!-- Time: 下拉-起時 下拉-起分 / 下拉-迄時 下拉-迄分 -->
     	</tr>    
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Send notification</b>:
+    			<b><s:property value="getText('CORE_PROG001D0004A_alert')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0004A_alert" name="CORE_PROG001D0004A_alert" data-dojo-type="dijit/form/CheckBox" value="true" />    		
     		</td>
     	</tr>    	    	        		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Contact mail</b>:
+    			<b><s:property value="getText('CORE_PROG001D0004A_contact')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0004A_contact" id="CORE_PROG001D0004A_contact" value="" width="400" maxlength="500"></gs:textBox>
     		</td>
@@ -177,10 +177,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0004A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0004A_save')}" 
     				iconClass="dijitIconSave"></gs:button> 			
     			<gs:button name="CORE_PROG001D0004A_clear" id="CORE_PROG001D0004A_clear" onClick="CORE_PROG001D0004A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0004A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>      		
     		</td>
     	</tr>    	    	    	    	    	
