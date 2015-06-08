@@ -86,12 +86,12 @@ public class SystemMessageNoticeSaveOrUpdateAction extends BaseJsonAction {
 							"message"
 					}, 
 					new String[]{
-							"Please select publish!<BR/>",
-							"Notice ID is required and only normal characters!<BR/>",
-							"Title is required!<BR/>",
-							"Start date is required!<BR/>",
-							"End date is required!<BR/>",
-							"Message is required!"
+							this.getText("MESSAGE.CORE_PROG001D0006A_msgOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0006A_noticeId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0006A_title") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0006A_date1") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0006A_date2") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0006A_message") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -114,7 +114,7 @@ public class SystemMessageNoticeSaveOrUpdateAction extends BaseJsonAction {
 		if (Integer.parseInt(date1) > Integer.parseInt(date2)) {
 			this.getFieldsId().add("date1");
 			this.getFieldsId().add("date2");
-			throw new ControllerException("Incorrect date range!<BR/>");
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0006A_dateRange") + "<BR/>" );
 		}
 		if ( Integer.parseInt( this.getFields().get("startHour")+this.getFields().get("startMinutes") ) 
 				> Integer.parseInt( this.getFields().get("endHour")+this.getFields().get("endMinutes") ) ) {
@@ -122,11 +122,11 @@ public class SystemMessageNoticeSaveOrUpdateAction extends BaseJsonAction {
 			this.getFieldsId().add("startMinutes");
 			this.getFieldsId().add("endHour");
 			this.getFieldsId().add("endMinutes");			
-			throw new ControllerException("Incorrect time range!<BR/>");			
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0006A_timeRange") + "<BR/>" );			
 		}
 		if (!"true".equals(this.getFields().get("isGlobal")) && this.isNoSelectId(this.getFields().get("toAccountOid"))) {
 			this.getFieldsId().add("toAccountOid");
-			throw new ControllerException("Please select account!<BR/>");
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0006A_toAccountOid") + "<BR/>" );
 		}
 	}	
 	
