@@ -30,13 +30,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0006Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0006Q_GridButtonClick, width: "10%" },  
-			{ name: "Id", field: "noticeId", width: "10%" },
-			{ name: "Title", field: "title", width: "35%" },
-			{ name: "Date", field: "date", width: "15%" },
-			{ name: "Time", field: "time", width: "10%" },
-			{ name: "Global", field: "isGlobal", width: "5%" },
-			{ name: "To", field: "toAccount", width: "15%" }
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_01')}", field: "oid", formatter: CORE_PROG001D0006Q_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_02')}", field: "noticeId", width: "10%" },
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_03')}", field: "title", width: "35%" },
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_04')}", field: "date", width: "15%" },
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_05')}", field: "time", width: "10%" },
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_06')}", field: "isGlobal", width: "5%" },
+			{ name: "${action.getText('CORE_PROG001D0006Q_grid_07')}", field: "toAccount", width: "15%" }
 		];	
 }
 
@@ -63,7 +63,7 @@ function CORE_PROG001D0006Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG001D0006Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -118,13 +118,13 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="75px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="10%"  align="right">Publish id:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0006Q_msgOid')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:select name="CORE_PROG001D0006Q_msgOid" dataSource="msgDataMap" id="CORE_PROG001D0006Q_msgOid"></gs:select></td>
-    		<td height="25px" width="10%"  align="right">Id:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0006Q_noticeId')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:textBox name="CORE_PROG001D0006Q_noticeId" id="CORE_PROG001D0006Q_noticeId" value="" width="200" maxlength="10"></gs:textBox></td>  					
     	</tr>
 		<tr>
-    		<td height="25px" width="10%"  align="right">Title:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0006Q_title')"/>:</td>
     		<td height="25px" width="90%"  align="left" colspan="3"><gs:textBox name="CORE_PROG001D0006Q_title" id="CORE_PROG001D0006Q_title" value="" width="400" maxlength="100"></gs:textBox></td>					
     	</tr>    	
     	<tr>
@@ -147,10 +147,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('CORE_PROG001D0006Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="CORE_PROG001D0006Q_clear" id="CORE_PROG001D0006Q_clear" onClick="CORE_PROG001D0006Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0006Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr>     	    	
