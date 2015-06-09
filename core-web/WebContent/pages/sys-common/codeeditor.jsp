@@ -82,8 +82,8 @@ body, html {
 
 <s:if test=" \"Y\" == cbMode ">
 
-<input type="button" name="okBtn" id="okBtn" value="OK" class="flat lighter" onClick="setCbFieldValue();">
-<input type="button" name="clBtn" id="clBtn" value="Close" class="flat lighter" onClick="window.close();">
+<input type="button" name="okBtn" id="okBtn" value="${action.getText('CORE_PROGCOMM0004Q_okBtn')}" class="flat lighter" onClick="setCbFieldValue();">
+<input type="button" name="clBtn" id="clBtn" value="${action.getText('CORE_PROGCOMM0004Q_clBtn')}" class="flat lighter" onClick="window.close();">
 <br/>
 
 </s:if>
