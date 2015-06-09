@@ -100,8 +100,8 @@ public class SystemFormTemplateSaveOrUpdateAction extends BaseJsonAction {
 							"name"
 					}, 
 					new String[]{
-							"Template ID is required and only normal characters!<BR/>",
-							"Name is required!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0012A_tplId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0012A_name") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -120,7 +120,7 @@ public class SystemFormTemplateSaveOrUpdateAction extends BaseJsonAction {
 	private void save() throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.checkFields();
 		if ( StringUtils.isBlank(this.getFields().get("uploadOid")) ) {
-			throw new ControllerException( "Please upload JSP file!" );
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0012A_uploadOid") + "<BR/>" );
 		}
 		SysFormTemplateVO template = new SysFormTemplateVO();
 		this.transformFields2ValueObject(template, new String[]{"tplId", "name", "description"});

@@ -51,7 +51,7 @@ function CORE_PROG001D0012E_clear() {
 
 function CORE_PROG001D0012E_uploadSuccess() {
 	hideCommonUploadDialog();
-	dojo.byId('CORE_PROG001D0012E_uploadShow').innerHTML = 'Completed file upload!';
+	dojo.byId('CORE_PROG001D0012E_uploadShow').innerHTML = '<s:property value="getText('CORE_PROG001D0012E_uploadShowSuccess')"/>';
 }
 
 function CORE_PROG001D0012E_uploadFail() {
@@ -89,21 +89,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="325px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Template Id</b>:
+    			<b><s:property value="getText('CORE_PROG001D0012E_tplId')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0012E_tplId" id="CORE_PROG001D0012E_tplId" value="sysFormTemplate.tplId" width="200" maxlength="50" readonly="Y"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0012E_name')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0012E_name" id="CORE_PROG001D0012E_name" value="sysFormTemplate.name" width="200" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>JSP file</b>:
+    			<b>JSP <s:property value="getText('CORE_PROG001D0012E_uploadOid')"/></b>:
     			<br/>
     			<input type="button" id="CORE_PROG001D0012E_uploadBtn" label="Upload" value="Upload" 
 			   		data-dojo-props=" iconClass:'dijitFolderOpened', showLabel:false "
@@ -114,7 +114,7 @@ function ${programId}_page_message() {
     	</tr>	      	
 		<tr>
     		<td height="125px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG001D0012E_description')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG001D0012E_description" name="CORE_PROG001D0012E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${sysFormTemplate.description}</textarea>	
     		</td>
@@ -138,10 +138,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0012E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0012E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0012E_clear" id="CORE_PROG001D0012E_clear" onClick="CORE_PROG001D0012E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0012E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	
