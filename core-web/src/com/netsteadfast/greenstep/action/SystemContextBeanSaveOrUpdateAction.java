@@ -79,9 +79,9 @@ public class SystemContextBeanSaveOrUpdateAction extends BaseJsonAction {
 							"type"
 					}, 
 					new String[]{
-							"Please select system!<BR/>",
-							"Class name is required!<BR/>",
-							"Please select type!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0009A_systemOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0009A_className") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0009A_type") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,

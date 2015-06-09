@@ -82,28 +82,28 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="325px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0009A_systemOid')"/></b>:
     			<br/>
     			<gs:select name="CORE_PROG001D0009A_systemOid" dataSource="sysMap" id="CORE_PROG001D0009A_systemOid"></gs:select>
     		</td>
     	</tr>		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Class</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0009A_className')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0009A_className" id="CORE_PROG001D0009A_className" value="" width="400" maxlength="255"></gs:textBox>
     		</td>
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0009A_type')"/></b>:
     			<br/>
     			<gs:select name="CORE_PROG001D0009A_type" dataSource="typeMap" id="CORE_PROG001D0009A_type"></gs:select>
     		</td>
     	</tr>    		  	
 		<tr>
     		<td height="125px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG001D0009A_description')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG001D0009A_description" name="CORE_PROG001D0009A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>	
     		</td>
@@ -126,10 +126,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0009A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0009A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0009A_clear" id="CORE_PROG001D0009A_clear" onClick="CORE_PROG001D0009A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0009A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	
