@@ -1,12 +1,12 @@
 { 
 	"default" 	: "en",
 	"langs"		: {
-		"en"		:	"English (default)",
-		"de"		:	"Deutsch",
-		"es"		:	"español",
-		"fr"		:	"Français",
-		"tw"		:	"繁體中文",
-		"cn"		:	"简体中文",
-		"ja"		:	"日本語"				
+		"cn"		:	"CN - 简体中文",
+		"de"		:	"DE - Deutsch",
+		"en"		:	"EN - English (default)",
+		"es"		:	"ES - español",
+		"fr"		:	"FR - Français",
+		"ja"		:	"JA - 日本語 ",
+		"tw"		:	"TW - 繁體中文"
 	} 
 }
