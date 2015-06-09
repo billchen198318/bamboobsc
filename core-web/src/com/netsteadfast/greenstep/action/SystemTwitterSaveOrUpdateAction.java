@@ -97,9 +97,9 @@ public class SystemTwitterSaveOrUpdateAction extends BaseJsonAction {
 							"content"
 					},
 					new String[]{
-							"Please select system!<BR/>",
-							"Title is required!<BR/>",
-							"Embedded is required!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0010A_systemOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0010A_title") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0010A_content") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -118,7 +118,7 @@ public class SystemTwitterSaveOrUpdateAction extends BaseJsonAction {
 				|| this.getFields().get("content").indexOf("twitter") == -1
 				|| this.getFields().get("content").indexOf("data-widget-id") == -1 ) {
 			this.getFieldsId().add("content");
-			throw new ControllerException("Embedded must be a Twitter widget!<BR/>");
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG001D0010A_contentTwitterWidget") + "<BR/>");
 		}
 	}	
 	
