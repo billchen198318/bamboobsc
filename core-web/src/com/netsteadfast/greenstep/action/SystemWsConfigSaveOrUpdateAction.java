@@ -82,9 +82,9 @@ public class SystemWsConfigSaveOrUpdateAction extends BaseJsonAction {
 							"beanId"
 					},
 					new String[]{
-							"Please select system!<BR/>",
-							"ID is required and only normal characters!<BR/>",
-							"Bean is required!<BR/>"
+							this.getText("MESSAGE.CORE_PROG003D0001A_systemOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0001A_wsId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0001A_beanId") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -102,7 +102,7 @@ public class SystemWsConfigSaveOrUpdateAction extends BaseJsonAction {
 		if (WSConfig.TYPE_SOAP.equals(this.getFields().get("type")) 
 				&& StringUtils.isBlank(this.getFields().get("publishAddress")) ) {
 			this.getFieldsId().add("publishAddress");
-			throw new ControllerException("Address is required while type is SOAP!<BR/>");
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG003D0001A_publishAddress") + "<BR/>" );
 		}
 	}
 	
