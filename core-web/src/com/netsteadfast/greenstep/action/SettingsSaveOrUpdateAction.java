@@ -82,8 +82,8 @@ public class SettingsSaveOrUpdateAction extends BaseJsonAction {
 							"mailFrom"
 					}, 
 					new String[]{
-							"Mail from format incorrect!<BR/>",
-							"Mail from is required!"
+							this.getText("MESSAGE.CORE_PROG001D0011Q_mailFrom_msg1") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0011Q_mailFrom_msg2") + "<BR/>"
 					}, 
 					new Class[]{
 							EmailFieldCheckUtils.class,
