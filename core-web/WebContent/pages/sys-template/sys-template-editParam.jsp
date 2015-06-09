@@ -38,10 +38,10 @@ CORE_PROG001D0007E_S00_fieldsId['objectVar'] 		= 'CORE_PROG001D0007E_S00_objectV
 
 function CORE_PROG001D0007E_S00_GridFieldStructure() {
 	return [
-			{ name: "*", field: "oid", formatter: CORE_PROG001D0007E_S00_GridButtonClick, width: "10%" },  
-			{ name: "Template variable", field: "templateVar", width: "40%" },
-			{ name: "Object variable", field: "objectVar", width: "40%" },
-			{ name: "for Title", field: "isTitle", width: "10%" }
+			{ name: "${action.getText('CORE_PROG001D0007E_S00_grid_01')}", field: "oid", formatter: CORE_PROG001D0007E_S00_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG001D0007E_S00_grid_02')}", field: "templateVar", width: "40%" },
+			{ name: "${action.getText('CORE_PROG001D0007E_S00_grid_03')}", field: "objectVar", width: "40%" },
+			{ name: "${action.getText('CORE_PROG001D0007E_S00_grid_04')}", field: "isTitle", width: "10%" }
 		];		
 }
 
@@ -73,7 +73,7 @@ function CORE_PROG001D0007E_S00_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG001D0007E_S00_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -128,13 +128,13 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="20%"  align="right">Template variable:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG001D0007E_S00_templateVar')"/>:</td>    		
     		<td height="25px" width="30%"  align="left"><gs:textBox name="CORE_PROG001D0007E_S00_templateVar" id="CORE_PROG001D0007E_S00_templateVar" value="" width="200" maxlength="100" ></gs:textBox></td>
-    		<td height="25px" width="20%"  align="right">Object field:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG001D0007E_S00_objectVar')"/>:</td>    		
     		<td height="25px" width="30%"  align="left"><gs:textBox name="CORE_PROG001D0007E_S00_objectVar" id="CORE_PROG001D0007E_S00_objectVar" value="" width="200" maxlength="100" ></gs:textBox></td>
     	</tr>	
 		<tr>
-    		<td height="25px" width="20%"  align="right">for Title:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG001D0007E_S00_isTitle')"/>:</td>    		
     		<td height="25px" width="30%"  align="left"><input id="CORE_PROG001D0007E_S00_isTitle" name="CORE_PROG001D0007E_S00_isTitle" data-dojo-type="dijit/form/CheckBox" value="true" /></td>
     		<td height="25px" width="20%"  align="right">&nbsp;</td>
     		<td height="25px" width="30%"  align="left">&nbsp;</td>
@@ -158,10 +158,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0007E_S00_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0007E_S00_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0007E_S00_clear" id="CORE_PROG001D0007E_S00_clear" onClick="CORE_PROG001D0007E_S00_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0007E_S00_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	
@@ -188,7 +188,7 @@ function ${programId}_page_message() {
 			    	errorFn="clearQuery_${programId}_grid();"
 			    	loadFn="dataGrid_${programId}_grid(data);" 
 			    	programId="${programId}"
-			    	label="Query mapper parameter" 
+			    	label="${action.getText('CORE_PROG001D0007E_S00_query')}" 
 			    	iconClass="dijitIconSearch"></gs:button>
     		</td>    		  				
     	</tr>   		

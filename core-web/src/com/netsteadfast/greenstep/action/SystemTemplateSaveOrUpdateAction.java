@@ -81,9 +81,9 @@ public class SystemTemplateSaveOrUpdateAction extends BaseJsonAction {
 							"message"
 					}, 
 					new String[]{
-							"Template ID is required and only normal characters!<BR/>",
-							"Title is required!<BR/>",
-							"Content is required!"
+							this.getText("MESSAGE.CORE_PROG001D0007A_templateId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0007A_title") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0007A_message") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -109,8 +109,8 @@ public class SystemTemplateSaveOrUpdateAction extends BaseJsonAction {
 							"objectVar"
 					}, 
 					new String[]{
-							"Template variable is required and only normal characters!<BR/>",
-							"Object field name is required and only normal characters!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0007E_S00_templateVar") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0007E_S00_objectVar") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,

@@ -81,28 +81,28 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="525px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>ID</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0007E_templateId')"/></b> <s:property value="getText('CORE_PROG001D0007E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0007E_templateId" id="CORE_PROG001D0007E_templateId" value="sysTemplate.templateId" width="200" maxlength="10" readonly="Y"></gs:textBox>
     		</td>
     	</tr>    		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Title</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0007E_title')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0007E_title" id="CORE_PROG001D0007E_title" value="sysTemplate.title" width="400" maxlength="200"></gs:textBox>
     		</td>
     	</tr>	
 		<tr>
     		<td height="325px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Content</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0007E_message')"/></b>:
     			<br/>
     			<div data-dojo-type="dijit/Editor" id="CORE_PROG001D0007E_message" data-dojo-props="onChange:function(){ }">${sysTemplate.message}</div>    			
     		</td>
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG001D0007E_description')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0007E_description" id="CORE_PROG001D0007E_description" value="sysTemplate.description" width="400" maxlength="200"></gs:textBox>
     		</td>
@@ -126,10 +126,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0007E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0007E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0007E_clear" id="CORE_PROG001D0007E_clear" onClick="CORE_PROG001D0007E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0007E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	
