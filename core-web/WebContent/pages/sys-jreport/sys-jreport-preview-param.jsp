@@ -62,14 +62,14 @@ function ${programId}_page_message() {
     	<tr>
     		<td height="25px" width="100%"  align="left" colspan="2">
     			<gs:button name="CORE_PROG001D0008Q_S00_preview" id="CORE_PROG001D0008Q_S00_preview" onClick="CORE_PROG001D0008Q_S00_preview();"
-    				label="Preview" 
+    				label="${action.getText('CORE_PROG001D0008Q_S00_preview')}" 
     				iconClass="dijitIconSave"></gs:button>    					
     		</td>
     	</tr>     	 	  	    	
     	
     	<tr>
-    		<td height="25px" width="50%"  align="center" bgcolor="#C1C1C1"><font color="#ffffff"><b>URL param / Report param</b></font></td>
-    		<td height="25px" width="50%"  align="center" bgcolor="#C1C1C1"><font color="#ffffff"><b>Param value</b></font></td>    		
+    		<td height="25px" width="50%"  align="center" bgcolor="#C1C1C1"><font color="#ffffff"><b><s:property value="getText('CORE_PROG001D0008Q_S00_previewParam')"/></b></font></td>
+    		<td height="25px" width="50%"  align="center" bgcolor="#C1C1C1"><font color="#ffffff"><b><s:property value="getText('CORE_PROG001D0008Q_S00_previewParamValue')"/></b></font></td>    		
     	</tr>	   
     	 	
     	<s:if test=" null != jreportParams ">

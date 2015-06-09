@@ -53,12 +53,12 @@ function CORE_PROG001D0008A_clear() {
 
 function CORE_PROG001D0008A_uploadSuccess() {
 	hideCommonUploadDialog();
-	dojo.byId('CORE_PROG001D0008A_uploadShow').innerHTML = 'Completed file upload!';
+	dojo.byId('CORE_PROG001D0008A_uploadShow').innerHTML = '<s:property value="getText('CORE_PROG001D0008A_uploadShowSuccess')"/>';
 }
 
 function CORE_PROG001D0008A_uploadFail() {
 	dojo.byId('CORE_PROG001D0008A_uploadOid').value = "";
-	dojo.byId('CORE_PROG001D0008A_uploadShow').innerHTML = '<font color="#6E6E6E">not Yet upload files!</font>';
+	dojo.byId('CORE_PROG001D0008A_uploadShow').innerHTML = '<font color="#6E6E6E"><s:property value="getText('CORE_PROG001D0008A_uploadShow')"/></font>';
 }
 
 //------------------------------------------------------------------------------
@@ -92,32 +92,32 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="325px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Report(zip) file</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0008A_upload_label')"/></b>:
     			<br/>
     			<input type="button" id="CORE_PROG001D0008A_uploadBtn" label="Upload" value="Upload" 
 			   		data-dojo-props=" iconClass:'dijitFolderOpened', showLabel:false "
 			   		data-dojo-type="dijit.form.Button" onClick="openCommonUploadDialog('CORE', 'tmp', 'Y', 'CORE_PROG001D0008A_uploadOid', 'CORE_PROG001D0008A_uploadSuccess', 'CORE_PROG001D0008A_uploadFail');" />
-    			<span id="CORE_PROG001D0008A_uploadShow"><font color='#6E6E6E'>not Yet upload files!</font></span>
+    			<span id="CORE_PROG001D0008A_uploadShow"><font color='#6E6E6E'><s:property value="getText('CORE_PROG001D0008A_uploadShow')"/></font></span>
     			<input type="hidden" name="CORE_PROG001D0008A_uploadOid" id="CORE_PROG001D0008A_uploadOid" value="" />    			
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Report Id</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0008A_reportId')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0008A_reportId" id="CORE_PROG001D0008A_reportId" value="" width="200" maxlength="50"></gs:textBox>
     		</td>    		
     	</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Compile</b>:
+    			<b><s:property value="getText('CORE_PROG001D0008A_isCompile')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0008A_isCompile" name="CORE_PROG001D0008A_isCompile" data-dojo-type="dijit/form/CheckBox" value="true" />
     		</td>    		
     	</tr>
 		<tr>
     		<td height="125px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG001D0008A_description')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG001D0008A_description" name="CORE_PROG001D0008A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
     		</td>    		
@@ -140,10 +140,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0008A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0008A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0008A_clear" id="CORE_PROG001D0008A_clear" onClick="CORE_PROG001D0008A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0008A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		
     		</td>

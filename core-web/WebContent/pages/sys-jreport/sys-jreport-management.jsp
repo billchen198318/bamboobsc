@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0008Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0008Q_GridButtonClick, width: "20%" },  
-			{ name: "Report Id", field: "reportId", width: "20%" },
-			{ name: "File", field: "file", width: "25%" },
-			{ name: "Compile", field: "isCompile", width: "10%" },
-			{ name: "Description", field: "description", width: "25%" }			
+			{ name: "${action.getText('CORE_PROG001D0008Q_grid_01')}", field: "oid", formatter: CORE_PROG001D0008Q_GridButtonClick, width: "20%" },  
+			{ name: "${action.getText('CORE_PROG001D0008Q_grid_02')}", field: "reportId", width: "20%" },
+			{ name: "${action.getText('CORE_PROG001D0008Q_grid_03')}", field: "file", width: "25%" },
+			{ name: "${action.getText('CORE_PROG001D0008Q_grid_04')}", field: "isCompile", width: "10%" },
+			{ name: "${action.getText('CORE_PROG001D0008Q_grid_05')}", field: "description", width: "25%" }			
 		];
 }
 
@@ -74,7 +74,7 @@ function CORE_PROG001D0008Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG001D0008Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -133,7 +133,7 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="10%"  align="right">ID:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0008Q_reportId')"/>:</td>
     		<td height="25px" width="90%"  align="left"><gs:textBox name="CORE_PROG001D0008Q_reportId" id="CORE_PROG001D0008Q_reportId" value="" width="200" maxlength="10"></gs:textBox></td>    		  					
     	</tr>
     	<tr>
@@ -154,10 +154,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('CORE_PROG001D0008Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="CORE_PROG001D0008Q_clear" id="CORE_PROG001D0008Q_clear" onClick="CORE_PROG001D0008Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0008Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr> 	

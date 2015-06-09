@@ -84,7 +84,7 @@ public class SystemJreportSaveOrUpdateAction extends BaseJsonAction {
 							"reportId"
 					}, 
 					new String[]{
-							"ID is required and only normal characters!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0008A_reportId") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class
@@ -108,8 +108,8 @@ public class SystemJreportSaveOrUpdateAction extends BaseJsonAction {
 							"urlParam"
 					}, 
 					new String[]{
-							"Report parameter is required and only normal characters!<BR/>",
-							"URL parameter is required and only normal characters!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0008E_S00_rptParam") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0008E_S00_urlParam") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
