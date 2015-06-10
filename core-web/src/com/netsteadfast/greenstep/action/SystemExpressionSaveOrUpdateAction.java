@@ -103,10 +103,10 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 							"content"
 					},
 					new String[]{
-							"Please select type!<BR/>",
-							"ID is required and only normal characters!<BR/>",
-							"Name is required!<BR/>",
-							"Content is required!<BR/>"
+							this.getText("MESSAGE.CORE_PROG003D0002A_type") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0002A_exprId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0002A_name") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0002A_iframe1") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -124,7 +124,7 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 		}		
 		if (Constants.HTML_SELECT_NO_SELECT_ID.equals(this.getFields().get("exprId"))) {
 			this.getFieldsId().add("exprId");
-			throw new ControllerException("ID is incorrect, please change another!");				
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG003D0002A_exprId_msg1") + "<BR/>" );				
 		}
 	}
 	
@@ -181,10 +181,10 @@ public class SystemExpressionSaveOrUpdateAction extends BaseJsonAction {
 	private void updateContent() throws ControllerException, AuthorityException, ServiceException, Exception {
 		String content = this.getFields().get("content");
 		if ( StringUtils.isBlank(content) ) {
-			throw new ControllerException("Expression is required!");
+			throw new ControllerException( this.getText("CORE_PROG003D0002A_exprId_msg2") + "<BR/>" );
 		}
 		if ( content.length() > 8000 ) {
-			throw new ControllerException("Expression over max length!");
+			throw new ControllerException( this.getText("CORE_PROG003D0002A_exprId_msg3") + "<BR/>" );
 		}
 		SysExpressionVO expression = new SysExpressionVO();
 		this.transformFields2ValueObject(expression, new String[]{"oid"});
