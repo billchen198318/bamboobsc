@@ -88,49 +88,49 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="530px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Driver</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001E_driverOid')"/></b>:
     			<br/>
     			<gs:select name="QCHARTS_PROG001D0001E_driverOid" dataSource="driverMap" id="QCHARTS_PROG001D0001E_driverOid" value="fields.driverOid"></gs:select>
     		</td>
     	</tr>		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001E_id')"/></b> <s:property value="getText('QCHARTS_PROG001D0001E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001E_id" id="QCHARTS_PROG001D0001E_id" value="dataSourceConf.id" width="200" maxlength="20" readonly="Y"></gs:textBox>
     		</td>
     	</tr>  	    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001E_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001E_name" id="QCHARTS_PROG001D0001E_name" value="dataSourceConf.name" width="200" maxlength="100"></gs:textBox>
     		</td>
     	</tr>  	
    		<tr>
     		<td height="80px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>JDBC-url</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001E_jdbcUrl')"/></b>:
     			<br/>
     			<textarea id="QCHARTS_PROG001D0001E_jdbcUrl" name="QCHARTS_PROG001D0001E_jdbcUrl" data-dojo-type="dijit/form/Textarea" rows="2" cols="75" style="width:600px;height:50px;max-height:50px">${dataSourceConf.jdbcUrl}</textarea>
     		</td>
     	</tr>  	
  		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>DB account</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001E_dbAccount')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001E_dbAccount" id="QCHARTS_PROG001D0001E_dbAccount" value="dataSourceConf.dbAccount" width="200" maxlength="50"></gs:textBox>
     		</td>
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>DB password</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001E_dbPassword')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001E_dbPassword" id="QCHARTS_PROG001D0001E_dbPassword" value="dataSourceConf.dbPassword" width="200" maxlength="100"></gs:textBox>
     		</td>
     	</tr>  	    	   	 	
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('QCHARTS_PROG001D0001E_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0001E_description" name="QCHARTS_PROG001D0001E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${dataSourceConf.description}</textarea>	
 		    </td>
@@ -157,10 +157,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="QCHARTS_PROG001D0001E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('QCHARTS_PROG001D0001E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="QCHARTS_PROG001D0001E_clear" id="QCHARTS_PROG001D0001E_clear" onClick="QCHARTS_PROG001D0001E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('QCHARTS_PROG001D0001E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

@@ -83,12 +83,12 @@ public class DataSourceConfSaveOrUpdateAction extends BaseJsonAction {
 							"dbPassword"
 					}, 
 					new String[]{
-							"Please select driver!<BR/>",
-							"Id is required and only normal characters!<BR/>",							
-							"Name is required!<BR/>",
-							"JDBC-url is required!<BR/>",
-							"DB-account is required!<BR/>",
-							"DB-password is required!<BR/>"							
+							this.getText("MESSAGE.QCHARTS_PROG001D0001A_driverOid") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0001A_id") + "<BR/>",							
+							this.getText("MESSAGE.QCHARTS_PROG001D0001A_name") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0001A_jdbcUrl") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0001A_dbAccount") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0001A_dbPassword") + "<BR/>"							
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
