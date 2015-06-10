@@ -80,9 +80,9 @@ public class SystemFormSaveOrUpdateAction extends BaseJsonAction {
 							"name"
 					}, 
 					new String[]{
-							"ID is required and only normal characters!<BR/>",
-							"Please select template!<BR/>",
-							"Name is required!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0013A_formId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0013A_templateOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0013A_name") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
