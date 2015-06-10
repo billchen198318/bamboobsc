@@ -83,7 +83,7 @@ public class DataQueryMapperSaveOrUpdateAction extends BaseJsonAction {
 							"name"
 					}, 
 					new String[]{						
-							"Name is required!<BR/>"					
+							this.getText("MESSAGE.QCHARTS_PROG001D0002A_name") + "<BR/>"					
 					}, 
 					new Class[]{
 							NotBlankFieldCheckUtils.class,
@@ -99,7 +99,7 @@ public class DataQueryMapperSaveOrUpdateAction extends BaseJsonAction {
 		if (StringUtils.isBlank(this.getFields().get("appendFields"))) {
 			this.getFieldsId().add("labelField");
 			this.getFieldsId().add("valueField");
-			throw new ControllerException("Mapper data is required!");
+			throw new ControllerException( this.getText("MESSAGE.QCHARTS_PROG001D0002A_appendFields") + "<BR/>" );
 		}
 	}		
 
@@ -135,7 +135,7 @@ public class DataQueryMapperSaveOrUpdateAction extends BaseJsonAction {
 		if (null == datas || datas.size()<1) {
 			this.getFieldsId().add("labelField");
 			this.getFieldsId().add("valueField");
-			throw new ControllerException("Mapper data is required!");
+			throw new ControllerException( this.getText("MESSAGE.QCHARTS_PROG001D0002A_appendFields") + "<BR/>" );
 		}		
 		return datas;
 	}

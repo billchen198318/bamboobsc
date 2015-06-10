@@ -67,12 +67,12 @@ function QCHARTS_PROG001D0002A_addField() {
 	var labelField = dijit.byId("QCHARTS_PROG001D0002A_labelField").get("value");
 	var valueField = dijit.byId("QCHARTS_PROG001D0002A_valueField").get("value");	
 	if ('' == labelField || '' == valueField) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'Label field and Value field is required!', function(){}, 'N');
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('QCHARTS_PROG001D0002A_addField_msg1')" escapeJavaScript="true"/>', function(){}, 'N');
 		return;
 	} 
 	
 	if (labelField.indexOf(':')>-1 || labelField.indexOf(_gscore_delimiter)>-1 || valueField.indexOf(':')>-1 || valueField.indexOf(_gscore_delimiter)>-1) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'Label field or Value field data error!', function(){}, 'N');
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('QCHARTS_PROG001D0002A_addField_msg2')" escapeJavaScript="true"/>', function(){}, 'N');
 		return;		
 	}
 	
@@ -135,14 +135,14 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0002A_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0002A_name" id="QCHARTS_PROG001D0002A_name" value="" width="200" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>  
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('QCHARTS_PROG001D0002A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0002A_description" name="QCHARTS_PROG001D0002A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
 		    </td>		    
@@ -151,20 +151,20 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="25px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="25px" width="90%"  align="left">
-    			<b>Mapper Label</b>:<gs:textBox name="QCHARTS_PROG001D0002A_labelField" id="QCHARTS_PROG001D0002A_labelField" value="" width="200" maxlength="50"></gs:textBox>
+    			<b><s:property value="getText('QCHARTS_PROG001D0002A_labelField')"/></b>:<gs:textBox name="QCHARTS_PROG001D0002A_labelField" id="QCHARTS_PROG001D0002A_labelField" value="" width="200" maxlength="50"></gs:textBox>
     			&nbsp;
-    			<b>Mapper Value</b>:<gs:textBox name="QCHARTS_PROG001D0002A_valueField" id="QCHARTS_PROG001D0002A_valueField" value="" width="200" maxlength="50"></gs:textBox>
+    			<b><s:property value="getText('QCHARTS_PROG001D0002A_valueField')"/></b>:<gs:textBox name="QCHARTS_PROG001D0002A_valueField" id="QCHARTS_PROG001D0002A_valueField" value="" width="200" maxlength="50"></gs:textBox>
     			&nbsp;
     			<gs:button name="QCHARTS_PROG001D0002A_addField" id="QCHARTS_PROG001D0002A_addField" onClick="QCHARTS_PROG001D0002A_addField();" 
-    				label="add" ></gs:button>       			
+    				label="+" ></gs:button>       			
     		</td>
     	</tr>  			
 	</table>
 	<table id="QCHARTS_PROG001D0002A_mapperTable" width="600px" border="0" cellspacing="1" cellpadding="1" bgcolor="#C0C0C0" >
 		<tr>
 			<td bgcolor="#F1F1F1" width="10%" align="center"><b>#</b></td>
-			<td bgcolor="#F1F1F1" width="45%" align="center"><b>Label Field</b></td>
-			<td bgcolor="#F1F1F1" width="45%" align="center"><b>Value Field</b></td>			
+			<td bgcolor="#F1F1F1" width="45%" align="center"><b><s:property value="getText('QCHARTS_PROG001D0002A_mapperTableLabel')"/></b></td>
+			<td bgcolor="#F1F1F1" width="45%" align="center"><b><s:property value="getText('QCHARTS_PROG001D0002A_mapperTableValue')"/></b></td>			
 		</tr>
 	</table>	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >	
@@ -185,10 +185,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="QCHARTS_PROG001D0002A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('QCHARTS_PROG001D0002A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="QCHARTS_PROG001D0002A_clear" id="QCHARTS_PROG001D0002A_clear" onClick="QCHARTS_PROG001D0002A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('QCHARTS_PROG001D0002A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>  		    		
 		    </td>
 		</tr>  
