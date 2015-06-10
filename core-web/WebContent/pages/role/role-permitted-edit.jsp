@@ -38,10 +38,10 @@ CORE_PROG002D0001E_S00_fieldsId['permType'] 		= 'CORE_PROG002D0001E_S00_permType
 
 function CORE_PROG002D0001E_S00_GridFieldStructure() {
 	return [
-			{ name: "*", field: "oid", formatter: CORE_PROG002D0001E_S00_GridButtonClick, width: "10%" },  
-			{ name: "Permission", field: "permission", width: "40%" },
-			{ name: "Type", field: "permType", width: "10%" },
-			{ name: "Description", field: "description", width: "40%" }
+			{ name: "${action.getText('CORE_PROG002D0001E_S00_grid_01')}", field: "oid", formatter: CORE_PROG002D0001E_S00_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG002D0001E_S00_grid_02')}", field: "permission", width: "40%" },
+			{ name: "${action.getText('CORE_PROG002D0001E_S00_grid_03')}", field: "permType", width: "10%" },
+			{ name: "${action.getText('CORE_PROG002D0001E_S00_grid_04')}", field: "description", width: "40%" }
 		];		
 }
 
@@ -73,7 +73,7 @@ function CORE_PROG002D0001E_S00_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG002D0001E_S00_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -128,19 +128,19 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="275px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="20%"  align="right">Role:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG002D0001E_S00_role')"/>:</td>
     		<td height="25px" width="80%"  align="left"><s:property value="role.role"/></td>
     	</tr>
 		<tr>
-    		<td height="25px" width="20%"  align="right">Type:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG002D0001E_S00_permType')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:select name="CORE_PROG002D0001E_S00_permType" dataSource="permTypeMap" id="CORE_PROG002D0001E_S00_permType"></gs:select></td>
     	</tr>    	
 		<tr>
-    		<td height="25px" width="20%"  align="right">Permission:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG002D0001E_S00_permission')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:textBox name="CORE_PROG002D0001E_S00_permission" id="CORE_PROG002D0001E_S00_permission" value="" width="400" maxlength="255"></gs:textBox></td>
     	</tr>	
 		<tr>
-    		<td height="200px" width="20%"  align="right">Description:</td>
+    		<td height="200px" width="20%"  align="right"><s:property value="getText('CORE_PROG002D0001E_S00_description')"/>:</td>
     		<td height="200px" width="80%"  align="left">
     			<textarea id="CORE_PROG002D0001E_S00_description" name="CORE_PROG002D0001E_S00_description" data-dojo-type="dijit/form/Textarea" rows="9" cols="50" style="width:300px;height:190px;max-height:200px"></textarea>	
     		</td>
@@ -164,10 +164,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG002D0001E_S00_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG002D0001E_S00_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG002D0001E_S00_clear" id="CORE_PROG002D0001E_S00_clear" onClick="CORE_PROG002D0001E_S00_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG002D0001E_S00_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>      	    	
@@ -194,7 +194,7 @@ function ${programId}_page_message() {
 			    	errorFn="clearQuery_${programId}_grid();"
 			    	loadFn="dataGrid_${programId}_grid(data);" 
 			    	programId="${programId}"
-			    	label="Query permission" 
+			    	label="${action.getText('CORE_PROG002D0001E_S00_query')}" 
 			    	iconClass="dijitIconSearch"></gs:button>
     		</td>    		  				
     	</tr>   		

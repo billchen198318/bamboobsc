@@ -77,8 +77,8 @@ public class RolePermittedSaveOrUpdateAction extends BaseJsonAction {
 							"permType"
 					}, 
 					new String[]{
-							"Permission is required!<BR/>",
-							"Please select a type!<BR/>"
+							this.getText("MESSAGE.CORE_PROG002D0001E_S00_permission") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG002D0001E_S00_permType") + "<BR/>"
 					},					
 					new Class[]{
 							NotBlankFieldCheckUtils.class,

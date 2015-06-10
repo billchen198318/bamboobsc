@@ -78,14 +78,14 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="325px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Role</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG002D0001A_role')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG002D0001A_role" id="CORE_PROG002D0001A_role" value="" width="200" maxlength="50"></gs:textBox>
     		</td>    		
     	</tr>	
 		<tr>
     		<td height="225px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG002D0001A_description')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG002D0001A_description" name="CORE_PROG002D0001A_description" data-dojo-type="dijit/form/Textarea" rows="9" cols="50" style="width:300px;height:190px;max-height:200px"></textarea>
     		</td>    		
@@ -106,10 +106,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG002D0001A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG002D0001A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG002D0001A_clear" id="CORE_PROG002D0001A_clear" onClick="CORE_PROG002D0001A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG002D0001A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    		
     		</td>
     	</tr>      	

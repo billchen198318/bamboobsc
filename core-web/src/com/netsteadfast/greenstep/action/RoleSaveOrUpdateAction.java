@@ -75,7 +75,7 @@ public class RoleSaveOrUpdateAction extends BaseJsonAction {
 							"role"
 					}, 
 					new String[]{
-							"ID is required and only normal characters!<BR/>"
+							this.getText("MESSAGE.CORE_PROG002D0001A_role") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class

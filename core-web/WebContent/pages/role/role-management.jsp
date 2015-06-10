@@ -30,9 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG002D0001Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG002D0001Q_GridButtonClick, width: "15%" },  
-			{ name: "Role", field: "role", width: "35%" },
-			{ name: "Description", field: "description", width: "50%" }
+			{ name: "${action.getText('CORE_PROG002D0001Q_grid_01')}", field: "oid", formatter: CORE_PROG002D0001Q_GridButtonClick, width: "15%" },  
+			{ name: "${action.getText('CORE_PROG002D0001Q_grid_02')}", field: "role", width: "35%" },
+			{ name: "${action.getText('CORE_PROG002D0001Q_grid_03')}", field: "description", width: "50%" }
 		];		
 }
 
@@ -61,7 +61,7 @@ function CORE_PROG002D0001Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG002D0001Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -120,7 +120,7 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="25px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="10%"  align="right">ID:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG002D0001Q_role')"/>:</td>
     		<td height="25px" width="30%"  align="left"><gs:textBox name="CORE_PROG002D0001Q_role" id="CORE_PROG002D0001Q_role" value="" width="200" maxlength="50"></gs:textBox></td>
     		<td height="25px" width="60%"  align="left">
 			    <gs:button name="CORE_PROG002D0001Q_query" id="CORE_PROG002D0001Q_query" onClick="getQueryGrid_${programId}_grid();"
@@ -139,10 +139,10 @@ function ${programId}_page_message() {
 			    	errorFn="clearQuery_${programId}_grid();"
 			    	loadFn="dataGrid_${programId}_grid(data);" 
 			    	programId="${programId}"
-			    	label="Query" 
+			    	label="${action.getText('CORE_PROG002D0001Q_query')}" 
 			    	iconClass="dijitIconSearch"></gs:button>
 			    <gs:button name="CORE_PROG002D0001Q_clear" id="CORE_PROG002D0001Q_clear" onClick="CORE_PROG002D0001Q_clear();" 
-			    	label="Clear" 
+			    	label="${action.getText('CORE_PROG002D0001Q_clear')}" 
 			    	iconClass="dijitIconClear"></gs:button>
     		</td>    		  				
     	</tr>   		
