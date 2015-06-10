@@ -68,7 +68,7 @@ public class SystemProgramMenuRoleSaveOrUpdateAction extends BaseJsonAction {
 	private void checkFields() throws ControllerException {
 		if (super.isNoSelectId(this.getFields().get("sysProgOid")) ) {
 			this.getFieldsId().add("CORE_PROG002D0003Q_sysProg");
-			throw new ControllerException("Please select a program item!");	
+			throw new ControllerException( this.getText("MESSAGE.CORE_PROG002D0003Q_sysProg") + "<BR/>" );	
 		}		
 	}	
 	
