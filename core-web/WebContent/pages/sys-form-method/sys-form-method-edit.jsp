@@ -82,21 +82,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="675px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0014E_name')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0014E_name" id="CORE_PROG001D0014E_name" value="formMethod.name" width="200" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>	   	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Result type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0014E_resultType')"/></b>:
     			<br/>
     			<gs:select name="CORE_PROG001D0014E_resultType" dataSource="resultTypeMap" id="CORE_PROG001D0014E_resultType" value="formMethod.resultType"></gs:select>
     		</td>    		
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0014E_type')"/></b>:
     			<br/>
     			<gs:select name="CORE_PROG001D0014E_type" dataSource="typeMap" id="CORE_PROG001D0014E_type" value="formMethod.type"></gs:select>
     		</td>    		
@@ -110,7 +110,7 @@ function ${programId}_page_message() {
 					<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Expression' " >						
 						<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:350px">
 							
-	    					<font color='RED'>*</font><b>Expression</b>:
+	    					<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0014E_iframe1')"/></b>:
 	    					<br/>
 	    					<iframe name="CORE_PROG001D0014E_iframe1" id="CORE_PROG001D0014E_iframe1" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=basePath%>/core.commonCodeEditorAction.action?oid=${exprOid}'></iframe>
 						
@@ -124,7 +124,7 @@ function ${programId}_page_message() {
 	    </tr>	   	    		
 		<tr>
     		<td height="125px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG001D0014E_description')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG001D0014E_description" name="CORE_PROG001D0014E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${formMethod.description}</textarea>
     		</td>    		
@@ -150,10 +150,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG001D0014E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG001D0014E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG001D0014E_clear" id="CORE_PROG001D0014E_clear" onClick="CORE_PROG001D0014E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0014E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG001D0014Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG001D0014Q_GridButtonClick, width: "10%" },  
-			{ name: "Name", field: "name", width: "20%" },
-			{ name: "Result", field: "resultType", width: "20%" },
-			{ name: "Type", field: "type", width: "20%" },
-			{ name: "Description", field: "description", width: "30%" }
+			{ name: "${action.getText('CORE_PROG001D0014Q_grid_01')}", field: "oid", formatter: CORE_PROG001D0014Q_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG001D0014Q_grid_02')}", field: "name", width: "20%" },
+			{ name: "${action.getText('CORE_PROG001D0014Q_grid_03')}", field: "resultType", width: "20%" },
+			{ name: "${action.getText('CORE_PROG001D0014Q_grid_04')}", field: "type", width: "20%" },
+			{ name: "${action.getText('CORE_PROG001D0014Q_grid_05')}", field: "description", width: "30%" }
 		];	
 }
 
@@ -111,7 +111,7 @@ function CORE_PROG001D0014Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG001D0014Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -185,10 +185,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('CORE_PROG001D0014Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="CORE_PROG001D0014Q_clear" id="CORE_PROG001D0014Q_clear" onClick="CORE_PROG001D0014Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG001D0014Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr>     	    	

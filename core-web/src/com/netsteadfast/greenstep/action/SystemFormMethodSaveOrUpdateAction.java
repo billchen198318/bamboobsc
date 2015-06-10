@@ -104,11 +104,11 @@ public class SystemFormMethodSaveOrUpdateAction extends BaseJsonAction {
 							"expression"
 					}, 
 					new String[]{
-							"Data error!<BR/>",
-							"Name is required and only normal characters!<BR/>",
-							"Please select result type!<BR/>",
-							"Please select type!<BR/>",
-							"Expression is required!<BR/>"
+							this.getText("MESSAGE.CORE_PROG001D0014A_formOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0014A_name") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0014A_resultType") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0014A_type") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG001D0014A_iframe1") + "<BR/>"
 					}, 
 					new Class[]{
 							NotBlankFieldCheckUtils.class,
