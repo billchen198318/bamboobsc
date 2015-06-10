@@ -84,9 +84,9 @@ public class SystemBeanHelpSaveOrUpdateAction extends BaseJsonAction {
 							"method"							
 					}, 
 					new String[]{
-							"Please select system!<BR/>",
-							"Bean id is required!<BR/>",
-							"Method is required!"
+							this.getText("MESSAGE.CORE_PROG003D0003A_systemOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0003A_beanId") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0003A_method") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -113,9 +113,9 @@ public class SystemBeanHelpSaveOrUpdateAction extends BaseJsonAction {
 							"runType"							
 					}, 
 					new String[]{
-							"Please select expression!<BR/>",
-							"SEQ is required!<BR/>",
-							"Please select type!"
+							this.getText("MESSAGE.CORE_PROG003D0003E_S00_exprOid") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0003E_S00_exprSeq") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0003E_S00_runType") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -150,9 +150,9 @@ public class SystemBeanHelpSaveOrUpdateAction extends BaseJsonAction {
 							"methodParamIndex"							
 					}, 
 					new String[]{
-							"Variable is required!<BR/>",
-							"Parameter class is required!<BR/>",
-							"Parameter index only positive-integer number!"
+							this.getText("MESSAGE.CORE_PROG003D0003E_S01_varName") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0003E_S01_methodParamClass") + "<BR/>",
+							this.getText("MESSAGE.CORE_PROG003D0003E_S01_methodParamIndex") + "<BR/>"
 					}, 
 					new Class[]{
 							NotBlankFieldCheckUtils.class,

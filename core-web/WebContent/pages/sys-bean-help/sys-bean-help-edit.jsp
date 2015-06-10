@@ -82,35 +82,35 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="475px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>System</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG003D0003E_systemOid')"/></b> <s:property value="getText('CORE_PROG003D0003E_readOnly')"/>:
     			<br/>
     			<gs:select name="CORE_PROG003D0003E_systemOid" dataSource="sysMap" id="CORE_PROG003D0003E_systemOid" value="selectValue" readonly="Y"></gs:select>
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Bean</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG003D0003E_beanId')"/></b> <s:property value="getText('CORE_PROG003D0003E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="CORE_PROG003D0003E_beanId" id="CORE_PROG003D0003E_beanId" value="sysBeanHelp.beanId" width="400" maxlength="255" readonly="Y"></gs:textBox>
     		</td>
     	</tr>	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Method</b> (read only):
+    			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG003D0003E_method')"/></b> <s:property value="getText('CORE_PROG003D0003E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="CORE_PROG003D0003E_method" id="CORE_PROG003D0003E_method" value="sysBeanHelp.method" width="200" maxlength="100" readonly="Y"></gs:textBox>
     		</td>
     	</tr>      	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Enable</b>:
+    			<b><s:property value="getText('CORE_PROG003D0003E_enableFlag')"/></b>:
     			<br/>
 				<input id="CORE_PROG003D0003E_enableFlag" name="CORE_PROG003D0003E_enableFlag" data-dojo-type="dijit/form/CheckBox" value="true" <s:if test=" \"Y\" == sysBeanHelp.enableFlag "> checked="checked" </s:if> />   		
     		</td>
     	</tr>    	    	    	    
 		<tr>
     		<td height="225px" width="100%"  align="left">
-    			<b>Description</b>:
+    			<b><s:property value="getText('CORE_PROG003D0003E_description')"/></b>:
     			<br/>
     			<textarea id="CORE_PROG003D0003E_description" name="CORE_PROG003D0003E_description" data-dojo-type="dijit/form/Textarea" rows="9" cols="50" style="width:300px;height:190px;max-height:200px">${sysBeanHelp.description}</textarea>	
     		</td>
@@ -135,10 +135,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG003D0003E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG003D0003E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG003D0003E_clear" id="CORE_PROG003D0003E_clear" onClick="CORE_PROG003D0003E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG003D0003E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

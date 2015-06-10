@@ -34,10 +34,10 @@ require(["dojo/ready", "dojo/parser", "dijit/registry", "dijit/form/Button", "di
 
 function CORE_PROG003D0003E_S00_GridFieldStructure() {
 	return [
-			{ name: "*", field: "oid", formatter: CORE_PROG003D0003E_S00_GridButtonClick, width: "15%" },  
-			{ name: "Expression", field: "exprId", width: "45%" },			
-			{ name: "SEQ", field: "exprSeq", width: "20%" },			
-			{ name: "Type", field: "runType", width: "20%" }			
+			{ name: "${action.getText('CORE_PROG003D0003E_S00_grid_01')}", field: "oid", formatter: CORE_PROG003D0003E_S00_GridButtonClick, width: "15%" },  
+			{ name: "${action.getText('CORE_PROG003D0003E_S00_grid_02')}", field: "exprId", width: "45%" },			
+			{ name: "${action.getText('CORE_PROG003D0003E_S00_grid_03')}", field: "exprSeq", width: "20%" },			
+			{ name: "${action.getText('CORE_PROG003D0003E_S00_grid_04')}", field: "runType", width: "20%" }			
 		];		
 }
 
@@ -57,7 +57,7 @@ function CORE_PROG003D0003E_S00_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG003D0003E_S00_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -135,15 +135,15 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="100px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="20%"  align="right">Expression:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S00_exprOid')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:select name="CORE_PROG003D0003E_S00_exprOid" dataSource="expressionMap" id="CORE_PROG003D0003E_S00_exprOid" ></gs:select></td>
     	</tr>	
 		<tr>
-    		<td height="25px" width="20%"  align="right">SEQ:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S00_exprSeq')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:textBox name="CORE_PROG003D0003E_S00_exprSeq" id="CORE_PROG003D0003E_S00_exprSeq" value="" width="200" maxlength="10" ></gs:textBox></td>
     	</tr>	
 		<tr>
-    		<td height="25px" width="20%"  align="right">Type:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S00_runType')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:select name="CORE_PROG003D0003E_S00_runType" dataSource="runTypeMap" id="CORE_PROG003D0003E_S00_runType"></gs:select></td>
     	</tr>      	   	
     	<tr>
@@ -165,10 +165,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG003D0003E_S00_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG003D0003E_S00_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG003D0003E_S00_clear" id="CORE_PROG003D0003E_S00_clear" onClick="CORE_PROG003D0003E_S00_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG003D0003E_S00_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	
@@ -195,7 +195,7 @@ function ${programId}_page_message() {
 			    	errorFn="clearQuery_${programId}_grid();"
 			    	loadFn="dataGrid_${programId}_grid(data);" 
 			    	programId="${programId}"
-			    	label="Query expression" 
+			    	label="${action.getText('CORE_PROG003D0003E_S00_query')}" 
 			    	iconClass="dijitIconSearch"></gs:button>
     		</td>    		  				
     	</tr>   		

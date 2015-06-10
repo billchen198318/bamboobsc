@@ -30,12 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function CORE_PROG003D0003Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: CORE_PROG003D0003Q_GridButtonClick, width: "10%" },  
-			{ name: "Bean Id", field: "beanId", width: "30%" },
-			{ name: "Method", field: "method", width: "20%" },
-			{ name: "System", field: "system", width: "15%" },
-			{ name: "Enable", field: "enableFlag", width: "5%" },
-			{ name: "Description", field: "description", width: "20%" }
+			{ name: "${action.getText('CORE_PROG003D0003Q_grid_01')}", field: "oid", formatter: CORE_PROG003D0003Q_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG003D0003Q_grid_02')}", field: "beanId", width: "30%" },
+			{ name: "${action.getText('CORE_PROG003D0003Q_grid_03')}", field: "method", width: "20%" },
+			{ name: "${action.getText('CORE_PROG003D0003Q_grid_04')}", field: "system", width: "15%" },
+			{ name: "${action.getText('CORE_PROG003D0003Q_grid_05')}", field: "enableFlag", width: "5%" },
+			{ name: "${action.getText('CORE_PROG003D0003Q_grid_06')}", field: "description", width: "20%" }
 		];	
 }
 
@@ -63,7 +63,7 @@ function CORE_PROG003D0003Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG003D0003Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -120,9 +120,9 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="30px" width="10%"  align="right">System:</td>
+    		<td height="30px" width="10%"  align="right"><s:property value="getText('CORE_PROG003D0003Q_systemOid')"/>:</td>
     		<td height="30px" width="40%"  align="left"><gs:select name="CORE_PROG003D0003Q_systemOid" dataSource="sysMap" id="CORE_PROG003D0003Q_systemOid"></gs:select></td>
-    		<td height="30px" width="10%"  align="right">Bean Id:</td>
+    		<td height="30px" width="10%"  align="right"><s:property value="getText('CORE_PROG003D0003Q_beanId')"/>:</td>
     		<td height="30px" width="40%"  align="left"><gs:textBox name="CORE_PROG003D0003Q_beanId" id="CORE_PROG003D0003Q_beanId" value="" width="300" maxlength="100"></gs:textBox></td>  					
     	</tr>
     	<tr>
@@ -144,10 +144,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('CORE_PROG003D0003Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="CORE_PROG003D0003Q_clear" id="CORE_PROG003D0003Q_clear" onClick="CORE_PROG003D0003Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG003D0003Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr>      	

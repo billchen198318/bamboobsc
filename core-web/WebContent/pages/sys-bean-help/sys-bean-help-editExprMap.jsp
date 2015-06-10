@@ -34,11 +34,11 @@ require(["dojo/ready", "dojo/parser", "dijit/registry", "dijit/form/Button", "di
 
 function CORE_PROG003D0003E_S01_GridFieldStructure() {
 	return [
-			{ name: "*", field: "oid", formatter: CORE_PROG003D0003E_S01_GridButtonClick, width: "10%" },  
-			{ name: "Variable", field: "varName", width: "25%" },			
-			{ name: "Method result", field: "methodResultFlag", width: "10%" },
-			{ name: "Parameter class", field: "methodParamClass", width: "45%" },			
-			{ name: "Parameter index", field: "methodParamIndex", width: "10%" }		
+			{ name: "${action.getText('CORE_PROG003D0003E_S01_grid_01')}", field: "oid", formatter: CORE_PROG003D0003E_S01_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('CORE_PROG003D0003E_S01_grid_02')}", field: "varName", width: "25%" },			
+			{ name: "${action.getText('CORE_PROG003D0003E_S01_grid_03')}", field: "methodResultFlag", width: "10%" },
+			{ name: "${action.getText('CORE_PROG003D0003E_S01_grid_04')}", field: "methodParamClass", width: "45%" },			
+			{ name: "${action.getText('CORE_PROG003D0003E_S01_grid_05')}", field: "methodParamIndex", width: "10%" }		
 		];		
 }
 
@@ -52,7 +52,7 @@ function CORE_PROG003D0003E_S01_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('CORE_PROG003D0003E_S01_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -131,19 +131,19 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="125px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="20%"  align="right">Variable:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S01_varName')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:textBox name="CORE_PROG003D0003E_S01_varName" id="CORE_PROG003D0003E_S01_varName" value="" width="400" maxlength="255" ></gs:textBox></td>
     	</tr>	
 		<tr>
-    		<td height="25px" width="20%"  align="right">Method result:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S01_methodResultFlag')"/>:</td>
     		<td height="25px" width="80%"  align="left"><input id="CORE_PROG003D0003E_S01_methodResultFlag" name="CORE_PROG003D0003E_S01_methodResultFlag" data-dojo-type="dijit/form/CheckBox" value="true" /></td>
     	</tr>	
 		<tr>
-    		<td height="25px" width="20%"  align="right">Method parameter class:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S01_methodParamClass')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:textBox name="CORE_PROG003D0003E_S01_methodParamClass" id="CORE_PROG003D0003E_S01_methodParamClass" value="" width="400" maxlength="255" ></gs:textBox></td>
     	</tr>      	   
 		<tr>
-    		<td height="25px" width="20%"  align="right">Method parameter index:</td>
+    		<td height="25px" width="20%"  align="right"><s:property value="getText('CORE_PROG003D0003E_S01_methodParamIndex')"/>:</td>
     		<td height="25px" width="80%"  align="left"><gs:textBox name="CORE_PROG003D0003E_S01_methodParamIndex" id="CORE_PROG003D0003E_S01_methodParamIndex" value="" width="50" maxlength="3" ></gs:textBox></td>
     	</tr>     		
     	<tr>
@@ -166,10 +166,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROG003D0003E_S01_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROG003D0003E_S01_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="CORE_PROG003D0003E_S01_clear" id="CORE_PROG003D0003E_S01_clear" onClick="CORE_PROG003D0003E_S01_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROG003D0003E_S01_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	
@@ -196,7 +196,7 @@ function ${programId}_page_message() {
 			    	errorFn="clearQuery_${programId}_grid();"
 			    	loadFn="dataGrid_${programId}_grid(data);" 
 			    	programId="${programId}"
-			    	label="Query expression" 
+			    	label="${action.getText('CORE_PROG003D0003E_S01_query')}" 
 			    	iconClass="dijitIconSearch"></gs:button>
     		</td>    		  				
     	</tr>   		
