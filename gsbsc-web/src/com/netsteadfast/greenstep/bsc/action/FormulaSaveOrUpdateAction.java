@@ -86,11 +86,11 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 							"expression"
 					}, 
 					new String[]{
-							"Id is required and only normal characters!<BR/>",
-							"name is required!<BR/>",
-							"Please select type!<BR/>",
-							"Please select return mode!<BR/>",
-							"expression is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG001D0003A_forId") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0003A_name") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0003A_type") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0003A_returnMode") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0003A_expression") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -109,12 +109,12 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 		}			
 		if (this.getFields().get("expression").length() > 500 ) {
 			this.getFieldsId().add("expression");
-			throw new ControllerException("expression maximum of 500 characters!<BR/>");			
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0003A_msg1") + "<BR/>");			
 		}
 		if (FormulaMode.MODE_CUSTOM.equals(this.getFields().get("returnMode")) 
 				&& StringUtils.isBlank(this.getFields().get("returnVar")) ) {
 			this.getFieldsId().add("returnVar");
-			throw new ControllerException("When return-mode is custom return-variable is required!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0003A_msg2") + "<BR/>");
 		}
 	}			
 	
@@ -157,20 +157,20 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 	private Object testFormula() throws ControllerException, AuthorityException, ServiceException, Exception {
 		if (this.isNoSelectId(this.getFields().get("type")) ) {
 			this.getFieldsId().add("type");
-			throw new ControllerException("Please select type!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0003A_type") + "<BR/>");
 		}
 		if (this.isNoSelectId(this.getFields().get("returnMode")) ) {
 			this.getFieldsId().add("returnMode");
-			throw new ControllerException("Please select return mode!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0003A_returnMode") + "<BR/>");
 		}
 		if (FormulaMode.MODE_CUSTOM.equals(this.getFields().get("returnMode")) 
 				&& StringUtils.isBlank(this.getFields().get("returnVar")) ) {
 			this.getFieldsId().add("returnVar");
-			throw new ControllerException("When return-mode is custom return-variable is required!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0003A_msg2") + "<BR/>");
 		}		
 		if (StringUtils.isBlank(this.getFields().get("expression")) ) {
 			this.getFieldsId().add("expression");
-			throw new ControllerException("expression is required!<BR/>");			
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0003A_expression") + "<BR/>");			
 		}
 		String actual = this.getFields().get("actual");
 		String target = this.getFields().get("target");

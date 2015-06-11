@@ -102,42 +102,42 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="600px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>&nbsp;(read only)&nbsp;:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_forId')"/></b> <s:property value="getText('BSC_PROG001D0003E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003E_forId" id="BSC_PROG001D0003E_forId" value="formula.forId" width="200" maxlength="14" readonly="Y"></gs:textBox>
     		</td>	
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003E_name" id="BSC_PROG001D0003E_name" value="formula.name" width="400" maxlength="100"></gs:textBox>
     		</td>
     	</tr>		    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_type')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0003E_type" dataSource="typeMap" id="BSC_PROG001D0003E_type" value="formula.type"></gs:select>
     		</td>
     	</tr>		    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Mode</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_returnMode')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0003E_returnMode" dataSource="modeMap" id="BSC_PROG001D0003E_returnMode" value="formula.returnMode"></gs:select>
     		</td>
     	</tr>		    	
  		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Return variable</b>:
+    			<b><s:property value="getText('BSC_PROG001D0003E_returnVar')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003E_returnVar" id="BSC_PROG001D0003E_returnVar" value="formula.returnVar" width="100" maxlength="50"></gs:textBox>
     		</td>
     	</tr>		    	
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<font color='RED'>*</font><b>Expression</b>:
+		    	<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_expression')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0003E_expression" name="BSC_PROG001D0003E_expression" data-dojo-type="dijit/form/Textarea" rows="4" cols="65" style="width:450px;height:90px;max-height:100px">${formula.expression}</textarea>
 		    	
@@ -151,7 +151,7 @@ function ${programId}_page_message() {
 										onClick:function(){ 
 											BSC_PROG001D0003E_putValue('BSC_PROG001D0003E_expression', 'actual');
 										}
-									">actual</button>		
+									"><s:property value="getText('BSC_PROG001D0003E_btnCalActual')"/></button>		
 								<button id="BSC_PROG001D0003E_btnCalTarget" data-dojo-type="dijit.form.Button"
 									data-dojo-props="
 										iconClass:'',
@@ -159,13 +159,13 @@ function ${programId}_page_message() {
 										onClick:function(){ 
 											BSC_PROG001D0003E_putValue('BSC_PROG001D0003E_expression', 'target');
 										}
-									">target</button>	
+									"><s:property value="getText('BSC_PROG001D0003E_btnCalTarget')"/></button>	
 								<div data-dojo-type="dijit/form/DropDownButton">
-		  							<span>TEST settings</span>
+		  							<span><s:property value="getText('BSC_PROG001D0003E_testSet')"/></span>
 		  							<div data-dojo-type="dijit/TooltipDialog">
 		  								<table border="0" cellpadding="0" cellspacing="0" >
 		  									<tr>
-		  										<td width="20%" align="right"><label for="name">Actual:</label></td>
+		  										<td width="20%" align="right"><label for="name"><s:property value="getText('BSC_PROG001D0003E_actual')"/>:</label></td>
 		  										<td width="80%" align="left">
 													<input id="BSC_PROG001D0003E_actual" type="text"
 													    data-dojo-type="dijit/form/NumberTextBox"
@@ -177,7 +177,7 @@ function ${programId}_page_message() {
 		  										</td>
 		  									</tr>
 		  									<tr>
-		  										<td width="20%" align="right"><label for="hobby">Target:</label></td>
+		  										<td width="20%" align="right"><label for="hobby"><s:property value="getText('BSC_PROG001D0003E_target')"/>:</label></td>
 		  										<td width="80%" align="left">
 													<input id="BSC_PROG001D0003E_target" type="text"
 													    data-dojo-type="dijit/form/NumberTextBox"
@@ -254,7 +254,7 @@ function ${programId}_page_message() {
 				    				errorFn=""
 				    				loadFn="BSC_PROG001D0003E_testFormulaSuccess(data);" 
 				    				programId="${programId}"
-				    				label="test" 
+				    				label="${action.getText('BSC_PROG001D0003E_testFormula')}" 
 				    				iconClass=""></gs:button>    									  				
 			  				</td>		  				
 			  				<td width="16%">
@@ -446,7 +446,7 @@ function ${programId}_page_message() {
 		</tr>        	
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('BSC_PROG001D0003E_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0003E_description" name="BSC_PROG001D0003E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${formula.description}</textarea>	
 		    </td>
@@ -475,10 +475,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG001D0003E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG001D0003E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG001D0003E_clear" id="BSC_PROG001D0003E_clear" onClick="BSC_PROG001D0003E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG001D0003E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

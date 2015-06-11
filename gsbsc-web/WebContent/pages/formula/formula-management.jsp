@@ -30,10 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function BSC_PROG001D0003Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: BSC_PROG001D0003Q_GridButtonClick, width: "15%" },  
-			{ name: "Id", field: "forId", width: "15%" },
-			{ name: "Name", field: "name", width: "30%" },
-			{ name: "Description", field: "description", width: "40%" }
+			{ name: "${action.getText('BSC_PROG001D0003Q_grid_01')}", field: "oid", formatter: BSC_PROG001D0003Q_GridButtonClick, width: "15%" },  
+			{ name: "${action.getText('BSC_PROG001D0003Q_grid_02')}", field: "forId", width: "15%" },
+			{ name: "${action.getText('BSC_PROG001D0003Q_grid_03')}", field: "name", width: "30%" },
+			{ name: "${action.getText('BSC_PROG001D0003Q_grid_04')}", field: "description", width: "40%" }
 		];
 }
 
@@ -59,7 +59,7 @@ function BSC_PROG001D0003Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('BSC_PROG001D0003Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -114,9 +114,9 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >		
 		<tr>
-    		<td height="25px" width="10%"  align="right">Id:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG001D0003Q_forId')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG001D0003Q_forId" id="BSC_PROG001D0003Q_forId" value="" width="200" maxlength="14"></gs:textBox></td>  					
-    		<td height="25px" width="10%"  align="right">Name:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG001D0003Q_name')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG001D0003Q_name" id="BSC_PROG001D0003Q_name" value="" width="200" maxlength="100"></gs:textBox></td>  					
     	</tr>
     	<tr>
@@ -138,10 +138,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('BSC_PROG001D0003Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="BSC_PROG001D0003Q_clear" id="BSC_PROG001D0003Q_clear" onClick="BSC_PROG001D0003Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG001D0003Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr> 	
