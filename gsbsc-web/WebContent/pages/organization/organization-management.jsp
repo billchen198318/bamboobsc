@@ -84,7 +84,7 @@ function BSC_PROG001D0002Q_getOrganizationTree() {
 		store: store,
 		query: {"type": "parent"},
 		rootId: "root",
-		rootLabel: "directory.",
+		rootLabel: "<s:property value="getText('BSC_PROG001D0002Q_getOrganizationTree_rootLabel')" escapeJavaScript="true"/>",
 		childrenAttrs: ["children"]
 	});
 
@@ -190,13 +190,13 @@ function BSC_PROG001D0002Q_changeParent(entityOid, parentOid) {
 /* 刪除部門資料 */
 function BSC_PROG001D0002Q_delete() {
 	if ( dojo.byId("BSC_PROG001D0002Q_oid").value==null || dojo.byId("BSC_PROG001D0002Q_oid").value=="" ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), "Please select organization.", function(){}, 'Y');
+		alertDialog(_getApplicationProgramNameById('${programId}'), "<s:property value="getText('BSC_PROG001D0002Q_oid')" escapeJavaScript="true"/>", function(){}, 'Y');
 		return;
 	}
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('BSC_PROG001D0002Q_deleteConfirm')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -247,7 +247,7 @@ function ${programId}_map_initialize() {
 			mapOptions);
 	
 	var ${programId}_infowindow = new google.maps.InfoWindow({
-		content: '<font color="RED">Please drag marker icon , To company correct address!</font>',
+		content: '<font color="RED"><s:property value="getText('BSC_PROG001D0002Q_mapInfoWindowContent')" escapeJavaScript="true"/></font>',
 		maxWidth: 400
 	});		
 	
@@ -325,7 +325,7 @@ function ${programId}_page_message() {
 	<tr>
 		<td width="25%" valign="top">
 			<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:250px;height:1200px">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'architecture' "   >
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG001D0002Q_architecture')" escapeJavaScript="true"/>' "   >
 	    			<div id="BSC_PROG001D0002Q_tree" ></div>
 	  			</div>			 							
 			</div>	
@@ -333,17 +333,17 @@ function ${programId}_page_message() {
 		<td width="75%" valign="top">
 			<table border="0" width="100%" height="625px" cellpadding="1" cellspacing="0" >
 				<tr>
-		    		<td height="50px" width="100%" align="left"><font color='RED'>*</font><b>ID</b>:<br/>
+		    		<td height="50px" width="100%" align="left"><font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0002Q_orgId')"/></b>:<br/>
 		    			<gs:textBox name="BSC_PROG001D0002Q_orgId" id="BSC_PROG001D0002Q_orgId" value="" width="200" maxlength="10"></gs:textBox>
 		    		</td>
 		    	</tr>	
 				<tr>
-		    		<td height="50px" width="100%" align="left"><font color='RED'>*</font><b>Name</b>:<br/>
+		    		<td height="50px" width="100%" align="left"><font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0002Q_name')"/></b>:<br/>
 		    			<gs:textBox name="BSC_PROG001D0002Q_name" id="BSC_PROG001D0002Q_name" value="" width="400" maxlength="200"></gs:textBox>
 		    		</td>
 		    	</tr>    
 				<tr>
-		    		<td height="325px" width="100%" align="left" ><b>location</b> ( Please drag marker icon , To company correct address! ):
+		    		<td height="325px" width="100%" align="left" ><b><s:property value="getText('BSC_PROG001D0002Q_location')"/></b> <s:property value="getText('BSC_PROG001D0002Q_locationMemo')"/>:
 						<div dojoType="dijit.layout.BorderContainer" style="height:290px">
 							<div dojoType="dijit.layout.ContentPane" region="center" style="overflow:hidden">
 								<div id="${programId}_map_canvas" style="height:100%; width:100%"></div>
@@ -352,12 +352,12 @@ function ${programId}_page_message() {
 		    		</td>
 		    	</tr>       
 				<tr>
-		    		<td height="50px" width="100%" align="left"><b>Address</b>:<br/>
+		    		<td height="50px" width="100%" align="left"><b><s:property value="getText('BSC_PROG001D0002Q_address')"/></b>:<br/>
 		    			<gs:textBox name="BSC_PROG001D0002Q_address" id="BSC_PROG001D0002Q_address" value="" width="600" maxlength="500"></gs:textBox>
 		    		</td>
 		    	</tr>  		    			
 				<tr>
-		    		<td height="125px" width="100%" align="left"><b>Description</b>:<br/>
+		    		<td height="125px" width="100%" align="left"><b><s:property value="getText('BSC_PROG001D0002Q_description')"/></b>:<br/>
 		    			<textarea id="BSC_PROG001D0002Q_description" name="BSC_PROG001D0002Q_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>	
 		    		</td>
 		    	</tr>   
@@ -382,13 +382,13 @@ function ${programId}_page_message() {
 		    				errorFn=""
 		    				loadFn="BSC_PROG001D0002Q_saveSuccess(data);" 
 		    				programId="${programId}"
-		    				label="Save" 
+		    				label="${action.getText('BSC_PROG001D0002Q_save')}" 
 		    				iconClass="dijitIconSave"></gs:button>    			
 		    			<gs:button name="BSC_PROG001D0002Q_clear" id="BSC_PROG001D0002Q_clear" onClick="BSC_PROG001D0002Q_clear(true);" 
-		    				label="Clear" 
+		    				label="${action.getText('BSC_PROG001D0002Q_clear')}" 
 		    				iconClass="dijitIconClear"></gs:button>   
 		    			<gs:button name="BSC_PROG001D0002Q_delete" id="BSC_PROG001D0002Q_delete" onClick="BSC_PROG001D0002Q_delete();" 
-		    				label="Delete" 
+		    				label="${action.getText('BSC_PROG001D0002Q_delete')}" 
 		    				iconClass="dijitIconDelete"></gs:button>       				 			
 		    		</td>
 		    	</tr>    	   	

@@ -95,8 +95,8 @@ public class OrganizationSaveOrUpdateAction extends BaseJsonAction {
 							"name"				
 					}, 
 					new String[]{
-							"Id is required and only normal characters!<BR/>",
-							"name is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG001D0002Q_orgId") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0002Q_name") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -112,7 +112,7 @@ public class OrganizationSaveOrUpdateAction extends BaseJsonAction {
 		}	
 		if ( super.defaultString( super.getFields().get("address") ).length() > 500 ) {
 			this.getFieldsId().add("address");
-			throw new ControllerException("address max length is 500 characters!");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0002Q_address") + "<BR/>");
 		}
 	}	
 	

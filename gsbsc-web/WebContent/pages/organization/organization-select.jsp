@@ -50,7 +50,7 @@ function BSC_PROG001D0002Q_S00_getOrganizationTree() {
 		store: store,
 		query: {"type": "parent"},
 		rootId: "root",
-		rootLabel: "directory.",
+		rootLabel: "<s:property value="getText('BSC_PROG001D0002Q_S00_getOrganizationTree_rootLabel')" escapeJavaScript="true"/>",
 		childrenAttrs: ["children"]
 	});
 
