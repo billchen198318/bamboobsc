@@ -80,11 +80,10 @@ public class AnalyticsConfigSaveOrUpdateAction extends BaseJsonAction {
 							"jdbcUrl"
 					}, 
 					new String[]{						
-							"Id is required!<BR/>",
-							"Name is required!<BR/>",
-							"Drivers is required!<BR/>",
-							"Url is required!<BR/>"
-							
+							this.getText("MESSAGE.QCHARTS_PROG001D0003A_id") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0003A_name") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0003A_jdbcDrivers") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0003A_jdbcUrl") + "<BR/>"							
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,

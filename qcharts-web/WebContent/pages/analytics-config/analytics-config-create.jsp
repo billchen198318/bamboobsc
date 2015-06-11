@@ -85,35 +85,35 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="400px" cellpadding="1" cellspacing="0" >			
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_id')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0003A_id" id="QCHARTS_PROG001D0003A_id" value="" width="200" maxlength="20"></gs:textBox>
     		</td>    		
     	</tr>  	    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0003A_name" id="QCHARTS_PROG001D0003A_name" value="" width="200" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Drivers</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_jdbcDrivers')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0003A_jdbcDrivers" id="QCHARTS_PROG001D0003A_jdbcDrivers" value="" width="200" maxlength="50"></gs:textBox>    			
     		</td>    		
     	</tr>     	    	
    		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>JDBC-url</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_jdbcUrl')"/></b>:
     			<br/>
     			<textarea id="QCHARTS_PROG001D0003A_jdbcUrl" name="QCHARTS_PROG001D0003A_jdbcUrl" data-dojo-type="dijit/form/Textarea" rows="2" cols="75" style="width:600px;height:50px;max-height:50px"></textarea>
     		</td>    		
     	</tr>  	
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('QCHARTS_PROG001D0003A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0003A_description" name="QCHARTS_PROG001D0003A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
 		    </td>		    
@@ -137,10 +137,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="QCHARTS_PROG001D0003A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('QCHARTS_PROG001D0003A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="QCHARTS_PROG001D0003A_clear" id="QCHARTS_PROG001D0003A_clear" onClick="QCHARTS_PROG001D0003A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('QCHARTS_PROG001D0003A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>       		
     		</td>
     	</tr>     	 	  	    	
