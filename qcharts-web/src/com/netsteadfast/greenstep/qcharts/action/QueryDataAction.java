@@ -91,8 +91,8 @@ public class QueryDataAction extends BaseJsonAction {
 							"queryExpression"
 					}, 
 					new String[]{
-							"Please select Datasource!<BR/>",
-							"Query expression is required!<BR/>"									
+							this.getText("MESSAGE.QCHARTS_PROG002D0001Q_dataSourceConfOid") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG002D0001Q_queryExpression") + "<BR/>"									
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -119,10 +119,10 @@ public class QueryDataAction extends BaseJsonAction {
 							"queryExpression"
 					}, 
 					new String[]{
-							"Please select Datasource!<BR/>",
-							"Please select Mapper!<BR/>",
-							"Name is required!<BR/>",
-							"Query expression is required!<BR/>"									
+							this.getText("MESSAGE.QCHARTS_PROG002D0001Q_dataSourceConfOid") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG002D0001Q_dataQueryMapperOid") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG002D0001Q_name") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG002D0001Q_queryExpression") + "<BR/>"									
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -150,19 +150,19 @@ public class QueryDataAction extends BaseJsonAction {
 		String name = this.getFields().get("name");
 		if ( ("2".equals(queryType) || "3".equals(queryType)) && StringUtils.isBlank(name) ) {
 			this.getFieldsId().add("name");
-			throw new ControllerException("Name is required!");
+			throw new ControllerException( this.getText("MESSAGE.QCHARTS_PROG002D0001Q_name") + "<BR/>" );
 		}
 		if ( "2".equals(queryType) && (this.isNoSelectId(dataQueryMapperOid) || this.isNoSelectId(dataQueryMapperSetOid)) ) {
 			this.getFieldsId().add("dataQueryMapperOid");
 			this.getFieldsId().add("dataQueryMapperSetOid");
-			throw new ControllerException("Please select Mapper and Mapper items!");
+			throw new ControllerException( this.getText("MESSAGE.QCHARTS_PROG002D0001Q_msg1") + "<BR/>" );
 		}
 		if ( ("3".equals(queryType) || "4".equals(queryType)) && this.isNoSelectId(dataQueryMapperOid) ) {
 			this.getFieldsId().add("dataQueryMapperOid");
-			throw new ControllerException("Please select Mapper!");			
+			throw new ControllerException( this.getText("MESSAGE.QCHARTS_PROG002D0001Q_dataQueryMapperOid") + "<BR/>" );			
 		}
 		this.searchDatas = QueryDataUtils.query(dataSourceConfOid, queryExpression);
-		this.message = "Query fail!";
+		this.message = this.getText("MESSAGE.QCHARTS_PROG002D0001Q_msg2") + "<BR/>";
 		if (this.searchDatas!=null) {
 			this.renderGridContent();
 			if ("2".equals(queryType)) {
@@ -174,7 +174,7 @@ public class QueryDataAction extends BaseJsonAction {
 						dataQueryMapperOid, this.seriesCategories, this.searchDatas);
 			}
 			this.success = IS_YES;
-			this.message = "Query success!";			
+			this.message = this.getText("MESSAGE.QCHARTS_PROG002D0001Q_msg3") + "<BR/>";			
 		} 
 	}
 	

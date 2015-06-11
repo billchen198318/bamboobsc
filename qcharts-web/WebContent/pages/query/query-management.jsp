@@ -385,13 +385,13 @@ function QCHARTS_PROG002D0001Q_saveSuccess(data) { // data 是 json 資料
 function QCHARTS_PROG002D0001Q_delete() {
 	var oid = dijit.byId("QCHARTS_PROG002D0001Q_queryOid").get("value");
 	if ( '' == oid || _gscore_please_select_id == oid ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please select History!', function(){}, 'N');	
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('QCHARTS_PROG002D0001Q_queryOid_pleaseSelect')" escapeJavaScript="true"/>', function(){}, 'N');	
 		return;
 	}
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('QCHARTS_PROG002D0001Q_deleteConfirm')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -516,8 +516,8 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" >
 		<tr valign="top">
-			<td width="100%" align="center" height="55%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+			<td width="100%" align="center" height="55%">								
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('QCHARTS_PROG002D0001Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:225px">
 					
 						<table border="0" width="100%" >
@@ -530,7 +530,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0001Q_query();
-											}">Query</button>		
+											}"><s:property value="getText('QCHARTS_PROG002D0001Q_btnQuery')"/></button>		
 																		
 									<button id="QCHARTS_PROG002D0001Q_btnPie" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -538,7 +538,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0001Q_pie();
-											}">Pie</button>	
+											}"><s:property value="getText('QCHARTS_PROG002D0001Q_btnPie')"/></button>	
 
 									<button id="QCHARTS_PROG002D0001Q_btnBar" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -546,7 +546,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0001Q_bar();
-											}">Bar</button>	
+											}"><s:property value="getText('QCHARTS_PROG002D0001Q_btnBar')"/></button>	
 																						
 									<button id="QCHARTS_PROG002D0001Q_btnLine" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -554,7 +554,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0001Q_line();
-											}">Line</button>	
+											}"><s:property value="getText('QCHARTS_PROG002D0001Q_btnLine')"/></button>	
 											
 									<button id="QCHARTS_PROG002D0001Q_btnArea" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -562,7 +562,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0001Q_area();
-											}">Area</button>												
+											}"><s:property value="getText('QCHARTS_PROG002D0001Q_btnArea')"/></button>												
 											
 					    			<gs:button name="QCHARTS_PROG002D0001Q_save" id="QCHARTS_PROG002D0001Q_save" onClick="QCHARTS_PROG002D0001Q_save();"
 					    				handleAs="json"
@@ -582,15 +582,15 @@ function ${programId}_page_message() {
 					    				errorFn=""
 					    				loadFn="QCHARTS_PROG002D0001Q_saveSuccess(data);" 
 					    				programId="${programId}"
-					    				label="Save query" 
+					    				label="${action.getText('QCHARTS_PROG002D0001Q_save')}" 
 					    				iconClass="dijitIconSave"></gs:button>    
 					    							
 					    			<gs:button name="QCHARTS_PROG002D0001Q_clear" id="QCHARTS_PROG002D0001Q_clear" onClick="QCHARTS_PROG002D0001Q_clear();" 
-					    				label="Clear" 
+					    				label="${action.getText('QCHARTS_PROG002D0001Q_clear')}" 
 					    				iconClass="dijitIconClear"></gs:button>    												
 																						
 					    			<gs:button name="QCHARTS_PROG002D0001Q_delete" id="QCHARTS_PROG002D0001Q_delete" onClick="QCHARTS_PROG002D0001Q_delete();" 
-					    				label="Delete" 
+					    				label="${action.getText('QCHARTS_PROG002D0001Q_delete')}" 
 					    				iconClass="dijitIconDelete"></gs:button>      
 		    																							
 								</td>
@@ -598,15 +598,15 @@ function ${programId}_page_message() {
 							<tr>
 								<td width="100%" align="left" height="25px">
 								
-									History:
+									<s:property value="getText('QCHARTS_PROG002D0001Q_queryOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0001Q_queryOid" dataSource="queryHistoryMap" id="QCHARTS_PROG002D0001Q_queryOid" onChange="QCHARTS_PROG002D0001Q_getQueryHistory();"></gs:select>
 									&nbsp;		
 								
-									Datasource: 
+									<s:property value="getText('QCHARTS_PROG002D0001Q_dataSourceConfOid')"/>: 
 									<gs:select name="QCHARTS_PROG002D0001Q_dataSourceConfOid" dataSource="confMap" id="QCHARTS_PROG002D0001Q_dataSourceConfOid"></gs:select>
 						    		&nbsp;		
 						    									
-									Name:
+									<s:property value="getText('QCHARTS_PROG002D0001Q_name')"/>:
 									<gs:textBox name="QCHARTS_PROG002D0001Q_name" id="QCHARTS_PROG002D0001Q_name" value="" width="200" maxlength="100"></gs:textBox>
 									
 								</td>
@@ -614,10 +614,10 @@ function ${programId}_page_message() {
 							<tr>
 								<td width="100%" align="left" height="25px">
 															
-									Mapper:
+									<s:property value="getText('QCHARTS_PROG002D0001Q_dataQueryMapperOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0001Q_dataQueryMapperOid" dataSource="mapperMap" id="QCHARTS_PROG002D0001Q_dataQueryMapperOid" onChange="QCHARTS_PROG002D0001Q_triggerChangeMapperSetItems();"></gs:select>
 									&nbsp;
-									Mapper items<font size='2'>(for Pie charts)</font>:
+									<s:property value="getText('QCHARTS_PROG002D0001Q_dataQueryMapperSetOid')"/><font size='2'><s:property value="getText('QCHARTS_PROG002D0001Q_dataQueryMapperSetOid_forPieChart')"/></font>:
 									<gs:select name="QCHARTS_PROG002D0001Q_dataQueryMapperSetOid" dataSource="mapperSetMap" id="QCHARTS_PROG002D0001Q_dataQueryMapperSetOid"></gs:select>
 									
 								</td>
@@ -625,7 +625,7 @@ function ${programId}_page_message() {
 							<tr>
 								<td width="100%" align="left" height="125px">
 								
-									Query expression:<br/>
+									<s:property value="getText('QCHARTS_PROG002D0001Q_queryExpression')"/>:<br/>
 									<textarea id="QCHARTS_PROG002D0001Q_queryExpression" name="QCHARTS_PROG002D0001Q_queryExpression" data-dojo-type="dijit/form/Textarea" rows="6" cols="120" style="width:960px;height:90px;max-height:100px"></textarea>
 									
 								</td>
