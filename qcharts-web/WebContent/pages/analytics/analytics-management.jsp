@@ -162,13 +162,13 @@ function QCHARTS_PROG002D0002Q_saveSuccess(data) { // data 是 json 資料
 function QCHARTS_PROG002D0002Q_delete() {
 	var oid = dijit.byId("QCHARTS_PROG002D0002Q_mdxOid").get("value");
 	if ( '' == oid || _gscore_please_select_id == oid ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please select History!', function(){}, 'N');	
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('QCHARTS_PROG002D0002Q_mdxOid_pleaseSelect')" escapeJavaScript="true"/>', function(){}, 'N');	
 		return;
 	}
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('QCHARTS_PROG002D0002Q_deleteConfirm')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -293,7 +293,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="55%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('QCHARTS_PROG002D0002Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:225px">
 					
 						<table border="0" width="100%" >
@@ -306,7 +306,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0002Q_query();
-											}">Query</button>				
+											}"><s:property value="getText('QCHARTS_PROG002D0002Q_btnQuery')"/></button>				
 							
 									<button id="QCHARTS_PROG002D0002Q_btnQueryExport" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -314,7 +314,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												QCHARTS_PROG002D0002Q_queryExport();
-											}">Query export</button>																			
+											}"><s:property value="getText('QCHARTS_PROG002D0002Q_btnQueryExport')"/></button>																			
 											
 									<button id="QCHARTS_PROG002D0002Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -322,7 +322,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												QCHARTS_PROG002D0002Q_excel();																			  
-											}">Excel</button>	
+											}"><s:property value="getText('QCHARTS_PROG002D0002Q_btnXls')"/></button>	
 											
 					    			<gs:button name="QCHARTS_PROG002D0002Q_save" id="QCHARTS_PROG002D0002Q_save" onClick="QCHARTS_PROG002D0002Q_save();"
 					    				handleAs="json"
@@ -341,15 +341,15 @@ function ${programId}_page_message() {
 					    				errorFn=""
 					    				loadFn="QCHARTS_PROG002D0002Q_saveSuccess(data);" 
 					    				programId="${programId}"
-					    				label="Save query" 
+					    				label="${action.getText('QCHARTS_PROG002D0002Q_save')}" 
 					    				iconClass="dijitIconSave"></gs:button>    
 					    							
 					    			<gs:button name="QCHARTS_PROG002D0002Q_clear" id="QCHARTS_PROG002D0002Q_clear" onClick="QCHARTS_PROG002D0002Q_clear();" 
-					    				label="Clear" 
+					    				label="${action.getText('QCHARTS_PROG002D0002Q_clear')}" 
 					    				iconClass="dijitIconClear"></gs:button>    												
 																						
 					    			<gs:button name="QCHARTS_PROG002D0002Q_delete" id="QCHARTS_PROG002D0002Q_delete" onClick="QCHARTS_PROG002D0002Q_delete();" 
-					    				label="Delete" 
+					    				label="${action.getText('QCHARTS_PROG002D0002Q_delete')}" 
 					    				iconClass="dijitIconDelete"></gs:button>      
 		    																							
 								</td>
@@ -357,28 +357,28 @@ function ${programId}_page_message() {
 							<tr>
 								<td width="100%" align="left" height="25px">
 								
-									History:
+									<s:property value="getText('QCHARTS_PROG002D0002Q_mdxOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0002Q_mdxOid" dataSource="mdxMap" id="QCHARTS_PROG002D0002Q_mdxOid" onChange="QCHARTS_PROG002D0002Q_getMdxHistory();" ></gs:select> 
 									&nbsp;		
 						    									
-									Name:
+									<s:property value="getText('QCHARTS_PROG002D0002Q_name')"/>:
 									<gs:textBox name="QCHARTS_PROG002D0002Q_name" id="QCHARTS_PROG002D0002Q_name" value="" width="200" maxlength="100"></gs:textBox>
 									
 									&nbsp;
-									Dimension Title:<input id="QCHARTS_PROG002D0002Q_showDimensionTitle" name="QCHARTS_PROG002D0002Q_showDimensionTitle" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
+									<s:property value="getText('QCHARTS_PROG002D0002Q_showDimensionTitle')"/>:<input id="QCHARTS_PROG002D0002Q_showDimensionTitle" name="QCHARTS_PROG002D0002Q_showDimensionTitle" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
 									&nbsp;
-									Parent Members:<input id="QCHARTS_PROG002D0002Q_showParentMembers" name="QCHARTS_PROG002D0002Q_showParentMembers" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
+									<s:property value="getText('QCHARTS_PROG002D0002Q_showParentMembers')"/>:<input id="QCHARTS_PROG002D0002Q_showParentMembers" name="QCHARTS_PROG002D0002Q_showParentMembers" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
 									
 								</td>
 							</tr>
 							<tr>
 								<td width="100%" align="left" height="25px">
 								
-									Config: 
+									<s:property value="getText('QCHARTS_PROG002D0002Q_olapConfigOid')"/>: 
 									<gs:select name="QCHARTS_PROG002D0002Q_olapConfigOid" dataSource="configMap" id="QCHARTS_PROG002D0002Q_olapConfigOid"></gs:select>
 						    		&nbsp;		
 						    																	
-									Mondrian Catalog:
+									<s:property value="getText('QCHARTS_PROG002D0002Q_olapCatalogOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0002Q_olapCatalogOid" dataSource="catalogMap" id="QCHARTS_PROG002D0002Q_olapCatalogOid"></gs:select>
 																		
 								</td>
@@ -386,7 +386,7 @@ function ${programId}_page_message() {
 							<tr>
 								<td width="100%" align="left" height="125px">
 								
-									MultiDimensional eXpressions:<br/>
+									<s:property value="getText('QCHARTS_PROG002D0002Q_expression')"/>:<br/>
 									<textarea id="QCHARTS_PROG002D0002Q_expression" name="QCHARTS_PROG002D0002Q_expression" data-dojo-type="dijit/form/Textarea" rows="6" cols="120" style="width:960px;height:90px;max-height:100px"></textarea>
 									
 								</td>

@@ -157,9 +157,9 @@ public class AnalyticsProcessAction extends BaseJsonAction {
 							"expression"
 					}, 
 					new String[]{
-							"Please select Config!<BR/>",
-							"Please select Catalog!<BR/>",
-							"expression is required!<BR/>"									
+							this.getText("MESSAGE.QCHARTS_PROG002D0002Q_olapConfigOid") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG002D0002Q_olapCatalogOid") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG002D0002Q_expression") + "<BR/>"									
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -194,7 +194,7 @@ public class AnalyticsProcessAction extends BaseJsonAction {
 		String mondrianUrl = OlapUtils.getMondrianUrl(config.getJdbcUrl(), config.getJdbcDrivers(), catalogFile.getPath());
 		this.content = Pivot4JUtils.rendererHtml(
 				mondrianUrl, this.getFields().get("expression"), showDimensionTitle, showParentMembers);	
-		this.message = "Query success!";			
+		this.message = this.getText("MESSAGE.QCHARTS_PROG002D0002Q_msg1") + "<BR/>";			
 		this.success = IS_YES;
 	}
 	
@@ -239,7 +239,7 @@ public class AnalyticsProcessAction extends BaseJsonAction {
 		} finally {
 			file = null;
 		}
-		this.message = "Query success!";			
+		this.message = this.getText("MESSAGE.QCHARTS_PROG002D0002Q_msg1") + "<BR/>";			
 		this.success = IS_YES;		
 	}
 	
