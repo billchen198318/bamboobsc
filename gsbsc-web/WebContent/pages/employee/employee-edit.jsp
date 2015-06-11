@@ -110,34 +110,34 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="300px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Account</b>&nbsp;(read only)&nbsp;:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001E_account')"/></b> <s:property value="getText('BSC_PROG001D0001E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_account" id="BSC_PROG001D0001E_account" value="employee.account" width="200" maxlength="24" readonly="Y"></gs:textBox>
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>&nbsp;(&nbsp;no / read only)&nbsp;:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001E_empId')"/></b> <s:property value="getText('BSC_PROG001D0001E_empIdno')"/> / <s:property value="getText('BSC_PROG001D0001E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_empId" id="BSC_PROG001D0001E_empId" value="employee.empId" width="200" maxlength="10" readonly="Y"></gs:textBox>
     		</td>
     	</tr>		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Full name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001E_fullName')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_fullName" id="BSC_PROG001D0001E_fullName" value="employee.fullName" width="400" maxlength="100"></gs:textBox>
     		</td>
     	</tr>		    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Job title</b>:
+    			<b><s:property value="getText('BSC_PROG001D0001E_jobTitle')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_jobTitle" id="BSC_PROG001D0001E_jobTitle" value="employee.jobTitle" width="400" maxlength="100"></gs:textBox>
     		</td>
     	</tr>		    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Department</b>:&nbsp;&nbsp;
+    			<b><s:property value="getText('BSC_PROG001D0001E_deptSelect')"/></b>:&nbsp;&nbsp;
 				<button name="BSC_PROG001D0001E_deptSelect" id="BSC_PROG001D0001E_deptSelect" data-dojo-type="dijit.form.Button"
 					data-dojo-props="
 						showLabel:false,
@@ -176,10 +176,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG001D0001E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG001D0001E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG001D0001E_clear" id="BSC_PROG001D0001E_clear" onClick="BSC_PROG001D0001E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG001D0001E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    	    		
     		</td>
     	</tr>	    	   	 	  	    	

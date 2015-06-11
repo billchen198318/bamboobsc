@@ -81,11 +81,11 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 							"fullName"
 					}, 
 					new String[]{
-							"Account is required and only normal characters!<BR/>",
-							"Id is required and only normal characters!<BR/>",
-							"Password is required and only normal characters!<BR/>",
-							"Password (repeat) is required and only normal characters!<BR/>",
-							"Full name is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG001D0001A_account") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001A_empId") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001A_password1") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001A_password2") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001A_fullName") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -105,12 +105,12 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 		if ( !this.getFields().get("password1").equals( this.getFields().get("password2") ) ) {
 			this.getFieldsId().add("password1");
 			this.getFieldsId().add("password2");
-			throw new ControllerException("Password and (repeat) must be the same!<BR/>");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG001D0001A_password12_msg1") + "<BR/>");
 		}
 		if ( this.getFields().get("password1").length() < 4 || this.getFields().get("password1").length() > 14 ) {
 			this.getFieldsId().add("password1");
 			this.getFieldsId().add("password2");			
-			throw new ControllerException("Password length must be 4-14 characters!<BR/>");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG001D0001A_password12_msg2") + "<BR/>");
 		}
 		this.getFields().put("password", this.getFields().get("password1"));
 	}	
@@ -123,7 +123,7 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 							"fullName"
 					}, 
 					new String[]{
-							"Full name is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG001D0001A_fullName") + "<BR/>"
 					}, 
 					new Class[]{
 							NotBlankFieldCheckUtils.class
@@ -148,9 +148,9 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 							"password3"
 					}, 
 					new String[]{
-							"old Password is required and only normal characters!<BR/>",
-							"new Password is required and only normal characters!<BR/>",
-							"new Password (repeat) is required and only normal characters!<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001E_S00_password1") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001E_S00_password2") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0001E_S00_password3") + "<BR/>",
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -168,12 +168,12 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 		if ( !this.getFields().get("password2").equals( this.getFields().get("password3") ) ) {
 			this.getFieldsId().add("password2");
 			this.getFieldsId().add("password3");
-			throw new ControllerException("new Password and (repeat) must be the same!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0001E_S00_password23_msg1") + "<BR/>");
 		}
 		if ( this.getFields().get("password2").length() < 4 || this.getFields().get("password2").length() > 14 ) {
 			this.getFieldsId().add("password2");
 			this.getFieldsId().add("password3");			
-			throw new ControllerException("Password length must be 4-14 characters!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0001E_S00_password23_msg2") + "<BR/>");
 		}
 		this.getFields().put("password", this.getFields().get("password1"));		
 	}
