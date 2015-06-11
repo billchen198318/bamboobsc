@@ -50,12 +50,12 @@ function QCHARTS_PROG001D0004E_clear() {
 
 function QCHARTS_PROG001D0004E_uploadSuccess() {
 	hideCommonUploadDialog();
-	dojo.byId('QCHARTS_PROG001D0004E_uploadShow').innerHTML = 'Completed file upload!';
+	dojo.byId('QCHARTS_PROG001D0004E_uploadShow').innerHTML = '<s:property value="getText('QCHARTS_PROG001D0004E_uploadShowSuccess')" escapeJavaScript="true"/>';
 }
 
 function QCHARTS_PROG001D0004E_uploadFail() {
 	dojo.byId('QCHARTS_PROG001D0004E_uploadOid').value = "";
-	dojo.byId('QCHARTS_PROG001D0004E_uploadShow').innerHTML = '<font color="#6E6E6E">not Yet upload files!</font>';
+	dojo.byId('QCHARTS_PROG001D0004E_uploadShow').innerHTML = '<font color="#6E6E6E"><s:property value="getText('QCHARTS_PROG001D0004E_uploadShow')" escapeJavaScript="true"/></font>';
 }
 
 //------------------------------------------------------------------------------
@@ -89,21 +89,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="350px" cellpadding="1" cellspacing="0" >			
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0004E_id')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0004E_id" id="QCHARTS_PROG001D0004E_id" value="olapCatalog.id" width="200" maxlength="20" readonly="Y"></gs:textBox>
     		</td>
     	</tr>  	    	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0004E_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0004E_name" id="QCHARTS_PROG001D0004E_name" value="olapCatalog.name" width="200" maxlength="100"></gs:textBox>
     		</td>
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Mondrian Catalog</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0004E_uploadOid')"/></b>:
     			<br/>
     			<input type="button" id="QCHARTS_PROG001D0004E_uploadBtn" label="Upload" value="Upload" 
 			   		data-dojo-props=" iconClass:'dijitFolderOpened', showLabel:false "
@@ -114,7 +114,7 @@ function ${programId}_page_message() {
     	</tr>   	
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('QCHARTS_PROG001D0004E_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0004E_description" name="QCHARTS_PROG001D0004E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${olapCatalog.description}</textarea>	
 		    </td>
@@ -138,10 +138,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="QCHARTS_PROG001D0004E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('QCHARTS_PROG001D0004E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="QCHARTS_PROG001D0004E_clear" id="QCHARTS_PROG001D0004E_clear" onClick="QCHARTS_PROG001D0004E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('QCHARTS_PROG001D0004E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

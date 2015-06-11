@@ -81,8 +81,8 @@ public class AnalyticsCatalogSaveOrUpdateAction extends BaseJsonAction {
 							"name"
 					}, 
 					new String[]{						
-							"Id is required!<BR/>",
-							"Name is required!<BR/>"
+							this.getText("MESSAGE.QCHARTS_PROG001D0004A_id") + "<BR/>",
+							this.getText("MESSAGE.QCHARTS_PROG001D0004A_name") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -104,18 +104,18 @@ public class AnalyticsCatalogSaveOrUpdateAction extends BaseJsonAction {
 		}
 		byte datas[] = UploadSupportUtils.getDataBytes( this.getFields().get("uploadOid") );
 		if ( null == datas ) {
-			throw new Exception("error, upload catalog xml file is null!");
+			throw new Exception( this.getText("MESSAGE.QCHARTS_PROG001D0004A_uploadOid_msg1") + "<BR/>" );
 		}
 		String xmlContent = new String(datas, Constants.BASE_ENCODING);
 		if ( xmlContent.indexOf("Schema") == -1 ) {
-			throw new Exception("error, upload file not a Mondrian catalog xml!");
+			throw new Exception( this.getText("MESSAGE.QCHARTS_PROG001D0004A_uploadOid_msg2") + "<BR/>" );
 		}
 	}	
 	
 	private void save() throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.checkFields();
 		if ( StringUtils.isBlank(this.getFields().get("uploadOid")) ) {
-			throw new ControllerException("Please upload catalog xml file!");
+			throw new ControllerException( this.getText("MESSAGE.QCHARTS_PROG001D0004A_uploadOid_msg3") + "<BR/>" );
 		}
 		this.checkUploadCatalog();
 		OlapCatalogVO olapCatalog = new OlapCatalogVO();
