@@ -92,28 +92,28 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="300px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>&nbsp;(read only)&nbsp;:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_aggrId')"/></b> <s:property value="getText('BSC_PROG001D0008E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0008E_aggrId" id="BSC_PROG001D0008E_aggrId" value="aggr.aggrId" width="200" maxlength="14" readonly="Y"></gs:textBox>
     		</td>
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0008E_name" id="BSC_PROG001D0008E_name" value="aggr.name" width="400" maxlength="100"></gs:textBox>
     		</td>
     	</tr>     	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_type')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0008E_type" dataSource="typeMap" id="BSC_PROG001D0008E_type" value="aggr.type"></gs:select>
     		</td>
     	</tr>     	
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('BSC_PROG001D0008E_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0008E_description" name="BSC_PROG001D0008E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${aggr.description}</textarea>	
 		    </td>
@@ -126,7 +126,7 @@ function ${programId}_page_message() {
 				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Expression' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:350px">
 							    
-		    		<font color='RED'>*</font><b>Expression</b>:
+		    		<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_iframe1')"/></b>:
 		    		<br/>
 		    		<iframe name="BSC_PROG001D0008E_iframe1" id="BSC_PROG001D0008E_iframe1" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=mainSysBasePath%>/core.commonCodeEditorAction.action?oid=${uploadExprOid1}&<%=Constants.IS_IFRAME_MODE%>=Y'></iframe>
 		    		
@@ -143,7 +143,7 @@ function ${programId}_page_message() {
 				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Expression ( for date range )' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:350px">		    
 		    
-		    		<font color='RED'>*</font><b>Expression</b> ( for date range ):
+		    		<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_iframe2')"/></b>:
 		    		<br/>
 		    		<iframe name="BSC_PROG001D0008E_iframe2" id="BSC_PROG001D0008E_iframe2" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=mainSysBasePath%>/core.commonCodeEditorAction.action?oid=${uploadExprOid2}&<%=Constants.IS_IFRAME_MODE%>=Y'></iframe>
 		    		
@@ -175,10 +175,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG001D0008E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG001D0008E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG001D0008E_clear" id="BSC_PROG001D0008E_clear" onClick="BSC_PROG001D0008E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG001D0008E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    			
     		</td>
     	</tr>     	 	  	    	

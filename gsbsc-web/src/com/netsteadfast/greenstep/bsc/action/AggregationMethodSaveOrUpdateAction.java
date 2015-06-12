@@ -82,11 +82,11 @@ public class AggregationMethodSaveOrUpdateAction extends BaseJsonAction {
 							"expression2"
 					}, 
 					new String[]{
-							"Id is required and only normal characters!<BR/>",
-							"name is required!<BR/>",
-							"Please select type!<BR/>",
-							"expression is required!<BR/>",
-							"expression(for date range) is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG001D0008A_aggrId") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0008A_name") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0008A_type") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0008A_iframe1") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG001D0008A_iframe2") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -105,11 +105,11 @@ public class AggregationMethodSaveOrUpdateAction extends BaseJsonAction {
 		}			
 		if (this.getFields().get("expression1").length() > 4000 ) {
 			this.getFieldsId().add("expression1");
-			throw new ControllerException("expression maximum of 4000 characters!<BR/>");			
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG001D0008A_iframe1_msg1") + "<BR/>" );			
 		}
 		if (this.getFields().get("expression2").length() > 4000 ) {
 			this.getFieldsId().add("expression2");
-			throw new ControllerException("expression(for date range) maximum of 4000 characters!<BR/>");			
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG001D0008A_iframe2_msg1") + "<BR/>" );			
 		}		
 	}
 	
