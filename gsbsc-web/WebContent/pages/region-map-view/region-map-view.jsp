@@ -71,7 +71,7 @@ function BSC_PROG001D0006Q_map_initialize() {
 	    draggable: false
 	});	
 	
-	var new_win_href_${orgId} = '&nbsp;&nbsp;&nbsp;<a href="#" onclick="BSC_PROG001D0006Q_openNew(\'${orgId}\'); return false;"><img src="./icons/help-about.png" border="0" /><font color="#6E6E6E"><b>Click show detail.</b></font></a>';
+	var new_win_href_${orgId} = '&nbsp;&nbsp;&nbsp;<a href="#" onclick="BSC_PROG001D0006Q_openNew(\'${orgId}\'); return false;"><img src="./icons/help-about.png" border="0" /><font color="#6E6E6E"><b><s:property value="getText('BSC_PROG001D0006Q_clickshowinfo')" escapeJavaScript="true"/></b></font></a>';
 	
 	google.maps.event.addListener(marker_${orgId}, 'click', function(event) {	
 		
@@ -173,25 +173,25 @@ function BSC_PROG001D0006Q_showOrganizationInfo(organization) {
 	var content = '';
 	content += '<table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#d8d8d8" >';
 	content += '<tr>';
-	content += '<td colspan="2" bgcolor="#d8d8d8" align="center" ><b>Organization/Department</b></td>';
+	content += '<td colspan="2" bgcolor="#d8d8d8" align="center" ><b><s:property value="getText('BSC_PROG001D0006Q_orga_label')" escapeJavaScript="true"/></b></td>';
 	content += '</tr>';	
 	content += '<tr>';
-	content += '<td bgcolor="#f5f5f5" align="right" >Id:</td>';
+	content += '<td bgcolor="#f5f5f5" align="right" ><s:property value="getText('BSC_PROG001D0006Q_orga_id')" escapeJavaScript="true"/>:</td>';
 	content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.orgId + '</font></td>';
 	content += '</tr>';
 	content += '<tr>';
-	content += '<td bgcolor="#f5f5f5" align="right" >Name:</td>';
+	content += '<td bgcolor="#f5f5f5" align="right" ><s:property value="getText('BSC_PROG001D0006Q_orga_name')" escapeJavaScript="true"/>:</td>';
 	content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.name + '</font></td>';
 	content += '</tr>';	
 	if (organization.address!=null && ""!=organization.address) {
 		content += '<tr>';
-		content += '<td bgcolor="#f5f5f5" align="right" >Address:</td>';
+		content += '<td bgcolor="#f5f5f5" align="right" ><s:property value="getText('BSC_PROG001D0006Q_orga_addr')" escapeJavaScript="true"/>:</td>';
 		content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.address + '</font></td>';
 		content += '</tr>';		
 	}	
 	if (organization.description!=null && ""!=organization.description) {
 		content += '<tr>';
-		content += '<td bgcolor="#f5f5f5" align="right" >Description:</td>';
+		content += '<td bgcolor="#f5f5f5" align="right" ><s:property value="getText('BSC_PROG001D0006Q_orga_desc')" escapeJavaScript="true"/>:</td>';
 		content += '<td bgcolor="#ffffff" align="left" ><font size="2">' + organization.description + '</font></td>';
 		content += '</tr>';							
 	}
