@@ -79,14 +79,14 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="450px" cellpadding="1" cellspacing="0" >	
 		<tr>
 			<td height="50px" width="100%"  align="left">
-				<font color='RED'>*</font><b>Title</b>:
+				<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0001A_title')"/></b>:
 				<br/>
 				<gs:textBox name="BSC_PROG002D0001A_title" id="BSC_PROG002D0001A_title" value="" width="400" maxlength="100"></gs:textBox>
 			</td>
 		</tr>	
 		<tr>
 			<td height="375px" width="100%"  align="left">
-				<font color='RED'>*</font><b>Content</b>:
+				<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0001A_content')"/></b>:
 				<br/>
 				<div data-dojo-type="dijit/Editor" id="BSC_PROG002D0001A_content" data-dojo-props="onChange:function(){ }"></div>
 			</td>
@@ -107,10 +107,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG002D0001A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG002D0001A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG002D0001A_clear" id="BSC_PROG002D0001A_clear" onClick="BSC_PROG002D0001A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG002D0001A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>  			
 			</td>
 		</tr>		

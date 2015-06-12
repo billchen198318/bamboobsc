@@ -76,8 +76,8 @@ public class VisionSaveOrUpdateAction extends BaseJsonAction {
 							"content"				
 					}, 
 					new String[]{
-							"title is required!<BR/>",
-							"content is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG002D0001A_title") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0001A_content") + "<BR/>"
 					}, 
 					new Class[]{
 							NotBlankFieldCheckUtils.class,

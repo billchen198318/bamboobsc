@@ -78,21 +78,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="475px" cellpadding="1" cellspacing="0" >
 		<tr>
 			<td height="50px" width="100%"  align="left">
-				<b>Id</b>&nbsp;(read only)&nbsp;:
+				<b><s:property value="getText('BSC_PROG002D0001E_visId')"/></b> <s:property value="getText('BSC_PROG002D0001E_readOnly')"/> :
 				<br/>
 				<gs:textBox name="BSC_PROG002D0001E_visId" id="BSC_PROG002D0001E_visId" value="vision.visId" width="200" maxlength="14" readonly="Y"></gs:textBox>
 			</td>
 		</tr>	
 		<tr>
 			<td height="50px" width="100%"  align="left">
-				<font color='RED'>*</font><b>Title</b>:
+				<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0001E_title')"/></b>:
 				<br/>
 				<gs:textBox name="BSC_PROG002D0001E_title" id="BSC_PROG002D0001E_title" value="vision.title" width="400" maxlength="100"></gs:textBox>
 			</td>
 		</tr>	    	
 		<tr>
 			<td height="375px" width="100%"  align="left">
-				<font color='RED'>*</font><b>Content</b>:
+				<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0001E_content')"/></b>:
 				<br/>
 				<div data-dojo-type="dijit/Editor" id="BSC_PROG002D0001E_content" data-dojo-props="onChange:function(){ }">${visionContent}</div>
 			</td>
@@ -114,10 +114,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG002D0001E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG002D0001E_update')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG002D0001E_clear" id="BSC_PROG002D0001E_clear" onClick="BSC_PROG002D0001E_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG002D0001E_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    				
 			</td>
 		</tr>			   	 	  	    	
