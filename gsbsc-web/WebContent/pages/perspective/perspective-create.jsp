@@ -87,21 +87,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="450px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Vision</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002A_visionOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0002A_visionOid" dataSource="visionMap" id="BSC_PROG002D0002A_visionOid"></gs:select>
     		</td>    		
     	</tr>		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002A_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0002A_name" id="BSC_PROG002D0002A_name" value="" width="400" maxlength="100"></gs:textBox>
     		</td>    		
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Weight</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002A_weight')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0002A_weight" name= "BSC_PROG002D0002A_weight" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />     		
@@ -109,7 +109,7 @@ function ${programId}_page_message() {
     	</tr>        	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Target</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002A_target')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0002A_target" name= "BSC_PROG002D0002A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />      			
@@ -117,7 +117,7 @@ function ${programId}_page_message() {
     	</tr>   
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Min</b>&nbsp;(&nbsp;alert&nbsp;)&nbsp;:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002A_min')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0002A_min" name= "BSC_PROG002D0002A_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    	    		
@@ -125,7 +125,7 @@ function ${programId}_page_message() {
     	</tr>   
 		<tr>
 		    <td height="150px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('BSC_PROG002D0002A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG002D0002A_description" name="BSC_PROG002D0002A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
 		    </td>
@@ -150,10 +150,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG002D0002A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG002D0002A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG002D0002A_clear" id="BSC_PROG002D0002A_clear" onClick="BSC_PROG002D0002A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG002D0002A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>       		
     		</td>
     	</tr>     	 	  	    	
