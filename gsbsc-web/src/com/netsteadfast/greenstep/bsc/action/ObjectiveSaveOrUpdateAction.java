@@ -83,12 +83,12 @@ public class ObjectiveSaveOrUpdateAction extends BaseJsonAction {
 							"min"
 					}, 
 					new String[]{
-							"Please select vision!<BR/>",
-							"Please select perspective!<BR/>",
-							"name is required!<BR/>",
-							"weight is required and must be numeric. up to two-bit floating point!<BR/>",
-							"target is required and must be numeric. up to two-bit floating point!<BR/>",
-							"min is required and must be numeric. up to two-bit floating point!<BR/>"
+							this.getText("MESSAGE.BSC_PROG002D0003A_visionOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0003A_perspectiveOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0003A_name") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0003A_weight") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0003A_target") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0003A_min") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
