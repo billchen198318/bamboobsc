@@ -82,7 +82,7 @@ public class ScoreColorSaveOrUpdateAction extends BaseJsonAction {
 							"score"			
 					}, 
 					new String[]{
-							"Score is required and must be numeric!<BR/>"
+							this.getText("MESSAGE.BSC_PROG001D0004Q_score") + "<BR/>"
 					}, 
 					new Class[]{
 							BscNumberFieldCheckUtils.class
@@ -97,14 +97,14 @@ public class ScoreColorSaveOrUpdateAction extends BaseJsonAction {
 		}			
 		if ( NumberUtils.toLong(this.getFields().get("score"), 0) < BscConstants.SCORE_COLOR_MIN_VALUE ) {
 			this.getFieldsId().add("score");
-			throw new ControllerException("Score value MIN is " + BscConstants.SCORE_COLOR_MIN_VALUE );
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0004Q_score_msg1") + " " + BscConstants.SCORE_COLOR_MIN_VALUE + "<BR/>");
 		}
 		if ( NumberUtils.toLong(this.getFields().get("score"), 0) > BscConstants.SCORE_COLOR_MAX_VALUE ) {
 			this.getFieldsId().add("score");
-			throw new ControllerException("Score value MAX is " + BscConstants.SCORE_COLOR_MAX_VALUE );
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG001D0004Q_score_msg2") + " " + BscConstants.SCORE_COLOR_MAX_VALUE + "<BR/>");
 		}
 		if ( StringUtils.isBlank(this.getFields().get("bgColor")) || StringUtils.isBlank(this.getFields().get("fontColor")) ) {
-			throw new ControllerException("Font-color and background-color is required!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG001D0004Q_bgColorfontColor_msg") + "<BR/>" );
 		}
 	}	
 	
@@ -114,7 +114,7 @@ public class ScoreColorSaveOrUpdateAction extends BaseJsonAction {
 		int nowScoreMaxValue = this.scoreColorService.findForMaxValue();
 		if (score < nowScoreMaxValue + 1 ) {
 			this.getFieldsId().add("score");
-			throw new ControllerException("Scores must be greater than " + nowScoreMaxValue + "!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG001D0004Q_score_msg3") + " " + nowScoreMaxValue + "<BR/>");
 		}
 		ScoreColorVO scoreColor = new ScoreColorVO();
 		scoreColor.setScoreMin( nowScoreMaxValue + 1 );

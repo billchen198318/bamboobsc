@@ -69,7 +69,7 @@ function BSC_PROG001D0004Q_delete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('BSC_PROG001D0004Q_delete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -136,7 +136,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="left" height="30%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG001D0004Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:250px">
 			    			
 		    			<gs:button name="BSC_PROG001D0004Q_query" id="BSC_PROG001D0004Q_query" onClick="BSC_PROG001D0004Q_query();"
@@ -148,10 +148,10 @@ function ${programId}_page_message() {
 		    				errorFn=""
 		    				loadFn="BSC_PROG001D0004Q_querySuccess(data);" 
 		    				programId="${programId}"
-		    				label="Query" 
+		    				label="${action.getText('BSC_PROG001D0004Q_query')}" 
 		    				iconClass="dijitIconSearch"></gs:button>    					    					
 		    			<gs:button name="BSC_PROG001D0004Q_clear" id="BSC_PROG001D0004Q_clear" onClick="BSC_PROG001D0004Q_clear();" 
-		    				label="Clear" 
+		    				label="${action.getText('BSC_PROG001D0004Q_clear')}" 
 		    				iconClass="dijitIconClear"></gs:button>    	    					
     					
     					&nbsp;
@@ -160,7 +160,7 @@ function ${programId}_page_message() {
     					&nbsp;
     					&nbsp;
     					
-						Score (range max):
+						<s:property value="getText('BSC_PROG001D0004Q_score')"/>:
 			    		<gs:textBox name="BSC_PROG001D0004Q_score" id="BSC_PROG001D0004Q_score" value="0" width="100" maxlength="9" />
 			    				    		
 			    		<gs:button name="BSC_PROG001D0004Q_save" id="BSC_PROG001D0004Q_save" onClick="BSC_PROG001D0004Q_save();"
@@ -179,17 +179,17 @@ function ${programId}_page_message() {
 			   				errorFn=""
 		    				loadFn="BSC_PROG001D0004Q_saveSuccess(data);" 
 			    			programId="${programId}"
-			    			label="Save" 
+			    			label="${action.getText('BSC_PROG001D0004Q_save')}" 
 			    			iconClass="dijitIconSave"></gs:button> 	
 			    			
 			    		<table border="0" width="800px" height="150px">
 							<tr valign="top">
 								<td width="400px" align="left">
-									<h3>font color</h3>
+									<h3><s:property value="getText('BSC_PROG001D0004Q_colorPicker1')"/></h3>
 									<div data-dojo-type="dojox.widget.ColorPicker" value="#000000" id="BSC_PROG001D0004Q_colorPicker1"></div>		
 								</td>
 								<td width="400px" align="left">
-									<h3>background color</h3>
+									<h3><s:property value="getText('BSC_PROG001D0004Q_colorPicker2')"/></h3>
 									<div data-dojo-type="dojox.widget.ColorPicker" value="#ffffff" id="BSC_PROG001D0004Q_colorPicker2"></div>	
 								</td>
 							</tr>		    		

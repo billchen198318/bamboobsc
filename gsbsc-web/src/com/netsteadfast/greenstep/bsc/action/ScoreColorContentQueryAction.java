@@ -85,6 +85,11 @@ public class ScoreColorContentQueryAction extends BaseJsonAction {
 				params, null, orderParams);
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("scoreColors", scoreColors);
+		parameter.put("scoreRange", this.getText("TPL.BSC_PROG001D0004Q_scoreRange"));
+		parameter.put("scoreColor", this.getText("TPL.BSC_PROG001D0004Q_scoreColor"));
+		parameter.put("colorTest", this.getText("TPL.BSC_PROG001D0004Q_colorTest"));		
+		parameter.put("btnEdit", this.getText("TPL.BSC_PROG001D0004Q_btnEdit"));
+		parameter.put("btnDelete", this.getText("TPL.BSC_PROG001D0004Q_btnDelete"));		
 		this.body = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				TemplateUtils.class.getClassLoader(), 
