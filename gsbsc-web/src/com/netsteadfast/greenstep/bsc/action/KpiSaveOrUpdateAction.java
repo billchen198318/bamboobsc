@@ -94,20 +94,20 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 							"dataType"
 					}, 
 					new String[]{
-							"Please select vision!<BR/>",
-							"Please select perspective!<BR/>",
-							"Please select objective!<BR/>",
-							"Id is required and only normal characters!<BR/>",
-							"name is required!<BR/>",
-							"Please select formula!<BR/>",
-							"weight is required and must be numeric. up to two-bit floating point!<BR/>",
-							"target is required and must be numeric. up to two-bit floating point!<BR/>",
-							"min is required and must be numeric. up to two-bit floating point!<BR/>",
-							"Please select compare type!<BR/>",
-							"unit is required!<BR/>",
-							"Please select management method!<BR/>",
-							"Please select calculation!<BR/>",
-							"Please select belong type!<BR/>"
+							this.getText("MESSAGE.BSC_PROG002D0004A_visionOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_perspectiveOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_objectiveOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_id") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_name") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_formulaOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_weight") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_target") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_min") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_compareType") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_unit") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_management") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_cal") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_dataType") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -136,16 +136,16 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		String dataType = this.getFields().get("dataType");
 		if (BscKpiCode.DATA_TYPE_DEPARTMENT.equals(dataType) && StringUtils.isBlank(this.getFields().get("orgaOids")) ) {
 			this.getFieldsId().add("dataType");
-			throw new ControllerException("when Belong type of department. must select department!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG002D0004A_dataType_msg1") + "<BR/>");
 		}
 		if (BscKpiCode.DATA_TYPE_PERSONAL.equals(dataType) && StringUtils.isBlank(this.getFields().get("emplOids")) ) {
 			this.getFieldsId().add("dataType");
-			throw new ControllerException("when Belong type of employee. must select employee!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG002D0004A_dataType_msg2") + "<BR/>");
 		}
 		if (BscKpiCode.DATA_TYPE_BOTH.equals(dataType) 
 				&& ( StringUtils.isBlank(this.getFields().get("orgaOids")) || StringUtils.isBlank(this.getFields().get("emplOids")) ) ) {
 			this.getFieldsId().add("dataType");
-			throw new ControllerException("when Belong type of both. must select department and employee!<BR/>");			
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG002D0004A_dataType_msg3") + "<BR/>");			
 		}
 	}	
 	

@@ -30,14 +30,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function BSC_PROG002D0004Q_GridFieldStructure() {
 	return [
-			{ name: "View&nbsp;/&nbsp;Edit", field: "oid", formatter: BSC_PROG002D0004Q_GridButtonClick, width: "10%" },  
-			{ name: "Vision", field: "visionTitle", width: "10%" },
-			{ name: "Perspective", field: "perspectiveName", width: "15%" },
-			{ name: "Objective", field: "objectiveName", width: "15%" },
-			{ name: "Id", field: "id", width: "10%" },
-			{ name: "Name", field: "name", width: "20%" },
-			{ name: "Weight", field: "weight", width: "5%" },
-			{ name: "Description", field: "description", width: "15%" }	
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_01')}", field: "oid", formatter: BSC_PROG002D0004Q_GridButtonClick, width: "10%" },  
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_02')}", field: "visionTitle", width: "10%" },
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_03')}", field: "perspectiveName", width: "15%" },
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_04')}", field: "objectiveName", width: "15%" },
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_05')}", field: "id", width: "10%" },
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_06')}", field: "name", width: "20%" },
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_07')}", field: "weight", width: "5%" },
+			{ name: "${action.getText('BSC_PROG002D0004Q_grid_08')}", field: "description", width: "15%" }	
 		];
 }
 
@@ -66,7 +66,7 @@ function BSC_PROG002D0004Q_confirmDelete(oid) {
 	confirmDialog(
 			"${programId}_managementDialogId000", 
 			_getApplicationProgramNameById('${programId}'), 
-			"delete? ", 
+			"${action.getText('BSC_PROG002D0004Q_confirmDelete')}", 
 			function(success) {
 				if (!success) {
 					return;
@@ -204,21 +204,21 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" height="75px" cellpadding="1" cellspacing="0" >
 		<tr>
-    		<td height="25px" width="10%"  align="right">Vision:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0004Q_visionOid')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:select name="BSC_PROG002D0004Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0004Q_visionOid" onChange="BSC_PROG002D0004Q_triggerChangePerspectiveItems();"></gs:select></td>
-    		<td height="25px" width="10%"  align="right">Perspective:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0004Q_perspectiveOid')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:select name="BSC_PROG002D0004Q_perspectiveOid" dataSource="perspectiveMap" id="BSC_PROG002D0004Q_perspectiveOid" onChange="BSC_PROG002D0004Q_triggerChangeObjectiveItems();"></gs:select></td>
     	</tr>
 		<tr>
-    		<td height="25px" width="10%"  align="right">Objective:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0004Q_objectiveOid')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:select name="BSC_PROG002D0004Q_objectiveOid" dataSource="objectiveMap" id="BSC_PROG002D0004Q_objectiveOid" ></gs:select></td>
     		<td height="25px" width="10%"  align="right">&nbsp;</td>
     		<td height="25px" width="40%"  align="left">&nbsp;</td>
     	</tr>	    		
 		<tr>
-    		<td height="25px" width="10%"  align="right">Id:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0004Q_id')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0004Q_id" id="BSC_PROG002D0004Q_id" value="" width="200" maxlength="14"></gs:textBox></td>  					
-    		<td height="25px" width="10%"  align="right">Name:</td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0004Q_name')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0004Q_name" id="BSC_PROG002D0004Q_name" value="" width="200" maxlength="100"></gs:textBox></td>  					
     	</tr>
     	<tr>
@@ -243,10 +243,10 @@ function ${programId}_page_message() {
     				errorFn="clearQuery_${programId}_grid();"
     				loadFn="dataGrid_${programId}_grid(data);" 
     				programId="${programId}"
-    				label="Query" 
+    				label="${action.getText('BSC_PROG002D0004Q_query')}" 
     				iconClass="dijitIconSearch"></gs:button>
     			<gs:button name="BSC_PROG002D0004Q_clear" id="BSC_PROG002D0004Q_clear" onClick="BSC_PROG002D0004Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG002D0004Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>
     		</td>
     	</tr> 	

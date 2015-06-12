@@ -197,99 +197,99 @@ function ${programId}_page_message() {
 	<table border="0" width="850" height="800px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="50%"  align="left">
-    			<font color='RED'>*</font><b>Vision</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_visionOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_visionOid" dataSource="visionMap" id="BSC_PROG002D0004A_visionOid" onChange="BSC_PROG002D0004A_triggerChangePerspectiveItems();"></gs:select>
     		</td>    		
     		<td height="50px" width="50%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_id')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0004A_id" id="BSC_PROG002D0004A_id" value="" width="200" maxlength="14"></gs:textBox>
     		</td>      		
     	</tr>		
 		<tr>
     		<td height="50px" width="50%"  align="left">
-    			<font color='RED'>*</font><b>Perspective</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_perspectiveOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_perspectiveOid" dataSource="perspectiveMap" id="BSC_PROG002D0004A_perspectiveOid" onChange="BSC_PROG002D0004A_triggerChangeObjectiveItems();"></gs:select>
     		</td>    		
     		<td height="50px" width="50%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0004A_name" id="BSC_PROG002D0004A_name" value="" width="400" maxlength="100"></gs:textBox>
     		</td>        		
     	</tr>		    
 		<tr>
     		<td height="50px" width="50%"  align="left">
-    			<font color='RED'>*</font><b>Objective</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_objectiveOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_objectiveOid" dataSource="objectiveMap" id="BSC_PROG002D0004A_objectiveOid"></gs:select>
     		</td>    		
     		<td height="50px" width="50%"  align="left">
-    			<font color='RED'>*</font><b>Formula</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_formulaOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_formulaOid" dataSource="formulaMap" id="BSC_PROG002D0004A_formulaOid"></gs:select>
     		</td>      		
     	</tr>	  		     			    	    
 		<tr>
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b>Weight</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_weight')"/></b>:
     			<br/>
-    			<input id="BSC_PROG002D0004A_weight" name= "BSC_PROG002D0004A_weight" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    			<input id="BSC_PROG002D0004A_weight" name="BSC_PROG002D0004A_weight" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />     		    			
     		</td>    		
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b>Management method</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_management')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_management" dataSource="managementMap" id="BSC_PROG002D0004A_management"></gs:select>
     			&nbsp;&nbsp;
-    			<b>for quasi is better</b>:
+    			<b><s:property value="getText('BSC_PROG002D0004A_quasiRange')"/></b>:
     			<gs:select name="BSC_PROG002D0004A_quasiRange" dataSource="quasiRangeMap" id="BSC_PROG002D0004A_quasiRange" width="60"></gs:select>      			    			
     		</td>      		
     	</tr>        	
 		<tr>
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b>Target</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_target')"/></b>:
     			<br/>
-    			<input id="BSC_PROG002D0004A_target" name= "BSC_PROG002D0004A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    			<input id="BSC_PROG002D0004A_target" name="BSC_PROG002D0004A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    			
     		</td>  
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b>Calculation</b> ( aggregation method ) :
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_cal')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_cal" dataSource="calculationMap" id="BSC_PROG002D0004A_cal"></gs:select>
     		</td>     		  		
     	</tr>   
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
-    			<font color='RED'>*</font><b>Min</b>&nbsp;(&nbsp;alert&nbsp;)&nbsp;:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_min')"/></b>:
     			<br/>
-    			<input id="BSC_PROG002D0004A_min" name= "BSC_PROG002D0004A_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    			<input id="BSC_PROG002D0004A_min" name="BSC_PROG002D0004A_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    			
     		</td>    		
     	</tr>       	    	
 		<tr>
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b>Compare type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_compareType')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_compareType" dataSource="compareTypeMap" id="BSC_PROG002D0004A_compareType"></gs:select>
     		</td>   
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b>Unit</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_unit')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0004A_unit" id="BSC_PROG002D0004A_unit" value="" width="150" maxlength="20"></gs:textBox>
     		</td>       		 		
     	</tr>      	    	
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
-    			<font color='RED'>*</font><b>Belong type</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_dataType')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_dataType" dataSource="dataTypeMap" id="BSC_PROG002D0004A_dataType"></gs:select>
     		</td>    		
     	</tr>    	    	    	    	
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
-    			<b>Department</b>:
+    			<b><s:property value="getText('BSC_PROG002D0004A_deptSelect')"/></b>:
     			&nbsp;&nbsp;
 				<button name="BSC_PROG002D0004A_deptSelect" id="BSC_PROG002D0004A_deptSelect" data-dojo-type="dijit.form.Button"
 					data-dojo-props="
@@ -313,7 +313,7 @@ function ${programId}_page_message() {
     	</tr>     
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
-    			<b>Employee</b>:
+    			<b><s:property value="getText('BSC_PROG002D0004A_emplSelect')"/></b>:
     			&nbsp;&nbsp;
 				<button name="BSC_PROG002D0004A_emplSelect" id="BSC_PROG002D0004A_emplSelect" data-dojo-type="dijit.form.Button"
 					data-dojo-props="
@@ -337,21 +337,21 @@ function ${programId}_page_message() {
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
-    			<b>Organization measure-data separate</b>:
+    			<b><s:property value="getText('BSC_PROG002D0004A_orgaMeasureSeparate')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_orgaMeasureSeparate" name="BSC_PROG002D0004A_orgaMeasureSeparate" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
     		</td>
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
-    			<b>Personal measure-data separate</b>:
+    			<b><s:property value="getText('BSC_PROG002D0004A_userMeasureSeparate')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_userMeasureSeparate" name="BSC_PROG002D0004A_userMeasureSeparate" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />    		
     		</td>    		
     	</tr>   	       	
 		<tr>
 		    <td height="150px" width="100%" align="left" colspan="2">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('BSC_PROG002D0004A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG002D0004A_description" name="BSC_PROG002D0004A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
 		    </td>
@@ -390,10 +390,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG002D0004A_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG002D0004A_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG002D0004A_clear" id="BSC_PROG002D0004A_clear" onClick="BSC_PROG002D0004A_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG002D0004A_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    	    		
     		</td>
     	</tr>     	 	  	    	
