@@ -39,11 +39,11 @@ function BSC_PROG001D0005Q_query() {
 	var childTabTitle = '';
 	
 	if ('all' == dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("value") || '' == dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("value") ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), "Please select workspace!", function(){}, "Y");
+		alertDialog(_getApplicationProgramNameById('${programId}'), "<s:property value="getText('BSC_PROG001D0005Q_workspaceOid_msg1')" escapeJavaScript="true"/>", function(){}, "Y");
 		return;
 	}
 	if ('all' == dijit.byId("BSC_PROG001D0005Q_visionOid").get("value") || '' == dijit.byId("BSC_PROG001D0005Q_visionOid").get("value") ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), "Please select vision!", function(){}, "Y");
+		alertDialog(_getApplicationProgramNameById('${programId}'), "<s:property value="getText('BSC_PROG001D0005Q_visionOid_msg1')" escapeJavaScript="true"/>", function(){}, "Y");
 		return;
 	}
 	childTabId = 'BSC_PROG001D0005Q_TabContainerChildTab' + dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("value");
@@ -79,19 +79,19 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="35%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG001D0005Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:60px">
 					
 						<table border="0" width="100%" cellspacing="0" >
 							<tr valign="top">
 								<td width="600px" align="left" height="45px" bgcolor="#d7e3ed" >	
 									
-									Workspace:
+									<s:property value="getText('BSC_PROG001D0005Q_workspaceOid')"/>:
 									<gs:select name="BSC_PROG001D0005Q_workspaceOid" dataSource="workspaceMap" id="BSC_PROG001D0005Q_workspaceOid" value="fields.workspaceOid"></gs:select>
 						    		&nbsp;		    
 						    							
 						    																
-									Vision: 
+									<s:property value="getText('BSC_PROG001D0005Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG001D0005Q_visionOid" dataSource="visionMap" id="BSC_PROG001D0005Q_visionOid" value="fields.visionOid"></gs:select>
 						    		&nbsp;		    															
 								
@@ -131,7 +131,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												BSC_PROG001D0005Q_query();
-											}">Query</button>						
+											}"><s:property value="getText('BSC_PROG001D0005Q_btnQuery')"/></button>						
 															
 								</td>
 								
