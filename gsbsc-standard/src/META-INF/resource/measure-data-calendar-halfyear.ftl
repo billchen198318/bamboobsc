@@ -11,12 +11,12 @@
 	</tr>	
 	<tr>
 		<td colspan="2" bgcolor="#3796FF" align="center">
-			<font color="#FFFFFF" size="2"><b>Management:</b>${managementName}, <b>Calculation:</b>${calculationName}, <b>Unit:</b>${kpi.unit}, <b>Target:${kpi.target}, <b>Min:</b>${kpi.min}</font>
+			<font color="#FFFFFF" size="2"><b>${management}:</b>${managementName}, <b>${calculation}:</b>${calculationName}, <b>${unit}:</b>${kpi.unit}, <b>${target}:${kpi.target}, <b>${min}:</b>${kpi.min}</font>
 		</td>
 	</tr>				
 	<tr>
 		<td colspan="2" bgcolor="#3796FF" align="center">
-			<font color="#FFFFFF" size="2"><b>Formula name:</b>${formula.name}</font>
+			<font color="#FFFFFF" size="2"><b>${formulaName}:</b>${formula.name}</font>
 		</td>
 	</tr>		
 	<tr>
@@ -131,6 +131,6 @@
 	</tr>		
 	
 	<tr>
-		<td bgcolor="#FFFFFF" colspan="2"><b><font color="#333333">T (Target value) , A (Actual value)</font></b></td>
+		<td bgcolor="#FFFFFF" colspan="2"><b><font color="#333333">T (${targetValueName}) , A (${actualValueName})</font></b></td>
 	</tr>		
 </table>	

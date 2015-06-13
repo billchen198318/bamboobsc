@@ -311,7 +311,7 @@ public class MeasureDataCalendarUtils {
 	}	
 	
 	public static String renderBody(String kpiOid, String date, String frequency,
-			String dataFor, String orgaOid, String emplOid) throws ServiceException, Exception {
+			String dataFor, String orgaOid, String emplOid, Map<String, String> labels) throws ServiceException, Exception {
 		if (StringUtils.isBlank(kpiOid) || StringUtils.isBlank(date) 
 				|| StringUtils.isBlank(frequency) || StringUtils.isBlank(dataFor) ) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
@@ -331,6 +331,9 @@ public class MeasureDataCalendarUtils {
 				|| BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency) ) {
 			fillParameterForQuarterOrYear(parameter);
 		}		
+		for (Map.Entry<String, String> entry : labels.entrySet()) {
+			parameter.put(entry.getKey(), entry.getValue());
+		}
 		return render(parameter, getTemplateResource(frequency) );
 	}	
 	

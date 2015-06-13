@@ -146,7 +146,11 @@ public class MeasureDataSaveOrUpdateAction extends BaseJsonAction {
 	
 	private void save() throws ControllerException, AuthorityException, ServiceException, Exception {
 		if ( !YesNo.YES.equals( (String)this.getHttpServletRequest().getParameter("BSC_PROG002D0005Q_queryCalendar") ) ) {
-			throw new ControllerException("Measure data input step:<BR/>1.first query!<BR/>2.enter a measure-data!<BR/>3.Save!<BR/>");
+			throw new ControllerException(
+					this.getText("BSC_PROG002D0005Q_saveStep_label") + ":<BR/>"
+					+ this.getText("BSC_PROG002D0005Q_saveStep_01") + "<BR/>" 
+					+ this.getText("BSC_PROG002D0005Q_saveStep_02") + "<BR/>" 
+					+ this.getText("BSC_PROG002D0005Q_saveStep_03") + "<BR/>");
 		}
 		String oid = this.defaultString( (String)this.getHttpServletRequest().getParameter("BSC_PROG002D0005Q_kpiOid") );
 		String date = this.defaultString( (String)this.getHttpServletRequest().getParameter("BSC_PROG002D0005Q_date") );

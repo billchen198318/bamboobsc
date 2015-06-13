@@ -111,7 +111,7 @@ function BSC_PROG002D0005Q_getKpiData(oid) {
 				dojo.byId("BSC_PROG002D0005Q_kpiOid").value = data.kpi.oid;
 				dojo.byId("BSC_PROG002D0005Q_orgaMeasureSeparate").value = data.kpi.orgaMeasureSeparate;
 				dojo.byId("BSC_PROG002D0005Q_userMeasureSeparate").value = data.kpi.userMeasureSeparate;
-				alertDialog(_getApplicationProgramNameById('${programId}'), 'Maintain kpi: ' + data.kpi.name, function(){}, data.success);
+				alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('BSC_PROG002D0005Q_maintainKpi')" escapeJavaScript="true"/> : ' + data.kpi.name, function(){}, data.success);
 				BSC_PROG002D0005Q_handlerOptions(data.kpi);
 			}, 
 			function(error) {
@@ -330,7 +330,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="100%">
 		<tr>
 			<td width="270px" valign="top">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'KPIs menu' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG002D0005Q_kpiTree')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:270px;height:600px">
    						<div id="BSC_PROG002D0005Q_kpiTree"></div>
    					</div>		    						       								    					
@@ -338,25 +338,25 @@ function ${programId}_page_message() {
 		  						
 			</td>
 			<td valign="top" align="center" >
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG002D0005Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:75px">
    						<table border="0" width="100%" height="100%">
    							<tr>							
-   								<td width="20%" align="right"><font size='2'>Measure data for:</font></td>
+   								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_dataForOpt')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_dataForOpt" dataSource="{ \"all\":\"All\", \"organization\":\"Organization\", \"employee\":\"Employee\" }" id="BSC_PROG002D0005Q_dataForOpt" onChange="BSC_PROG002D0005Q_setDataForValue();"></gs:select>
    								</td>
-   								<td width="20%" align="right"><font size='2'>Frequency:</font></td>
+   								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_frequencyOpt')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_frequencyOpt" dataSource="frequencyMap" id="BSC_PROG002D0005Q_frequencyOpt" onChange="BSC_PROG002D0005Q_clearContent();"></gs:select>
    								</td>   								
    							</tr>   						
    							<tr>							
-   								<td width="20%" align="right"><font size='2'>Organization:</font></td>
+   								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_organizationOid')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_organizationOid" dataSource="organizationMap" id="BSC_PROG002D0005Q_organizationOid" readonly="Y" onChange="BSC_PROG002D0005Q_clearContent();"></gs:select>
    								</td>
-   								<td width="20%" align="right"><font size='2'>Employee:</font></td>
+   								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_employeeOid')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_employeeOid" dataSource="employeeMap" id="BSC_PROG002D0005Q_employeeOid" readonly="Y" onChange="BSC_PROG002D0005Q_clearContent();"></gs:select>
    								</td>   								
@@ -382,10 +382,10 @@ function ${programId}_page_message() {
 					    				errorFn=""
 					    				loadFn="BSC_PROG002D0005Q_renderBodySuccess(data)" 
 					    				programId="${programId}"
-					    				label="Query" 					    				
+					    				label="${action.getText('BSC_PROG002D0005Q_query')}" 					    				
 					    				iconClass="dijitIconSearch"></gs:button>
 					    			<gs:button name="BSC_PROG002D0005Q_clear" id="BSC_PROG002D0005Q_clear" onClick="BSC_PROG002D0005Q_clear();" 
-					    				label="Clear" 
+					    				label="${action.getText('BSC_PROG002D0005Q_clear')}" 
 					    				iconClass="dijitIconClear"></gs:button>  
 					    			<gs:button name="BSC_PROG002D0005Q_save" id="BSC_PROG002D0005Q_save" onClick="BSC_PROG002D0005Q_save();"
 					    				handleAs="json"
@@ -396,7 +396,7 @@ function ${programId}_page_message() {
 					    				errorFn=""
 					    				loadFn="BSC_PROG002D0005Q_saveSuccess(data);" 
 					    				programId="${programId}"
-					    				label="Save" 
+					    				label="${action.getText('BSC_PROG002D0005Q_save')}" 
 					    				iconClass="dijitIconSave"></gs:button>    						    				 								
    								</td>
    							</tr>

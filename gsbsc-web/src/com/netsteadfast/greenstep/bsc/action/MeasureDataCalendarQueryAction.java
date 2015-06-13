@@ -21,7 +21,9 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -66,20 +68,20 @@ public class MeasureDataCalendarQueryAction extends BaseJsonAction {
 		}
 		if (BscConstants.MEASURE_DATA_FOR_EMPLOYEE.equals(dataFor) && this.isNoSelectId(employeeOid) ) {
 			this.getFieldsId().add("employeeOid");
-			throw new ControllerException("Please select employee!");
+			throw new ControllerException(this.getText("BSC_PROG002D0005Q_msg1") + "<BR/>");
 		}
 		if (this.isNoSelectId(frequency)) {
 			this.getFieldsId().add("frequency");
-			throw new ControllerException("Please select frequency!");							
+			throw new ControllerException(this.getText("BSC_PROG002D0005Q_msg2") + "<BR/>");							
 		}		
 		if (BscConstants.MEASURE_DATA_FOR_ORGANIZATION.equals(dataFor) && this.isNoSelectId(organizationOid) ) {
 			this.getFieldsId().add("organizationOid");
-			throw new ControllerException("Please select organization!");			
+			throw new ControllerException(this.getText("BSC_PROG002D0005Q_msg3") + "<BR/>");			
 		}
 		if (BscConstants.MEASURE_DATA_FOR_ALL.equals(dataFor) 
 				&& !this.isNoSelectId(employeeOid) && !this.isNoSelectId(organizationOid) ) {
 			this.getFieldsId().add("dataFor");
-			throw new ControllerException("not need select employee or organization!");				
+			throw new ControllerException(this.getText("BSC_PROG002D0005Q_msg4") + "<BR/>");				
 		}
 	}
 	
@@ -105,6 +107,19 @@ public class MeasureDataCalendarQueryAction extends BaseJsonAction {
 		return dateTime.toString("yyyy-MM-dd");
 	}
 	
+	private Map<String, String> getLabels() {
+		Map<String, String> labels = new HashMap<String, String>();
+		labels.put("management", this.getText("TPL.BSC_PROG002D0005Q_management"));
+		labels.put("calculation", this.getText("TPL.BSC_PROG002D0005Q_calculation"));
+		labels.put("unit", this.getText("TPL.BSC_PROG002D0005Q_unit"));
+		labels.put("target", this.getText("TPL.BSC_PROG002D0005Q_target"));
+		labels.put("min", this.getText("TPL.BSC_PROG002D0005Q_min"));
+		labels.put("formulaName", this.getText("TPL.BSC_PROG002D0005Q_formulaName"));
+		labels.put("targetValueName", this.getText("TPL.BSC_PROG002D0005Q_targetValueName"));
+		labels.put("actualValueName", this.getText("TPL.BSC_PROG002D0005Q_actualValueName"));
+		return labels;
+	}
+	
 	private void renderCalendar() throws ControllerException, ServiceException, Exception {
 		this.checkFields();
 		this.dateValue = this.handlerDate();
@@ -114,7 +129,8 @@ public class MeasureDataCalendarQueryAction extends BaseJsonAction {
 				this.getFields().get("frequency"), 
 				this.getFields().get("dataFor"), 
 				this.getFields().get("organizationOid"), 
-				this.getFields().get("employeeOid"));		
+				this.getFields().get("employeeOid"),
+				this.getLabels());		
 		this.success = IS_YES;
 	}
 		
