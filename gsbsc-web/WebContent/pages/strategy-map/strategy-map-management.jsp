@@ -160,13 +160,13 @@ function ${programId}_page_message() {
 	
 	<jsp:include page="../header.jsp"></jsp:include>		
         
-        Vision:&nbsp;<s:select list="visionMap" name="visionOid" id="visionOid" value="visionOid" class="flat lighter"></s:select>
-        <input type="button" name="load" id="load" value="Load" class="flat lighter" >
+        <s:property value="getText('BSC_PROG002D0007Q_vision')"/>:&nbsp;<s:select list="visionMap" name="visionOid" id="visionOid" value="visionOid" class="flat lighter"></s:select>
+        <input type="button" name="load" id="load" value="${action.getText('BSC_PROG002D0007Q_btnLoad')}" class="flat lighter" >
         <s:if test=" divItems != null && divItems.size != 0 "> 
-        <input type="button" name="save" id="save" value="Save" class="flat lighter" >
-        <input type="button" name="export" id="export" value="Export" class="flat lighter" >
+        <input type="button" name="save" id="save" value=${action.getText('BSC_PROG002D0007Q_btnSave')} class="flat lighter" >
+        <input type="button" name="export" id="export" value="${action.getText('BSC_PROG002D0007Q_btnExport')}" class="flat lighter" >
         </s:if>                
-        <input type="button" name="new" id="new" value="New" class="flat lighter" >
+        <input type="button" name="new" id="new" value="${action.getText('BSC_PROG002D0007Q_btnNew')}" class="flat lighter" >
         	
         <div id="main">
 
@@ -372,7 +372,7 @@ jsPlumb.ready(function() {
 	
     $("#new").click(function (e) {
     	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {
-    		alert('Please select vision!');
+    		alert('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}
     	window.location = "<%=basePath%>/bsc.strategyMapLoadNewAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
@@ -380,7 +380,7 @@ jsPlumb.ready(function() {
     
     $("#load").click(function (e) {
     	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {
-    		alert('Please select vision!');
+    		alert('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}
     	window.location = "<%=basePath%>/bsc.strategyMapLoadRecordAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
@@ -388,7 +388,7 @@ jsPlumb.ready(function() {
     
     $("#save").click(function (e) {
     	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {
-    		alert('Please select vision!');
+    		alert('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}    	
         e.preventDefault();

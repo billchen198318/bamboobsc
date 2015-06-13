@@ -90,7 +90,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 	
 	private void loadNew() throws ControllerException, ServiceException, Exception {
 		if ( StringUtils.isBlank(this.visionOid) || super.isNoSelectId(this.visionOid) ) {
-			throw new ControllerException("Please select vision!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0007Q_vision") );
 		}
 		Context context = this.getChainContext();
 		SimpleChain chain = new SimpleChain();
@@ -105,7 +105,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 	
 	private void loadRecord() throws ControllerException, ServiceException, Exception {
 		if ( StringUtils.isBlank(this.visionOid) || super.isNoSelectId(this.visionOid) ) {
-			throw new ControllerException("Please select vision!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0007Q_vision") );
 		}
 		Context context = this.getChainContext();
 		SimpleChain chain = new SimpleChain();

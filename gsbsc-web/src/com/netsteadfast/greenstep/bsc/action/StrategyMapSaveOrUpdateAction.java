@@ -87,10 +87,10 @@ public class StrategyMapSaveOrUpdateAction extends BaseJsonAction {
 		String visionOid = this.getFields().get("visionOid");
 		String mapData = this.getFields().get("mapData");
 		if ( StringUtils.isBlank(visionOid) || super.isNoSelectId(visionOid) ) {
-			throw new ControllerException("Please select vision!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0007Q_vision") );
 		}
 		if ( StringUtils.isBlank(mapData) ) {
-			throw new ControllerException("no data!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0007Q_msg1") );
 		}		
 		Map<String, Object> items = this.fillStrategyMapItems();		
 		DefaultResult<Boolean> result = this.strategyMapLogicService.create(visionOid, items);
