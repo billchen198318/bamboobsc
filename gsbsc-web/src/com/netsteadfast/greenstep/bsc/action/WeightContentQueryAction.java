@@ -58,7 +58,7 @@ public class WeightContentQueryAction extends BaseJsonAction {
 	private void renderBody() throws ControllerException, ServiceException, Exception {
 		if (super.isNoSelectId(this.getFields().get("visionOid")) ) {
 			this.getFieldsId().add("visionOid");
-			throw new ControllerException("Please select vision!");
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0006Q_visionOid") + "<BR/>");
 		}
 		SimpleChain simpleChanin = new SimpleChain();
 		Context context = new ContextBase();
@@ -66,6 +66,7 @@ public class WeightContentQueryAction extends BaseJsonAction {
 		if (YesNo.YES.equals(this.getFields().get("autoAllocation")) ) {
 			context.put("autoAllocation", this.getFields().get("autoAllocation") );
 		}
+		context.put("weightName", this.getText("TPL.BSC_PROG002D0006Q_weightName"));
 		ChainResultObj resultObj = simpleChanin.getResultFromResource("weightItemsChain", context);
 		this.body = String.valueOf( resultObj.getValue() );
 		this.message = resultObj.getMessage();

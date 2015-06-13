@@ -52,6 +52,7 @@ public class WeightBodyCommand extends BaseChainCommandSupport implements Comman
 		}		
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("treeObj", treeObj);
+		parameter.put("weightName", String.valueOf(context.get("weightName")));
 		/*
 		StringTemplateLoader templateLoader = new StringTemplateLoader();
 		templateLoader.putTemplate("resourceTemplate", 

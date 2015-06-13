@@ -19,7 +19,7 @@
 			<td width="33%" bgcolor="#FFFFFF" rowspan="${perspective.row}" >
 				<b>${perspective.name}</b>
 				<BR/>
-				<font size="2" color="#6D6D6D">weight:</font>
+				<font size="2" color="#6D6D6D">${weightName}:</font>
 				<input name="PER:${perspective.oid}" 
 					type="text"
 					data-dojo-type="dijit/form/NumberTextBox"
@@ -40,7 +40,7 @@
 			<td width="33%" bgcolor="#FFFFFF" rowspan="${objective.row}" >
 				<b>${objective.name}</b>
 				<BR/>
-				<font size="2" color="#6D6D6D">weight:</font>
+				<font size="2" color="#6D6D6D">${weightName}:</font>
 				<input name="OBJ:${objective.oid}" 
 					type="text"
 					data-dojo-type="dijit/form/NumberTextBox"
@@ -57,7 +57,7 @@
 					<td width="33%" bgcolor="#FFFFFF" >
 						<b>${kpi.name}</b>
 						<BR/>
-						<font size="2" color="#6D6D6D">weight:</font>
+						<font size="2" color="#6D6D6D">${weightName}:</font>
 						<input name="KPI:${kpi.oid}" 
 							type="text"
 							data-dojo-type="dijit/form/NumberTextBox"

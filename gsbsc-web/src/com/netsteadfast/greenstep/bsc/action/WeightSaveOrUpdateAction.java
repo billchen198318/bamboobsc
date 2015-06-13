@@ -110,7 +110,11 @@ public class WeightSaveOrUpdateAction extends BaseJsonAction {
 	private void update() throws ControllerException, AuthorityException, ServiceException, Exception {
 		if ( !YesNo.YES.equals(this.getHttpServletRequest().getParameter("BSC_PROG002D0006Q_queryWeight")) ) {
 			this.getFieldsId().add("visionOid");
-			throw new ControllerException("Save step:<BR/>1. Select vision!<BR/>2. Query!<BR/>3. Save!<BR/>");
+			throw new ControllerException(
+					this.getText("MESSAGE.BSC_PROG002D0006Q_saveStep_label") + ":<BR/>" 
+					+ this.getText("MESSAGE.BSC_PROG002D0006Q_saveStep_01") + "<BR/>" 
+					+ this.getText("MESSAGE.BSC_PROG002D0006Q_saveStep_02") + "<BR/>" 
+					+ this.getText("MESSAGE.BSC_PROG002D0006Q_saveStep_03") + "<BR/>");
 		}
 		DefaultResult<Boolean> result = this.weightLogicService.update(
 				this.getPerspectives(), 

@@ -86,10 +86,10 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="100%">
 		<tr>
 			<td width="100%" valign="top" height="30px" align="left">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG002D0006Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:30px">
 					
-					Vision:&nbsp;
+					<s:property value="getText('BSC_PROG002D0006Q_visionOid')"/>:&nbsp;
 					<gs:select name="BSC_PROG002D0006Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0006Q_visionOid"></gs:select>
 					&nbsp;&nbsp;
 	    			<gs:button name="BSC_PROG002D0006Q_query" id="BSC_PROG002D0006Q_query" onClick="BSC_PROG002D0006Q_query();"
@@ -105,7 +105,7 @@ function ${programId}_page_message() {
 	    				errorFn=""
 	    				loadFn="BSC_PROG002D0006Q_querySuccess(data);" 
 	    				programId="${programId}"
-	    				label="Query" 
+	    				label="${action.getText('BSC_PROG002D0006Q_query')}" 
 	    				iconClass="dijitIconSearch"></gs:button>
 	    			<gs:button name="BSC_PROG002D0006Q_queryAutoAllocation" id="BSC_PROG002D0006Q_queryAutoAllocation" onClick="BSC_PROG002D0006Q_queryAutoAllocation();"
 	    				handleAs="json"
@@ -121,7 +121,7 @@ function ${programId}_page_message() {
 	    				errorFn=""
 	    				loadFn="BSC_PROG002D0006Q_querySuccess(data);" 
 	    				programId="${programId}"
-	    				label="Auto Allocation" 
+	    				label="${action.getText('BSC_PROG002D0006Q_queryAutoAllocation')}" 
 	    				iconClass="dijitIconSearch"></gs:button>	    
 	    			&nbsp;&nbsp;&nbsp;&nbsp;					
 	    			<gs:button name="BSC_PROG002D0006Q_save" id="BSC_PROG002D0006Q_save" onClick="BSC_PROG002D0006Q_save();"
@@ -133,7 +133,7 @@ function ${programId}_page_message() {
 	    				errorFn=""
 	    				loadFn="BSC_PROG002D0006Q_saveSuccess(data);" 
 	    				programId="${programId}"
-	    				label="Save" 
+	    				label="${action.getText('BSC_PROG002D0006Q_save')}" 
 	    				iconClass="dijitIconSave"></gs:button> 
     									
 					</div>
