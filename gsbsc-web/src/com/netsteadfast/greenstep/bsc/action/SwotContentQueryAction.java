@@ -65,8 +65,8 @@ public class SwotContentQueryAction extends BaseJsonAction {
 							"organizationOid"
 					}, 
 					new String[]{
-							"Please select vision!<BR/>",
-							"Please select organization!<BR/>"
+							this.getText("MESSAGE.BSC_PROG002D0008Q_visionOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0008Q_organizationOid") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -87,6 +87,10 @@ public class SwotContentQueryAction extends BaseJsonAction {
 		Context context = new ContextBase();
 		context.put("visionOid", this.getFields().get("visionOid"));
 		context.put("organizationOid", this.getFields().get("organizationOid"));
+		context.put("strengthsName", this.getText("TPL.BSC_PROG002D0008Q_s"));
+		context.put("weaknessesName", this.getText("TPL.BSC_PROG002D0008Q_w"));
+		context.put("opportunitiesName", this.getText("TPL.BSC_PROG002D0008Q_o"));
+		context.put("threatsName", this.getText("TPL.BSC_PROG002D0008Q_t"));
 		return context;
 	}
 	

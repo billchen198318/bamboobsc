@@ -148,7 +148,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="35%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG002D0008Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:70px">
 					
 						<table border="0" width="100%" >
@@ -161,7 +161,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG002D0008Q_query();
-											}">Query</button>		
+											}"><s:property value="getText('BSC_PROG002D0008Q_btnQuery')"/></button>		
 									
 					    			<gs:button name="BSC_PROG002D0008Q_save" id="BSC_PROG002D0008Q_save" onClick="BSC_PROG002D0008Q_save();"
 					    				handleAs="json"
@@ -172,7 +172,7 @@ function ${programId}_page_message() {
 					    				errorFn=""
 					    				loadFn="BSC_PROG002D0008Q_saveSuccess(data);" 
 					    				programId="${programId}"
-					    				label="Save" 
+					    				label="${action.getText('BSC_PROG002D0008Q_save')}" 
 					    				showLabel="N"
 					    				iconClass="dijitIconSave"></gs:button> 									
 																
@@ -195,7 +195,7 @@ function ${programId}_page_message() {
 													taintTest	: true
 												});											
 																							  
-											}">export as PNG</button>	
+											}"><s:property value="getText('BSC_PROG002D0008Q_btnExportPng')"/></button>	
 					
 									<button id="BSC_PROG002D0008Q_btnPdf" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -203,18 +203,18 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG002D0008Q_pdf();
-											}">PDF</button>	
+											}"><s:property value="getText('BSC_PROG002D0008Q_btnPdf')"/></button>	
 											
 								</td>											
 							</tr>
 							
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">	
-									Vision: 
+									<s:property value="getText('BSC_PROG002D0008Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG002D0008Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0008Q_visionOid" onChange="BSC_PROG002D0008Q_clearContent();"></gs:select>
 						    		&nbsp;		    			
 					    																	
-									Organization:
+									<s:property value="getText('BSC_PROG002D0008Q_organizationOid')"/>:
 									<gs:select name="BSC_PROG002D0008Q_organizationOid" dataSource="organizationMap" id="BSC_PROG002D0008Q_organizationOid" onChange="BSC_PROG002D0008Q_clearContent();"></gs:select>
 								</td>											
 							</tr>							

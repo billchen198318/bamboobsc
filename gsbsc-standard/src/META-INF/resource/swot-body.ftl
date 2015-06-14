@@ -8,16 +8,16 @@
 			&nbsp;
 		</td>
 		<td bgcolor="#F2F2F2" align="center" width="252px">
-			<b><font color="#000000" size="+1">STRENGTHS</font></b>
+			<b><font color="#000000" size="+1">${strengthsName}</font></b>
 		</td>
 		<td bgcolor="#F2F2F2" align="center" width="252px">
-			<b><font color="#000000" size="+1">WEAKNESSES</font></b>
+			<b><font color="#000000" size="+1">${weaknessesName}</font></b>
 		</td>
 		<td bgcolor="#F2F2F2" align="center" width="252px">
-			<b><font color="#000000" size="+1">OPPORTUNITIES</font></b>
+			<b><font color="#000000" size="+1">${opportunitiesName}</font></b>
 		</td>
 		<td bgcolor="#F2F2F2" align="center" width="252px">
-			<b><font color="#000000" size="+1">THREATS</font></b>
+			<b><font color="#000000" size="+1">${threatsName}</font></b>
 		</td>								
 	</tr>	
 	

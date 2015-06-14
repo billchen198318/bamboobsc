@@ -44,6 +44,10 @@ public class SwotBodyCommand extends BaseChainCommandSupport implements Command 
 		parameter.put("issues", swotData.getIssues());
 		parameter.put("vision", swotData.getVision());
 		parameter.put("organization", swotData.getOrganization());
+		parameter.put("strengthsName", String.valueOf(context.get("strengthsName")));
+		parameter.put("weaknessesName", String.valueOf(context.get("weaknessesName")));
+		parameter.put("opportunitiesName", String.valueOf(context.get("opportunitiesName")));
+		parameter.put("threatsName", String.valueOf(context.get("threatsName")));
 		String content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				SwotBodyCommand.class.getClassLoader(), 

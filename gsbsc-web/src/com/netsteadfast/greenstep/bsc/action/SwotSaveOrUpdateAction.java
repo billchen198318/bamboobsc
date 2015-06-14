@@ -76,14 +76,14 @@ public class SwotSaveOrUpdateAction extends BaseJsonAction {
 		String organizationOid = this.getHttpServletRequest().getParameter("BSC_PROG002D0008Q_organizationOid");
 		if ( this.isNoSelectId(visionOid) || StringUtils.isBlank(visionOid) ) {
 			this.getFieldsId().add("visionOid");
-			errMsg += "Please select vision!<BR/>";
+			errMsg += this.getText("MESSAGE.BSC_PROG002D0008Q_visionOid") + "<BR/>";
 		}
 		if ( this.isNoSelectId(organizationOid) || StringUtils.isBlank(organizationOid) ) {
 			this.getFieldsId().add("organizationOid");
-			errMsg += "Please select organization!<BR/>";
+			errMsg += this.getText("MESSAGE.BSC_PROG002D0008Q_organizationOid") + "<BR/>";
 		}
 		if ( !StringUtils.isBlank(errMsg) ) {
-			errMsg += "Please first query!<BR/>";
+			errMsg += this.getText("MESSAGE.BSC_PROG002D0008Q_msg1") + "<BR/>";
 			throw new ControllerException( errMsg );
 		}	
 	}
