@@ -57,7 +57,7 @@ function CORE_PROGCOMM0003Q_getData() {
 function CORE_PROGCOMM0003Q_preview() {
 	var uploadOid = dojo.byId('${uploadOidField}').value;
 	if (null == uploadOid || 'null' == uploadOid || '' == uploadOid) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'No before save signature!', function(){}, 'Y');	
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.CORE_PROGCOMM0003Q_preview')" escapeJavaScript="true"/>', function(){}, 'Y');	
 		return;
 	}
 	openCommonLoadUpload( 'view', uploadOid, { 'title' : 'Signature preview', 'width' : 480, 'height' : 220 } );	
@@ -80,7 +80,7 @@ function ${programId}_page_message() {
 <table border="0">
 	<tr>
 		<td align="center" bgcolor="#d7e3ed" >
-			Signature you name<font size='2'>(use mouse click left not release, drawing name)</font>
+			<font size='2'><s:property value="getText('CORE_PROGCOMM0003Q_label')"/></font>
 		</td>
 	</tr>
 	<tr>
@@ -105,15 +105,15 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="CORE_PROGCOMM0003Q_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('CORE_PROGCOMM0003Q_save')}" 
     				iconClass="dijitIconSave"></gs:button> 
     				   			
     			<gs:button name="CORE_PROGCOMM0003Q_clear" id="CORE_PROGCOMM0003Q_clear" onClick="CORE_PROGCOMM0003Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('CORE_PROGCOMM0003Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    	
     				
     			<gs:button name="CORE_PROGCOMM0003Q_preview" id="CORE_PROGCOMM0003Q_preview" onClick="CORE_PROGCOMM0003Q_preview();" 
-    				label="Preview" 
+    				label="${action.getText('CORE_PROGCOMM0003Q_preview')}" 
     				iconClass="dijitIconSearch"></gs:button>   
     				    								
 		</td>
