@@ -222,7 +222,7 @@ function BSC_PROG003D0001Q_generateChartsToData() {
 
 function BSC_PROG003D0001Q_generateExport(docType) {
 	if (!BSC_PROG003D0001Q_isReportQueryResult()) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please first query report!', function(){}, 'Y');
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0001Q_msg1')" escapeJavaScript="true"/>', function(){}, 'Y');
 		return;
 	}	
 	var url = '${basePath}/bsc.kpiReportExcelQueryAction.action';
@@ -281,7 +281,7 @@ function BSC_PROG003D0001Q_uploadSignatureFail() {
 function BSC_PROG003D0001Q_uploadSignatureClear() {
 	var uploadOid = dojo.byId('BSC_PROG003D0001Q_uploadSignatureOid').value;
 	if (null == uploadOid || 'null' == uploadOid || '' == uploadOid) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'No before save signature!', function(){}, 'Y');	
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0001Q_msg2')" escapeJavaScript="true"/>', function(){}, 'Y');	
 		return;
 	}	
 	confirmDialog(
@@ -293,7 +293,7 @@ function BSC_PROG003D0001Q_uploadSignatureClear() {
 					return;
 				}	
 				dojo.byId('BSC_PROG003D0001Q_uploadSignatureOid').value = '';
-				alertDialog(_getApplicationProgramNameById('${programId}'), 'Clear signature success!', function(){}, 'Y');				
+				alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0001Q_msg3')" escapeJavaScript="true"/>', function(){}, 'Y');				
 			}, 
 			(window.event ? window.event : null) 
 	);
@@ -375,7 +375,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="35%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG003D0001Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:120px">
 					
 						<table border="0" width="100%" >
@@ -388,7 +388,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												BSC_PROG003D0001Q_query();
-											}">Query</button>		
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/></button>		
 																
 									<button id="BSC_PROG003D0001Q_btnExportPng" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -412,7 +412,7 @@ function ${programId}_page_message() {
 													taintTest	: true
 												});
 												*/											  
-											}">export as PNG</button>	
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnExportPng')"/></button>	
 					
 									<button id="BSC_PROG003D0001Q_btnPdf" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -420,7 +420,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0001Q_generateExport('PDF');
-											}">PDF</button>	
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnPdf')"/></button>	
 									            
 									<button id="BSC_PROG003D0001Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -428,7 +428,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0001Q_generateExport('EXCEL');																			  
-											}">Excel</button>	
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnXls')"/></button>	
 											
 									<button id="BSC_PROG003D0001Q_btnSignature" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -436,7 +436,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												openCommonSignatureDialog('BSC', 'BSC_PROG003D0001Q_uploadSignatureOid', 'BSC_PROG003D0001Q_uploadSignatureSuccess', 'BSC_PROG003D0001Q_uploadSignatureFail');													  
-											}">Signature</button>												
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnSignature')"/></button>												
 										
 									<button id="BSC_PROG003D0001Q_btnSignatureClear" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -444,7 +444,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0001Q_uploadSignatureClear();
-											}">Clear signature</button>											
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnSignatureClear')"/></button>											
 											
 								</td>											
 							</tr>	
@@ -452,11 +452,11 @@ function ${programId}_page_message() {
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">	
 								
-									Vision: 
+									<s:property value="getText('BSC_PROG003D0001Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG003D0001Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0001Q_visionOid"></gs:select>
 						    		&nbsp;		    			
 					    																	
-									Measure data frequency:
+									<s:property value="getText('BSC_PROG003D0001Q_frequency')"/>:
 									<gs:select name="BSC_PROG003D0001Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0001Q_frequency" value="6" onChange="BSC_PROG003D0001Q_setFrequencyValue();" width="140"></gs:select>
 								</td>											
 							</tr>	
@@ -464,21 +464,21 @@ function ${programId}_page_message() {
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">
 								
-							    	Measure data start year:
+							    	<s:property value="getText('BSC_PROG003D0001Q_startYearDate')"/>:
 							    	<input id="BSC_PROG003D0001Q_startYearDate" name="BSC_PROG003D0001Q_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
 							    	&nbsp;	
-							    	end year:
+							    	<s:property value="getText('BSC_PROG003D0001Q_endYearDate')"/>:
 							    	<input id="BSC_PROG003D0001Q_endYearDate" name="BSC_PROG003D0001Q_endYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
 							    									    	
 							    	&nbsp;&nbsp;		
-									Measure data start date:
+									<s:property value="getText('BSC_PROG003D0001Q_startDate')"/>:
 									<input id="BSC_PROG003D0001Q_startDate" type="text" name="BSC_PROG003D0001Q_startDate" data-dojo-type="dijit.form.DateTextBox"
 										maxlength="10" 
 										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />	
 									&nbsp;						
-									end date:
+									<s:property value="getText('BSC_PROG003D0001Q_endDate')"/>:
 									<input id="BSC_PROG003D0001Q_endDate" type="text" name="BSC_PROG003D0001Q_endDate" data-dojo-type="dijit.form.DateTextBox"
 										maxlength="10" 
 										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />																	    									    	
@@ -487,13 +487,13 @@ function ${programId}_page_message() {
 							</tr>
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">							
-									Measure data for:
+									<s:property value="getText('BSC_PROG003D0001Q_dataFor')"/>:
 									<gs:select name="BSC_PROG003D0001Q_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"Organization\", \"employee\":\"Employee\" }" id="BSC_PROG003D0001Q_dataFor" onChange="BSC_PROG003D0001Q_setDataForValue();" width="140"></gs:select>
 									&nbsp;&nbsp;
-									organization:
+									<s:property value="getText('BSC_PROG003D0001Q_measureDataOrganizationOid')"/>:
 									<gs:select name="BSC_PROG003D0001Q_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0001Q_measureDataOrganizationOid" onChange="BSC_PROG003D0001Q_setMeasureDataOrgaValue();" readonly="Y"></gs:select>
 									&nbsp;&nbsp;
-									employee:
+									<s:property value="getText('BSC_PROG003D0001Q_measureDataEmployeeOid')"/>:
 									<gs:select name="BSC_PROG003D0001Q_measureDataEmployeeOid" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0001Q_measureDataEmployeeOid" onChange="BSC_PROG003D0001Q_setMeasureDataEmplValue();" readonly="Y"></gs:select>
 									
 								</td>
