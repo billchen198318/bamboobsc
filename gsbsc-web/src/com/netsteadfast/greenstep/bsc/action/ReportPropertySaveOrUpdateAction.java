@@ -85,12 +85,12 @@ public class ReportPropertySaveOrUpdateAction extends BaseJsonAction {
 							"classNote"
 					}, 
 					new String[]{
-							"Background color is required!<BR/>",
-							"Font color is required!<BR/>",
-							"Perspective title is required!<BR/>",
-							"Objective title is required!<BR/>",
-							"KPI title is required!<BR/>",
-							"Class level note is required!<BR/>"
+							this.getText("MESSAGE.BSC_PROG004D0001Q_backgroundColor") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0001Q_fontColor") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0001Q_perspectiveTitle") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0001Q_objectiveTitle") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0001Q_kpiTitle") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0001Q_classNote") + "<BR/>"
 					}, 
 					new Class[]{
 							NotBlankFieldCheckUtils.class,
@@ -111,7 +111,7 @@ public class ReportPropertySaveOrUpdateAction extends BaseJsonAction {
 		String classNote = this.getFields().get("classNote");
 		if (classNote.length()>100) {
 			this.getFieldsId().add("classNote");
-			throw new ControllerException("Class level note maximum of 100 characters!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG004D0001Q_classNote_msg1") + "<BR/>");
 		}
 	}		
 	

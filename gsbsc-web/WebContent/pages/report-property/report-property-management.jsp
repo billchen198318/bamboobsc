@@ -91,11 +91,11 @@ function ${programId}_page_message() {
 			    <table border="0" width="800px" height="150px">
 					<tr valign="top">
 						<td width="400px" align="left">
-							<h3>font color</h3>
+							<h3><s:property value="getText('BSC_PROG004D0001Q_colorPicker1')"/></h3>
 							<div data-dojo-type="dojox.widget.ColorPicker" value="${fields.fontColor}" id="BSC_PROG004D0001Q_colorPicker1"></div>		
 						</td>
 						<td width="400px" align="left">
-							<h3>background color</h3>
+							<h3><s:property value="getText('BSC_PROG004D0001Q_colorPicker2')"/></h3>
 							<div data-dojo-type="dojox.widget.ColorPicker" value="${fields.backgroundColor}" id="BSC_PROG004D0001Q_colorPicker2"></div>	
 						</td>
 					</tr>		    		
@@ -103,25 +103,25 @@ function ${programId}_page_message() {
 			</td>
 		</tr>
 		<tr>
-			<td width="20%" align="right" >Perspective title:</td>
+			<td width="20%" align="right" ><s:property value="getText('BSC_PROG004D0001Q_perspectiveTitle')"/>:</td>
 			<td width="80%" align="left" >
 				<gs:textBox name="BSC_PROG004D0001Q_perspectiveTitle" id="BSC_PROG004D0001Q_perspectiveTitle" value="fields.perspectiveTitle" maxlength="100"></gs:textBox>
 			</td>			
 		</tr>
 		<tr>
-			<td width="20%" align="right" >Objective title:</td>
+			<td width="20%" align="right" ><s:property value="getText('BSC_PROG004D0001Q_objectiveTitle')"/>:</td>
 			<td width="80%" align="left" >
 				<gs:textBox name="BSC_PROG004D0001Q_objectiveTitle" id="BSC_PROG004D0001Q_objectiveTitle" value="fields.objectiveTitle" maxlength="100"></gs:textBox>
 			</td>			
 		</tr>	
 		<tr>
-			<td width="20%" align="right" >KPI title:</td>
+			<td width="20%" align="right" ><s:property value="getText('BSC_PROG004D0001Q_kpiTitle')"/>:</td>
 			<td width="80%" align="left" >
 				<gs:textBox name="BSC_PROG004D0001Q_kpiTitle" id="BSC_PROG004D0001Q_kpiTitle" value="fields.kpiTitle" maxlength="100"></gs:textBox>
 			</td>			
 		</tr>	
 		<tr>
-		    <td height="100px" width="20%" align="right">Class level note:</td>
+		    <td height="100px" width="20%" align="right"><s:property value="getText('BSC_PROG004D0001Q_classNote')"/>:</td>
 		    <td height="100px" width="80%"  align="left">
 		    	<textarea id="BSC_PROG004D0001Q_classNote" name="BSC_PROG004D0001Q_classNote" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${fields.classNote}</textarea>	
 		    </td>
@@ -147,10 +147,10 @@ function ${programId}_page_message() {
 	   				errorFn=""
     				loadFn="BSC_PROG004D0001Q_saveSuccess(data);" 
 	    			programId="${programId}"
-	    			label="Save" 
+	    			label="${action.getText('BSC_PROG004D0001Q_save')}" 
 	    			iconClass="dijitIconSave"></gs:button> 			
     			<gs:button name="BSC_PROG004D0001Q_clear" id="BSC_PROG004D0001Q_clear" onClick="BSC_PROG004D0001Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG004D0001Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    				    					
 			</td>
 		</tr>			
