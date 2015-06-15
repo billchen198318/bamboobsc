@@ -318,7 +318,7 @@ function BSC_PROG003D0005Q_generateExport(type) {
 		}	
 	});
 	if ( chartsCount < 1 ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'Please first query!', function(){}, 'Y');
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0005Q_msg1')" escapeJavaScript="ture"/>', function(){}, 'Y');
 		return;
 	}
 	
@@ -389,7 +389,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="35%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG003D0005Q_options')" escapeJavaScript="ture"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:80px">
 					
 						<table border="0" width="100%" >
@@ -402,7 +402,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												BSC_PROG003D0005Q_query();
-											}">Query</button>		
+											}"><s:property value="getText('BSC_PROG003D0005Q_btnQuery')"/></button>		
 											
 									<button id="BSC_PROG003D0005Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -410,22 +410,22 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0005Q_generateExport('EXCEL');																			  
-											}">Excel</button>												
+											}"><s:property value="getText('BSC_PROG003D0005Q_btnXls')"/></button>												
 											
 								</td>
 							</tr>
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">	
 								
-									Vision: 
+									<s:property value="getText('BSC_PROG003D0005Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG003D0005Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0005Q_visionOid"></gs:select>
 						    		&nbsp;		    			
 					    																	
-									Measure data frequency:
+									<s:property value="getText('BSC_PROG003D0005Q_frequency')"/>:
 									<gs:select name="BSC_PROG003D0005Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0005Q_frequency" value="6" width="140" readonly="Y"></gs:select>
 									&nbsp;
 									
-							    	Measure data Year:
+							    	<s:property value="getText('BSC_PROG003D0005Q_startYearDate')"/>:
 							    	<input id="BSC_PROG003D0005Q_startYearDate" name="BSC_PROG003D0005Q_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
 							    	&nbsp;				

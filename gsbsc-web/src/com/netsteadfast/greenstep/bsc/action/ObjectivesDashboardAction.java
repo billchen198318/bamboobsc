@@ -93,7 +93,7 @@ public class ObjectivesDashboardAction extends BaseJsonAction implements IBaseAd
 		Context context = this.getContext();
 		List< Map<String, Object> > chartDatas = (List<Map<String, Object>>) context.get("chartDatas");
 		if ( chartDatas == null || chartDatas.size() < 1 ) {
-			throw new ServiceException("Please first query!");
+			throw new ServiceException( this.getText("MESSAGE.BSC_PROG003D0005Q_msg1") + "<BR/>" );
 		}
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("objectivesDashboardExcelContentChain", context);
