@@ -488,7 +488,7 @@ function ${programId}_page_message() {
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">							
 									<s:property value="getText('BSC_PROG003D0001Q_dataFor')"/>:
-									<gs:select name="BSC_PROG003D0001Q_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"Organization\", \"employee\":\"Employee\" }" id="BSC_PROG003D0001Q_dataFor" onChange="BSC_PROG003D0001Q_setDataForValue();" width="140"></gs:select>
+									<gs:select name="BSC_PROG003D0001Q_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"${action.getText('BSC_PROG003D0001Q_measureDataOrganizationOid')}\", \"employee\":\"${action.getText('BSC_PROG003D0001Q_measureDataEmployeeOid')}\" }" id="BSC_PROG003D0001Q_dataFor" onChange="BSC_PROG003D0001Q_setDataForValue();" width="140"></gs:select>
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0001Q_measureDataOrganizationOid')"/>:
 									<gs:select name="BSC_PROG003D0001Q_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0001Q_measureDataOrganizationOid" onChange="BSC_PROG003D0001Q_setMeasureDataOrgaValue();" readonly="Y"></gs:select>
