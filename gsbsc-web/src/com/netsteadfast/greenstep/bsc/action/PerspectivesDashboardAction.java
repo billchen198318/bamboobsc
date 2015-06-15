@@ -95,7 +95,7 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 		Context context = this.getContext();
 		List< Map<String, Object> > chartDatas = (List<Map<String, Object>>) context.get("chartDatas");
 		if ( chartDatas == null || chartDatas.size() < 1 ) {
-			throw new ServiceException("Please first query!");
+			throw new ServiceException( this.getText("MESSAGE.BSC_PROG003D0004Q_msg1") + "<BR/>" );
 		}
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("perspectivesDashboardExcelContentChain", context);
