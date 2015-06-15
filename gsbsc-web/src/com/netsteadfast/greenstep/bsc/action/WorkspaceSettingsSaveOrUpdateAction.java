@@ -85,9 +85,9 @@ public class WorkspaceSettingsSaveOrUpdateAction extends BaseJsonAction {
 							"workspaceTemplateOid"
 					}, 
 					new String[]{
-							"Id is required and only normal characters!<BR/>",
-							"Name is required!<BR/>",
-							"Please select template!<BR/>"
+							this.getText("MESSAGE.BSC_PROG004D0002A_workspaceId") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0002A_workspaceName") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG004D0002A_workspaceTemplateOid") + "<BR/>"
 					}, 
 					new Class[]{
 							IdFieldCheckUtils.class,
@@ -139,7 +139,7 @@ public class WorkspaceSettingsSaveOrUpdateAction extends BaseJsonAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG001D0002A")
+	@ControllerMethodAuthority(programId="BSC_PROG004D0002A")
 	public String doSave() throws Exception {
 		try {
 			if (!this.allowJob()) {
@@ -168,7 +168,7 @@ public class WorkspaceSettingsSaveOrUpdateAction extends BaseJsonAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG001D0002Q")
+	@ControllerMethodAuthority(programId="BSC_PROG004D0002Q")
 	public String doDelete() throws Exception {
 		try {
 			if (!this.allowJob()) {

@@ -36,7 +36,7 @@ BSC_PROG004D0002A_fieldsId['workspaceTemplateOid'] 	= 'BSC_PROG004D0002A_C01_wor
 function BSC_PROG004D0002A_save() {	
 	
 	if (dojo.byId("BSC_PROG004D0002A_C01_table") == null) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), "Please first select template and settings it!", function(){}, "Y");
+		alertDialog(_getApplicationProgramNameById('${programId}'), "<s:property value="getText('MESSAGE.BSC_PROG004D0002A_C01_table')" escapeJavaScript="true"/>", function(){}, "Y");
 		return;
 	}
 	var table = document.getElementById("BSC_PROG004D0002A_C01_table");
@@ -96,7 +96,7 @@ function BSC_PROG004D0002A_TabContainer_show() {
 	viewPage.addOrUpdateContentPane(
 			'BSC_PROG004D0002A_TabContainer', 
 			'BSC_PROG004D0002A_TabContainer_baseChildTab', 
-			'Base', 
+			'${action.getText('BSC_PROG004D0002A_TabContainer_contentPane1')}', 
 			'${basePath}/bsc.workspaceSettingsCreateBaseAction.action', 
 			false, 
 			true,
@@ -105,7 +105,7 @@ function BSC_PROG004D0002A_TabContainer_show() {
 	viewPage.addOrUpdateContentPane(
 			'BSC_PROG004D0002A_TabContainer', 
 			'BSC_PROG004D0002A_TabContainer_contentChildTab', 
-			'Content', 
+			'${action.getText('BSC_PROG004D0002A_TabContainer_contentPane2')}', 
 			'${basePath}/bsc.workspaceSettingsCreateContentAction.action', 
 			false, 
 			true,

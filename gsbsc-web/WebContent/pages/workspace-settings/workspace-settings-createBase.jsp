@@ -46,21 +46,21 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="225px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Id</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG004D0002A_C00_workspaceId')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG004D0002A_C00_workspaceId" id="BSC_PROG004D0002A_C00_workspaceId" value="" maxlength="20"></gs:textBox>
     		</td>
     	</tr>     		
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Name</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG004D0002A_C00_workspaceName')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG004D0002A_C00_workspaceName" id="BSC_PROG004D0002A_C00_workspaceName" value="" maxlength="100" width="400"></gs:textBox>
     		</td>
     	</tr> 
 		<tr>
 		    <td height="125px" width="100%" align="left">
-		    	<b>Description</b>:
+		    	<b><s:property value="getText('BSC_PROG004D0002A_C00_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG004D0002A_C00_description" name="BSC_PROG004D0002A_C00_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
 		    </td>
