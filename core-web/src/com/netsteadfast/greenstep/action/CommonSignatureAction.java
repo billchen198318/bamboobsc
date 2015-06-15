@@ -25,15 +25,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
+import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.util.MenuSupportUtils;
 
 @ControllerAuthority(check=true)
 @Controller("core.web.controller.CommonSignatureAction")
 @Scope
-public class CommonSignatureAction extends BaseSupportAction {
+public class CommonSignatureAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = 8863724031372295431L;
 	private String system=""; // 系統 CORE, BSC ...
 	private String uploadOidField=""; // 完成後要填入 TB_SYS_UPLOAD.OID 的欄位
@@ -64,6 +66,23 @@ public class CommonSignatureAction extends BaseSupportAction {
 		}
 		return SUCCESS;		
 	}
+	
+	@Override
+	public String getProgramName() {
+		try {
+			return MenuSupportUtils.getProgramName(this.getProgramId());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	@Override
+	public String getProgramId() {
+		return super.getActionMethodProgramId();
+	}	
 
 	public String getSystem() {
 		return system;
