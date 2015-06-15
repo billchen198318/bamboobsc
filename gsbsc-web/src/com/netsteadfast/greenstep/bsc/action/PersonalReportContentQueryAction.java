@@ -89,10 +89,10 @@ public class PersonalReportContentQueryAction extends BaseJsonAction {
 							"dateType"
 					}, 
 					new String[]{
-							"Please select vision!<BR/>",
-							"Please select frequency!<BR/>",
-							"Please select employee!<BR/>",
-							"Please select date-type!<BR/>"
+							this.getText("MESSAGE.BSC_PROG003D0002Q_visionOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG003D0002Q_frequency") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG003D0002Q_employeeOid") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG003D0002Q_dateType") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class,
@@ -113,15 +113,15 @@ public class PersonalReportContentQueryAction extends BaseJsonAction {
 		if ( "3".equals(dateType) && !"6".equals(frequency) ) { // year
 			this.getFieldsId().add("frequency");
 			this.getFieldsId().add("dateType");
-			throw new ControllerException("Frequency and type does not comply!");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG003D0002Q_msg1") + "<BR/>");
 		}
 		if ( !"3".equals(dateType) && !"5".equals(frequency) ) { // half-year
 			this.getFieldsId().add("frequency");
 			this.getFieldsId().add("dateType");
-			throw new ControllerException("Frequency and type does not comply!");			
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG003D0002Q_msg1") + "<BR/>");			
 		}		
 		if ( !SimpleUtils.isDate( this.getFields().get("year")+"/01/01" ) ) {
-			throw new ControllerException("year is error!");
+			throw new ControllerException(this.getText("MESSAGE.BSC_PROG003D0002Q_msg2") + "<BR/>");
 		}
 	}
 	

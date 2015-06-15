@@ -156,7 +156,7 @@ function BSC_PROG003D0002Q_uploadSignatureFail() {
 function BSC_PROG003D0002Q_uploadSignatureClear() {
 	var uploadOid = dojo.byId('BSC_PROG003D0002Q_uploadSignatureOid').value;
 	if (null == uploadOid || 'null' == uploadOid || '' == uploadOid) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), 'No before save signature!', function(){}, 'Y');	
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0002Q_msg1')" escapeJavaScript="true"/>', function(){}, 'Y');	
 		return;
 	}	
 	confirmDialog(
@@ -168,7 +168,7 @@ function BSC_PROG003D0002Q_uploadSignatureClear() {
 					return;
 				}	
 				dojo.byId('BSC_PROG003D0002Q_uploadSignatureOid').value = '';
-				alertDialog(_getApplicationProgramNameById('${programId}'), 'Clear signature success!', function(){}, 'Y');				
+				alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0002Q_msg2')" escapeJavaScript="true"/>', function(){}, 'Y');				
 			}, 
 			(window.event ? window.event : null) 
 	);
@@ -207,7 +207,7 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="25%">
-				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: 'Options' " >						
+				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG003D0002Q_options')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:100%;height:90px">
 					
 						<table border="0" width="100%" >
@@ -220,7 +220,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												BSC_PROG003D0002Q_query();
-											}">Query</button>		
+											}"><s:property value="getText('BSC_PROG003D0002Q_btnQuery')"/></button>		
 																
 									<button id="BSC_PROG003D0002Q_btnExportPng" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -241,7 +241,7 @@ function ${programId}_page_message() {
 													taintTest	: true
 												});
 																							  
-											}">export as PNG</button>	
+											}"><s:property value="getText('BSC_PROG003D0002Q_btnExportPng')"/></button>	
 					
 									<button id="BSC_PROG003D0002Q_btnPdf" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -249,7 +249,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0002Q_generateExport('PDF');	
-											}">PDF</button>	
+											}"><s:property value="getText('BSC_PROG003D0002Q_btnPdf')"/></button>	
 									            
 									<button id="BSC_PROG003D0002Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -257,7 +257,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0002Q_generateExport('EXCEL');																			  
-											}">Excel</button>	
+											}"><s:property value="getText('BSC_PROG003D0002Q_btnXls')"/></button>	
 											
 											
 									<button id="BSC_PROG003D0002Q_btnSignature" data-dojo-type="dijit.form.Button"
@@ -266,7 +266,7 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												openCommonSignatureDialog('BSC', 'BSC_PROG003D0002Q_uploadSignatureOid', 'BSC_PROG003D0002Q_uploadSignatureSuccess', 'BSC_PROG003D0002Q_uploadSignatureFail');													  
-											}">Signature</button>												
+											}"><s:property value="getText('BSC_PROG003D0002Q_btnSignature')"/></button>												
 										
 									<button id="BSC_PROG003D0002Q_btnSignatureClear" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -274,22 +274,22 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0002Q_uploadSignatureClear();
-											}">Clear signature</button>														
+											}"><s:property value="getText('BSC_PROG003D0002Q_btnSignatureClear')"/></button>														
 											
 								</td>											
 							</tr>							
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">	
 								
-									Vision: 
+									<s:property value="getText('BSC_PROG003D0002Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG003D0002Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0002Q_visionOid"></gs:select>
 						    		&nbsp;		    			
 					    																	
-									Measure data frequency:
+									<s:property value="getText('BSC_PROG003D0002Q_frequency')"/>:
 									<gs:select name="BSC_PROG003D0002Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0002Q_frequency" value="5" width="140" readonly="Y"></gs:select>
 									
 									&nbsp;
-									employee:
+									<s:property value="getText('BSC_PROG003D0002Q_employeeOid')"/>:
 									<gs:select name="BSC_PROG003D0002Q_employeeOid" dataSource="employeeMap" id="BSC_PROG003D0002Q_employeeOid" ></gs:select>									
 																		
 								</td>	
@@ -328,7 +328,7 @@ function ${programId}_page_message() {
 											</td>
 											<td width="300px" align="left" height="30px" >	
 												<gs:select name="BSC_PROG003D0002Q_dateType" 
-													dataSource="{ \"1\":\"In the first half\", \"2\":\"In the second half\", \"3\":\"Year\" }" 
+													dataSource="{ \"1\":\"${action.getText('BSC_PROG003D0002Q_dateType_1')}\", \"2\":\"${action.getText('BSC_PROG003D0002Q_dateType_2')}\", \"3\":\"${action.getText('BSC_PROG003D0002Q_dateType_3')}\" }" 
 													id="BSC_PROG003D0002Q_dateType"
 													onChange="BSC_PROG003D0002Q_setFrequencyValue();"></gs:select>											
 											</td>
