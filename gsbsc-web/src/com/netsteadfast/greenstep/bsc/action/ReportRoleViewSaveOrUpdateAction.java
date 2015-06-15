@@ -75,7 +75,7 @@ public class ReportRoleViewSaveOrUpdateAction extends BaseJsonAction {
 							"roleOid"
 					}, 
 					new String[]{
-							"Please select role!<BR/>"
+							this.getText("MESSAGE.BSC_PROG004D0003Q_roleOid") + "<BR/>"
 					}, 
 					new Class[]{
 							SelectItemFieldCheckUtils.class

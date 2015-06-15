@@ -157,14 +157,14 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="200px" cellpadding="1" cellspacing="0" >	
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<font color='RED'>*</font><b>Role</b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG004D0003Q_roleOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG004D0003Q_roleOid" dataSource="roleMap" id="BSC_PROG004D0003Q_roleOid" onChange="BSC_PROG004D0003Q_roleChange();" value="fields.oid"></gs:select>
     		</td>  		
 		</tr>
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Department</b>:
+    			<b><s:property value="getText('BSC_PROG004D0003Q_deptSelect')"/></b>:
     			&nbsp;&nbsp;
 				<button name="BSC_PROG004D0003Q_deptSelect" id="BSC_PROG004D0003Q_deptSelect" data-dojo-type="dijit.form.Button"
 					data-dojo-props="
@@ -188,7 +188,7 @@ function ${programId}_page_message() {
     	</tr>     
 		<tr>
     		<td height="50px" width="100%"  align="left">
-    			<b>Employee</b>:
+    			<b><s:property value="getText('BSC_PROG004D0003Q_emplSelect')"/></b>:
     			&nbsp;&nbsp;
 				<button name="BSC_PROG004D0003Q_emplSelect" id="BSC_PROG004D0003Q_emplSelect" data-dojo-type="dijit.form.Button"
 					data-dojo-props="
@@ -227,10 +227,10 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG004D0003Q_saveSuccess(data);" 
     				programId="${programId}"
-    				label="Save" 
+    				label="${action.getText('BSC_PROG004D0003Q_save')}" 
     				iconClass="dijitIconSave"></gs:button>    			
     			<gs:button name="BSC_PROG004D0003Q_clear" id="BSC_PROG004D0003Q_clear" onClick="BSC_PROG004D0003Q_clear();" 
-    				label="Clear" 
+    				label="${action.getText('BSC_PROG004D0003Q_clear')}" 
     				iconClass="dijitIconClear"></gs:button>    	    		
     		</td>
     	</tr>    		
