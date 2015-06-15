@@ -14,27 +14,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td width="70%" align="left">
 			
 				<div id="comboButtonMenu" data-dojo-type="dijit.form.ComboButton">
-					<span>Application</span>				
+					<span><s:property value="getText('IndexAction_applicationName')"/></span>				
 					<div dojoType="dijit.Menu" >	
 							
 							${comboButtonMenuData}	
 					
 							<div dojoType="dijit.MenuSeparator"></div>
-							<div dojoType="dijit.MenuItem" jsId="backHome" data-dojo-props='onClick:function(){ window.location="<%=basePath%>/pages/way.jsp"; }' ><img src="./icons/view-refresh.png" border="0">&nbsp;Refresh</div>
+							<div dojoType="dijit.MenuItem" jsId="backHome" data-dojo-props='onClick:function(){ window.location="<%=basePath%>/pages/way.jsp"; }' ><img src="./icons/view-refresh.png" border="0">&nbsp;<s:property value="getText('IndexAction_refreshPage')"/></div>
 							
 					</div>					
 				</div>			
 				&nbsp;|&nbsp;
 				<div id="comboButtonHelp" data-dojo-type="dijit.form.ComboButton">
-					<span>Help</span>
+					<span><s:property value="getText('IndexAction_help')"/></span>
 					<div dojoType="dijit.Menu" id="helpMenu">
-						<div dojoType="dijit.MenuItem" data-dojo-props='onClick:function(){ if (!confirm("leave the page, go to project site.")) { return; } window.location="https://github.com/billchen198318/bamboobsc/issues"; }' >Proposed issues</div>
-						<div dojoType="dijit.MenuItem" data-dojo-props='onClick:function(){ CORE_PROGCOMM0001Q_DlgShow(); }' >About</div>										
+						<div dojoType="dijit.MenuItem" data-dojo-props='onClick:function(){ if (!confirm("${action.getText('IndexAction_issuesMsg')}")) { return; } window.location="https://github.com/billchen198318/bamboobsc/issues"; }' ><s:property value="getText('IndexAction_issues')"/></div>
+						<div dojoType="dijit.MenuItem" data-dojo-props='onClick:function(){ CORE_PROGCOMM0001Q_DlgShow(); }' ><s:property value="getText('IndexAction_about')"/></div>										
 					</div>
 				</div>								
 									
 				&nbsp;|&nbsp;
-				<a href="#" title="logout, end session." alt="logout, end session." onClick='confirmDialog("logoutDialogId000", "Logout", "logout , Are you sure ?", logoutEvent, (window.event ? window.event : null) ); return false;'><img src="./images/logout.png" alt="logoOut" border="0" /></a>
+				<a href="#" title="logout, end session." alt="logout, end session." onClick='confirmDialog("logoutDialogId000", "${action.getText('IndexAction_logoutTitle')}", "${action.getText('IndexAction_logoutMsg')}", logoutEvent, (window.event ? window.event : null) ); return false;'><img src="./images/logout.png" alt="logoOut" border="0" /></a>
 				
 				&nbsp;|&nbsp;										
 				<font size='2'>${verMsg}</font>			
