@@ -83,7 +83,7 @@ and save my.cnf
 ###3. Get bambooBSC environment file
 ```
 # cd /home/pi
-# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150527.7z
+# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150615.7z
 ```
 
 ###4. Install P7ZIP
