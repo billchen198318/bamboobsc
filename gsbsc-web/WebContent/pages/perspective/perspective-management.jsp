@@ -180,7 +180,7 @@ function ${programId}_page_message() {
     		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0002Q_perId" id="BSC_PROG002D0002Q_perId" value="" width="200" maxlength="14"></gs:textBox></td>
     	</tr>	
 		<tr>
-    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0002Q_name')"/></td>
+    		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0002Q_name')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0002Q_name" id="BSC_PROG002D0002Q_name" value="" width="200" maxlength="100"></gs:textBox></td>  					
     		<td height="25px" width="10%"  align="right">&nbsp;</td>
     		<td height="25px" width="40%"  align="left">&nbsp;</td>  					
