@@ -306,10 +306,11 @@ itext-xtra-5.5.1.jar
 itextpdf-5.5.1.jar
 
 
-PJL Compressing Filter
-http://sourceforge.net/projects/pjl-comp-filter/
+ziplet
+https://github.com/ziplet/ziplet
+modify CompressingFilter.java add @WebFilter( asyncSupported = true )
 -------------------------
-pjl-comp-filter-1.8.1.jar
+ziplet-2.0.1-async.jar
 
 
 jackson

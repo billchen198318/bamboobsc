@@ -88,7 +88,7 @@
     
  	<filter>
   		<filter-name>CompressingFilter</filter-name>
-  		<filter-class>com.planetj.servlet.filter.compression.CompressingFilter</filter-class>
+  		<filter-class>com.github.ziplet.filter.compression.CompressingFilter</filter-class>
   		<async-supported>true</async-supported>
  	</filter>	    
  	<filter-mapping>
