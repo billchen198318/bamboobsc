@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	
+	<package name="bsc-mobile-common" extends="bsc-mobile-default" namespace="/" >
+		
+		<action name="index" class="bsc.mobile.web.controller.IndexAction">
+			<result name="input">/pages/index.jsp</result>			
+			<result name="success">/pages/index.jsp</result>
+		</action>				
+							  					
+	</package>
+	
+	<package name="bsc-mobile-common-json" extends="bsc-mobile-default,json-default" namespace="/" >	
+	
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />		
+			
+	</package>
+
+	<package name="bsc-mobile-common-report" extends="bsc-mobile-default,jasperreports-default" namespace="/" >		
+		
+		<default-interceptor-ref name="greenStepJasperReportCustomStack" /> 
+		
+		<action name="core.commonJasperReportAction" class="core.web.controller.CommonJasperReportAction">
+        	<result name="success" type="jasper">
+            	<param name="location">${location}</param>
+            	<param name="dataSource">dataSource</param>
+            	<param name="connection">connection</param>
+            	<param name="format">${format}</param>
+            	<param name="reportParameters">reportParams</param> 
+        	</result>		
+        	<result name="input" type="redirect">/jsp/blank.jsp</result>
+		</action>
+		
+	</package>	
+	
+	<package name="bsc-mobile-common-chart" extends="bsc-mobile-default" namespace="/" >
+		
+		<default-interceptor-ref name="greenStepProvideCustomStack" />
+		
+		<action name="core.commonBarChartAction" class="core.web.controller.CommonBarChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">480</param>
+    			<param name="height">380</param> 
+  			</result>
+		</action>
+		
+		<action name="core.commonPieChartAction" class="core.web.controller.CommonPieChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">480</param>
+    			<param name="height">380</param> 
+  			</result>
+		</action>
+				
+	</package>				
+		
+</struts>

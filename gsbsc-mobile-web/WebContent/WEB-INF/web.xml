@@ -1,0 +1,230 @@
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	
+  	<context-param>
+   		<param-name>contextConfigLocation</param-name>
+   		<param-value>classpath*:applicationContext.xml</param-value>
+  	</context-param>  	
+
+  	<listener>
+   		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+
+  	<listener>
+   		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  	</listener>
+
+  	<listener>
+   		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  	</listener>
+  	
+  	<!-- Custom -->  		
+	<listener>
+		<listener-class>com.netsteadfast.greenstep.base.sys.WebSystemHttpSessionListenerForGeneralPackage</listener-class>
+	</listener> 
+	   	 		
+	<!-- 訊息發送的listener -->
+	<listener>
+		<listener-class>com.netsteadfast.greenstep.sys.WebMessagePublishListener</listener-class>
+	</listener>  
+	
+	<!-- 共用的ServletContextListener -->
+	<listener>
+		<listener-class>com.netsteadfast.greenstep.sys.WebSystemCtxBeanSupportListener</listener-class>
+	</listener>  
+		
+	<!-- lazy loading enabled in spring -->
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>	
+	
+	<!-- spring security or shiro-->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<async-supported>true</async-supported>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	    <dispatcher>REQUEST</dispatcher>
+	    <dispatcher>FORWARD</dispatcher>
+	    <dispatcher>INCLUDE</dispatcher>
+	    <dispatcher>ERROR</dispatcher>		
+	</filter-mapping>	
+	
+	
+  	<servlet>
+    	<servlet-name>kaptcha</servlet-name>
+    	<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    	<init-param>
+      		<description> Border around kaptcha. Legal values are yes or no. </description>
+      		<param-name>kaptcha.border</param-name>
+      		<param-value>no</param-value>
+    	</init-param>
+    	<init-param>
+      	<description>Color of the border. Legal values are r,g,b (and optional alpha) or white,black,blue. </description>
+      		<param-name>kaptcha.border.color</param-name>
+      		<param-value>red</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>Thickness of the border around kaptcha. Legal values are > 0. </description>
+      		<param-name>kaptcha.border.thickness</param-name>
+      		<param-value>5</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>Width in pixels of the kaptcha image. </description>
+      		<param-name>kaptcha.image.width</param-name>
+      		<param-value>100</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>Height in pixels of the kaptcha image. </description>
+      		<param-name>kaptcha.image.height</param-name>
+      		<param-value>48</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The image producer. </description>
+      		<param-name>kaptcha.producer.impl</param-name>
+      		<param-value>com.google.code.kaptcha.impl.DefaultKaptcha</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The text producer. </description>
+      		<param-name>kaptcha.textproducer.impl</param-name>
+      		<param-value>com.google.code.kaptcha.text.impl.DefaultTextCreator</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The characters that will create the kaptcha. </description>
+      		<param-name>kaptcha.textproducer.char.string</param-name>
+      		<param-value>ABCDEFGHIJKLMNOPQRSTUVWXYZ</param-value><!-- ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -->
+    	</init-param>
+    	<init-param>
+      		<description>The number of characters to display. </description>
+      		<param-name>kaptcha.textproducer.char.length</param-name>
+      		<param-value>4</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>A list of comma separated font names.</description>
+      		<param-name>kaptcha.textproducer.font.names</param-name>
+      		<param-value>Arial</param-value><!-- Arial, Courier -->
+    	</init-param>
+    	<init-param>
+      		<description>The size of the font to use. </description>
+      		<param-name>kaptcha.textproducer.font.size</param-name>
+      		<param-value>28</param-value><!-- 23 -->
+    	</init-param>
+    	<init-param>
+      		<description>The color to use for the font. Legal values are r,g,b. </description>
+      		<param-name>kaptcha.textproducer.font.color</param-name>
+      		<param-value>black</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The noise producer. </description>
+      		<param-name>kaptcha.noise.impl</param-name>
+      		<param-value>com.google.code.kaptcha.impl.NoNoise</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The noise color. Legal values are r,g,b. </description>
+      		<param-name>kaptcha.noise.color</param-name>
+      		<param-value>black</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The obscurificator implementation. </description>
+      		<param-name>kaptcha.obscurificator.impl</param-name>
+      		<param-value>com.google.code.kaptcha.impl.ShadowGimpy</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>The background implementation. </description>
+      		<param-name>kaptcha.background.impl</param-name>
+      		<param-value>com.google.code.kaptcha.impl.DefaultBackground</param-value>
+    	</init-param>
+    	<init-param>
+      		<description>Ending background color. Legal values are r,g,b. </description>
+      		<param-name>kaptcha.background.clear.to</param-name>
+      		<param-value>white</param-value>
+    	</init-param>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>kaptcha</servlet-name>
+    	<url-pattern>/kaptcha.jpg</url-pattern>
+  	</servlet-mapping>		
+	
+	<!-- 
+    <filter-mapping>  
+        <filter-name>struts2</filter-name>  
+        <url-pattern>*.action</url-pattern>  
+    </filter-mapping>   
+    -->
+    
+	<!-- struts 2.x filter -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<!-- 
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		-->
+	</filter-mapping>    
+    
+    
+ 	<filter>
+  		<filter-name>CompressingFilter</filter-name>
+  		<filter-class>com.github.ziplet.filter.compression.CompressingFilter</filter-class>
+  		<async-supported>true</async-supported>
+ 	</filter>	    
+ 	<filter-mapping>
+  		<filter-name>CompressingFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+ 	</filter-mapping>     
+ 	
+ 	
+  	<filter>
+  		<filter-name>CharsetFilter</filter-name>
+  		<filter-class>com.netsteadfast.greenstep.base.filter.CharsetFilter</filter-class>
+  		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>  	
+		<init-param>
+			<param-name>contentType</param-name>
+			<param-value>text/html; charset=UTF-8</param-value>
+		</init-param>  				
+ 	</filter>	    
+ 	<filter-mapping>
+  		<filter-name>CharsetFilter</filter-name>
+  		<url-pattern>*.action</url-pattern>
+  		<url-pattern>*.html</url-pattern>
+  		<url-pattern>*.htm</url-pattern>
+  		<url-pattern>*.js</url-pattern>
+  		<url-pattern>*.css</url-pattern>
+ 	</filter-mapping>  	
+    
+ 	<!-- 訊息發送的servlet -->
+	<servlet>
+		<servlet-name>WebMessagePublishServlet</servlet-name>		
+		<servlet-class>com.netsteadfast.greenstep.sys.WebMessagePublishServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>WebMessagePublishServlet</servlet-name>
+		<url-pattern>/publish/*</url-pattern>
+	</servlet-mapping>
+	    	
+</web-app>
