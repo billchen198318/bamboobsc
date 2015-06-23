@@ -32,7 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 function refresh_content() {
-	alert( 123 );
+	//alert( 123 );
+}
+
+function logout_page() {
+	if ( confirm("Are you sure?") ) {
+		window.location = "${basePath}/logout.action";
+	}
 }
 
 function pageMessage() {
@@ -49,26 +55,30 @@ function pageMessage() {
 <div data-role="footer">
     <div data-role="navbar" data-iconpos="left">
         <ul>
-            <li><a href="${basePath}/logout.action" data-icon="delete">Logout</a></li>
-            <li><button class="ui-btn ui-icon-refresh ui-btn-icon-left" onclick="refresh_content();">Refresh</button></li>
-            <li><a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini" data-icon="gear">Settings</a></li>
+            <li><a href="#" data-icon="delete" onclick="logout_page();">Logout</a></li>
+            <li><a href="#" data-icon="refresh" onclick="refresh_content();">Refresh / Query</a></li>
+            <li><a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini" data-icon="gear">Options</a></li>
         </ul>
     </div><!-- /navbar -->
 </div><!-- /footer -->
 
 <div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
-	<table width="100%">
+	<table width="100%">	
+	    <tr valign="top">
+	    	<td bgcolor="#ffffff"><img src="./images/original.jpg" width="220" height="30" /></td>
+	    </tr>		
 		<tr valign="top">
 			<td width="100%">
 			
-				<div class="ui-field-contain">
-				    <label for="frequency">Frequency:</label>
+				<label for="frequency">Frequency:</label>
+			
+								    
 				    <select name="frequency" id="frequency" data-mini="true">
 				    	<s:iterator value="frequencyMap" status="st" id="cols">
 				    		<option value="<s:property value="#cols.key"/>" <s:if test=" \"6\" == #cols.key "> SELECTED </s:if> ><s:property value="#cols.value"/></option>	
 				    	</s:iterator>			    	
 				    </select>
-				</div>		
+						
 	
 			</td>
 		</tr>
@@ -88,7 +98,7 @@ function pageMessage() {
 			</td>
 			
 		</tr>	
-		
+	
 	</table>
 </div>
 
