@@ -21,13 +21,25 @@
  */
 package com.netsteadfast.greenstep.bsc.mobile.action;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
+import com.netsteadfast.greenstep.base.exception.ControllerException;
+import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
+import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.po.hbm.BbVision;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=false)
 @Controller("bsc.mobile.web.controller.IndexAction")
@@ -35,15 +47,46 @@ import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 public class IndexAction extends BaseSupportAction {
 	private static final long serialVersionUID = -1938608913545322784L;
 	protected Logger logger=Logger.getLogger(IndexAction.class);
+	private IVisionService<VisionVO, BbVision, String> visionService;
+	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(false);
 	
 	public IndexAction() {
 		super();
 	}
 	
-	@ControllerMethodAuthority(programId="CORE_INDEX")
-	public String execute() throws Exception {
+	public IVisionService<VisionVO, BbVision, String> getVisionService() {
+		return visionService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.VisionService")
+	@Required		
+	public void setVisionService(
+			IVisionService<VisionVO, BbVision, String> visionService) {
+		this.visionService = visionService;
+	}
+	
+	private void initData() throws ServiceException, Exception {
 		
-		return SUCCESS;
+	}
+
+	@ControllerMethodAuthority(programId="BSC_MOBILE_INDEX")
+	public String execute() throws Exception {
+		try {
+			this.initData();
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;	
+	}
+
+	public Map<String, String> getFrequencyMap() {
+		return frequencyMap;
 	}
 
 }

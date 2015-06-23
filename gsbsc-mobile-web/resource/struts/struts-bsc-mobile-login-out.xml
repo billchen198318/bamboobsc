@@ -16,8 +16,8 @@
 		</action>
 		
 		<action name="logout" class="bsc.mobile.web.controller.LoginAction" method="doLogout">
-			<result name="input">/jsp/bsc/login.jsp</result>			
-			<result name="success" type="redirect">/index.action</result>
+			<result name="input">/login.action</result>			
+			<result name="success" type="redirect">/login.action</result>
 		</action>		
 		   	
 	</package>
