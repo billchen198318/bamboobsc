@@ -44,6 +44,7 @@ import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.TemplateUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
@@ -109,6 +110,16 @@ public class BscMobileCardUtils {
 				DefaultResult<VisionVO> vResult = visionService.findObjectByOid(vision);
 				if (vResult.getValue()!=null) { // 計算分數chain 取出的vision資料沒有放 content 欄位, 但這邊要用到, 所以取出content欄位
 					vision.setContent( new String(vResult.getValue().getContent(), Constants.BASE_ENCODING).getBytes() );
+				}
+				for (PerspectiveVO perspective : vision.getPerspectives()) {
+					for (ObjectiveVO objective : perspective.getObjectives()) {
+						for (KpiVO kpi : objective.getKpis()) { // 產生報表不需要以下欄位
+							kpi.getAggregationMethod().setDescription( " " );
+							kpi.getAggregationMethod().setExpression1( " " );
+							kpi.getAggregationMethod().setExpression2( " " );
+							kpi.getFormula().setExpression( " " );							
+						}
+					}
 				}
 				visionScores.add( vision );
 			}
