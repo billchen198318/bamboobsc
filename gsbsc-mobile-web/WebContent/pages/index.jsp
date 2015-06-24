@@ -32,7 +32,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 function refresh_content() {
-	//alert( 123 );
+	var date1 = $("#date1").val();
+	var date2 = $("#date1").val();
+	var frequency = $("#frequency").val();
+	
+	$("#card_content").html('');
+	
+	$.mobile.loading( 'show', {
+		text: 'Please wait!',
+		textVisible: true,
+		theme: 'z',
+		html: ""
+	});	
+	
+	$.ajax({
+		url: "${basePath}/bsc.mobile.doVisionCardAction.action",
+		data: { 
+				'fields.date1'				:	date1,
+				'fields.date2'				:	date2,
+				'fields.frequency'			:	frequency
+		},
+		type: "POST",
+		dataType: "json",
+		async: true,
+		timeout: 300000,
+		cache: false,
+		success: function(data) {
+			$.mobile.loading( 'hide' );			
+			
+			if ( data.success != 'Y' ) {				
+				alert( data.message );
+				return;
+			}
+			
+			$("#card_content").html( data.content );
+			
+		},
+		error: function(e) {
+			$.mobile.loading( 'hide' );			
+			alert( e.statusText );			
+		}
+		
+	});	
+	
 }
 
 function logout_page() {
@@ -62,6 +104,10 @@ function pageMessage() {
     </div><!-- /navbar -->
 </div><!-- /footer -->
 
+<div data-role="content">
+	<div id="card_content"></div>
+</div>
+
 <div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
 	<table width="100%">	
 	    <tr valign="top">
@@ -86,7 +132,7 @@ function pageMessage() {
 			
 			<td width="100%">
 				<label for="date1">Measures-data begin date:</label>
-				<input data-role="date" type="text" name="date1" id="date1"/>
+				<input data-role="date" type="text" name="date1" id="date1" value="${measureDataDate1}"/>
 			</td>
 			
 		</tr>
@@ -94,7 +140,7 @@ function pageMessage() {
 			
 			<td width="100%">
 				<label for="date2">Measures-data end date:</label>
-				<input data-role="date" type="text" name="date2" id="date2"/>
+				<input data-role="date" type="text" name="date2" id="date2" value="${measureDataDate1}"/>
 			</td>
 			
 		</tr>	

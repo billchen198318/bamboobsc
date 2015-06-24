@@ -88,5 +88,11 @@ public class IndexAction extends BaseSupportAction {
 	public Map<String, String> getFrequencyMap() {
 		return frequencyMap;
 	}
-
+	
+	// yyyy/mm/dd to mm/dd/yyyy
+	public String getMeasureDataDate1() throws Exception {
+		String nowDate[] = this.getNowDate().split("/");		
+		return nowDate[1] + "/" + nowDate[2] + "/" + nowDate[0];
+	}
+	
 }

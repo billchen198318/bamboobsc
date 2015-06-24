@@ -11,5 +11,6 @@
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
     
     <bean id="bsc.mobile.web.controller.IndexAction" class="com.netsteadfast.greenstep.bsc.mobile.action.IndexAction" scope="prototype" />
+    <bean id="bsc.mobile.web.controller.ScorecardQueryContentAction" class="com.netsteadfast.greenstep.bsc.mobile.action.ScorecardQueryContentAction" scope="prototype" />
     
 </beans>

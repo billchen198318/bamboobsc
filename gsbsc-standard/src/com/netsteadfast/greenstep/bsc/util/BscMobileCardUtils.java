@@ -36,6 +36,7 @@ import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.chain.SimpleChain;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.model.UploadTypes;
@@ -54,6 +55,17 @@ public class BscMobileCardUtils {
 	
 	static {
 		visionService = (IVisionService<VisionVO, BbVision, String>)AppContext.getBean("bsc.service.VisionService");
+	}
+	
+	public static String getVisionCardUpload(VisionVO vision) throws ServiceException, Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(vision);
+		return UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				jsonData.getBytes(), 
+				SimpleUtils.getUUIDStr() + ".json");			
 	}
 	
 	public static String getVisionCardUpload(String frequency, String startDate, 
@@ -79,8 +91,8 @@ public class BscMobileCardUtils {
 		Context context = new ContextBase();
 		context.put("startDate", startDate);
 		context.put("endDate", endDate);		
-		context.put("startYearDate", startDate);
-		context.put("endYearDate", endDate);		
+		context.put("startYearDate", startDate.substring(0, 4));
+		context.put("endYearDate", endDate.substring(0, 4));		
 		context.put("frequency", frequency);
 		context.put("dataFor", "all");
 		context.put("orgId", BscConstants.MEASURE_DATA_ORGANIZATION_FULL);
@@ -92,7 +104,13 @@ public class BscMobileCardUtils {
 			ChainResultObj resultObj = chain.getResultFromResource("performanceScoreChain", context);
 			BscStructTreeObj treeObj = (BscStructTreeObj)resultObj.getValue();
 			for (int i=0; treeObj.getVisions()!=null && i<treeObj.getVisions().size(); i++) {
-				visionScores.add( treeObj.getVisions().get(i) );
+				VisionVO vision = treeObj.getVisions().get(i);
+				vision.setContent( " ".getBytes() );
+				DefaultResult<VisionVO> vResult = visionService.findObjectByOid(vision);
+				if (vResult.getValue()!=null) { // 計算分數chain 取出的vision資料沒有放 content 欄位, 但這邊要用到, 所以取出content欄位
+					vision.setContent( new String(vResult.getValue().getContent(), Constants.BASE_ENCODING).getBytes() );
+				}
+				visionScores.add( vision );
 			}
 		}
 		return visionScores;
@@ -110,17 +128,34 @@ public class BscMobileCardUtils {
 				kpiSize += objective.getKpis().size();
 			}
 		}
+		BscReportPropertyUtils.loadData();		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("perspectiveTitle", BscReportPropertyUtils.getPerspectiveTitle());
+		paramMap.put("objectiveTitle", BscReportPropertyUtils.getObjectiveTitle());
+		paramMap.put("kpiTitle", BscReportPropertyUtils.getKpiTitle());
+		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
+		paramMap.put("fontColor", BscReportPropertyUtils.getFontColor());
 		paramMap.put("vision", vision);
+		paramMap.put("visionContent", new String(vision.getContent(), Constants.BASE_ENCODING) );
 		paramMap.put("perspectiveSize", perspectiveSize);
 		paramMap.put("objectiveSize", objectiveSize);
 		paramMap.put("kpiSize", kpiSize);
+		paramMap.put("percentage", getPercentage(vision.getScore(), 100f));
 		content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				BscMobileCardUtils.class.getClassLoader(), 
 				_RESOURCE_VISION_CARD, 
 				paramMap);		
 		return content;
+	}
+	
+	private static String getPercentage(float score, float compareValue) {
+		int percentage=0;
+		if (score<=compareValue && score!=0.0f && compareValue!=0.0f) {
+			float p=score/compareValue * 100;
+			percentage = Math.round(p);
+		}
+		return String.valueOf(percentage);
 	}
 	
 }

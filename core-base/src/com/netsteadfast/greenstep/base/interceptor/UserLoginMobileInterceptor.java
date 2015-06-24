@@ -21,6 +21,8 @@
  */
 package com.netsteadfast.greenstep.base.interceptor;
 
+import java.io.PrintWriter;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -28,6 +30,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.model.AccountObj;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -54,6 +57,14 @@ public class UserLoginMobileInterceptor extends AbstractInterceptor {
 		if (SecurityUtils.getSubject().isAuthenticated() && !StringUtils.isBlank(accountId)) {
 			return actionInvocation.invoke();
 		}		
+		String header = ServletActionContext.getRequest().getHeader("X-Requested-With");
+		if ("XMLHttpRequest".equalsIgnoreCase(header)) {
+			PrintWriter printWriter = ServletActionContext.getResponse().getWriter();
+			printWriter.print(Constants.NO_LOGIN_JSON_DATA);
+            printWriter.flush();
+            printWriter.close();
+			return null;			
+		}
 		return "logout";
 	}
 
