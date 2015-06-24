@@ -42,6 +42,7 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.util.BscMobileCardUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
@@ -225,6 +226,32 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}		
 	}
 	
+	private void loadKpiCardContent() throws ServiceException, Exception {
+		StringBuilder outContent = new StringBuilder();
+		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA);
+		String uploadOid = this.getFields().get("uploadOid");
+		String objectiveOid = super.defaultString( this.getFields().get("objectiveOid") );
+		VisionVO vision = BscMobileCardUtils.getVisionCardFromUpload(uploadOid);
+		List<PerspectiveVO> perspectives = vision.getPerspectives();
+		for (PerspectiveVO perspective : perspectives) {
+			List<ObjectiveVO> objectives = perspective.getObjectives();
+			for (ObjectiveVO objective : objectives) {
+				if (objectiveOid.equals(objective.getOid())) {
+					List<KpiVO> kpis = objective.getKpis();
+					for (KpiVO kpi : kpis) {
+						outContent.append( BscMobileCardUtils.getKPIsCardContent(uploadOid, kpi) );
+						outContent.append("<BR/>");						
+					}
+				}
+			}
+		}
+		this.content = outContent.toString();
+		if (!StringUtils.isBlank(content)) {
+			this.message = "Query success!";
+			this.success = IS_YES;
+		}		
+	}
+	
 	@JSON(serialize=false)
 	public String doVisionCard() throws Exception {
 		try {
@@ -277,6 +304,30 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	public String doObjectiveCard() throws Exception {
 		try {
 			this.loadObjectiveCardContent();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { 
+			e.printStackTrace();
+			if (e.getMessage()==null) { 
+				this.message=e.toString();
+				this.logger.error(e.toString());
+			} else {
+				this.message=e.getMessage().toString();
+				this.logger.error(e.getMessage());
+			}						
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;	
+	}	
+	
+	@JSON(serialize=false)
+	public String doKpiCard() throws Exception {
+		try {
+			this.loadKpiCardContent();
 		} catch (ControllerException ce) {
 			this.message=ce.getMessage().toString();
 		} catch (AuthorityException ae) {

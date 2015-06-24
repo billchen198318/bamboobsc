@@ -158,6 +158,46 @@ function query_objectiveByPerspective(uploadOid, perspectiveOid) {
 	
 }
 
+function query_kpiByObjective(uploadOid, objectiveOid) {
+	
+	$.mobile.loading( 'show', {
+		text: 'Please wait!',
+		textVisible: true,
+		theme: 'z',
+		html: ""
+	});	
+	
+	$.ajax({
+		url: "${basePath}/bsc.mobile.doKpiCardAction.action",
+		data: { 
+				'fields.uploadOid'			:	uploadOid,
+				'fields.objectiveOid'		:	objectiveOid
+		},
+		type: "POST",
+		dataType: "json",
+		async: true,
+		timeout: 300000,
+		cache: false,
+		success: function(data) {
+			$.mobile.loading( 'hide' );			
+			
+			if ( data.success != 'Y' ) {				
+				alert( data.message );
+				return;
+			}
+			
+			$("#card_content").html('<center>' + data.content + '</center>');
+			
+		},
+		error: function(e) {
+			$.mobile.loading( 'hide' );			
+			alert( e.statusText );			
+		}
+		
+	});	
+	
+}
+
 function logout_page() {
 	if ( confirm("Are you sure?") ) {
 		window.location = "${basePath}/logout.action";

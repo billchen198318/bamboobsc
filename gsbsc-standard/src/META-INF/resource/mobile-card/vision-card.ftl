@@ -1,3 +1,10 @@
+<#assign hrWidth=percentage?number >
+<#if ( hrWidth > 100 ) >
+	<#assign hrWidth=100 >
+</#if>
+<#if ( hrWidth < 0 ) >
+	<#assign hrWidth=0 >
+</#if>
 <table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="${backgroundColor}">
 	<tr valign="top">
 		<td width="100%" align="center" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
@@ -25,7 +32,7 @@
 			<BR/>
 			<font color="${vision.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>			
 			<BR/>
-			<hr align="left" width="${percentage}%" size="15" color="${vision.fontColor}">
+			<hr align="left" width="${hrWidth}%" size="15" color="${vision.fontColor}">
 		</td>
 	</tr>
 	<tr valign="top">

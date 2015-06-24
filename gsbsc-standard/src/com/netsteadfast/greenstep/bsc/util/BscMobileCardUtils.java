@@ -38,6 +38,7 @@ import com.netsteadfast.greenstep.base.chain.SimpleChain;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.model.UploadTypes;
@@ -56,6 +57,7 @@ public class BscMobileCardUtils {
 	private static final String _RESOURCE_VISION_CARD = "META-INF/resource/mobile-card/vision-card.ftl";
 	private static final String _RESOURCE_PERSPECTIVE_CARD = "META-INF/resource/mobile-card/perspective-card.ftl";
 	private static final String _RESOURCE_OBJECTIVE_CARD = "META-INF/resource/mobile-card/objective-card.ftl";
+	private static final String _RESOURCE_KPI_CARD = "META-INF/resource/mobile-card/kpi-card.ftl";
 	
 	static {
 		visionService = (IVisionService<VisionVO, BbVision, String>)AppContext.getBean("bsc.service.VisionService");
@@ -207,11 +209,32 @@ public class BscMobileCardUtils {
 				_RESOURCE_OBJECTIVE_CARD, 
 				paramMap);			
 		return content;
-	}	
+	}
+	
+	public static String getKPIsCardContent(String uploadOid, KpiVO kpi) throws ServiceException, Exception {
+		String content = "";
+		BscReportPropertyUtils.loadData();	
+		float compareValue = kpi.getTarget();
+		if (BscKpiCode.COMPARE_TYPE_MIN.equals(kpi.getCompareType())) {
+			compareValue = kpi.getMin();
+		} 
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("kpi", kpi);
+		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
+		paramMap.put("fontColor", BscReportPropertyUtils.getFontColor());
+		paramMap.put("percentage", getPercentage(kpi.getScore(), compareValue));
+		paramMap.put("uploadOid", uploadOid);		
+		content = TemplateUtils.processTemplate(
+				"resourceTemplate", 
+				BscMobileCardUtils.class.getClassLoader(), 
+				_RESOURCE_KPI_CARD, 
+				paramMap);			
+		return content;
+	}		
 	
 	private static String getPercentage(float score, float compareValue) {
 		int percentage=0;
-		if (score<=compareValue && score!=0.0f && compareValue!=0.0f) {
+		if (score!=0.0f && compareValue!=0.0f) {
 			float p=score/compareValue * 100;
 			percentage = Math.round(p);
 		}
