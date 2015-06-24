@@ -55,6 +55,7 @@ public class BscMobileCardUtils {
 	private static IVisionService<VisionVO, BbVision, String> visionService;
 	private static final String _RESOURCE_VISION_CARD = "META-INF/resource/mobile-card/vision-card.ftl";
 	private static final String _RESOURCE_PERSPECTIVE_CARD = "META-INF/resource/mobile-card/perspective-card.ftl";
+	private static final String _RESOURCE_OBJECTIVE_CARD = "META-INF/resource/mobile-card/objective-card.ftl";
 	
 	static {
 		visionService = (IVisionService<VisionVO, BbVision, String>)AppContext.getBean("bsc.service.VisionService");
@@ -190,6 +191,23 @@ public class BscMobileCardUtils {
 				paramMap);			
 		return content;
 	}
+	
+	public static String getObjectivesCardContent(String uploadOid, ObjectiveVO objective) throws ServiceException, Exception {
+		String content = "";
+		BscReportPropertyUtils.loadData();	
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("objective", objective);
+		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
+		paramMap.put("fontColor", BscReportPropertyUtils.getFontColor());
+		paramMap.put("percentage", getPercentage(objective.getScore(), objective.getTarget()));
+		paramMap.put("uploadOid", uploadOid);		
+		content = TemplateUtils.processTemplate(
+				"resourceTemplate", 
+				BscMobileCardUtils.class.getClassLoader(), 
+				_RESOURCE_OBJECTIVE_CARD, 
+				paramMap);			
+		return content;
+	}	
 	
 	private static String getPercentage(float score, float compareValue) {
 		int percentage=0;

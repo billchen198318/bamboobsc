@@ -118,6 +118,46 @@ function query_perspective(uploadOid) {
 	
 }
 
+function query_objectiveByPerspective(uploadOid, perspectiveOid) {
+	
+	$.mobile.loading( 'show', {
+		text: 'Please wait!',
+		textVisible: true,
+		theme: 'z',
+		html: ""
+	});	
+	
+	$.ajax({
+		url: "${basePath}/bsc.mobile.doObjectiveCardAction.action",
+		data: { 
+				'fields.uploadOid'			:	uploadOid,
+				'fields.perspectiveOid'		:	perspectiveOid
+		},
+		type: "POST",
+		dataType: "json",
+		async: true,
+		timeout: 300000,
+		cache: false,
+		success: function(data) {
+			$.mobile.loading( 'hide' );			
+			
+			if ( data.success != 'Y' ) {				
+				alert( data.message );
+				return;
+			}
+			
+			$("#card_content").html('<center>' + data.content + '</center>');
+			
+		},
+		error: function(e) {
+			$.mobile.loading( 'hide' );			
+			alert( e.statusText );			
+		}
+		
+	});	
+	
+}
+
 function logout_page() {
 	if ( confirm("Are you sure?") ) {
 		window.location = "${basePath}/logout.action";
