@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.netsteadfast.greenstep.BscConstants;
@@ -53,9 +54,20 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 public class BscMobileCardUtils {
 	private static IVisionService<VisionVO, BbVision, String> visionService;
 	private static final String _RESOURCE_VISION_CARD = "META-INF/resource/mobile-card/vision-card.ftl";
+	private static final String _RESOURCE_PERSPECTIVE_CARD = "META-INF/resource/mobile-card/perspective-card.ftl";
 	
 	static {
 		visionService = (IVisionService<VisionVO, BbVision, String>)AppContext.getBean("bsc.service.VisionService");
+	}
+	
+	public static VisionVO getVisionCardFromUpload(String uploadOid) throws ServiceException, Exception {
+		byte[] content = UploadSupportUtils.getDataBytes(uploadOid);
+		String jsonStr = new String(content, Constants.BASE_ENCODING);
+		if (StringUtils.isBlank(jsonStr)) {
+			throw new Exception("vision-card json data error.");
+		}
+		VisionVO vision = new ObjectMapper().readValue(jsonStr, VisionVO.class);
+		return vision;
 	}
 	
 	public static String getVisionCardUpload(VisionVO vision) throws ServiceException, Exception {
@@ -140,6 +152,7 @@ public class BscMobileCardUtils {
 			}
 		}
 		BscReportPropertyUtils.loadData();		
+		String uploadOid = getVisionCardUpload(vision);
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("perspectiveTitle", BscReportPropertyUtils.getPerspectiveTitle());
 		paramMap.put("objectiveTitle", BscReportPropertyUtils.getObjectiveTitle());
@@ -152,11 +165,29 @@ public class BscMobileCardUtils {
 		paramMap.put("objectiveSize", objectiveSize);
 		paramMap.put("kpiSize", kpiSize);
 		paramMap.put("percentage", getPercentage(vision.getScore(), 100f));
+		paramMap.put("uploadOid", uploadOid);
 		content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				BscMobileCardUtils.class.getClassLoader(), 
 				_RESOURCE_VISION_CARD, 
 				paramMap);		
+		return content;
+	}
+	
+	public static String getPerspectivesCardContent(String uploadOid, PerspectiveVO perspective) throws ServiceException, Exception {
+		String content = "";
+		BscReportPropertyUtils.loadData();	
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("perspective", perspective);
+		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
+		paramMap.put("fontColor", BscReportPropertyUtils.getFontColor());
+		paramMap.put("percentage", getPercentage(perspective.getScore(), perspective.getTarget()));
+		paramMap.put("uploadOid", uploadOid);		
+		content = TemplateUtils.processTemplate(
+				"resourceTemplate", 
+				BscMobileCardUtils.class.getClassLoader(), 
+				_RESOURCE_PERSPECTIVE_CARD, 
+				paramMap);			
 		return content;
 	}
 	

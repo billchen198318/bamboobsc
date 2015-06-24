@@ -21,9 +21,7 @@
  */
 package com.netsteadfast.greenstep.bsc.mobile.action;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -44,6 +42,7 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.util.BscMobileCardUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=false)
@@ -55,7 +54,6 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	private String message = "";
 	private String success = IS_NO;
 	private String content = "";
-	private Map<String, String> visionScoresData = new HashMap<String, String>();
 		
 	// copy from KpiReportContentQueryAction
 	private void setDateValue() throws Exception {
@@ -177,20 +175,60 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 				this.getFields().get("endDate"));		
 		for (VisionVO vision : visionScores) {
 			outContent.append( BscMobileCardUtils.getVisionCardContent(vision) );
-			String uploadOid = BscMobileCardUtils.getVisionCardUpload(vision);
-			visionScoresData.put(vision.getOid(), uploadOid);
+			outContent.append("<BR/>");
 		}
 		this.content = outContent.toString();		
 		if (!StringUtils.isBlank(content)) {
 			this.message = "Query success!";
+			this.success = IS_YES;
+		}		
+	}
+	
+	private void loadPerspectiveCardContent() throws ServiceException, Exception {
+		StringBuilder outContent = new StringBuilder();
+		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA);
+		String uploadOid = this.getFields().get("uploadOid");
+		VisionVO vision = BscMobileCardUtils.getVisionCardFromUpload(uploadOid);
+		List<PerspectiveVO> perspectives = vision.getPerspectives();
+		for (PerspectiveVO perspective : perspectives) {
+			outContent.append( BscMobileCardUtils.getPerspectivesCardContent(uploadOid, perspective) );
+			outContent.append("<BR/>");
 		}
-		this.success = IS_YES;
+		this.content = outContent.toString();
+		if (!StringUtils.isBlank(content)) {
+			this.message = "Query success!";
+			this.success = IS_YES;
+		}		
 	}
 	
 	@JSON(serialize=false)
 	public String doVisionCard() throws Exception {
 		try {
 			this.loadVisionCardContent();			
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) { 
+			e.printStackTrace();
+			if (e.getMessage()==null) { 
+				this.message=e.toString();
+				this.logger.error(e.toString());
+			} else {
+				this.message=e.getMessage().toString();
+				this.logger.error(e.getMessage());
+			}						
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;	
+	}
+	
+	@JSON(serialize=false)
+	public String doPerspectiveCard() throws Exception {
+		try {
+			this.loadPerspectiveCardContent();
 		} catch (ControllerException ce) {
 			this.message=ce.getMessage().toString();
 		} catch (AuthorityException ae) {
@@ -244,11 +282,6 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	@JSON
 	public String getContent() {
 		return content;
-	}
-
-	@JSON
-	public Map<String, String> getVisionScoresData() {
-		return visionScoresData;
 	}
 	
 }

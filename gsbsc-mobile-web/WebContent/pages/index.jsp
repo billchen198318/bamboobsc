@@ -31,6 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <script type="text/javascript">
 
+var uploadOid='';
+
 function refresh_content() {
 	var date1 = $("#date1").val();
 	var date2 = $("#date1").val();
@@ -65,7 +67,46 @@ function refresh_content() {
 				return;
 			}
 			
-			$("#card_content").html( data.content );
+			$("#card_content").html('<center>' + data.content + '</center>');
+			
+		},
+		error: function(e) {
+			$.mobile.loading( 'hide' );			
+			alert( e.statusText );			
+		}
+		
+	});	
+	
+}
+
+function query_perspective(uploadOid) {
+	
+	$.mobile.loading( 'show', {
+		text: 'Please wait!',
+		textVisible: true,
+		theme: 'z',
+		html: ""
+	});	
+	
+	$.ajax({
+		url: "${basePath}/bsc.mobile.doPerspectiveCardAction.action",
+		data: { 
+				'fields.uploadOid'			:	uploadOid
+		},
+		type: "POST",
+		dataType: "json",
+		async: true,
+		timeout: 300000,
+		cache: false,
+		success: function(data) {
+			$.mobile.loading( 'hide' );			
+			
+			if ( data.success != 'Y' ) {				
+				alert( data.message );
+				return;
+			}
+			
+			$("#card_content").html('<center>' + data.content + '</center>');
 			
 		},
 		error: function(e) {

@@ -1,21 +1,21 @@
 <table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="${backgroundColor}">
 	<tr valign="top">
-		<td width="100%" align="center" bgcolor="${backgroundColor}">
+		<td width="100%" align="center" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
 		<font color="${fontColor}" size="4"><b>${vision.title}</b></font>
 		</td>
 	</tr>	
 	<tr valign="top">
-		<td width="100%" align="right" bgcolor="${backgroundColor}">
+		<td width="100%" align="right" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
 		<font color="${fontColor}" size="2"><b>${perspectiveTitle}: ${perspectiveSize}</b></font>
 		</td>
 	</tr>	
 	<tr valign="top">
-		<td width="100%" align="right" bgcolor="${backgroundColor}">
+		<td width="100%" align="right" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
 		<font color="${fontColor}" size="2"><b>${objectiveTitle}: ${objectiveSize}</b></font>
 		</td>
 	</tr>	
 	<tr valign="top">
-		<td width="100%" align="right" bgcolor="${backgroundColor}">
+		<td width="100%" align="right" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
 		<font color="${fontColor}" size="2"><b>${kpiTitle}: ${kpiSize}</b></font>
 		</td>
 	</tr>
