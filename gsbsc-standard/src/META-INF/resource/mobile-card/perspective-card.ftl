@@ -1,4 +1,4 @@
-<table width="380px" border="0" cellspacing="2" cellpadding="0" bgcolor="${backgroundColor}">
+<table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="${backgroundColor}">
 	<tr valign="top">
 		<td width="100%" align="left" bgcolor="${backgroundColor}">
 		<font color="${fontColor}" size="4"><b>${perspective.name}</b></font>
