@@ -106,7 +106,8 @@ function query_perspective(uploadOid) {
 				return;
 			}
 			
-			$("#card_content").html('<center>' + data.content + '</center>');
+			var titleContent = getTitleContent(data.backgroundColor, data.fontColor, data.rootVision.title, 'refresh_content();');
+			$("#card_content").html('<center>' + titleContent + data.content + '</center>');
 			
 		},
 		error: function(e) {
@@ -146,7 +147,9 @@ function query_objectiveByPerspective(uploadOid, perspectiveOid) {
 				return;
 			}
 			
-			$("#card_content").html('<center>' + data.content + '</center>');
+			var fnname = "query_perspective('" + uploadOid + "');";
+			var titleContent = getTitleContent(data.backgroundColor, data.fontColor, (data.perspectiveTitle + ' : ' + data.rootPerspective.name), fnname);
+			$("#card_content").html('<center>' + titleContent + data.content + '</center>');
 			
 		},
 		error: function(e) {
@@ -186,7 +189,9 @@ function query_kpiByObjective(uploadOid, objectiveOid) {
 				return;
 			}
 			
-			$("#card_content").html('<center>' + data.content + '</center>');
+			var fnname = "query_objectiveByPerspective('" + uploadOid + "', '" + data.rootPerspective.oid + "');";
+			var titleContent = getTitleContent(data.backgroundColor, data.fontColor, (data.objectiveTitle + ' : ' + data.rootObjective.name), fnname);			
+			$("#card_content").html('<center>' + titleContent + data.content + '</center>');
 			
 		},
 		error: function(e) {
@@ -196,6 +201,19 @@ function query_kpiByObjective(uploadOid, objectiveOid) {
 		
 	});	
 	
+}
+
+function getTitleContent(backgroundColor, fontColor, title, fnname) {	
+	var titleContent = '';
+	titleContent += '<table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="' + backgroundColor + '">';
+	titleContent += '<tr valign="top">';
+	titleContent += '<td width="100%" align="center" bgcolor="' + backgroundColor + '" onclick="' + fnname + '">';
+	titleContent += '<font color="' + fontColor + '" size="4"><b>' + title + '</b></font>';
+	titleContent += '</td>';
+	titleContent += '</tr>';
+	titleContent += '</table>';
+	titleContent += '<BR/><BR/>';	
+	return titleContent;
 }
 
 function logout_page() {

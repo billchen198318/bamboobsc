@@ -41,6 +41,7 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.util.BscMobileCardUtils;
+import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
@@ -55,8 +56,15 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	protected Logger logger=Logger.getLogger(ScorecardQueryContentAction.class);
 	private String message = "";
 	private String success = IS_NO;
-	private String content = "";
-		
+	private String content = "";	
+	private String backgroundColor = "#ffffff";
+	private String fontColor = "#000000";	
+	private String perspectiveTitle = "";
+	private String objectiveTitle = "";
+	private VisionVO rootVision = new VisionVO();
+	private PerspectiveVO rootPerspective = new PerspectiveVO();
+	private ObjectiveVO rootObjective = new ObjectiveVO();
+	
 	// copy from KpiReportContentQueryAction
 	private void setDateValue() throws Exception {
 		/**
@@ -186,11 +194,20 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}		
 	}
 	
+	private void loadColor() throws ServiceException, Exception {
+		BscReportPropertyUtils.loadData();
+		this.backgroundColor = BscReportPropertyUtils.getBackgroundColor();
+		this.fontColor = BscReportPropertyUtils.getFontColor();
+		this.perspectiveTitle = BscReportPropertyUtils.getPerspectiveTitle();
+		this.objectiveTitle = BscReportPropertyUtils.getObjectiveTitle();		
+	}
+	
 	private void loadPerspectiveCardContent() throws ServiceException, Exception {
 		StringBuilder outContent = new StringBuilder();
 		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA);
 		String uploadOid = this.getFields().get("uploadOid");
 		VisionVO vision = BscMobileCardUtils.getVisionCardFromUpload(uploadOid);
+		this.rootVision = vision;
 		List<PerspectiveVO> perspectives = vision.getPerspectives();
 		for (PerspectiveVO perspective : perspectives) {
 			outContent.append( BscMobileCardUtils.getPerspectivesCardContent(uploadOid, perspective) );
@@ -198,6 +215,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		this.content = outContent.toString();
 		if (!StringUtils.isBlank(content)) {
+			this.loadColor();
 			this.message = "Query success!";
 			this.success = IS_YES;
 		}		
@@ -212,6 +230,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		List<PerspectiveVO> perspectives = vision.getPerspectives();
 		for (PerspectiveVO perspective : perspectives) {
 			if (perspectiveOid.equals(perspective.getOid())) {
+				this.rootPerspective = perspective;
 				List<ObjectiveVO> objectives = perspective.getObjectives();
 				for (ObjectiveVO objective : objectives) {
 					outContent.append( BscMobileCardUtils.getObjectivesCardContent(uploadOid, objective) );
@@ -221,6 +240,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		this.content = outContent.toString();
 		if (!StringUtils.isBlank(content)) {
+			this.loadColor();
 			this.message = "Query success!";
 			this.success = IS_YES;
 		}		
@@ -237,6 +257,8 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 			List<ObjectiveVO> objectives = perspective.getObjectives();
 			for (ObjectiveVO objective : objectives) {
 				if (objectiveOid.equals(objective.getOid())) {
+					this.rootPerspective = perspective;
+					this.rootObjective = objective;
 					List<KpiVO> kpis = objective.getKpis();
 					for (KpiVO kpi : kpis) {
 						outContent.append( BscMobileCardUtils.getKPIsCardContent(uploadOid, kpi) );
@@ -247,6 +269,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		this.content = outContent.toString();
 		if (!StringUtils.isBlank(content)) {
+			this.loadColor();
 			this.message = "Query success!";
 			this.success = IS_YES;
 		}		
@@ -381,6 +404,41 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	@JSON
 	public String getContent() {
 		return content;
+	}
+
+	@JSON
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	@JSON
+	public String getFontColor() {
+		return fontColor;
+	}
+
+	@JSON
+	public String getPerspectiveTitle() {
+		return perspectiveTitle;
+	}
+
+	@JSON
+	public String getObjectiveTitle() {
+		return objectiveTitle;
+	}
+
+	@JSON
+	public VisionVO getRootVision() {
+		return rootVision;
+	}
+
+	@JSON
+	public PerspectiveVO getRootPerspective() {
+		return rootPerspective;
+	}
+
+	@JSON
+	public ObjectiveVO getRootObjective() {
+		return rootObjective;
 	}
 	
 }
