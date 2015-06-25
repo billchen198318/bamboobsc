@@ -26,6 +26,26 @@
 		<font color="${fontColor}" size="2"><b>Weight: ${kpi.weight} %</b></font>
 		</td>
 	</tr>			
+	<tr valign="top">
+		<td width="100%" align="left" bgcolor="${backgroundColor}">
+		<font color="${fontColor}" size="2"><b>management: ${kpi.managementName}</b></font>
+		</td>
+	</tr>			
+	<tr valign="top">
+		<td width="100%" align="left" bgcolor="${backgroundColor}">
+		<font color="${fontColor}" size="2"><b>Calculation: ${kpi.calculationName}</b></font>
+		</td>
+	</tr>		
+	<tr valign="top">
+		<td width="100%" align="left" bgcolor="${backgroundColor}">
+		<font color="${fontColor}" size="2"><b>Unit: ${kpi.unit}</b></font>
+		</td>
+	</tr>		
+	<tr valign="top">
+		<td width="100%" align="left" bgcolor="${backgroundColor}">
+		<font color="${fontColor}" size="2"><b>Formula: ${kpi.formula.name}</b></font>
+		</td>
+	</tr>	
 	<tr>
 		<td width="100%" align="left" bgcolor="${kpi.bgColor}">
 			<font color="${kpi.fontColor}" size="3"><b>Score: ${kpi.score?string(',###.##')}</b></font>
