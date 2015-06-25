@@ -41,7 +41,7 @@ function refresh_content() {
 	$("#card_content").html('');
 	
 	$.mobile.loading( 'show', {
-		text: 'Please wait!',
+		text: '<s:property value="getText('MESSAGE.INDEX_pleaseWait')" escapeJavaScript="true"/>',
 		textVisible: true,
 		theme: 'z',
 		html: ""
@@ -82,7 +82,7 @@ function refresh_content() {
 function query_perspective(uploadOid) {
 	
 	$.mobile.loading( 'show', {
-		text: 'Please wait!',
+		text: '<s:property value="getText('MESSAGE.INDEX_pleaseWait')" escapeJavaScript="true"/>',
 		textVisible: true,
 		theme: 'z',
 		html: ""
@@ -122,7 +122,7 @@ function query_perspective(uploadOid) {
 function query_objectiveByPerspective(uploadOid, perspectiveOid) {
 	
 	$.mobile.loading( 'show', {
-		text: 'Please wait!',
+		text: '<s:property value="getText('MESSAGE.INDEX_pleaseWait')" escapeJavaScript="true"/>',
 		textVisible: true,
 		theme: 'z',
 		html: ""
@@ -164,7 +164,7 @@ function query_objectiveByPerspective(uploadOid, perspectiveOid) {
 function query_kpiByObjective(uploadOid, objectiveOid) {
 	
 	$.mobile.loading( 'show', {
-		text: 'Please wait!',
+		text: '<s:property value="getText('MESSAGE.INDEX_pleaseWait')" escapeJavaScript="true"/>',
 		textVisible: true,
 		theme: 'z',
 		html: ""
@@ -217,7 +217,7 @@ function getTitleContent(backgroundColor, fontColor, title, fnname) {
 }
 
 function logout_page() {
-	if ( confirm("Are you sure?") ) {
+	if ( confirm("<s:property value="getText('MESSAGE.INDEX_logoutPage')" escapeJavaScript="true"/>") ) {
 		window.location = "${basePath}/logout.action";
 	}
 }
@@ -236,9 +236,9 @@ function pageMessage() {
 <div data-role="footer">
     <div data-role="navbar" data-iconpos="left">
         <ul>
-            <li><a href="#" data-icon="delete" onclick="logout_page();">Logout</a></li>
-            <li><a href="#" data-icon="refresh" onclick="refresh_content();">Refresh / Query</a></li>
-            <li><a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini" data-icon="gear">Options</a></li>
+            <li><a href="#" data-icon="delete" onclick="logout_page();"><s:property value="getText('INDEX_Logout')"/></a></li>
+            <li><a href="#" data-icon="refresh" onclick="refresh_content();"><s:property value="getText('INDEX_refreshQuery')"/></a></li>
+            <li><a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini" data-icon="gear"><s:property value="getText('INDEX_options')"/></a></li>
         </ul>
     </div><!-- /navbar -->
 </div><!-- /footer -->
@@ -255,22 +255,19 @@ function pageMessage() {
 		<tr valign="top">
 			<td width="100%">
 			
-				<label for="frequency">Frequency:</label>
-			
-								    
-				    <select name="frequency" id="frequency" data-mini="true">
-				    	<s:iterator value="frequencyMap" status="st" id="cols">
-				    		<option value="<s:property value="#cols.key"/>" <s:if test=" \"6\" == #cols.key "> SELECTED </s:if> ><s:property value="#cols.value"/></option>	
-				    	</s:iterator>			    	
-				    </select>
-						
+				<label for="frequency"><s:property value="getText('INDEX_frequency')"/>:</label>				    
+				<select name="frequency" id="frequency" data-mini="true">
+					<s:iterator value="frequencyMap" status="st" id="cols">
+						<option value="<s:property value="#cols.key"/>" <s:if test=" \"6\" == #cols.key "> SELECTED </s:if> ><s:property value="#cols.value"/></option>	
+					</s:iterator>			    	
+				</select>
 	
 			</td>
 		</tr>
 		<tr valign="top">
 			
 			<td width="100%">
-				<label for="date1">Measures-data begin date:</label>
+				<label for="date1"><s:property value="getText('INDEX_date1')"/>:</label>
 				<input data-role="date" type="text" name="date1" id="date1" value="${measureDataDate1}"/>
 			</td>
 			
@@ -278,7 +275,7 @@ function pageMessage() {
 		<tr valign="top">
 			
 			<td width="100%">
-				<label for="date2">Measures-data end date:</label>
+				<label for="date2"><s:property value="getText('INDEX_date2')"/>:</label>
 				<input data-role="date" type="text" name="date2" id="date2" value="${measureDataDate1}"/>
 			</td>
 			

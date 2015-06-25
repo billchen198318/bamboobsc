@@ -28,6 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <script type="text/javascript">
 
+function redirectLogin(sel) {
+	window.location = '<%=basePath%>login.action?lang=' + sel.value;
+}
+
 function pageMessage() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
 	if (null!=pageMessage && ''!=pageMessage && ' '!=pageMessage) {
@@ -46,7 +50,23 @@ function pageMessage() {
     <tr>
       <td bgcolor="#ffffff">
 	  <center>
-	  <table id="loginTable" width="270" border="0" cellpadding="2" cellspacing="2">	 	   
+	  <table id="loginTable" width="270" border="0" cellpadding="2" cellspacing="2">	 
+        <tr>           
+          <td width="100%" align="center">     
+          	<label for="lang"><s:property value="getText('LOGIN_language')"/>:</label>     	
+          	<select name="lang" id="lang" data-mini="true" onchange="redirectLogin(this);">
+          	<%
+          	String defaultLang = (String)request.getAttribute("lang");
+          	Map<String, Object> langs = LocaleLanguageUtils.getMap();
+          	for (Map.Entry<String, Object> entry : langs.entrySet()) {
+          	%>
+          	<option value="<%=entry.getKey()%>" <% if ( entry.getKey().equals(defaultLang) ) { %> selected <% } %> ><%=String.valueOf( entry.getValue() )%></option>
+          	<% 	
+          	}
+          	%>
+          	</select>
+          </td>
+        </tr>  		  	   
         <tr>
         	<td width="100%" align="center">
         		<img src="./kaptcha.jpg?n=<%=System.currentTimeMillis()%>"/>
@@ -56,19 +76,19 @@ function pageMessage() {
         </tr>  
         <tr>  
         	<td width="100%" align="center">
-        		<label for="username">Account:</label>
+        		<label for="username"><s:property value="getText('LOGIN_username')"/>:</label>
         		<input name="username" id="username" value="" type="text">
         	</td>
         </tr>
         <tr> 
         	<td width="100%" align="center">
-        		<label for="password">Password:</label>
+        		<label for="password"><s:property value="getText('LOGIN_password')"/>:</label>
         		<input name="password" id="password" value="" autocomplete="off" type="password">		
         	</td>
         </tr>        
         <tr>         
         	<td width="100%" align="center">
-        	    <input value="Login" id="submit" name="submit" type="submit">
+        	    <input value="${action.getText('LOGIN_btnLogin')}" id="submit" name="submit" type="submit">
         	</td>
         </tr>
         <tr> 
