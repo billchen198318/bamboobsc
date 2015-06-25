@@ -127,14 +127,14 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	private void checkDateRange() throws ControllerException, Exception {
 		// mm/dd/yyyy to yyyy/mm/dd
 		String date1Tmp[] = super.defaultString( this.getFields().get("date1") ).split("/");
-		String date2Tmp[] = super.defaultString( this.getFields().get("date1") ).split("/");
+		String date2Tmp[] = super.defaultString( this.getFields().get("date2") ).split("/");
 		if (date1Tmp==null || date1Tmp.length!=3 || date2Tmp==null || date2Tmp.length!=3) {
-			throw new ControllerException("Date format error!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_01"));
 		}
 		String date1= date1Tmp[2] + "/" + date1Tmp[0] + "/" + date1Tmp[1];
 		String date2= date2Tmp[2] + "/" + date2Tmp[0] + "/" + date2Tmp[1];
 		if (!SimpleUtils.isDate(date1) || !SimpleUtils.isDate(date2)) {
-			throw new ControllerException("Date format error!<BR/>");
+			throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_01"));
 		}		
 		this.getFields().put("startDate", date1);
 		this.getFields().put("endDate", date2);
@@ -150,7 +150,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 			DateTime dt2 = new DateTime(endDate);
 			int betweenMonths = Months.monthsBetween(dt1, dt2).getMonths();
 			if ( betweenMonths >= 12 ) {
-				throw new ControllerException("Date range can not be more than 12 months!<BR/>");	
+				throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_02"));	
 			}
 			return;
 		}
@@ -159,17 +159,17 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		int betweenYears = Years.yearsBetween(dt1, dt2).getYears();
 		if (BscMeasureDataFrequency.FREQUENCY_QUARTER.equals(frequency)) {
 			if ( betweenYears >= 3 ) {
-				throw new ControllerException("Date range can not be more than 3 years!<BR/>");				
+				throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_03"));				
 			}
 		}
 		if (BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency)) {
 			if ( betweenYears >= 4 ) {
-				throw new ControllerException("Date range can not be more than 4 years!<BR/>");				
+				throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_04"));				
 			}			
 		}
 		if (BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency)) {
 			if ( betweenYears >= 6 ) {
-				throw new ControllerException("Date range can not be more than 6 years!<BR/>");				
+				throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_05"));				
 			}			
 		}
 	}
@@ -189,7 +189,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		this.content = outContent.toString();		
 		if (!StringUtils.isBlank(content)) {
-			this.message = "Query success!";
+			this.message = this.getText("MESSAGE.ScorecardQueryContentAction_06");
 			this.success = IS_YES;
 		}		
 	}
@@ -216,7 +216,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		this.content = outContent.toString();
 		if (!StringUtils.isBlank(content)) {
 			this.loadColor();
-			this.message = "Query success!";
+			this.message = this.getText("MESSAGE.ScorecardQueryContentAction_06");
 			this.success = IS_YES;
 		}		
 	}
@@ -241,7 +241,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		this.content = outContent.toString();
 		if (!StringUtils.isBlank(content)) {
 			this.loadColor();
-			this.message = "Query success!";
+			this.message = this.getText("MESSAGE.ScorecardQueryContentAction_06");
 			this.success = IS_YES;
 		}		
 	}
@@ -270,7 +270,7 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		this.content = outContent.toString();
 		if (!StringUtils.isBlank(content)) {
 			this.loadColor();
-			this.message = "Query success!";
+			this.message = this.getText("MESSAGE.ScorecardQueryContentAction_06");
 			this.success = IS_YES;
 		}		
 	}

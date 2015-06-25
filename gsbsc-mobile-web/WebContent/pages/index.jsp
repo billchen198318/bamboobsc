@@ -35,7 +35,7 @@ var uploadOid='';
 
 function refresh_content() {
 	var date1 = $("#date1").val();
-	var date2 = $("#date1").val();
+	var date2 = $("#date2").val();
 	var frequency = $("#frequency").val();
 	
 	$("#card_content").html('');
