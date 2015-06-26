@@ -224,6 +224,7 @@ public class BscMobileCardUtils {
 		paramMap.put("fontColor", BscReportPropertyUtils.getFontColor());
 		paramMap.put("percentage", getPercentage(kpi.getScore(), compareValue));
 		paramMap.put("uploadOid", uploadOid);		
+		paramMap.put("compareTypeName", BscKpiCode.getCompareTypeMap(false).get(kpi.getCompareType()) );
 		content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				BscMobileCardUtils.class.getClassLoader(), 

@@ -33,6 +33,11 @@
 	</tr>			
 	<tr valign="top">
 		<td width="100%" align="left" bgcolor="${backgroundColor}">
+		<font color="${fontColor}" size="2"><b>Compare type: ${compareTypeName}</b></font>
+		</td>
+	</tr>			
+	<tr valign="top">
+		<td width="100%" align="left" bgcolor="${backgroundColor}">
 		<font color="${fontColor}" size="2"><b>Calculation: ${kpi.calculationName}</b></font>
 		</td>
 	</tr>		
