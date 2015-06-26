@@ -143,7 +143,7 @@ dataSource.password=password
 # chmod a+x startup.sh
 ```
 
-add JAVA_OPTS="-server -Xmx700M" to catalina.sh
+add JAVA_OPTS="-Xmx750M -server -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90" to catalina.sh
 ```
 # ./startup.sh
 ```
