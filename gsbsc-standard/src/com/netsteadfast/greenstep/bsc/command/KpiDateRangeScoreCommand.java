@@ -61,7 +61,7 @@ public class KpiDateRangeScoreCommand extends BaseChainCommandSupport implements
 		String startDate = StringUtils.defaultString( (String)context.get("startDate") ).trim();
 		String endDate = StringUtils.defaultString( (String)context.get("endDate") ).trim();
 		//BscReportSupportUtils.loadExpression(); 2015-04-11 rem
-		long beg = System.currentTimeMillis();
+		//long beg = System.currentTimeMillis();
 		for (VisionVO vision : treeObj.getVisions()) {
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				for (ObjectiveVO objective : perspective.getObjectives()) {
@@ -99,8 +99,8 @@ public class KpiDateRangeScoreCommand extends BaseChainCommandSupport implements
 				}
 			}
 		}
-		long end = System.currentTimeMillis();
-		System.out.println( this.getClass().getName() + " use time(MS) = " + (end-beg) );
+		//long end = System.currentTimeMillis();
+		//System.out.println( this.getClass().getName() + " use time(MS) = " + (end-beg) );
 		return false;
 	}
 	

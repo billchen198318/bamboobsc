@@ -104,7 +104,7 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 	}
 	
 	private void processKpisScore(List<VisionVO> visions) throws Exception {
-		long beg = System.currentTimeMillis();
+		//long beg = System.currentTimeMillis();
 		for (VisionVO vision : visions) {
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				for (ObjectiveVO objective : perspective.getObjectives()) {
@@ -130,8 +130,8 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 				}
 			}
 		}
-		long end = System.currentTimeMillis();
-		System.out.println( this.getClass().getName() + " use time(MS) = " + (end-beg) );		
+		//long end = System.currentTimeMillis();
+		//System.out.println( this.getClass().getName() + " use time(MS) = " + (end-beg) );		
 	}
 	
 //	private float calculationMeasureData(KpiVO kpi) throws Exception {

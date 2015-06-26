@@ -60,7 +60,7 @@ public class BscFormulaUtils {
 		}
 		ScriptExpressionUtils.execute(
 				type, handlerExpression(type, returnMode, expression), results, parameter);
-		System.out.println(results);
+		//System.out.println(results);
 		return results;
 	}
 	
