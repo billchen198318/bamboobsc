@@ -33,8 +33,11 @@ bambooBSC is released under version 2.0 of the Apache Version 2.0
 <br/><br/>
 contact: chen.xin.nien@gmail.com
 <br/><br/>
-how to create a measure project demo video:<br/>
-https://www.youtube.com/watch?v=A27wnMTtfOc 
+Create a scorecard project demo video:<br/>
+https://www.youtube.com/watch?v=A27wnMTtfOc
+<br/>
+Mobile web version demo video:<br/>
+https://www.youtube.com/watch?v=56ocMktSRIs
 <br/><br/>
 <h2>Screenshot</h2>
 <br/>
