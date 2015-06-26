@@ -93,7 +93,7 @@ and save my.cnf
 
 ###5. Extract the archive
 ```
-# p7zip -d bamboobsc-05-20150527.7z
+# p7zip -d bamboobsc-05-20150615.7z
 ```
 
 ###6. Import bbcore.sql to MySQL
@@ -113,6 +113,8 @@ config A ( CORE system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapp
 config B (Balanced Scorecard system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>gsbsc-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
 config C (Simple OLAP system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>qcharts-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+<br/>
+config D (Mobile web ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>gsbsc-mobile-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
 settings <b>dataSource.user</b> and <b>dataSource.password</b> <br/>
 dataSource.user is MySQL account<br/>
@@ -138,7 +140,7 @@ dataSource.password=password
 # chmod a+x startup.sh
 ```
 
-add JAVA_OPTS="-server -Xmx512M" to catalina.sh
+add JAVA_OPTS="-server -Xmx700M" to catalina.sh
 ```
 # ./startup.sh
 ```
