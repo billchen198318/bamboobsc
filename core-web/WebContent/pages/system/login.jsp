@@ -67,7 +67,7 @@ function pageMessage() {
       <td bgcolor="#ffffff"><img src="./images/original.jpg" width="220" height="30" /></td>
     </tr>
     <tr>
-      <td height="240" bgcolor="#ffffff">
+      <td height="260" bgcolor="#ffffff">
 	  <center>
 	  <table id="loginTable" width="270" border="0" cellpadding="2" cellspacing="2">	 
         <tr> 
@@ -101,6 +101,11 @@ function pageMessage() {
         <tr>         
           <td width="225" align="center" colspan="2"><s:submit key="LOGIN_btnLogin" theme="simple" id="btnLogin" name="btnLogin" onclick="submit_login();"/></td>          
         </tr>
+        <tr> 
+          <td width="225" align="center" colspan="3" bgcolor="#FAFAFA">
+          <a href="../gsbsc-mobile-web/index.action"><font color="#7E7E7E" size="2"><b>click to mobile version web.</b></font></a>
+          </td>
+         </tr>        
         <tr> 
           <td width="225" align="center" colspan="2" bgcolor="#FAFAFA">
           <font color="#7E7E7E" size="2">Please use <b>Chrome</b> or <b>Firefox</b> browser, can not support other browser.</font>
