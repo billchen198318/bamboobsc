@@ -1,4 +1,9 @@
-2015-06-20
+2015-07-01
+-----------------------------------------------------------
+Add mobile version web, query scorecard for a mobile-device's browser.
+
+
+2015-06-15
 -----------------------------------------------------------
 Some modifications and add locale language support.
 locale language support:
