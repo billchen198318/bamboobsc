@@ -167,9 +167,9 @@ hamcrest-core-1.3.jar
 
 c3p0
 -------------------------
-c3p0-0.9.5.jar
-c3p0-oracle-thin-extras-0.9.5.jar
-mchange-commons-java-0.2.9.jar
+c3p0-0.9.5.1.jar
+c3p0-oracle-thin-extras-0.9.5.1.jar
+mchange-commons-java-0.2.10.jar
 
 
 ASM	(require by Apache CXF ... etc )
