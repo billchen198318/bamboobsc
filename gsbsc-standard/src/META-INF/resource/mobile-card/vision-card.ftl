@@ -8,6 +8,7 @@
 <table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="${backgroundColor}">
 	<tr valign="top">
 		<td width="100%" align="center" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
+		<img src="./images/go-next.png" border="0" alt="next" onclick="query_perspective('${uploadOid}');"/>
 		<font color="${fontColor}" size="4"><b>${vision.title}</b></font>
 		</td>
 	</tr>	

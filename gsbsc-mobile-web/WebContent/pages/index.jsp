@@ -208,6 +208,7 @@ function getTitleContent(backgroundColor, fontColor, title, fnname) {
 	titleContent += '<table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="' + backgroundColor + '">';
 	titleContent += '<tr valign="top">';
 	titleContent += '<td width="100%" align="center" bgcolor="' + backgroundColor + '" onclick="' + fnname + '">';
+	titleContent += '<img src="./images/go-previous.png" border="0" alt="previous" onclick="' + onclick + '"/>';
 	titleContent += '<font color="' + fontColor + '" size="4"><b>' + title + '</b></font>';
 	titleContent += '</td>';
 	titleContent += '</tr>';
