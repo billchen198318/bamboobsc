@@ -46,6 +46,7 @@ https://www.youtube.com/watch?v=56ocMktSRIs
 <br/>2.
 <img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/A_fix.png"/><br/>
 <br/>3.
+<br/>
 <img src="http://a.fsdn.com/con/app/proj/bamboobsc/screenshots/Screenshot_2015-06-29-14-07-32.png"/><br/>
 
 <br/>
