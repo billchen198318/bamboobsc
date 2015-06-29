@@ -73,8 +73,8 @@ bsh-2.1.8.jar
 
 MYBATIS(iBATIS)
 -------------------------
-mybatis-3.2.8.jar
-mybatis-spring-1.2.2.jar
+mybatis-3.3.0.jar
+mybatis-spring-1.2.3.jar
 
 
 JFreeChart

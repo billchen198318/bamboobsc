@@ -30,8 +30,8 @@ import com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand;
 import com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand;
 import com.netsteadfast.greenstep.bsc.service.IScoreColorService;
 import com.netsteadfast.greenstep.bsc.service.logic.IOrganizationLogicService;
-import com.netsteadfast.greenstep.model.SystemFtpData;
-import com.netsteadfast.greenstep.model.SystemFtpResultObj;
+//import com.netsteadfast.greenstep.model.SystemFtpData;
+//import com.netsteadfast.greenstep.model.SystemFtpResultObj;
 import com.netsteadfast.greenstep.po.hbm.BbScoreColor;
 import com.netsteadfast.greenstep.po.hbm.TbAccount;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
@@ -44,7 +44,7 @@ import com.netsteadfast.greenstep.service.ISysMailHelperService;
 import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.service.ISysUploadService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
-import com.netsteadfast.greenstep.util.SystemFtpUtils;
+//import com.netsteadfast.greenstep.util.SystemFtpUtils;
 import com.netsteadfast.greenstep.vo.AccountVO;
 import com.netsteadfast.greenstep.vo.ScoreColorVO;
 import com.netsteadfast.greenstep.vo.SysCodeVO;
@@ -56,30 +56,30 @@ import com.netsteadfast.greenstep.vo.SysVO;
 @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public class TestUnit {
 	
-	@Test
-	public void testSystemFtp() throws Exception {
-		/*
-		 SystemFtpResultObj resultObj = SystemFtpUtils.getFileOnly("TRAN0001");		 
-		 List<File> files = resultObj.getFiles();
-		 if ( files == null || files.size() < 1 ) {
-			 System.out.println("no file.");
-			 return;
-		 }
-		 for (File file : files) {
-			 System.out.println( file.getPath() );
-		 }
-		 */
-		SystemFtpResultObj resultObj = SystemFtpUtils.getDatas("TRAN0001");
-		List<SystemFtpData> datas = resultObj.getDatas();
-		if ( datas == null ) {
-			System.out.println("no data.");
-			return;
-		}
-		for (SystemFtpData data : datas ) {
-			System.out.println( data.getContent() );
-			System.out.println( String.valueOf( data.getDatas() ) );			
-		}
-	}
+//	@Test
+//	public void testSystemFtp() throws Exception {
+//		/*
+//		 SystemFtpResultObj resultObj = SystemFtpUtils.getFileOnly("TRAN0001");		 
+//		 List<File> files = resultObj.getFiles();
+//		 if ( files == null || files.size() < 1 ) {
+//			 System.out.println("no file.");
+//			 return;
+//		 }
+//		 for (File file : files) {
+//			 System.out.println( file.getPath() );
+//		 }
+//		 */
+//		SystemFtpResultObj resultObj = SystemFtpUtils.getDatas("TRAN0001");
+//		List<SystemFtpData> datas = resultObj.getDatas();
+//		if ( datas == null ) {
+//			System.out.println("no data.");
+//			return;
+//		}
+//		for (SystemFtpData data : datas ) {
+//			System.out.println( data.getContent() );
+//			System.out.println( String.valueOf( data.getDatas() ) );			
+//		}
+//	}
 	
 	/*
 	@SuppressWarnings("unchecked")
@@ -127,24 +127,29 @@ public class TestUnit {
 	 * 
 	 */
 	
-	public static void main(String args[]) throws Exception {
-		/*
-		String val = "                    ";
-		System.out.println(StringUtils.isEmpty(val));
-		System.out.println(StringUtils.isBlank(val));
-		*/
-		
-		/*
-		SimpleChain chain = new SimpleChain();
-		ChainResultObj result = chain.getResultFromClass(
-				new Class[]{LoadBscMixDataCommand.class, LoadBscStructTreeCommand.class});
-		System.out.println( result.getValue() );
-		System.exit(1);
-		*/
-		IScoreColorService<ScoreColorVO, BbScoreColor, String> scoreColorService =
-				(IScoreColorService<ScoreColorVO, BbScoreColor, String>)AppContext.getBean("bsc.service.ScoreColorService");
-		System.out.println( scoreColorService.findForMaxValue() );
-	}
+//	public static void main(String args[]) throws Exception {
+//		/*
+//		String val = "                    ";
+//		System.out.println(StringUtils.isEmpty(val));
+//		System.out.println(StringUtils.isBlank(val));
+//		*/
+//		
+//		/*
+//		SimpleChain chain = new SimpleChain();
+//		ChainResultObj result = chain.getResultFromClass(
+//				new Class[]{LoadBscMixDataCommand.class, LoadBscStructTreeCommand.class});
+//		System.out.println( result.getValue() );
+//		System.exit(1);
+//		*/
+//		IScoreColorService<ScoreColorVO, BbScoreColor, String> scoreColorService =
+//				(IScoreColorService<ScoreColorVO, BbScoreColor, String>)AppContext.getBean("bsc.service.ScoreColorService");
+//		//System.out.println( scoreColorService.findForMaxValue() );
+//		
+//		Map<String, Object> paramMap = new HashMap<String, Object>();
+//		DefaultResult<List<BbScoreColor>> result = scoreColorService.ibatisSelectListByParams(paramMap);
+//		List<BbScoreColor> testList = result.getValue();
+//		System.out.println( testList.size() );
+//	}
 	
 	@Test
 	public void test7() throws Exception {
