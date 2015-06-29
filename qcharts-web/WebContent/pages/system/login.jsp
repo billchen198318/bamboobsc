@@ -103,7 +103,7 @@ function pageMessage() {
         </tr>
         <tr> 
           <td width="225" align="center" colspan="3" bgcolor="#FAFAFA">
-          <a href="../gsbsc-mobile-web/index.action"><font color="#7E7E7E" size="2"><b>click to mobile version web.</b></font></a>
+          <a href="../gsbsc-mobile-web/index.action"><font color="#7E7E7E" size="3"><b>click to mobile version web.</b></font></a>
           </td>
          </tr>        
         <tr> 
