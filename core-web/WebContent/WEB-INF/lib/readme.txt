@@ -284,8 +284,8 @@ jstl-api-1.2.jar
 
 JasperReports
 -------------------------
-jasperreports-6.0.4.jar
-jasperreports-fonts-6.0.4.jar
+jasperreports-6.1.0.jar
+jasperreports-fonts-6.1.0.jar
 jasperreports-chart-themes-5.6.0.jar
 jasperreports-core-renderer.jar
 jasperreports-htmlcomponent-5.0.1.jar
