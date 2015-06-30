@@ -89,7 +89,7 @@ and save my.cnf
 ###3. Get bambooBSC environment file
 ```
 # cd /home/pi
-# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150615.7z
+# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150701.7z
 ```
 
 ###4. Install P7ZIP
@@ -99,7 +99,7 @@ and save my.cnf
 
 ###5. Extract the archive
 ```
-# p7zip -d bamboobsc-05-20150615.7z
+# p7zip -d bamboobsc-05-20150701.7z
 ```
 
 ###6. Import bbcore.sql to MySQL
