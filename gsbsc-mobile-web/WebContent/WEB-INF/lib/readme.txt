@@ -376,7 +376,7 @@ commons-configuration-1.10.jar
 eigenbase-properties-1.1.4.jar
 eigenbase-resgen-1.3.6.jar
 eigenbase-xom-1.3.4.jar
-mondrian-3.9.0.0-213.jar
+mondrian-3.10.0.1-130.jar
 olap4j-1.2.0.jar
 olap4j-tck-1.2.0.jar
 olap4j-xmla-1.2.0.jar
