@@ -75,6 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath%>/signature_pad/signature_pad.js"></script>
 	
 	
+	<!-- Highcharts -->
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>	
+	
+	
 <style type="text/css">
 
 .myExportIcon {
