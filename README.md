@@ -9,6 +9,7 @@ Features:<br/>
 3. Strategy Map, and BSC SWOT.<br/>
 4. Can custom SQL query results show as Charts ( PIE, BAR, LINE, AREA ) on QCHARTS-WEB.<br/>
 5. Provides a simple OLAP query.<br/>
+6. Provides sourcecard query for a mobile-device browser.
 <br/><br/>
 
 <h2>Demo web: ( The web run on Raspberry pi 2 )</h2>
