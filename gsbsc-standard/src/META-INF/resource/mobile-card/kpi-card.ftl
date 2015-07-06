@@ -61,6 +61,11 @@
 		</td>
 	</tr>	
 	<tr valign="top">
+		<td width="100%" align="center" bgcolor="#ffffff">
+			<img src="./bsc.mobile.commonMeterChartAction.action?oid=${chartDataOid}" border="0" alt="score-meter-chart" />
+		</td>
+	</tr>	
+	<tr valign="top">
 		<td width="100%" align="left" bgcolor="#ffffff">
 		description:<BR/>
 		${kpi.description}

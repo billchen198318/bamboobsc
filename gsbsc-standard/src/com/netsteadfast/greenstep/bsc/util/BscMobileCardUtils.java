@@ -43,6 +43,7 @@ import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
+import com.netsteadfast.greenstep.util.JFreeChartDataMapperUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.TemplateUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
@@ -225,6 +226,22 @@ public class BscMobileCardUtils {
 		paramMap.put("percentage", getPercentage(kpi.getScore(), compareValue));
 		paramMap.put("uploadOid", uploadOid);		
 		paramMap.put("compareTypeName", BscKpiCode.getCompareTypeMap(false).get(kpi.getCompareType()) );
+		int score = (int)kpi.getScore();
+		int lowerBound = (int)kpi.getMin();
+		int upperBound = (int)compareValue;	
+		if (score<=lowerBound) {
+			lowerBound = score;
+		}
+		if (score>=upperBound ) {
+			upperBound = score;
+		}				
+		if (lowerBound>=upperBound) {			
+			upperBound = upperBound + lowerBound;
+		}			
+		String chartDataOid = JFreeChartDataMapperUtils.createMeterData(
+				kpi.getName(), kpi.getScore(), lowerBound, upperBound, 
+				320, 280);		
+		paramMap.put("chartDataOid", chartDataOid);
 		content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				BscMobileCardUtils.class.getClassLoader(), 

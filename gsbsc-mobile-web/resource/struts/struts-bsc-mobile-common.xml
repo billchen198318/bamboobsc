@@ -69,19 +69,26 @@
 		
 		<default-interceptor-ref name="greenStepProvideCustomStack" />
 		
-		<action name="core.commonBarChartAction" class="core.web.controller.CommonBarChartAction">
+		<action name="bsc.mobile.commonBarChartAction" class="core.web.controller.CommonBarChartAction">
   			<result name="success" type="chart">
     			<param name="width">480</param>
     			<param name="height">380</param> 
   			</result>
 		</action>
 		
-		<action name="core.commonPieChartAction" class="core.web.controller.CommonPieChartAction">
+		<action name="bsc.mobile.commonPieChartAction" class="core.web.controller.CommonPieChartAction">
   			<result name="success" type="chart">
     			<param name="width">480</param>
     			<param name="height">380</param> 
   			</result>
 		</action>
+		
+		<action name="bsc.mobile.commonMeterChartAction" class="core.web.controller.CommonMeterChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">320</param>
+    			<param name="height">280</param> 
+  			</result>
+		</action>			
 				
 	</package>				
 		

@@ -80,6 +80,13 @@
     			<param name="height">380</param> 
   			</result>
 		</action>
+		
+		<action name="qcharts.commonMeterChartAction" class="core.web.controller.CommonMeterChartAction">
+  			<result name="success" type="chart">
+    			<param name="width">320</param>
+    			<param name="height">280</param> 
+  			</result>
+		</action>		
 				
 	</package>
 				

@@ -26,5 +26,6 @@
     
     <bean id="core.web.controller.CommonBarChartAction" class="com.netsteadfast.greenstep.action.CommonBarChartAction" scope="prototype" />
     <bean id="core.web.controller.CommonPieChartAction" class="com.netsteadfast.greenstep.action.CommonPieChartAction" scope="prototype" />
+    <bean id="core.web.controller.CommonMeterChartAction" class="com.netsteadfast.greenstep.action.CommonMeterChartAction" scope="prototype" />
         	    	    	    	    	    
 </beans>

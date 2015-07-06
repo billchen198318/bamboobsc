@@ -101,6 +101,28 @@ public class JFreeChartDataMapperUtils {
 		return dataMap;
 	}	
 	
+	public static String createMeterData(String title, float value, int lowerBound, int upperBound, 
+			int width, int height) throws Exception {
+		Map<String, Object> meterDataMap = fillMeterDataMap(title, value, lowerBound, upperBound, 
+				width, height);
+		return createUploadData(meterDataMap);
+	}
+	
+	public static Map<String, Object> fillMeterDataMap(String title, float value, int lowerBound, int upperBound, 
+			int width, int height) throws Exception {
+		if (null == title || lowerBound >= upperBound) {
+			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_INCORRECT) );
+		}
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("title", title);		
+		dataMap.put("value", String.valueOf(value));
+		dataMap.put("lowerBound", lowerBound);
+		dataMap.put("upperBound", upperBound);		
+		dataMap.put("width", width);
+		dataMap.put("height", height);		
+		return dataMap;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> getChartData2Map(String uploadOid) throws Exception {
 		if (StringUtils.isBlank(uploadOid)) {
