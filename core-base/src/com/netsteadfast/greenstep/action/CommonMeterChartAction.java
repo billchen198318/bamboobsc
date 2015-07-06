@@ -100,62 +100,62 @@ public class CommonMeterChartAction extends BaseSupportAction {
 	}	
 	
 	private void fillChart(String title, float value, int lowerBound, int upperBound) throws Exception {
-        DefaultValueDataset dataset = new DefaultValueDataset();
-        
-        dataset.setValue(value);
+		DefaultValueDataset dataset = new DefaultValueDataset();
+		
+		dataset.setValue(value);
  
-        DialPlot plot = new DialPlot();
-        plot.setView(0.0d, 0.0d, 1.0d, 1.0d);
-        plot.setDataset(0, dataset);
-        
-        StandardDialFrame frame = new StandardDialFrame();
-        plot.setDialFrame(frame);
-        DialBackground dialBackground = new DialBackground();
-        dialBackground.setGradientPaintTransformer(
-        		new StandardGradientPaintTransformer(GradientPaintTransformType.VERTICAL));
-        plot.setBackground(dialBackground);
-        DialTextAnnotation textAnnotation = new DialTextAnnotation( title );
-        textAnnotation.setRadius(0.555555555555555555D);
-        plot.addLayer(textAnnotation);
-        
-        DialValueIndicator valueIndicator = new DialValueIndicator(0);
-        plot.addLayer(valueIndicator);
-        
-        StandardDialScale scale1 = new StandardDialScale();
-        scale1.setLowerBound( lowerBound );
-        scale1.setUpperBound( upperBound );
-        scale1.setStartAngle( -140 ); // -120
-        scale1.setExtent( -260D ); // -300D 
-        scale1.setTickRadius(0.88D);
-        scale1.setTickLabelOffset(0.14999999999999999D); 
-        scale1.setTickLabelFont(new Font("Dialog", 0, 14)); 
-        plot.addScale(0, scale1);
-        
-        StandardDialRange standarddialrange0 = new StandardDialRange( lowerBound, (upperBound*0.6), Color.red);
-        standarddialrange0.setInnerRadius(0.52000000000000002D);
-        standarddialrange0.setOuterRadius(0.55000000000000004D);
-        plot.addLayer(standarddialrange0);
-        
-        StandardDialRange standarddialrange1 = new StandardDialRange( (upperBound*0.6), (upperBound*0.8), Color.orange);
-        standarddialrange1.setInnerRadius(0.52000000000000002D);
-        standarddialrange1.setOuterRadius(0.55000000000000004D);
-        plot.addLayer(standarddialrange1);
-        
-        StandardDialRange standarddialrange2 = new StandardDialRange( (upperBound*0.8), upperBound, Color.green);
-        standarddialrange2.setInnerRadius(0.52000000000000002D);
-        standarddialrange2.setOuterRadius(0.55000000000000004D);
-        plot.addLayer(standarddialrange2);
-        
-        Pointer pointer = new Pointer(0); 
-        pointer.setFillPaint(new Color(144, 196, 246));
-        plot.addPointer(pointer);
-        plot.mapDatasetToScale(0, 0);
-        DialCap dialcap = new DialCap();
-        dialcap.setRadius(0.0700000000000001D);
-        plot.setCap(dialcap);
-        
-        this.chart = new JFreeChart(plot);
-        this.chart.setBackgroundPaint(new Color(234, 244, 253));
+		DialPlot plot = new DialPlot();
+		plot.setView(0.0d, 0.0d, 1.0d, 1.0d);
+		plot.setDataset(0, dataset);
+		
+		StandardDialFrame frame = new StandardDialFrame();
+		plot.setDialFrame(frame);
+		DialBackground dialBackground = new DialBackground();
+		dialBackground.setGradientPaintTransformer(
+				new StandardGradientPaintTransformer(GradientPaintTransformType.VERTICAL));
+		plot.setBackground(dialBackground);
+		DialTextAnnotation textAnnotation = new DialTextAnnotation( title );
+		textAnnotation.setRadius(0.555555555555555555D);
+		plot.addLayer(textAnnotation);
+		
+		DialValueIndicator valueIndicator = new DialValueIndicator(0);
+		plot.addLayer(valueIndicator);
+		
+		StandardDialScale scale1 = new StandardDialScale();
+		scale1.setLowerBound( lowerBound );
+		scale1.setUpperBound( upperBound );
+		scale1.setStartAngle( -140 ); // -120
+		scale1.setExtent( -260D ); // -300D 
+		scale1.setTickRadius(0.88D);
+		scale1.setTickLabelOffset(0.14999999999999999D); 
+		scale1.setTickLabelFont(new Font("Dialog", 0, 14)); 
+		plot.addScale(0, scale1);
+		
+		StandardDialRange standarddialrange0 = new StandardDialRange( lowerBound, (upperBound*0.6), Color.red);
+		standarddialrange0.setInnerRadius(0.52000000000000002D);
+		standarddialrange0.setOuterRadius(0.55000000000000004D);
+		plot.addLayer(standarddialrange0);
+		
+		StandardDialRange standarddialrange1 = new StandardDialRange( (upperBound*0.6), (upperBound*0.8), Color.orange);
+		standarddialrange1.setInnerRadius(0.52000000000000002D);
+		standarddialrange1.setOuterRadius(0.55000000000000004D);
+		plot.addLayer(standarddialrange1);
+		
+		StandardDialRange standarddialrange2 = new StandardDialRange( (upperBound*0.8), upperBound, Color.green);
+		standarddialrange2.setInnerRadius(0.52000000000000002D);
+		standarddialrange2.setOuterRadius(0.55000000000000004D);
+		plot.addLayer(standarddialrange2);
+		
+		Pointer pointer = new Pointer(0); 
+		pointer.setFillPaint(new Color(144, 196, 246));
+		plot.addPointer(pointer);
+		plot.mapDatasetToScale(0, 0);
+		DialCap dialcap = new DialCap();
+		dialcap.setRadius(0.0700000000000001D);
+		plot.setCap(dialcap);
+		
+		this.chart = new JFreeChart(plot);
+		this.chart.setBackgroundPaint(new Color(234, 244, 253));
 	}
 
 	public JFreeChart getChart() {
