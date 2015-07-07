@@ -143,7 +143,8 @@ public class BscMobileCardUtils {
 		return visionScores;
 	}
 	
-	public static String getVisionCardContent(VisionVO vision) throws ServiceException, Exception {
+	public static String getVisionCardContent(VisionVO vision, String frequencyName, 
+			String startDate, String endDate) throws ServiceException, Exception {
 		String content = "";
 		int perspectiveSize = vision.getPerspectives().size();
 		int objectiveSize = 0;
@@ -170,6 +171,9 @@ public class BscMobileCardUtils {
 		paramMap.put("kpiSize", kpiSize);
 		paramMap.put("percentage", getPercentage(vision.getScore(), 100f));
 		paramMap.put("uploadOid", uploadOid);
+		paramMap.put("frequencyName", frequencyName);
+		paramMap.put("startDate", startDate);
+		paramMap.put("endDate", endDate);
 		content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				BscMobileCardUtils.class.getClassLoader(), 

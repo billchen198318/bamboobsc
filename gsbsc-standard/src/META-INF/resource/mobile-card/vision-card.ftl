@@ -27,6 +27,16 @@
 		<font color="${fontColor}" size="2"><b>${kpiTitle}: ${kpiSize}</b></font>
 		</td>
 	</tr>
+	<tr valign="top">
+		<td width="100%" align="right" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
+		<font color="${fontColor}" size="2"><b>Frequency: ${frequencyName}</b></font>
+		</td>
+	</tr>	
+	<tr valign="top">
+		<td width="100%" align="right" bgcolor="${backgroundColor}" onclick="query_perspective('${uploadOid}');">
+		<font color="${fontColor}" size="2"><b>Date range: ${startDate} - ${endDate}</b></font>
+		</td>
+	</tr>	
 	<tr>
 		<td width="100%" align="left" bgcolor="${vision.bgColor}">
 			<font color="${vision.fontColor}" size="3"><b>Score: ${vision.score?string(',###.##')}</b></font>

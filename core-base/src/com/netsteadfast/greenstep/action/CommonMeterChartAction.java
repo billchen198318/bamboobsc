@@ -155,7 +155,8 @@ public class CommonMeterChartAction extends BaseSupportAction {
 		plot.setCap(dialcap);
 		
 		this.chart = new JFreeChart(plot);
-		this.chart.setBackgroundPaint(new Color(234, 244, 253));
+		//this.chart.setBackgroundPaint(new Color(234, 244, 253));
+		this.chart.setBackgroundPaint( Color.white );
 	}
 
 	public JFreeChart getChart() {

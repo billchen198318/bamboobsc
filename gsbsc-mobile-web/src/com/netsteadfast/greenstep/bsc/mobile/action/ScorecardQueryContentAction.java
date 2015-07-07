@@ -178,13 +178,21 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		this.checkDateRange();
 		this.setDateValue();
 		StringBuilder outContent = new StringBuilder();
+		String frequency = this.getFields().get("frequency");
 		this.message = SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA);
 		List<VisionVO> visionScores = BscMobileCardUtils.getVisionCard(
-				this.getFields().get("frequency"), 
-				this.getFields().get("startDate"), 
-				this.getFields().get("endDate"));		
-		for (VisionVO vision : visionScores) {
-			outContent.append( BscMobileCardUtils.getVisionCardContent(vision) );
+				frequency, this.getFields().get("startDate"), this.getFields().get("endDate"));
+		String dateStr1 = this.getFields().get("startDate");
+		String dateStr2 = this.getFields().get("endDate");		
+		if (BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency) 
+				|| BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency)
+				|| BscMeasureDataFrequency.FREQUENCY_QUARTER.equals(frequency) ) {
+			dateStr1 = dateStr1.substring(0, 4);
+			dateStr2 = dateStr2.substring(0, 4);
+		}
+		for (VisionVO vision : visionScores) {			
+			outContent.append( BscMobileCardUtils.getVisionCardContent(
+					vision, BscMeasureDataFrequency.getFrequencyMap(false).get(frequency), dateStr1, dateStr2) );
 			outContent.append("<BR/>");
 		}
 		this.content = outContent.toString();		
