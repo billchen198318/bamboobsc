@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -52,6 +53,68 @@ public class JReportUtils {
 		sysJreportService = (ISysJreportService<SysJreportVO, TbSysJreport, String>)AppContext.getBean("core.service.SysJreportService");
 	}
 	
+	public static void deployReport(SysJreportVO report) throws Exception {
+		TbSysJreport destReportObj = new TbSysJreport();
+		BeanUtils.copyProperties(destReportObj, report);
+		deployReport( destReportObj );
+	}
+	
+	public static void deployReport(TbSysJreport report) throws Exception {		
+		String reportDeployDirName = Constants.getDeployJasperReportDir() + "/";
+		File reportDeployDir = new File(reportDeployDirName);
+		try {
+			if (!reportDeployDir.exists()) {
+				logger.warn("no exists dir, force mkdir " + reportDeployDirName);
+				FileUtils.forceMkdir(reportDeployDir);
+			}								
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.error(e.getMessage().toString());
+		}
+		logger.info("REPORT-ID : " + report.getReportId());
+		File reportFile = null;
+		File reportZipFile = null;			
+		OutputStream os = null;
+		try {
+			String reportFileFullPath = reportDeployDirName + report.getReportId() + "/" + report.getFile();				
+			String reportZipFileFullPath = reportDeployDirName + report.getReportId() + ".zip";		
+			reportZipFile = new File(reportZipFileFullPath);
+			if (reportZipFile.exists()) {
+				logger.warn("delete " + reportZipFileFullPath);
+				FileUtils.forceDelete(reportZipFile);					
+			}
+			os = new FileOutputStream(reportZipFile);
+			IOUtils.write(report.getContent(), os);
+			os.flush();
+			ZipFile zipFile = new ZipFile( reportZipFileFullPath );
+			zipFile.extractAll( reportDeployDirName );
+			reportFile = new File( reportFileFullPath );
+			if (!reportFile.exists()) {
+				logger.warn("report file is missing : " + reportFileFullPath);
+				return;
+			}
+			if (YesNo.YES.equals(report.getIsCompile()) && report.getFile().endsWith("jrxml")) {
+				logger.info("compile report...");
+				String outJasper = compileReportToJasperFile(new String[]{reportFileFullPath}, reportDeployDirName + report.getReportId() + "/");
+				logger.info("out : " + outJasper);
+			}
+		} catch (JRException re) {
+			re.printStackTrace();
+			logger.error(re.getMessage().toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.error(e.getMessage().toString());
+		} finally {
+			if (os!=null) {
+				os.close();
+			}
+			os = null;
+			reportFile = null;
+			reportZipFile = null;
+		}
+		reportDeployDir = null;		
+	}
+	
 	public static void deploy() throws ServiceException, Exception {
 		logger.info("begin deploy...");
 		List<TbSysJreport> reports = sysJreportService.findListByParams(null);
@@ -61,57 +124,18 @@ public class JReportUtils {
 			if (reportDeployDir.exists()) {
 				logger.warn("delete " + reportDeployDirName);
 				FileUtils.forceDelete(reportDeployDir);
-			}		
-			FileUtils.forceMkdir(reportDeployDir);				
+			}	
+			logger.warn("mkdir " + reportDeployDirName);
+			FileUtils.forceMkdir(reportDeployDir);					
+			for (TbSysJreport report : reports) {
+				deployReport(report);
+			}							
 		} catch (IOException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage().toString());
 		}
-		for (TbSysJreport report : reports) {
-			logger.info("REPORT-ID : " + report.getReportId());
-			File reportFile = null;
-			File reportZipFile = null;			
-			OutputStream os = null;
-			try {
-				String reportFileFullPath = reportDeployDirName + report.getReportId() + "/" + report.getFile();				
-				String reportZipFileFullPath = reportDeployDirName + report.getReportId() + ".zip";		
-				reportZipFile = new File(reportZipFileFullPath);
-				if (reportZipFile.exists()) {
-					logger.warn("delete " + reportZipFileFullPath);
-					FileUtils.forceDelete(reportZipFile);					
-				}
-				os = new FileOutputStream(reportZipFile);
-				IOUtils.write(report.getContent(), os);
-				os.flush();
-				ZipFile zipFile = new ZipFile( reportZipFileFullPath );
-				zipFile.extractAll( reportDeployDirName );
-				reportFile = new File( reportFileFullPath );
-				if (!reportFile.exists()) {
-					logger.warn("report file is missing : " + reportFileFullPath);
-					continue;
-				}
-				if (YesNo.YES.equals(report.getIsCompile()) && report.getFile().endsWith("jrxml")) {
-					logger.info("compile report...");
-					String outJasper = compileReportToJasperFile(new String[]{reportFileFullPath}, reportDeployDirName + report.getReportId() + "/");
-					logger.info("out : " + outJasper);
-				}
-			} catch (JRException re) {
-				re.printStackTrace();
-				logger.error(re.getMessage().toString());
-			} catch (IOException e) {
-				e.printStackTrace();
-				logger.error(e.getMessage().toString());
-			} finally {
-				if (os!=null) {
-					os.close();
-				}
-				os = null;
-				reportFile = null;
-				reportZipFile = null;
-			}
-		}
-		reportDeployDir = null;
-		logger.info("end...");
+		reportDeployDir = null;			
+		logger.info("end deploy...");
 	}
 	
 	/**

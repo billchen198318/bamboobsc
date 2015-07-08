@@ -153,6 +153,15 @@ public class SystemJreportSaveOrUpdateAction extends BaseJsonAction {
 		file = null;
 	}
 	
+	private void deployReport(SysJreportVO report) {
+		try {
+			JReportUtils.deployReport(report);
+		} catch (Exception e) {
+			logger.error( e.getMessage().toString() );
+			e.printStackTrace();			
+		}
+	}
+	
 	private void save() throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.checkFields();
 		if ( StringUtils.isBlank(this.getFields().get("uploadOid")) ) {
@@ -170,6 +179,7 @@ public class SystemJreportSaveOrUpdateAction extends BaseJsonAction {
 		this.message = result.getSystemMessage().getValue();
 		if (result.getValue()!=null) {
 			this.success = IS_YES;
+			this.deployReport( result.getValue() );			
 		}
 	}
 	
@@ -191,6 +201,7 @@ public class SystemJreportSaveOrUpdateAction extends BaseJsonAction {
 		this.message = result.getSystemMessage().getValue();
 		if (result.getValue()!=null) {
 			this.success = IS_YES;
+			this.deployReport( result.getValue() );			
 		}		
 	}
 	
