@@ -245,13 +245,10 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 			continue;
 		} 
 		
-		var maxValue = 100;
+		var maxValue = target;
 		if (maxValue < score) {
 			maxValue = score;
 		}
-		if (maxValue < target) {
-			maxValue = target;
-		}		
 		
 		var labelString = kpis[k].name + " ( " + score + " ) ";
 		
