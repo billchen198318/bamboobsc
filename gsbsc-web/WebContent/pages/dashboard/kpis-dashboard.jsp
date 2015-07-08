@@ -351,13 +351,10 @@ function BSC_PROG003D0006Q_showKpisMeterGauge( data ) {
 					continue;
 				} 
 				
-				var maxValue = 100;
+				var maxValue = target;
 				if (maxValue < score) {
 					maxValue = score;
 				}
-				if (maxValue < target) {
-					maxValue = target;
-				}		
 				
 				var labelString = kpi.name + " ( " + score + " ) ";
 				

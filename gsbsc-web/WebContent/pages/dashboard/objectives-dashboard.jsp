@@ -237,12 +237,9 @@ function BSC_PROG003D0005Q_showObjectivesMeterGauge( data ) {
 				continue;
 			} 
 			
-			var maxValue = 100;
+			var maxValue = target;
 			if (maxValue < score) {
 				maxValue = score;
-			}
-			if (maxValue < target) {
-				maxValue = target;
 			}		
 			
 			var labelString = objective.name + " ( " + score + " ) ";

@@ -181,13 +181,10 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 			continue;
 		} 
 		
-		var maxValue = 100;
+		var maxValue = target;
 		if (maxValue < score) {
 			maxValue = score;
-		}
-		if (maxValue < target) {
-			maxValue = target;
-		}		
+		}	
 		
 		var labelString = perspective.name + " ( " + score + " ) ";
 		
