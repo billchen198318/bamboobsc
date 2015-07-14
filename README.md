@@ -159,3 +159,70 @@ example (if raspberry pi 2 IP-Address is 192.168.1.100) :<br/>
 <br/>
 
 the log file on /tmp/
+
+<br/>
+<br/>
+
+###Build development environments
+```
+System required
+A. JDK8
+B. Eclipse4 or later version
+C. Apache Tomcat7
+```
+
+###1. Download archives file
+click "Download ZIP" button<br/>
+<img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/001.png"></img>
+
+###2. Unzip the archive file bamboobsc-master.zip
+Unzip to C:\home\git\<br/>
+<img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/002.png"></img>
+
+###3. Open eclipse
+workspace dir input C:\home\git\bamboobsc-master<br/>
+<img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/003.png"></img>
+
+###4. Configure eclipse
+settings Text file encoding to UTF-8<br/>
+<img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/005.png"></img>
+
+###5. Import project
+   a. core-persistence
+   b. core-lib
+   c. core-base
+   d. core-web
+   e. gsbsc-standard
+   f. gsbsc-web
+   g. qcharts-standard
+   h. qcharts-web
+   i. gsbsc-mobile-web<br/>
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/004.png"></img>
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/006.png"></img>
+   
+   config tomcat7 server<br/> 
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/007.png"></img>
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/008.png"></img>
+   
+   
+   config <b>core-lib</b> project "ThirdPartyLib" user libraries<br/>
+   add External JARs: all jar file on C:\home\git\bamboobsc-master\core-web\WEB-INF\lib\<br/> 
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/009.png"></img>
+   
+   
+   config <b>core-base</b> project "CORE-LIB" user libraries<br/>
+   add External JARs: "core-persistence.jar" and "core-lib.jar" on C:\home\git\bamboobsc-master\core-export-lib\<br/>
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/010.png"></img>
+   
+   
+   config <b>gsbsc-standard</b> project "CORE-BASE" user libraries<br/>
+   add External JARs: "core-base.jar" on C:\home\git\bamboobsc-master\core-export-lib\<br/>
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/011.png"></img>
+   
+###5. Clean Java Problems ( if found Java Problem on Markers )
+   1. Clean all project 
+   2. Restart
+
+   no found Java Problem, Environment Setup Complete<br/>
+   <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/012.png"></img>
+
