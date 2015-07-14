@@ -176,7 +176,7 @@ click "Download ZIP" button<br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/001.png"></img>
 
 ###2. Unzip the archive file bamboobsc-master.zip
-Unzip to C:\home\git\<br/>
+Unzip to C:\home\git\ <br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/002.png"></img>
 
 ###3. Open eclipse
@@ -206,17 +206,17 @@ settings Text file encoding to UTF-8<br/>
    
    
    config <b>core-lib</b> project "ThirdPartyLib" user libraries<br/>
-   add External JARs: all jar file on C:\home\git\bamboobsc-master\core-web\WEB-INF\lib\<br/> 
+   add External JARs: all jar file on C:\home\git\bamboobsc-master\core-web\WEB-INF\lib\ <br/> 
    <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/009.png"></img>
    
    
    config <b>core-base</b> project "CORE-LIB" user libraries<br/>
-   add External JARs: "core-persistence.jar" and "core-lib.jar" on C:\home\git\bamboobsc-master\core-export-lib\<br/>
+   add External JARs: "core-persistence.jar" and "core-lib.jar" on C:\home\git\bamboobsc-master\core-export-lib\ <br/>
    <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/010.png"></img>
    
    
    config <b>gsbsc-standard</b> project "CORE-BASE" user libraries<br/>
-   add External JARs: "core-base.jar" on C:\home\git\bamboobsc-master\core-export-lib\<br/>
+   add External JARs: "core-base.jar" on C:\home\git\bamboobsc-master\core-export-lib\ <br/>
    <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/011.png"></img>
    
 ###5. Clean Java Problems ( if found Java Problem on Markers )
