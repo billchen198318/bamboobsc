@@ -188,14 +188,14 @@ settings Text file encoding to UTF-8<br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/005.png"></img>
 
 ###5. Import project
-   a. core-persistence
-   b. core-lib
-   c. core-base
-   d. core-web
-   e. gsbsc-standard
-   f. gsbsc-web
-   g. qcharts-standard
-   h. qcharts-web
+   a. core-persistence<br/>
+   b. core-lib<br/>
+   c. core-base<br/>
+   d. core-web<br/>
+   e. gsbsc-standard<br/>
+   f. gsbsc-web<br/>
+   g. qcharts-standard<br/>
+   h. qcharts-web<br/>
    i. gsbsc-mobile-web<br/>
    <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/004.png"></img>
    <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/006.png"></img>
