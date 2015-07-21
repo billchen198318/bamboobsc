@@ -1,11 +1,11 @@
 <table id="gridQuery_table${id}" width="${width}" border="0" cellspacing="0" cellpadding="1" style="display:none" style="background-color:#d7e3ed;">
   <tr>
   	<td width="80px" bgcolor="#d7e3ed" align="left" >
-  		<font size="2">total:&nbsp;<span id="gridQuery_pageOf_rowCount${id}"/></font>  	
+  		<font size="2">${totalName}:&nbsp;<span id="gridQuery_pageOf_rowCount${id}"/></font>  	
   	</td>
     <td width="130px" bgcolor="#d7e3ed" align="left">
     <input type="hidden" name="pageOf.size" id="gridQuery_pageOf_size${id}" value="1"/>
-    	<font size="2">page</font>
+    	<font size="2">${pageName}</font>
     	<select name="pageOf.select" id="gridQuery_pageOf_select${id}" 
     			data-dojo-id="gridQuery_pageOf_select${id}" data-dojo-type="dijit.form.Select" data-dojo-props='style:"width: 75px;" ' 
     			onChange="changeGridQueryPageOfSelect${id}();" >
@@ -19,7 +19,7 @@
     <td width="20px" bgcolor="#d7e3ed" align="left"><a href="javascript:changeGridQueryToLast${id}();"><img src="./icons/stock_last.png" border="0" 	/></a></td>
     <td width="10px" bgcolor="#d7e3ed" align="left">&nbsp;</td>
     <td width="200px" bgcolor="#d7e3ed" align="left">
-    	<font size="2">row size</font>
+    	<font size="2">${rowSizeName}</font>
     	<select name="pageOf.showRow" id="gridQuery_pageOf_showRow${id}" 
     			data-dojo-id="gridQuery_pageOf_showRow${id}" data-dojo-type="dijit.form.Select" data-dojo-props='style:"width: 75px;" ' 
     			onChange="changeGridQueryPageOfShowRow${id}();" >

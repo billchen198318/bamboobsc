@@ -21,13 +21,19 @@
  */
 package org.gsweb.components.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.jsp.PageContext;
 
 import org.gsweb.components.util.ComponentResourceUtils;
 import org.gsweb.components.util.UIComponent;
+
+import com.opensymphony.xwork2.ActionContext;
 
 public class ToolBar implements UIComponent {
 	private PageContext pageContext = null;	
@@ -46,7 +52,7 @@ public class ToolBar implements UIComponent {
 	private String importJsMethod="";	
 	private StringBuilder htmlOut=new StringBuilder();	
 	
-	private Map<String, Object> getParameters(String type) {
+	private Map<String, Object> getParameters(String type, String language) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", this.id);
 		params.put("createNewEnable", this.createNewEnable);		
@@ -61,13 +67,53 @@ public class ToolBar implements UIComponent {
 		params.put("cancelJsMethod", this.cancelJsMethod);		
 		params.put("exportJsMethod", this.exportJsMethod);
 		params.put("importJsMethod", this.importJsMethod);
+		
+		// put default name
+		params.put("createNewName", "New");
+		params.put("saveName", "Save");	
+		params.put("exportName", "Export");
+		params.put("importName", "Import");
+		params.put("refreshName", "Refresh");
+		params.put("cancelName", "Cancel");
+		this.setLabelNameFromProperties(params, language);		
+		
 		return params;		
 	}
 	
+	private void setLabelNameFromProperties(Map<String, Object> params, String language) {
+		String propFileName = "META-INF/resource/toolbar/ui.toolbar_" + language + ".properties";
+		InputStream is = null;
+		is = TextBox.class.getClassLoader().getResourceAsStream(propFileName);
+		if (is != null) {
+			Properties prop = new Properties();
+			try {
+				prop.load(is);
+				params.put("createNewName", prop.get("createNewName"));
+				params.put("saveName", prop.get("saveName"));	
+				params.put("exportName", prop.get("exportName"));
+				params.put("importName", prop.get("importName"));
+				params.put("refreshName", prop.get("refreshName"));
+				params.put("cancelName", prop.get("cancelName"));		
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} finally {
+				try {
+					is.close();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+			}				
+			prop.clear();
+			prop = null;					
+		}	
+		is = null;			
+	}	
+	
 	private void generateHtml() {
+		Locale locale = ActionContext.getContext().getLocale();
 		try {
 			htmlOut.append( ComponentResourceUtils.generatorResource(
-					ToolBar.class, IS_HTML, "META-INF/resource/toolbar/ui.toolbar.htm", this.getParameters(IS_HTML)) );
+					ToolBar.class, IS_HTML, "META-INF/resource/toolbar/ui.toolbar.htm", this.getParameters(IS_HTML, locale.getLanguage())) );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

@@ -5,7 +5,7 @@
 			onClick:function(){ 
 				${createNewJsMethod}
 			} 
-		">New</div>
+		">${createNewName}</div>
 </#if>
 <#if saveEnabel == "Y" >				
 	<div data-dojo-type="dijit/form/Button" id="${id}.save"
@@ -13,7 +13,7 @@
 			onClick:function(){ 
 				${saveJsMethod}
 			} 
-		">Save</div>
+		">${saveName}</div>
 </#if>
 <#if exportEnable == "Y" >
 	<div data-dojo-type="dijit/form/Button" id="${id}.export"
@@ -21,7 +21,7 @@
 		onClick:function(){ 
 			${exportJsMethod}
 		} 
-		">Export</div>			
+		">${exportName}</div>			
 </#if>		
 <#if importEnable == "Y" >							
 	<div data-dojo-type="dijit/form/Button" id="${id}.import"
@@ -29,7 +29,7 @@
 		onClick:function(){ 
 			${importJsMethod}
 		} 
-		">Import</div>			
+		">${importName}</div>			
 </#if>
 <#if refreshEnable == "Y" >		
 	<div data-dojo-type="dijit/form/Button" id="${id}.refresh"
@@ -37,7 +37,7 @@
 		onClick:function(){ 
 			${refreshJsMethod}
 		} 
-		">Refresh</div>
+		">${refreshName}</div>
 </#if>
 <#if cancelEnable == "Y" >		
 	<span data-dojo-type="dijit/ToolbarSeparator"></span>
@@ -46,6 +46,6 @@
 		onClick:function(){ 
 			${cancelJsMethod}
 		} 
-		">Cancel</div>
+		">${cancelName}</div>
 </#if>
 </div>

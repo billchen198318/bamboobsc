@@ -21,13 +21,19 @@
  */
 package org.gsweb.components.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.jsp.PageContext;
 
 import org.gsweb.components.util.ComponentResourceUtils;
 import org.gsweb.components.util.UIComponent;
+
+import com.opensymphony.xwork2.ActionContext;
 
 public class Grid implements UIComponent {
 	private PageContext pageContext = null;
@@ -40,7 +46,7 @@ public class Grid implements UIComponent {
 	private StringBuilder script=new StringBuilder();
 	private StringBuilder htmlOut=new StringBuilder();	
 	
-	private Map<String, Object> getParameters(String type) {		
+	private Map<String, Object> getParameters(String type, String language) {		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", this.id);
 		if (IS_SCRIPT.equals(type)) { // javascript
@@ -50,23 +56,56 @@ public class Grid implements UIComponent {
 			params.put("disableOnHeaderCellClick", this.disableOnHeaderCellClick);
 		} else { // html
 			params.put("width", String.valueOf(this.width)+"%" );			
+			
+			// put default name
+			params.put("totalName", "total");
+			params.put("pageName", "page");	
+			params.put("rowSizeName", "row size");
+			this.setLabelNameFromProperties(params, language);			
 		}
 		return params;
+	}
+	
+	private void setLabelNameFromProperties(Map<String, Object> params, String language) {
+		String propFileName = "META-INF/resource/grid/ui.grid_" + language + ".properties";
+		InputStream is = null;
+		is = TextBox.class.getClassLoader().getResourceAsStream(propFileName);
+		if (is != null) {
+			Properties prop = new Properties();
+			try {
+				prop.load(is);
+				params.put("totalName", prop.get("totalName"));
+				params.put("pageName", prop.get("pageName"));	
+				params.put("rowSizeName", prop.get("rowSizeName"));	
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} finally {
+				try {
+					is.close();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+			}				
+			prop.clear();
+			prop = null;					
+		}	
+		is = null;			
 	}
 	
 	private void generateScript() {	
 		try {
 			script.append( ComponentResourceUtils.generatorResource(
-					Grid.class, IS_SCRIPT, "META-INF/resource/grid/ui.grid.js", this.getParameters(IS_SCRIPT)) );
+					Grid.class, IS_SCRIPT, "META-INF/resource/grid/ui.grid.js", this.getParameters(IS_SCRIPT, null)) );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 	}
 	
 	private void generateHtml() {
+		Locale locale = ActionContext.getContext().getLocale();
 		try {
 			htmlOut.append( ComponentResourceUtils.generatorResource(
-					Grid.class, IS_HTML, "META-INF/resource/grid/ui.grid.htm", this.getParameters(IS_HTML)) );
+					Grid.class, IS_HTML, "META-INF/resource/grid/ui.grid.htm", this.getParameters(IS_HTML, locale.getLanguage())) );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
