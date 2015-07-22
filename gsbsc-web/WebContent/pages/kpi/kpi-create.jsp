@@ -245,7 +245,7 @@ function ${programId}_page_message() {
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_formulaOid" dataSource="formulaMap" id="BSC_PROG002D0004A_formulaOid"></gs:select>
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_formulaOid'">
-    				Select formula.
+    				Select formula. the options will effect result score.
 				</div>      			
     		</td>      		
     	</tr>	  		     			    	    
@@ -301,7 +301,7 @@ function ${programId}_page_message() {
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_cal" dataSource="calculationMap" id="BSC_PROG002D0004A_cal"></gs:select>
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_cal'">
-    				Select calculation. ( aggregation method )
+    				Select calculation. ( aggregation method ) the options will effect result score.
 				</div>     			
     		</td>     		  		
     	</tr>   
