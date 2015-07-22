@@ -89,6 +89,9 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('BSC_PROG002D0002E_perId')"/></b> <s:property value="getText('BSC_PROG002D0002E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0002E_perId" id="BSC_PROG002D0002E_perId" value="perspective.perId" width="200" maxlength="14" readonly="Y"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_perId'">
+    				Id. ( read only )
+				</div>     			
     		</td>    		
     	</tr>		
     	<tr>
@@ -96,6 +99,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002E_visionOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0002E_visionOid" dataSource="visionMap" id="BSC_PROG002D0002E_visionOid" value="fields.visionSelectValue"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_visionOid'">
+    				Select vision.
+				</div>       			
     		</td>    		
     	</tr>		
 		<tr>
@@ -103,6 +109,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002E_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0002E_name" id="BSC_PROG002D0002E_name" value="perspective.name" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_name'">
+    				Input name.
+				</div>        			
     		</td>
     	</tr>  	
 		<tr>
@@ -110,7 +119,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0002E_weight')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0002E_weight" name= "BSC_PROG002D0002E_weight" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="${perspective.weight}" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />     		    			
+    				value="${perspective.weight}" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_weight'">
+    				Input weight value, only allow numbers. range: 0.0 ~ 100.0 
+				</div>      				     		    			
     		</td>
     	</tr>        	
 		<tr>
@@ -119,6 +131,9 @@ function ${programId}_page_message() {
     			<br/>
     			<input id="BSC_PROG002D0002E_target" name= "BSC_PROG002D0002E_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="${perspective.target}" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_target'">
+    				Input target value, only allow numbers.
+				</div>     				
 			</td>    				     		
     	</tr>   
 		<tr>
@@ -127,6 +142,9 @@ function ${programId}_page_message() {
     			<br/>
     			<input id="BSC_PROG002D0002E_min" name= "BSC_PROG002D0002E_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="${perspective.min}" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_min'">
+    				Input min value, only allow numbers.
+				</div>     				
     		</td>		     		
     	</tr>   
 		<tr>
@@ -134,6 +152,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('BSC_PROG002D0002E_description')"/></b>:
 		    	<br/>		
 		    	<textarea id="BSC_PROG002D0002E_description" name="BSC_PROG002D0002E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${perspective.description}</textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002E_description'">
+    				Input description, the maximum allowed 500 characters.
+				</div>			    	
 		    </td>	
 		</tr>      	   	    	
     	<tr>

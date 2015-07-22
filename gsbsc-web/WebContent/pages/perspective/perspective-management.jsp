@@ -177,11 +177,21 @@ function ${programId}_page_message() {
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0002Q_visionOid')"/>:</td>
     		<td height="25px" width="40%"  align="left"><gs:select name="BSC_PROG002D0002Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0002Q_visionOid"></gs:select></td>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0002Q_perId')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0002Q_perId" id="BSC_PROG002D0002Q_perId" value="" width="200" maxlength="14"></gs:textBox></td>
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG002D0002Q_perId" id="BSC_PROG002D0002Q_perId" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002Q_perId'">
+    				Input Id. example: PER20141115001
+				</div>      			
+    		</td>
     	</tr>	
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0002Q_name')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0002Q_name" id="BSC_PROG002D0002Q_name" value="" width="200" maxlength="100"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG002D0002Q_name" id="BSC_PROG002D0002Q_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0002Q_name'">
+    				Input name.
+				</div>      			
+    		</td>  					
     		<td height="25px" width="10%"  align="right">&nbsp;</td>
     		<td height="25px" width="40%"  align="left">&nbsp;</td>  					
     	</tr>
