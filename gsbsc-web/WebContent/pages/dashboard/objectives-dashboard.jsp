@@ -416,15 +416,24 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('BSC_PROG003D0005Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG003D0005Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0005Q_visionOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0005Q_visionOid'">
+					    				Select vision.
+									</div>  										
 						    		&nbsp;		    			
 					    																	
 									<s:property value="getText('BSC_PROG003D0005Q_frequency')"/>:
 									<gs:select name="BSC_PROG003D0005Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0005Q_frequency" value="6" width="140" readonly="Y"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0005Q_frequency'">
+					    				Select frequency. ( fixed for year )
+									</div> 											
 									&nbsp;
 									
 							    	<s:property value="getText('BSC_PROG003D0005Q_startYearDate')"/>:
 							    	<input id="BSC_PROG003D0005Q_startYearDate" name="BSC_PROG003D0005Q_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0005Q_startYearDate'">
+					    				Select year.
+									</div>								    		
 							    	&nbsp;				
 							    										
 								</td>											

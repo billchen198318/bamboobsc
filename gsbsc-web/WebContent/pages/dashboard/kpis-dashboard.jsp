@@ -530,10 +530,16 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('BSC_PROG003D0006Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG003D0006Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0006Q_visionOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_visionOid'">
+					    				Select vision.
+									</div>  									
 						    		&nbsp;		    			
 					    																	
 									<s:property value="getText('BSC_PROG003D0006Q_frequency')"/>:
 									<gs:select name="BSC_PROG003D0006Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0006Q_frequency" value="6" width="140" onChange="BSC_PROG003D0006Q_setFrequencyValue();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_frequency'">
+					    				Select frequency.
+									</div> 										
 									&nbsp;
 																	
 								</td>											
@@ -543,37 +549,54 @@ function ${programId}_page_message() {
 								
 							    	<s:property value="getText('BSC_PROG003D0006Q_startYearDate')"/>:
 							    	<input id="BSC_PROG003D0006Q_startYearDate" name="BSC_PROG003D0006Q_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
-							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />		
+							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_startYearDate'">
+					    				Select start year.
+									</div>									    				
 							    	&nbsp;
 							    	<s:property value="getText('BSC_PROG003D0006Q_endYearDate')"/>:
 							    	<input id="BSC_PROG003D0006Q_endYearDate" name="BSC_PROG003D0006Q_endYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
-							    									    							
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_endYearDate'">
+					    				Select end year.
+									</div>																		    									    							
 							    	&nbsp;&nbsp;		
 									<s:property value="getText('BSC_PROG003D0006Q_startDate')"/>:
 									<input id="BSC_PROG003D0006Q_startDate" type="text" name="BSC_PROG003D0006Q_startDate" data-dojo-type="dijit.form.DateTextBox"
 										maxlength="10" 
-										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />	
+										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_startDate'">
+					    				Select start date.
+									</div>												
 									&nbsp;						
 									<s:property value="getText('BSC_PROG003D0006Q_endDate')"/>:
 									<input id="BSC_PROG003D0006Q_endDate" type="text" name="BSC_PROG003D0006Q_endDate" data-dojo-type="dijit.form.DateTextBox"
 										maxlength="10" 
 										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />																	    									    	
-							    										    							
-							    										
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_endDate'">
+					    				Select end date.
+									</div>									    										    														    										
 								</td>
 							</tr>															
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">							
 									<s:property value="getText('BSC_PROG003D0006Q_dataFor')"/>:
 									<gs:select name="BSC_PROG003D0006Q_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"${action.getText('BSC_PROG003D0006Q_measureDataOrganizationOid')}\", \"employee\":\"${action.getText('BSC_PROG003D0006Q_measureDataEmployeeOid')}\" }" id="BSC_PROG003D0006Q_dataFor" onChange="BSC_PROG003D0006Q_setDataForValue();" width="140"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_dataFor'">
+					    				Select measure data type.
+									</div>											
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0006Q_measureDataOrganizationOid')"/>:
 									<gs:select name="BSC_PROG003D0006Q_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0006Q_measureDataOrganizationOid" onChange="BSC_PROG003D0006Q_setMeasureDataOrgaValue();" readonly="Y"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_measureDataOrganizationOid'">
+					    				Select measure data organization/department.
+									</div>											
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0006Q_measureDataEmployeeOid')"/>:
 									<gs:select name="BSC_PROG003D0006Q_measureDataEmployeeOid" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0006Q_measureDataEmployeeOid" onChange="BSC_PROG003D0006Q_setMeasureDataEmplValue();" readonly="Y"></gs:select>
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0006Q_measureDataEmployeeOid'">
+					    				Select measure data personal/Employee.
+									</div>										
 								</td>
 							</tr>								
 							

@@ -283,15 +283,24 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('BSC_PROG003D0002Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG003D0002Q_visionOid" dataSource="visionMap" id="BSC_PROG003D0002Q_visionOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0002Q_visionOid'">
+					    				Select vision.
+									</div>  									
 						    		&nbsp;		    			
 					    																	
 									<s:property value="getText('BSC_PROG003D0002Q_frequency')"/>:
 									<gs:select name="BSC_PROG003D0002Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0002Q_frequency" value="5" width="140" readonly="Y"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0002Q_frequency'">
+					    				Select frequency.
+									</div> 										
 									
 									&nbsp;
 									<s:property value="getText('BSC_PROG003D0002Q_employeeOid')"/>:
 									<gs:select name="BSC_PROG003D0002Q_employeeOid" dataSource="employeeMap" id="BSC_PROG003D0002Q_employeeOid" ></gs:select>									
-																		
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0002Q_employeeOid'">
+					    				Select measure data personal/Employee.
+									</div>			
+																											
 								</td>	
 							</tr>
 							<tr valign="top">
@@ -324,7 +333,10 @@ function ${programId}_page_message() {
 												        </s:if>
 												    </ol>
 												</div> 	
-																						
+												<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0002Q_year'">
+								    				Select year.
+												</div>	
+																															
 											</td>
 											<td width="300px" align="left" height="30px" >	
 												<gs:select name="BSC_PROG003D0002Q_dateType" 
