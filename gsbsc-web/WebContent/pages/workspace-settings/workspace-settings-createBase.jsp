@@ -49,6 +49,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG004D0002A_C00_workspaceId')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG004D0002A_C00_workspaceId" id="BSC_PROG004D0002A_C00_workspaceId" value="" maxlength="20"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG004D0002A_C00_workspaceId'">
+    				Input Id, only allow normal characters.
+				</div>      			
     		</td>
     	</tr>     		
 		<tr>
@@ -56,6 +59,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG004D0002A_C00_workspaceName')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG004D0002A_C00_workspaceName" id="BSC_PROG004D0002A_C00_workspaceName" value="" maxlength="100" width="400"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG004D0002A_C00_workspaceName'">
+    				Input name.
+				</div>    			
     		</td>
     	</tr> 
 		<tr>
@@ -63,6 +69,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('BSC_PROG004D0002A_C00_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG004D0002A_C00_description" name="BSC_PROG004D0002A_C00_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG004D0002A_C00_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div>  		    	
 		    </td>
 		</tr>     	   	
     </table>	
