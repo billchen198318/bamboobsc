@@ -189,15 +189,35 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="75px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0003Q_visionOid')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:select name="BSC_PROG002D0003Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0003Q_visionOid" onChange="BSC_PROG002D0003Q_triggerChangePerspectiveItems();"></gs:select></td>
+    		<td height="25px" width="40%"  align="left">
+    			<gs:select name="BSC_PROG002D0003Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0003Q_visionOid" onChange="BSC_PROG002D0003Q_triggerChangePerspectiveItems();"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003Q_visionOid'">
+    				Select vision.
+				</div>     			
+    		</td>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0003Q_perspectiveOid')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:select name="BSC_PROG002D0003Q_perspectiveOid" dataSource="perspectiveMap" id="BSC_PROG002D0003Q_perspectiveOid"></gs:select></td>
+    		<td height="25px" width="40%"  align="left">
+    			<gs:select name="BSC_PROG002D0003Q_perspectiveOid" dataSource="perspectiveMap" id="BSC_PROG002D0003Q_perspectiveOid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003Q_perspectiveOid'">
+    				Select perspectives.
+				</div>     			
+    		</td>
     	</tr>	
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0003Q_objId')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0003Q_objId" id="BSC_PROG002D0003Q_objId" value="" width="200" maxlength="14"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG002D0003Q_objId" id="BSC_PROG002D0003Q_objId" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003Q_objId'">
+    				Input Id. example: OBJ20141115001
+				</div>    			
+    		</td>  					
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0003Q_name')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0003Q_name" id="BSC_PROG002D0003Q_name" value="" width="200" maxlength="100"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG002D0003Q_name" id="BSC_PROG002D0003Q_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003Q_name'">
+    				Input name.
+				</div>    			
+    		</td>  					
     	</tr>
     	<tr>
     		<td  height="25px" width="100%"  align="center" colspan="4">

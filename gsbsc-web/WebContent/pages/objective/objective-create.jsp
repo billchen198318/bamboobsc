@@ -104,6 +104,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0003A_visionOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0003A_visionOid" dataSource="visionMap" id="BSC_PROG002D0003A_visionOid" onChange="BSC_PROG002D0003A_triggerChangePerspectiveItems();"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_visionOid'">
+    				Select vision.
+				</div>     			
     		</td>    		
     	</tr>		
 		<tr>
@@ -111,6 +114,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0003A_perspectiveOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0003A_perspectiveOid" dataSource="perspectiveMap" id="BSC_PROG002D0003A_perspectiveOid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_perspectiveOid'">
+    				Select perspectives.
+				</div>     	    			
     		</td>    		
     	</tr>		    	
 		<tr>
@@ -118,6 +124,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0003A_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0003A_name" id="BSC_PROG002D0003A_name" value="" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_name'">
+    				Input name.
+				</div>       			
     		</td>    		
     	</tr>  	
 		<tr>
@@ -125,7 +134,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0003A_weight')"/></b>:    			
     			<br/>
     			<input id="BSC_PROG002D0003A_weight" name="BSC_PROG002D0003A_weight" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />     		    			
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_weight'">
+    				Input weight value, only allow numbers. range: 0.0 ~ 100.0 
+				</div>      				     		    			
     		</td>    		
     	</tr>        	
 		<tr>
@@ -133,7 +145,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0003A_target')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0003A_target" name="BSC_PROG002D0003A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    			    		
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_target'">
+    				Input target value, only allow numbers.
+				</div>       				     		    			    		
     		</td>    		
     	</tr>   
 		<tr>
@@ -141,7 +156,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0003A_min')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0003A_min" name="BSC_PROG002D0003A_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    			
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_min'">
+    				Input min value, only allow numbers.
+				</div>      				     		    			
     		</td>    		
     	</tr>   
 		<tr>
@@ -149,6 +167,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('BSC_PROG002D0003A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG002D0003A_description" name="BSC_PROG002D0003A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0003A_description'">
+    				Input description, the maximum allowed 500 characters.
+				</div>			    	
 		    </td>		    
 		</tr>      	  	    	    	   	  	    		 	  	    	    	      	    	    	    	   	  	    		 	  	    	
     	<tr>
