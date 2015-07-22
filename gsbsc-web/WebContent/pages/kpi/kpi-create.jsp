@@ -200,11 +200,17 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_visionOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_visionOid" dataSource="visionMap" id="BSC_PROG002D0004A_visionOid" onChange="BSC_PROG002D0004A_triggerChangePerspectiveItems();"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_visionOid'">
+    				Select vision.
+				</div>       			
     		</td>    		
     		<td height="50px" width="50%"  align="left">
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_id')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0004A_id" id="BSC_PROG002D0004A_id" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_id'">
+    				Input Id, only allow normal characters. 
+				</div>     			
     		</td>      		
     	</tr>		
 		<tr>
@@ -212,11 +218,17 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_perspectiveOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_perspectiveOid" dataSource="perspectiveMap" id="BSC_PROG002D0004A_perspectiveOid" onChange="BSC_PROG002D0004A_triggerChangeObjectiveItems();"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_perspectiveOid'">
+    				Select perspectives.
+				</div>       			
     		</td>    		
     		<td height="50px" width="50%"  align="left">
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0004A_name" id="BSC_PROG002D0004A_name" value="" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_name'">
+    				Input name.
+				</div>      			
     		</td>        		
     	</tr>		    
 		<tr>
@@ -224,11 +236,17 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_objectiveOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_objectiveOid" dataSource="objectiveMap" id="BSC_PROG002D0004A_objectiveOid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_objectiveOid'">
+    				Select objectives.
+				</div>     			
     		</td>    		
     		<td height="50px" width="50%"  align="left">
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_formulaOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_formulaOid" dataSource="formulaMap" id="BSC_PROG002D0004A_formulaOid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_formulaOid'">
+    				Select formula.
+				</div>      			
     		</td>      		
     	</tr>	  		     			    	    
 		<tr>
@@ -236,15 +254,36 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_weight')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_weight" name="BSC_PROG002D0004A_weight" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />     		    			
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:0.00,max:999.00, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_weight'">
+    				Input weight value, only allow numbers. range: 0.0 ~ 100.0 
+				</div>       				    				     		    			
     		</td>    		
     		<td height="50px" width="50%"  align="left" >
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_management')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_management" dataSource="managementMap" id="BSC_PROG002D0004A_management"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_management'">
+    				Select management method:<BR/> 
+    				1. Bigger ( score bigger is better) <BR/> 
+    				2. Smaller ( score smaller is better)  <BR/>
+    				3. Quasi ( score quasi is better) <BR/>
+    				the options will effect KPI Report result date-range item UP / DOWN status icon.
+				</div>      			
     			&nbsp;&nbsp;
     			<b><s:property value="getText('BSC_PROG002D0004A_quasiRange')"/></b>:
-    			<gs:select name="BSC_PROG002D0004A_quasiRange" dataSource="quasiRangeMap" id="BSC_PROG002D0004A_quasiRange" width="60"></gs:select>      			    			
+    			<gs:select name="BSC_PROG002D0004A_quasiRange" dataSource="quasiRangeMap" id="BSC_PROG002D0004A_quasiRange" width="60"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_quasiRange'">
+    				Select quasi-range %. <BR/>
+    				Example: <BR/>
+    				&nbsp;&nbsp;if a KPI item result-score is 90 , quasi-range is 15 , target value is 100 ,<BR/> 
+    				&nbsp;&nbsp;and management method is 'quasi is better' , compare type is 'Target' <BR/>
+    				<BR/>
+    				&nbsp;&nbsp;quasi-range (Max) = target(100) + ( 100 * 15/100 ) = 113.5 <BR/>
+    				&nbsp;&nbsp;quasi-range (Min) = target(100) - ( 100 * 15/100 ) = 86.5 <BR/>
+    				<BR/>
+    				&nbsp;&nbsp;score(90) is bigger then value: Min(86.5) and small then value: Max(113.5) . so KPI status is Good / Up.    				
+				</div>    			      			    			
     		</td>      		
     	</tr>        	
 		<tr>
@@ -252,12 +291,18 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_target')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_target" name="BSC_PROG002D0004A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    			
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_target'">
+    				Input target value, only allow numbers.
+				</div>       				    			
     		</td>  
     		<td height="50px" width="50%"  align="left" >
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_cal')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_cal" dataSource="calculationMap" id="BSC_PROG002D0004A_cal"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_cal'">
+    				Select calculation. ( aggregation method )
+				</div>     			
     		</td>     		  		
     	</tr>   
 		<tr>
@@ -265,7 +310,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_min')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_min" name="BSC_PROG002D0004A_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		    			
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_min'">
+    				Input min value, only allow numbers.
+				</div>       				     		    			
     		</td>    		
     	</tr>       	    	
 		<tr>
@@ -273,11 +321,22 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_compareType')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_compareType" dataSource="compareTypeMap" id="BSC_PROG002D0004A_compareType"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_compareType'">
+    				Select compare type. <BR/>
+    				&nbsp;Target: KPI item result score compare with target value. <BR/>
+    				<BR/>
+    				&nbsp;Min: KPI item result score compare with min value. <BR/>
+    				<BR/>
+    				&nbsp;the options will effect KPI Report result date-range item UP / DOWN status icon.
+				</div>      			
     		</td>   
     		<td height="50px" width="50%"  align="left" >
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_unit')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG002D0004A_unit" id="BSC_PROG002D0004A_unit" value="" width="150" maxlength="20"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_unit'">
+    				Input unit, the maximum allowed 20 characters. 
+				</div>     			
     		</td>       		 		
     	</tr>      	    	
 		<tr>
@@ -285,6 +344,16 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_dataType')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG002D0004A_dataType" dataSource="dataTypeMap" id="BSC_PROG002D0004A_dataType"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_dataType'">
+    				Select belong type.<BR/>
+    				Example:<BR/>
+    				&nbsp;Department/Organization type:<BR/>
+    				&nbsp;&nbsp;KPI item measure data for 'All' and 'Department/Organization'.<BR/><BR/>
+    				&nbsp;Personal/Employee:<BR/>
+    				&nbsp;&nbsp;KPI item measure data for 'All' and 'Personal/Employee'.<BR/><BR/>
+    				&nbsp;Both:<BR/>
+    				&nbsp;&nbsp;KPI item measure data for 'All' and 'Department/Organization' and 'Personal/Employee'.<BR/>
+				</div>     			
     		</td>    		
     	</tr>    	    	    	    	
 		<tr>
@@ -340,13 +409,19 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('BSC_PROG002D0004A_orgaMeasureSeparate')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_orgaMeasureSeparate" name="BSC_PROG002D0004A_orgaMeasureSeparate" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_orgaMeasureSeparate'">
+    				enable, can input KPI item measure-data for organization/department. 
+				</div> 				    			
     		</td>
     	</tr>  
 		<tr>
     		<td height="50px" width="100%"  align="left" colspan="2">
     			<b><s:property value="getText('BSC_PROG002D0004A_userMeasureSeparate')"/></b>:
     			<br/>
-    			<input id="BSC_PROG002D0004A_userMeasureSeparate" name="BSC_PROG002D0004A_userMeasureSeparate" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />    		
+    			<input id="BSC_PROG002D0004A_userMeasureSeparate" name="BSC_PROG002D0004A_userMeasureSeparate" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_userMeasureSeparate'">
+    				enable, can input KPI item measure-data for personal/Employee. 
+				</div> 				    			    			    		
     		</td>    		
     	</tr>   	       	
 		<tr>
@@ -354,6 +429,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('BSC_PROG002D0004A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG002D0004A_description" name="BSC_PROG002D0004A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div>   		    	
 		    </td>
 		</tr>      	  	    	    	   	  	    		 	  	    	    	      	    	    	    	   	  	    		 	  	    	
     	<tr>
