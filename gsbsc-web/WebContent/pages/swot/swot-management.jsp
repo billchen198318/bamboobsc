@@ -212,10 +212,16 @@ function ${programId}_page_message() {
 								<td width="100%" align="left" height="25px">	
 									<s:property value="getText('BSC_PROG002D0008Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG002D0008Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0008Q_visionOid" onChange="BSC_PROG002D0008Q_clearContent();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0008Q_visionOid'">
+										Select vision.
+									</div> 									
 						    		&nbsp;		    			
 					    																	
 									<s:property value="getText('BSC_PROG002D0008Q_organizationOid')"/>:
 									<gs:select name="BSC_PROG002D0008Q_organizationOid" dataSource="organizationMap" id="BSC_PROG002D0008Q_organizationOid" onChange="BSC_PROG002D0008Q_clearContent();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0008Q_organizationOid'">
+										Select organization/department.
+									</div> 											
 								</td>											
 							</tr>							
 							

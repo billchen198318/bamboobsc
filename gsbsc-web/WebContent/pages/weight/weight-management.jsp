@@ -91,6 +91,9 @@ function ${programId}_page_message() {
 					
 					<s:property value="getText('BSC_PROG002D0006Q_visionOid')"/>:&nbsp;
 					<gs:select name="BSC_PROG002D0006Q_visionOid" dataSource="visionMap" id="BSC_PROG002D0006Q_visionOid"></gs:select>
+					<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0006Q_visionOid'">
+						Select vision.
+					</div>   					
 					&nbsp;&nbsp;
 	    			<gs:button name="BSC_PROG002D0006Q_query" id="BSC_PROG002D0006Q_query" onClick="BSC_PROG002D0006Q_query();"
 	    				handleAs="json"

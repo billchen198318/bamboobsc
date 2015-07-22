@@ -332,7 +332,7 @@ function ${programId}_page_message() {
 			<td width="270px" valign="top">
 				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG002D0005Q_kpiTree')" escapeJavaScript="true"/>' " >						
 					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:270px;height:600px">
-   						<div id="BSC_PROG002D0005Q_kpiTree"></div>
+   						<div id="BSC_PROG002D0005Q_kpiTree"></div> 						
    					</div>		    						       								    					
 		  		</div>		
 		  						
@@ -345,20 +345,32 @@ function ${programId}_page_message() {
    								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_dataForOpt')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_dataForOpt" dataSource="{ \"all\":\"All\", \"organization\":\"Organization\", \"employee\":\"Employee\" }" id="BSC_PROG002D0005Q_dataForOpt" onChange="BSC_PROG002D0005Q_setDataForValue();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0005Q_dataForOpt'">
+					    				Select data type.
+									</div>    									
    								</td>
    								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_frequencyOpt')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_frequencyOpt" dataSource="frequencyMap" id="BSC_PROG002D0005Q_frequencyOpt" onChange="BSC_PROG002D0005Q_clearContent();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0005Q_frequencyOpt'">
+					    				Select frequency.
+									</div>     									
    								</td>   								
    							</tr>   						
    							<tr>							
    								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_organizationOid')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_organizationOid" dataSource="organizationMap" id="BSC_PROG002D0005Q_organizationOid" readonly="Y" onChange="BSC_PROG002D0005Q_clearContent();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0005Q_organizationOid'">
+					    				Select organization/department.
+									</div>    									
    								</td>
    								<td width="20%" align="right"><font size='2'><s:property value="getText('BSC_PROG002D0005Q_employeeOid')"/>:</font></td>
    								<td width="30%" align="left">
    									<gs:select name="BSC_PROG002D0005Q_employeeOid" dataSource="employeeMap" id="BSC_PROG002D0005Q_employeeOid" readonly="Y" onChange="BSC_PROG002D0005Q_clearContent();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0005Q_employeeOid'">
+					    				Select personal/Employee.
+									</div>       									
    								</td>   								
    							</tr>
    							<tr>
