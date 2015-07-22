@@ -121,18 +121,18 @@ jsr107cache-1.1.jar
 
 POI
 -------------------------
-poi-3.10.1-20140818.jar
-poi-examples-3.10.1-20140818.jar
-poi-excelant-3.10.1-20140818.jar
-poi-ooxml-3.10.1-20140818.jar
-poi-ooxml-schemas-3.10.1-20140818.jar
-poi-scratchpad-3.10.1-20140818.jar
+poi-3.12-20150511.jar
+poi-examples-3.12-20150511.jar
+poi-excelant-3.12-20150511.jar
+poi-ooxml-3.12-20150511.jar
+poi-ooxml-schemas-3.12-20150511.jar
+poi-scratchpad-3.12-20150511.jar
 xmlbeans-2.6.0.jar (remove for Apache CXF xmlbeans-2.6.0.jar )
 stax-api-1.0.1.jar
 
 
 -------------------------
-commons-codec-1.5.jar
+commons-codec-1.9.jar
 commons-email-1.2.jar
 commons-lang3-3.1.jar
 commons-beanutils-1.8.3.jar
