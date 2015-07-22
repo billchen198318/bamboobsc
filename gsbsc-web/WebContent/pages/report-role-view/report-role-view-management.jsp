@@ -160,6 +160,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG004D0003Q_roleOid')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG004D0003Q_roleOid" dataSource="roleMap" id="BSC_PROG004D0003Q_roleOid" onChange="BSC_PROG004D0003Q_roleChange();" value="fields.oid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG004D0003Q_roleOid'">
+    				Select role.
+				</div> 			    			
     		</td>  		
 		</tr>
 		<tr>
