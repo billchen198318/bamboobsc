@@ -81,6 +81,9 @@ function ${programId}_page_message() {
 				<b><s:property value="getText('BSC_PROG002D0001E_visId')"/></b> <s:property value="getText('BSC_PROG002D0001E_readOnly')"/> :
 				<br/>
 				<gs:textBox name="BSC_PROG002D0001E_visId" id="BSC_PROG002D0001E_visId" value="vision.visId" width="200" maxlength="14" readonly="Y"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0001E_visId'">
+    				Id. ( read only )
+				</div> 					
 			</td>
 		</tr>	
 		<tr>
@@ -88,6 +91,9 @@ function ${programId}_page_message() {
 				<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0001E_title')"/></b>:
 				<br/>
 				<gs:textBox name="BSC_PROG002D0001E_title" id="BSC_PROG002D0001E_title" value="vision.title" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0001E_title'">
+    				Input title.
+				</div> 						
 			</td>
 		</tr>	    	
 		<tr>
@@ -95,6 +101,9 @@ function ${programId}_page_message() {
 				<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0001E_content')"/></b>:
 				<br/>
 				<div data-dojo-type="dijit/Editor" id="BSC_PROG002D0001E_content" data-dojo-props="onChange:function(){ }">${visionContent}</div>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0001E_content'">
+    				Input content. ( recommend content should not exceed A4 paper size )
+				</div> 					
 			</td>
 		</tr>    	
 		<tr>

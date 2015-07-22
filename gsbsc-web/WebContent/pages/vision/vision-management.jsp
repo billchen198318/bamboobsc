@@ -181,9 +181,19 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0001Q_visId')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0001Q_visId" id="BSC_PROG002D0001Q_visId" value="" width="200" maxlength="14"></gs:textBox></td>
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG002D0001Q_visId" id="BSC_PROG002D0001Q_visId" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0001Q_visId'">
+    				Input Id. example: VIS20141114001
+				</div>       			
+    		</td>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG002D0001Q_title')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG002D0001Q_title" id="BSC_PROG002D0001Q_title" value="" width="200" maxlength="100"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG002D0001Q_title" id="BSC_PROG002D0001Q_title" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0001Q_title'">
+    				Input title.
+				</div>       			
+    		</td>  					
     	</tr>
     	<tr>
     		<td  height="25px" width="100%"  align="center" colspan="4">
