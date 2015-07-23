@@ -103,9 +103,19 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG001D0001Q_S00_empId')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG001D0001Q_S00_empId" id="BSC_PROG001D0001Q_S00_empId" value="" width="200" maxlength="10"></gs:textBox></td>
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG001D0001Q_S00_empId" id="BSC_PROG001D0001Q_S00_empId" value="" width="200" maxlength="10"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001Q_S00_empId'">
+    				Input employee Id.
+				</div> 	    			
+    		</td>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG001D0001Q_S00_fullName')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG001D0001Q_S00_fullName" id="BSC_PROG001D0001Q_S00_fullName" value="" width="200" maxlength="100"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG001D0001Q_S00_fullName" id="BSC_PROG001D0001Q_S00_fullName" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001Q_S00_fullName'">
+    				Input full name.
+				</div> 	    			
+    		</td>  					
     	</tr>
     	<tr>
     		<td  height="25px" width="100%"  align="center" colspan="4">

@@ -122,6 +122,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001A_account')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001A_account" id="BSC_PROG001D0001A_account" value="" width="200" maxlength="24"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001A_account'">
+    				Input account, only allow normal characters. 
+				</div>          			
     		</td>
     	</tr>  	
 		<tr>
@@ -129,6 +132,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001A_empId')"/></b> <s:property value="getText('BSC_PROG001D0001A_empIdno')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001A_empId" id="BSC_PROG001D0001A_empId" value="" width="200" maxlength="10"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001A_empId'">
+    				Input employee serial-number, only allow normal characters. 
+				</div>     			
     		</td>
     	</tr>      	
 		<tr>
@@ -136,7 +142,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001A_password1')"/></b>:
     			<br/>
 				<input name="BSC_PROG001D0001A_password1" id="BSC_PROG001D0001A_password1" type="password" trim="true" maxlength="14" 
-					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />    	    			
+					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001A_password1'">
+    				Input password, only allow normal characters. 
+				</div>     					    	    			
     		</td>
     	</tr> 
 		<tr>
@@ -144,7 +153,10 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001A_password1')"/></b> <s:property value="getText('BSC_PROG001D0001A_password2')"/>:
     			<br/>
 				<input name="BSC_PROG001D0001A_password2" id="BSC_PROG001D0001A_password2" type="password" trim="true" maxlength="14" 
-					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />        			
+					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001A_password2'">
+    				Input password ( confirm ), only allow normal characters. 
+				</div>  					        			
     		</td>
     	</tr> 
 		<tr>
@@ -152,6 +164,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001A_fullName')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001A_fullName" id="BSC_PROG001D0001A_fullName" value="" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001A_fullName'">
+    				Input full name. 
+				</div>      			
     		</td>
     	</tr>  
 		<tr>
@@ -159,6 +174,9 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('BSC_PROG001D0001A_jobTitle')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001A_jobTitle" id="BSC_PROG001D0001A_jobTitle" value="" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001A_jobTitle'">
+    				Input job title. 
+				</div>    			
     		</td>
     	</tr>
 		<tr>

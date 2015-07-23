@@ -86,21 +86,30 @@ function ${programId}_page_message() {
     		<td height="25px" width="30%"  align="right"><font color='RED'>*</font><s:property value="getText('BSC_PROG001D0001E_S00_password1')"/>:</td>
     		<td height="25px" width="70%"  align="left">
 				<input name="BSC_PROG001D0001E_S00_password1" id="BSC_PROG001D0001E_S00_password1" type="password" trim="true" maxlength="14" 
-					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />    			
+					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_S00_password1'">
+    				Input old password.
+				</div> 					    			
     		</td>
     	</tr>  	
 		<tr>
     		<td height="25px" width="30%"  align="right"><font color='RED'>*</font><s:property value="getText('BSC_PROG001D0001E_S00_password2')"/>:</td>
     		<td height="25px" width="70%"  align="left">
 				<input name="BSC_PROG001D0001E_S00_password2" id="BSC_PROG001D0001E_S00_password2" type="password" trim="true" maxlength="14" 
-					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />    			
+					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_S00_password2'">
+    				Input new password.
+				</div> 					    			
     		</td>
     	</tr>  	 
 		<tr>
     		<td height="25px" width="30%"  align="right"><font color='RED'>*</font><s:property value="getText('BSC_PROG001D0001E_S00_password3')"/>:</td>
     		<td height="25px" width="70%"  align="left">
 				<input name="BSC_PROG001D0001E_S00_password3" id="BSC_PROG001D0001E_S00_password3" type="password" trim="true" maxlength="14" 
-					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />    			
+					data-dojo-type="dijit.form.TextBox" data-dojo-props='style:"width: 200px;" ' />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_S00_password3'">
+    				Input new password. ( confirm )
+				</div> 					    			
     		</td>
     	</tr>  	     	    	 	  	    	
     	<tr>

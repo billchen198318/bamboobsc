@@ -113,12 +113,18 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001E_account')"/></b> <s:property value="getText('BSC_PROG001D0001E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_account" id="BSC_PROG001D0001E_account" value="employee.account" width="200" maxlength="24" readonly="Y"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_account'">
+    				Account. ( read only ) 
+				</div>      			
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001E_empId')"/></b> <s:property value="getText('BSC_PROG001D0001E_empIdno')"/> / <s:property value="getText('BSC_PROG001D0001E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_empId" id="BSC_PROG001D0001E_empId" value="employee.empId" width="200" maxlength="10" readonly="Y"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_empId'">
+    				Employee serial-number. ( read only )
+				</div>     			
     		</td>
     	</tr>		
 		<tr>
@@ -126,6 +132,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0001E_fullName')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_fullName" id="BSC_PROG001D0001E_fullName" value="employee.fullName" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_fullName'">
+    				Input full name. 
+				</div>       			
     		</td>
     	</tr>		    	
 		<tr>
@@ -133,6 +142,9 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('BSC_PROG001D0001E_jobTitle')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0001E_jobTitle" id="BSC_PROG001D0001E_jobTitle" value="employee.jobTitle" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0001E_jobTitle'">
+    				Input job title. 
+				</div>      			
     		</td>
     	</tr>		    	
 		<tr>
