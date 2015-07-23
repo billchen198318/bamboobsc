@@ -358,17 +358,29 @@ function ${programId}_page_message() {
 								<td width="100%" align="left" height="25px">
 								
 									<s:property value="getText('QCHARTS_PROG002D0002Q_mdxOid')"/>:
-									<gs:select name="QCHARTS_PROG002D0002Q_mdxOid" dataSource="mdxMap" id="QCHARTS_PROG002D0002Q_mdxOid" onChange="QCHARTS_PROG002D0002Q_getMdxHistory();" ></gs:select> 
+									<gs:select name="QCHARTS_PROG002D0002Q_mdxOid" dataSource="mdxMap" id="QCHARTS_PROG002D0002Q_mdxOid" onChange="QCHARTS_PROG002D0002Q_getMdxHistory();" ></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_mdxOid'">
+    									Select history data.
+									</div>   									 
 									&nbsp;		
 						    									
 									<s:property value="getText('QCHARTS_PROG002D0002Q_name')"/>:
 									<gs:textBox name="QCHARTS_PROG002D0002Q_name" id="QCHARTS_PROG002D0002Q_name" value="" width="200" maxlength="100"></gs:textBox>
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_name'">
+    									Input name.
+									</div> 
+																		
 									&nbsp;
 									<s:property value="getText('QCHARTS_PROG002D0002Q_showDimensionTitle')"/>:<input id="QCHARTS_PROG002D0002Q_showDimensionTitle" name="QCHARTS_PROG002D0002Q_showDimensionTitle" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_showDimensionTitle'">
+    									enable show Dimension-Title on report.
+									</div> 									
 									&nbsp;
 									<s:property value="getText('QCHARTS_PROG002D0002Q_showParentMembers')"/>:<input id="QCHARTS_PROG002D0002Q_showParentMembers" name="QCHARTS_PROG002D0002Q_showParentMembers" data-dojo-type="dijit/form/CheckBox" value="true" checked="checked" />
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_showParentMembers'">
+    									enable show Parent-Members on report.
+									</div>
+																		
 								</td>
 							</tr>
 							<tr>
@@ -376,11 +388,17 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('QCHARTS_PROG002D0002Q_olapConfigOid')"/>: 
 									<gs:select name="QCHARTS_PROG002D0002Q_olapConfigOid" dataSource="configMap" id="QCHARTS_PROG002D0002Q_olapConfigOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_olapConfigOid'">
+    									Select datasource config.
+									</div> 									
 						    		&nbsp;		
 						    																	
 									<s:property value="getText('QCHARTS_PROG002D0002Q_olapCatalogOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0002Q_olapCatalogOid" dataSource="catalogMap" id="QCHARTS_PROG002D0002Q_olapCatalogOid"></gs:select>
-																		
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_olapCatalogOid'">
+    									Select Mondrian-Catalog.<BR/>the catalog file need work with success datasource config.
+									</div> 	
+																											
 								</td>
 							</tr>							
 							<tr>
@@ -388,7 +406,23 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('QCHARTS_PROG002D0002Q_expression')"/>:<br/>
 									<textarea id="QCHARTS_PROG002D0002Q_expression" name="QCHARTS_PROG002D0002Q_expression" data-dojo-type="dijit/form/Textarea" rows="6" cols="120" style="width:960px;height:90px;max-height:100px"></textarea>
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0002Q_expression'">
+    									MultiDimensional eXpressions.<BR/>
+    									Example:<BR/>
+    									
+    									<hr size="1">
+    									<font size='2'>
+										SELECT <BR/>
+										&nbsp;&nbsp;{ [Measures].[Store Sales] } ON COLUMNS,<BR/> 
+										&nbsp;&nbsp;{ [Date].[2002], [Date].[2003] } ON ROWS<BR/> 
+										FROM Sales WHERE ( [Store].[USA].[CA] )
+										</font>
+										<hr size="1">
+										
+										<BR/> 									
+    									Reference: <a href="https://en.wikipedia.org/wiki/MultiDimensional_eXpressions">MultiDimensional eXpressions</a>
+									</div> 	
+																		
 								</td>
 							</tr>
 														

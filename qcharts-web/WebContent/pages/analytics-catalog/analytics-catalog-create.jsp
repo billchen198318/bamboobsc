@@ -94,6 +94,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0004A_id')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0004A_id" id="QCHARTS_PROG001D0004A_id" value="" width="200" maxlength="20"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0004A_id'">
+    				Input Id, only allow normal characters.
+				</div>     		    			
     		</td>    		
     	</tr>  	    	
 		<tr>
@@ -101,6 +104,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0004A_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0004A_name" id="QCHARTS_PROG001D0004A_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0004A_name'">
+    				Input name.
+				</div>       			
     		</td>    		
     	</tr>  	
 		<tr>
@@ -119,6 +125,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('QCHARTS_PROG001D0004A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0004A_description" name="QCHARTS_PROG001D0004A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0004A_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div> 		    	
 		    </td>		    
 		</tr>      	  	       	   	  	    		 	  	    	    	      	    	    	    	   	  	    		 	  	    	
     	<tr>

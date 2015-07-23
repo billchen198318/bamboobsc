@@ -88,6 +88,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_id')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0003A_id" id="QCHARTS_PROG001D0003A_id" value="" width="200" maxlength="20"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_id'">
+    				Input Id, only allow normal characters.
+				</div>     			
     		</td>    		
     	</tr>  	    	
 		<tr>
@@ -95,13 +98,27 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0003A_name" id="QCHARTS_PROG001D0003A_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_name'">
+    				Input name.
+				</div>       			
     		</td>    		
     	</tr>  	
 		<tr>
     		<td height="50px" width="100%"  align="left">
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_jdbcDrivers')"/></b>:
     			<br/>
-    			<gs:textBox name="QCHARTS_PROG001D0003A_jdbcDrivers" id="QCHARTS_PROG001D0003A_jdbcDrivers" value="" width="200" maxlength="50"></gs:textBox>    			
+    			<gs:textBox name="QCHARTS_PROG001D0003A_jdbcDrivers" id="QCHARTS_PROG001D0003A_jdbcDrivers" value="" width="200" maxlength="50"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_jdbcDrivers'">
+    				Input jdbc Driver.<BR/>
+    				Example:<BR/>
+    				&nbsp;&nbsp;MySQL: com.mysql.jdbc.Driver <BR/>
+    				&nbsp;&nbsp;PostgreSQL: org.postgresql.Driver <a href="https://jdbc.postgresql.org/">download</a><BR/>
+    				&nbsp;&nbsp;SQL-Server: com.microsoft.sqlserver.jdbc.SQLServerDriver <a href="https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx">download</a><BR/>
+    				&nbsp;&nbsp;Oracle: oracle.jdbc.OracleDriver <a href="http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html">download</a> <BR/>    				
+    				<BR/>
+    				<BR/>
+    				Non MySQL database, need <font color='RED'>copy jdbc driver JAR library file to WEB-INF/lib/</font> .
+				</div>       			    			
     		</td>    		
     	</tr>     	    	
    		<tr>
@@ -109,6 +126,14 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0003A_jdbcUrl')"/></b>:
     			<br/>
     			<textarea id="QCHARTS_PROG001D0003A_jdbcUrl" name="QCHARTS_PROG001D0003A_jdbcUrl" data-dojo-type="dijit/form/Textarea" rows="2" cols="75" style="width:600px;height:50px;max-height:50px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_jdbcUrl'">
+    				Input jdbc url.<BR/>
+    				Example:<BR/>
+    				jdbc:mysql://localhost:3306/testdb?user=root&password=pwd123
+    				<BR/>
+    				<BR/>
+    				<a href="http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html">Reference</a>
+				</div>     			
     		</td>    		
     	</tr>  	
 		<tr>
@@ -116,6 +141,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('QCHARTS_PROG001D0003A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0003A_description" name="QCHARTS_PROG001D0003A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div> 		    	
 		    </td>		    
 		</tr>      	  	    	    	   	  	    		 	  	    	    	      	    	    	    	   	  	    		 	  	    	
     	<tr>
