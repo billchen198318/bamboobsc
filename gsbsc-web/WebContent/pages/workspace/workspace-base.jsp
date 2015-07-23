@@ -88,11 +88,17 @@ function ${programId}_page_message() {
 									
 									<s:property value="getText('BSC_PROG001D0005Q_workspaceOid')"/>:
 									<gs:select name="BSC_PROG001D0005Q_workspaceOid" dataSource="workspaceMap" id="BSC_PROG001D0005Q_workspaceOid" value="fields.workspaceOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0005Q_workspaceOid'">
+					    				Select workspace.
+									</div> 									
 						    		&nbsp;		    
 						    							
 						    																
 									<s:property value="getText('BSC_PROG001D0005Q_visionOid')"/>: 
 									<gs:select name="BSC_PROG001D0005Q_visionOid" dataSource="visionMap" id="BSC_PROG001D0005Q_visionOid" value="fields.visionOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0005Q_visionOid'">
+					    				Select vision.
+									</div> 																		
 						    		&nbsp;		    															
 								
 								</td>
