@@ -113,7 +113,12 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('QCHARTS_PROG001D0002Q_name')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="QCHARTS_PROG001D0002Q_name" id="QCHARTS_PROG001D0002Q_name" value="" width="200" maxlength="100"></gs:textBox></td>
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="QCHARTS_PROG001D0002Q_name" id="QCHARTS_PROG001D0002Q_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0002Q_name'">
+    				Input name.
+				</div>       			
+    		</td>
     		<td height="25px" width="10%"  align="right">&nbsp;</td>
     		<td height="25px" width="40%"  align="left">&nbsp;</td>
     		

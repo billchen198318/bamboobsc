@@ -92,6 +92,18 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001A_driverOid')"/></b>:
     			<br/>
     			<gs:select name="QCHARTS_PROG001D0001A_driverOid" dataSource="driverMap" id="QCHARTS_PROG001D0001A_driverOid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_driverOid'">
+    				Select driver.<BR/>
+    				
+    				&nbsp;&nbsp;PostgreSQL driver <a href="https://jdbc.postgresql.org/">download</a><BR/>
+    				&nbsp;&nbsp;SQL-Server driver <a href="https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx">download</a><BR/>
+    				&nbsp;&nbsp;Oracle driver <a href="http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html">download</a> <BR/>    				
+    				<BR/>
+    				<BR/>
+    				Non MySQL database:<BR/>
+    				1. need <font color='RED'>copy jdbc driver JAR library file to WEB-INF/lib/</font> .  <BR/>  				
+    				2. need config table named `<font color='RED'>qc_data_source_driver</font>` to add datasource. 
+				</div>         			
     		</td>    		
     	</tr>		
 		<tr>
@@ -99,6 +111,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001A_id')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001A_id" id="QCHARTS_PROG001D0001A_id" value="" width="200" maxlength="20"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_id'">
+    				Input Id, only allow normal characters.
+				</div>        			
     		</td>    		
     	</tr>  	    	
 		<tr>
@@ -106,6 +121,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001A_name')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001A_name" id="QCHARTS_PROG001D0001A_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_name'">
+    				Input name.
+				</div>       			
     		</td>    		
     	</tr>  	
    		<tr>
@@ -113,6 +131,14 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001A_jdbcUrl')"/></b>:
     			<br/>
     			<textarea id="QCHARTS_PROG001D0001A_jdbcUrl" name="QCHARTS_PROG001D0001A_jdbcUrl" data-dojo-type="dijit/form/Textarea" rows="2" cols="75" style="width:600px;height:50px;max-height:50px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_jdbcUrl'">
+    				Input jdbc url.<BR/>
+    				Example:<BR/>
+    				jdbc:mysql://localhost:3306/testdb
+    				<BR/>
+    				<BR/>
+    				<a href="http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html">Reference</a>
+				</div>     			
     		</td>    		
     	</tr>  	
  		<tr>
@@ -120,6 +146,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001A_dbAccount')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001A_dbAccount" id="QCHARTS_PROG001D0001A_dbAccount" value="" width="200" maxlength="50"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_dbAccount'">
+    				Input database account.
+				</div>       			
     		</td>    		
     	</tr>  	
 		<tr>
@@ -127,6 +156,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('QCHARTS_PROG001D0001A_dbPassword')"/></b>:
     			<br/>
     			<gs:textBox name="QCHARTS_PROG001D0001A_dbPassword" id="QCHARTS_PROG001D0001A_dbPassword" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_dbPassword'">
+    				Input database password.
+				</div>     			
     		</td>    		
     	</tr>  	    	   	 	
 		<tr>
@@ -134,6 +166,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('QCHARTS_PROG001D0001A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="QCHARTS_PROG001D0001A_description" name="QCHARTS_PROG001D0001A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div> 		    	
 		    </td>
 		</tr>      	  	    	    	   	  	    				 	  	    	    	      	    	    	    	   	  	    		 	  	    
     	<tr>

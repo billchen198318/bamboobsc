@@ -602,15 +602,24 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('QCHARTS_PROG002D0001Q_queryOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0001Q_queryOid" dataSource="queryHistoryMap" id="QCHARTS_PROG002D0001Q_queryOid" onChange="QCHARTS_PROG002D0001Q_getQueryHistory();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0001Q_queryOid'">
+    									Select history data.
+									</div>  									
 									&nbsp;		
 								
 									<s:property value="getText('QCHARTS_PROG002D0001Q_dataSourceConfOid')"/>: 
 									<gs:select name="QCHARTS_PROG002D0001Q_dataSourceConfOid" dataSource="confMap" id="QCHARTS_PROG002D0001Q_dataSourceConfOid"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0001Q_dataSourceConfOid'">
+    									Select datasource.
+									</div> 									
 						    		&nbsp;		
 						    									
 									<s:property value="getText('QCHARTS_PROG002D0001Q_name')"/>:
 									<gs:textBox name="QCHARTS_PROG002D0001Q_name" id="QCHARTS_PROG002D0001Q_name" value="" width="200" maxlength="100"></gs:textBox>
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0001Q_name'">
+    									Input name.
+									</div> 	
+																		
 								</td>
 							</tr>
 							<tr>
@@ -618,10 +627,17 @@ function ${programId}_page_message() {
 															
 									<s:property value="getText('QCHARTS_PROG002D0001Q_dataQueryMapperOid')"/>:
 									<gs:select name="QCHARTS_PROG002D0001Q_dataQueryMapperOid" dataSource="mapperMap" id="QCHARTS_PROG002D0001Q_dataQueryMapperOid" onChange="QCHARTS_PROG002D0001Q_triggerChangeMapperSetItems();"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0001Q_dataQueryMapperOid'">
+    									Select mapper.
+									</div> 
+																		
 									&nbsp;
 									<s:property value="getText('QCHARTS_PROG002D0001Q_dataQueryMapperSetOid')"/><font size='2'><s:property value="getText('QCHARTS_PROG002D0001Q_dataQueryMapperSetOid_forPieChart')"/></font>:
 									<gs:select name="QCHARTS_PROG002D0001Q_dataQueryMapperSetOid" dataSource="mapperSetMap" id="QCHARTS_PROG002D0001Q_dataQueryMapperSetOid"></gs:select>
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0001Q_dataQueryMapperSetOid'">
+    									Select mapper item. ( only need when PIE-chart )
+									</div> 
+																		
 								</td>
 							</tr>							
 							<tr>
@@ -629,7 +645,22 @@ function ${programId}_page_message() {
 								
 									<s:property value="getText('QCHARTS_PROG002D0001Q_queryExpression')"/>:<br/>
 									<textarea id="QCHARTS_PROG002D0001Q_queryExpression" name="QCHARTS_PROG002D0001Q_queryExpression" data-dojo-type="dijit/form/Textarea" rows="6" cols="120" style="width:960px;height:90px;max-height:100px"></textarea>
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG002D0001Q_queryExpression'">
+    									SQL expression.<BR/>
+    									Example:<BR/>
+    									
+    									<hr size="1">
+    									<font size='2'>
+										select <BR/>
+										&nbsp;&nbsp;ID, NAME, PERFORMANCE <BR/> 										
+										from SALES where BRANCH = '01'
+										</font>
+										<hr size="1">
+										
+										<BR/> 									
+    									Reference: <a href="https://en.wikipedia.org/wiki/SQL">SQL</a>
+									</div> 	
+																		
 								</td>
 							</tr>
 														
