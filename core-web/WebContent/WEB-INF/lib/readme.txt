@@ -261,7 +261,7 @@ guava-gwt-13.0.1.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.3-indy.jar
+groovy-all-2.4.4-indy.jar
 
 
 Apache ActiveMQ
