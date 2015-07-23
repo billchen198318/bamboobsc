@@ -105,6 +105,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_forId')"/></b> <s:property value="getText('BSC_PROG001D0003E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003E_forId" id="BSC_PROG001D0003E_forId" value="formula.forId" width="200" maxlength="14" readonly="Y"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_forId'">
+		    		Id. ( read only )
+				</div>       			
     		</td>	
     	</tr>  	
 		<tr>
@@ -112,6 +115,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003E_name" id="BSC_PROG001D0003E_name" value="formula.name" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_name'">
+		    		Input name.
+				</div>       			
     		</td>
     	</tr>		    	
 		<tr>
@@ -119,6 +125,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_type')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0003E_type" dataSource="typeMap" id="BSC_PROG001D0003E_type" value="formula.type"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_type'">
+		    		Select langauge type. ( recommend groovy )
+				</div>     			
     		</td>
     	</tr>		    	
 		<tr>
@@ -126,6 +135,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_returnMode')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0003E_returnMode" dataSource="modeMap" id="BSC_PROG001D0003E_returnMode" value="formula.returnMode"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_returnMode'">
+		    		Select mode.
+				</div>         			
     		</td>
     	</tr>		    	
  		<tr>
@@ -133,6 +145,9 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('BSC_PROG001D0003E_returnVar')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003E_returnVar" id="BSC_PROG001D0003E_returnVar" value="formula.returnVar" width="100" maxlength="50"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_returnVar'">
+		    		Input return variable name when mode is custom.
+				</div>    			
     		</td>
     	</tr>		    	
 		<tr>
@@ -140,7 +155,15 @@ function ${programId}_page_message() {
 		    	<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003E_expression')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0003E_expression" name="BSC_PROG001D0003E_expression" data-dojo-type="dijit/form/Textarea" rows="4" cols="65" style="width:450px;height:90px;max-height:100px">${formula.expression}</textarea>
-		    	
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_expression'">
+		    		Input expression.<BR/>
+		    		Example:<BR/>
+		    		&nbsp;&nbsp;( actual / target ) × 100 + 1<BR/>
+		    		<BR/>
+		    		&nbsp;&nbsp;Actual(actual) : the variable is measured data actual field.<BR/>
+		    		&nbsp;&nbsp;Target(target) : the variable is measured data target field.
+				</div> 
+						    	
 			  		<table border="0" cellpadding="0" cellspacing="0" >
 			  			<tr>
 			  				<td colspan="6">
@@ -448,7 +471,10 @@ function ${programId}_page_message() {
 		    <td height="150px" width="100%" align="left">
 		    	<b><s:property value="getText('BSC_PROG001D0003E_description')"/></b>:
 		    	<br/>
-		    	<textarea id="BSC_PROG001D0003E_description" name="BSC_PROG001D0003E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${formula.description}</textarea>	
+		    	<textarea id="BSC_PROG001D0003E_description" name="BSC_PROG001D0003E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${formula.description}</textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003E_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div>   		    		
 		    </td>
 		</tr>      	     	   	    	
     	<tr>

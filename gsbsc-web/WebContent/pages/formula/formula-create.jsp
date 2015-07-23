@@ -106,6 +106,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003A_forId')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003A_forId" id="BSC_PROG001D0003A_forId" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_forId'">
+		    		Input Id, only allow normal characters.
+				</div>       			
     		</td>
     	</tr>  		
 		<tr>
@@ -113,6 +116,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003A_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003A_name" id="BSC_PROG001D0003A_name" value="" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_name'">
+		    		Input name.
+				</div>       			
     		</td>
     	</tr>     	
 		<tr>
@@ -120,6 +126,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003A_type')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0003A_type" dataSource="typeMap" id="BSC_PROG001D0003A_type"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_type'">
+		    		Select langauge type. ( recommend groovy )
+				</div>       			
     		</td>
     	</tr>     	
 		<tr>
@@ -127,6 +136,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003A_returnMode')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0003A_returnMode" dataSource="modeMap" id="BSC_PROG001D0003A_returnMode"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_returnMode'">
+		    		Select mode.
+				</div>     			
     		</td>
     	</tr>     	
  		<tr>
@@ -134,6 +146,9 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('BSC_PROG001D0003A_returnVar')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0003A_returnVar" id="BSC_PROG001D0003A_returnVar" value="" width="100" maxlength="50"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_returnVar'">
+		    		Input return variable name when mode is custom.
+				</div>     			
     		</td>
     	</tr>     	   	    	    	
 		<tr>
@@ -141,7 +156,15 @@ function ${programId}_page_message() {
 		    	<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0003A_expression')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0003A_expression" name="BSC_PROG001D0003A_expression" data-dojo-type="dijit/form/Textarea" rows="4" cols="65" style="width:450px;height:90px;max-height:100px"></textarea>
-		    	
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_expression'">
+		    		Input expression.<BR/>
+		    		Example:<BR/>
+		    		&nbsp;&nbsp;( actual / target ) × 100 + 1<BR/>
+		    		<BR/>
+		    		&nbsp;&nbsp;Actual(actual) : the variable is measured data actual field.<BR/>
+		    		&nbsp;&nbsp;Target(target) : the variable is measured data target field.
+				</div> 
+						    	
 			  		<table border="0" cellpadding="0" cellspacing="0" >
 			  			<tr>
 			  				<td colspan="6">
@@ -450,6 +473,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('BSC_PROG001D0003A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0003A_description" name="BSC_PROG001D0003A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0003A_description'">
+    				Input description, the maximum allowed 500 characters. 
+				</div>   			    	
 		    </td>
 		</tr>      	    	   	  	    		 	  	    	    	      	    	    	    	   	  	    		 	  	    	
     	<tr>

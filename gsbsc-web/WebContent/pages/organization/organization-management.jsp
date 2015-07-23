@@ -335,11 +335,17 @@ function ${programId}_page_message() {
 				<tr>
 		    		<td height="50px" width="100%" align="left"><font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0002Q_orgId')"/></b>:<br/>
 		    			<gs:textBox name="BSC_PROG001D0002Q_orgId" id="BSC_PROG001D0002Q_orgId" value="" width="200" maxlength="10"></gs:textBox>
+						<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0002Q_orgId'">
+		    				Input Id, only allow normal characters.
+						</div>  		    			
 		    		</td>
 		    	</tr>	
 				<tr>
 		    		<td height="50px" width="100%" align="left"><font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0002Q_name')"/></b>:<br/>
 		    			<gs:textBox name="BSC_PROG001D0002Q_name" id="BSC_PROG001D0002Q_name" value="" width="400" maxlength="200"></gs:textBox>
+						<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0002Q_name'">
+		    				Input name.
+						</div> 		    			
 		    		</td>
 		    	</tr>    
 				<tr>
@@ -354,11 +360,17 @@ function ${programId}_page_message() {
 				<tr>
 		    		<td height="50px" width="100%" align="left"><b><s:property value="getText('BSC_PROG001D0002Q_address')"/></b>:<br/>
 		    			<gs:textBox name="BSC_PROG001D0002Q_address" id="BSC_PROG001D0002Q_address" value="" width="600" maxlength="500"></gs:textBox>
+						<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0002Q_address'">
+		    				Input address.
+						</div> 			    			
 		    		</td>
 		    	</tr>  		    			
 				<tr>
 		    		<td height="125px" width="100%" align="left"><b><s:property value="getText('BSC_PROG001D0002Q_description')"/></b>:<br/>
-		    			<textarea id="BSC_PROG001D0002Q_description" name="BSC_PROG001D0002Q_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>	
+		    			<textarea id="BSC_PROG001D0002Q_description" name="BSC_PROG001D0002Q_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+						<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0002Q_description'">
+		    				Input description, the maximum allowed 500 characters.
+						</div> 			    				
 		    		</td>
 		    	</tr>   
 		    	<tr>
