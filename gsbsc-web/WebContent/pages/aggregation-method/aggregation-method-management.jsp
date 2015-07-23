@@ -115,9 +115,19 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >		
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG001D0008Q_aggrId')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG001D0008Q_aggrId" id="BSC_PROG001D0008Q_aggrId" value="" width="200" maxlength="14"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG001D0008Q_aggrId" id="BSC_PROG001D0008Q_aggrId" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008Q_aggrId'">
+    				Input Id.
+				</div>     			
+    		</td>  					
     		<td height="25px" width="10%"  align="right"><s:property value="getText('BSC_PROG001D0008Q_name')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:textBox name="BSC_PROG001D0008Q_name" id="BSC_PROG001D0008Q_name" value="" width="200" maxlength="100"></gs:textBox></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<gs:textBox name="BSC_PROG001D0008Q_name" id="BSC_PROG001D0008Q_name" value="" width="200" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008Q_name'">
+    				Input name.
+				</div>        			
+    		</td>  					
     	</tr>
     	<tr>
     		<td  height="25px" width="100%"  align="center" colspan="4">

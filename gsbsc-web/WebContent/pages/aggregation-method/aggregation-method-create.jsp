@@ -97,6 +97,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008A_aggrId')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0008A_aggrId" id="BSC_PROG001D0008A_aggrId" value="" width="200" maxlength="14"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008A_aggrId'">
+    				Input Id, only allow normal characters.
+				</div>        			
     		</td>
     	</tr>  		
 		<tr>
@@ -104,6 +107,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008A_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0008A_name" id="BSC_PROG001D0008A_name" value="" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008A_name'">
+    				Input name.
+				</div>      			
     		</td>
     	</tr>     	
 		<tr>
@@ -111,6 +117,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008A_type')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0008A_type" dataSource="typeMap" id="BSC_PROG001D0008A_type"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008A_type'">
+		    		Select langauge type. ( recommend groovy )
+				</div>      			
     		</td>
     	</tr>  
 		<tr>
@@ -118,6 +127,9 @@ function ${programId}_page_message() {
 		    	<b><s:property value="getText('BSC_PROG001D0008A_description')"/></b>:
 		    	<br/>
 		    	<textarea id="BSC_PROG001D0008A_description" name="BSC_PROG001D0008A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008A_description'">
+		    		Input description, the maximum allowed 500 characters.
+				</div> 		    	
 		    </td>
 		</tr> 
 	</table>

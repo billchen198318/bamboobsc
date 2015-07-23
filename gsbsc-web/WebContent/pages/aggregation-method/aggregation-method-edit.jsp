@@ -95,6 +95,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_aggrId')"/></b> <s:property value="getText('BSC_PROG001D0008E_readOnly')"/>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0008E_aggrId" id="BSC_PROG001D0008E_aggrId" value="aggr.aggrId" width="200" maxlength="14" readonly="Y"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008E_aggrId'">
+    				Input Id, ( read only )
+				</div>        			
     		</td>
     	</tr>  	
 		<tr>
@@ -102,6 +105,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_name')"/></b>:
     			<br/>
     			<gs:textBox name="BSC_PROG001D0008E_name" id="BSC_PROG001D0008E_name" value="aggr.name" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008E_name'">
+    				Input name.
+				</div>        			
     		</td>
     	</tr>     	
 		<tr>
@@ -109,13 +115,19 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG001D0008E_type')"/></b>:
     			<br/>
     			<gs:select name="BSC_PROG001D0008E_type" dataSource="typeMap" id="BSC_PROG001D0008E_type" value="aggr.type"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008E_type'">
+		    		Select langauge type. ( recommend groovy )
+				</div>     			
     		</td>
     	</tr>     	
 		<tr>
 		    <td height="150px" width="100%" align="left">
 		    	<b><s:property value="getText('BSC_PROG001D0008E_description')"/></b>:
 		    	<br/>
-		    	<textarea id="BSC_PROG001D0008E_description" name="BSC_PROG001D0008E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${aggr.description}</textarea>	
+		    	<textarea id="BSC_PROG001D0008E_description" name="BSC_PROG001D0008E_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px">${aggr.description}</textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0008E_description'">
+		    		Input description, the maximum allowed 500 characters.
+				</div>		    		
 		    </td>
 		</tr>         	
 	</table>
