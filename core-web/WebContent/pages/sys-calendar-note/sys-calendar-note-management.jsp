@@ -118,9 +118,19 @@ function ${programId}_page_message() {
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >
 		<tr>
     		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0004Q_accountOid')"/>:</td>
-    		<td height="25px" width="40%"  align="left"><gs:select name="CORE_PROG001D0004Q_accountOid" dataSource="accountMap" id="CORE_PROG001D0004Q_accountOid" readonly="${selectReadonly}" value="${selectValue}"></gs:select></td>    		
+    		<td height="25px" width="40%"  align="left">
+    			<gs:select name="CORE_PROG001D0004Q_accountOid" dataSource="accountMap" id="CORE_PROG001D0004Q_accountOid" readonly="${selectReadonly}" value="${selectValue}"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004Q_accountOid'">
+    				Select account.
+				</div>         			
+    		</td>    		
     		<td height="25px" width="10%"  align="right"><s:property value="getText('CORE_PROG001D0004Q_date')"/></td>
-    		<td height="25px" width="40%"  align="left"><input id="CORE_PROG001D0004Q_date" type="text" name="CORE_PROG001D0004Q_date" data-dojo-type="dijit.form.DateTextBox" maxlength="10" constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" required="true" style="width:120px;" /></td>  					
+    		<td height="25px" width="40%"  align="left">
+    			<input id="CORE_PROG001D0004Q_date" type="text" name="CORE_PROG001D0004Q_date" data-dojo-type="dijit.form.DateTextBox" maxlength="10" constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" required="true" style="width:120px;" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004Q_date'">
+    				Select date.
+				</div>     			
+    		</td>  					
     	</tr>
     	<tr>
     		<td  height="25px" width="100%"  align="center" colspan="4">

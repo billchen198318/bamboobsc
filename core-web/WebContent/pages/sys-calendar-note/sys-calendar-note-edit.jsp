@@ -99,6 +99,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004E_accountOid')"/></b> <s:property value="getText('CORE_PROG001D0004E_readOnly')"/>:
     			<br/>
     			<gs:select name="CORE_PROG001D0004E_accountOid" dataSource="accountMap" id="CORE_PROG001D0004E_accountOid" readonly="Y" value="accountOid"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_accountOid'">
+    				owner account. ( read only )
+				</div>       			
     		</td>
     	</tr>	
 		<tr>
@@ -106,13 +109,19 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004E_title')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0004E_title" id="CORE_PROG001D0004E_title" value="sysCalendarNote.title" width="400" maxlength="100"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_title'">
+    				Input title.
+				</div>        			
     		</td>
     	</tr>	
 		<tr>
     		<td height="225px" width="100%"  align="left">
     			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004E_note')"/></b>:
     			<br/>
-    			<textarea id="CORE_PROG001D0004E_note" name="CORE_PROG001D0004E_note" data-dojo-type="dijit/form/Textarea" rows="9" cols="50" style="width:300px;height:190px;max-height:200px">${sysCalendarNote.note}</textarea>	
+    			<textarea id="CORE_PROG001D0004E_note" name="CORE_PROG001D0004E_note" data-dojo-type="dijit/form/Textarea" rows="9" cols="50" style="width:300px;height:190px;max-height:200px">${sysCalendarNote.note}</textarea>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_note'">
+    				Input description, the maximum allowed 1000 characters.
+				</div>     				
     		</td>
     	</tr>
 		<tr>
@@ -120,6 +129,9 @@ function ${programId}_page_message() {
     			<font color='RED'>*</font><b><s:property value="getText('CORE_PROG001D0004E_date')"/></b>:
     			<br/>
     			<input id="CORE_PROG001D0004E_date" type="text" name="CORE_PROG001D0004E_date" data-dojo-type="dijit.form.DateTextBox" maxlength="10" constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" required="true" style="width:120px;" value="${calendarNoteDate}" />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_date'">
+    				Select date.
+				</div>        			
     		</td>
     	</tr>
 		<tr>
@@ -128,13 +140,28 @@ function ${programId}_page_message() {
     			<br/>
     			<b><s:property value="getText('CORE_PROG001D0004E_time_start')"/></b>&nbsp;
     			<s:property value="getText('CORE_PROG001D0004E_time_startHour')"/><gs:select name="CORE_PROG001D0004E_time_startHour" dataSource="hourMap" id="CORE_PROG001D0004E_time_startHour" width="50" value="startHour"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_time_startHour'">
+    				Select start Hour.
+				</div>  
+				    			
     			<s:property value="getText('CORE_PROG001D0004E_time_startMinutes')"/><gs:select name="CORE_PROG001D0004E_time_startMinutes" dataSource="minutesMap" id="CORE_PROG001D0004E_time_startMinutes" width="50" value="startMinutes"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_time_startMinutes'">
+    				Select start Minutes.
+				</div>  
+				    			
     			&nbsp;&nbsp;&nbsp;
     			
     			<b><s:property value="getText('CORE_PROG001D0004E_time_end')"/></b>&nbsp;
     			<s:property value="getText('CORE_PROG001D0004E_time_endHour')"/><gs:select name="CORE_PROG001D0004E_time_endHour" dataSource="hourMap" id="CORE_PROG001D0004E_time_endHour" width="50" value="endHour"></gs:select>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_time_endHour'">
+    				Select end Hour.
+				</div>   
+				    			
     			<s:property value="getText('CORE_PROG001D0004E_time_endMinutes')"/><gs:select name="CORE_PROG001D0004E_time_endMinutes" dataSource="minutesMap" id="CORE_PROG001D0004E_time_endMinutes" width="50" value="endMinutes"></gs:select>    			
-    			
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_time_endMinutes'">
+    				Select end Minutes.
+				</div> 
+				    			
     		</td>
     		<!-- Time: 下拉-起時 下拉-起分 / 下拉-迄時 下拉-迄分 -->
     	</tr>    
@@ -142,7 +169,11 @@ function ${programId}_page_message() {
     		<td height="50px" width="100%"  align="left">
     			<b><s:property value="getText('CORE_PROG001D0004E_alert')"/></b>:
     			<br/>
-    			<input id="CORE_PROG001D0004E_alert" name="CORE_PROG001D0004E_alert" data-dojo-type="dijit/form/CheckBox" value="true" <s:if test=" \"Y\" == sysCalendarNote.alert "> checked </s:if> /> 
+    			<input id="CORE_PROG001D0004E_alert" name="CORE_PROG001D0004E_alert" data-dojo-type="dijit/form/CheckBox" value="true" <s:if test=" \"Y\" == sysCalendarNote.alert "> checked </s:if> />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_alert'">
+    				enable, send mail to notice.
+				</div> 
+				    			 
     		</td>
     	</tr>    	    	        		
 		<tr>
@@ -150,6 +181,13 @@ function ${programId}_page_message() {
     			<b><s:property value="getText('CORE_PROG001D0004E_contact')"/></b>:
     			<br/>
     			<gs:textBox name="CORE_PROG001D0004E_contact" id="CORE_PROG001D0004E_contact" value="sysCalendarNote.contact" width="400" maxlength="500"></gs:textBox>
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'CORE_PROG001D0004E_contact'">
+    				Mail address.<BR/>
+    				Example:<BR/>
+    				&nbsp;&nbsp;1.Single: bill1234@gmail.com<BR/>
+    				&nbsp;&nbsp;2.Many: bill1234@gmail.com;amy@gmail.com;tiffany@gmail.com
+				</div> 
+				    			
     		</td>
     	</tr>     	 	  	    	
     	<tr>
