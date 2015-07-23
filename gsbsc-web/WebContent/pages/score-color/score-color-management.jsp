@@ -162,7 +162,14 @@ function ${programId}_page_message() {
     					
 						<s:property value="getText('BSC_PROG001D0004Q_score')"/>:
 			    		<gs:textBox name="BSC_PROG001D0004Q_score" id="BSC_PROG001D0004Q_score" value="0" width="100" maxlength="9" />
-			    				    		
+						<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG001D0004Q_score'">
+    						Input range score value, only allow numbers.<BR/>
+    						current value must bigger than before-record score value.
+    						<BR/><BR/>
+    						min cannot smaller than -999999999.<BR/>
+    						max cannot bigger than 999999999.
+						</div> 	
+							    				    		
 			    		<gs:button name="BSC_PROG001D0004Q_save" id="BSC_PROG001D0004Q_save" onClick="BSC_PROG001D0004Q_save();"
 			    			handleAs="json"
 			    			sync="N"

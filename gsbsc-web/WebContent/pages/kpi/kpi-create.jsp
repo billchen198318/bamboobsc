@@ -282,7 +282,7 @@ function ${programId}_page_message() {
     				&nbsp;&nbsp;quasi-range (Max) = target(100) + ( 100 * 15/100 ) = 113.5 <BR/>
     				&nbsp;&nbsp;quasi-range (Min) = target(100) - ( 100 * 15/100 ) = 86.5 <BR/>
     				<BR/>
-    				&nbsp;&nbsp;score(90) is bigger then value: Min(86.5) and small then value: Max(113.5) . so KPI status is Good / Up.    				
+    				&nbsp;&nbsp;score(90) is bigger than Min(86.5) and small than Max(113.5) . so KPI status is Good / Up.    				
 				</div>    			      			    			
     		</td>      		
     	</tr>        	
