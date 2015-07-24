@@ -241,10 +241,11 @@ function BSC_PROG003D0005Q_showObjectivesMeterGauge( data ) {
 			if (maxValue < score) {
 				maxValue = score;
 			}		
+			maxValue = parseInt(maxValue+'', 10);
 			
 			var labelString = objective.name + " ( " + score + " ) ";
 			
-			$.jqplot(id, [ [score] ], {
+			$.jqplot(id, [ [parseInt(score+'', 10)] ], {
 			       seriesDefaults: {
 			           renderer: $.jqplot.MeterGaugeRenderer,
 			           rendererOptions: {

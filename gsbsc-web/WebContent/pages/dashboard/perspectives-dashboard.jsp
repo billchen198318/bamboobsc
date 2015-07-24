@@ -185,10 +185,11 @@ function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
 		if (maxValue < score) {
 			maxValue = score;
 		}	
+		maxValue = parseInt(maxValue+'', 10);
 		
 		var labelString = perspective.name + " ( " + score + " ) ";
 		
-		$.jqplot(id, [ [score] ], {
+		$.jqplot(id, [ [parseInt(score+'', 10)] ], {
 		       seriesDefaults: {
 		           renderer: $.jqplot.MeterGaugeRenderer,
 		           rendererOptions: {

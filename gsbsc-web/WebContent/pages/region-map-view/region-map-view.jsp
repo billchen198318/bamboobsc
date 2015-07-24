@@ -249,10 +249,11 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 		if (maxValue < score) {
 			maxValue = score;
 		}
+		maxValue = parseInt(maxValue+'', 10);
 		
 		var labelString = kpis[k].name + " ( " + score + " ) ";
 		
-		$.jqplot(id, [ [score] ], {
+		$.jqplot(id, [ [parseInt(score+'', 10)] ], {
 		       seriesDefaults: {
 		           renderer: $.jqplot.MeterGaugeRenderer,
 		           rendererOptions: {

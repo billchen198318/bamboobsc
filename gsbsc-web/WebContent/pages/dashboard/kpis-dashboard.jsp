@@ -355,10 +355,11 @@ function BSC_PROG003D0006Q_showKpisMeterGauge( data ) {
 				if (maxValue < score) {
 					maxValue = score;
 				}
+				maxValue = parseInt(maxValue+'', 10);				
 				
 				var labelString = kpi.name + " ( " + score + " ) ";
 				
-				$.jqplot(id, [ [score] ], {
+				$.jqplot(id, [ [parseInt(score+'', 10)] ], {
 				       seriesDefaults: {
 				           renderer: $.jqplot.MeterGaugeRenderer,
 				           rendererOptions: {
