@@ -55,12 +55,24 @@ public class ScoreCalculationCallable implements Callable<ScoreCalculationCallab
 	@Override
 	public ScoreCalculationCallableData call() throws Exception {
 		BscScoreColorUtils.loadScoreColors();
-		//BscReportSupportUtils.loadExpression(); // 2014-04-18 rem 移到 aggregation method 的 expression 去呼叫
+		//BscReportSupportUtils.loadExpression(); // 這邊會用到與 aggregation method 的 expression 也會用到
 		if ( this.data.isDefaultMode() ) { // KPI分數
 			float score = AggregationMethodUtils.processDefaultMode( this.data.getKpi() );
 			this.data.getKpi().setScore(score);
 			this.data.getKpi().setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
-			this.data.getKpi().setFontColor( BscScoreColorUtils.getFontColor(score) );			
+			this.data.getKpi().setFontColor( BscScoreColorUtils.getFontColor(score) );	
+			/*
+			this.data.getKpi().setImgIcon( 
+					BscReportSupportUtils.getHtmlIconBase(
+							"KPI", 
+							this.data.getKpi().getTarget(), 
+							this.data.getKpi().getMin(), 
+							score, 
+							this.data.getKpi().getCompareType(), 
+							this.data.getKpi().getManagement(), 
+							this.data.getKpi().getQuasiRange())
+			);
+			*/
 		} else { // KPI 日期區間分數
 			if (BscMeasureDataFrequency.FREQUENCY_DAY.equals( this.data.getFrequency() ) 
 					|| BscMeasureDataFrequency.FREQUENCY_WEEK.equals( this.data.getFrequency() ) 

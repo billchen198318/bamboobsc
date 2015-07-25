@@ -23,6 +23,7 @@
 							<font color="${objective.fontColor}" >
 							<b>${objective.name}</b>
 							</font>
+							${objective.imgIcon}
 						</td>						
 					</tr>
 					<tr>
@@ -93,6 +94,7 @@
 									<font color="${kpi.fontColor}" >
 									<b>${kpi.name}</b>
 									</font>
+									${kpi.imgIcon}
 								</td>						
 							</tr>
 							<tr>

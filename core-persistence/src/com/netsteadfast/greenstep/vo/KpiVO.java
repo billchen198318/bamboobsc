@@ -58,6 +58,7 @@ public class KpiVO extends BaseValueObj implements java.io.Serializable {
 	private String fontColor; // 報表要用的
 	private String bgColor; // 報表要用的
 	private float score; // 報表要用的
+	private String imgIcon; // 報表要用的
 	private String managementName; // 報表要用的管理方式名稱
 	private String calculationName; // 報表要用的計算方式名稱
 	private List<DateRangeScoreVO> dateRangeScores = new LinkedList<DateRangeScoreVO>(); // 報表要用的日期區間分數
@@ -284,6 +285,14 @@ public class KpiVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setScore(float score) {
 		this.score = score;
+	}
+
+	public String getImgIcon() {
+		return imgIcon;
+	}
+
+	public void setImgIcon(String imgIcon) {
+		this.imgIcon = imgIcon;
 	}
 
 	public String getManagementName() {

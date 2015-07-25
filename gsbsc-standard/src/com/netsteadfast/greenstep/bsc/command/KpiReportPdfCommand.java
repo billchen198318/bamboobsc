@@ -184,6 +184,18 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 		//Map<String, String> calculationMap = BscKpiCode.getCalculationMap(false);		
 		PdfPCell cell = null;
 		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			
+			Image pImage = Image.getInstance( 
+					BscReportSupportUtils.getByteIconBase(
+							"PERSPECTIVES", 
+							perspective.getTarget(), 
+							perspective.getMin(), 
+							perspective.getScore(), 
+							"", 
+							"", 
+							0) );
+			pImage.setWidthPercentage(10f);			
+			
 			String content = this.getItemsContent(
 					perspective.getName(), 
 					perspective.getScore(), 
@@ -191,12 +203,25 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 					perspective.getTarget(), 
 					perspective.getMin());
 			cell = new PdfPCell();
-			cell.addElement( new Phrase(content, this.getFont(perspective.getFontColor(), false)) );
+			cell.addElement(pImage);
+			cell.addElement( new Phrase("\n"+content, this.getFont(perspective.getFontColor(), false)) );
 			this.setCellBackgroundColor(cell, perspective.getBgColor());
 			cell.setRowspan(perspective.getRow());
 			table.addCell(cell);				
 			
 			for (ObjectiveVO objective : perspective.getObjectives()) {
+				
+				Image oImage = Image.getInstance( 
+						BscReportSupportUtils.getByteIconBase(
+								"OBJECTIVES", 
+								objective.getTarget(), 
+								objective.getMin(), 
+								objective.getScore(), 
+								"", 
+								"", 
+								0) );
+				oImage.setWidthPercentage(10f);					
+				
 				content = this.getItemsContent(
 						objective.getName(), 
 						objective.getScore(), 
@@ -204,7 +229,8 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 						objective.getTarget(), 
 						objective.getMin());				
 				cell = new PdfPCell();
-				cell.addElement( new Phrase(content, this.getFont(objective.getFontColor(), false)) );
+				cell.addElement(oImage);
+				cell.addElement( new Phrase("\n"+content, this.getFont(objective.getFontColor(), false)) );
 				this.setCellBackgroundColor(cell, objective.getBgColor());
 				cell.setRowspan(objective.getRow());
 				table.addCell(cell);	
@@ -216,11 +242,24 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 							managementMap, 
 							calculationMap);	
 					*/
+					
+					Image kImage = Image.getInstance( 
+							BscReportSupportUtils.getByteIconBase(
+									"KPI", 
+									kpi.getTarget(), 
+									kpi.getMin(), 
+									kpi.getScore(), 
+									kpi.getCompareType(), 
+									kpi.getManagement(), 
+									kpi.getQuasiRange()) );
+					kImage.setWidthPercentage(10f);						
+					
 					content = this.getKpisContent(
 							kpi, 
 							managementMap);						
 					cell = new PdfPCell();
-					cell.addElement( new Phrase(content, this.getFont(kpi.getFontColor(), false)) );
+					cell.addElement(kImage);
+					cell.addElement( new Phrase("\n"+content, this.getFont(kpi.getFontColor(), false)) );
 					this.setCellBackgroundColor(cell, kpi.getBgColor());					
 					table.addCell(cell);					
 				}

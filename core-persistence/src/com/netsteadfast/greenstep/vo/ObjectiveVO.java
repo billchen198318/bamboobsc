@@ -45,6 +45,7 @@ public class ObjectiveVO extends BaseValueObj implements java.io.Serializable {
 	private String fontColor; // 報表要用的
 	private String bgColor; // 報表要用的
 	private float score; // 報表要用的
+	private String imgIcon; // 報表要用的
 	
 	public ObjectiveVO() {
 		
@@ -199,6 +200,14 @@ public class ObjectiveVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setScore(float score) {
 		this.score = score;
+	}
+
+	public String getImgIcon() {
+		return imgIcon;
+	}
+
+	public void setImgIcon(String imgIcon) {
+		this.imgIcon = imgIcon;
 	}
 
 }

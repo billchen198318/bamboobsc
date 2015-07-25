@@ -55,6 +55,7 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 	private void scoreCalculation(BscStructTreeObj treeObj) throws Exception {
 		List<VisionVO> visions = treeObj.getVisions();
 		BscScoreColorUtils.loadScoreColors();
+		//BscReportSupportUtils.loadExpression();
 		this.processKpisScore(visions);
 		this.processObjectivesScore(visions);
 		this.processPerspectivesScore(visions);
@@ -82,7 +83,19 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 				}
 				perspective.setScore(score);
 				perspective.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
-				perspective.setFontColor( BscScoreColorUtils.getFontColor(score) );					
+				perspective.setFontColor( BscScoreColorUtils.getFontColor(score) );	
+				/*
+				perspective.setImgIcon( 
+						BscReportSupportUtils.getHtmlIconBase(
+								"PERSPECTIVES", 
+								perspective.getTarget(), 
+								perspective.getMin(), 
+								score, 
+								"", 
+								"", 
+								0)
+				);
+				*/
 			}
 		}
 	}
@@ -97,7 +110,19 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 					}
 					objective.setScore(score);
 					objective.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
-					objective.setFontColor( BscScoreColorUtils.getFontColor(score) );					
+					objective.setFontColor( BscScoreColorUtils.getFontColor(score) );
+					/*
+					objective.setImgIcon( 
+							BscReportSupportUtils.getHtmlIconBase(
+									"OBJECTIVES", 
+									objective.getTarget(), 
+									objective.getMin(), 
+									score, 
+									"", 
+									"", 
+									0)
+					);
+					*/
 				}
 			}
 		}

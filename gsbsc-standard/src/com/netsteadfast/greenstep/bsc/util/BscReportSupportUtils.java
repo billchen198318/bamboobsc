@@ -44,9 +44,13 @@ import com.netsteadfast.greenstep.vo.SysExpressionVO;
 public class BscReportSupportUtils {	
 	private static final String REPORT_UP_DOWN_HTML_ICON_STATUS_EXPR_ID = "BSC_RPT_EXPR0003";
 	private static final String REPORT_UP_DOWN_BYTE_ICON_STATUS_EXPR_ID = "BSC_RPT_EXPR0004";
+	private static final String REPORT_UP_DOWN_HTML_ICON_STATUS_FOR_BASE_EXPR_ID = "BSC_RPT_EXPR0005";
+	private static final String REPORT_UP_DOWN_BYTE_ICON_STATUS_FOR_BASE_EXPR_ID = "BSC_RPT_EXPR0006";	
 	private static ISysExpressionService<SysExpressionVO, TbSysExpression, String> sysExpressionService; 
 	private static ThreadLocal<SysExpressionVO> exprThreadLocal01 = new ThreadLocal<SysExpressionVO>(); // for BSC_RPT_EXPR0003
 	private static ThreadLocal<SysExpressionVO> exprThreadLocal02 = new ThreadLocal<SysExpressionVO>(); // for BSC_RPT_EXPR0004
+	private static ThreadLocal<SysExpressionVO> exprThreadLocal03 = new ThreadLocal<SysExpressionVO>(); // BSC_RPT_EXPR0005
+	private static ThreadLocal<SysExpressionVO> exprThreadLocal04 = new ThreadLocal<SysExpressionVO>(); // BSC_RPT_EXPR0006
 	private static NumberFormat numberFormat = null;
 	
 	static {
@@ -57,27 +61,23 @@ public class BscReportSupportUtils {
 	}
 	
 	public static void loadExpression() throws ServiceException, Exception {
-		if ( exprThreadLocal01.get() == null ) { // 2015-04-10 add if block
-			SysExpressionVO sysExpression01 = new SysExpressionVO();
-			sysExpression01.setExprId( REPORT_UP_DOWN_HTML_ICON_STATUS_EXPR_ID );
-			//DefaultResult<SysExpressionVO> result01 = sysExpressionService.findByUK(sysExpression01); // 2015-04-10 rem
-			DefaultResult<SysExpressionVO> result01 = sysExpressionService.findByUkCacheable(sysExpression01); // 2015-04-10 add
-			if (result01.getValue()!=null) {
-				sysExpression01 = result01.getValue();
-				exprThreadLocal01.set(sysExpression01);
+		loadExpression(exprThreadLocal01, REPORT_UP_DOWN_HTML_ICON_STATUS_EXPR_ID);
+		loadExpression(exprThreadLocal02, REPORT_UP_DOWN_BYTE_ICON_STATUS_EXPR_ID);
+		loadExpression(exprThreadLocal03, REPORT_UP_DOWN_HTML_ICON_STATUS_FOR_BASE_EXPR_ID);
+		loadExpression(exprThreadLocal04, REPORT_UP_DOWN_BYTE_ICON_STATUS_FOR_BASE_EXPR_ID);
+	}
+	
+	public static void loadExpression(
+			ThreadLocal<SysExpressionVO> exprThreadLocal, String exprId) throws ServiceException, Exception {
+		if ( exprThreadLocal.get() == null ) { 
+			SysExpressionVO sysExpression = new SysExpressionVO();
+			sysExpression.setExprId( exprId );
+			DefaultResult<SysExpressionVO> result = sysExpressionService.findByUkCacheable(sysExpression); 
+			if (result.getValue()!=null) {
+				sysExpression = result.getValue();
+				exprThreadLocal.set(sysExpression);
 			}			
-		}
-		if ( exprThreadLocal02.get() == null ) { // 2015-04-10 add if block
-			SysExpressionVO sysExpression02 = new SysExpressionVO();
-			sysExpression02.setExprId( REPORT_UP_DOWN_BYTE_ICON_STATUS_EXPR_ID );
-			//DefaultResult<SysExpressionVO> result02 = sysExpressionService.findByUK(sysExpression02); // 2015-04-10 rem
-			DefaultResult<SysExpressionVO> result02 = sysExpressionService.findByUkCacheable(sysExpression02); // 2015-04-10 add
-			if (result02.getValue()!=null) {
-				sysExpression02 = result02.getValue();
-				exprThreadLocal02.set(sysExpression02);
-			}			
-		}
-		
+		}		
 	}
 	
 	public static String getUrlIcon(KpiVO kpi, float score) throws Exception {
@@ -98,6 +98,32 @@ public class BscReportSupportUtils {
 				parameters);
 		icon = (String)results.get("icon");
 		return StringUtils.defaultString( icon );
+	}
+	
+	public static String getUrlIconBase(String mode, float target, float min, float score,
+			String kpiCompareType, String kpiManagement, float kpiQuasiRange) throws Exception {
+		String icon = "";
+		SysExpressionVO sysExpression = exprThreadLocal03.get();
+		if (null == sysExpression) {
+			return icon;
+		}
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> results = new HashMap<String, Object>();
+		parameters.put("mode", mode);
+		parameters.put("target", target);
+		parameters.put("min", min);
+		parameters.put("score", score);
+		parameters.put("compareType", kpiCompareType);
+		parameters.put("management", kpiManagement);
+		parameters.put("quasiRange", kpiQuasiRange);
+		results.put("icon", " ");
+		ScriptExpressionUtils.execute(
+				sysExpression.getType(), 
+				sysExpression.getContent(), 
+				results, 
+				parameters);
+		icon = (String)results.get("icon");
+		return StringUtils.defaultString( icon );		
 	}
 	
 	public static String getHtmlIcon(KpiVO kpi, float score) throws Exception {
@@ -129,6 +155,44 @@ public class BscReportSupportUtils {
 		datas = IOUtils.toByteArray( classLoader.getResource(iconResource).openStream() );
 		return datas;
 	}
+	
+	public static String getHtmlIconBase(String mode, float target, float min, float score,
+			String kpiCompareType, String kpiManagement, float kpiQuasiRange) throws Exception {
+		String icon = getUrlIconBase(mode, target, min, score, 
+				kpiCompareType, kpiManagement, kpiQuasiRange);
+		if ( StringUtils.isBlank(icon) ) {
+			return "";
+		}
+		return "<img src='./images/" + icon + "' border='0' >";
+	}	
+	
+	public static byte[] getByteIconBase(String mode, float target, float min, float score,
+			String kpiCompareType, String kpiManagement, float kpiQuasiRange) throws Exception {
+		byte[] datas = null;
+		SysExpressionVO sysExpression = exprThreadLocal04.get();
+		if (null == sysExpression) {
+			return datas;
+		}
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> results = new HashMap<String, Object>();
+		parameters.put("mode", mode);
+		parameters.put("target", target);
+		parameters.put("min", min);
+		parameters.put("score", score);
+		parameters.put("compareType", kpiCompareType);
+		parameters.put("management", kpiManagement);
+		parameters.put("quasiRange", kpiQuasiRange);
+		results.put("icon", " ");
+		ScriptExpressionUtils.execute(
+				sysExpression.getType(), 
+				sysExpression.getContent(), 
+				results, 
+				parameters);
+		String iconResource = (String)results.get("icon");		
+		ClassLoader classLoader = BscReportSupportUtils.class.getClassLoader();
+		datas = IOUtils.toByteArray( classLoader.getResource(iconResource).openStream() );
+		return datas;
+	}	
 	
 	public static String parse(float score) {			
 		return numberFormat.format(score);

@@ -24,6 +24,7 @@
 									<font color="${kpi.fontColor}" >
 									<b>${kpi.name}</b>
 									</font>
+									${kpi.imgIcon}
 								</td>						
 							</tr>
 							<tr>

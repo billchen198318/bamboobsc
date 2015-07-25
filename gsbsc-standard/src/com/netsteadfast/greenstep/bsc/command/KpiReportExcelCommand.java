@@ -286,8 +286,23 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
 						cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 						Cell contentCell1 = contentRow.createCell(cell++);
-						contentCell1.setCellValue( content );
+						contentCell1.setCellValue( "\n" + content );
 						contentCell1.setCellStyle(cellStyle);	
+						
+						if (i==0 && ox==0) {
+							byte[] imgBytes = BscReportSupportUtils.getByteIconBase(
+									"PERSPECTIVES", 
+									perspective.getTarget(), 
+									perspective.getMin(), 
+									perspective.getScore(), 
+									"", 
+									"", 
+									0);
+							if (null != imgBytes) {
+								SimpleUtils.setCellPicture(wb, sh, imgBytes, contentCell1.getRowIndex(), contentCell1.getColumnIndex());
+							}									
+						}					
+						
 					}
 					for (int i=0; i<itemCols; i++) {
 						String content = this.getItemsContent(
@@ -310,8 +325,23 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
 						cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 						Cell contentCell1 = contentRow.createCell(cell++);
-						contentCell1.setCellValue( content );
-						contentCell1.setCellStyle(cellStyle);						
+						contentCell1.setCellValue( "\n" + content );
+						contentCell1.setCellStyle(cellStyle);
+						
+						if (i==0 && kx==0) {
+							byte[] imgBytes = BscReportSupportUtils.getByteIconBase(
+									"OBJECTIVES", 
+									objective.getTarget(), 
+									objective.getMin(), 
+									objective.getScore(), 
+									"", 
+									"", 
+									0);
+							if (null != imgBytes) {
+								SimpleUtils.setCellPicture(wb, sh, imgBytes, contentCell1.getRowIndex(), contentCell1.getColumnIndex());
+							}							
+						}	
+						
 					}
 					for (int i=0; i<itemCols; i++) {
 						//String content = this.getKpisContent(kpi, managementMap, calculationMap);
@@ -330,8 +360,23 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
 						cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 						Cell contentCell1 = contentRow.createCell(cell++);
-						contentCell1.setCellValue( content );
-						contentCell1.setCellStyle(cellStyle);						
+						contentCell1.setCellValue( "\n" + content );
+						contentCell1.setCellStyle(cellStyle);			
+						
+						if (i==0) {
+							byte[] imgBytes = BscReportSupportUtils.getByteIconBase(
+									"KPI", 
+									kpi.getTarget(), 
+									kpi.getMin(), 
+									kpi.getScore(), 
+									kpi.getCompareType(), 
+									kpi.getManagement(), 
+									kpi.getQuasiRange());
+							if (null != imgBytes) {
+								SimpleUtils.setCellPicture(wb, sh, imgBytes, contentCell1.getRowIndex(), contentCell1.getColumnIndex());
+							}								
+						}					
+						
 					}
 					
 				}

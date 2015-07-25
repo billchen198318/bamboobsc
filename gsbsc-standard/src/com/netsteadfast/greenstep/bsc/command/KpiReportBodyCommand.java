@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.bsc.command;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.chain.Command;
@@ -39,12 +40,17 @@ import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
+import com.netsteadfast.greenstep.bsc.util.BscReportSupportUtils;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.TemplateUtils;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
+import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 public class KpiReportBodyCommand extends BaseChainCommandSupport implements Command {
 	private static final String templateResource = "META-INF/resource/kpi-report-body.ftl";
@@ -106,6 +112,7 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 		if ( BscConstants.HEAD_FOR_KPI_ID.equals( nextType ) && !StringUtils.isBlank(nextId) ) {
 			templateResourceSrc = templateResource_NG_KPI;
 		}		
+		this.setImgIconBase(treeObj);
 		String content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				KpiReportBodyCommand.class.getClassLoader(), 
@@ -113,6 +120,46 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 				parameter);
 		this.setResult(context, content);		
 		return false;
+	}
+	
+	private void setImgIconBase(BscStructTreeObj treeObj) throws ServiceException, Exception {
+		BscReportSupportUtils.loadExpression();
+		List<VisionVO> visions = treeObj.getVisions();
+		for (VisionVO vision : visions) {
+			for (PerspectiveVO perspective : vision.getPerspectives()) {
+				perspective.setImgIcon(
+						BscReportSupportUtils.getHtmlIconBase(
+								"PERSPECTIVES", 
+								perspective.getTarget(), 
+								perspective.getMin(), 
+								perspective.getScore(), 
+								"", 
+								"", 
+								0) );				
+				for (ObjectiveVO objective : perspective.getObjectives()) {
+					objective.setImgIcon(
+							BscReportSupportUtils.getHtmlIconBase(
+									"OBJECTIVES", 
+									objective.getTarget(), 
+									objective.getMin(), 
+									objective.getScore(), 
+									"", 
+									"", 
+									0) );					
+					for (KpiVO kpi : objective.getKpis()) {
+						kpi.setImgIcon(
+								BscReportSupportUtils.getHtmlIconBase(
+										"KPI", 
+										kpi.getTarget(), 
+										kpi.getMin(), 
+										kpi.getScore(), 
+										kpi.getCompareType(), 
+										kpi.getManagement(), 
+										kpi.getQuasiRange()) );
+					}
+				}
+			}
+		}
 	}
 	
 	private void fillReportProperty(Map<String, Object> parameter) throws ServiceException, Exception {
