@@ -9,6 +9,7 @@
 	<tr valign="top">
 		<td width="100%" align="left" bgcolor="${backgroundColor}">
 		<font color="${fontColor}" size="4"><b>${kpi.name}</b></font>
+		${kpi.imgIcon}
 		</td>
 	</tr>	
 	<tr valign="top">

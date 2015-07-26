@@ -10,6 +10,7 @@
 		<td width="100%" align="left" bgcolor="${backgroundColor}" onclick="query_objectiveByPerspective('${uploadOid}', '${perspective.oid}');">
 		<img src="./images/go-next.png" border="0" alt="next" onclick="query_objectiveByPerspective('${uploadOid}', '${perspective.oid}');"/>
 		<font color="${fontColor}" size="4"><b>${perspective.name}</b></font>
+		${perspective.imgIcon}
 		</td>
 	</tr>	
 	<tr valign="top">

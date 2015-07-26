@@ -185,6 +185,18 @@ public class BscMobileCardUtils {
 	public static String getPerspectivesCardContent(String uploadOid, PerspectiveVO perspective) throws ServiceException, Exception {
 		String content = "";
 		BscReportPropertyUtils.loadData();	
+		BscReportSupportUtils.loadExpression();
+		if (StringUtils.isBlank(perspective.getImgIcon())) {
+			String icon = BscReportSupportUtils.getHtmlIconBase(
+					"PERSPECTIVES", 
+					perspective.getTarget(), 
+					perspective.getMin(), 
+					perspective.getScore(), 
+					"", 
+					"", 
+					0);
+			perspective.setImgIcon( icon );
+		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("perspective", perspective);
 		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
@@ -202,6 +214,18 @@ public class BscMobileCardUtils {
 	public static String getObjectivesCardContent(String uploadOid, ObjectiveVO objective) throws ServiceException, Exception {
 		String content = "";
 		BscReportPropertyUtils.loadData();	
+		BscReportSupportUtils.loadExpression();
+		if (StringUtils.isBlank(objective.getImgIcon())) {
+			String icon = BscReportSupportUtils.getHtmlIconBase(
+					"OBJECTIVES", 
+					objective.getTarget(), 
+					objective.getMin(), 
+					objective.getScore(), 
+					"", 
+					"", 
+					0);
+			objective.setImgIcon( icon );			
+		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("objective", objective);
 		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
@@ -223,6 +247,17 @@ public class BscMobileCardUtils {
 		if (BscKpiCode.COMPARE_TYPE_MIN.equals(kpi.getCompareType())) {
 			compareValue = kpi.getMin();
 		} 
+		if (StringUtils.isBlank(kpi.getImgIcon())) {
+			String icon = BscReportSupportUtils.getHtmlIconBase(
+					"KPI", 
+					kpi.getTarget(), 
+					kpi.getMin(), 
+					kpi.getScore(), 
+					kpi.getCompareType(), 
+					kpi.getManagement(), 
+					kpi.getQuasiRange());
+			kpi.setImgIcon( icon );				
+		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("kpi", kpi);
 		paramMap.put("backgroundColor", BscReportPropertyUtils.getBackgroundColor());
