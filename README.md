@@ -90,7 +90,7 @@ and save my.cnf
 ###3. Get bambooBSC environment file
 ```
 # cd /home/pi
-# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150701.7z
+# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150801.7z
 ```
 
 ###4. Install P7ZIP
@@ -100,7 +100,7 @@ and save my.cnf
 
 ###5. Extract the archive
 ```
-# p7zip -d bamboobsc-05-20150701.7z
+# p7zip -d bamboobsc-05-20150801.7z
 ```
 
 ###6. Import bbcore.sql to MySQL
@@ -115,13 +115,13 @@ mysql> exit;<br/>
 ```
 
 ###7. Config applicationContext-dataSource.properties
-config A ( CORE system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>core-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config A ( CORE system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.63/webapps/<b>core-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
-config B (Balanced Scorecard system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>gsbsc-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config B (Balanced Scorecard system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.63/webapps/<b>gsbsc-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
-config C (Simple OLAP system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>qcharts-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config C (Simple OLAP system ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.63/webapps/<b>qcharts-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
-config D (Mobile web ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.62/webapps/<b>gsbsc-mobile-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config D (Mobile web ).<br/> /home/pi/bamboobsc-05/apache-tomcat-7.0.63/webapps/<b>gsbsc-mobile-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
 settings <b>dataSource.user</b> and <b>dataSource.password</b> <br/>
 dataSource.user is MySQL account<br/>
@@ -141,13 +141,13 @@ dataSource.password=password
 
 ###9. Run bambooBSC 0.5
 ```
-# cd /home/pi/bamboobsc-05/apache-tomcat-7.0.62/bin
+# cd /home/pi/bamboobsc-05/apache-tomcat-7.0.63/bin
 # chmod a+x catalina.sh
 # chmod a+x shutdown.sh
 # chmod a+x startup.sh
 ```
 
-add JAVA_OPTS="-Xmx750M -server -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90" to catalina.sh
+add JAVA_OPTS="-Xmx700M -client -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:GCTimeRatio=2 -XX:AdaptiveSizePolicyWeight=90" to catalina.sh
 ```
 # ./startup.sh
 ```
