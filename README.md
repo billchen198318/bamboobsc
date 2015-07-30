@@ -34,12 +34,31 @@ bambooBSC is released under version 2.0 of the Apache Version 2.0
 <br/><br/>
 contact: chen.xin.nien@gmail.com
 <br/><br/>
-Create a scorecard project demo video:<br/>
-https://www.youtube.com/watch?v=A27wnMTtfOc
-<br/>
-Mobile web version demo video:<br/>
-https://www.youtube.com/watch?v=56ocMktSRIs
-<br/><br/>
+
+<font size='2' color="#7E7E7E">
+<b>Create a scorecard project demo.</b></font>
+<BR/>
+[![Create a scorecard project demo.](http://img.youtube.com/vi/A27wnMTtfOc/0.jpg)](http://www.youtube.com/watch?v=A27wnMTtfOc)
+<BR/>
+<BR/>
+
+
+<BR/>
+<font size='2' color="#7E7E7E"><b>Mobile version web demo.</b></font>
+<BR/>
+[![Mobile version web demo.](http://img.youtube.com/vi/56ocMktSRIs/0.jpg)](http://www.youtube.com/watch?v=56ocMktSRIs)
+<BR/>
+<BR/>
+
+
+<BR/>
+<font size='2' color="#7E7E7E"><b>install step on ms-windows video.</b></font>
+<BR/>
+[![install step on ms-windows video.](http://img.youtube.com/vi/pM3q9udreDo/0.jpg)](http://www.youtube.com/watch?v=pM3q9udreDo)
+<BR/>
+<BR/>
+
+
 <h2>Screenshot</h2>
 <br/>
 <br/>1.
