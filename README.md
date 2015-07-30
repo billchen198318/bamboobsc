@@ -55,7 +55,8 @@ bambooBSC is released under version 2.0 of the Apache Version 2.0
 <h2>manual document:</h2>
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/bamboobsc-guide.pdf">bamboobsc-guide.pdf</a>
 <br/><br/>
-<h2>Download:</h2> http://sourceforge.net/projects/bamboobsc/
+<h2>Download:</h2>
+https://github.com/billchen198318/bamboobsc/releases/download/v0.5-20150801/bamboobsc-05-20150801.7z
 <br/><br/>
 contact: chen.xin.nien@gmail.com
 <br/><br/>
@@ -110,7 +111,7 @@ and save my.cnf
 ###3. Get bambooBSC environment file
 ```
 # cd /home/pi
-# wget http://www.mirrorservice.org/sites/ftp.sourceforge.net/pub/sourceforge/b/project/ba/bamboobsc/bamboobsc-05-20150801.7z
+# wget --no-check-certificate https://github.com/billchen198318/bamboobsc/releases/download/v0.5-20150801/bamboobsc-05-20150801.7z
 ```
 
 ###4. Install P7ZIP
