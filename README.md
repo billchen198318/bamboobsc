@@ -42,6 +42,7 @@ contact: chen.xin.nien@gmail.com
 <BR/>
 <BR/>
 
+[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://youtu.be/vt5fpE0bzSY)
 
 <BR/>
 <font size='2' color="#7E7E7E"><b>Mobile version web demo.</b></font>
