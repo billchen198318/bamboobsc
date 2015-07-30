@@ -12,6 +12,31 @@ Features:<br/>
 6. Provides sourcecard query for a mobile-device browser.
 <br/><br/>
 
+<font size='2' color="#7E7E7E">
+<b>Create a scorecard project demo:</b></font>
+<BR/>
+<a href="http://www.youtube.com/watch?v=A27wnMTtfOc">
+<img src="http://img.youtube.com/vi/A27wnMTtfOc/0.jpg" alt="Create a scorecard project demo."/>
+</a>
+<BR/>
+<BR/>
+
+<BR/>
+<font size='2' color="#7E7E7E"><b>Mobile version web demo:</b></font>
+<BR/>
+<a href="http://www.youtube.com/watch?v=56ocMktSRIs">
+<img src="http://img.youtube.com/vi/56ocMktSRIs/0.jpg" alt="Mobile version web demo."/>
+</a>
+
+<BR/>
+<font size='2' color="#7E7E7E"><b>install step on ms-windows video:</b></font>
+<BR/>
+<a href="http://www.youtube.com/watch?v=pM3q9udreDo">
+<img src="http://img.youtube.com/vi/pM3q9udreDo/0.jpg" alt="Mobile version web demo."/>
+</a>
+<BR/>
+<BR/>
+
 <h2>Demo web: ( The web run on Raspberry pi 2 )</h2>
 http://124.218.68.215:8888/core-web/login.action<br/>
 account: tester<br/>
@@ -34,31 +59,6 @@ bambooBSC is released under version 2.0 of the Apache Version 2.0
 <br/><br/>
 contact: chen.xin.nien@gmail.com
 <br/><br/>
-
-<font size='2' color="#7E7E7E">
-<b>Create a scorecard project demo.</b></font>
-<BR/>
-[![Create a scorecard project demo.](http://img.youtube.com/vi/A27wnMTtfOc/0.jpg)](http://www.youtube.com/watch?v=A27wnMTtfOc)
-<BR/>
-<BR/>
-
-[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://youtu.be/vt5fpE0bzSY)
-
-<BR/>
-<font size='2' color="#7E7E7E"><b>Mobile version web demo.</b></font>
-<BR/>
-[![Mobile version web demo.](http://img.youtube.com/vi/56ocMktSRIs/0.jpg)](http://www.youtube.com/watch?v=56ocMktSRIs)
-<BR/>
-<BR/>
-
-
-<BR/>
-<font size='2' color="#7E7E7E"><b>install step on ms-windows video.</b></font>
-<BR/>
-[![install step on ms-windows video.](http://img.youtube.com/vi/pM3q9udreDo/0.jpg)](http://www.youtube.com/watch?v=pM3q9udreDo)
-<BR/>
-<BR/>
-
 
 <h2>Screenshot</h2>
 <br/>
