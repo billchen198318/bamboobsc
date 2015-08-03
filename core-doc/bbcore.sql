@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.15, for FreeBSD10.0 (amd64)
+-- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.6.15
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -164,6 +164,7 @@ CREATE TABLE `bb_kpi` (
   `WEIGHT` decimal(5,2) NOT NULL,
   `UNIT` varchar(20) NOT NULL,
   `FOR_ID` varchar(14) NOT NULL,
+  `MAX` float NOT NULL,
   `TARGET` float NOT NULL,
   `MIN` float NOT NULL,
   `MANAGEMENT` varchar(1) NOT NULL DEFAULT '1',
@@ -191,7 +192,7 @@ CREATE TABLE `bb_kpi` (
 
 LOCK TABLES `bb_kpi` WRITE;
 /*!40000 ALTER TABLE `bb_kpi` DISABLE KEYS */;
-INSERT INTO `bb_kpi` VALUES ('0775e107-756b-4934-848c-6e4b1235af3b','KPI0003','OBJ20141127001','Investment projects in developing countries','',50.00,'%','F001',100,50,'1','1','AVG_001','3','Y','Y',0,'admin','2014-11-27 09:12:15','admin','2015-03-12 13:38:05'),('71b4417c-6c8c-4ef6-b8d4-fbb4d56863bb','KPI0006','OBJ20141127004','Education and Training','',100.00,'number of times','F002',70,30,'3','1','MAX_001','2','Y','Y',5,'admin','2014-11-27 09:43:20','admin','2015-03-12 13:35:47'),('9aa1c537-402f-4ccc-8d77-f472f98a3192','KPI0001','OBJ20141117001','Sales','aa bb',100.00,'%','F001',50,10,'1','1','AVG_001','1','Y','Y',0,'admin','2014-11-23 17:14:39','admin','2015-04-22 15:09:40'),('b4ebcdd0-1944-432e-8bb2-85df54f854d8','KPI0002','OBJ20141127001','Stock market investment fund','',50.00,'%','F001',100,50,'1','1','AVG_001','1','Y','Y',0,'admin','2014-11-27 09:09:32','admin','2014-12-14 15:18:15'),('b888607c-6d52-4163-82ac-a1ae03c9cba6','KPI0004','OBJ20141127002','Expanding Asia-Pacific market','',100.00,'%','F001',100,60,'1','1','AVG_001','1','Y','Y',0,'admin','2014-11-27 09:21:36','admin','2015-03-12 13:39:02'),('c12b2c99-4b28-4ce9-94bc-314161b9b7e7','KPI0005','OBJ20141127003','Loss stronghold transformation','',100.00,'Point','F002',100,50,'2','1','MIN_001','1','Y','Y',0,'admin','2014-11-27 09:30:48','admin','2015-03-12 13:35:30');
+INSERT INTO `bb_kpi` VALUES ('0775e107-756b-4934-848c-6e4b1235af3b','KPI0003','OBJ20141127001','Investment projects in developing countries','',50.00,'%','F001',150,100,50,'1','1','AVG_001','3','Y','Y',0,'admin','2014-11-27 09:12:15','admin','2015-03-12 13:38:05'),('71b4417c-6c8c-4ef6-b8d4-fbb4d56863bb','KPI0006','OBJ20141127004','Education and Training','',100.00,'number of times','F002',150,70,30,'3','1','MAX_001','2','Y','Y',5,'admin','2014-11-27 09:43:20','admin','2015-03-12 13:35:47'),('9aa1c537-402f-4ccc-8d77-f472f98a3192','KPI0001','OBJ20141117001','Sales','aa bb',100.00,'%','F001',150,50,10,'1','1','AVG_001','1','Y','Y',0,'admin','2014-11-23 17:14:39','admin','2015-04-22 15:09:40'),('b4ebcdd0-1944-432e-8bb2-85df54f854d8','KPI0002','OBJ20141127001','Stock market investment fund','',50.00,'%','F001',150,100,50,'1','1','AVG_001','1','Y','Y',0,'admin','2014-11-27 09:09:32','admin','2014-12-14 15:18:15'),('b888607c-6d52-4163-82ac-a1ae03c9cba6','KPI0004','OBJ20141127002','Expanding Asia-Pacific market','',100.00,'%','F001',150,100,60,'1','1','AVG_001','1','Y','Y',0,'admin','2014-11-27 09:21:36','admin','2015-03-12 13:39:02'),('c12b2c99-4b28-4ce9-94bc-314161b9b7e7','KPI0005','OBJ20141127003','Loss stronghold transformation','',100.00,'Point','F002',150,100,50,'2','1','MIN_001','1','Y','Y',0,'admin','2014-11-27 09:30:48','admin','2015-03-12 13:35:30');
 /*!40000 ALTER TABLE `bb_kpi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2696,4 +2697,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-25 16:14:17
+-- Dump completed on 2015-08-03 12:08:23
