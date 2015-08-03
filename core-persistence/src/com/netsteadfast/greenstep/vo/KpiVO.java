@@ -39,6 +39,7 @@ public class KpiVO extends BaseValueObj implements java.io.Serializable {
 	private BigDecimal weight;
 	private String unit;
 	private String forId;
+	private float max;
 	private float target;
 	private float min;
 	private String management;
@@ -141,6 +142,14 @@ public class KpiVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setForId(String forId) {
 		this.forId = forId;
+	}
+
+	public float getMax() {
+		return max;
+	}
+
+	public void setMax(float max) {
+		this.max = max;
 	}
 
 	public float getTarget() {

@@ -13,6 +13,7 @@
 		<result column="WEIGHT" property="weight"/>
 		<result column="FOR_ID" property="forId"/>		
 		<result column="UNIT" property="unit"/>
+		<result column="MAX" property="max"/>
 		<result column="TARGET" property="target"/>
 		<result column="MIN" property="min"/>
 		<result column="MANAGEMENT" property="management"/>

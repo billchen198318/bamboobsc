@@ -34,7 +34,11 @@
 		<field>
 			<a>unit</a>
 			<b>unit</b>
-		</field>	
+		</field>
+		<field>
+			<a>max</a>
+			<b>max</b>
+		</field>			
 		<field>
 			<a>target</a>
 			<b>target</b>
@@ -104,6 +108,10 @@
 			<a>unit</a>
 			<b>unit</b>
 		</field>	
+		<field>
+			<a>max</a>
+			<b>max</b>
+		</field>			
 		<field>
 			<a>target</a>
 			<b>target</b>
