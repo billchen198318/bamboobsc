@@ -85,6 +85,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 							"name",
 							"formulaOid",
 							"weight",
+							"max",
 							"target",
 							"min",
 							"compareType",
@@ -101,6 +102,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 							this.getText("MESSAGE.BSC_PROG002D0004A_name") + "<BR/>",
 							this.getText("MESSAGE.BSC_PROG002D0004A_formulaOid") + "<BR/>",
 							this.getText("MESSAGE.BSC_PROG002D0004A_weight") + "<BR/>",
+							this.getText("MESSAGE.BSC_PROG002D0004A_max") + "<BR/>",
 							this.getText("MESSAGE.BSC_PROG002D0004A_target") + "<BR/>",
 							this.getText("MESSAGE.BSC_PROG002D0004A_min") + "<BR/>",
 							this.getText("MESSAGE.BSC_PROG002D0004A_compareType") + "<BR/>",
@@ -116,6 +118,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 							IdFieldCheckUtils.class,
 							NotBlankFieldCheckUtils.class,
 							SelectItemFieldCheckUtils.class,
+							BscNumberFieldCheckUtils.class,
 							BscNumberFieldCheckUtils.class,
 							BscNumberFieldCheckUtils.class,
 							BscNumberFieldCheckUtils.class,
@@ -149,10 +152,23 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		}
 	}	
 	
+	private void checkMaxTargetMinCriteria(KpiVO kpi) throws ControllerException, Exception {		
+		if (kpi.getMax() <= kpi.getTarget()) {
+			this.getFieldsId().add("max");
+			this.getFieldsId().add("target");
+			throw new ControllerException( "Maximum-value must bigger than Target-value." );			
+		}
+		if (kpi.getTarget() <= kpi.getMin()) {
+			this.getFieldsId().add("target");
+			this.getFieldsId().add("min");			
+			throw new ControllerException( "Target-value must bigger than Minimum-value." );
+		}
+	}	
+	
 	private void save() throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.checkFields();
 		KpiVO kpi = new KpiVO();
-		this.transformFields2ValueObject(kpi, new String[]{"id", "name", "weight", "target", "min", 
+		this.transformFields2ValueObject(kpi, new String[]{"id", "name", "weight", "max", "target", "min", 
 				"compareType", "unit", "management", "quasiRange", "dataType", "description"});
 		kpi.setOrgaMeasureSeparate(YesNo.NO);
 		kpi.setUserMeasureSeparate(YesNo.NO);
@@ -162,6 +178,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		if ("true".equals(this.getFields().get("userMeasureSeparate")) ) {
 			kpi.setUserMeasureSeparate(YesNo.YES);
 		}
+		this.checkMaxTargetMinCriteria(kpi);		
 		DefaultResult<KpiVO> result = this.kpiLogicService.create(
 				kpi, 
 				this.getFields().get("objectiveOid"), 
@@ -178,7 +195,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 	private void update() throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.checkFields();
 		KpiVO kpi = new KpiVO();
-		this.transformFields2ValueObject(kpi, new String[]{"oid", "id", "name", "weight", "target", "min", 
+		this.transformFields2ValueObject(kpi, new String[]{"oid", "id", "name", "weight", "max", "target", "min", 
 				"compareType", "unit", "management", "quasiRange", "dataType", "description"});
 		kpi.setOrgaMeasureSeparate(YesNo.NO);
 		kpi.setUserMeasureSeparate(YesNo.NO);
@@ -188,6 +205,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		if ("true".equals(this.getFields().get("userMeasureSeparate")) ) {
 			kpi.setUserMeasureSeparate(YesNo.YES);
 		}
+		this.checkMaxTargetMinCriteria(kpi);		
 		DefaultResult<KpiVO> result = this.kpiLogicService.update(
 				kpi, 
 				this.getFields().get("objectiveOid"), 

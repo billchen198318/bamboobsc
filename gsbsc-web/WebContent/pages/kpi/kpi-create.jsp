@@ -36,6 +36,7 @@ BSC_PROG002D0004A_fieldsId['id'] 				= 'BSC_PROG002D0004A_id';
 BSC_PROG002D0004A_fieldsId['name'] 				= 'BSC_PROG002D0004A_name';
 BSC_PROG002D0004A_fieldsId['formulaOid'] 		= 'BSC_PROG002D0004A_formulaOid';
 BSC_PROG002D0004A_fieldsId['weight'] 			= 'BSC_PROG002D0004A_weight';
+BSC_PROG002D0004A_fieldsId['max'] 				= 'BSC_PROG002D0004A_max';
 BSC_PROG002D0004A_fieldsId['target'] 			= 'BSC_PROG002D0004A_target';
 BSC_PROG002D0004A_fieldsId['min'] 				= 'BSC_PROG002D0004A_min';
 BSC_PROG002D0004A_fieldsId['compareType'] 		= 'BSC_PROG002D0004A_compareType';
@@ -63,6 +64,7 @@ function BSC_PROG002D0004A_clear() {
 	dijit.byId('BSC_PROG002D0004A_name').set("value", "");		
 	dijit.byId('BSC_PROG002D0004A_formulaOid').set("value", _gscore_please_select_id);
 	dijit.byId('BSC_PROG002D0004A_weight').set("value", "+000.00");
+	dijit.byId('BSC_PROG002D0004A_max').set("value", "+000.00");
 	dijit.byId('BSC_PROG002D0004A_target').set("value", "+000.00");
 	dijit.byId('BSC_PROG002D0004A_min').set("value", "+000.00");
 	dijit.byId('BSC_PROG002D0004A_compareType').set("value", _gscore_please_select_id);
@@ -288,12 +290,12 @@ function ${programId}_page_message() {
     	</tr>        	
 		<tr>
     		<td height="50px" width="50%"  align="left" >
-    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_target')"/></b>:
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_max')"/></b>:
     			<br/>
-    			<input id="BSC_PROG002D0004A_target" name="BSC_PROG002D0004A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    			<input id="BSC_PROG002D0004A_max" name="BSC_PROG002D0004A_max" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		
-				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_target'">
-    				Input target value, only allow numbers.
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_max'">
+    				Input Maximum value, only allow numbers.
 				</div>       				    			
     		</td>  
     		<td height="50px" width="50%"  align="left" >
@@ -306,13 +308,22 @@ function ${programId}_page_message() {
     		</td>     		  		
     	</tr>   
 		<tr>
-    		<td height="50px" width="100%"  align="left" colspan="2">
+    		<td height="50px" width="50%"  align="left" >
+    			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_target')"/></b>:
+    			<br/>
+    			<input id="BSC_PROG002D0004A_target" name="BSC_PROG002D0004A_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />     		
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_target'">
+    				Input target value, only allow numbers.
+				</div>       				    			
+    		</td>  		
+    		<td height="50px" width="50%"  align="left" >
     			<font color='RED'>*</font><b><s:property value="getText('BSC_PROG002D0004A_min')"/></b>:
     			<br/>
     			<input id="BSC_PROG002D0004A_min" name="BSC_PROG002D0004A_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
     				value="0.0" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004A_min'">
-    				Input min value, only allow numbers.
+    				Input Minimum value, only allow numbers.
 				</div>       				     		    			
     		</td>    		
     	</tr>       	    	
@@ -450,6 +461,7 @@ function ${programId}_page_message() {
     						'fields.name'				: dijit.byId('BSC_PROG002D0004A_name').get('value'),   						
     						'fields.formulaOid'			: dijit.byId('BSC_PROG002D0004A_formulaOid').get('value'),
     						'fields.weight'				: dijit.byId('BSC_PROG002D0004A_weight').get('value'),
+    						'fields.max'				: dijit.byId('BSC_PROG002D0004A_max').get('value'),
     						'fields.target'				: dijit.byId('BSC_PROG002D0004A_target').get('value'),    						 
     						'fields.min'				: dijit.byId('BSC_PROG002D0004A_min').get('value'),    						
     						'fields.compareType'		: dijit.byId('BSC_PROG002D0004A_compareType').get('value'),
