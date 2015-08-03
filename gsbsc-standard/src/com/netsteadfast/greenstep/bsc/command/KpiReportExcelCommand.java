@@ -261,7 +261,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 					KpiVO kpi = objective.getKpis().get(kx);
 					
 					Row contentRow = sh.createRow(row++);
-					contentRow.setHeight((short)3000);					
+					contentRow.setHeight((short)4000);					
 					
 					int cell = 0;
 					
@@ -589,6 +589,13 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		return str;
 	}
 	
+	private String getItemsContent(String name, float score, BigDecimal weight, float max, float target, float min) {
+		String str = "";
+		str = name + "\n" + "score: " + BscReportSupportUtils.parse2(score) + "\n" + "weight: " + weight.toString() + "%" + "\n" +
+				"Max:" + max + "\n" + "Target: " + target + "\n" + "min: " + min;
+		return str;
+	}	
+	
 	/*
 	private String getKpisContent(KpiVO kpi, Map<String, String> managementMap, Map<String, String> calculationMap) {
 		String str = this.getItemsContent(kpi.getName(), kpi.getScore(), kpi.getWeight(), kpi.getTarget(), kpi.getMin());
@@ -602,7 +609,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 	*/
 
 	private String getKpisContent(KpiVO kpi, Map<String, String> managementMap) throws Exception {
-		String str = this.getItemsContent(kpi.getName(), kpi.getScore(), kpi.getWeight(), kpi.getTarget(), kpi.getMin());
+		String str = this.getItemsContent(kpi.getName(), kpi.getScore(), kpi.getWeight(), kpi.getMax(), kpi.getTarget(), kpi.getMin());
 		str += "\n" + "management: " + managementMap.get(kpi.getManagement()) + "\n" + 
 				"Calculation: " + AggregationMethodUtils.getNameByAggrId(kpi.getCal()) + "\n" + 
 				"Unit: " + kpi.getUnit() + "\n" + 

@@ -14,6 +14,11 @@
 	</tr>	
 	<tr valign="top">
 		<td width="100%" align="left" bgcolor="${backgroundColor}">
+		<font color="${fontColor}" size="2"><b>Max: ${kpi.max}</b></font>
+		</td>
+	</tr>		
+	<tr valign="top">
+		<td width="100%" align="left" bgcolor="${backgroundColor}">
 		<font color="${fontColor}" size="2"><b>Target: ${kpi.target}</b></font>
 		</td>
 	</tr>	

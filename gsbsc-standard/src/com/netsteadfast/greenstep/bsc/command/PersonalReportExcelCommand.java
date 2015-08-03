@@ -243,7 +243,7 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		titleCell2.setCellStyle(cellHeadStyle);		
 		
 		titleCell3 = headRow.createCell(2);	
-		titleCell3.setCellValue( "Target" );
+		titleCell3.setCellValue( "Maximum\nTarget\nMinimum" );
 		titleCell3.setCellStyle(cellHeadStyle);		
 		
 		titleCell4 = headRow.createCell(3);	
@@ -261,6 +261,7 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		
 		row++;
 		headRow = sh.createRow(row);
+		headRow.setHeight( (short)1000 );
 		
 		titleCell1 = headRow.createCell(0);	
 		titleCell1.setCellValue( "Objective of Strategy" );
@@ -341,7 +342,11 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 					contentCell2.setCellStyle(cellStyle);
 					
 					Cell contentCell3 = contentRow.createCell(kCol++);
-					contentCell3.setCellValue(kpi.getTarget() + " / " + kpi.getUnit());
+					contentCell3.setCellValue(
+							"max: " + kpi.getMax() + "\n" +
+							"target: " + kpi.getTarget() + "\n" +
+							"min: " + kpi.getMin() + "\n" + 
+							"unit: " + kpi.getUnit());
 					contentCell3.setCellStyle(cellStyle);					
 					
 					Cell contentCell4 = contentRow.createCell(kCol++);

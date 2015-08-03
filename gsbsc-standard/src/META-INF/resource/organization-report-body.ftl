@@ -81,7 +81,9 @@
 			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000">
-					Target
+					Maximum<br/>
+					Target<br/>
+					Minimum
 				</font>
 				</b>			
 			</td>	
@@ -129,7 +131,10 @@
 				</td>				
 				<td bgcolor="#ffffff" align="left">
 					<font color="#000000">
-						${kpi.target} / ${kpi.unit}
+						max: ${kpi.max?c}<br/>
+						target: ${kpi.target?c}<br>
+						min: ${kpi.min?c} <br> 
+						unit: ${kpi.unit}
 					</font>		
 				</td>	
 				<td bgcolor="${kpi.dateRangeScores[0].bgColor}" align="center">

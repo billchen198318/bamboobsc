@@ -31,6 +31,7 @@ public class BscMixDataVO implements java.io.Serializable {
 	private String kpiDescription;
 	private BigDecimal kpiWeight;
 	private String kpiUnit;
+	private float kpiMax;
 	private float kpiTarget;
 	private float kpiMin;	
 	private String kpiManagement;
@@ -77,7 +78,7 @@ public class BscMixDataVO implements java.io.Serializable {
 
 	public BscMixDataVO(String kpiOid, String kpiId, String kpiName,
 			String kpiDescription, BigDecimal kpiWeight, String kpiUnit,
-			float kpiTarget, float kpiMin, String kpiManagement,
+			float kpiMax, float kpiTarget, float kpiMin, String kpiManagement,
 			String kpiCompareType, String kpiCal, String kpiDataType,
 			String kpiOrgaMeasureSeparate, String kpiUserMeasureSeparate,
 			int kpiQuasiRange, String objOid, String objId, String objName,
@@ -96,6 +97,7 @@ public class BscMixDataVO implements java.io.Serializable {
 		this.kpiDescription = kpiDescription;
 		this.kpiWeight = kpiWeight;
 		this.kpiUnit = kpiUnit;
+		this.kpiMax = kpiMax;
 		this.kpiTarget = kpiTarget;
 		this.kpiMin = kpiMin;
 		this.kpiManagement = kpiManagement;
@@ -183,6 +185,14 @@ public class BscMixDataVO implements java.io.Serializable {
 
 	public void setKpiUnit(String kpiUnit) {
 		this.kpiUnit = kpiUnit;
+	}
+
+	public float getKpiMax() {
+		return kpiMax;
+	}
+
+	public void setKpiMax(float kpiMax) {
+		this.kpiMax = kpiMax;
 	}
 
 	public float getKpiTarget() {

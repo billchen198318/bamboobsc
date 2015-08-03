@@ -518,7 +518,7 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			String id, String objId, String name, String weight, String target,
 			String min, String unit, String forId, String management, String compareType, String cal,
 			String dataType, String orgaMeasureSeparate, String userMeasureSeparate, String quasiRange,
-			String description) throws Exception {
+			String description, String max) throws Exception {
 		if ( super.isBlank(id) ) {
 			return "row: " + row + " id is blank.\n";
 		}						
@@ -531,6 +531,9 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 		if ( super.isBlank(weight) ) {
 			return "row: " + row + " weight is blank.\n";				
 		}
+		if ( super.isBlank(max) ) {
+			return "row: " + row + " max is blank.\n";			
+		}		
 		if ( super.isBlank(target) ) {
 			return "row: " + row + " target is blank.\n";			
 		}
@@ -567,6 +570,9 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 		if ( !NumberUtils.isNumber(weight) ) {
 			return "row: " + row + " weight is not number.\n";		
 		}
+		if ( !NumberUtils.isNumber(max) ) {
+			return "row: " + row + " max is not number.\n";				
+		}		
 		if ( !NumberUtils.isNumber(target) ) {
 			return "row: " + row + " target is not number.\n";				
 		}
@@ -630,13 +636,14 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			String orgaMeasureSeparate = data.get("ORGA_MEASURE_SEPARATE");
 			String userMeasureSeparate = data.get("USER_MEASURE_SEPARATE");
 			String quasiRange = data.get("QUASI_RANGE");
-			String description = data.get("DESCRIPTION");			
+			String description = data.get("DESCRIPTION");
+			String max = data.get("MAX");
 			String errMsg = this.checkKPIsDataError(
 					row,
 					id, objId, name, weight, target, 
 					min, unit, forId, management, compareType, cal, 
 					dataType, orgaMeasureSeparate, userMeasureSeparate, quasiRange, 
-					description);
+					description, max);
 			if ( !"".equals(errMsg) ) {
 				msg.append(errMsg);
 				continue;
@@ -660,6 +667,7 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 			kpi.setId(id);
 			kpi.setName(name);
 			kpi.setWeight( new BigDecimal(weight) );
+			kpi.setMax( Float.valueOf(max) );
 			kpi.setTarget( Float.valueOf(target) );
 			kpi.setMin( Float.valueOf(min) );
 			kpi.setCompareType(compareType);

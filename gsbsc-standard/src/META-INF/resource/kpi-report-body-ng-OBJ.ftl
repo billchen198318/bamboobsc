@@ -124,6 +124,18 @@
 							<tr>
 								<td align="left" bgcolor="${kpi.bgColor}" width="15%">
 									<font color="${kpi.fontColor}" >
+									Max:
+									</font>
+								</td>
+								<td align="left" bgcolor="${kpi.bgColor}" width="85%">
+									<font color="${kpi.fontColor}" >
+									${kpi.max}
+									</font>
+								</td>
+							</tr>								
+							<tr>
+								<td align="left" bgcolor="${kpi.bgColor}" width="15%">
+									<font color="${kpi.fontColor}" >
 									Target:
 									</font>
 								</td>

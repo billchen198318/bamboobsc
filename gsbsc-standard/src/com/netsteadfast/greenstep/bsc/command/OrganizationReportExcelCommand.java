@@ -233,7 +233,7 @@ public class OrganizationReportExcelCommand extends BaseChainCommandSupport impl
 		titleCell4.setCellStyle(cellHeadStyle);	
 		
 		titleCell5 = headRow.createCell(4);	
-		titleCell5.setCellValue( "Target" );
+		titleCell5.setCellValue( "Maximum\nTarget\nMinimum" );
 		titleCell5.setCellStyle(cellHeadStyle);			
 		
 		titleCell6 = headRow.createCell(5);	
@@ -288,7 +288,11 @@ public class OrganizationReportExcelCommand extends BaseChainCommandSupport impl
 					titleCell4.setCellStyle(cellStyle);	
 					
 					Cell titleCell5 = contentRow.createCell(4);	
-					titleCell5.setCellValue( kpi.getTarget() + " / " + kpi.getUnit() );
+					titleCell5.setCellValue( 
+							"max: " + kpi.getMax() + "\n" +
+							"target: " + kpi.getTarget() + "\n" +
+							"min: " + kpi.getMin() + "\n" + 
+							"unit: " + kpi.getUnit() );
 					titleCell5.setCellStyle(cellStyle);			
 					
 					DateRangeScoreVO dateRangeScore = kpi.getDateRangeScores().get(0);

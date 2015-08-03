@@ -2,7 +2,7 @@
 <ExportDataConfig>
 	<id>bb_kpi_001</id>
 	<name>export KPIs data</name>
-	<title>"KPI Id"; "Objective Id"; "Name"; "Weight"; "Target"; "Min"; "Unit"; "Formula Id"; "Management method( 1-bigger is better, 2-smaller is better, 3-quasi is better )"; "compare type( 1-Target, 2-Min )"; "Calculation method"; "Data type( 1-organization, 2-personal, 3-both )"; "measure-data for Organization"; "measure-data for Personal"; "QUASI-range(0, 1, 3, 5, 7, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50)"; "Description";</title>
+	<title>"KPI Id"; "Objective Id"; "Name"; "Weight"; "Target"; "Min"; "Unit"; "Formula Id"; "Management method( 1-bigger is better, 2-smaller is better, 3-quasi is better )"; "compare type( 1-Target, 2-Min )"; "Calculation method"; "Data type( 1-organization, 2-personal, 3-both )"; "measure-data for Organization"; "measure-data for Personal"; "QUASI-range(0, 1, 3, 5, 7, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50)"; "Description"; "Max";</title>
 	<sql>
 		select 
 			ID, 
@@ -20,7 +20,8 @@
 			ORGA_MEASURE_SEPARATE, 
 			USER_MEASURE_SEPARATE, 
 			QUASI_RANGE,
-			DESCRIPTION
+			DESCRIPTION,
+			MAX
 		from bb_kpi 
 		order by ID asc
 		limit 500	

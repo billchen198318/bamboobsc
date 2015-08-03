@@ -235,7 +235,7 @@ public class PersonalReportPdfCommand extends BaseChainCommandSupport implements
 		table.addCell(cell);	
 		
 		cell = new PdfPCell();
-		cell.addElement( new Phrase("Target", this.getFont(fnColor, true)) );
+		cell.addElement( new Phrase("Maximum\nTarget\nMinimum", this.getFont(fnColor, true)) );
 		this.setCellBackgroundColor(cell, bgColor);
 		cell.setColspan(1);
 		cell.setRowspan(2);
@@ -295,7 +295,10 @@ public class PersonalReportPdfCommand extends BaseChainCommandSupport implements
 					table.addCell(cell);	
 					
 					cell = new PdfPCell();
-					cell.addElement( new Phrase(kpi.getTarget() + " / " + kpi.getUnit(), this.getFont(fnColor, true)) );
+					cell.addElement( new Phrase("max: " + kpi.getMax() + "\n" +
+							"target: " + kpi.getTarget() + "\n" +
+							"min: " + kpi.getMin() + "\n" + 
+							"unit: " + kpi.getUnit(), this.getFont(fnColor, true)) );
 					this.setCellBackgroundColor(cell, bgColor);
 					cell.setColspan(1);
 					table.addCell(cell);			

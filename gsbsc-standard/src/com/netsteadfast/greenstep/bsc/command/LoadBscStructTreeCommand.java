@@ -185,6 +185,7 @@ public class LoadBscStructTreeCommand extends BaseChainCommandSupport implements
 							kpi.setDescription( mixData.getKpiDescription() );
 							kpi.setForId( mixData.getForId() );
 							kpi.setManagement( mixData.getKpiManagement() );
+							kpi.setMax( mixData.getKpiMax() );
 							kpi.setMin( mixData.getKpiMin() );
 							kpi.setName( mixData.getKpiName() );
 							kpi.setObjId( mixData.getObjId() );

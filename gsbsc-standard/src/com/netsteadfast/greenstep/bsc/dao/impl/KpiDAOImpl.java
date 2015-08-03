@@ -48,7 +48,7 @@ public class KpiDAOImpl extends BaseDAO<BbKpi, String> implements IKpiDAO<BbKpi,
 		StringBuilder hql = new StringBuilder();
 		if (Constants.QUERY_TYPE_OF_SELECT.equals(type)) {
 			hql.append("SELECT new com.netsteadfast.greenstep.bsc.vo.BscMixDataVO(");
-			hql.append("	k.oid, k.id, k.name, k.description, k.weight, k.unit, k.target, k.min, ");
+			hql.append("	k.oid, k.id, k.name, k.description, k.weight, k.unit, k.max, k.target, k.min, ");
 			hql.append("	k.management, k.compareType, k.cal, k.dataType, k.orgaMeasureSeparate, k.userMeasureSeparate, ");	
 			hql.append("	k.quasiRange, ");
 			hql.append("	o.oid, o.objId, o.name, o.weight, o.description, o.target, o.min, ");
@@ -109,7 +109,7 @@ public class KpiDAOImpl extends BaseDAO<BbKpi, String> implements IKpiDAO<BbKpi,
 
 	/**
 	 * select 
-	 * k.OID, k.ID, k.NAME, k.DESCRIPTION, k.WEIGHT, k.UNIT, k.TARGET, k.MIN,
+	 * k.OID, k.ID, k.NAME, k.DESCRIPTION, k.WEIGHT, k.UNIT, k.MAX, k.TARGET, k.MIN,
 	 * k.MANAGEMENT, k.COMPARE_TYPE, k.CAL, k.DATA_TYPE, k.ORGA_MEASURE_SEPARATE, k.USER_MEASURE_SEPARATE,
 	 * k.QUASI_RANGE,
 	 * o.OID, o.OBJ_ID, o.NAME, o.WEIGHT, o.DESCRIPTION, o.TARGET, o.MIN,
