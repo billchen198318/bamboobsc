@@ -108,20 +108,23 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 			if ( row == 0 ) {
 				Cell cell1 = nowRow.createCell(0);
 				cell1.setCellStyle(cellHeadStyle);
-				cell1.setCellValue( "KPI" );	
+				cell1.setCellValue( "KPI" );				
 				Cell cell2 = nowRow.createCell(1);
 				cell2.setCellStyle(cellHeadStyle);
-				cell2.setCellValue( "Target" );	
+				cell2.setCellValue( "Maximum" );									
 				Cell cell3 = nowRow.createCell(2);
 				cell3.setCellStyle(cellHeadStyle);
-				cell3.setCellValue( "Min" );								
+				cell3.setCellValue( "Target" );	
 				Cell cell4 = nowRow.createCell(3);
 				cell4.setCellStyle(cellHeadStyle);
-				cell4.setCellValue( "Score" );	
+				cell4.setCellValue( "Minimum" );								
+				Cell cell5 = nowRow.createCell(4);
+				cell5.setCellStyle(cellHeadStyle);
+				cell5.setCellValue( "Score" );	
 				
 				List<Map<String, Object>> dateRangeScores = (List<Map<String, Object>>)nodeData.get("dateRangeScores");
 				for ( Map<String, Object> rangeScore : dateRangeScores ) {
-					Cell cell = nowRow.createCell( 4+left );
+					Cell cell = nowRow.createCell( 5+left );
 					cell.setCellStyle(cellHeadStyle);
 					cell.setCellValue( String.valueOf( rangeScore.get("date") ) );	
 					left++;
@@ -151,14 +154,16 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 			cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 			
 			Cell cell1 = nowRow.createCell(0);
-			cell1.setCellValue( String.valueOf( nodeData.get("name") ) );	
+			cell1.setCellValue( String.valueOf( nodeData.get("name") ) );				
 			Cell cell2 = nowRow.createCell(1);
-			cell2.setCellValue( String.valueOf( nodeData.get("target") ) );	
+			cell2.setCellValue( String.valueOf( nodeData.get("max") ) );								
 			Cell cell3 = nowRow.createCell(2);
-			cell3.setCellValue( String.valueOf( nodeData.get("min") ) );								
+			cell3.setCellValue( String.valueOf( nodeData.get("target") ) );				
 			Cell cell4 = nowRow.createCell(3);
-			cell4.setCellValue( String.valueOf( nodeData.get("score") ) );
-			cell4.setCellStyle( cellStyle );			
+			cell4.setCellValue( String.valueOf( nodeData.get("min") ) );								
+			Cell cell5 = nowRow.createCell(4);
+			cell5.setCellValue( String.valueOf( nodeData.get("score") ) );
+			cell5.setCellStyle( cellStyle );			
 	
 			
 			List<Map<String, Object>> dateRangeScores = (List<Map<String, Object>>)nodeData.get("dateRangeScores");
@@ -180,7 +185,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 				cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
 				cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);				
 				
-				Cell cell = nowRow.createCell( 4+left );
+				Cell cell = nowRow.createCell( 5+left );
 				cell.setCellStyle(cellHeadStyle);
 				cell.setCellValue( String.valueOf( rangeScore.get("score") ) );	
 				cell.setCellStyle( cellStyle );
@@ -218,7 +223,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		cellHeadFont.setBold(true);		
 		cellHeadStyle.setFont( cellHeadFont );
 		
-		int titleCellSize = 14;
+		int titleCellSize = 9;
 		Row headRow = sh.createRow( row );
 		for (int i=0; i<titleCellSize; i++) {
 			Cell headCell = headRow.createCell( i );
@@ -228,7 +233,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		sh.addMergedRegion( new CellRangeAddress(row, row, 0, titleCellSize-1) );
 		
 		row = row+1;
-		int cellLeft = 10;
+		int cellLeft = 5;
 		int rowSpace = 17;
 		for (Map<String, Object> data : chartDatas) {							
 			Map<String, Object> nodeData = (Map<String, Object>) ( (List<Object>)data.get("datas") ).get(0); 
@@ -263,15 +268,19 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 			
 			nowRow = sh.createRow(row+1);
 			Cell cell2 = nowRow.createCell(cellLeft);
-			cell2.setCellValue( "Target: " + String.valueOf( nodeData.get("target") ) );			
+			cell2.setCellValue( "Maximum: " + String.valueOf( nodeData.get("max") ) );				
 			
 			nowRow = sh.createRow(row+2);
 			Cell cell3 = nowRow.createCell(cellLeft);
-			cell3.setCellValue( "Min: " + String.valueOf( nodeData.get("min") ) );				
+			cell3.setCellValue( "Target: " + String.valueOf( nodeData.get("target") ) );			
 			
 			nowRow = sh.createRow(row+3);
 			Cell cell4 = nowRow.createCell(cellLeft);
-			cell4.setCellValue( "Score: " + String.valueOf( nodeData.get("score") ) );				
+			cell4.setCellValue( "Min: " + String.valueOf( nodeData.get("min") ) );				
+			
+			nowRow = sh.createRow(row+4);
+			Cell cell5 = nowRow.createCell(cellLeft);
+			cell5.setCellValue( "Score: " + String.valueOf( nodeData.get("score") ) );				
 			
 			row += rowSpace;			
 		}

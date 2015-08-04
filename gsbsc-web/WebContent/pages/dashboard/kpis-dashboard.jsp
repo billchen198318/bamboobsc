@@ -168,8 +168,9 @@ function BSC_PROG003D0006Q_showTables( data ) {
 				if ( c == 0 ) { // first line label
 					t += '<tr>';
 					t += '<td bgcolor="#f5f5f5" align="left" width="320px"><b>KPI</b></td>';
+					t += '<td bgcolor="#f5f5f5" align="left"><b>Maximum</b></td>';
 					t += '<td bgcolor="#f5f5f5" align="left"><b>Target</b></td>';
-					t += '<td bgcolor="#f5f5f5" align="left"><b>Min</b></td>';	
+					t += '<td bgcolor="#f5f5f5" align="left"><b>Minimum</b></td>';	
 					t += '<td bgcolor="#f5f5f5" align="left"><b>Score</b></td>';
 					for ( var r in kpi.dateRangeScores ) {
 						t += '<td bgcolor="#f5f5f5" align="left"><b>' + kpi.dateRangeScores[r].date + '</b></td>';					
@@ -178,6 +179,7 @@ function BSC_PROG003D0006Q_showTables( data ) {
 				}
 				t += '<tr>';
 				t += '<td bgcolor="#ffffff" align="left">' + kpi.name + '</td>';
+				t += '<td bgcolor="#ffffff" align="left">' + kpi.max + '</td>';
 				t += '<td bgcolor="#ffffff" align="left">' + kpi.target + '</td>';
 				t += '<td bgcolor="#ffffff" align="left">' + kpi.min + '</td>';	
 				t += '<td bgcolor="' + kpi.bgColor + '" align="center"><font color="' + kpi.fontColor + '">' + BSC_PROG003D0006Q_parseScore(kpi.score) + '</font></td>';	
@@ -204,6 +206,7 @@ function BSC_PROG003D0006Q_showKpisBarCharts( data ) {
 		}	
 	});		
 	
+	var max = [ ];
     var target = [ ];
     var score = [ ];
     var min = [ ];	
@@ -213,6 +216,7 @@ function BSC_PROG003D0006Q_showKpisBarCharts( data ) {
 			var objective = data.perspectiveItems[n].objectives[o];
 			for ( var k in objective.kpis ) {
 				var kpi = objective.kpis[k];
+				max.push( kpi.max );
 				target.push( kpi.target );
 				score.push( kpi.score );
 				min.push( kpi.min );
@@ -234,7 +238,7 @@ function BSC_PROG003D0006Q_showKpisBarCharts( data ) {
     // Ticks should match up one for each y value (category) in the series.
     // var ticks = ['Obj1', 'Obj2', 'Obj3', 'Obj4'];
      
-    BSC_PROG003D0006Q_kpisBarCharts = $.jqplot('BSC_PROG003D0006Q_kpisBarCharts', [target, score, min], {
+    BSC_PROG003D0006Q_kpisBarCharts = $.jqplot('BSC_PROG003D0006Q_kpisBarCharts', [max, target, score, min], {
         // The "seriesDefaults" option is an options object that will
         // be applied to all series in the chart.
         seriesDefaults:{
@@ -245,9 +249,10 @@ function BSC_PROG003D0006Q_showKpisBarCharts( data ) {
         // option on the series option.  Here a series option object
         // is specified for each series.
         series:[
+			{label:'Maximum'},    
             {label:'Target'},
             {label:'Score'},
-            {label:'Min'}
+            {label:'Minimum'}
         ],
         // Show the legend and put it outside the grid, but inside the
         // plot container, shrinking the grid to accomodate the legend.
@@ -376,6 +381,7 @@ function BSC_PROG003D0006Q_showKpisMeterGauge( data ) {
 				datas.push({
 					id: kpi.id,
 					name: kpi.name,
+					max: kpi.max,
 					target: kpi.target,
 					min: kpi.min,
 					score: kpi.score,
@@ -407,12 +413,15 @@ function BSC_PROG003D0006Q_showKpiItemsDataContentTable( kpi ) {
 	content += '<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE" >';
 	content += '<tr>';
 	content += '<td bgcolor="' + kpi.bgColor + '" align="center" ><b><font size="4" color="' + kpi.fontColor + '" >' + kpi.name + '</font></b></td>';
-	content += '</tr>';		
+	content += '</tr>';
+	content += '<tr>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Maximum:&nbsp;</b>' + kpi.max + '</td>';
+	content += '</tr>';	
 	content += '<tr>';
 	content += '<td bgcolor="#ffffff" align="center" ><b>Target:&nbsp;</b>' + kpi.target + '</td>';
 	content += '</tr>';
 	content += '<tr>';
-	content += '<td bgcolor="#ffffff" align="center" ><b>Min:&nbsp;</b>' + kpi.min + '</td>';
+	content += '<td bgcolor="#ffffff" align="center" ><b>Minimum:&nbsp;</b>' + kpi.min + '</td>';
 	content += '</tr>';
 	content += '<tr>';
 	content += '<td bgcolor="#ffffff" align="center" ><b>Score:&nbsp;</b>' + kpi.score + '</td>';
