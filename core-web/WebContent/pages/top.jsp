@@ -55,11 +55,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- dlg -->			
 ${dialogData}
 
-<div id="pleaseWaitDlg" dojoType="dojox.widget.DialogSimple" style="width: 420px; height: 100px" title="Please wait">
-	<table border="0">
-		<tr>
+<div id="pleaseWaitDlg" dojoType="dojox.widget.DialogSimple" style="width: 420px; height: 140px" title="Please wait">
+	<table border="0" width="100%">
+		<tr valign="top">
 			<td>
-				<font size='3'>Please wait.</font>
+			<table border="0" width="100%" cellpadding="0" cellspacing="0">
+				<tr valign="top">
+					<td align="left" valign="middle" bgcolor="#F5F5F5">
+						<img src="<%=basePath%>/images/head_logo.jpg" border="0" alt="logo" style="vertical-align:middle;margin-top:0.25em"/><b><font color="#000000">Please wait.</font></b>
+						<br/>
+						<hr color="#3794E5" size="2">
+					</td>
+				</tr>
+			</table>				
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<!-- <font size='3'>Please wait.</font> -->
 				<br>
 				<div id="indeterminateBar" data-dojo-type="dijit/ProgressBar" data-dojo-props='style:"width:380px" ' indeterminate="true" ></div>
 				<br>
