@@ -149,13 +149,43 @@
 					${kpi.name}
 				</font>
 			</td>				
-			<td bgcolor="#ffffff" align="left">
-				<font color="#000000" >
-					max: ${kpi.max?c}<br/>
-					target: ${kpi.target?c}<br>
-					min: ${kpi.min?c} <br> 
-					unit: ${kpi.unit}
-				</font>
+			<td bgcolor="#ffffff" align="left" width="170px">
+			
+				<table border="0" width="100%">
+					<tr>
+						<td align="right" bgcolor="#ffffff" width="30%">
+							<font color="#000000" >max:</font>
+						<td>
+						<td align="left" bgcolor="#ffffff" width="70%">
+							<font color="#000000" >${kpi.max?c}</font>
+						<td>						
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#ffffff" width="30%">
+							<font color="#000000" >target:</font>
+						<td>
+						<td align="left" bgcolor="#ffffff" width="70%">
+							<font color="#000000" >${kpi.target?c}</font>
+						<td>						
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#ffffff" width="30%">
+							<font color="#000000" >min:</font>
+						<td>
+						<td align="left" bgcolor="#ffffff" width="70%">
+							<font color="#000000" >${kpi.min?c}</font>
+						<td>						
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#ffffff" width="30%">
+							<font color="#000000" >unit:</font>
+						<td>
+						<td align="left" bgcolor="#ffffff" width="70%">
+							<font color="#000000" >${kpi.unit}</font>
+						<td>						
+					</tr>																								
+				</table>
+								
 			</td>
 			<td bgcolor="#ffffff" align="left">
 				<font color="#000000" >
