@@ -156,12 +156,12 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		if (kpi.getMax() <= kpi.getTarget()) {
 			this.getFieldsId().add("max");
 			this.getFieldsId().add("target");
-			throw new ControllerException( "Maximum-value must bigger than Target-value." );			
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0004A_maxTargetMinCriteria_msg1") );			
 		}
 		if (kpi.getTarget() <= kpi.getMin()) {
 			this.getFieldsId().add("target");
 			this.getFieldsId().add("min");			
-			throw new ControllerException( "Target-value must bigger than Minimum-value." );
+			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0004A_maxTargetMinCriteria_msg2") );
 		}
 	}	
 	
