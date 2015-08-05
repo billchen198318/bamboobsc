@@ -136,6 +136,34 @@
 								</td>
 							</tr>
 							<tr>
+								<td align="left" bgcolor="${kpi.bgColor}" width="15%">
+									<font color="${kpi.fontColor}" >
+									Organizations:
+									</font>
+								</td>							
+								<td align="left" bgcolor="${kpi.bgColor}" width="85%">
+									<font color="${kpi.fontColor}" >									
+										<#list kpi.organizations as org >
+										${org.orgId}-${org.name},&nbsp;
+										</#list>
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" bgcolor="${kpi.bgColor}" width="15%">
+									<font color="${kpi.fontColor}" >
+									Employees:
+									</font>
+								</td>								
+								<td align="left" bgcolor="${kpi.bgColor}" width="85%">
+									<font color="${kpi.fontColor}" >
+										<#list kpi.employees as emp >
+										${emp.empId}-${emp.fullName},&nbsp;
+										</#list>
+									</font>
+								</td>
+							</tr>								
+							<tr>
 								<td align="left" bgcolor="${kpi.bgColor}" width="100%" colspan="2">
 									<font color="${kpi.fontColor}" >
 									${kpi.description}

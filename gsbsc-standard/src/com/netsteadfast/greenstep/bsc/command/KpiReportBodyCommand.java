@@ -112,7 +112,7 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 		if ( BscConstants.HEAD_FOR_KPI_ID.equals( nextType ) && !StringUtils.isBlank(nextId) ) {
 			templateResourceSrc = templateResource_NG_KPI;
 		}		
-		this.setImgIconBase(treeObj);
+		this.setImgIconBaseAndKpiInfo(treeObj);
 		String content = TemplateUtils.processTemplate(
 				"resourceTemplate", 
 				KpiReportBodyCommand.class.getClassLoader(), 
@@ -122,7 +122,7 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 		return false;
 	}
 	
-	private void setImgIconBase(BscStructTreeObj treeObj) throws ServiceException, Exception {
+	private void setImgIconBaseAndKpiInfo(BscStructTreeObj treeObj) throws ServiceException, Exception {
 		BscReportSupportUtils.loadExpression();
 		List<VisionVO> visions = treeObj.getVisions();
 		for (VisionVO vision : visions) {
@@ -156,6 +156,8 @@ public class KpiReportBodyCommand extends BaseChainCommandSupport implements Com
 										kpi.getCompareType(), 
 										kpi.getManagement(), 
 										kpi.getQuasiRange()) );
+						BscReportSupportUtils.fillKpiEmployees(kpi);
+						BscReportSupportUtils.fillKpiOrganizations(kpi);						
 					}
 				}
 			}

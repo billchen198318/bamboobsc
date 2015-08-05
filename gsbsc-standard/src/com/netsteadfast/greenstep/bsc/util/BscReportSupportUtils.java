@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -34,10 +35,16 @@ import org.apache.commons.lang3.StringUtils;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.TbSysExpression;
 import com.netsteadfast.greenstep.service.ISysExpressionService;
 import com.netsteadfast.greenstep.util.ScriptExpressionUtils;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.SysExpressionVO;
 
 @SuppressWarnings("unchecked")
@@ -47,6 +54,8 @@ public class BscReportSupportUtils {
 	private static final String REPORT_UP_DOWN_HTML_ICON_STATUS_FOR_BASE_EXPR_ID = "BSC_RPT_EXPR0005";
 	private static final String REPORT_UP_DOWN_BYTE_ICON_STATUS_FOR_BASE_EXPR_ID = "BSC_RPT_EXPR0006";	
 	private static ISysExpressionService<SysExpressionVO, TbSysExpression, String> sysExpressionService; 
+	private static IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
+	private static IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private static ThreadLocal<SysExpressionVO> exprThreadLocal01 = new ThreadLocal<SysExpressionVO>(); // for BSC_RPT_EXPR0003
 	private static ThreadLocal<SysExpressionVO> exprThreadLocal02 = new ThreadLocal<SysExpressionVO>(); // for BSC_RPT_EXPR0004
 	private static ThreadLocal<SysExpressionVO> exprThreadLocal03 = new ThreadLocal<SysExpressionVO>(); // BSC_RPT_EXPR0005
@@ -57,7 +66,11 @@ public class BscReportSupportUtils {
 		numberFormat = new DecimalFormat("0.00");
 		numberFormat.setCurrency( Currency.getInstance(Locale.US) );
 		sysExpressionService = (ISysExpressionService<SysExpressionVO, TbSysExpression, String>)
-				AppContext.getBean("core.service.SysExpressionService");		
+				AppContext.getBean("core.service.SysExpressionService");
+		employeeService = (IEmployeeService<EmployeeVO, BbEmployee, String>)
+				AppContext.getBean("bsc.service.EmployeeService");
+		organizationService = (IOrganizationService<OrganizationVO, BbOrganization, String>)
+				AppContext.getBean("bsc.service.OrganizationService");
 	}
 	
 	public static void loadExpression() throws ServiceException, Exception {
@@ -205,5 +218,45 @@ public class BscReportSupportUtils {
 		}
 		return str;
 	}	
+	
+	/**
+	 * 為KPI報表顯示要用的 , 取出KPI所屬的部門/組織
+	 * 
+	 * @param kpi
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	public static void fillKpiOrganizations(KpiVO kpi) throws ServiceException, Exception {
+		List<String> appendOrgaOids = organizationService.findForAppendOrganizationOidsByKpiOrga(kpi.getId());
+		for (int i=0; appendOrgaOids!=null && i<appendOrgaOids.size(); i++) {
+			OrganizationVO organization = new OrganizationVO();
+			organization.setOid( appendOrgaOids.get(i) );
+			DefaultResult<OrganizationVO> result = organizationService.findObjectByOid(organization);
+			if ( result.getValue() != null ) {
+				organization = result.getValue();
+				kpi.getOrganizations().add(organization);
+			}
+		}
+	}
+	
+	/**
+	 * 為KPI報表顯示要用的 , 取出KPI所屬的員工
+	 * 
+	 * @param kpi
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	public static void fillKpiEmployees(KpiVO kpi) throws ServiceException, Exception {
+		List<String> appendEmplOids = employeeService.findForAppendEmployeeOidsByKpiEmpl(kpi.getId());
+		for (int i=0; appendEmplOids!=null && i<appendEmplOids.size(); i++) {
+			EmployeeVO employee = new EmployeeVO();
+			employee.setOid( appendEmplOids.get(i) );
+			DefaultResult<EmployeeVO> result = employeeService.findObjectByOid(employee);
+			if ( result.getValue() != null ) {
+				employee = result.getValue();
+				kpi.getEmployees().add(employee);
+			}
+		}
+	}
 	
 }
