@@ -21,7 +21,9 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -46,7 +48,11 @@ import com.netsteadfast.greenstep.bsc.action.utils.NotBlankFieldCheckUtils;
 import com.netsteadfast.greenstep.bsc.action.utils.SelectItemFieldCheckUtils;
 import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
 import com.netsteadfast.greenstep.bsc.service.logic.IKpiLogicService;
+import com.netsteadfast.greenstep.po.hbm.TbSysExpression;
+import com.netsteadfast.greenstep.service.ISysExpressionService;
+import com.netsteadfast.greenstep.util.ScriptExpressionUtils;
 import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.SysExpressionVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.KpiSaveOrUpdateAction")
@@ -55,6 +61,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 	private static final long serialVersionUID = 3591579231127212607L;
 	protected Logger logger=Logger.getLogger(KpiSaveOrUpdateAction.class);
 	private IKpiLogicService kpiLogicService; 
+	private ISysExpressionService<SysExpressionVO, TbSysExpression, String> sysExpressionService;
 	private String message = "";
 	private String success = IS_NO;
 	
@@ -73,6 +80,18 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		this.kpiLogicService = kpiLogicService;
 	}
 	
+	@JSON(serialize=false)
+	public ISysExpressionService<SysExpressionVO, TbSysExpression, String> getSysExpressionService() {
+		return sysExpressionService;
+	}
+
+	@Autowired
+	@Resource(name="core.service.SysExpressionService")		
+	public void setSysExpressionService(
+			ISysExpressionService<SysExpressionVO, TbSysExpression, String> sysExpressionService) {
+		this.sysExpressionService = sysExpressionService;
+	}
+
 	@SuppressWarnings("unchecked")
 	private void checkFields() throws ControllerException {
 		try {
@@ -152,7 +171,10 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 		}
 	}	
 	
-	private void checkMaxTargetMinCriteria(KpiVO kpi) throws ControllerException, Exception {		
+	private void checkMaxTargetMinCriteria(KpiVO kpi) throws ServiceException, ControllerException, Exception {	
+		/*
+		 * 不一定是固定MAX>TARGET>MIN, 所以移到表達式中處理, 讓以後比較能客製化
+		 * 
 		if (kpi.getMax() <= kpi.getTarget()) {
 			this.getFieldsId().add("max");
 			this.getFieldsId().add("target");
@@ -163,6 +185,21 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 			this.getFieldsId().add("min");			
 			throw new ControllerException( this.getText("MESSAGE.BSC_PROG002D0004A_maxTargetMinCriteria_msg2") );
 		}
+		*/
+		SysExpressionVO expressionObj = new SysExpressionVO();
+		expressionObj.setExprId( "BSC_KPI_EXPR0003" );
+		DefaultResult<SysExpressionVO> exprResult = this.sysExpressionService.findByUK(expressionObj); 
+		if (exprResult.getValue()==null) {
+			throw new ServiceException(exprResult.getSystemMessage().getValue());
+		}
+		expressionObj = exprResult.getValue();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("kpi", kpi);
+		paramMap.put("fieldsId", this.getFieldsId());
+		paramMap.put("fields", this.getFields());
+		paramMap.put("msg1", this.getText("MESSAGE.BSC_PROG002D0004A_maxTargetMinCriteria_msg1"));
+		paramMap.put("msg2", this.getText("MESSAGE.BSC_PROG002D0004A_maxTargetMinCriteria_msg2"));
+		ScriptExpressionUtils.execute(expressionObj.getType(), expressionObj.getContent(), null, paramMap);		
 	}	
 	
 	private void save() throws ControllerException, AuthorityException, ServiceException, Exception {
