@@ -75,6 +75,7 @@ public class ToolBar implements UIComponent {
 		params.put("importName", "Import");
 		params.put("refreshName", "Refresh");
 		params.put("cancelName", "Cancel");
+		params.put("fullscreenName", "FullScreen (Use only recommended when viewing data) / Exit FullScreen");
 		this.setLabelNameFromProperties(params, language);		
 		
 		return params;		
@@ -94,6 +95,7 @@ public class ToolBar implements UIComponent {
 				params.put("importName", prop.get("importName"));
 				params.put("refreshName", prop.get("refreshName"));
 				params.put("cancelName", prop.get("cancelName"));		
+				params.put("fullscreenName", prop.get("fullscreenName"));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} finally {
