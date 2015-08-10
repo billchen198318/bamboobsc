@@ -37,8 +37,14 @@
 		onClick:function(){ 
 			${refreshJsMethod}
 		} 
-		">${refreshName}</div>
-</#if>
+		">${refreshName}</div>		
+	<div data-dojo-type="dijit/form/Button" id="${id}.fullscreen"
+		data-dojo-props="iconClass:'myFullScreenIcon', showLabel:false,
+		onClick:function(){ 
+			setMainScreen(document.documentElement);
+		} 
+		">FullScreen/Exit FullScreen</div>			
+</#if>	
 <#if cancelEnable == "Y" >		
 	<span data-dojo-type="dijit/ToolbarSeparator"></span>
 	<div data-dojo-type="dijit/form/Button" id="${id}.cancel"

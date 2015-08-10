@@ -98,6 +98,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	text-align: center;
 }
 
+.myFullScreenIcon {
+  	background-image: url(./icons/fullscreen.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
+
+:-webkit-full-screen {
+	background: #ffffff;
+}
+
+:-moz-full-screen {
+	background: #ffffff;
+}
+
+:-ms-fullscreen {
+	background: #ffffff;
+}
+
+:full-screen { /*pre-spec */
+	background: #ffffff;
+}
+
+:fullscreen { /* spec */
+	background: #ffffff;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -165,6 +194,42 @@ function loadMenuTree() {
 }
 
 var viewPage = new GS.ViewPage('<%=basePath%>');
+
+
+//need for toolbar button fullscreen and exit-fullscreen
+//src copy from http://davidwalsh.name/fullscreen
+var mFullScreen = false;
+function setMainScreen(element) {
+	if (!mFullScreen) {		
+		launchIntoFullscreen(element);		
+	} else {		
+		exitFullscreen();
+	}	
+}
+
+function launchIntoFullscreen(element) {
+	if(element.requestFullscreen) {
+		element.requestFullscreen();
+	} else if(element.mozRequestFullScreen) {
+		element.mozRequestFullScreen();
+	} else if(element.webkitRequestFullscreen) {
+		element.webkitRequestFullscreen();
+	} else if(element.msRequestFullscreen) {
+		element.msRequestFullscreen();
+	}
+	mFullScreen = true;
+}
+
+function exitFullscreen() {
+	if(document.exitFullscreen) {
+		document.exitFullscreen();
+	} else if(document.mozCancelFullScreen) {
+		document.mozCancelFullScreen();
+	} else if(document.webkitExitFullscreen) {
+		document.webkitExitFullscreen();
+	}
+	mFullScreen = false;
+}
 
 </script>
 
