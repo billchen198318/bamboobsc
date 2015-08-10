@@ -24,18 +24,28 @@ package org.gsweb.components.ui;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.gsweb.components.util.ComponentResourceUtils;
 import org.gsweb.components.util.UIComponent;
 
+import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.opensymphony.xwork2.ActionContext;
 
+@SuppressWarnings("unchecked")
 public class ToolBar implements UIComponent {
+	private static final String _CONFIG = "META-INF/resource/toolbar/ui.toolbar.json";
+	private static String _configDatas = " { } ";
+	private static Map<String, Object> _configDataMap;
 	private PageContext pageContext = null;	
 	private String id="";
 	private String createNewEnable="";
@@ -51,6 +61,22 @@ public class ToolBar implements UIComponent {
 	private String exportJsMethod="";
 	private String importJsMethod="";	
 	private StringBuilder htmlOut=new StringBuilder();	
+	
+	static {
+		try {
+			InputStream is = ToolBar.class.getClassLoader().getResource( _CONFIG ).openStream();
+			_configDatas = IOUtils.toString(is, Constants.BASE_ENCODING);
+			is.close();
+			is = null;
+			_configDataMap = (Map<String, Object>)new ObjectMapper().readValue( _configDatas, LinkedHashMap.class );
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (null==_configDataMap) {
+				_configDataMap = new HashMap<String, Object>();
+			}			
+		}
+	}
 	
 	private Map<String, Object> getParameters(String type, String language) {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -77,8 +103,14 @@ public class ToolBar implements UIComponent {
 		params.put("cancelName", "Cancel");
 		params.put("fullscreenName", "FullScreen (Use only recommended when viewing data) / Exit FullScreen");
 		this.setLabelNameFromProperties(params, language);		
+		this.setExperienceMode(params);
 		
 		return params;		
+	}
+	
+	private void setExperienceMode(Map<String, Object> params) {
+		String experience = StringUtils.defaultString( (String)_configDataMap.get("experience") ).trim();
+		params.put("experience", (YesNo.YES.equals(experience) ? YesNo.YES : YesNo.NO) );
 	}
 	
 	private void setLabelNameFromProperties(Map<String, Object> params, String language) {

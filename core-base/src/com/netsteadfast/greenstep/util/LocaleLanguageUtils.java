@@ -33,22 +33,22 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.netsteadfast.greenstep.base.Constants;
 
 public class LocaleLanguageUtils {
-	public static final String _CONFIG = "META-INF/lang.json";
-	public static String _DATASOURCE = " { } ";
-	public static Map<String, Object> _DATA_MAP;
+	private static final String _CONFIG = "META-INF/lang.json";
+	private static String _datas = " { } ";
+	private static Map<String, Object> _configDataMap;
 	
 	static {
 		try {
 			InputStream is = LocaleLanguageUtils.class.getClassLoader().getResource( _CONFIG ).openStream();
-			_DATASOURCE = IOUtils.toString(is, Constants.BASE_ENCODING);
+			_datas = IOUtils.toString(is, Constants.BASE_ENCODING);
 			is.close();
 			is = null;
-			_DATA_MAP = loadDatas();
+			_configDataMap = loadDatas();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (null==_DATA_MAP) {
-				_DATA_MAP = new HashMap<String, Object>();
+			if (null==_configDataMap) {
+				_configDataMap = new HashMap<String, Object>();
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class LocaleLanguageUtils {
 	public static Map<String, Object> loadDatas() {
 		Map<String, Object> datas = null;
 		try {
-			datas = (Map<String, Object>)new ObjectMapper().readValue( _DATASOURCE, LinkedHashMap.class );
+			datas = (Map<String, Object>)new ObjectMapper().readValue( _datas, LinkedHashMap.class );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -66,11 +66,11 @@ public class LocaleLanguageUtils {
 	
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> getMap() {
-		return (Map<String, Object>) _DATA_MAP.get("langs");
+		return (Map<String, Object>) _configDataMap.get("langs");
 	}
 	
 	public static String getDefault() {
-		return (String) _DATA_MAP.get("default");
+		return (String) _configDataMap.get("default");
 	}
 	
 	public static void main(String args[]) throws Exception {

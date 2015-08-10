@@ -41,11 +41,17 @@
 	<div data-dojo-type="dijit/form/Button" id="${id}.fullscreen"
 		data-dojo-props="iconClass:'myFullScreenIcon', showLabel:false,
 		onClick:function(){ 
-			if ( dojo.byId('${id}_ChildTab')!= null ) {
+			
+			if ( dojo.byId('${id}_ChildTab')!= null && '${experience}' == 'Y' ) {
 				setMainScreen( dojo.byId('${id}_ChildTab') );
+				var childTab = dijit.byId('${id}_ChildTab');
+				childTab.style.height = '100%';
+				childTab.style.width = '100%';
+				childTab.resize();
 			} else {
 				setMainScreen(document.documentElement);
-			}			
+			}
+					
 		} 
 		">${fullscreenName}</div>			
 </#if>	

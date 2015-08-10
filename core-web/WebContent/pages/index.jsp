@@ -198,9 +198,9 @@ var viewPage = new GS.ViewPage('<%=basePath%>');
 
 //need for toolbar button fullscreen and exit-fullscreen
 //src copy from http://davidwalsh.name/fullscreen
-var mFullScreen = false;
 function setMainScreen(element) {
-	if (!mFullScreen) {		
+	if (!document.fullscreenElement && !document.mozFullScreenElement 
+			&& !document.webkitFullscreenElement && !document.msFullscreenElement) {	
 		launchIntoFullscreen(element);		
 	} else {		
 		exitFullscreen();
@@ -217,7 +217,6 @@ function launchIntoFullscreen(element) {
 	} else if(element.msRequestFullscreen) {
 		element.msRequestFullscreen();
 	}
-	mFullScreen = true;
 }
 
 function exitFullscreen() {
@@ -228,7 +227,6 @@ function exitFullscreen() {
 	} else if(document.webkitExitFullscreen) {
 		document.webkitExitFullscreen();
 	}
-	mFullScreen = false;
 }
 
 </script>
