@@ -1,3 +1,9 @@
+2015-08-10
+-----------------------------------------------------------
+1. Add "Max" field for KPI / KPI-Report / Personal-Report / Department-Report.
+2. *** please re-import bbcore.sql to MySQL ***
+
+
 2015-07-27
 -----------------------------------------------------------
 1. Add KPI-Report status icon and some modifications.
