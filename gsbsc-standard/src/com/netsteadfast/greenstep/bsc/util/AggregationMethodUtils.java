@@ -102,11 +102,7 @@ public class AggregationMethodUtils {
 		if ( kpi == null || kpi.getMeasureDatas() == null ) {
 			throw new Exception("no measure data!");
 		}
-		String bscExpression = expression;
-		bscExpression = StringUtils.replace(bscExpression, "÷", "/");
-		bscExpression = StringUtils.replace(bscExpression, "×", "*");
-		bscExpression = StringUtils.replace(bscExpression, "−", "-");
-		bscExpression = StringUtils.replace(bscExpression, "+", "+");		
+		String bscExpression = ScriptExpressionUtils.replaceFormulaExpression(type, expression);
 		Map<String, Object> results = new HashMap<String, Object>();
 		results.put(AggregationMethodVariable.SCORE, null);
 		results = ScriptExpressionUtils.execute(

@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.util;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.python.util.PythonInterpreter;
 
@@ -64,6 +65,22 @@ public class ScriptExpressionUtils {
 			executeJython(scriptExpression, results, parameters);
 		}
 		return results;
+	}
+	
+	public static String replaceFormulaExpression(String type, String expression) throws Exception {
+		if (StringUtils.isBlank(expression)) {
+			return expression;
+		}
+		String bscExpression = expression;
+		bscExpression = StringUtils.replace(bscExpression, "÷", "/");
+		bscExpression = StringUtils.replace(bscExpression, "×", "*");
+		bscExpression = StringUtils.replace(bscExpression, "−", "-");
+		bscExpression = StringUtils.replace(bscExpression, "+", "+");
+		if (!ScriptTypeCode.IS_PYTHON.equals(type)) {
+			bscExpression = StringUtils.replace(bscExpression, "abs(", "Math.abs(");
+			bscExpression = StringUtils.replace(bscExpression, "sqrt(", "Math.sqrt(");					
+		}		
+		return bscExpression;		
 	}
 	
 	private static void executeBsh(String scriptExpression, Map<String, Object> results, Map<String, Object> parameters) throws Exception {

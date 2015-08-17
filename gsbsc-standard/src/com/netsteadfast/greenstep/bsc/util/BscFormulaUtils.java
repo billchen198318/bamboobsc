@@ -95,15 +95,7 @@ public class BscFormulaUtils {
 				bscExpression = DEFAULT_RETURN_MODE_VAR + "=" + bscExpression;
 			}			
 		}
-		bscExpression = StringUtils.replace(bscExpression, "÷", "/");
-		bscExpression = StringUtils.replace(bscExpression, "×", "*");
-		bscExpression = StringUtils.replace(bscExpression, "−", "-");
-		bscExpression = StringUtils.replace(bscExpression, "+", "+");
-		if (!ScriptTypeCode.IS_PYTHON.equals(type)) {
-			bscExpression = StringUtils.replace(bscExpression, "abs(", "Math.abs(");
-			bscExpression = StringUtils.replace(bscExpression, "sqrt(", "Math.sqrt(");					
-		}		
-		return bscExpression;
+		return ScriptExpressionUtils.replaceFormulaExpression(type, bscExpression);
 	}
 
 }
