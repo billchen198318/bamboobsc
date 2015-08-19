@@ -195,40 +195,6 @@ function loadMenuTree() {
 
 var viewPage = new GS.ViewPage('<%=basePath%>');
 
-
-//need for toolbar button fullscreen and exit-fullscreen
-//src copy from http://davidwalsh.name/fullscreen
-function setMainScreen(element) {
-	if (!document.fullscreenElement && !document.mozFullScreenElement 
-			&& !document.webkitFullscreenElement && !document.msFullscreenElement) {	
-		launchIntoFullscreen(element);		
-	} else {		
-		exitFullscreen();
-	}	
-}
-
-function launchIntoFullscreen(element) {
-	if(element.requestFullscreen) {
-		element.requestFullscreen();
-	} else if(element.mozRequestFullScreen) {
-		element.mozRequestFullScreen();
-	} else if(element.webkitRequestFullscreen) {
-		element.webkitRequestFullscreen();
-	} else if(element.msRequestFullscreen) {
-		element.msRequestFullscreen();
-	}
-}
-
-function exitFullscreen() {
-	if(document.exitFullscreen) {
-		document.exitFullscreen();
-	} else if(document.mozCancelFullScreen) {
-		document.mozCancelFullScreen();
-	} else if(document.webkitExitFullscreen) {
-		document.webkitExitFullscreen();
-	}
-}
-
 </script>
 
 </head>
