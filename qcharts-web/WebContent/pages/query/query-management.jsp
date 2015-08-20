@@ -585,14 +585,17 @@ function ${programId}_page_message() {
 					    				loadFn="QCHARTS_PROG002D0001Q_saveSuccess(data);" 
 					    				programId="${programId}"
 					    				label="${action.getText('QCHARTS_PROG002D0001Q_save')}" 
+					    				showLabel="N"
 					    				iconClass="dijitIconSave"></gs:button>    
 					    							
 					    			<gs:button name="QCHARTS_PROG002D0001Q_clear" id="QCHARTS_PROG002D0001Q_clear" onClick="QCHARTS_PROG002D0001Q_clear();" 
 					    				label="${action.getText('QCHARTS_PROG002D0001Q_clear')}" 
+					    				showLabel="N"
 					    				iconClass="dijitIconClear"></gs:button>    												
 																						
 					    			<gs:button name="QCHARTS_PROG002D0001Q_delete" id="QCHARTS_PROG002D0001Q_delete" onClick="QCHARTS_PROG002D0001Q_delete();" 
 					    				label="${action.getText('QCHARTS_PROG002D0001Q_delete')}" 
+					    				showLabel="N"
 					    				iconClass="dijitIconDelete"></gs:button>      
 		    																							
 								</td>
@@ -674,7 +677,7 @@ function ${programId}_page_message() {
 	
 	<div id="QCHARTS_PROG002D0001Q_content"></div>
 	
-	<div id="QCHARTS_PROG002D0001Q_charts" style="min-width: 640px; height: 480px; max-width: 1024px; margin: 0 auto"></div>
+	<div id="QCHARTS_PROG002D0001Q_charts" style="min-width: 1024px; height: 100%; max-width: 2048px; margin: 0 auto"></div>
 	
 	
 <script type="text/javascript">${programId}_page_message();</script>	

@@ -342,14 +342,17 @@ function ${programId}_page_message() {
 					    				loadFn="QCHARTS_PROG002D0002Q_saveSuccess(data);" 
 					    				programId="${programId}"
 					    				label="${action.getText('QCHARTS_PROG002D0002Q_save')}" 
+					    				showLabel="N"
 					    				iconClass="dijitIconSave"></gs:button>    
 					    							
 					    			<gs:button name="QCHARTS_PROG002D0002Q_clear" id="QCHARTS_PROG002D0002Q_clear" onClick="QCHARTS_PROG002D0002Q_clear();" 
-					    				label="${action.getText('QCHARTS_PROG002D0002Q_clear')}" 
+					    				label="${action.getText('QCHARTS_PROG002D0002Q_clear')}"
+					    				showLabel="N" 
 					    				iconClass="dijitIconClear"></gs:button>    												
 																						
 					    			<gs:button name="QCHARTS_PROG002D0002Q_delete" id="QCHARTS_PROG002D0002Q_delete" onClick="QCHARTS_PROG002D0002Q_delete();" 
 					    				label="${action.getText('QCHARTS_PROG002D0002Q_delete')}" 
+					    				showLabel="N"
 					    				iconClass="dijitIconDelete"></gs:button>      
 		    																							
 								</td>
