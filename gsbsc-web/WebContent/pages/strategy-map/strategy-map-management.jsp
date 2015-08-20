@@ -136,32 +136,6 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
     z-index: 3;
 }
 
-#opened {
-    left: 10em;
-    top: 5em;
-}
-
-#phone1 {
-    left: 35em;
-    top: 12em;
-    width: 7em;
-}
-
-#inperson {
-    left: 12em;
-    top: 23em;
-}
-
-#phone2 {
-    left: 28em;
-    top: 24em;
-}
-
-#rejected {
-    left: 10em;
-    top: 35em;
-}
-
 .dragHover {
     border: 2px solid orange;
 }
