@@ -26,14 +26,19 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<meta http-equiv="keywords" content="bambooCORE">
 	<meta http-equiv="description" content="bambooCORE">
 	
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
 	
-	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsplumb.css">
+	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsPlumbToolkit-defaults.css">
+	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/main.css">
+	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsPlumbToolkit-demo.css">        	
 	
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
 	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-1.9.0-min.js"></script>
-	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-ui-1.9.2.min.js"></script>
+	<!--  
+	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-ui-1.9.2.min.js"></script>	
 	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery.ui.touch-punch-0.2.2.min.js"></script>	
+	-->
 	
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	   	
@@ -50,93 +55,127 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 }
 
 .lighter {
-    background: #666;
+    background: #74B1CD;
 }
 
 
 
-#demo {
-	margin-top:0em;
+
+
+.demo {
+    /* for IE10+ touch devices */
+    touch-action:none;
 }
 
-.w { 	
-	padding:16px;
-	position:absolute;
-	border: 1px solid black;
-	z-index:4;
-	border-radius:1em;
-	border:1px solid #2e6f9a;
-	box-shadow: 2px 2px 19px #e0e0e0;
-	-o-box-shadow: 2px 2px 19px #e0e0e0;
-	-webkit-box-shadow: 2px 2px 19px #e0e0e0;
-	-moz-box-shadow: 2px 2px 19px #e0e0e0;
-	-moz-border-radius:8px;
-	border-radius:8px;
-	opacity:0.8;
-	filter:alpha(opacity=80);
-	cursor:move;
-	background-color:white;
-	font-size:11px;
-	-webkit-transition:background-color 0.25s ease-in;
-	-moz-transition:background-color 0.25s ease-in;
-	transition:background-color 0.25s ease-in;	
+.w {
+    padding: 16px;
+    position: absolute;
+    z-index: 4;
+    border: 1px solid #2e6f9a;
+    box-shadow: 2px 2px 19px #e0e0e0;
+    -o-box-shadow: 2px 2px 19px #e0e0e0;
+    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: move;
+    background-color: white;
+    font-size: 11px;
+    -webkit-transition: background-color 0.25s ease-in;
+    -moz-transition: background-color 0.25s ease-in;
+    transition: background-color 0.25s ease-in;
 }
 
 .w:hover {
-	background-color: #5c96bc;
-	color:white;
+    background-color: #5c96bc;
+    color: white;
 
 }
 
 .aLabel {
-	-webkit-transition:background-color 0.25s ease-in;
-	-moz-transition:background-color 0.25s ease-in;
-	transition:background-color 0.25s ease-in;
+    -webkit-transition: background-color 0.25s ease-in;
+    -moz-transition: background-color 0.25s ease-in;
+    transition: background-color 0.25s ease-in;
 }
 
 .aLabel._jsPlumb_hover, ._jsPlumb_source_hover, ._jsPlumb_target_hover {
-	background-color:#1e8151;
-	color:white;
+    background-color: #1e8151;
+    color: white;
 }
 
 .aLabel {
-	background-color:white;
-	opacity:0.8;
-	padding:0.3em;				
-	border-radius:0.5em;
-	border:1px solid #346789;
-	cursor:pointer;
+    background-color: white;
+    opacity: 0.8;
+    padding: 0.3em;
+    border-radius: 0.5em;
+    border: 1px solid #346789;
+    cursor: pointer;
 }
 
 .ep {
-	position:absolute;
-	bottom: 37%;
-	right: 5px;
-	width:1em;
-	height:1em;
-	background-color:orange;
-	cursor:pointer;
-	box-shadow: 0px 0px 2px black;
-	-webkit-transition:-webkit-box-shadow 0.25s ease-in;
-	-moz-transition:-moz-box-shadow 0.25s ease-in;
-	transition:box-shadow 0.25s ease-in;
+    position: absolute;
+    bottom: 37%;
+    right: 5px;
+    width: 1em;
+    height: 1em;
+    background-color: orange;
+    cursor: pointer;
+    box-shadow: 0 0 2px black;
+    -webkit-transition: -webkit-box-shadow 0.25s ease-in;
+    -moz-transition: -moz-box-shadow 0.25s ease-in;
+    transition: box-shadow 0.25s ease-in;
 }
 
 .ep:hover {
-	box-shadow: 0px 0px 6px black;
+    box-shadow: 0px 0px 6px black;
 }
 
-.strategymap-main ._jsPlumb_endpoint {
-	z-index:3;
+.statemachine-demo ._jsPlumb_endpoint {
+    z-index: 3;
 }
+
+#opened {
+    left: 10em;
+    top: 5em;
+}
+
+#phone1 {
+    left: 35em;
+    top: 12em;
+    width: 7em;
+}
+
+#inperson {
+    left: 12em;
+    top: 23em;
+}
+
+#phone2 {
+    left: 28em;
+    top: 24em;
+}
+
+#rejected {
+    left: 10em;
+    top: 35em;
+}
+
+.dragHover {
+    border: 2px solid orange;
+}
+
+path, ._jsPlumb_endpoint { cursor:pointer; }
+
+
+
+
 
 <s:iterator value="cssItems" status="st" >
 	<s:property escapeHtml="false" escapeJavaScript="false" />
 </s:iterator>	
 
-.dragHover { border:2px solid orange; }
-
-path { cursor:pointer; }
 
 </style>
 
@@ -156,11 +195,17 @@ function ${programId}_page_message() {
 
 </head>
 
-<body data-demo-id="statemachine" data-library="jquery">
+<body data-demo-id="statemachine" data-library="dom">
 	
 	<jsp:include page="../header.jsp"></jsp:include>		
         
-        <s:property value="getText('BSC_PROG002D0007Q_vision')"/>:&nbsp;<s:select list="visionMap" name="visionOid" id="visionOid" value="visionOid" class="flat lighter"></s:select>
+        
+    <div class="navbar navbar-top navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">        
+        
+        <font color="#ffffff"><s:property value="getText('BSC_PROG002D0007Q_vision')"/>:</font>&nbsp;
+        <s:select list="visionMap" name="visionOid" id="visionOid" value="visionOid" class="flat lighter"></s:select>
         <input type="button" name="load" id="load" value="${action.getText('BSC_PROG002D0007Q_btnLoad')}" class="flat lighter" >
         <s:if test=" divItems != null && divItems.size != 0 "> 
         <input type="button" name="save" id="save" value=${action.getText('BSC_PROG002D0007Q_btnSave')} class="flat lighter" >
@@ -168,13 +213,17 @@ function ${programId}_page_message() {
         </s:if>                
         <input type="button" name="new" id="new" value="${action.getText('BSC_PROG002D0007Q_btnNew')}" class="flat lighter" >
         	
+        	</div>
+        </div>
+    </div>    	
+        	
         <div id="main">
 
 		
 
-           <!-- demo -->
-            <div class="demo strategymap-main" id="strategymap-main">
-
+           <!-- demo -->            
+			<div class="canvas canvas-wide statemachine-demo jtk-surface jtk-surface-nopan" id="canvas">
+			
 				<s:iterator value="divItems" status="st" >
 					<s:property escapeHtml="false" escapeJavaScript="false" />
 				</s:iterator>	
@@ -187,154 +236,131 @@ function ${programId}_page_message() {
 
         </div>	
 	
-	<!-- JS -->
-	<!-- support lib for bezier stuff -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/lib/jsBezier-0.6.js"></script>
-	<!-- event adapter -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/lib/mottle-0.4.js"></script>
-	<!-- geom functions -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/lib/biltong-0.2.js"></script>
-	<!-- jsplumb util -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/util.js"></script>
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/browser-util.js"></script>
-	<!-- base DOM adapter -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/dom-adapter.js"></script>
-	<!-- main jsplumb engine -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/jsPlumb.js"></script>
-	<!-- endpoint -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/endpoint.js"></script>
-	<!-- connection -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/connection.js"></script>
-	<!-- anchors -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/anchors.js"></script>
-	<!-- connectors, endpoint and overlays  -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/defaults.js"></script>
-	<!-- bezier connectors -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/connectors-bezier.js"></script>
-	<!-- state machine connectors -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/connectors-statemachine.js"></script>
-	<!-- flowchart connectors -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/connectors-flowchart.js"></script>
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/connector-editors.js"></script>
-	<!-- SVG renderer -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/renderers-svg.js"></script>
-	
-	<!-- vml renderer -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/renderers-vml.js"></script>
-	
-	<!-- common adapter -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/base-library-adapter.js"></script>
-	<!-- jquery jsPlumb adapter -->
-	<script src="<%=mainSysBasePath%>/jsPlumb/src/jquery.jsPlumb.js"></script>
-	<!-- /JS -->	
+
+        <!-- JS -->
+        <!-- support lib for bezier stuff -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/lib/jsBezier-0.7.js"></script>
+        <!-- event adapter -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/lib/mottle-0.6.js"></script>
+        <!-- geometry functions -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/lib/biltong-0.2.js"></script>
+        <!-- drag -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/lib/katavorio-0.7.js"></script>
+        <!-- jsplumb util -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/util.js"></script>
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/browser-util.js"></script>
+        <!-- main jsplumb engine -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/jsPlumb.js"></script>
+        <!-- base DOM adapter -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/dom-adapter.js"></script>
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/overlay-component.js"></script>
+        <!-- endpoint -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/endpoint.js"></script>
+        <!-- connection -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/connection.js"></script>
+        <!-- anchors -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/anchors.js"></script>
+        <!-- connectors, endpoint and overlays  -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/defaults.js"></script>
+        <!-- bezier connectors -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/connectors-bezier.js"></script>
+        <!-- state machine connectors -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/connectors-statemachine.js"></script>
+        <!-- flowchart connectors -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/connectors-flowchart.js"></script>
+        <!-- SVG renderer -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/renderers-svg.js"></script>
+
+        <!-- vml renderer -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/renderers-vml.js"></script>
+
+        <!-- common adapter -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/base-library-adapter.js"></script>
+        <!-- no library jsPlumb adapter -->
+        <script src="<%=mainSysBasePath%>/jsPlumb/src/dom.jsPlumb.js"></script>
+        <!-- /JS -->
+
 	
 <script type="text/javascript">
 
-jsPlumb.ready(function() {
+jsPlumb.ready(function () {
 
-	// setup some defaults for jsPlumb.
-	var instance = jsPlumb.getInstance({
-		Endpoint : ["Dot", {radius:2}],
-		HoverPaintStyle : {strokeStyle:"#1e8151", lineWidth:2 },
-		ConnectionOverlays : [
-			[ "Arrow", {
-				location:1,
-				id:"arrow",
-                length:14,
-                foldback:0.8
-			} ],
-            [ "Label", { label:"FOO", id:"label", cssClass:"aLabel" }]
-		],
-		Container:"strategymap-main"
-	});
+    // setup some defaults for jsPlumb.
+    var instance = jsPlumb.getInstance({
+        Endpoint: ["Dot", {radius: 2}],
+        HoverPaintStyle: {strokeStyle: "#1e8151", lineWidth: 2 },
+        ConnectionOverlays: [
+            [ "Arrow", {
+                location: 1,
+                id: "arrow",
+                length: 14,
+                foldback: 0.8
+            } ],
+            [ "Label", { label: "FOO", id: "label", cssClass: "aLabel" }]
+        ],
+        Container: "canvas"
+    });
 
     window.jsp = instance;
 
-	var windows = jsPlumb.getSelector(".strategymap-main .w");
+    var windows = jsPlumb.getSelector(".statemachine-demo .w");
 
     // initialise draggable elements.
-	instance.draggable(windows);
+    instance.draggable(windows);
 
     // bind a click listener to each connection; the connection is deleted. you could of course
-	// just do this: jsPlumb.bind("click", jsPlumb.detach), but I wanted to make it clear what was
-	// happening.
-	instance.bind("click", function(c) {
-		instance.detach(c);
-	});
+    // just do this: jsPlumb.bind("click", jsPlumb.detach), but I wanted to make it clear what was
+    // happening.
+    instance.bind("click", function (c) {
+        instance.detach(c);
+    });
 
-	// bind a connection listener. note that the parameter passed to this function contains more than
-	// just the new connection - see the documentation for a full list of what is included in 'info'.
-	// this listener sets the connection's internal
-	// id as the label overlay's text.
-    instance.bind("connection", function(info) {
-		info.connection.getOverlay("label").setLabel(info.connection.id);
-		info.connection.hideOverlay("label"); // 不要顯示connection label
+    // bind a connection listener. note that the parameter passed to this function contains more than
+    // just the new connection - see the documentation for a full list of what is included in 'info'.
+    // this listener sets the connection's internal
+    // id as the label overlay's text.
+    instance.bind("connection", function (info) {
+        info.connection.getOverlay("label").setLabel(info.connection.id);
+        info.connection.hideOverlay("label"); // 不要顯示connection label
     });
 
 
-	// suspend drawing and initialise.
-	instance.doWhileSuspended(function() {
-		var isFilterSupported = instance.isDragFilterSupported();
-		// make each ".ep" div a source and give it some parameters to work with.  here we tell it
-		// to use a Continuous anchor and the StateMachine connectors, and also we give it the
-		// connector's paint style.  note that in this demo the strokeStyle is dynamically generated,
-		// which prevents us from just setting a jsPlumb.Defaults.PaintStyle.  but that is what i
-		// would recommend you do. Note also here that we use the 'filter' option to tell jsPlumb
-		// which parts of the element should actually respond to a drag start.
-		// here we test the capabilities of the library, to see if we
-		// can provide a `filter` (our preference, support by vanilla
-		// jsPlumb and the jQuery version), or if that is not supported,
-		// a `parent` (YUI and MooTools). I want to make it perfectly
-		// clear that `filter` is better. Use filter when you can.
-		if (isFilterSupported) {
-			instance.makeSource(windows, {
-				filter:".ep",
-				anchor:"Continuous",
-				connector:[ "StateMachine", { curviness:20 } ],
-				connectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
-				maxConnections:5,
-				onMaxConnections:function(info, e) {
-					alert("Maximum connections (" + info.maxConnections + ") reached");
-				}
-			});
-		}
-		else {
-			var eps = jsPlumb.getSelector(".ep");
-			for (var i = 0; i < eps.length; i++) {
-				var e = eps[i], p = e.parentNode;
-				instance.makeSource(e, {
-					parent:p,
-					anchor:"Continuous",
-					connector:[ "StateMachine", { curviness:20 } ],
-					connectorStyle:{ strokeStyle:"#5c96bc",lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
-					maxConnections:5,
-					onMaxConnections:function(info, e) {
-						alert("Maximum connections (" + info.maxConnections + ") reached");
-					}
-				});
-			}
-		}
-	});
+    // suspend drawing and initialise.
+    instance.batch(function () {
+        instance.makeSource(windows, {
+            filter: ".ep",
+            anchor: "Continuous",
+            connector: [ "StateMachine", { curviness: 20 } ],
+            connectorStyle: { strokeStyle: "#5c96bc", lineWidth: 2, outlineColor: "transparent", outlineWidth: 4 },
+            maxConnections: 5,
+            onMaxConnections: function (info, e) {
+                alert("Maximum connections (" + info.maxConnections + ") reached");
+            }
+        });
+        
+        // and finally, make a couple of connections
+        <s:if test=" divItems!=null && divItems.size!=0 ">
+        
+        // initialise all '.w' elements as connection targets.
+        instance.makeTarget(windows, {
+            dropOptions: { hoverClass: "dragHover" },
+            anchor: "Continuous",
+            allowLoopback: true
+        });        
+        
+    	<s:iterator value="conItems" status="st" >
+    	instance.connect(<s:property escapeHtml="false" escapeJavaScript="false" />);
+    	</s:iterator>	
+    	
+    	</s:if>
+    	
+    });
 
-	<s:if test=" divItems!=null && divItems.size!=0 ">
-	
-	// initialise all '.w' elements as connection targets.
-	instance.makeTarget(windows, {
-		dropOptions:{ hoverClass:"dragHover" },
-		anchor:"Continuous",
-		allowLoopback:true
-	});
-	
-	
-	<s:iterator value="conItems" status="st" >
-	instance.connect(<s:property escapeHtml="false" escapeJavaScript="false" />);
-	</s:iterator>		
-	
-	
-	jsPlumb.fire("jsPlumbDemoLoaded", instance);
-	
-	</s:if>
-	
+    
+    <s:if test=" divItems!=null && divItems.size!=0 ">
+    jsPlumb.fire("jsPlumbDemoLoaded", instance);
+    </s:if>
+    
     
     function getToJson() {
     	
@@ -430,9 +456,11 @@ jsPlumb.ready(function() {
 			taintTest	: true
 		});    	
 		
-    });
+    });    
+    
     
 });
+
 
 </script>
 	
