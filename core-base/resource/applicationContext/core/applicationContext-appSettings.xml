@@ -13,7 +13,9 @@
 		<constructor-arg>
 			<map>
 				<entry key="base.system" 								value="${base.system}" />
-				<entry key="base.mainSystem" 							value="${base.mainSystem}" />
+				<entry key="base.mainSystem" 							value="${base.mainSystem}" />				
+				<entry key="base.encryptorKey1" 						value="${base.encryptorKey1}" />
+				<entry key="base.encryptorKey2" 						value="${base.encryptorKey2}" />				
 				<entry key="baseSupperAction.errorContent" 				value="${base.page.errorContent}" />
 				<entry key="baseSupperAction.dojoLocal"					value="${base.page.dojoLocal}" />
 				<entry key="baseSupperAction.dojoAjaxTimeout"			value="${base.page.dojoAjaxTimeout}" />

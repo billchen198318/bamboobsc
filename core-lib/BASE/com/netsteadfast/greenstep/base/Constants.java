@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.netsteadfast.greenstep.base.model.YesNo;
 
@@ -217,5 +218,31 @@ public class Constants {
 		getSettingsMap();
 		return (String)appSettingsMap.get("base.deployJasperReportDir");
 	}
+	
+	/**
+	 * 系統加密用的key1 , EncryptorUtils 要用的 key1
+	 * @return
+	 */
+	public static String getEncryptorKey1() {
+		getSettingsMap();
+		String key = (String)appSettingsMap.get("base.encryptorKey1");
+		if (StringUtils.isBlank(key)) {
+			key = ENCRYPTOR_KEY1;
+		}
+		return key;
+	}
+	
+	/**
+	 * 系統加密用的key2 , EncryptorUtils 要用的 key2
+	 * @return
+	 */
+	public static String getEncryptorKey2() {
+		getSettingsMap();
+		String key = (String)appSettingsMap.get("base.encryptorKey2");
+		if (StringUtils.isBlank(key)) {
+			key = ENCRYPTOR_KEY2;
+		}
+		return key;
+	}	
 	
 }
