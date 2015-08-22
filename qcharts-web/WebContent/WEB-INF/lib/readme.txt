@@ -313,15 +313,15 @@ ziplet-2.0.1-async.jar
 
 
 jackson
-http://repository.codehaus.org/org/codehaus/jackson/
+http://mvnrepository.com/artifact/org.codehaus.jackson
 -------------------------
-jackson-core-lgpl-1.9.11.jar
-jackson-mapper-lgpl-1.9.11.jar
+jackson-core-asl-1.9.13.jar
+jackson-mapper-asl-1.9.13.jar
 
 
 Apache Shiro
 -------------------------
-shiro-all-1.2.3.jar
+shiro-all-1.2.4.jar
 
 
 https://code.google.com/p/kaptcha/
