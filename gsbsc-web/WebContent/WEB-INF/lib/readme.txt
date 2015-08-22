@@ -273,7 +273,7 @@ groovy-all-2.4.4-indy.jar
 
 Apache ActiveMQ
 -------------------------
-activemq-all-5.10.0.jar
+activemq-all-5.11.1.jar
 
 
 dozer
