@@ -87,9 +87,9 @@ Hibernate
 dom4j-1.6.1.jar
 antlr-2.7.7.jar
 hibernate-commons-annotations-4.0.5.Final.jar
-hibernate-core-4.3.10.Final.jar
-hibernate-entitymanager-4.3.10.Final.jar
-hibernate-envers-4.3.10.Final.jar
+hibernate-core-4.3.11.Final.jar
+hibernate-entitymanager-4.3.11.Final.jar
+hibernate-envers-4.3.11.Final.jar
 hibernate-jpa-2.1-api-1.0.0.Final.jar
 jandex-1.1.0.Final.jar
 javassist-3.18.1-GA.jar
