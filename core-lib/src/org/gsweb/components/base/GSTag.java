@@ -24,6 +24,6 @@ package org.gsweb.components.base;
 import javax.servlet.jsp.tagext.Tag;
 
 public interface GSTag extends Tag {
-	public static final long TIMEOUT = 24*1000; // 24sec
+	public static final long TIMEOUT = 600000; // 600sec
 	
 }
