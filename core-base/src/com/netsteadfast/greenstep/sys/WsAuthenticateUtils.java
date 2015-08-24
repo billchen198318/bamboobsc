@@ -39,7 +39,7 @@ public class WsAuthenticateUtils {
     	if ( StringUtils.isBlank(currentId) || StringUtils.isBlank(account) ) {
     		throw new Exception("null key.");
     	}
-    	return EncryptorUtils.encrypt(Constants.ENCRYPTOR_KEY1, Constants.ENCRYPTOR_KEY2, 
+    	return EncryptorUtils.encrypt(Constants.getEncryptorKey1(), Constants.getEncryptorKey2(), 
     			currentId + ";" + account + ";" + System.currentTimeMillis() );
     }
     
@@ -47,7 +47,7 @@ public class WsAuthenticateUtils {
     	if ( StringUtils.isBlank(authenticate) ) {
     		throw new Exception("null key.");
     	}
-    	String idStr = EncryptorUtils.decrypt(Constants.ENCRYPTOR_KEY1, Constants.ENCRYPTOR_KEY2, 
+    	String idStr = EncryptorUtils.decrypt(Constants.getEncryptorKey1(), Constants.getEncryptorKey2(), 
     			authenticate);
     	if ( StringUtils.isBlank(idStr) ) {
     		throw new Exception("null key.");
