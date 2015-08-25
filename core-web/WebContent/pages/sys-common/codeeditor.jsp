@@ -62,7 +62,7 @@ body, html {
 }
 
 .lighter {
-    background: #666;
+    background: #74B1CD;
 }
 
 <s:if test=" \"Y\" == cbMode ">
@@ -82,9 +82,16 @@ body, html {
 
 <s:if test=" \"Y\" == cbMode ">
 
-<input type="button" name="okBtn" id="okBtn" value="${action.getText('CORE_PROGCOMM0004Q_okBtn')}" class="flat lighter" onClick="setCbFieldValue();">
-<input type="button" name="clBtn" id="clBtn" value="${action.getText('CORE_PROGCOMM0004Q_clBtn')}" class="flat lighter" onClick="window.close();">
-<br/>
+<table border="0" width="100%">
+	<tr>
+		<td align="left" bgcolor="#58775d">
+			&nbsp;&nbsp;
+			<input type="button" name="okBtn" id="okBtn" value="${action.getText('CORE_PROGCOMM0004Q_okBtn')}" class="flat lighter" onClick="setCbFieldValue();">
+			&nbsp;&nbsp;
+			<input type="button" name="clBtn" id="clBtn" value="${action.getText('CORE_PROGCOMM0004Q_clBtn')}" class="flat lighter" onClick="window.close();">		
+		</td>
+	</tr>
+</table>
 
 </s:if>
 
