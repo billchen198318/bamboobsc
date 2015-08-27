@@ -82,51 +82,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <style type="text/css">
 
-.myExportIcon {
-  	background-image: url(./icons/document-export.png);
-  	background-repeat: no-repeat;
-  	width: 16px;
-  	height: 16px;
-  	text-align: center;
-}
-
-.myImportIcon {
-  	background-image: url(./icons/document-import.png);
-  	background-repeat: no-repeat;
-  	width: 16px;
-  	height: 16px;
-  	text-align: center;
-}
-
-.myFullScreenIcon {
-  	background-image: url(./icons/fullscreen.png);
-  	background-repeat: no-repeat;
-  	width: 16px;
-  	height: 16px;
-  	text-align: center;
-}
-
-
-:-webkit-full-screen {
-	background: #ffffff;
-}
-
-:-moz-full-screen {
-	background: #ffffff;
-}
-
-:-ms-fullscreen {
-	background: #ffffff;
-}
-
-:full-screen { /*pre-spec */
-	background: #ffffff;
-}
-
-:fullscreen { /* spec */
-	background: #ffffff;
-}
-
 </style>
 
 <script type="text/javascript">
