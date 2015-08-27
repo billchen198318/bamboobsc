@@ -32,6 +32,8 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/main.css">
 	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsPlumbToolkit-demo.css">        	
 	
+	<link href="<%=mainSysBasePath%>/toastr/toastr.min.css" rel="stylesheet"/>
+	
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
 	<script src="<%=mainSysBasePath%>/jsPlumb/external/jquery-1.9.0-min.js"></script>
@@ -42,6 +44,8 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	   	
+	
+	<script src="<%=mainSysBasePath%>/toastr/toastr.min.js"></script>
 	
 <style type="text/css">
 
@@ -308,7 +312,7 @@ jsPlumb.ready(function () {
             connectorStyle: { strokeStyle: "#5c96bc", lineWidth: 2, outlineColor: "transparent", outlineWidth: 4 },
             maxConnections: 5,
             onMaxConnections: function (info, e) {
-                alert("Maximum connections (" + info.maxConnections + ") reached");
+            	toastr.info("Maximum connections (" + info.maxConnections + ") reached")                
             }
         });
         
@@ -371,8 +375,8 @@ jsPlumb.ready(function () {
     });
 	
     $("#new").click(function (e) {
-    	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {
-    		alert('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
+    	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {    		
+    		toastr.info('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}
     	window.location = "<%=basePath%>/bsc.strategyMapLoadNewAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
@@ -380,7 +384,7 @@ jsPlumb.ready(function () {
     
     $("#load").click(function (e) {
     	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {
-    		alert('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
+    		toastr.info('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}
     	window.location = "<%=basePath%>/bsc.strategyMapLoadRecordAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
@@ -388,7 +392,7 @@ jsPlumb.ready(function () {
     
     $("#save").click(function (e) {
     	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {
-    		alert('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
+    		toastr.info('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}    	
         e.preventDefault();
@@ -406,7 +410,13 @@ jsPlumb.ready(function () {
         		'fields.visionOid'	: $("#visionOid").val()
         	},
         	success	: function(data) {
-        		alert( data.message );
+        		if ('Y' == data.success) {
+        			toastr.info( data.message );
+        		} else if ('N' == data.success || 'E' == data.success ) {
+        			toastr.warning( data.message );
+        		} else {
+        			toastr.error( data.message );
+        		}        		
         	},
          	error: function(data) {
          		alert(data);
