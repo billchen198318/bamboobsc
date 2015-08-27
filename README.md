@@ -1,5 +1,7 @@
 # bamboobsc
 
+[![Join the chat at https://gitter.im/billchen198318/bamboobsc](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/billchen198318/bamboobsc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <h2>bambooBSC is an opensource Balanced Scorecard (BSC) Business Intelligence</h2>
 <br/>
 <br/>
