@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysBeanHelpExprMapPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysBeanHelpExprMapVO(m.oid, m.helpExprOid, m.methodResultFlag, m.methodParamClass, m.methodParamIndex, m.varName)
+		FROM TbSysBeanHelpExprMap m 
+		WHERE 1=1
+		
+		<#if helpExprOid??>
+		AND m.helpExprOid = :helpExprOid
+		</#if>
+		
+		ORDER BY m.varName ASC
+	]]>
+	</query>
+	
+	<query name="findSysBeanHelpExprMapPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysBeanHelpExprMap m 
+		WHERE 1=1
+		
+		<#if helpExprOid??>
+		AND m.helpExprOid = :helpExprOid
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

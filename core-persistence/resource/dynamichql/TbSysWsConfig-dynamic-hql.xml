@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysWsConfigPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysWsConfigVO(m.oid, m.wsId, m.system, m.type, m.beanId, m.publishAddress)
+		FROM TbSysWsConfig m 
+		WHERE 1=1
+		
+		<#if wsId??>
+		and m.wsId = :wsId
+		</#if>
+				
+		<#if systemOid??>
+		and m.system IN ( SELECT s.sysId FROM TbSys s WHERE s.oid = :systemOid )
+		</#if>
+		
+		ORDER BY m.wsId ASC
+	]]>
+	</query>
+	
+	<query name="findSysWsConfigPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysWsConfig m 
+		WHERE 1=1
+		
+		<#if wsId??>
+		and m.wsId = :wsId
+		</#if>
+				
+		<#if systemOid??>
+		and m.system IN ( SELECT s.sysId FROM TbSys s WHERE s.oid = :systemOid )
+		</#if>	
+	]]>		
+	</query>
+
+</dynamic-hql>

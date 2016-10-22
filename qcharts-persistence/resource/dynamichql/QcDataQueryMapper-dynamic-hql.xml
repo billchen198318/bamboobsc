@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findDataQueryMapperPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.DataQueryMapperVO(m.oid, m.name, m.description)
+		FROM QcDataQueryMapper m 
+		WHERE 1=1
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+						
+		ORDER BY m.name ASC
+	]]>
+	</query>
+	
+	<query name="findDataQueryMapperPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM QcDataQueryMapper m 
+		WHERE 1=1
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+	]]>		
+	</query>
+
+</dynamic-hql>

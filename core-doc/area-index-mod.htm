@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: '2015 KPIs'
+        },
+        subtitle: {
+            text: 'Query result'
+        },
+        xAxis: {
+            categories: ['KPI-1', 'KPI-2'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Query Value'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' value'
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: [{
+            name: 'TARGET',
+            data: [502, 635]
+        }, {
+            name: 'ACTUAL',
+            data: [206, 307]
+        }]
+    });
+});
+		</script>
+	</head>
+	<body>
+<script src="../../js/highcharts.js"></script>
+<script src="../../js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>

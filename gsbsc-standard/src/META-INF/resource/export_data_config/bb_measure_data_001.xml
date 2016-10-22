@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportDataConfig>
+	<id>bb_measure_data_001</id>
+	<name>export measures-data</name>
+	<title>"KPI Id"; "Date"; "Target"; "Actual"; "Frequency"; "Organization Id"; "Employee No";</title>
+	<sql>
+		select 
+			KPI_ID, DATE, TARGET, ACTUAL, FREQUENCY, ORG_ID, EMP_ID 
+		from bb_measure_data
+		order by KPI_ID, FREQUENCY, DATE asc
+		limit 15000	
+	</sql>
+	<separate_symbol>;</separate_symbol>
+	<escape_csv>true</escape_csv>
+	<description>export measures-data to csv file.</description>
+</ExportDataConfig>

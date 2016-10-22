@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+    <!-- 
+    	core-web 主要使用的 lib jar 為 core-base.jar 但 gsbsc-web 與 gsbsc-standard 也是需要 core-base.jar 的
+    	所以在 core-web 放一個空的 applicationContext-STANDARD-EXPAND-BEANS.xml 
+    	如果將 applicationContext-STANDARD-EXPAND-BEANS.xml 放到 core-base.jar 中又會影響到 gsbsc-standard 
+    	所以將 applicationContext-STANDARD-EXPAND-BEANS.xml 放到 core-web 中 
+    	gsbsc-standard 也有自己獨立的一份 applicationContext-STANDARD-EXPAND-BEANS.xml
+    	因為 gsbsc-standard 有了 applicationContext-STANDARD-EXPAND-BEANS.xml 所以 gsbsc-web 就不需要放 applicationContext-STANDARD-EXPAND-BEANS.xml 了
+    -->
+        
+    
+</beans>    

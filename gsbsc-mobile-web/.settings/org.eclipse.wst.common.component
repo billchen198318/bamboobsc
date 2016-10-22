@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="gsbsc-mobile-web">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
+        <dependent-module archiveName="core-lib.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/core-lib/core-lib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="core-base.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/core-base/core-base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="core-persistence.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/core-persistence/core-persistence">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gsbsc-standard.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/gsbsc-standard/gsbsc-standard">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gsbsc-persistence.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/gsbsc-persistence/gsbsc-persistence">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="gsbsc-mobile-web"/>
+        <property name="java-output-path" value="/gsbsc-mobile-web/build/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbPdca">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbPdca" id="baseResultMap">
+		<id column="OID" property="oid"/>			
+		<result column="TITLE" property="title"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="PARENT_OID" property="parentOid"/>
+		<result column="CONFIRM_DATE" property="confirmDate"/>
+		<result column="CONFIRM_FLAG" property="confirmFlag"/>
+		<result column="CONFIRM_EMP_ID" property="confirmEmpId"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>
+		<result column="UDATE" property="udate"/>
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_pdca where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="title != null">
+			AND TITLE = #{title}
+		</if>				
+		<if test="confirmDate != null">
+			AND CONFIRM_DATE = #{confirmDate}
+		</if>
+		<if test="confirmFlag != null">
+			AND CONFIRM_FLAG = #{confirmFlag}
+		</if>						
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_pdca where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="title != null">
+			AND TITLE = #{title}
+		</if>				
+		<if test="confirmDate != null">
+			AND CONFIRM_DATE = #{confirmDate}
+		</if>
+		<if test="confirmFlag != null">
+			AND CONFIRM_FLAG = #{confirmFlag}
+		</if>					
+	</select>	
+	
+</mapper>

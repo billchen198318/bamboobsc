@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysMenuRole.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysMenuRole</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysMenuRoleVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>progId</a>
+			<b>progId</b>
+		</field>				
+		<field>
+			<a>role</a>
+			<b>role</b>
+		</field>							
+	</mapping>
+
+	<mapping map-id="sysMenuRole.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysMenuRoleVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysMenuRole</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>progId</a>
+			<b>progId</b>
+		</field>				
+		<field>
+			<a>role</a>
+			<b>role</b>
+		</field>
+	</mapping>
+	
+</mappings>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysUpload.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysUpload</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysUploadVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>
+		<field>
+			<a>subDir</a>
+			<b>subDir</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>	
+		<field>
+			<a>fileName</a>
+			<b>fileName</b>
+		</field>	
+		<field>
+			<a>showName</a>
+			<b>showName</b>
+		</field>	
+		<field>
+			<a>isFile</a>
+			<b>isFile</b>
+		</field>
+		<field>
+			<a>content</a>
+			<b>content</b>
+		</field>																														
+	</mapping>
+
+	<mapping map-id="sysUpload.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysUploadVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysUpload</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>
+		<field>
+			<a>subDir</a>
+			<b>subDir</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>	
+		<field>
+			<a>fileName</a>
+			<b>fileName</b>
+		</field>	
+		<field>
+			<a>showName</a>
+			<b>showName</b>
+		</field>	
+		<field>
+			<a>isFile</a>
+			<b>isFile</b>
+		</field>
+		<field>
+			<a>content</a>
+			<b>content</b>
+		</field>			
+	</mapping>
+	
+</mappings>

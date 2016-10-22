@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysFormPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysFormVO(m.oid, m.formId, m.templateId, m.name, m.description)
+		FROM TbSysForm m 
+		WHERE 1=1
+		
+		<#if formId??>
+		and m.formId = :formId
+		</#if>
+		
+		<#if name??>
+		and m.name LIKE :name
+		</#if>
+		
+		ORDER BY m.formId ASC		
+	]]>
+	</query>
+	
+	<query name="findSysFormPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysForm m 
+		WHERE 1=1
+		
+		<#if formId??>
+		and m.formId = :formId
+		</#if>
+		
+		<#if name??>
+		and m.name LIKE :name
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

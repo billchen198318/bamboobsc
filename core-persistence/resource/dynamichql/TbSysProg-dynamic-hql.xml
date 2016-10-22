@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysProgPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysProgVO(sp.oid, sp.progId, sp.name, sp.url, sp.editMode, sp.progSystem, sp.itemType, sp.icon)
+		FROM TbSysProg sp 
+		WHERE 1=1		
+		
+		<#if name??>
+		and sp.name LIKE :name
+		</#if>
+				
+		<#if progId??>
+		and sp.progId = :progId
+		</#if>
+			
+		ORDER BY sp.progId,sp.name ASC
+	]]>
+	</query>
+	
+	<query name="findSysProgPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysProg sp 
+		WHERE 1=1		
+		
+		<#if name??>
+		and sp.name LIKE :name
+		</#if>
+				
+		<#if progId??>
+		and sp.progId = :progId
+		</#if>
+	]]>		
+	</query>
+
+</dynamic-hql>

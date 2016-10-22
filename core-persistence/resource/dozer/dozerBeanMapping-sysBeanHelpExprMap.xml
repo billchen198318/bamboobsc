@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysBeanHelpExprMap.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysBeanHelpExprMap</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysBeanHelpExprMapVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>helpExprOid</a>
+			<b>helpExprOid</b>
+		</field>		
+		<field>
+			<a>methodResultFlag</a>
+			<b>methodResultFlag</b>
+		</field>			
+		<field>
+			<a>methodParamClass</a>
+			<b>methodParamClass</b>
+		</field>		
+		<field>
+			<a>methodParamIndex</a>
+			<b>methodParamIndex</b>
+		</field>						
+		<field>
+			<a>varName</a>
+			<b>varName</b>
+		</field>																					
+	</mapping>
+
+	<mapping map-id="sysBeanHelpExprMap.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysBeanHelpExprMapVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysBeanHelpExprMap</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>helpExprOid</a>
+			<b>helpExprOid</b>
+		</field>		
+		<field>
+			<a>methodResultFlag</a>
+			<b>methodResultFlag</b>
+		</field>			
+		<field>
+			<a>methodParamClass</a>
+			<b>methodParamClass</b>
+		</field>		
+		<field>
+			<a>methodParamIndex</a>
+			<b>methodParamIndex</b>
+		</field>			
+		<field>
+			<a>varName</a>
+			<b>varName</b>
+		</field>		
+	</mapping>
+	
+</mappings>

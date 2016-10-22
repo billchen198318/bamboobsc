@@ -1,0 +1,85 @@
+2015-04-14
+
+Thanks for the reply Chen. Do you have sample script I can use to achieve the restriction. An example being;
+
+At the end of March, I would not want anyone to be able to update KPIs for 
+January and February. 
+
+Also another scenario maybe how to deny updates of specific KPIs(measured data) per month per user.
+
+
+
+// ------------------------------------------------------------------------------------------------
+// bsc.service.logic.MeasureDataLogicService
+// saveOrUpdate
+// frequency args index 2
+// measureDatas args index 6
+// kpiOid args index 0
+// organizationId args index 4
+// employeeId args index 5
+
+/*
+ * The require for Christopher Hayden
+ */
+if ( measureDatas==null || !(measureDatas instanceof java.util.ArrayList) ) {
+	return;
+}
+
+def denyUsers = [ "need-deny-user-id" ]; // the is need deny users
+
+def nowYear = com.netsteadfast.greenstep.util.SimpleUtils.getStrYMD( com.netsteadfast.greenstep.util.SimpleUtils.IS_YEAR ); // not modify me
+def nowMonth = com.netsteadfast.greenstep.util.SimpleUtils.getStrYMD( com.netsteadfast.greenstep.util.SimpleUtils.IS_MONTH ); // not modify me
+def nowUserId = ((java.lang.String)org.apache.shiro.SecurityUtils.getSubject().getPrincipal());
+com.netsteadfast.greenstep.vo.KpiVO kpi = com.netsteadfast.greenstep.bsc.util.MeasureDataCalendarUtils.findKpi(kpiOid);
+java.util.List<com.netsteadfast.greenstep.vo.MeasureDataVO> newMeasureDatas = new java.util.ArrayList<com.netsteadfast.greenstep.vo.MeasureDataVO>();
+
+for ( com.netsteadfast.greenstep.vo.MeasureDataVO measureData : measureDatas ) {	
+	
+	/*
+	 * frequency 1 is Day
+	 * frequency 2 is Week
+	 * frequency 3 is Month
+	 * frequency 4 is QUARTER
+	 * frequency 5 is HALF OF YEAR
+	 * frequency 6 is Year
+	 */
+	// At the end of March, I would not want anyone to be able to update KPIs for January and February. 
+	if ( "3".equals( frequency ) ) { // the frequency 3 is of month
+		//System.out.println( "measureData.date=" + measureData.date);
+		//System.out.println( "nowYear+nowMonth=" + nowYear+nowMonth);	
+		if ( !measureData.date.startsWith(nowYear+nowMonth) ) {
+			//throw new com.netsteadfast.greenstep.base.exception.ServiceException( "Only can update current month measures data. please contact system administrator!" );
+			com.netsteadfast.greenstep.vo.MeasureDataVO beforeMeasureData = 
+				com.netsteadfast.greenstep.bsc.util.MeasureDataCalendarUtils.findMeasureData(
+					kpi.id,
+					measureData.date,
+					frequency,
+					organizationId,
+					employeeId
+				);
+			if ( beforeMeasureData !=null ) {
+				measureData.setActual( beforeMeasureData.actual );
+				measureData.setTarget( beforeMeasureData.target );
+				newMeasureDatas.add( measureData );				
+			} 	
+		} else {
+			newMeasureDatas.add( measureData );
+		}
+	}	
+
+	// Also another scenario maybe how to deny updates of specific KPIs(measured data) per month per user.
+	// an example ( deny admin update March data )
+	for (String denyUser : denyUsers) {
+		if ( "3".equals( frequency ) && denyUser.equals( nowUserId ) /* && denyUser.equals( measureData.empId ) */ ) { // the frequency 3 is of month
+			if ( measureData.date.startsWith(nowYear+nowMonth) ) { // cannot update current month
+				throw new com.netsteadfast.greenstep.base.exception.ServiceException( denyUser + " you cannot update measures data. please contact system administrator!" );
+			}
+		}
+	}
+	
+}
+
+measureDatas.clear();
+measureDatas.addAll( newMeasureDatas );
+
+// ------------------------------------------------------------------------------------------------

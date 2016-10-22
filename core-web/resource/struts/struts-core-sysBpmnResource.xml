@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="core-sysBpmnResource" extends="core-default" namespace="/" >		
+		
+		<action name="core.systemBpmnResourceManagementAction" class="core.web.controller.SystemBpmnResourceManagementAction">
+			<result name="input">/pages/sys-bpmn-res/sys-bpmn-res-management.jsp</result>		
+			<result name="success">/pages/sys-bpmn-res/sys-bpmn-res-management.jsp</result>
+		</action>
+		
+		<action name="core.systemBpmnResourceCreateAction" class="core.web.controller.SystemBpmnResourceManagementAction" method="create">
+			<result name="input">/pages/sys-bpmn-res/sys-bpmn-res-create.jsp</result>		
+			<result name="success">/pages/sys-bpmn-res/sys-bpmn-res-create.jsp</result>
+		</action>		
+		
+		<action name="core.systemBpmnResourceEditAction" class="core.web.controller.SystemBpmnResourceManagementAction" method="edit">
+			<result name="input">/pages/sys-bpmn-res/sys-bpmn-res-edit.jsp</result>		
+			<result name="success">/pages/sys-bpmn-res/sys-bpmn-res-edit.jsp</result>
+		</action>
+		
+		<action name="core.systemBpmnResourceProcessListAction" class="core.web.controller.SystemBpmnResourceManagementAction" method="processList">
+			<result name="input">/pages/sys-bpmn-res/sys-bpmn-res-proc-list.jsp</result>		
+			<result name="success">/pages/sys-bpmn-res/sys-bpmn-res-proc-list.jsp</result>
+		</action>		
+		
+		<!-- BPMN Resource Role Assignee -->
+		<action name="core.systemBpmnResourceRoleAssigneeManagementAction" class="core.web.controller.SystemBpmnResourceManagementAction" method="roleAssignee">
+			<result name="input">/pages/sys-bpmn-res/sys-bpmn-res-role-assignee-management.jsp</result>		
+			<result name="success">/pages/sys-bpmn-res/sys-bpmn-res-role-assignee-management.jsp</result>
+		</action>		
+		
+		<action name="core.systemBpmnResourceRoleAssigneeCreateAction" class="core.web.controller.SystemBpmnResourceManagementAction" method="createRoleAssignee">
+			<result name="input">/pages/sys-bpmn-res/sys-bpmn-res-role-assignee-create.jsp</result>		
+			<result name="success">/pages/sys-bpmn-res/sys-bpmn-res-role-assignee-create.jsp</result>
+		</action>		
+						   	
+	</package>
+	
+	<package name="core-sysBpmnResource-json" extends="core-default,json-default" namespace="/" >	
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+		
+		<action name="core.systemBpmnResourceManagementGridQueryAction" class="core.web.controller.SystemBpmnResourceGridQueryManagementAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBpmnResourceSaveAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doSave">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBpmnResourceUpdateAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doUpdate">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>			
+		
+		<action name="core.systemBpmnResourceDeleteAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doDelete">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="core.systemBpmnResourceDeploymentAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doDeployment">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBpmnResourceExportAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doExport">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>			
+		
+		<action name="core.systemBpmnResourceExportDiagramAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doExportDiagram">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<!-- BPMN Resource Role Assignee -->
+		<action name="core.systemBpmnResourceRoleAssigneeManagementGridQueryAction" class="core.web.controller.SystemBpmnResourceGridQueryManagementAction" method="queryRoleAssignee">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBpmnResourceRoleAssigneeDeleteAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doRoleAssigneeDelete">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="core.systemBpmnResourceRoleAssigneeSaveAction" class="core.web.controller.SystemBpmnResourceSaveOrUpdateAction" method="doRoleAssigneeSave">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+				
+	</package>
+			
+</struts>

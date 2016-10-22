@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysMultiName">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysMultiName" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="SYS_ID" property="sysId"/>		
+		<result column="LOCALE_CODE" property="localeCode"/>	
+		<result column="NAME" property="name"/>
+		<result column="ENABLE_FLAG" property="enableFlag"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_multi_name where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="sysId != null">
+			AND SYS_ID = #{sysId}
+		</if>			
+		<if test="localeCode != null">
+			AND LOCALE_CODE = #{localeCode}
+		</if>										
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_multi_name where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="sysId != null">
+			AND SYS_ID = #{sysId}
+		</if>			
+		<if test="localeCode != null">
+			AND LOCALE_CODE = #{localeCode}
+		</if>			
+	</select>	
+	
+</mapper>

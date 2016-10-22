@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysJreportParamPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysJreportParamVO(m.oid, m.reportId, m.urlParam, m.rptParam)
+		FROM TbSysJreportParam m 
+		WHERE 1=1
+		
+		<#if sysJreportOid??>
+		AND m.reportId IN ( SELECT r.reportId FROM TbSysJreport r WHERE r.oid = :sysJreportOid )
+		</#if>
+		
+		ORDER BY m.rptParam ASC
+	]]>
+	</query>
+	
+	<query name="findSysJreportParamPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysJreportParam m 
+		WHERE 1=1
+		
+		<#if sysJreportOid??>
+		AND m.reportId IN ( SELECT r.reportId FROM TbSysJreport r WHERE r.oid = :sysJreportOid )
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

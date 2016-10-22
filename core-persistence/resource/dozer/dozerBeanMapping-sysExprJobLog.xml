@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysExprJobLog.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysExprJobLog</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysExprJobLogVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>logStatus</a>
+			<b>logStatus</b>
+		</field>
+		<field>
+			<a>beginDatetime</a>
+			<b>beginDatetime</b>
+		</field>
+		<field>
+			<a>endDatetime</a>
+			<b>endDatetime</b>
+		</field>
+		<field>
+			<a>faultMsg</a>
+			<b>faultMsg</b>
+		</field>
+	</mapping>
+
+	<mapping map-id="sysExprJobLog.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysExprJobLogVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysExprJobLog</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>logStatus</a>
+			<b>logStatus</b>
+		</field>
+		<field>
+			<a>beginDatetime</a>
+			<b>beginDatetime</b>
+		</field>
+		<field>
+			<a>endDatetime</a>
+			<b>endDatetime</b>
+		</field>
+		<field>
+			<a>faultMsg</a>
+			<b>faultMsg</b>
+		</field>										
+	</mapping>
+	
+</mappings>

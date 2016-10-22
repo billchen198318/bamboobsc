@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysBpmnResourceRolePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysBpmnResourceRoleVO(rr.oid, rr.id, rr.role, rr.taskName, r.name)
+		FROM TbSysBpmnResourceRole rr, TbSysBpmnResource r 
+		WHERE rr.id = r.id
+		
+		<#if resourceOid??>
+		and r.oid = :resourceOid
+		</#if>
+		
+		<#if taskName??>
+		and rr.taskName LIKE :taskName
+		</#if>
+		
+		ORDER BY rr.id, rr.role, rr.taskName ASC
+	]]>
+	</query>
+	
+	<query name="findSysBpmnResourceRolePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysBpmnResourceRole rr, TbSysBpmnResource r 
+		WHERE rr.id = r.id
+		
+		<#if resourceOid??>
+		and r.oid = :resourceOid
+		</#if>
+		
+		<#if taskName??>
+		and rr.taskName LIKE :taskName
+		</#if>
+	]]>
+	</query>
+
+</dynamic-hql>

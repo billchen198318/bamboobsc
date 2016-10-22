@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="bsc-mobile-login-out" extends="bsc-mobile-default" namespace="/" >
+		
+		<default-interceptor-ref name="greenStepProvideCustomStack" />
+		
+		<action name="login" class="bsc.mobile.web.controller.LoginAction">
+			<result name="input">/pages/system/login.jsp</result>
+			<result name="login">/pages/system/login.jsp</result>			
+			<result name="success" type="redirect">/index.action</result>
+		</action>
+		
+		<action name="logout" class="bsc.mobile.web.controller.LoginAction" method="doLogout">
+			<result name="input">/login.action</result>			
+			<result name="success" type="redirect">/login.action</result>
+		</action>		
+		   	
+	</package>
+			
+</struts>

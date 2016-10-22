@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbStrategyMap">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbStrategyMap" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="VIS_ID" property="visId"/>		
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_strategy_map where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>			
+		<if test="visId != null">
+			AND VIS_ID = #{visId}
+		</if>							
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_strategy_map where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>			
+		<if test="visId != null">
+			AND VIS_ID = #{visId}
+		</if>					
+	</select>	
+	
+</mapper>

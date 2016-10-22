@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findWorkspacePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.WorkspaceVO(m.oid, m.spaceId, m.templateId, m.name, m.description)
+		FROM BbWorkspace m 
+		WHERE 1=1
+		
+		<#if spaceId??>
+		AND m.spaceId = :spaceId
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>				
+		
+		ORDER BY m.spaceId ASC
+	]]>
+	</query>
+	
+	<query name="findWorkspacePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbWorkspace m 
+		WHERE 1=1
+		
+		<#if spaceId??>
+		AND m.spaceId = :spaceId
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

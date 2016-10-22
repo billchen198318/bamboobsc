@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysMenu.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysMenu</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysMenuVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>progId</a>
+			<b>progId</b>
+		</field>									
+		<field>
+			<a>parentOid</a>
+			<b>parentOid</b>
+		</field>			
+		<field>
+			<a>enableFlag</a>
+			<b>enableFlag</b>
+		</field>																					
+	</mapping>
+
+	<mapping map-id="sysMenu.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysMenuVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysMenu</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>progId</a>
+			<b>progId</b>
+		</field>									
+		<field>
+			<a>parentOid</a>
+			<b>parentOid</b>
+		</field>			
+		<field>
+			<a>enableFlag</a>
+			<b>enableFlag</b>
+		</field>			
+	</mapping>
+	
+</mappings>

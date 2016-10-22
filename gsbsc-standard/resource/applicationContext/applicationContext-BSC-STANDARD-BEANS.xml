@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-organization.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-organizationPar.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-employee.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-employeeOrga.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-vision.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-perspective.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-objective.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-kpi.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-kpiEmpl.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-kpiOrga.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-kpiAttac.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-formula.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-measureData.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-scoreColor.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-strategyMap.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-strategyMapNodes.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-strategyMapConns.xml" />            
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-swot.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-swotReportMst.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-swotReportDtl.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspace.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspaceTemplate.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspaceCompoment.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspaceConfig.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-workspaceLabel.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-aggregationMethod.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-reportRoleView.xml" />    
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-degreeFeedbackAssign.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-degreeFeedbackItem.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-degreeFeedbackLevel.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-degreeFeedbackProject.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-degreeFeedbackScore.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdca.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaDoc.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaKpis.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaOwner.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaItem.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaItemDoc.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaItemOwner.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaAudit.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaItemAudit.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaOrga.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaMeasureFreq.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-monitorItemScore.xml" />
+    
+</beans>    

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<include file="struts/struts-bsc-base.xml" />
+	<include file="struts/struts-bsc-employee.xml" />
+	<include file="struts/struts-bsc-organization.xml" />
+	<include file="struts/struts-bsc-common.xml" />
+	<include file="struts/struts-bsc-vision.xml" />	
+	<include file="struts/struts-bsc-perspective.xml" />
+	<include file="struts/struts-bsc-objective.xml" />
+	<include file="struts/struts-bsc-formula.xml" />
+	<include file="struts/struts-bsc-kpi.xml" />
+	<include file="struts/struts-bsc-measureData.xml" />			
+	<include file="struts/struts-bsc-weight.xml" />
+	<include file="struts/struts-bsc-scoreColor.xml" />	
+	<include file="struts/struts-bsc-reportProperty.xml" />	
+	<include file="struts/struts-bsc-report.xml" />
+	<include file="struts/struts-bsc-strategyMap.xml" />		
+	<include file="struts/struts-bsc-swot.xml" />
+	<include file="struts/struts-bsc-workspaceSettings.xml" />
+	<include file="struts/struts-bsc-aggregationMethod.xml" />
+	<include file="struts/struts-bsc-reportRoleView.xml" />
+	<include file="struts/struts-bsc-dashboard.xml" />
+	<include file="struts/struts-bsc-degreeFeedbackProject.xml" />
+	<include file="struts/struts-bsc-pdca.xml" />
+	
+</struts>

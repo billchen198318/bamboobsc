@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findVisionPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.VisionVO(m.oid, m.visId, m.title)
+		FROM BbVision m 
+		WHERE 1=1
+		
+		<#if visId??>
+		AND m.visId = :visId
+		</#if>
+		
+		<#if title??>
+		AND m.title LIKE :title
+		</#if>
+		
+		ORDER BY m.visId ASC
+	]]>
+	</query>
+	
+	<query name="findVisionPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbVision m 
+		WHERE 1=1
+		
+		<#if visId??>
+		AND m.visId = :visId
+		</#if>
+		
+		<#if title??>
+		AND m.title LIKE :title
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

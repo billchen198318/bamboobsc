@@ -1,0 +1,52 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysWsService">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysWsService" id="baseResultMap">
+		<id column="OID" property="oid"/>						
+		<result column="ID" property="id"/>
+		<result column="SYSTEM" property="system"/>		
+		<result column="BEAN_ID" property="beanId"/>				
+		<result column="WSDL_ADDRESS" property="wsdlAddress"/>	
+		<result column="DESCRIPTION" property="description"/>				
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_ws_service where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="id != null">
+			AND ID = #{id}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>					
+		<if test="beanId != null">
+			AND BEAN_ID = #{beanId}
+		</if>																
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_ws_service where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="id != null">
+			AND ID = #{id}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>					
+		<if test="beanId != null">
+			AND BEAN_ID = #{beanId}
+		</if>				
+	</select>	
+	
+</mapper>

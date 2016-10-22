@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+    <!-- interceptor -->        
+    <import resource="classpath*:applicationContext/controller/applicationContext-interceptors-web.xml" />    
+    
+    <!-- action -->    
+    <import resource="classpath*:applicationContext/controller/applicationContext-login-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-common-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-apSys-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysProgram-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysMenu-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-role-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-userRole-web.xml" />     
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysProgramMenuRole-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysCalendarNote-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysMsgNoticeConfig-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysMsgNotice-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysTemplate-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysWsConfig-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysExpression-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysBeanHelp-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysJreport-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysCtxBean-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysTwitter-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-settings-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysFormTemplate-web.xml" />        
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysForm-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysFormMethod-web.xml" />    
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysBpmnResource-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-sysExpressionJob-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-test-web.xml" />              
+   
+    
+    <!-- Apache CXF WEB Service BEANS -->
+    <import resource="classpath*:applicationContext/applicationContext-STANDARD-CXF.xml" />
+        
+    <!-- apache camel -->
+    <import resource="classpath*:applicationContext/applicationContext-STANDARD-ESB.xml" />
+            
+</beans>

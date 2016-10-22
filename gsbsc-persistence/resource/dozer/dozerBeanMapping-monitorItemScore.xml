@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="monitorItemScore.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.MonitorItemScoreVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>itemType</a>
+			<b>itemType</b>
+		</field>		
+		<field>
+			<a>itemId</a>
+			<b>itemId</b>
+		</field>		
+		<field>
+			<a>dateVal</a>
+			<b>dateVal</b>
+		</field>	
+		<field>
+			<a>frequency</a>
+			<b>frequency</b>
+		</field>		
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>						
+		<field>
+			<a>score</a>
+			<b>score</b>
+		</field>			
+	</mapping>
+
+	<mapping map-id="monitorItemScore.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.MonitorItemScoreVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>	
+		<field>
+			<a>itemType</a>
+			<b>itemType</b>
+		</field>		
+		<field>
+			<a>itemId</a>
+			<b>itemId</b>
+		</field>		
+		<field>
+			<a>dateVal</a>
+			<b>dateVal</b>
+		</field>	
+		<field>
+			<a>frequency</a>
+			<b>frequency</b>
+		</field>		
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>						
+		<field>
+			<a>score</a>
+			<b>score</b>
+		</field>	
+	</mapping>
+	
+</mappings>

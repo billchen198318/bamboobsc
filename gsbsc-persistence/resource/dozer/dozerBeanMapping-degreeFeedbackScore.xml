@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="degreeFeedbackScore.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackScore</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.DegreeFeedbackScoreVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>projectOid</a>
+			<b>projectOid</b>
+		</field>		
+		<field>
+			<a>itemOid</a>
+			<b>itemOid</b>
+		</field>	
+		<field>
+			<a>assignOid</a>
+			<b>assignOid</b>
+		</field>	
+		<field>
+			<a>score</a>
+			<b>score</b>
+		</field>
+		<field>
+			<a>memo</a>
+			<b>memo</b>
+		</field>																					
+	</mapping>
+
+	<mapping map-id="degreeFeedbackScore.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.DegreeFeedbackScoreVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackScore</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>projectOid</a>
+			<b>projectOid</b>
+		</field>		
+		<field>
+			<a>itemOid</a>
+			<b>itemOid</b>
+		</field>	
+		<field>
+			<a>assignOid</a>
+			<b>assignOid</b>
+		</field>	
+		<field>
+			<a>score</a>
+			<b>score</b>
+		</field>
+		<field>
+			<a>memo</a>
+			<b>memo</b>
+		</field>
+	</mapping>
+	
+</mappings>

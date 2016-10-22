@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysTemplatePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysTemplateVO(m.oid, m.templateId, m.title, m.description)
+		FROM TbSysTemplate m 
+		WHERE 1=1
+		
+		<#if templateId??>
+		and m.templateId = :templateId
+		</#if>
+		
+		<#if title??>
+		and m.title LIKE :title
+		</#if>		
+		
+		ORDER BY m.templateId ASC
+	]]>
+	</query>
+	
+	<query name="findSysTemplatePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysTemplate m 
+		WHERE 1=1
+		
+		<#if templateId??>
+		and m.templateId = :templateId
+		</#if>
+		
+		<#if title??>
+		and m.title LIKE :title
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">            
+         
+         
+    <!-- C3P0 configuration -->
+    <bean id="dataSource" destroy-method="close"
+    	class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass">
+			<value>${dataSource.driverClass}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${dataSource.jdbcUrl}</value>
+		</property>
+		<property name="user">
+			<value>${dataSource.user}</value>
+		</property>
+		<property name="password">
+			<value>${dataSource.password}</value>
+		</property>           
+		<property name="maxPoolSize">
+			<value>${dataSource.maxPoolSize}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${dataSource.minPoolSize}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${dataSource.initialPoolSize}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${dataSource.maxIdleTime}</value>
+		</property>		
+	</bean>	
+
+			    
+</beans>
+

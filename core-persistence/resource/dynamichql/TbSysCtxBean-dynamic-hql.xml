@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysCtxBeanPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysCtxBeanVO(m.oid, m.system, m.className, m.type, m.description)
+		FROM TbSysCtxBean m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		AND m.system IN ( SELECT s.sysId FROM TbSys s WHERE s.oid = :systemOid )
+		</#if>
+				
+		<#if className??>
+		AND m.className = :className
+		</#if>
+		
+		ORDER BY m.system, m.className ASC
+	]]>
+	</query>
+	
+	<query name="findSysCtxBeanPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysCtxBean m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		AND m.system IN ( SELECT s.sysId FROM TbSys s WHERE s.oid = :systemOid )
+		</#if>
+				
+		<#if className??>
+		AND m.className = :className
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

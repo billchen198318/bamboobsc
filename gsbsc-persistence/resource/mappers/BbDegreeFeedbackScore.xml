@@ -1,0 +1,52 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbDegreeFeedbackScore">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackScore" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="PROJECT_OID" property="projectOid"/>			
+		<result column="ITEM_OID" property="itemOid"/>		
+		<result column="ASSIGN_OID" property="assignOid"/>		
+		<result column="SCORE" property="score"/>									
+		<result column="MEMO" property="memo"/>		
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_degree_feedback_score where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="projectOid != null">
+			AND PROJECT_OID = #{projectOid}
+		</if>				
+		<if test="itemOid != null">
+			AND ITEM_OID = #{itemOid}
+		</if>
+		<if test="assignOid != null">
+			AND ASSIGN_OID = #{assignOid}
+		</if>																						
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_degree_feedback_score where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="projectOid != null">
+			AND PROJECT_OID = #{projectOid}
+		</if>				
+		<if test="itemOid != null">
+			AND ITEM_OID = #{itemOid}
+		</if>
+		<if test="assignOid != null">
+			AND ASSIGN_OID = #{assignOid}
+		</if>					
+	</select>	
+	
+</mapper>

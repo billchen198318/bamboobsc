@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findPdcaPageGrid-select">	
+	<![CDATA[	
+		SELECT
+			new com.netsteadfast.greenstep.vo.PdcaVO(m.oid, m.title, m.startDate, m.endDate, m.parentOid, m.confirmDate, m.confirmFlag, m.confirmEmpId)
+		FROM BbPdca m WHERE 1=1
+		
+		<#if title??>
+		AND m.title LIKE :title
+		</#if>
+
+		<#if startDate??>
+		<#if endDate??>
+		AND m.startDate >= :startDate AND m.endDate <= :endDate
+		</#if>
+		</#if>
+		
+		ORDER BY m.startDate, m.endDate, m.title ASC				
+	]]>
+	</query>
+	
+	<query name="findPdcaPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbPdca m WHERE 1=1
+		
+		<#if title??>
+		AND m.title LIKE :title
+		</#if>
+
+		<#if startDate??>
+		<#if endDate??>
+		AND m.startDate >= :startDate AND m.endDate <= :endDate
+		</#if>
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

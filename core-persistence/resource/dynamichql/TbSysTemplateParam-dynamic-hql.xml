@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysTemplateParamPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysTemplateParamVO(m.oid, m.templateId, m.isTitle, m.templateVar, m.objectVar)
+		FROM TbSysTemplateParam m 
+		WHERE 1=1	
+		
+		<#if templateOid??>
+		and m.templateId IN ( SELECT t.templateId FROM TbSysTemplate t WHERE t.oid = :templateOid )
+		</#if>		
+		
+		ORDER BY m.templateId, m.templateVar ASC
+	]]>
+	</query>
+	
+	<query name="findSysTemplateParamPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysTemplateParam m 
+		WHERE 1=1	
+		
+		<#if templateOid??>
+		and m.templateId IN ( SELECT t.templateId FROM TbSysTemplate t WHERE t.oid = :templateOid )
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

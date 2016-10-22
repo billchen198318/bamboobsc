@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"    
+    xmlns:cxf="http://cxf.apache.org/core"
+    xmlns:http="http://cxf.apache.org/transports/http/configuration"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+    http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+    http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+    
+      
+	<import resource="classpath:META-INF/cxf/cxf.xml" />	
+	<import resource="classpath:META-INF/cxf/cxf-extension-*.xml" />	<!-- cxf-extension-soap.xml" -->
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+    <!--  五分鐘 -->
+    <http:conduit name="*.http-conduit">
+    	<http:client ConnectionTimeout="12000" ReceiveTimeout="300000"/>
+    </http:conduit>
+	
+	<!-- logging interceptor -->
+	<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+	<bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+    <cxf:bus> 
+        <cxf:inInterceptors>
+        	<ref bean="loggingOutInterceptor" />
+			<ref bean="loggingInInterceptor" />
+        </cxf:inInterceptors> 
+    </cxf:bus>    	
+	
+	
+	<!-- example sample -->
+	<bean id="core.webservice.HelloService" class="com.netsteadfast.greenstep.webservice.impl.HelloServiceImpl" />
+	
+	<!-- send mail webService -->
+	<bean id="core.webservice.SendMailService" class="com.netsteadfast.greenstep.webservice.impl.SendMailServiceImpl" />
+	
+	<!-- expression Job manual webService -->
+	<bean id="core.webservice.ManualJobService" class="com.netsteadfast.greenstep.webservice.impl.ManualJobServiceImpl" />
+	                
+</beans>

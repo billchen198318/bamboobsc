@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysProg">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysProg" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="PROG_ID" property="progId"/>		
+		<result column="NAME" property="name"/>
+		<result column="URL" property="url"/>
+		<result column="EDIT_MODE" property="editMode"/>		
+		<result column="IS_DIALOG" property="isDialog"/>		
+		<result column="IS_WINDOW" property="isWindow"/>		
+		<result column="DIALOG_W" property="dialogW"/>
+		<result column="DIALOG_H" property="dialogH"/>
+		<result column="PROG_SYSTEM" property="progSystem"/>
+		<result column="ITEM_TYPE" property="itemType"/>
+		<result column="ICON" property="icon"/>	
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_prog where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="progId != null">
+			AND PROG_ID = #{progId}
+		</if>			
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>		
+		<if test="progSystem != null">
+			AND PROG_SYSTEM = #{progSystem}
+		</if>											
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_prog where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="progId != null">
+			AND PROG_ID = #{progId}
+		</if>			
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>			
+		<if test="progSystem != null">
+			AND PROG_SYSTEM = #{progSystem}
+		</if>			
+	</select>	
+	
+</mapper>

@@ -1,0 +1,1 @@
+<span id="${id}"><b>${text}</b><#if requiredFlag == 'Y' >&nbsp;<font color='#FF0000'>*</font></#if></span>

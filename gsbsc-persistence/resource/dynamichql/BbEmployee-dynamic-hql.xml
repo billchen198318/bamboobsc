@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findEmployeePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.EmployeeVO(m.oid, m.account, m.empId, m.fullName, m.jobTitle)			
+		FROM BbEmployee m, TbAccount b 
+		WHERE m.account = b.account
+		
+		<#if empId??>
+		AND m.empId = :empId
+		</#if>
+		
+		<#if fullName??>
+		AND m.fullName LIKE :fullName
+		</#if>
+		
+		ORDER BY m.empId, m.account ASC
+	]]>
+	</query>
+	
+	<query name="findEmployeePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)			
+		FROM BbEmployee m, TbAccount b 
+		WHERE m.account = b.account
+		
+		<#if empId??>
+		AND m.empId = :empId
+		</#if>
+		
+		<#if fullName??>
+		AND m.fullName LIKE :fullName
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

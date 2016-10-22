@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysTwitterPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysTwitterVO(m.oid, m.system, m.title, m.enableFlag)
+		FROM TbSysTwitter m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		and m.system IN ( SELECT b.sysId FROM TbSys b WHERE b.oid = :systemOid )
+		</#if>
+				
+		<#if title??>
+		and m.title LIKE :title
+		</#if>		
+		
+		ORDER BY m.system ASC
+	]]>
+	</query>
+	
+	<query name="findSysTwitterPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysTwitter m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		and m.system IN ( SELECT b.sysId FROM TbSys b WHERE b.oid = :systemOid )
+		</#if>
+				
+		<#if title??>
+		and m.title LIKE :title
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

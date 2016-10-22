@@ -1,0 +1,72 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbMonitorItemScore">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="ITEM_TYPE" property="itemType"/>
+		<result column="ITEM_ID" property="itemId"/>		
+		<result column="DATE_VAL" property="dateVal"/>
+		<result column="FREQUENCY" property="frequency"/>		
+		<result column="ORG_ID" property="orgId"/>
+		<result column="EMP_ID" property="empId"/>
+		<result column="SCORE" property="score"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_monitor_item_score where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="itemType != null">
+			AND ITEM_TYPE = #{itemType}
+		</if>		
+		<if test="itemId != null">
+			AND ITEM_ID = #{itemId}
+		</if>			
+		<if test="dateVal != null">
+			AND DATE_VAL = #{dateVal}
+		</if>	
+		<if test="frequency != null">
+			AND FREQUENCY = #{frequency}
+		</if>									
+		<if test="orgId != null">
+			AND ORG_ID = #{orgId}
+		</if>
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>							
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_monitor_item_score where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="itemType != null">
+			AND ITEM_TYPE = #{itemType}
+		</if>		
+		<if test="itemId != null">
+			AND ITEM_ID = #{itemId}
+		</if>			
+		<if test="dateVal != null">
+			AND DATE_VAL = #{dateVal}
+		</if>	
+		<if test="frequency != null">
+			AND FREQUENCY = #{frequency}
+		</if>									
+		<if test="orgId != null">
+			AND ORG_ID = #{orgId}
+		</if>
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>			
+	</select>	
+	
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysMsgNoticePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysMsgNoticeVO(m.oid, m.noticeId, m.msgId, m.title, m.date, m.time, m.isGlobal, m.toAccount)	
+		FROM TbSysMsgNotice m 
+		WHERE 1=1
+		
+		<#if title??>
+		and m.title LIKE :title
+		</#if>
+		
+		<#if noticeId??>
+		and m.noticeId = :noticeId
+		</#if>		
+		
+		<#if msgOid??>
+		and m.msgId IN ( SELECT s.msgId FROM TbSysMsgNoticeConfig s WHERE s.oid = :msgOid )
+		</#if>						
+		
+		ORDER BY m.msgId ASC, m.noticeId DESC
+	]]>
+	</query>
+	
+	<query name="findSysMsgNoticePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)	
+		FROM TbSysMsgNotice m 
+		WHERE 1=1
+		
+		<#if title??>
+		and m.title LIKE :title
+		</#if>
+		
+		<#if noticeId??>
+		and m.noticeId = :noticeId
+		</#if>		
+		
+		<#if msgOid??>
+		and m.msgId IN ( SELECT s.msgId FROM TbSysMsgNoticeConfig s WHERE s.oid = :msgOid )
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findOlapConfPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.OlapConfVO(m.oid, m.id, m.name, m.jdbcDrivers, m.jdbcUrl)
+		FROM QcOlapConf m 
+		WHERE 1=1
+
+		<#if id??>
+		AND m.id = :id
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>	
+		
+		ORDER BY m.id ASC
+	]]>
+	</query>
+	
+	<query name="findOlapConfPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM QcOlapConf m 
+		WHERE 1=1
+
+		<#if id??>
+		AND m.id = :id
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

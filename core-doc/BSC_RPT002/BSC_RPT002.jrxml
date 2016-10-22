@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BSC_RPT002" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c1553bf4-b471-48de-9963-43b1a58b4ddc">
+	<property name="ireport.zoom" value="0.9090909090909145"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="89"/>
+	<parameter name="REPORT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from bb_swot_report_mst where REPORT_ID = $P{REPORT_ID}]]>
+	</queryString>
+	<field name="OID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REPORT_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VISION_TITLE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORG_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CUSERID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CDATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UUSERID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UDATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="60">
+			<textField>
+				<reportElement x="32" y="31" width="779" height="20" uuid="0e1df69d-e090-4503-be2e-2d9dd9b4ccff"/>
+				<textElement textAlignment="Center">
+					<font fontName="fireflysung" size="14" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ORG_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="9" width="779" height="20" uuid="d0b1707d-54df-4663-891c-527b20df8394"/>
+				<textElement textAlignment="Center">
+					<font fontName="fireflysung" size="16" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VISION_TITLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="32" y="2" width="171" height="31" backcolor="#F4F4F4" uuid="5f3eb2ba-36d6-44ef-9df3-cc88b1634fc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="12" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Perspectives]]></text>
+			</staticText>
+			<line>
+				<reportElement x="32" y="1" width="1" height="34" uuid="1c58eb2b-c1f1-4a9b-aa34-b3382a12d273"/>
+			</line>
+			<line>
+				<reportElement x="32" y="1" width="779" height="1" uuid="f8841ee1-1a1e-4c81-8b1b-0f9a72218717"/>
+			</line>
+			<line>
+				<reportElement x="810" y="1" width="1" height="34" uuid="be9702b5-76a1-4f7c-8b6c-d2ddb15e3891"/>
+			</line>
+			<line>
+				<reportElement x="32" y="32" width="779" height="1" uuid="b36280f2-8b19-43ec-891b-0f0e022fbbd5"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="204" y="2" width="155" height="30" backcolor="#F4F4F4" uuid="c4a04200-6733-4956-b68e-0ee3730cf197"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="12" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[STRENGTHS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="360" y="2" width="152" height="30" backcolor="#F4F4F4" uuid="563638c7-da68-4ada-9cdf-3e74e825834e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="12" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[WEAKNESSES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="513" y="2" width="151" height="30" backcolor="#F4F4F4" uuid="b1e9a0fc-88d7-4014-9861-10c8414dd04a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="12" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[OPPORTUNITIES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="665" y="2" width="145" height="30" backcolor="#F4F4F4" uuid="932f0cd5-0524-43d1-a73c-4f19fee241ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="12" isBold="true" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[THREATS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="203" y="1" width="1" height="34" uuid="6a88bc84-bcfa-4d1b-9771-98e4b07bf42e"/>
+			</line>
+			<line>
+				<reportElement x="359" y="1" width="1" height="34" uuid="b4150e38-4f5b-4907-8a5d-32efb627512e"/>
+			</line>
+			<line>
+				<reportElement x="512" y="1" width="1" height="34" uuid="adcc5c6b-389f-4801-b2d3-ae1aa82a2f0c"/>
+			</line>
+			<line>
+				<reportElement x="664" y="1" width="1" height="34" uuid="0abc8e02-e8f9-4f1d-8e3c-17148c94a797"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="500" splitType="Stretch">
+			<subreport>
+				<reportElement x="32" y="0" width="778" height="452" uuid="70944271-c532-4b36-8dc9-1e1e335bd894"/>
+				<subreportParameter name="REPORT_ID">
+					<subreportParameterExpression><![CDATA[$P{REPORT_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BSC_RPT002_1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

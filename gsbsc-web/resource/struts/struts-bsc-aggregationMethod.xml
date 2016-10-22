@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="bsc-aggregationMethod" extends="bsc-default" namespace="/" >		
+		
+		<action name="bsc.aggregationMethodManagementAction" class="bsc.web.controller.AggregationMethodManagementAction">
+			<result name="input">/pages/aggregation-method/aggregation-method-management.jsp</result>		
+			<result name="success">/pages/aggregation-method/aggregation-method-management.jsp</result>
+		</action>			
+		
+		<action name="bsc.aggregationMethodCreateAction" class="bsc.web.controller.AggregationMethodManagementAction" method="create">
+			<result name="input">/pages/aggregation-method/aggregation-method-create.jsp</result>		
+			<result name="success">/pages/aggregation-method/aggregation-method-create.jsp</result>
+		</action>			
+		
+		<action name="bsc.aggregationMethodEditAction" class="bsc.web.controller.AggregationMethodManagementAction" method="edit">
+			<result name="input">/pages/aggregation-method/aggregation-method-edit.jsp</result>		
+			<result name="success">/pages/aggregation-method/aggregation-method-edit.jsp</result>
+		</action>	
+														   	
+	</package>
+	
+	<package name="bsc-aggregationMethod-json" extends="bsc-default,json-default" namespace="/" >			
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+		
+		<action name="bsc.aggregationMethodManagementGridQueryAction" class="bsc.web.controller.AggregationMethodManagementGridQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>			
+		
+		<action name="bsc.aggregationMethodSaveAction" class="bsc.web.controller.AggregationMethodSaveOrUpdateAction" method="doSave">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+	
+		<action name="bsc.aggregationMethodUpdateAction" class="bsc.web.controller.AggregationMethodSaveOrUpdateAction" method="doUpdate">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="bsc.aggregationMethodDeleteAction" class="bsc.web.controller.AggregationMethodSaveOrUpdateAction" method="doDelete">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+												
+	</package>
+			
+</struts>

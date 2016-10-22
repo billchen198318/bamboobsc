@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="qcharts-analyticsConfig" extends="qcharts-default" namespace="/" >		
+		
+		<action name="qcharts.analyticsConfigManagementAction" class="qcharts.web.controller.AnalyticsConfigManagementAction">
+			<result name="input">/pages/analytics-config/analytics-config-management.jsp</result>		
+			<result name="success">/pages/analytics-config/analytics-config-management.jsp</result>
+		</action>			
+				
+		<action name="qcharts.analyticsConfigCreateAction" class="qcharts.web.controller.AnalyticsConfigManagementAction" method="create">
+			<result name="input">/pages/analytics-config/analytics-config-create.jsp</result>		
+			<result name="success">/pages/analytics-config/analytics-config-create.jsp</result>
+		</action>		
+		
+		<action name="qcharts.analyticsConfigEditAction" class="qcharts.web.controller.AnalyticsConfigManagementAction" method="edit">
+			<result name="input">/pages/analytics-config/analytics-config-edit.jsp</result>		
+			<result name="success">/pages/analytics-config/analytics-config-edit.jsp</result>
+		</action>			
+								   	
+	</package>
+	
+	<package name="qcharts-analyticsConfig-json" extends="qcharts-default,json-default" namespace="/" >			
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+								
+		<action name="qcharts.analyticsConfigManagementGridQueryAction" class="qcharts.web.controller.AnalyticsConfigManagementGridQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>					
+		
+		<action name="qcharts.analyticsConfigSaveAction" class="qcharts.web.controller.AnalyticsConfigSaveOrUpdateAction" method="doSave">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+	
+		<action name="qcharts.analyticsConfigUpdateAction" class="qcharts.web.controller.AnalyticsConfigSaveOrUpdateAction" method="doUpdate">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="qcharts.analyticsConfigDeleteAction" class="qcharts.web.controller.AnalyticsConfigSaveOrUpdateAction" method="doDelete">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>								
+										
+	</package>
+			
+</struts>

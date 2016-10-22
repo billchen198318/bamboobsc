@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">   
+    
+	<bean id="app.config.appSettings" class="java.util.HashMap" scope="singleton" >
+		<constructor-arg>
+			<map>
+				<entry key="base.system" 								value="${base.system}" />
+				<entry key="base.mainSystem" 							value="${base.mainSystem}" />				
+				<entry key="base.encryptorKey1" 						value="${base.encryptorKey1}" />
+				<entry key="base.encryptorKey2" 						value="${base.encryptorKey2}" />				
+				<entry key="baseSupperAction.errorContent" 				value="${base.page.errorContent}" />
+				<entry key="baseSupperAction.dojoLocal"					value="${base.page.dojoLocal}" />
+				<entry key="baseSupperAction.dojoAjaxTimeout"			value="${base.page.dojoAjaxTimeout}" />
+				<entry key="baseSupperAction.dojoAjaxSync"				value="${base.page.dojoAjaxSync}" />					
+				<entry key="baseSupperAction.verMsg"					value="${base.page.verMsg}" />
+				<entry key="baseSupperAction.jsVerBuild"				value="${base.page.jsVerBuild}" />		
+				<entry key="base.uploadDir"								value="${base.uploadDir}" />
+				<entry key="base.deployJasperReportDir"					value="${base.deployJasperReportDir}" />
+				<entry key="cxf.JAXRSServerFactoryBean.address"			value="${cxf.JAXRSServerFactoryBean.address}" />
+				<entry key="googleMap.enable" 							value="${googleMap.enable}" />
+				<entry key="googleMap.url" 								value="${googleMap.url}" />
+				<entry key="googleMap.key" 								value="${googleMap.key}" />
+				<entry key="googleMap.defaultLat" 						value="${googleMap.defaultLat}" />
+				<entry key="googleMap.defaultLng" 						value="${googleMap.defaultLng}" />
+				<entry key="googleMap.language" 						value="${googleMap.language}" />
+				<entry key="googleMap.clientLocationEnable" 			value="${googleMap.clientLocationEnable}" />
+				<entry key="twitter.enable" 							value="${twitter.enable}" />
+				<entry key="base.loginCaptchaCodeEnable" 				value="${base.loginCaptchaCodeEnable}" />
+				<entry key="base.applicationSiteHostUpdateMode" 		value="${base.applicationSiteHostUpdateMode}" />
+			</map>
+		</constructor-arg>				
+	</bean>
+	    
+</beans>    

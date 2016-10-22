@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysMultiName.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysMultiName</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysMultiNameVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>sysId</a>
+			<b>sysId</b>
+		</field>			
+		<field>
+			<a>localeCode</a>
+			<b>localeCode</b>
+		</field>				
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>				
+		<field>
+			<a>enableFlag</a>
+			<b>enableFlag</b>
+		</field>																									
+	</mapping>
+
+	<mapping map-id="sysMultiName.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysMultiNameVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysMultiName</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>sysId</a>
+			<b>sysId</b>
+		</field>			
+		<field>
+			<a>localeCode</a>
+			<b>localeCode</b>
+		</field>				
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>				
+		<field>
+			<a>enableFlag</a>
+			<b>enableFlag</b>
+		</field>						
+	</mapping>
+	
+</mappings>

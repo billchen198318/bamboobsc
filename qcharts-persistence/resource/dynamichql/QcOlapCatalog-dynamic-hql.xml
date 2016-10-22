@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findOlapCatalogPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.OlapCatalogVO(m.oid, m.id, m.name)
+		FROM QcOlapCatalog m 
+		WHERE 1=1
+
+		<#if id??>
+		AND m.id = :id
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>	
+		
+		ORDER BY m.id ASC
+	]]>
+	</query>
+	
+	<query name="findOlapCatalogPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM QcOlapCatalog m 
+		WHERE 1=1
+
+		<#if id??>
+		AND m.id = :id
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

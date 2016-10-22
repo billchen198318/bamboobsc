@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbObjective">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbObjective" id="baseResultMap">
+		<id column="OID" property="oid"/>					
+		<result column="OBJ_ID" property="objId"/>
+		<result column="PER_ID" property="perId"/>
+		<result column="NAME" property="name"/>		
+		<result column="WEIGHT" property="weight"/>		
+		<result column="TARGET" property="target"/>		
+		<result column="MIN" property="min"/>		
+		<result column="DESCRIPTION" property="description"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_objective where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="objId != null">
+			AND OBJ_ID = #{objId}
+		</if>						
+		<if test="perId != null">
+			AND PER_ID = #{perId}
+		</if>				
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>						
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_objective where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="objId != null">
+			AND OBJ_ID = #{objId}
+		</if>						
+		<if test="perId != null">
+			AND PER_ID = #{perId}
+		</if>				
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>						
+	</select>	
+	
+</mapper>

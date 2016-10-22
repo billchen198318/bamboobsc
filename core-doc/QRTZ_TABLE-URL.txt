@@ -1,0 +1,14 @@
+http://svn.terracotta.org/svn/quartz/tags/quartz-2.1.7/docs/dbTables/
+
+
+for UNIX 
+
+FreeBSD
+/var/db/mysql/my.cnf
+
+Linux
+/etc/my.cnf
+
+MySQL 需要調整
+lower_case_table_names=1
+

@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysExprJob">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysExprJob" id="baseResultMap">
+		<id column="OID" property="oid"/>					
+		<result column="SYSTEM" property="system"/>
+		<result column="ID" property="id"/>
+		<result column="NAME" property="name"/>
+		<result column="ACTIVE" property="active"/>
+		<result column="DESCRIPTION" property="description"/>			
+		<result column="RUN_STATUS" property="runStatus"/>
+		<result column="CHECK_FAULT" property="checkFault"/>
+		<result column="EXPR_ID" property="exprId"/>		
+		<result column="RUN_DAY_OF_WEEK" property="runDayOfWeek"/>		
+		<result column="RUN_HOUR" property="runHour"/>
+		<result column="RUN_MINUTE" property="runMinute"/>
+		<result column="CONTACT_MODE" property="contactMode"/>
+		<result column="CONTACT" property="contact"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_expr_job where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="id != null">
+			AND ID = #{id}
+		</if>					
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>				
+		<if test="active != null">
+			AND ACTIVE = #{active}
+		</if>					
+		<if test="exprId != null">
+			AND EXPR_ID = #{exprId}
+		</if>															
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_expr_job where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="id != null">
+			AND ID = #{id}
+		</if>					
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>				
+		<if test="active != null">
+			AND ACTIVE = #{active}
+		</if>					
+		<if test="exprId != null">
+			AND EXPR_ID = #{exprId}
+		</if>	
+	</select>	
+	
+</mapper>

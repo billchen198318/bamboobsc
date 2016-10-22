@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findObjectivePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.ObjectiveVO(m.oid, m.objId, m.perId, m.name, m.weight, v.title, p.name)
+		FROM BbObjective m, BbPerspective p, BbVision v 
+		WHERE m.perId = p.perId AND p.visId = v.visId
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+		
+		<#if perspectiveOid??>
+		AND p.oid = :perspectiveOid
+		</#if>
+		
+		<#if objId??>
+		AND m.objId = :objId
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>		
+		
+		ORDER BY m.objId ASC
+	]]>
+	</query>
+	
+	<query name="findObjectivePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbObjective m, BbPerspective p, BbVision v 
+		WHERE m.perId = p.perId AND p.visId = v.visId
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+		
+		<#if perspectiveOid??>
+		AND p.oid = :perspectiveOid
+		</#if>
+		
+		<#if objId??>
+		AND m.objId = :objId
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="core-sysBeanHelp" extends="core-default" namespace="/" >		
+		
+		<action name="core.systemBeanHelpManagementAction" class="core.web.controller.SystemBeanHelpManagementAction">
+			<result name="input">/pages/sys-bean-help/sys-bean-help-management.jsp</result>		
+			<result name="success">/pages/sys-bean-help/sys-bean-help-management.jsp</result>
+		</action>
+		
+		<action name="core.systemBeanHelpCreateAction" class="core.web.controller.SystemBeanHelpManagementAction" method="create">
+			<result name="input">/pages/sys-bean-help/sys-bean-help-create.jsp</result>		
+			<result name="success">/pages/sys-bean-help/sys-bean-help-create.jsp</result>
+		</action>
+		
+		<action name="core.systemBeanHelpEditAction" class="core.web.controller.SystemBeanHelpManagementAction" method="edit">
+			<result name="input">/pages/sys-bean-help/sys-bean-help-edit.jsp</result>		
+			<result name="success">/pages/sys-bean-help/sys-bean-help-edit.jsp</result>
+		</action>				
+	
+		<!-- bean expression -->		
+		<action name="core.systemBeanHelpEditExpressionAction" class="core.web.controller.SystemBeanHelpManagementAction" method="editExpression">
+			<result name="input">/pages/sys-bean-help/sys-bean-help-editExpr.jsp</result>		
+			<result name="success">/pages/sys-bean-help/sys-bean-help-editExpr.jsp</result>
+		</action>		
+		
+		<!-- bean expression mapper -->
+		<action name="core.systemBeanHelpEditExpressionMapperAction" class="core.web.controller.SystemBeanHelpManagementAction" method="editExpressionMapper">
+			<result name="input">/pages/sys-bean-help/sys-bean-help-editExprMap.jsp</result>		
+			<result name="success">/pages/sys-bean-help/sys-bean-help-editExprMap.jsp</result>
+		</action>	
+						   	
+	</package>
+	
+	<package name="core-sysBeanHelp-json" extends="core-default,json-default" namespace="/" >		
+	
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />		
+
+		<action name="core.systemBeanHelpManagementGridQueryAction" class="core.web.controller.SystemBeanHelpManagementGridQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBeanHelpSaveAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doSave" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="core.systemBeanHelpUpdateAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doUpdate" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="core.systemBeanHelpDeleteAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doDelete" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>							
+		
+		<!-- bean expression -->
+		<action name="core.systemBeanHelpExprGridQueryAction" class="core.web.controller.SystemBeanHelpManagementGridQueryAction" method="doQueryExpr">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+				
+		<action name="core.systemBeanHelpExprSaveAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doExprSave" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBeanHelpExprDeleteAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doExprDelete" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<!-- bean expression mapper -->
+		<action name="core.systemBeanHelpExprMapGridQueryAction" class="core.web.controller.SystemBeanHelpManagementGridQueryAction" method="doQueryExprMap">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+		
+		<action name="core.systemBeanHelpExprMapSaveAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doExprMapSave" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+		
+		<action name="core.systemBeanHelpExprMapDeleteAction" class="core.web.controller.SystemBeanHelpSaveOrUpdateAction" method="doExprMapDelete" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+										
+	</package>
+			
+</struts>

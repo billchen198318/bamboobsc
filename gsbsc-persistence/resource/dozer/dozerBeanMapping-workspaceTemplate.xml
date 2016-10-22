@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="workspaceTemplate.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbWorkspaceTemplate</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.WorkspaceTemplateVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>templateId</a>
+			<b>templateId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>				
+		<field>
+			<a>resource</a>
+			<b>resource</b>
+		</field>	
+		<field>
+			<a>resourceConf</a>
+			<b>resourceConf</b>
+		</field>
+		<field>
+			<a>positionSize</a>
+			<b>positionSize</b>
+		</field>									
+	</mapping>
+
+	<mapping map-id="workspaceTemplate.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.WorkspaceTemplateVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbWorkspaceTemplate</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>templateId</a>
+			<b>templateId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>				
+		<field>
+			<a>resource</a>
+			<b>resource</b>
+		</field>
+		<field>
+			<a>resourceConf</a>
+			<b>resourceConf</b>
+		</field>	
+		<field>
+			<a>positionSize</a>
+			<b>positionSize</b>
+		</field>									
+	</mapping>
+	
+</mappings>

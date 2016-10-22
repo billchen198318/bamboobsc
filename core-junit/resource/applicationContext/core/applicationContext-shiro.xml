@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">   
+    
+ 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManager" ref="ehcache"/>
+	</bean>
+ 	
+	<bean id="greenStepBaseAuthorizingRealm" class="com.netsteadfast.greenstep.sys.GreenStepBaseAuthorizingRealm"> 
+   		<property name="accountService" ref="core.service.AccountService"/>
+   		<property name="userRoleService" ref="core.service.UserRoleService"/>
+   		<property name="rolePermissionService" ref="core.service.RolePermissionService"/>
+   		<property name="cacheManager" ref="shiroCacheManager"/>
+   	</bean>   	
+   	
+   	<!-- ############################################################################## -->
+	<!-- 会话ID生成器 -->
+	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+	
+	<!-- 会话DAO -->
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
+		<property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+	</bean>
+	
+	<!-- 会话验证调度器 -->
+	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+		<property name="sessionValidationInterval" value="1800000"/>
+		<property name="sessionManager" ref="sessionManager"/>
+	</bean>
+	
+	<!-- 会话管理器 -->
+	<bean id="sessionManager" class="org.apache.shiro.session.mgt.DefaultSessionManager">
+		<property name="globalSessionTimeout" value="1800000"/>
+		<property name="deleteInvalidSessions" value="true"/>
+		<property name="sessionValidationSchedulerEnabled" value="false"/>
+		<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+		<property name="sessionDAO" ref="sessionDAO"/>
+	</bean>	   	
+	<!-- ############################################################################## -->
+   	
+	<bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
+		<property name="realm" ref="greenStepBaseAuthorizingRealm"/> 
+    	<property name="sessionManager" ref="sessionManager"/>  
+    	<property name="cacheManager" ref="shiroCacheManager"/>  		
+	</bean>
+	
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/> 
+	
+	<!-- For simplest integration, so that all SecurityUtils.* methods work in all cases, -->
+	<!-- make the securityManager bean a static singleton.  DO NOT do this in web         -->
+	<!-- applications - see the 'Web Applications' section below instead.                 -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	    <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+	    <property name="arguments" ref="securityManager"/>
+	</bean>		
+		
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	    <property name="securityManager" ref="securityManager"/>
+	</bean>	
+		    
+</beans>    

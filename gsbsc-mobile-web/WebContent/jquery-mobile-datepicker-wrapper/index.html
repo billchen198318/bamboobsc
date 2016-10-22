@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Mobile test page</title>
+	<meta charset=utf-8 />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"  href="http://code.jquery.com/mobile/git/jquery.mobile-git.css" /> 
+	<link rel="stylesheet" href="jquery.mobile.datepicker.css" />
+	<link rel="stylesheet" href="jquery.mobile.datepicker.theme.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+	<script src="external/jquery-ui/datepicker.js"></script>
+	<script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script> 
+	<script src="jquery.mobile.datepicker.js"></script>
+	<script>
+		$(function(){
+			$( ".date-input-css" ).datepicker();
+		})
+	</script>
+</head>
+<body>
+<div data-role="page">
+	<div data-role="header">
+		<h1>Mobile Datepicker</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<div class="ui-content">
+					<h1>Don't need autoinit? dont need data-attributes to options?</h1>
+					<h2>New css only option</h2>
+					<p>Now you can just include the 2 css files and use ui-datepicker as normal but in mobile</p>
+					<input type="text" class="date-input-css">
+					<p class="ui-li-aside">
+						* Note jQuery UI Datepicker is not actually a widget in that it does not use the jQuery UI Widget Factory. As such jQuery Mobile widget enhancements will not work with ui-datepicker using the css only
+					</p>
+				</div>
+			</div>
+			<div class="ui-block-b">
+				<div class="ui-content">
+					<h1>Want all the built in mobile goodness?</h1>
+					<h2>No problem just include the very small .js file and you can use jQuery UI datepicker just as you would any other mobile widget</h2>
+					<input type="text" class="date-input" data-inline="false" data-role="date">
+					<input type="text" class="date-input-inline" data-inline="true" data-role="date">
+				</div>
+			</div>
+		</div>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Footer</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+</body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+    
+    <!-- OLD remark -->
+    <!-- 不用打開這兩個beanId, 如果打要後等於有雙倍的ASPECT beanId被啟用了 -->
+    <!-- 
+    <bean id="core.aspect.ServiceAuthorityCheckAspect" class="com.netsteadfast.greenstep.service.aspect.ServiceAuthorityCheckAspect"></bean>
+    <bean id="core.aspect.ServiceScriptExpressionProcessAspect" class="com.netsteadfast.greenstep.service.aspect.ServiceScriptExpressionProcessAspect"></bean>
+    -->	
+    <!-- 
+	<context:component-scan base-package="com.netsteadfast.greenstep.service, com.netsteadfast.greenstep.bsc.service"/>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	-->
+	
+	
+	
+    <!-- 不用打開這兩個beanId, 如果打要後等於有雙倍的ASPECT beanId被啟用了 -->
+    <!-- 
+    <bean id="core.aspect.ServiceAuthorityCheckAspect" class="com.netsteadfast.greenstep.aspect.ServiceAuthorityCheckAspect"></bean>
+    <bean id="core.aspect.ServiceScriptExpressionProcessAspect" class="com.netsteadfast.greenstep.aspect.ServiceScriptExpressionProcessAspect"></bean>
+    -->	    
+	<context:component-scan base-package="com.netsteadfast.greenstep.aspect"/>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>	
+            
+</beans>    

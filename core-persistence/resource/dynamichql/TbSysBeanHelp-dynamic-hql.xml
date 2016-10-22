@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysBeanHelpPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysBeanHelpVO(m.oid, m.beanId, m.method, m.system, m.enableFlag, m.description)
+		FROM TbSysBeanHelp m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		AND m.system IN ( SELECT a.sysId FROM TbSys a WHERE a.oid = :systemOid )
+		</#if>
+
+		<#if beanId??>
+		AND m.beanId = :beanId
+		</#if>
+		
+		ORDER BY m.system, m.beanId ASC
+	]]>
+	</query>
+	
+	<query name="findSysBeanHelpPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysBeanHelp m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		AND m.system IN ( SELECT a.sysId FROM TbSys a WHERE a.oid = :systemOid )
+		</#if>
+
+		<#if beanId??>
+		AND m.beanId = :beanId
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

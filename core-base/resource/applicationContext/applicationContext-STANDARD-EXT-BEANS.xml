@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+    
+    <!-- Logic Service -->         
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sys.xml" />    
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysProg.xml" />   
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysMenu.xml" /> 
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-role.xml" /> 
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysCalendarNote.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysMsgNotice.xml" />    
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysTemplate.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysWsConfig.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysExpression.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysBeanHelp.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysJreport.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysCtxBean.xml" />
+    <import resource="classpath*:applicationContext/standard/ext/applicationContext-ext-sysForm.xml" /> 
+        
+</beans>    

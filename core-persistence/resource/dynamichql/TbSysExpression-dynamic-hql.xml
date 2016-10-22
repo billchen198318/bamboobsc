@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysExpressionPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysExpressionVO(m.oid, m.exprId, m.type, m.name, m.description)
+		FROM TbSysExpression m 
+		WHERE 1=1
+		
+		<#if exprId??>
+		and m.exprId = :exprId
+		</#if>
+		
+		<#if name??>
+		and m.name LIKE :name
+		</#if>
+					
+		<#if type??>
+		and m.type = :type
+		</#if>
+		
+		ORDER BY m.exprId ASC
+	]]>
+	</query>
+	
+	<query name="findSysExpressionPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysExpression m 
+		WHERE 1=1
+		
+		<#if exprId??>
+		and m.exprId = :exprId
+		</#if>
+		
+		<#if name??>
+		and m.name LIKE :name
+		</#if>
+					
+		<#if type??>
+		and m.type = :type
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

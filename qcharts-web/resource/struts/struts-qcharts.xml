@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<include file="struts/struts-qcharts-base.xml" />
+	<include file="struts/struts-qcharts-dataSourceConf.xml" />
+	<include file="struts/struts-qcharts-query.xml" />
+	<include file="struts/struts-qcharts-dataQueryMapper.xml" />
+	<include file="struts/struts-qcharts-common.xml" />	
+	<include file="struts/struts-qcharts-analyticsConfig.xml" />
+	<include file="struts/struts-qcharts-analyticsCatalog.xml" />
+	<include file="struts/struts-qcharts-analytics.xml" />		
+	
+</struts>

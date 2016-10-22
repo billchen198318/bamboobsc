@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    
+    <context:annotation-config />
+ 
+    <bean id="greenstep.web.interceptor.NoCacheHeaderInterceptor" class="com.netsteadfast.greenstep.base.interceptor.NoCacheHeaderInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.ActionInfoSupportInterceptor" class="com.netsteadfast.greenstep.base.interceptor.ActionInfoSupportInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.UserLoginInterceptor" class="com.netsteadfast.greenstep.base.interceptor.UserLoginInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.ControllerAuthorityCheckInterceptor" class="com.netsteadfast.greenstep.base.interceptor.ControllerAuthorityCheckInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.JsonOutermostBracketsInterceptor" class="com.netsteadfast.greenstep.base.interceptor.JsonOutermostBracketsInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.JasperReportCloseConnHelperInterceptor" class="com.netsteadfast.greenstep.base.interceptor.JasperReportCloseConnHelperInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.UserAgentRejectInterceptor" class="com.netsteadfast.greenstep.base.interceptor.UserAgentRejectInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.LocaleLangInterceptor" class="com.netsteadfast.greenstep.base.interceptor.LocaleLangInterceptor" scope="prototype" />
+    <bean id="greenstep.web.interceptor.QueryParamInspectInterceptor" class="com.netsteadfast.greenstep.base.interceptor.QueryParamInspectInterceptor" scope="prototype" />
+    
+</beans>

@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysFormTemplate">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysFormTemplate" id="baseResultMap">
+		<id column="OID" property="oid"/>				
+		<result column="TPL_ID" property="tplId"/>
+		<result column="NAME" property="name"/>
+		<result column="CONTENT" property="content"/>
+		<result column="FILE_NAME" property="fileName"/>
+		<result column="DESCRIPTION" property="description"/>				
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_form_template where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="tplId != null">
+			AND TPL_ID = #{tplId}
+		</if>																					
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_form_template where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="tplId != null">
+			AND TPL_ID = #{tplId}
+		</if>		
+	</select>	
+	
+</mapper>

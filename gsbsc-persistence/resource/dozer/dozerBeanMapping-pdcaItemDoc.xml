@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="pdcaItemDoc.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbPdcaItemDoc</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.PdcaItemDocVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>pdcaOid</a>
+			<b>pdcaOid</b>
+		</field>
+		<field>
+			<a>itemOid</a>
+			<b>itemOid</b>
+		</field>		
+		<field>
+			<a>uploadOid</a>
+			<b>uploadOid</b>
+		</field>
+		<field>
+			<a>viewMode</a>
+			<b>viewMode</b>
+		</field>
+	</mapping>
+
+	<mapping map-id="pdcaItemDoc.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.PdcaItemDocVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbPdcaItemDoc</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>pdcaOid</a>
+			<b>pdcaOid</b>
+		</field>
+		<field>
+			<a>itemOid</a>
+			<b>itemOid</b>
+		</field>		
+		<field>
+			<a>uploadOid</a>
+			<b>uploadOid</b>
+		</field>
+		<field>
+			<a>viewMode</a>
+			<b>viewMode</b>
+		</field>		
+	</mapping>
+	
+</mappings>

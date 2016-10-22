@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysCtxBean.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysCtxBean</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysCtxBeanVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>	
+		<field>
+			<a>className</a>
+			<b>className</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>		
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>																																
+	</mapping>
+
+	<mapping map-id="sysCtxBean.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysCtxBeanVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysCtxBean</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>	
+		<field>
+			<a>className</a>
+			<b>className</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>				
+	</mapping>
+	
+</mappings>

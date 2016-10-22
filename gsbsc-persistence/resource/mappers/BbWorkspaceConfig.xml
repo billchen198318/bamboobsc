@@ -1,0 +1,44 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbWorkspaceConfig">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbWorkspaceConfig" id="baseResultMap">
+		<id column="OID" property="oid"/>		
+		<result column="SPACE_ID" property="spaceId"/>				
+		<result column="COMP_ID" property="compId"/>
+		<result column="POSITION" property="position"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_workspace_config where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="spaceId != null">
+			AND SPACE_ID = #{spaceId}
+		</if>				
+		<if test="compId != null">
+			AND COMP_ID = #{compId}
+		</if>													
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_workspace_config where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="spaceId != null">
+			AND SPACE_ID = #{spaceId}
+		</if>					
+		<if test="compId != null">
+			AND COMP_ID = #{compId}
+		</if>						
+	</select>	
+	
+</mapper>

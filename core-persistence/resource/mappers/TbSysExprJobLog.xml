@@ -1,0 +1,46 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysExprJobLog">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysExprJobLog" id="baseResultMap">
+		<id column="OID" property="oid"/>					
+		<result column="ID" property="id"/>
+		<result column="LOG_STATUS" property="logStatus"/>
+		<result column="BEGIN_DATETIME" property="beginDatetime"/>
+		<result column="END_DATETIME" property="endDatetime"/>			
+		<result column="FAULT_MSG" property="faultMsg"/>	
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>				
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_expr_job_log where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="id != null">
+			AND ID = #{id}
+		</if>					
+		<if test="logStatus != null">
+			AND LOG_STATUS = #{logStatus}
+		</if>																		
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_expr_job_log where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="id != null">
+			AND ID = #{id}
+		</if>					
+		<if test="logStatus != null">
+			AND LOG_STATUS = #{logStatus}
+		</if>								
+	</select>	
+	
+</mapper>

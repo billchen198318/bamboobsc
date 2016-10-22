@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbDegreeFeedbackProject">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackProject" id="baseResultMap">
+		<id column="OID" property="oid"/>				
+		<result column="NAME" property="name"/>
+		<result column="YEAR" property="year"/>		
+		<result column="PUBLISH_FLAG" property="publishFlag"/>		
+		<result column="DESCRIPTION" property="description"/>		
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_degree_feedback_project where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>
+		<if test="year != null">
+			AND YEAR = #{year}
+		</if>					
+		<if test="publishFlag != null">
+			AND PUBLISH_FLAG = #{publishFlag}
+		</if>																							
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_degree_feedback_project where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>
+		<if test="year != null">
+			AND YEAR = #{year}
+		</if>	
+		<if test="publishFlag != null">
+			AND PUBLISH_FLAG = #{publishFlag}
+		</if>									
+	</select>	
+	
+</mapper>

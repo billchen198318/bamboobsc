@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findKpiPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.KpiVO(m.oid, m.id, m.name, m.description, m.weight, v.title, p.name, o.name)
+		FROM BbKpi m, BbObjective o, BbPerspective p, BbVision v 
+		WHERE m.objId = o.objId AND o.perId = p.perId AND p.visId = v.visId
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+
+		<#if perspectiveOid??>
+		AND p.oid = :perspectiveOid
+		</#if>
+		
+		<#if objectiveOid??>
+		AND o.oid = :objectiveOid
+		</#if>
+				
+		<#if id??>
+		AND m.id = :id
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+		
+		ORDER BY ${orderBy} ${sortType}
+	]]>
+	</query>
+	
+	<query name="findKpiPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbKpi m, BbObjective o, BbPerspective p, BbVision v 
+		WHERE m.objId = o.objId AND o.perId = p.perId AND p.visId = v.visId
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+
+		<#if perspectiveOid??>
+		AND p.oid = :perspectiveOid
+		</#if>
+		
+		<#if objectiveOid??>
+		AND o.oid = :objectiveOid
+		</#if>
+				
+		<#if id??>
+		AND m.id = :id
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+	]]>		
+	</query>
+	
+	<query name="findKpiMixData-select">
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.bsc.vo.BscMixDataVO(
+				k.oid, k.id, k.name, k.description, k.weight, k.unit, k.max, k.target, k.min,
+				k.management, k.compareType, k.cal, k.dataType, k.orgaMeasureSeparate, k.userMeasureSeparate,
+				k.quasiRange,
+				k.activate,
+				o.oid, o.objId, o.name, o.weight, o.description, o.target, o.min,
+				p.oid, p.perId, p.name, p.weight, p.description, p.target, p.min,
+				v.oid, v.visId, v.title,
+				f.oid, f.forId, f.name, f.type, f.returnMode, f.returnVar, f.expression,
+				aggr.oid, aggr.aggrId, aggr.name, aggr.type, aggr.expression1, aggr.expression2,
+				f2.oid, f2.forId, f2.name, f2.type, f2.returnMode, f2.returnVar, f2.expression
+			)
+		FROM BbKpi k, BbObjective o, BbPerspective p, BbVision v, BbAggregationMethod aggr, BbFormula f, BbFormula f2
+		WHERE k.objId = o.objId 
+		AND o.perId = p.perId 
+		AND p.visId = v.visId 
+		AND k.forId = f.forId 
+		AND k.cal = aggr.aggrId 
+		AND k.trendsForId = f2.forId
+		AND f.trendsFlag = 'N'
+		AND f2.trendsFlag = 'Y'		
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+		
+		<#if orgId??>
+		AND k.id IN ( SELECT b.kpiId FROM BbKpiOrga b WHERE b.orgId = :orgId )
+		</#if>
+		
+		<#if empId??>
+		AND k.id IN ( SELECT b.kpiId FROM BbKpiEmpl b WHERE b.empId = :empId )
+		</#if>
+		
+		<#if perId??>
+		AND p.perId = :perId			
+		</#if>
+		
+		<#if objId??>
+		AND o.objId = :objId
+		</#if>
+		
+		<#if kpiId??>
+		AND k.id = :kpiId
+		</#if>
+		
+		<#if kpiIds??>
+		AND k.id IN ( :kpiIds )
+		</#if>
+		
+		AND k.activate = 'Y'
+		
+		ORDER BY v.visId, p.perId, o.objId, k.id ASC			
+	]]>		
+	</query>	
+	
+	<query name="findKpiMixData-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbKpi k, BbObjective o, BbPerspective p, BbVision v, BbAggregationMethod aggr, BbFormula f, BbFormula f2
+		WHERE k.objId = o.objId 
+		AND o.perId = p.perId 
+		AND p.visId = v.visId 
+		AND k.forId = f.forId 
+		AND k.cal = aggr.aggrId 
+		AND k.trendsForId = f2.forId
+		AND f.trendsFlag = 'N'
+		AND f2.trendsFlag = 'Y'
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+		
+		<#if orgId??>
+		AND k.id IN ( SELECT b.kpiId FROM BbKpiOrga b WHERE b.orgId = :orgId )
+		</#if>
+		
+		<#if empId??>
+		AND k.id IN ( SELECT b.kpiId FROM BbKpiEmpl b WHERE b.empId = :empId )
+		</#if>
+		
+		<#if perId??>
+		AND p.perId = :perId			
+		</#if>
+		
+		<#if objId??>
+		AND o.objId = :objId
+		</#if>
+		
+		<#if kpiId??>
+		AND k.id = :kpiId
+		</#if>
+		
+		<#if kpiIds??>
+		AND k.id IN ( :kpiIds )
+		</#if>
+		
+		AND k.activate = 'Y'
+				
+	]]>		
+	</query>	
+	
+</dynamic-hql>

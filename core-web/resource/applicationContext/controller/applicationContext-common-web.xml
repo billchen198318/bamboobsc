@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+    <bean id="core.web.controller.IndexAction" class="com.netsteadfast.greenstep.action.IndexAction" scope="prototype" />
+    <bean id="core.web.controller.MenuGenerateAction" class="com.netsteadfast.greenstep.base.action.MenuGenerateAction" scope="prototype" />
+    <bean id="core.web.controller.ConfigJsAction" class="com.netsteadfast.greenstep.base.action.ConfigJsAction" scope="prototype" />
+    <bean id="core.web.controller.CommonSelectItemsDataAction" class="com.netsteadfast.greenstep.action.CommonSelectItemsDataAction" scope="prototype" />        
+    <bean id="core.web.controller.CommonUploadAction" class="com.netsteadfast.greenstep.action.CommonUploadAction" scope="prototype" />
+    <bean id="core.web.controller.CommonUploadFileAction" class="com.netsteadfast.greenstep.action.CommonUploadFileAction" scope="prototype" />
+    <bean id="core.web.controller.CommonLoadUploadFileAction" class="com.netsteadfast.greenstep.action.CommonLoadUploadFileAction" scope="prototype" />
+    <bean id="core.web.controller.CommonJasperReportAction" class="com.netsteadfast.greenstep.action.CommonJasperReportAction" scope="prototype" />
+    <bean id="core.web.controller.CommonSignatureAction" class="com.netsteadfast.greenstep.action.CommonSignatureAction" scope="prototype" />
+    <bean id="core.web.controller.CommonSignatureSaveAction" class="com.netsteadfast.greenstep.action.CommonSignatureSaveAction" scope="prototype" />
+    <bean id="core.web.controller.CommonCodeEditorAction" class="com.netsteadfast.greenstep.action.CommonCodeEditorAction" scope="prototype" />
+    
+    <!-- 每個系統都要加上這個action -->
+    <bean id="core.web.controller.CommonLoadFormAction" class="com.netsteadfast.greenstep.action.CommonLoadFormAction" scope="prototype" />
+    
+    <bean id="core.web.controller.CommonBarChartAction" class="com.netsteadfast.greenstep.action.CommonBarChartAction" scope="prototype" />
+    <bean id="core.web.controller.CommonPieChartAction" class="com.netsteadfast.greenstep.action.CommonPieChartAction" scope="prototype" />
+    <bean id="core.web.controller.CommonMeterChartAction" class="com.netsteadfast.greenstep.action.CommonMeterChartAction" scope="prototype" />
+    
+</beans>

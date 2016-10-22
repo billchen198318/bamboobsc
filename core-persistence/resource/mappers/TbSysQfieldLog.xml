@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysQfieldLog">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysQfieldLog" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="SYSTEM" property="system"/>
+		<result column="PROG_ID" property="progId"/>	
+		<result column="METHOD_NAME" property="methodName"/>
+		<result column="FIELD_NAME" property="fieldName"/>
+		<result column="FIELD_VALUE" property="fieldValue"/>
+		<result column="QUERY_USER_ID" property="queryUserId"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_qfield_log where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>		
+		<if test="progId != null">
+			AND PROG_ID = #{progId}
+		</if>	
+		<if test="queryUserId != null">
+			AND QUERY_USER_ID = #{queryUserId}
+		</if>														
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_qfield_log where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>		
+		<if test="progId != null">
+			AND PROG_ID = #{progId}
+		</if>	
+		<if test="queryUserId != null">
+			AND QUERY_USER_ID = #{queryUserId}
+		</if>				
+	</select>	
+	
+</mapper>

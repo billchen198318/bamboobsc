@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="strategyMapConns.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbStrategyMapConns</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.StrategyMapConnsVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>masterOid</a>
+			<b>masterOid</b>
+		</field>			
+		<field>
+			<a>connectionId</a>
+			<b>connectionId</b>
+		</field>
+		<field>
+			<a>sourceId</a>
+			<b>sourceId</b>
+		</field>
+		<field>
+			<a>targetId</a>
+			<b>targetId</b>
+		</field>																																		
+	</mapping>
+
+	<mapping map-id="strategyMapConns.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.StrategyMapConnsVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbStrategyMapConns</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>masterOid</a>
+			<b>masterOid</b>
+		</field>			
+		<field>
+			<a>connectionId</a>
+			<b>connectionId</b>
+		</field>
+		<field>
+			<a>sourceId</a>
+			<b>sourceId</b>
+		</field>
+		<field>
+			<a>targetId</a>
+			<b>targetId</b>
+		</field>			
+	</mapping>
+	
+</mappings>

@@ -1,0 +1,35 @@
+1. TB_KPI
+	TB_KPI.dept_Measure_data_separate	'Y' or 'N' 數據資料獨立'Y' , 數據資料不獨立'N'
+	TB_KPI.user_Measure_data_separate	'Y' or 'N' 數據資料獨立'Y' , 數據資料不獨立'N'
+	增加 checkBox
+		ITEM1. 每個部門衡量數據資料獨立
+		ITEM2. 每個員工衡量數據資料獨立
+		
+2. TB_KPI_DATA
+	TB_KPI_DATA.IS_DEPT = 'Y' or 'N'	數據資料獨立'Y' , 數據資料不獨立'N'
+	TB_KPI_DATA.IS_USER = 'Y' or 'N'	數據資料獨立'Y' , 數據資料不獨立'N'
+	TB_KPI_DATA.DEPT = '部門id'		數據資料沒有獨立 '*'
+	TB_KPI_DATA.USER = '員工id'  	數據資料沒有獨立 '*'
+	
+3. 數據資料維護
+
+	if TB_KPI.dept_Measure_data_separate = 'Y' then
+		顯示TB_KPI_DEPT部門下拉
+	endif
+
+	if TB_KPI.user_Measure_data_separate = 'Y' then
+		顯示TB_KPI_OWNER員工下拉
+	endif
+	
+	兩者皆有同時畫面只能選一種來維護
+	
+	
+4. 報表險示
+	
+	以 TB_KPI.dept_Measure_data_separate 或 TB_KPI.user_Measure_data_separate 
+	決定要select 出來的 TB_KPI_DATA 資料
+
+	
+5. 使用者希望在效能監控 "Monitor score settings " 功能中能設定更長的日期區間
+
+ 	

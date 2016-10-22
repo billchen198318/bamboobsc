@@ -1,0 +1,43 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbEmployeeOrga">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbEmployeeOrga" id="baseResultMap">
+		<id column="OID" property="oid"/>						
+		<result column="EMP_ID" property="empId"/>		
+		<result column="ORG_ID" property="orgId"/>						
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_employee_orga where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>	
+		<if test="orgId != null">
+			AND ORG_ID = #{orgId}
+		</if>								
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_employee_orga where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>	
+		<if test="orgId != null">
+			AND ORG_ID = #{orgId}
+		</if>						
+	</select>	
+	
+</mapper>

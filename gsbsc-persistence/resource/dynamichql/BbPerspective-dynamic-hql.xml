@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findPerspectivePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.PerspectiveVO(m.oid, m.perId, m.visId, m.name, m.weight, v.title)
+		FROM BbPerspective m, BbVision v 
+		WHERE m.visId = v.visId
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+
+		<#if perId??>
+		AND m.perId = :perId
+		</#if>
+				
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+		
+		ORDER BY m.perId ASC				
+	]]>
+	</query>
+	
+	<query name="findPerspectivePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbPerspective m, BbVision v 
+		WHERE m.visId = v.visId
+		
+		<#if visionOid??>
+		AND v.oid = :visionOid
+		</#if>
+
+		<#if perId??>
+		AND m.perId = :perId
+		</#if>
+				
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

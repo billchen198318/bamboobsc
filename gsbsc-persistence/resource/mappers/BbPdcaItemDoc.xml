@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbPdcaItemDoc">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbPdcaItemDoc" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="PDCA_OID" property="pdcaOid"/>
+		<result column="ITEM_OID" property="itemOid"/>
+		<result column="UPLOAD_OID" property="uploadOid"/>
+		<result column="VIEW_MODE" property="viewMode"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>
+		<result column="UDATE" property="udate"/>
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_pdca_item_doc where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="pdcaOid != null">
+			AND PDCA_OID = #{pdcaOid}
+		</if>
+		<if test="itemOid != null">
+			AND ITEM_OID = #{itemOid}
+		</if>		
+		<if test="uploadOid != null">
+			AND UPLOAD_OID = #{uploadOid}
+		</if>		
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_pdca_item_doc where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="pdcaOid != null">
+			AND PDCA_OID = #{pdcaOid}
+		</if>
+		<if test="itemOid != null">
+			AND ITEM_OID = #{itemOid}
+		</if>		
+		<if test="uploadOid != null">
+			AND UPLOAD_OID = #{uploadOid}
+		</if>		
+	</select>	
+	
+</mapper>

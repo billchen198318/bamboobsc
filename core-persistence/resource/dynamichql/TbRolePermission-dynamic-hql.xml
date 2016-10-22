@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findRolePermissionPageGrid-select">	
+	<![CDATA[
+		SELECT 
+			new com.netsteadfast.greenstep.vo.RolePermissionVO(rp.oid, rp.role, rp.permission, rp.permType, rp.description) 
+		FROM TbRolePermission rp 
+		WHERE 1=1
+		
+		<#if role??>
+		and rp.role=:role
+		</#if>
+		
+		ORDER BY rp.role, rp.permType, rp.permission ASC
+	]]>
+	</query>
+	
+	<query name="findRolePermissionPageGrid-count">
+	<![CDATA[
+		SELECT 
+			count(*)
+		FROM TbRolePermission rp 
+		WHERE 1=1
+		
+		<#if role??>
+		and rp.role=:role
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="bsc-report" extends="bsc-default" namespace="/" >		
+		
+		<!-- KPI Report -->
+		<action name="bsc.kpiReportAction" class="bsc.web.controller.KpiReportAction">
+			<result name="input">/pages/report/kpi-report.jsp</result>		
+			<result name="success">/pages/report/kpi-report.jsp</result>
+		</action>	
+		
+		<action name="bsc.kpiReportOpenWindowAction" class="bsc.web.controller.KpiReportAction" method="openWindow">
+			<result name="input">/pages/report/kpi-report-opw.jsp</result>		
+			<result name="success">/pages/report/kpi-report-opw.jsp</result>
+		</action>			
+
+		<action name="bsc.kpiReportCoffeeChartOpenWindowAction" class="bsc.web.controller.KpiReportAction" method="openWindow">
+			<result name="input">/pages/report/kpi-coffee-report.jsp</result>		
+			<result name="success">/pages/report/kpi-coffee-report.jsp</result>
+		</action>		
+		
+		<action name="bsc.kpiPeriodTrendsReportAction" class="bsc.web.controller.KpiReportAction" method="periodTrends">
+			<result name="input">/pages/report/kpi-period-trends-report.jsp</result>		
+			<result name="success">/pages/report/kpi-period-trends-report.jsp</result>
+		</action>		
+		
+		<!-- Personal BSC Report -->
+		<action name="bsc.personalReportAction" class="bsc.web.controller.PersonalReportAction">
+			<result name="input">/pages/report/personal-report.jsp</result>		
+			<result name="success">/pages/report/personal-report.jsp</result>
+		</action>	
+		
+						
+		<!-- Department BSC Report -->
+		<action name="bsc.departmentReportAction" class="bsc.web.controller.DepartmentReportAction" >
+			<result name="input">/pages/report/department-report.jsp</result>		
+			<result name="success">/pages/report/department-report.jsp</result>
+		</action>		
+		
+		<!-- History Item score Report -->
+		<action name="bsc.historyItemScoreReportAction" class="bsc.web.controller.HistoryItemScoreReportAction" >
+			<result name="input">/pages/report/history-item-score-report.jsp</result>		
+			<result name="success">/pages/report/history-item-score-report.jsp</result>
+		</action>
+				
+																		   	
+	</package>
+	
+	<package name="bsc-report-json" extends="bsc-default,json-default" namespace="/" >			
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+		
+		<!-- KPI Report -->
+		<action name="bsc.kpiReportContentQueryAction" class="bsc.web.controller.KpiReportContentQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+				
+		<action name="bsc.kpiReportPdfQueryAction" class="bsc.web.controller.KpiReportContentQueryAction" method="doPdf">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>					
+		
+		<action name="bsc.kpiReportExcelQueryAction" class="bsc.web.controller.KpiReportContentQueryAction" method="doExcel">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="bsc.kpiReportCoffeeChartJsonDataAction" class="bsc.web.controller.KpiReportContentQueryAction" method="doCoffeeChartJsonData" >
+		    <result name="success" type="stream">
+		        <param name="contentType">text/html</param>
+		        <param name="inputName">inputStream</param>
+		    </result>
+		</action>		
+		
+		
+		<!-- Personal BSC Report -->
+		<action name="bsc.personalReportContentQueryAction" class="bsc.web.controller.PersonalReportContentQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+		
+		<action name="bsc.personalReportPdfQueryAction" class="bsc.web.controller.PersonalReportContentQueryAction" method="doPdf">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>					
+		
+		<action name="bsc.personalReportExcelQueryAction" class="bsc.web.controller.PersonalReportContentQueryAction" method="doExcel">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		
+		<!-- Organization BSC Report -->
+		<action name="bsc.departmentReportContentQueryAction" class="bsc.web.controller.DepartmentReportContentQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+		
+		<action name="bsc.departmentReportPdfQueryAction" class="bsc.web.controller.DepartmentReportContentQueryAction" method="doPdf">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>					
+		
+		<action name="bsc.departmentReportExcelQueryAction" class="bsc.web.controller.DepartmentReportContentQueryAction" method="doExcel">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<!-- KPI period trends Report -->
+		<action name="bsc.kpiPeriodTrendsQueryAction" class="bsc.web.controller.KpiPeriodTrendsQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+
+		<action name="bsc.kpiPeriodTrendsExcelQueryAction" class="bsc.web.controller.KpiPeriodTrendsQueryAction" method="doExcel">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<!-- History Item score Report -->
+		<action name="bsc.historyItemScoreReportContentQueryAction" class="bsc.web.controller.HistoryItemScoreReportContentQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+																		
+	</package>
+			
+</struts>

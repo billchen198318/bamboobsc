@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysCalendarNote-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysCalendarNoteVO(m.oid, m.account, m.calendarId, m.title, m.date)
+		FROM TbSysCalendarNote m 
+		WHERE 1=1
+		
+		<#if accountOid??>
+		AND m.account IN ( SELECT a.account FROM TbAccount a WHERE a.oid = :accountOid )
+		</#if>		
+		
+		<#if date??>
+		AND m.date = :date
+		</#if>
+		
+		ORDER BY m.account ASC, m.calendarId DESC
+	]]>
+	</query>
+	
+	<query name="findSysCalendarNote-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysCalendarNote m 
+		WHERE 1=1
+		
+		<#if accountOid??>
+		AND m.account IN ( SELECT a.account FROM TbAccount a WHERE a.oid = :accountOid )
+		</#if>		
+		
+		<#if date??>
+		AND m.date = :date
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

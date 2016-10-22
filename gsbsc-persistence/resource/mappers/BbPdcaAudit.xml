@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbPdcaAudit">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbPdcaAudit" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="PDCA_OID" property="pdcaOid"/>
+		<result column="TYPE" property="type"/>
+		<result column="EMP_ID" property="empId"/>
+		<result column="CONFIRM_DATE" property="confirmDate"/>
+		<result column="CONFIRM_SEQ" property="confirmSeq"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>
+		<result column="UDATE" property="udate"/>
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_pdca_audit where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="pdcaOid != null">
+			AND PDCA_OID = #{pdcaOid}
+		</if>				
+		<if test="confirmSeq != null">
+			AND CONFIRM_SEQ = #{confirmSeq}
+		</if>		
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>											
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_pdca_audit where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="pdcaOid != null">
+			AND PDCA_OID = #{pdcaOid}
+		</if>				
+		<if test="confirmSeq != null">
+			AND CONFIRM_SEQ = #{confirmSeq}
+		</if>
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>
+		<if test="empId != null">
+			AND EMP_ID = #{empId}
+		</if>					
+	</select>	
+	
+</mapper>

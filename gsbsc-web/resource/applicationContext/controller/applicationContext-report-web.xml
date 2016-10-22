@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+    <!-- KPI Report -->
+    <bean id="bsc.web.controller.KpiReportAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.KpiReportAction" scope="prototype" />
+    <bean id="bsc.web.controller.KpiReportContentQueryAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.KpiReportContentQueryAction" scope="prototype" />
+    <bean id="bsc.web.controller.KpiPeriodTrendsQueryAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.KpiPeriodTrendsQueryAction" scope="prototype" />
+    	   
+   	<!-- Personal BSC Report -->
+    <bean id="bsc.web.controller.PersonalReportAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.PersonalReportAction" scope="prototype" />   
+    <bean id="bsc.web.controller.PersonalReportContentQueryAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.PersonalReportContentQueryAction" scope="prototype" />  
+    
+    <!-- Department BSC Report -->
+    <bean id="bsc.web.controller.DepartmentReportAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.DepartmentReportAction" scope="prototype" />   
+    <bean id="bsc.web.controller.DepartmentReportContentQueryAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.DepartmentReportContentQueryAction" scope="prototype" />   
+    
+    <!-- History Item score Report -->
+    <bean id="bsc.web.controller.HistoryItemScoreReportAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.HistoryItemScoreReportAction" scope="prototype" />   
+    <bean id="bsc.web.controller.HistoryItemScoreReportContentQueryAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.HistoryItemScoreReportContentQueryAction" scope="prototype" />   
+    	    	    	    	    	    	    	    	    
+</beans>

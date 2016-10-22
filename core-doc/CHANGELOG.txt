@@ -1,0 +1,204 @@
+0.7.0
+-----------------------------------------------------------
+1. Add AR - Arabic locale, language support by maltourky ( https://github.com/maltourky ) 
+	https://github.com/billchen198318/bamboobsc/issues/28
+
+
+0.6.6
+-----------------------------------------------------------
+1. Add system and program item multi name support, need self use
+   "01 - Application site multi name (Create)" or "02 - Program registration multi name (Create)" to management name.
+   
+   reference: 
+   https://github.com/billchen198318/bamboobsc/issues/30
+   
+2. Add KPI report some label name modify (01 - Report property).
+3. Fix BUG, KPI report export PNG image file mode cannot show all body.
+4. Some modifications
+5. If have previous data in MYSQL(bbcore) E.g: 0.6.5 or 0.6.4 old version, please update sql command file patch_065_up_066.sql
+
+
+0.6.5.1
+-----------------------------------------------------------
+1. Add input-field notice message label for Create/Edit page.
+2. Some modifications
+3. If have previous data in MYSQL(bbcore) E.g: 0.6.5 old version, please update sql command file patch_0650_up_0651.sql
+
+
+0.6.5
+-----------------------------------------------------------
+1. Some modifications
+
+
+0.6.4
+-----------------------------------------------------------
+1. Fix Personal BSC report score always zero bug.
+2. Support auto config host:port every when start tomcat-server(bambooBSC) on DHCP daymanic IP environment. ( old version only first one start tomcat-server-bambooBSC will config )
+   for manual install mode version:
+   config base.applicationSiteHostUpdateMode=2
+   reference: https://github.com/billchen198318/bamboobsc/issues/24 
+3. Some modifications
+
+
+0.6.3.1
+-----------------------------------------------------------
+1. Fix core.css patch flat-themes-1.11.1
+2. Add BR - Brazil locale, language support by Giacomozzi( https://github.com/giacomozzi ) 
+   https://github.com/billchen198318/bamboobsc/issues/8
+
+
+0.6.3
+-----------------------------------------------------------
+1. Support locale ( IT - Italy , PT - Portugal, RU - Russia ).
+2. PDCA features.
+   reference: https://github.com/billchen198318/bamboobsc/issues/14
+3. KPI inactive options.
+   reference: https://github.com/billchen198318/bamboobsc/issues/14
+4. Measure-data target / actual field input bug fix.
+   reference: https://github.com/billchen198318/bamboobsc/issues/16
+5. Some modifications
+6. *** please re-import bbcore.sql to MySQL *** 
+   If have previous data in MYSQL(bbcore) E.g: 0.6.2 old version, 
+   but did not re-import the SQL file to MYSQL(bbcore), the 0.6.3 version program will not work done.
+
+
+0.6.2
+-----------------------------------------------------------
+1. Change page themes to flat style.
+2. Add 07 - KPIs trends report(BSC_PROG003D0007Q) for default user role's menu-item. ( 0.6.1 SQL dump forget to add ) 
+3. Support configuration option to disable/enable captcha code on Login page. 0.6.2 default is disable captcha code. 
+   reference: https://github.com/billchen198318/bamboobsc/issues/5
+4. Support KPI attached files(document) for information/verification document.
+   reference: https://github.com/billchen198318/bamboobsc/issues/6
+5. Strategy Map add Print button, because export image cannot show line, this is compromise solution.
+   reference: https://github.com/billchen198318/bamboobsc/issues/12
+6. Support LDAP login mode.
+   reference: https://github.com/billchen198318/bamboobsc/issues/13
+7. Some modifications
+8. *** please re-import bbcore.sql to MySQL *** 
+   If have previous data in MYSQL(bbcore) E.g: 0.6.1 old version, 
+   but did not re-import the SQL file to MYSQL(bbcore), the 0.6.2 version program will not work done.
+
+
+0.6.1
+-----------------------------------------------------------
+1. Add new feature 07 - KPI Period Trends (https://github.com/billchen198318/bamboobsc/issues/3)
+2. Some modifications
+3. *** please re-import bbcore.sql to MySQL ***
+
+
+0.6.00
+-----------------------------------------------------------
+1. Add 360 Employee degree feedback project.
+2. Some modifications
+
+
+2015-09-01
+-----------------------------------------------------------
+1. Update BSC-strategy-map used jsPlumb-LIB to new version.
+2. Add lost password command line tools.
+3. Some modifications
+
+
+2015-08-10
+-----------------------------------------------------------
+1. Add "Max" field for KPI / KPI-Report / Personal-Report / Department-Report.
+2. *** please re-import bbcore.sql to MySQL ***
+
+
+2015-07-27
+-----------------------------------------------------------
+1. Add KPI-Report status icon and some modifications.
+2. *** please re-import bbcore.sql to MySQL ***
+
+
+2015-07-01
+-----------------------------------------------------------
+Add mobile version web, query scorecard for a mobile-device's browser.
+
+
+2015-06-15
+-----------------------------------------------------------
+Some modifications and add locale language support.
+locale language support:
+		CN - Simplified Chinese
+		DE - Deutsch
+		EN - English
+		ES - español
+		FR - Français
+		JA - Japan ,
+		TW - Traditional Chinese
+
+
+2015-05-26
+-----------------------------------------------------------
+Some modifications and database tables.
+add import/export csv file for Vision, Perspectives, strategy-objectives, KPIs, measure-data.
+
+
+2015-05-07
+-----------------------------------------------------------
+Some modifications
+
+
+2015-05-01
+-----------------------------------------------------------
+Some modifications
+
+
+2015-04-08
+-----------------------------------------------------------
+add new feature 
+	"04 - Perspectives Dashboard" 
+	"05 - Objectives Dashboard"
+	"06 - KPIs Dashboard"
+
+
+2015-03-27
+-----------------------------------------------------------
+Some modifications
+
+add new database table:
+	bb_report_role_view
+	
+*** please re-import bbcore.sql to MySQL
+
+
+2015-03-20
+-----------------------------------------------------------
+Some modifications
+
+
+2015-03-12
+-----------------------------------------------------------
+add new feature analytics(OLAP) on QCHARTS-WEB
+and modify KPI calculation(aggregation method) .
+
+add new database table:
+	bb_aggregation_method
+	qc_olap_conf
+	qc_olap_catalog
+	qc_olap_mdx
+	
+modifier to the database table:
+	bb_kpi.CAL VARCHAR(1) to VARCHAR(14)
+	and bb_kpi.CAL related-to bb_aggregation_method.AGGR_ID
+	
+*** please re-import bbcore.sql to MySQL
+
+
+2015-02-16
+-----------------------------------------------------------
+add KPI-Report/Personal-Report/Department-Report signature function
+
+
+2015-02-12
+-----------------------------------------------------------
+fix some login error, the same account login on another devices
+and modify tb_sys_usess UK_1(SESSION_ID, ACCOUNT) 
+
+
+2015-02-11
+-----------------------------------------------------------
+fix "05 - Measure data" T(Target value), A(Actual value) cannot input float number value.
+

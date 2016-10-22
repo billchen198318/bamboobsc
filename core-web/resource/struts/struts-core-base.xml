@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="core-default" extends="struts-default" namespace="/" >
+		
+		<result-types>
+		    <result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
+		    <!-- 
+		    <result-type name="chart" class="org.apache.struts2.dispatcher.ChartResult"/>
+		    -->
+		    <result-type name="chart" class="com.netsteadfast.greenstep.struts2.dispatcher.CustomJFreeChartResult"/>		    
+		</result-types>
+		
+		<interceptors>
+            <interceptor name="noCacheIntercepto" class="greenstep.web.interceptor.NoCacheHeaderInterceptor" />
+            <interceptor name="actionInfoIntercepto" class="greenstep.web.interceptor.ActionInfoSupportInterceptor" />
+            <interceptor name="userLoginIntercepto" class="greenstep.web.interceptor.UserLoginInterceptor" />            
+            <interceptor name="controllerAuthorityCheckIntercepto" class="greenstep.web.interceptor.ControllerAuthorityCheckInterceptor" />
+            <interceptor name="jsonOutermostBracketsInterceptor" class="greenstep.web.interceptor.JsonOutermostBracketsInterceptor" />
+            <interceptor name="jasperReportCloseConnHelperInterceptor" class="greenstep.web.interceptor.JasperReportCloseConnHelperInterceptor" />            
+            <interceptor name="userAgentRejectInterceptor" class="greenstep.web.interceptor.UserAgentRejectInterceptor" />
+            <interceptor name="localeLangInterceptor" class="greenstep.web.interceptor.LocaleLangInterceptor" />
+            <interceptor name="queryParamInspectInterceptor" class="greenstep.web.interceptor.QueryParamInspectInterceptor" />
+            <interceptor-stack name="greenStepProvideCustomStack"><!-- no check login session & authority-->
+            	<interceptor-ref name="noCacheIntercepto"></interceptor-ref>
+            	<interceptor-ref name="actionInfoIntercepto"></interceptor-ref>  
+            	<interceptor-ref name="localeLangInterceptor"></interceptor-ref>          	                
+                <interceptor-ref name="defaultStack"></interceptor-ref>                                                        
+            </interceptor-stack>            
+            <interceptor-stack name="greenStepJsonOutermostBracketsCustomStack"><!-- no check login session & authority with modify json out format of outermost brackets -->
+            	<interceptor-ref name="noCacheIntercepto"></interceptor-ref>
+            	<interceptor-ref name="actionInfoIntercepto"></interceptor-ref>
+            	<interceptor-ref name="jsonOutermostBracketsInterceptor"></interceptor-ref><!-- json 最外層增加  [ ...json資料內容....  ] 符號 -->
+            	<interceptor-ref name="defaultStack"></interceptor-ref>                 	
+            </interceptor-stack>
+            <interceptor-stack name="greenStepDefaultCustomStack">            	
+            	<interceptor-ref name="userAgentRejectInterceptor"></interceptor-ref>
+            	<interceptor-ref name="noCacheIntercepto"></interceptor-ref>
+            	<interceptor-ref name="actionInfoIntercepto"></interceptor-ref>
+            	<interceptor-ref name="userLoginIntercepto"></interceptor-ref>                       	
+            	<interceptor-ref name="localeLangInterceptor"></interceptor-ref>
+            	<interceptor-ref name="controllerAuthorityCheckIntercepto"></interceptor-ref>
+            	<interceptor-ref name="queryParamInspectInterceptor"></interceptor-ref>             	            	  	           	                   
+                <interceptor-ref name="defaultStack"></interceptor-ref>                                            
+            </interceptor-stack>  
+            <interceptor-stack name="greenStepJasperReportCustomStack">
+            	<interceptor-ref name="jasperReportCloseConnHelperInterceptor"></interceptor-ref>            	
+            	<interceptor-ref name="noCacheIntercepto"></interceptor-ref>
+            	<interceptor-ref name="actionInfoIntercepto"></interceptor-ref>
+            	<interceptor-ref name="userLoginIntercepto"></interceptor-ref>                	
+            	<interceptor-ref name="controllerAuthorityCheckIntercepto"></interceptor-ref>             	            	  	           	                   
+                <interceptor-ref name="defaultStack"></interceptor-ref>                                            
+            </interceptor-stack> 
+                                  
+        </interceptors>		
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+				
+		<!-- GLOBAL -->
+		
+		<!-- 預設 index.action , 開發時先關閉 , 比較好除錯 -->
+		<!--  
+		<default-action-ref name="index" /> 
+		-->
+		
+        <global-results>
+            <result name="login" type="redirect">/login.action</result>
+            <result name="logout" type="redirect">/logout.action</result>
+            <result name="loginAgain">/pages/system/login_again.jsp</result>   
+            <result name="logoutAgain">/pages/system/logout_again.jsp</result>    
+            <result name="rejectUserAgent">/pages/system/rejectUserAgent.jsp</result>
+            <result name="SQLException">/pages/system/exception.jsp</result>
+            <result name="Exception">/pages/system/exception.jsp</result>
+            <result name="error">/pages/system/error.jsp</result>
+            <result name="invalid.token">/pages/system/error.jsp</result>
+            <result name="blank">/pages/system/blank.jsp</result>
+            <result name="blankValue">/pages/system/blankValue.jsp</result>
+            <result name="noAuthorith">/pages/system/auth1.jsp</result>
+            <result name="searchNoData">/pages/system/searchNoData.jsp</result>
+            <result name="refreshDojoContentPane">/pages/system/refreshDojoContentPane.jsp</result>
+        </global-results>
+        
+        <global-exception-mappings>
+            <exception-mapping exception="java.sql.SQLException" result="SQLException"/>
+            <exception-mapping exception="java.lang.Exception" result="Exception"/>
+        </global-exception-mappings>  
+        	
+	</package>
+	
+</struts>

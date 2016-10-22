@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<include file="struts/struts-core-base.xml" />
+	<include file="struts/struts-core-login-out.xml" />		
+	<include file="struts/struts-core-common.xml" />
+	<include file="struts/struts-core-apSys.xml" />	
+	<include file="struts/struts-core-sysProgram.xml" />
+	<include file="struts/struts-core-sysMenu.xml" />	
+	<include file="struts/struts-core-role.xml" />	
+	<include file="struts/struts-core-userRole.xml" />	
+	<include file="struts/struts-core-sysProgramMenuRole.xml" />	
+	<include file="struts/struts-core-sysCalendarNote.xml" />				
+	<include file="struts/struts-core-sysMsgNoticeConfig.xml" />
+	<include file="struts/struts-core-sysMsgNotice.xml" />	
+	<include file="struts/struts-core-sysTemplate.xml" />
+	<include file="struts/struts-core-sysWsConfig.xml" />		
+	<include file="struts/struts-core-sysExpression.xml" />
+	<include file="struts/struts-core-sysBeanHelp.xml" />
+	<include file="struts/struts-core-sysJreport.xml" />	
+	<include file="struts/struts-core-sysCtxBean.xml" />	
+	<include file="struts/struts-core-sysTwitter.xml" />	
+	<include file="struts/struts-core-settings.xml" />	
+	<include file="struts/struts-core-sysFormTemplate.xml" />	
+	<include file="struts/struts-core-sysForm.xml" />	
+	<include file="struts/struts-core-sysFormMethod.xml" />	
+	<include file="struts/struts-core-sysBpmnResource.xml" />
+	<include file="struts/struts-core-sysExpressionJob.xml" />
+	<include file="struts/struts-core-test.xml" />
+	
+</struts>

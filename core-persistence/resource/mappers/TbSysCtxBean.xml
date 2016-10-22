@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysCtxBean">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysCtxBean" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="SYSTEM" property="system"/>				
+		<result column="CLASS_NAME" property="className"/>		
+		<result column="TYPE" property="type"/>				
+		<result column="DESCRIPTION" property="description"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_ctx_bean where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>			
+		<if test="className != null">
+			AND CLASS_NAME = #{className}
+		</if>	
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>											
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_ctx_bean where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="system != null">
+			AND SYSTEM = #{system}
+		</if>			
+		<if test="className != null">
+			AND CLASS_NAME = #{className}
+		</if>	
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>			
+	</select>	
+	
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysMsgNoticeConfigPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysMsgNoticeConfigVO(m.oid, m.msgId, m.system, m.className)
+		FROM TbSysMsgNoticeConfig m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		and m.system IN ( SELECT s.sysId FROM TbSys s WHERE s.oid = :systemOid )
+		</#if>
+					
+		<#if msgId??>
+		and m.msgId = :msgId
+		</#if>
+		
+		ORDER BY m.system, m.msgId ASC		
+	]]>
+	</query>
+	
+	<query name="findSysMsgNoticeConfigPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysMsgNoticeConfig m 
+		WHERE 1=1
+		
+		<#if systemOid??>
+		and m.system IN ( SELECT s.sysId FROM TbSys s WHERE s.oid = :systemOid )
+		</#if>
+					
+		<#if msgId??>
+		and m.msgId = :msgId
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

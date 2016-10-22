@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbFormula">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbFormula" id="baseResultMap">
+		<id column="OID" property="oid"/>			
+		<result column="FOR_ID" property="forId"/>
+		<result column="NAME" property="name"/>		
+		<result column="TYPE" property="type"/>		
+		<result column="TRENDS_FLAG" property="trendsFlag"/>
+		<result column="RETURN_MODE" property="returnMode"/>		
+		<result column="RETURN_VAR" property="returnVar"/>		
+		<result column="EXPRESSION" property="expression"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_formula where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>		
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>						
+		<if test="trendsFlag != null">
+			AND TRENDS_FLAG = #{trendsFlag}
+		</if>										
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_formula where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>		
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>						
+		<if test="trendsFlag != null">
+			AND TRENDS_FLAG = #{trendsFlag}
+		</if>						
+	</select>	
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="dataQueryMapperSet.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.QcDataQueryMapperSet</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.DataQueryMapperSetVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>mapperOid</a>
+			<b>mapperOid</b>
+		</field>	
+		<field>
+			<a>labelField</a>
+			<b>labelField</b>
+		</field>		
+		<field>
+			<a>valueField</a>
+			<b>valueField</b>
+		</field>													
+	</mapping>
+
+	<mapping map-id="dataQueryMapperSet.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.DataQueryMapperSetVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.QcDataQueryMapperSet</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>mapperOid</a>
+			<b>mapperOid</b>
+		</field>	
+		<field>
+			<a>labelField</a>
+			<b>labelField</b>
+		</field>		
+		<field>
+			<a>valueField</a>
+			<b>valueField</b>
+		</field>		
+	</mapping>
+	
+</mappings>

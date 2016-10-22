@@ -1,0 +1,63 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TbSysMsgNotice">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.TbSysMsgNotice" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="NOTICE_ID" property="noticeId"/>	
+		<result column="MSG_ID" property="msgId"/>
+		<result column="TITLE" property="title"/>
+		<result column="MESSAGE" property="message"/>
+		<result column="DATE" property="date"/>
+		<result column="TIME" property="time"/>
+		<result column="IS_GLOBAL" property="isGlobal"/>
+		<result column="TO_ACCOUNT" property="toAccount"/>
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from tb_sys_msg_notice where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>	
+		<if test="noticeId != null">
+			AND NOTICE_ID = #{noticeId}
+		</if>	
+		<if test="msgId != null">
+			AND MSG_ID = #{msgId}
+		</if>			
+		<if test="date != null">
+			AND DATE = #{date}
+		</if>	
+		<if test="isGlobal != null">
+			AND IS_GLOBAL = #{isGlobal}
+		</if>			
+		<if test="toAccount != null">
+			AND TO_ACCOUNT = #{toAccount}
+		</if>															
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from tb_sys_msg_notice where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>		
+		<if test="noticeId != null">
+			AND NOTICE_ID = #{noticeId}
+		</if>	
+		<if test="msgId != null">
+			AND MSG_ID = #{msgId}
+		</if>			
+		<if test="date != null">
+			AND DATE = #{date}
+		</if>	
+		<if test="isGlobal != null">
+			AND IS_GLOBAL = #{isGlobal}
+		</if>			
+		<if test="toAccount != null">
+			AND TO_ACCOUNT = #{toAccount}
+		</if>					
+	</select>	
+	
+</mapper>

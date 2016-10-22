@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="core-sysFormMethod" extends="core-default" namespace="/" >		
+		
+		<action name="core.systemFormMethodManagementAction" class="core.web.controller.SystemFormMethodManagementAction">
+			<result name="input">/pages/sys-form-method/sys-form-method-management.jsp</result>		
+			<result name="success">/pages/sys-form-method/sys-form-method-management.jsp</result>
+		</action>	
+		
+		<action name="core.systemFormMethodCreateAction" class="core.web.controller.SystemFormMethodManagementAction" method="create">
+			<result name="input">/pages/sys-form-method/sys-form-method-create.jsp</result>		
+			<result name="success">/pages/sys-form-method/sys-form-method-create.jsp</result>
+		</action>			
+
+		<action name="core.systemFormMethodEditAction" class="core.web.controller.SystemFormMethodManagementAction" method="edit">
+			<result name="input">/pages/sys-form-method/sys-form-method-edit.jsp</result>		
+			<result name="success">/pages/sys-form-method/sys-form-method-edit.jsp</result>
+		</action>
+															
+	</package>
+	
+	<package name="core-sysFormMethod-json" extends="core-default,json-default" namespace="/" >				
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+		
+		<action name="core.systemFormMethodManagementGridQueryAction" class="core.web.controller.SystemFormMethodManagementGridQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+
+		<action name="core.systemFormMethodSaveAction" class="core.web.controller.SystemFormMethodSaveOrUpdateAction" method="doSave">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+		
+		<action name="core.systemFormMethodUpdateAction" class="core.web.controller.SystemFormMethodSaveOrUpdateAction" method="doUpdate">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>			
+		
+		<action name="core.systemFormMethodDeleteAction" class="core.web.controller.SystemFormMethodSaveOrUpdateAction" method="doDelete">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="core.systemFormMethodCopy2UploadAction" class="core.web.controller.SystemFormMethodSaveOrUpdateAction" method="doCopy2Upload">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="core.systemFormMethodExpressionUploadAction" class="core.web.controller.SystemFormMethodSaveOrUpdateAction" method="doUploadExpression">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+																										
+	</package>
+			
+</struts>

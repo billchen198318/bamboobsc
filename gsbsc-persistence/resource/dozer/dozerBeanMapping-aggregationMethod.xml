@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="aggregationMethod.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbAggregationMethod</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.AggregationMethodVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>aggrId</a>
+			<b>aggrId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>	
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>	
+		<field>
+			<a>expression1</a>
+			<b>expression1</b>
+		</field>
+		<field>
+			<a>expression2</a>
+			<b>expression2</b>
+		</field>
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>																
+	</mapping>
+
+	<mapping map-id="aggregationMethod.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.AggregationMethodVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbAggregationMethod</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>aggrId</a>
+			<b>aggrId</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>	
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>
+		<field>
+			<a>expression1</a>
+			<b>expression1</b>
+		</field>
+		<field>
+			<a>expression2</a>
+			<b>expression2</b>
+		</field>
+		<field>
+			<a>description</a>
+			<b>description</b>
+		</field>
+	</mapping>
+	
+</mappings>

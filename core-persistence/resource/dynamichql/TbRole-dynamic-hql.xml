@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findRolePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.RoleVO(r.oid, r.role, r.description)
+		FROM TbRole r 
+		WHERE 1=1
+		
+		<#if role??>
+		and r.role = :role
+		</#if>
+		
+		ORDER BY r.role ASC
+	]]>
+	</query>
+	
+	<query name="findRolePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbRole r 
+		WHERE 1=1
+		
+		<#if role??>
+		and r.role = :role
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

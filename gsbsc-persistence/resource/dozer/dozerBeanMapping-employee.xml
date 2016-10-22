@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="employee.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbEmployee</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.EmployeeVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>account</a>
+			<b>account</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>	
+		<field>
+			<a>fullName</a>
+			<b>fullName</b>
+		</field>
+		<field>
+			<a>jobTitle</a>
+			<b>jobTitle</b>
+		</field>									
+	</mapping>
+
+	<mapping map-id="employee.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.EmployeeVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbEmployee</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>account</a>
+			<b>account</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>	
+		<field>
+			<a>fullName</a>
+			<b>fullName</b>
+		</field>
+		<field>
+			<a>jobTitle</a>
+			<b>jobTitle</b>
+		</field>
+	</mapping>
+	
+</mappings>

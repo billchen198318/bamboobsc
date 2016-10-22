@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysTemplateParam.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysTemplateParam</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysTemplateParamVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>templateId</a>
+			<b>templateId</b>
+		</field>	
+		<field>
+			<a>isTitle</a>
+			<b>isTitle</b>
+		</field>	
+		<field>
+			<a>templateVar</a>
+			<b>templateVar</b>
+		</field>					
+		<field>
+			<a>objectVar</a>
+			<b>objectVar</b>
+		</field>
+	</mapping>
+
+	<mapping map-id="sysTemplateParam.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysTemplateParamVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysTemplateParam</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>templateId</a>
+			<b>templateId</b>
+		</field>	
+		<field>
+			<a>isTitle</a>
+			<b>isTitle</b>
+		</field>			
+		<field>
+			<a>templateVar</a>
+			<b>templateVar</b>
+		</field>					
+		<field>
+			<a>objectVar</a>
+			<b>objectVar</b>
+		</field>
+	</mapping>
+	
+</mappings>

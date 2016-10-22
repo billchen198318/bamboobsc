@@ -1,0 +1,17 @@
+{ 
+	"default" 	: "en",
+	"langs"		: {
+		"ar"		:	"AR - Arabic",
+		"br"		:	"BR - Brasil",
+		"cn"		:	"CN - 简体中文",
+		"de"		:	"DE - Deutsch",
+		"en"		:	"EN - English (default)",
+		"es"		:	"ES - español",
+		"fr"		:	"FR - Français",
+		"it"		:	"IT - Italiano",		
+		"ja"		:	"JA - 日本語 ",
+		"pt"		:	"PT - Português",
+		"ru"		:	"RU - русский",
+		"tw"		:	"TW - 繁體中文"
+	} 
+}

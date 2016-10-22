@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbKpi">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbKpi" id="baseResultMap">
+		<id column="OID" property="oid"/>			
+		<result column="ID" property="id"/>
+		<result column="OBJ_ID" property="objId"/>		
+		<result column="NAME" property="name"/>		
+		<result column="DESCRIPTION" property="description"/>
+		<result column="WEIGHT" property="weight"/>
+		<result column="FOR_ID" property="forId"/>		
+		<result column="TRENDS_FOR_ID" property="trendsForId"/>				
+		<result column="UNIT" property="unit"/>
+		<result column="MAX" property="max"/>
+		<result column="TARGET" property="target"/>
+		<result column="MIN" property="min"/>
+		<result column="MANAGEMENT" property="management"/>
+		<result column="COMPARE_TYPE" property="compareType"/>
+		<result column="CAL" property="cal"/>
+		<result column="DATA_TYPE" property="dataType"/>
+		<result column="ORGA_MEASURE_SEPARATE" property="orgaMeasureSeparate"/>
+		<result column="USER_MEASURE_SEPARATE" property="userMeasureSeparate"/>
+		<result column="QUASI_RANGE" property="quasiRange"/>
+		<result column="ACTIVATE" property="activate"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_kpi where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="id != null">
+			AND ID = #{id}
+		</if>			
+		<if test="objId != null">
+			AND OBJ_ID = #{objId}
+		</if>						
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>										
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_kpi where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="id != null">
+			AND ID = #{id}
+		</if>			
+		<if test="objId != null">
+			AND OBJ_ID = #{objId}
+		</if>						
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>						
+	</select>	
+	
+</mapper>

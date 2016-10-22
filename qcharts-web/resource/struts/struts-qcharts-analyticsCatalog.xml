@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	
+	<package name="qcharts-analyticsCatalog" extends="qcharts-default" namespace="/" >		
+		
+		<action name="qcharts.analyticsCatalogManagementAction" class="qcharts.web.controller.AnalyticsCatalogManagementAction">
+			<result name="input">/pages/analytics-catalog/analytics-catalog-management.jsp</result>		
+			<result name="success">/pages/analytics-catalog/analytics-catalog-management.jsp</result>
+		</action>			
+				
+		<action name="qcharts.analyticsCatalogCreateAction" class="qcharts.web.controller.AnalyticsCatalogManagementAction" method="create">
+			<result name="input">/pages/analytics-catalog/analytics-catalog-create.jsp</result>		
+			<result name="success">/pages/analytics-catalog/analytics-catalog-create.jsp</result>
+		</action>
+				
+		<action name="qcharts.analyticsCatalogEditAction" class="qcharts.web.controller.AnalyticsCatalogManagementAction" method="edit">
+			<result name="input">/pages/analytics-catalog/analytics-catalog-edit.jsp</result>		
+			<result name="success">/pages/analytics-catalog/analytics-catalog-edit.jsp</result>
+		</action>	
+		
+		<action name="qcharts.analyticsCatalogExportAction" class="qcharts.web.controller.AnalyticsCatalogManagementAction" method="export">
+		    <result name="success" type="stream">
+		        <param name="contentType">${contentType}</param>
+		        <param name="contentDisposition">filename="${filename}"</param>
+		        <param name="inputName">inputStream</param>
+		    </result>
+		</action>					
+								   	
+	</package>
+	
+	<package name="qcharts-analyticsCatalog-json" extends="qcharts-default,json-default" namespace="/" >			
+		
+		<default-interceptor-ref name="greenStepDefaultCustomStack" />
+		
+		<action name="qcharts.analyticsCatalogManagementGridQueryAction" class="qcharts.web.controller.AnalyticsCatalogManagementGridQueryAction" >
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>	
+				
+		<action name="qcharts.analyticsCatalogSaveAction" class="qcharts.web.controller.AnalyticsCatalogSaveOrUpdateAction" method="doSave">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>		
+	
+		<action name="qcharts.analyticsCatalogUpdateAction" class="qcharts.web.controller.AnalyticsCatalogSaveOrUpdateAction" method="doUpdate">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>
+		
+		<action name="qcharts.analyticsCatalogDeleteAction" class="qcharts.web.controller.AnalyticsCatalogSaveOrUpdateAction" method="doDelete">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>								
+										
+	</package>
+			
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysVO(ts.oid, ts.sysId, ts.name, ts.host, ts.contextPath, ts.isLocal, ts.icon)	
+		FROM TbSys ts WHERE 1=1
+		
+		<#if name??>
+		and ts.name LIKE :name
+		</#if>
+				
+		<#if sysId??>
+		and ts.sysId = :sysId
+		</#if>
+		
+		ORDER BY ts.name ASC
+	]]>
+	</query>
+	
+	<query name="findSysPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)	
+		FROM TbSys ts WHERE 1=1
+		
+		<#if name??>
+		and ts.name LIKE :name
+		</#if>
+				
+		<#if sysId??>
+		and ts.sysId = :sysId
+		</#if>			
+	]]>		
+	</query>
+
+</dynamic-hql>

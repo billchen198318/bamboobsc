@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QcDataQueryMapperSet">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.QcDataQueryMapperSet" id="baseResultMap">
+		<id column="OID" property="oid"/>				
+		<result column="MAPPER_OID" property="mapperOid"/>	
+		<result column="LABEL_FIELD" property="labelField"/>
+		<result column="VALUE_FIELD" property="valueField"/>			
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from qc_data_query_mapper_set where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="mapperOid != null">
+			AND MAPPER_OID = #{mapperOid}
+		</if>	
+		<if test="labelField != null">
+			AND LABEL_FIELD = #{labelField}
+		</if>			
+		<if test="valueField != null">
+			AND VALUE_FIELD = #{valueField}
+		</if>												
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from qc_data_query_mapper where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="mapperOid != null">
+			AND MAPPER_OID = #{mapperOid}
+		</if>	
+		<if test="labelField != null">
+			AND LABEL_FIELD = #{labelField}
+		</if>					
+		<if test="valueField != null">
+			AND VALUE_FIELD = #{valueField}
+		</if>				
+	</select>	
+	
+</mapper>

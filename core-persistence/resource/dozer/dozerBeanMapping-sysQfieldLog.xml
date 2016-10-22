@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysQfieldLog.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysQfieldLog</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysQfieldLogVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>		
+		<field>
+			<a>progId</a>
+			<b>progId</b>
+		</field>			
+		<field>
+			<a>methodName</a>
+			<b>methodName</b>
+		</field>
+		<field>
+			<a>fieldName</a>
+			<b>fieldName</b>
+		</field>		
+		<field>
+			<a>fieldValue</a>
+			<b>fieldValue</b>
+		</field>		
+		<field>
+			<a>queryUserId</a>
+			<b>queryUserId</b>
+		</field>																													
+	</mapping>
+
+	<mapping map-id="sysQfieldLog.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysQfieldLogVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysQfieldLog</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>system</a>
+			<b>system</b>
+		</field>		
+		<field>
+			<a>progId</a>
+			<b>progId</b>
+		</field>			
+		<field>
+			<a>methodName</a>
+			<b>methodName</b>
+		</field>
+		<field>
+			<a>fieldName</a>
+			<b>fieldName</b>
+		</field>		
+		<field>
+			<a>fieldValue</a>
+			<b>fieldValue</b>
+		</field>		
+		<field>
+			<a>queryUserId</a>
+			<b>queryUserId</b>
+		</field>			
+	</mapping>
+	
+</mappings>

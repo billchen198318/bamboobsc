@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportDataConfig>
+	<id>bb_kpi_001</id>
+	<name>export KPIs data</name>
+	<title>"KPI Id"; "Objective Id"; "Name"; "Weight"; "Target"; "Min"; "Unit"; "Formula Id"; "Management method( 1-bigger is better, 2-smaller is better, 3-quasi is better )"; "compare type( 1-Target, 2-Min )"; "Calculation method"; "Data type( 1-organization, 2-personal, 3-both )"; "measure-data for Organization"; "measure-data for Personal"; "QUASI-range(0, 1, 3, 5, 7, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50)"; "Description"; "Max"; "Trends-Formula Id"; "Activate( Y, N )"</title>
+	<sql>
+		select 
+			ID, 
+			OBJ_ID, 
+			NAME, 
+			WEIGHT, 
+			TARGET, 
+			MIN, 
+			UNIT, 
+			FOR_ID, 
+			MANAGEMENT, 
+			COMPARE_TYPE, 
+			CAL, 
+			DATA_TYPE, 
+			ORGA_MEASURE_SEPARATE, 
+			USER_MEASURE_SEPARATE, 
+			QUASI_RANGE,
+			DESCRIPTION,
+			MAX,
+			TRENDS_FOR_ID,
+			ACTIVATE
+		from bb_kpi 
+		order by ID asc
+		limit 500	
+	</sql>
+	<separate_symbol>;</separate_symbol>
+	<escape_csv>true</escape_csv>
+	<description>export KPIs data to csv file.</description>
+</ExportDataConfig>

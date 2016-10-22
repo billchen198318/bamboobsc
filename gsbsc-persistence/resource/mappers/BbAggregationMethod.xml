@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbAggregationMethod">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbAggregationMethod" id="baseResultMap">
+		<id column="OID" property="oid"/>				
+		<result column="AGGR_ID" property="aggrId"/>
+		<result column="NAME" property="name"/>
+		<result column="TYPE" property="type"/>
+		<result column="EXPRESSION1" property="expression1"/>
+		<result column="EXPRESSION2" property="expression2"/>		
+		<result column="DESCRIPTION" property="description"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>		
+		<result column="UDATE" property="udate"/>		
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_aggregation_method where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="aggrId != null">
+			AND AGGR_ID = #{aggrId}
+		</if>
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>																					
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_aggregation_method where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="aggrId != null">
+			AND AGGR_ID = #{aggrId}
+		</if>
+		<if test="name != null">
+			AND NAME = #{name}
+		</if>
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>						
+	</select>	
+	
+</mapper>

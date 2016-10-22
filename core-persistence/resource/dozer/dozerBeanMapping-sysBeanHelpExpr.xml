@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="sysBeanHelpExpr.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.TbSysBeanHelpExpr</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.SysBeanHelpExprVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>helpOid</a>
+			<b>helpOid</b>
+		</field>
+		<field>
+			<a>exprId</a>
+			<b>exprId</b>
+		</field>
+		<field>
+			<a>exprSeq</a>
+			<b>exprSeq</b>
+		</field>
+		<field>
+			<a>runType</a>
+			<b>runType</b>
+		</field>																					
+	</mapping>
+
+	<mapping map-id="sysBeanHelpExpr.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.SysBeanHelpExprVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.TbSysBeanHelpExpr</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>helpOid</a>
+			<b>helpOid</b>
+		</field>
+		<field>
+			<a>exprId</a>
+			<b>exprId</b>
+		</field>
+		<field>
+			<a>exprSeq</a>
+			<b>exprSeq</b>
+		</field>
+		<field>
+			<a>runType</a>
+			<b>runType</b>
+		</field>		
+	</mapping>
+	
+</mappings>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+    
+    <context:annotation-config />
+    
+    <!--
+    放在CORE的 JOB 要能在 CORE, GSBSC 兩個區域都能跑,
+    如果只能在 GSBSC 跑, 卻無法在CORE跑  那請把
+    applicationContext-STANDARD-QUARTZ.xml 與 applicationContext-STANDARD-QUARTZ-JOB.xml
+    疑到 GSBSC 項目中 
+    
+    2015-06-26
+    將quartz設定檔從 core-base 移至  core-web, gsbsc-web, qcharts-web, gsbsc-mobile-web , 且只有 core-web 有開啟 Job 其餘設定檔內容都是空的
+    
+    2016-10-03
+    為了在個系統 core-web, gsbsc-web, qcharts-web 增加 SysExpressionJob , 所以每個系統都開啟Quartz了    
+     -->
+         
+    <!-- Scheduler job -->        
+	<bean name="core.job.SendMailHelperJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="true" />
+		<property name="jobClass" value="com.netsteadfast.greenstep.job.impl.SendMailHelperJobImpl" />
+	</bean>    
+
+	<bean name="core.job.ClearTempDataJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="true" />
+		<property name="jobClass" value="com.netsteadfast.greenstep.job.impl.ClearTempDataJobImpl" />
+	</bean>		
+
+	<bean name="core.job.SysExpressionJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="true" />
+		<property name="jobClass" value="com.netsteadfast.greenstep.job.impl.SysExpressionJobImpl" />
+	</bean>		
+	
+	<!-- Cron Trigger -->
+	<bean id="core.job.SendMailHelperJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="core.job.SendMailHelperJob" />
+		<property name="cronExpression" value="0 0/2 * * * ?" />
+	</bean>
+	
+	<bean id="core.job.ClearTempDataJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="core.job.ClearTempDataJob" />
+		<property name="cronExpression" value="1 30 03 * * ?" />
+	</bean>
+	
+	<bean id="core.job.SysExpressionJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="core.job.SysExpressionJob" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>	
+		
+</beans>

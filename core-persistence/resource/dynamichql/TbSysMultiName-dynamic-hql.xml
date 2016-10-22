@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysMultiNamePageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysMultiNameVO(m.oid, m.sysId, m.localeCode, m.name, m.enableFlag, b.name)
+		FROM TbSysMultiName m, TbSys b
+		WHERE m.sysId = b.sysId
+		
+		<#if sysId??>
+		and m.sysId = :sysId
+		</#if>
+		
+		ORDER BY m.sysId, m.localeCode ASC
+	]]>
+	</query>
+	
+	<query name="findSysMultiNamePageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)	
+		FROM TbSysMultiName m, TbSys b
+		WHERE m.sysId = b.sysId
+		
+		<#if sysId??>
+		and m.sysId = :sysId
+		</#if>
+	]]>		
+	</query>
+
+</dynamic-hql>

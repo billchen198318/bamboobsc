@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findSysJreportPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.SysJreportVO(m.oid, m.reportId, m.file, m.isCompile, m.description)
+		FROM TbSysJreport m 
+		WHERE 1=1
+		
+		<#if reportId??>
+		and m.reportId = :reportId
+		</#if>
+		
+		ORDER BY m.reportId ASC
+	]]>
+	</query>
+	
+	<query name="findSysJreportPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM TbSysJreport m 
+		WHERE 1=1
+		
+		<#if reportId??>
+		and m.reportId = :reportId
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>

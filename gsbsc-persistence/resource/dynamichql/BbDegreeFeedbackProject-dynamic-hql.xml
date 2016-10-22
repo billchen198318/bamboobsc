@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findDegreeFeedbackProjectPageGrid-select">	
+	<![CDATA[
+		SELECT
+			new com.netsteadfast.greenstep.vo.DegreeFeedbackProjectVO(m.oid, m.name, m.year, m.publishFlag)
+		FROM BbDegreeFeedbackProject m 
+		WHERE 1=1
+		
+		<#if year??>
+		AND m.year = :year
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+		
+		ORDER BY m.year, m.name ASC		
+	]]>
+	</query>
+	
+	<query name="findDegreeFeedbackProjectPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbDegreeFeedbackProject m 
+		WHERE 1=1
+		
+		<#if year??>
+		AND m.year = :year
+		</#if>
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>		
+	]]>		
+	</query>
+
+</dynamic-hql>
