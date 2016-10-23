@@ -1,7 +1,11 @@
 0.7.0
 -----------------------------------------------------------
-1. Add AR - Arabic locale, language support by maltourky ( https://github.com/maltourky ) 
-	https://github.com/billchen198318/bamboobsc/issues/28
+1. Dashboards features update, maybe will replace jqplot to nvd3-js or highcharts.
+2. Monitor score-performance JOB schedule for Vision、Strategy of objectives、KPI.
+3. Workspace upgrade, improve response speed for workspace component.
+4. QCHARTS-WEB upgrade.
+5. Add API ( SOAP / REST ) for Vision、Strategy of objectives、KPI、Measure-data and Formula.
+6. MOBILE version upgrade.
 
 
 0.6.6
