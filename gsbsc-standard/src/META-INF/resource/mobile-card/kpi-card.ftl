@@ -57,20 +57,23 @@
 		<font color="${fontColor}" size="2"><b>Formula: ${kpi.formula.name}</b></font>
 		</td>
 	</tr>	
+	<!--
 	<tr>
 		<td width="100%" align="left" bgcolor="${kpi.bgColor}">
 			<font color="${kpi.fontColor}" size="3"><b>Score: ${kpi.score?string(',###.##')}</b></font>
 			<BR/>
 			<font color="${kpi.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>			
-			<!--
 			<BR/>
 			<hr align="left" width="${hrWidth}%" size="15" color="${kpi.fontColor}" style="box-shadow: 0 0 15px 1px ${kpi.fontColor}; border-radius: 3px;">
-			-->
 		</td>
 	</tr>	
+	-->
 	<tr>
 		<td width="100%" align="left" bgcolor="#ffffff">
-			Percentage bar
+			<div class="text-xs-center" id="example-progress-kpi">
+			<font color="${kpi.fontColor}" size="3"><b>Score: ${kpi.score?string(',###.##')}</b></font>&nbsp;
+			<font color="${kpi.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>
+			</div>
 			<progress class="progress progress-info" value="${hrWidth}" max="100"></progress><br/>
 		</td>
 	</tr>			
