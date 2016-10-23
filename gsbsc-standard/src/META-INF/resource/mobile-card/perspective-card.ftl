@@ -32,11 +32,19 @@
 		<td width="100%" align="left" bgcolor="${perspective.bgColor}">
 			<font color="${perspective.fontColor}" size="3"><b>Score: ${perspective.score?string(',###.##')}</b></font>
 			<BR/>
-			<font color="${perspective.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>			
+			<font color="${perspective.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>		
+			<!--	
 			<BR/>
 			<hr align="left" width="${hrWidth}%" size="15" color="${perspective.fontColor}" style="box-shadow: 0 0 15px 1px ${perspective.fontColor}; border-radius: 3px;">
+			-->
 		</td>
 	</tr>	
+	<tr>
+		<td width="100%" align="left" bgcolor="#ffffff">
+			Percentage bar
+			<progress class="progress progress-info" value="${hrWidth}" max="100"></progress><br/>
+		</td>
+	</tr>		
 	<tr valign="top">
 		<td width="100%" align="left" bgcolor="#ffffff">
 		<font size="2" color="#333333"><b>Description:</b></font><BR/>

@@ -41,11 +41,19 @@
 		<td width="100%" align="left" bgcolor="${vision.bgColor}">
 			<font color="${vision.fontColor}" size="3"><b>Score: ${vision.score?string(',###.##')}</b></font>
 			<BR/>
-			<font color="${vision.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>			
+			<font color="${vision.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>		
+			<!--	
 			<BR/>
 			<hr align="left" width="${hrWidth}%" size="15" color="${vision.fontColor}" style="box-shadow: 0 0 15px 1px ${vision.fontColor}; border-radius: 3px;">
+			-->
 		</td>
 	</tr>
+	<tr>
+		<td width="100%" align="left" bgcolor="#ffffff">
+			Percentage bar
+			<progress class="progress progress-info" value="${hrWidth}" max="100"></progress><br/>
+		</td>
+	</tr>	
 	<tr valign="top">
 		<td width="100%" bgcolor="#ffffff">
 		${visionContent}
