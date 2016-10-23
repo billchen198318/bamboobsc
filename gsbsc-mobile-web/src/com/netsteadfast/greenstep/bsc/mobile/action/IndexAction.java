@@ -49,6 +49,7 @@ public class IndexAction extends BaseSupportAction {
 	protected Logger logger=Logger.getLogger(IndexAction.class);
 	private IVisionService<VisionVO, BbVision, String> visionService;
 	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(false);
+	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	
 	public IndexAction() {
 		super();
@@ -61,19 +62,20 @@ public class IndexAction extends BaseSupportAction {
 	@Autowired
 	@Resource(name="bsc.service.VisionService")
 	@Required		
-	public void setVisionService(
-			IVisionService<VisionVO, BbVision, String> visionService) {
+	public void setVisionService(IVisionService<VisionVO, BbVision, String> visionService) {
 		this.visionService = visionService;
 	}
 	
-	private void initData() throws ServiceException, Exception {
-		
+	private void initData(String type) throws ServiceException, Exception {
+		if ("lnkDashboard".equals(type)) {
+			this.visionMap = this.visionService.findForMap(true);
+		}
 	}
 
 	@ControllerMethodAuthority(programId="BSC_MOBILE_INDEX")
 	public String execute() throws Exception {
 		try {
-			this.initData();
+			this.initData("execute");
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
@@ -88,7 +90,7 @@ public class IndexAction extends BaseSupportAction {
 	@ControllerMethodAuthority(programId="BSC_MOBILE_OLD_INDEX")
 	public String oldHomePage() throws Exception {
 		try {
-			this.initData();
+			this.initData("oldHomePage");
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
@@ -103,7 +105,7 @@ public class IndexAction extends BaseSupportAction {
 	@ControllerMethodAuthority(programId="BSC_MOBILE_INDEX")
 	public String lnkDashboard() throws Exception {
 		try {
-			this.initData();
+			this.initData("lnkDashboard");
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
@@ -119,6 +121,10 @@ public class IndexAction extends BaseSupportAction {
 		return frequencyMap;
 	}
 	
+	public Map<String, String> getVisionMap() {
+		return visionMap;
+	}
+
 	// yyyy/mm/dd to mm/dd/yyyy
 	public String getMeasureDataDate1() throws Exception {
 		String nowDate[] = this.getNowDate().split("/");		

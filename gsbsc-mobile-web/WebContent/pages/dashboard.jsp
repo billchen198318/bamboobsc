@@ -76,12 +76,11 @@ function refresh_dashboard() {
 </jsp:include>
 
   <div class="form-group">
-    <label for="itemType">Type</label>
-    <select class="form-control" id="itemType">
-			<option value="1" >Vision</option>
-			<option value="2" >Perspectives</option>
-			<option value="3" >Strategy objectives</option>
-			<option value="4" >KPIs</option>
+    <label for="vision">Vision</label>
+    <select class="form-control" id="vision">
+    	<s:iterator value="visionMap" status="st" var="cols">
+    		<option value="<s:property value="#cols.key"/>" ><s:property value="#cols.value"/></option>
+    	</s:iterator>
     </select>
   </div>
   <div class="form-group">
