@@ -36,12 +36,13 @@ function refresh_dashboard() {
 	
 	$('#myPleaseWait').modal('show');
 	$.ajax({
-		url: "${basePath}/bsc.mobile.doDashboard.action",
+		url: "${basePath}/bsc.mobile.doDashboardAction.action",
 		data: { 
 				'fields.date1'				:	date1,
 				'fields.date2'				:	date2,
 				'fields.frequency'			:	frequency,
-				'fields.ver'					:	'newVer'
+				'fields.ver'					:	'newVer',
+				'fields.visionOid'		:	$("#vision").val()
 		},
 		type: "POST",
 		dataType: "json",

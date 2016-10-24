@@ -302,10 +302,12 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}		
 	}
 	
-	private void loadDashboardData() throws ServiceException, Exception {
+	private void loadDashboardData() throws ControllerException, ServiceException, Exception {
+		if (super.isNoSelectId(this.getFields().get("visionOid"))) {
+			throw new ControllerException("Please select vision!");
+		}
 		this.checkDateRange();
 		this.setDateValue();
-		
 	}
 	
 	@JSON(serialize=false)
