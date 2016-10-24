@@ -5,11 +5,11 @@ commons-io-2.4.jar
 commons-fileupload-1.3.2.jar
 freemarker-2.3.23.jar
 ognl-3.1.10.jar
-struts2-core-2.5.2.jar
-struts2-jasperreports-plugin-2.5.2.jar
-struts2-jfreechart-plugin-2.5.2.jar
-struts2-json-plugin-2.5.2.jar
-struts2-spring-plugin-2.5.2.jar
+struts2-core-2.5.5.jar
+struts2-jasperreports-plugin-2.5.5.jar
+struts2-jfreechart-plugin-2.5.5.jar
+struts2-json-plugin-2.5.5.jar
+struts2-spring-plugin-2.5.5.jar
 
 
 Spring4
@@ -98,14 +98,14 @@ javassist-3.18.1-GA.jar
 log4j
 -------------------------
 log4j-1.2.17.jar
-log4j-core-2.5.jar
-log4j-api-2.5.jar
+log4j-core-2.7.jar
+log4j-api-2.7.jar
 
 
 slf4j
 -------------------------
-slf4j-api-1.7.5.jar
-slf4j-log4j12-1.7.5.jar
+slf4j-api-1.7.12.jar
+slf4j-log4j12-1.7.21.jar
 
 
 ehcache
@@ -131,18 +131,18 @@ stax-api-1.0.1.jar
 
 Apache - common
 -------------------------
-commons-codec-1.9.jar
-commons-email-1.2.jar
-commons-lang3-3.1.jar
-commons-beanutils-1.8.3.jar
+commons-codec-1.10.jar
+commons-email-1.4.jar
+commons-lang3-3.4.jar
+commons-beanutils-1.9.3.jar
 commons-beanutils-core-1.8.3.jar
 commons-beanutils-bean-collections-1.8.3.jar
 ezmorph-1.0.6.jar
 commons-lang-2.6.jar
-commons-validator-1.4-SNAPSHOT.jar
+commons-validator-1.5.1.jar
 jakarta-oro-2.0.8.jar
 commons-net-3.0.1.jar
-commons-collections-3.2.1.jar
+commons-collections-3.2.2.jar
 commons-digester3-3.2.jar
 commons-chain-1.2.jar
 commons-httpclient-3.1.jar
@@ -175,7 +175,9 @@ mchange-commons-java-0.2.10.jar
 ASM	(require by Apache CXF ... etc )
 http://asm.ow2.org/	
 -------------------------
-asm-3.3.1.jar
+asm-5.1.jar
+asm-commons-5.1.jar
+asm-tree-5.1.jar
 
 
 Apache CXF with require	
