@@ -1,6 +1,4 @@
 <%@page import="com.netsteadfast.greenstep.util.LocaleLanguageUtils"%>
-<%@page import="com.netsteadfast.greenstep.base.Constants"%>
-<%@page import="com.netsteadfast.greenstep.util.ApplicationSiteUtils"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,8 +6,6 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
-String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSystem(), request);
 
 %>
 
@@ -23,11 +19,11 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 
 
 <!-- Highcharts -->
-<script src="<%=mainSysBasePath%>/highcharts/js/highcharts.js" crossorigin="anonymous"></script>
-<script src="<%=mainSysBasePath%>/highcharts/js/highcharts-3d.js" crossorigin="anonymous"></script>
-<script src="<%=mainSysBasePath%>/highcharts/js/highcharts-more.js" crossorigin="anonymous"></script>
-<script src="<%=mainSysBasePath%>/highcharts/js/modules/heatmap.js" crossorigin="anonymous"></script>
-<script src="<%=mainSysBasePath%>/highcharts/js/modules/exporting.js" crossorigin="anonymous"></script>	
+<script src="<%=basePath%>/highcharts/js/highcharts.js"></script>
+<script src="<%=basePath%>/highcharts/js/highcharts-3d.js"></script>
+<script src="<%=basePath%>/highcharts/js/highcharts-more.js"></script>
+<script src="<%=basePath%>/highcharts/js/modules/heatmap.js"></script>
+<script src="<%=basePath%>/highcharts/js/modules/exporting.js"></script>	
 
 
 <script type="text/javascript">
