@@ -26,7 +26,12 @@
 			<result name="input">/pages/dashboard.jsp</result>			
 			<result name="success">/pages/dashboard.jsp</result>
 		</action>		
-							  					
+
+		<action name="strategymap" class="bsc.mobile.web.controller.IndexAction" method="lnkStrategyMap">
+			<result name="input">/pages/strategy-map.jsp</result>			
+			<result name="success">/pages/strategy-map.jsp</result>
+		</action>		
+									  					
 	</package>
 	
 	<package name="bsc-mobile-common-json" extends="bsc-mobile-default,json-default" namespace="/" >	

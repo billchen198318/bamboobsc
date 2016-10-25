@@ -34,10 +34,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.chain.SimpleChain;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
@@ -111,7 +113,7 @@ public class BscMobileCardUtils {
 		context.put("startYearDate", startDate.substring(0, 4));
 		context.put("endYearDate", endDate.substring(0, 4));		
 		context.put("frequency", frequency);
-		context.put("dataFor", "all");
+		context.put("dataFor", BscConstants.MEASURE_DATA_FOR_ALL);
 		context.put("orgId", BscConstants.MEASURE_DATA_ORGANIZATION_FULL);
 		context.put("empId", BscConstants.MEASURE_DATA_EMPLOYEE_FULL);		
 		for (Map.Entry<String, String> entry : visions.entrySet()) {
@@ -288,6 +290,32 @@ public class BscMobileCardUtils {
 				paramMap);			
 		return content;
 	}		
+	
+	public static String getDashboardScoreUpload(String visionOid, String frequency, String startDate, String endDate) throws ServiceException, Exception {
+		VisionVO visionObj = getDashboardScore(visionOid, frequency, startDate, endDate);
+		return getVisionCardUpload(visionObj);
+	}
+	
+	public static VisionVO getDashboardScore(String visionOid, String frequency, String startDate, String endDate) throws ServiceException, Exception {
+		ChainResultObj result = PerformanceScoreChainUtils.getResult(
+				visionOid, 
+				startDate.substring(0, 4), 
+				endDate.substring(0, 4), 
+				startDate, 
+				startDate, 
+				frequency, 
+				BscConstants.MEASURE_DATA_FOR_ALL, 
+				BscConstants.MEASURE_DATA_ORGANIZATION_FULL, 
+				BscConstants.MEASURE_DATA_EMPLOYEE_FULL, 
+				"", 
+				"");
+		if (result.getValue() == null || ( (BscStructTreeObj)result.getValue() ).getVisions() == null || ( (BscStructTreeObj)result.getValue() ).getVisions().size() == 0) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA));
+		}		
+		BscStructTreeObj resultObj = (BscStructTreeObj)result.getValue();
+		VisionVO visionObj = resultObj.getVisions().get(0);
+		return visionObj;
+	}	
 	
 	private static String getPercentage(float score, float compareValue) {
 		int percentage=0;

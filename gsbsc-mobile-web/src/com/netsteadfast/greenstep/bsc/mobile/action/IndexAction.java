@@ -67,7 +67,7 @@ public class IndexAction extends BaseSupportAction {
 	}
 	
 	private void initData(String type) throws ServiceException, Exception {
-		if ("lnkDashboard".equals(type)) {
+		if ("lnkDashboard".equals(type) || "lnkStrategyMap".equals(type)) {
 			this.visionMap = this.visionService.findForMap(true);
 		}
 	}
@@ -115,6 +115,21 @@ public class IndexAction extends BaseSupportAction {
 			this.setPageMessage(e.getMessage().toString());
 		}
 		return SUCCESS;		
+	}
+	
+	@ControllerMethodAuthority(programId="BSC_MOBILE_INDEX")
+	public String lnkStrategyMap() throws Exception {
+		try {
+			this.initData("lnkStrategyMap");
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;			
 	}
 
 	public Map<String, String> getFrequencyMap() {

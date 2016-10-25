@@ -40,6 +40,9 @@ function logoutEvent() {
       <li class="nav-item <% if ("dashboard".equals(active)) { %> active <%} %>">
         <a class="nav-link" href="./dashboard.action"><b>Dashboard</b></a>
       </li>          
+      <li class="nav-item <% if ("strategy-map".equals(active)) { %> active <%} %>">
+        <a class="nav-link" href="./strategymap.action"><b>Strategy MAP</b></a>
+      </li>            
       <li class="nav-item <% if ("about".equals(active)) { %> active <%} %>">
         <a class="nav-link" href="./about.action"><b>About</b></a>
       </li>

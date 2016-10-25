@@ -308,6 +308,22 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		this.checkDateRange();
 		this.setDateValue();
+		this.rootVision = BscMobileCardUtils.getDashboardScore(
+				this.getFields().get("visionOid"), 
+				this.getFields().get("frequency"), 
+				this.getFields().get("startDate"), 
+				this.getFields().get("endDate"));
+		this.handlerDashboardChartData();
+		this.message = this.getText("MESSAGE.ScorecardQueryContentAction_06");
+		this.success = IS_YES;
+	}
+	
+	private void handlerDashboardChartData() throws Exception {
+		if (this.rootVision == null) {
+			return;
+		}
+		// 準備要顯示 highcharts 要用的資料
+		
 	}
 	
 	@JSON(serialize=false)
