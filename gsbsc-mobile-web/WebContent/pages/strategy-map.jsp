@@ -153,9 +153,15 @@ function refresh_map() {
     </select>
   </div>
 
+<!--  
 <button type="button" class="btn btn-primary" onclick="refresh_map();">${action.getText("INDEX_refreshQuery")}</button>
+-->
 
-
+<s:if test=" null == fields.visionOid || \"\" == fields.visionOid ">
+<div class="alert alert-info" role="alert">
+  <p>The MAP data is history, If need editor please change use WEB-version, Mobile-version only view.</p>
+</div>	
+</s:if>
 
         <div id="jtk-demo-main">
 
@@ -274,6 +280,7 @@ if (null!=pageMessage && ''!=pageMessage && ' '!=pageMessage) {
 
 
 </script>
+
 
 </body>
 </html>
