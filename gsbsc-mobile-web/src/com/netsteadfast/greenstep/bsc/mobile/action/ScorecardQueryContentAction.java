@@ -308,11 +308,13 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		this.checkDateRange();
 		this.setDateValue();
+		String startDate = super.defaultString( this.getFields().get("startDate") ).replaceAll("/", "").replaceAll("-", "");
+		String endDate = super.defaultString( this.getFields().get("endDate") ).replaceAll("/", "").replaceAll("-", "");
 		this.rootVision = BscMobileCardUtils.getDashboardScore(
 				this.getFields().get("visionOid"), 
 				this.getFields().get("frequency"), 
-				this.getFields().get("startDate"), 
-				this.getFields().get("endDate"));
+				startDate, 
+				endDate);
 		this.handlerDashboardChartData();
 		this.message = this.getText("MESSAGE.ScorecardQueryContentAction_06");
 		this.success = IS_YES;

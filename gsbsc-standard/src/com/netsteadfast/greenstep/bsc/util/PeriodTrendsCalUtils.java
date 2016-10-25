@@ -182,16 +182,16 @@ public class PeriodTrendsCalUtils {
 	}
 	
 	public static List<PeriodTrendsData<KpiVO>> getKpiScoreChange(String visionOid1, String startDate1, String endDate1, 
-			String startYearDate1, String endYearDate1, String frequency1, String dataFor1, String orgId1, String empId1,
+			String startYearDate1, String endYearDate1, String frequency1, String dataFor1, 
 			String measureDataOrganizationOid1, String measureDataEmployeeOid1,
 			String visionOid2, String startDate2, String endDate2, 
-			String startYearDate2, String endYearDate2, String frequency2, String dataFor2, String orgId2, String empId2,
+			String startYearDate2, String endYearDate2, String frequency2, String dataFor2, 
 			String measureDataOrganizationOid2, String measureDataEmployeeOid2) throws ServiceException, Exception {
 		
 		List<PeriodTrendsData<KpiVO>> result = new ArrayList<PeriodTrendsData<KpiVO>>();
-		Context context1 = PerformanceScoreChainUtils.getContext(visionOid1, startDate1, endDate1, startYearDate1, endYearDate1, frequency1, dataFor1, orgId1, empId1, 
+		Context context1 = PerformanceScoreChainUtils.getContext(visionOid1, startDate1, endDate1, startYearDate1, endYearDate1, frequency1, dataFor1,  
 				measureDataOrganizationOid1, measureDataEmployeeOid1);
-		Context context2 = PerformanceScoreChainUtils.getContext(visionOid2, startDate2, endDate2, startYearDate2, endYearDate2, frequency2, dataFor2, orgId2, empId2, 
+		Context context2 = PerformanceScoreChainUtils.getContext(visionOid2, startDate2, endDate2, startYearDate2, endYearDate2, frequency2, dataFor2, 
 				measureDataOrganizationOid2, measureDataEmployeeOid2);
 		/*
 		SimpleChain chain1 = new SimpleChain();
@@ -225,17 +225,17 @@ public class PeriodTrendsCalUtils {
 	}
 	
 	public static String renderKpiPeriodTrendsBody(String visionOid1, String startDate1, String endDate1, 
-			String startYearDate1, String endYearDate1, String frequency1, String dataFor1, String orgId1, String empId1,
+			String startYearDate1, String endYearDate1, String frequency1, String dataFor1,
 			String measureDataOrganizationOid1, String measureDataEmployeeOid1,
 			String visionOid2, String startDate2, String endDate2, 
-			String startYearDate2, String endYearDate2, String frequency2, String dataFor2, String orgId2, String empId2,
+			String startYearDate2, String endYearDate2, String frequency2, String dataFor2,
 			String measureDataOrganizationOid2, String measureDataEmployeeOid2) throws ServiceException, Exception {
 		String currentPeriodDateRange = getDateRange(frequency1, startYearDate1, endYearDate1, startDate1, endDate1);
 		String previousPeriodDateRange = getDateRange(frequency2, startYearDate2, endYearDate2, startDate2, endDate2);
 		return renderKpiPeriodTrendsBody(
-				getKpiScoreChange(visionOid1, startDate1, endDate1, startYearDate1, endYearDate1, frequency1, dataFor1, orgId1, empId1, 
+				getKpiScoreChange(visionOid1, startDate1, endDate1, startYearDate1, endYearDate1, frequency1, dataFor1, 
 						measureDataOrganizationOid1, measureDataEmployeeOid1, 
-						visionOid2, startDate2, endDate2, startYearDate2, endYearDate2, frequency2, dataFor2, orgId2, empId2, 
+						visionOid2, startDate2, endDate2, startYearDate2, endYearDate2, frequency2, dataFor2, 
 						measureDataOrganizationOid2, measureDataEmployeeOid2
 				),
 				currentPeriodDateRange,
@@ -258,17 +258,17 @@ public class PeriodTrendsCalUtils {
 	}
 	
 	public static String generateKpiPeriodTrendsExcel(String visionOid1, String startDate1, String endDate1, 
-			String startYearDate1, String endYearDate1, String frequency1, String dataFor1, String orgId1, String empId1,
+			String startYearDate1, String endYearDate1, String frequency1, String dataFor1,
 			String measureDataOrganizationOid1, String measureDataEmployeeOid1,
 			String visionOid2, String startDate2, String endDate2, 
-			String startYearDate2, String endYearDate2, String frequency2, String dataFor2, String orgId2, String empId2,
+			String startYearDate2, String endYearDate2, String frequency2, String dataFor2,
 			String measureDataOrganizationOid2, String measureDataEmployeeOid2) throws ServiceException, Exception {
 		String currentPeriodDateRange = getDateRange(frequency1, startYearDate1, endYearDate1, startDate1, endDate1);
 		String previousPeriodDateRange = getDateRange(frequency2, startYearDate2, endYearDate2, startDate2, endDate2);
 		return generateKpiPeriodTrendsExcel(
-				getKpiScoreChange(visionOid1, startDate1, endDate1, startYearDate1, endYearDate1, frequency1, dataFor1, orgId1, empId1, 
+				getKpiScoreChange(visionOid1, startDate1, endDate1, startYearDate1, endYearDate1, frequency1, dataFor1,
 						measureDataOrganizationOid1, measureDataEmployeeOid1, 
-						visionOid2, startDate2, endDate2, startYearDate2, endYearDate2, frequency2, dataFor2, orgId2, empId2, 
+						visionOid2, startDate2, endDate2, startYearDate2, endYearDate2, frequency2, dataFor2,
 						measureDataOrganizationOid2, measureDataEmployeeOid2
 				),
 				currentPeriodDateRange, 

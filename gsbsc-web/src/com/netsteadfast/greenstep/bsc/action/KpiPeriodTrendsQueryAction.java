@@ -243,8 +243,6 @@ public class KpiPeriodTrendsQueryAction extends BaseJsonAction {
 				this.getFields().get("endYearDate1"), 
 				this.getFields().get("frequency1"), 
 				this.getFields().get("dataFor1"), 
-				this.getFields().get("orgId1"), 
-				this.getFields().get("empId1"), 
 				this.getFields().get("measureDataOrganizationOid1"), 
 				this.getFields().get("measureDataEmployeeOid1"), 
 				this.getFields().get("visionOid2"), 
@@ -254,8 +252,6 @@ public class KpiPeriodTrendsQueryAction extends BaseJsonAction {
 				this.getFields().get("endYearDate2"), 
 				this.getFields().get("frequency2"), 
 				this.getFields().get("dataFor2"), 
-				this.getFields().get("orgId2"), 
-				this.getFields().get("empId2"), 
 				this.getFields().get("measureDataOrganizationOid2"), 
 				this.getFields().get("measureDataEmployeeOid2"));
 		this.body = PeriodTrendsCalUtils.renderKpiPeriodTrendsBody(
@@ -297,8 +293,6 @@ public class KpiPeriodTrendsQueryAction extends BaseJsonAction {
 				this.getFields().get("endYearDate1"), 
 				this.getFields().get("frequency1"), 
 				this.getFields().get("dataFor1"), 
-				this.getFields().get("orgId1"), 
-				this.getFields().get("empId1"), 
 				this.getFields().get("measureDataOrganizationOid1"), 
 				this.getFields().get("measureDataEmployeeOid1"), 
 				this.getFields().get("visionOid2"), 
@@ -308,8 +302,6 @@ public class KpiPeriodTrendsQueryAction extends BaseJsonAction {
 				this.getFields().get("endYearDate2"), 
 				this.getFields().get("frequency2"), 
 				this.getFields().get("dataFor2"), 
-				this.getFields().get("orgId2"), 
-				this.getFields().get("empId2"), 
 				this.getFields().get("measureDataOrganizationOid2"), 
 				this.getFields().get("measureDataEmployeeOid2"));
 		this.success = IS_YES;

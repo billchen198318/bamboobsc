@@ -41,6 +41,7 @@ import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.model.UploadTypes;
@@ -297,16 +298,22 @@ public class BscMobileCardUtils {
 	}
 	
 	public static VisionVO getDashboardScore(String visionOid, String frequency, String startDate, String endDate) throws ServiceException, Exception {
+		String startYear = "";
+		String endYear = "";
+		if (BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency) 
+				|| BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency)
+				|| BscMeasureDataFrequency.FREQUENCY_QUARTER.equals(frequency) ) {
+			startYear = startDate.substring(0, 4);
+			endYear = endDate.substring(0, 4);			
+		}
 		ChainResultObj result = PerformanceScoreChainUtils.getResult(
 				visionOid, 
-				startDate.substring(0, 4), 
-				endDate.substring(0, 4), 
 				startDate, 
-				startDate, 
+				endDate, 
+				startYear, 
+				endYear, 
 				frequency, 
 				BscConstants.MEASURE_DATA_FOR_ALL, 
-				BscConstants.MEASURE_DATA_ORGANIZATION_FULL, 
-				BscConstants.MEASURE_DATA_EMPLOYEE_FULL, 
 				"", 
 				"");
 		if (result.getValue() == null || ( (BscStructTreeObj)result.getValue() ).getVisions() == null || ( (BscStructTreeObj)result.getValue() ).getVisions().size() == 0) {

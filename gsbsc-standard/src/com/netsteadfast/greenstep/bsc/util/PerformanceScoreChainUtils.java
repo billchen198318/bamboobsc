@@ -100,7 +100,7 @@ public class PerformanceScoreChainUtils {
 	}
 	
 	public static Context getContext(String visionOid, String startDate, String endDate, 
-			String startYearDate, String endYearDate, String frequency, String dataFor, String orgId, String empId,
+			String startYearDate, String endYearDate, String frequency, String dataFor, 
 			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
 		Context context = new ContextBase();
 		context.put("visionOid", visionOid);
@@ -144,11 +144,11 @@ public class PerformanceScoreChainUtils {
 	}
 	
 	public static ChainResultObj getResult(String visionOid, String startDate, String endDate, 
-			String startYearDate, String endYearDate, String frequency, String dataFor, String orgId, String empId,
+			String startYearDate, String endYearDate, String frequency, String dataFor,
 			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
 		
 		return getResult(
-				getContext(visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, orgId, empId, measureDataOrganizationOid, measureDataEmployeeOid) 
+				getContext(visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid) 
 		);
 	}	
 	
@@ -201,8 +201,6 @@ public class PerformanceScoreChainUtils {
 		String startYearDate = year;
 		String endYearDate = year;
 		//String dataFor = "all"; // all, organization, employee
-		String orgId = BscConstants.MEASURE_DATA_ORGANIZATION_FULL;
-		String empId = BscConstants.MEASURE_DATA_EMPLOYEE_FULL;		
 		if (BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) || BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency)) {
 			Map<String, String> dateMap = BscMeasureDataFrequency.getWeekOrMonthStartEnd(frequency, dateVal, dateVal);
 			startDate = dateMap.get("startDate");
@@ -218,7 +216,7 @@ public class PerformanceScoreChainUtils {
 			String visionOid = visionData.getKey();
 			Context context = getContext(
 					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, 
-					dataFor, orgId, empId, measureDataOrganizationOid, measureDataEmployeeOid);
+					dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
 			createOrUpdateMonitorItemScore(dateVal, context);			
 		}
 		

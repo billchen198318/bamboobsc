@@ -1,4 +1,6 @@
 <%@page import="com.netsteadfast.greenstep.util.LocaleLanguageUtils"%>
+<%@page import="com.netsteadfast.greenstep.base.Constants"%>
+<%@page import="com.netsteadfast.greenstep.util.ApplicationSiteUtils"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,6 +8,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSystem(), request);
 
 %>
 
@@ -16,6 +20,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <jsp:include page="common-include.jsp"></jsp:include>
+
+
+<!-- Highcharts -->
+<script src="<%=mainSysBasePath%>/highcharts/js/highcharts.js" crossorigin="anonymous"></script>
+<script src="<%=mainSysBasePath%>/highcharts/js/highcharts-3d.js" crossorigin="anonymous"></script>
+<script src="<%=mainSysBasePath%>/highcharts/js/highcharts-more.js" crossorigin="anonymous"></script>
+<script src="<%=mainSysBasePath%>/highcharts/js/modules/heatmap.js" crossorigin="anonymous"></script>
+<script src="<%=mainSysBasePath%>/highcharts/js/modules/exporting.js" crossorigin="anonymous"></script>	
+
 
 <script type="text/javascript">
 
@@ -55,7 +68,7 @@ function refresh_dashboard() {
 				alert( data.message );
 				return;
 			}			
-			
+			showChartForPerspectives(data);
 		},
 		error: function(e) {		
 			$('#myPleaseWait').modal('hide');
@@ -65,6 +78,64 @@ function refresh_dashboard() {
 	});	
 }
 
+function showChartForPerspectives(data) {
+	
+	var chartData = [];
+	for (var p in data.rootVision.perspectives) {
+		chartData.push([data.rootVision.perspectives[p].name, data.rootVision.perspectives[p].score]);
+	}
+	
+    $('#perspectives_container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: data.rootVision.title
+        },
+        subtitle: {
+            text: 'Perspectives item'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Score'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Score: <b>{point.y:.1f}</b>'
+        },
+        series: [{
+            name: 'Item',
+            data: chartData,
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+    
+}
 
 </script>
 
@@ -111,7 +182,7 @@ function refresh_dashboard() {
 <br/>
 
 <div data-role="content">
-	<div id="dashboard_content">
+	<div id="perspectives_container">
 
 <div class="alert alert-info" role="alert">
   <h4 class="alert-heading">Measure-data begin/end date description!</h4>
@@ -121,6 +192,27 @@ function refresh_dashboard() {
 </div>	
 	
 	</div>
+</div>
+
+<br/>
+
+<div data-role="content">
+	<div id="objectives_container">
+	</div>
+</div>
+
+<br/>
+
+<div data-role="content">
+	<div id="kpi_container">
+	</div>	
+</div>
+
+<br/>
+
+<div data-role="content">
+	<div id="kpi_daterange_container">
+	</div>	
 </div>
 
 <%

@@ -111,7 +111,9 @@ function redirectLogin(sel) {
     <label>Please use <b>Chrome</b> (recommend) or <b>Firefox</b> browser, can not support other browser.</label>
     <br/>
     <label>bambooBSC 0.7.0 version</label>
-
+	
+	<a href="../gsbsc-mobile-web/index.action" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click to mobile version</a>
+	
 </form>
 </div>
 
