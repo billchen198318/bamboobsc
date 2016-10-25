@@ -219,7 +219,16 @@ function getTitleContent(backgroundColor, fontColor, title, fnname) {
 <br/>
 
 <div data-role="content">
-	<div id="card_content"></div>
+	<div id="card_content">
+
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Measure-data begin/end date description!</h4>
+  <p>The Frequency is <b>Year / Half of year / Quarter</b> , begin/end date capture <b>yyyy</b> for query.</p>
+  <p>The Frequency is <b>Month / Week</b> , begin/end date capture <b>yyyy-MM</b> for query.</p>
+  <p>The Frequency is <b>Day</b> , begin/end date capture <b>yyyy-MM-dd</b> for query.</p>    
+</div>	
+	
+	</div>
 </div>
 
 <%
