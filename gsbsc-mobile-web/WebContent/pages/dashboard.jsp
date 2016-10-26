@@ -291,6 +291,7 @@ function showChartForObjectives(data) {
 <br/>
 <br/>
 
+
 <div data-role="content">
 	<div id="perspectives_container">
 
@@ -304,21 +305,18 @@ function showChartForObjectives(data) {
 	</div>
 </div>
 
-<br/>
 
 <div data-role="content">
-	<div id="objectives_container">
-	</div>
+	<span id="objectives_container">
+	</span>
 </div>
 
-<br/>
 
 <div data-role="content">
 	<div id="kpi_container">
 	</div>	
 </div>
 
-<br/>
 
 <div data-role="content">
 	<div id="kpi_daterange_container">
