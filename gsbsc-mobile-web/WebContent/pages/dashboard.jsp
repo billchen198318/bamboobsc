@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
+<title>bambooBSC mobile version</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -64,8 +65,12 @@ function refresh_dashboard() {
 				alert( data.message );
 				return;
 			}			
+			$('#perspectives_alert_title').show();
+			$('#objectives_alert_title').show();
+			$('#kpi_alert_title').show();			
 			showChartForPerspectives(data);
 			showChartForObjectives(data);
+			showChartForKpis(data);
 		},
 		error: function(e) {		
 			$('#myPleaseWait').modal('hide');
@@ -168,7 +173,7 @@ function showChartForObjectives(data) {
             },
 
             tooltip: {
-                enabled: false
+                enabled: true
             },
 
             // the value axis
@@ -210,41 +215,139 @@ function showChartForObjectives(data) {
 				maxVal = objectiveItem.score;
 			}
 			
-	        // The speed gauge
-	        $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
-	            yAxis: {
-	                min: 0,
-	                max: maxVal,
-	                title: {
-	                    text: objectiveItem.name
-	                }
-	            },
-
-	            credits: {
-	                enabled: false
-	            },
-
-	            series: [{
-	                name: objectiveItem.name,
-	                data: [ objectiveItem.score ],
-	                dataLabels: {
-	                    format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-	                        ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-	                           '<span style="font-size:12px;color:silver">Score</span></div>'
-	                },
-	                tooltip: {
-	                    valueSuffix: ' km/h'
-	                }
-	            }]
-
-	        }));	
-	        
-	        
+			setSpeedGaugeChart(gaugeOptions, divChartId, objectiveItem.name, maxVal, objectiveItem.score);
 			
 		}
 	}    
 	
 	
+}
+
+
+function showChartForKpis(data) {
+	
+	var chartDivContent = "";
+	for (var p in data.rootVision.perspectives) {
+		for (var o in data.rootVision.perspectives[p].objectives) {
+			var objectiveItem = data.rootVision.perspectives[p].objectives[o];
+			for (var k in objectiveItem.kpis) {
+				var kpi = objectiveItem.kpis[k];
+				var divChartId = "kpi_container_" + kpi.id;
+				chartDivContent += '<div id="' + divChartId +'" style="width: 300px; height: 200px; float: left"></div>';
+			}
+		}
+	}
+	$("#kpi_container").html( chartDivContent );
+	
+    var gaugeOptions = {
+
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '140%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            // the value axis
+            yAxis: {
+                stops: [
+                    [0.1, '#DF5353'], // red
+                    [0.5, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
+                ],
+                lineWidth: 0,
+                minorTickInterval: null,
+                tickAmount: 2,
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            },
+
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: 5,
+                        borderWidth: 0,
+                        useHTML: true
+                    }
+                }
+            }
+        };
+
+	for (var p in data.rootVision.perspectives) {
+		for (var o in data.rootVision.perspectives[p].objectives) {
+			var objectiveItem = data.rootVision.perspectives[p].objectives[o];
+			for (var k in objectiveItem.kpis) {
+				
+				var kpi = objectiveItem.kpis[k];
+				var divChartId = "kpi_container_" + kpi.id;
+				
+				var maxVal = kpi.max;
+				if (kpi.target > maxVal) {
+					maxVal = kpi.target;
+				}
+				if (kpi.score > maxVal) {
+					maxVal = kpi.score;
+				}
+				
+				setSpeedGaugeChart(gaugeOptions, divChartId, kpi.name, maxVal, kpi.score);				
+				
+			}
+		}
+	}
+	
+	
+}
+
+
+function setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
+    // The speed gauge
+    $( '#'+chartId ).highcharts(Highcharts.merge(gaugeOptions, {
+        yAxis: {
+            min: 0,
+            max: maxVal,
+            title: {
+                text: textTitle
+            }
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        series: [{
+            name: textTitle,
+            data: [ score ],
+            dataLabels: {
+                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                       '<span style="font-size:12px;color:silver">Score</span></div>'
+            },
+            tooltip: {
+                valueSuffix: ' Score'
+            }
+        }]
+
+    }));		
 }
 
 </script>
@@ -293,35 +396,48 @@ function showChartForObjectives(data) {
 
 
 <div data-role="content">
-	<div id="perspectives_container">
-
-<div class="alert alert-info" role="alert">
-  <h4 class="alert-heading">Measure-data begin/end date description!</h4>
-  <p>The Frequency is <b>Year / Half of year / Quarter</b> , begin/end date capture <b>yyyy</b> for query.</p>
-  <p>The Frequency is <b>Month / Week</b> , begin/end date capture <b>yyyy-MM</b> for query.</p>
-  <p>The Frequency is <b>Day</b> , begin/end date capture <b>yyyy-MM-dd</b> for query.</p>    
-</div>	
-	
+	<div class="alert alert-success collapse" role="alert" id="perspectives_alert_title">
+	  <strong>Perspectives</strong>
 	</div>
-</div>
+	<div id="perspectives_container">
+		<div class="alert alert-info" role="alert">
+		  <h4 class="alert-heading">Measure-data begin/end date description!</h4>
+		  <p>The Frequency is <b>Year / Half of year / Quarter</b> , begin/end date capture <b>yyyy</b> for query.</p>
+		  <p>The Frequency is <b>Month / Week</b> , begin/end date capture <b>yyyy-MM</b> for query.</p>
+		  <p>The Frequency is <b>Day</b> , begin/end date capture <b>yyyy-MM-dd</b> for query.</p>    
+		</div>		
+	</div>
+
+<table>
+<tr>
+<td>	
+	<div class="alert alert-success collapse" role="alert" id="objectives_alert_title">
+	  <strong>Strategy objectives</strong>
+	</div>
+	<div id="objectives_container">
+	</div>
+</td>
+</tr>
+</table>
 
 
-<div data-role="content">
-	<span id="objectives_container">
-	</span>
-</div>
-
-
-<div data-role="content">
+<table>
+<tr>
+<td>		
+	<div class="alert alert-success collapse" role="alert" id="kpi_alert_title">
+	  <strong>KPIs</strong>
+	</div>
 	<div id="kpi_container">
-	</div>	
-</div>
-
-
-<div data-role="content">
+	</div>
+</td>
+</tr>
+</table>
+	
 	<div id="kpi_daterange_container">
-	</div>	
+	</div>		
+	
 </div>
+
 
 <%
 String realPath = getServletContext().getRealPath("/");
