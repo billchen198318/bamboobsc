@@ -22,8 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>/highcharts/js/highcharts.js"></script>
 <script src="<%=basePath%>/highcharts/js/highcharts-3d.js"></script>
 <script src="<%=basePath%>/highcharts/js/highcharts-more.js"></script>
-<script src="<%=basePath%>/highcharts/js/modules/heatmap.js"></script>
 <script src="<%=basePath%>/highcharts/js/modules/exporting.js"></script>	
+<script src="<%=basePath%>/highcharts/js/modules/solid-gauge.js"></script>
 
 
 <script type="text/javascript">
@@ -65,6 +65,7 @@ function refresh_dashboard() {
 				return;
 			}			
 			showChartForPerspectives(data);
+			showChartForObjectives(data);
 		},
 		error: function(e) {		
 			$('#myPleaseWait').modal('hide');
@@ -131,6 +132,119 @@ function showChartForPerspectives(data) {
         }]
     });
     
+}
+
+function showChartForObjectives(data) {
+	
+	var chartDivContent = "";
+	for (var p in data.rootVision.perspectives) {
+		for (var o in data.rootVision.perspectives[p].objectives) {
+			var objectiveItem = data.rootVision.perspectives[p].objectives[o];
+			var divChartId = "objectives_container_" + objectiveItem.objId;
+			chartDivContent += '<div id="' + divChartId +'" style="width: 300px; height: 200px; float: left"></div>';
+		}
+	}
+	$("#objectives_container").html( chartDivContent );
+	
+    var gaugeOptions = {
+
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '140%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            tooltip: {
+                enabled: false
+            },
+
+            // the value axis
+            yAxis: {
+                stops: [
+                    [0.1, '#DF5353'], // red
+                    [0.5, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
+                ],
+                lineWidth: 0,
+                minorTickInterval: null,
+                tickAmount: 2,
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            },
+
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: 5,
+                        borderWidth: 0,
+                        useHTML: true
+                    }
+                }
+            }
+        };
+
+	for (var p in data.rootVision.perspectives) {
+		for (var o in data.rootVision.perspectives[p].objectives) {
+			var objectiveItem = data.rootVision.perspectives[p].objectives[o];
+			var divChartId = "objectives_container_" + objectiveItem.objId;
+			
+			var maxVal = objectiveItem.target;
+			if (objectiveItem.score > maxVal) {
+				maxVal = objectiveItem.score;
+			}
+			
+	        // The speed gauge
+	        $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
+	            yAxis: {
+	                min: 0,
+	                max: maxVal,
+	                title: {
+	                    text: objectiveItem.name
+	                }
+	            },
+
+	            credits: {
+	                enabled: false
+	            },
+
+	            series: [{
+	                name: objectiveItem.name,
+	                data: [ objectiveItem.score ],
+	                dataLabels: {
+	                    format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+	                        ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+	                           '<span style="font-size:12px;color:silver">Score</span></div>'
+	                },
+	                tooltip: {
+	                    valueSuffix: ' km/h'
+	                }
+	            }]
+
+	        }));	
+	        
+	        
+			
+		}
+	}    
+	
+	
 }
 
 </script>
