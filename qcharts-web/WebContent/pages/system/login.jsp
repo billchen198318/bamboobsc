@@ -16,9 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="./bootstrap-4.0.0-alpha.4/css/bootstrap.css" crossorigin="anonymous">
 <script src="./bootstrap-4.0.0-alpha.4/js/bootstrap.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1.min.js"></script>
+
 
 <style type="text/css">
 
@@ -55,11 +56,37 @@ function redirectLogin(sel) {
     window.location = '<%=basePath%>login.action?lang=' + sel.value;
 }
 
+function submitLoginForm() {	
+	document.loginForm.submit();
+	$('#myPleaseWait').modal('show');	
+}
+
 </script>
 
 </head>
 
 <body>
+
+<!-- Modal Start here-->
+<div class="modal fade bs-example-modal-sm" id="myPleaseWait" tabindex="-1"
+    role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="glyphicon glyphicon-time">
+                    </span>Please wait!
+                 </h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <img alt="loading" src="./patch_flat_themes_1_11_icons/loadingAnimation.gif">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal ends Here -->
 
 <div class="container">   
 <form class="form-signin" name="loginForm" id="loginForm" action="./login.action" method="post">
@@ -105,7 +132,7 @@ function redirectLogin(sel) {
     <p class="bg-warning"><s:property value="pageMessage" escapeJavaScript="true"/></p>
     </s:if>   
    
-    <button type="submit" class="btn btn-lg btn-primary btn-block" name="submit" type="submit">${action.getText('LOGIN_btnLogin')}</button>
+    <button type="button" class="btn btn-lg btn-primary btn-block" name="btnSubmit" onclick="submitLoginForm()">${action.getText('LOGIN_btnLogin')}</button>
    
     <br/>
     <label>Please use <b>Chrome</b> (recommend) or <b>Firefox</b> browser, can not support other browser.</label>
