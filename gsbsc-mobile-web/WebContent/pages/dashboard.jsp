@@ -67,10 +67,11 @@ function refresh_dashboard() {
 			}			
 			$('#perspectives_alert_title').show();
 			$('#objectives_alert_title').show();
-			$('#kpi_alert_title').show();			
+			$('#kpi_alert_title').show();
 			showChartForPerspectives(data);
 			showChartForObjectives(data);
 			showChartForKpis(data);
+			showChartForKpiDateRange(data);
 		},
 		error: function(e) {		
 			$('#myPleaseWait').modal('hide');
@@ -350,6 +351,51 @@ function setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
     }));		
 }
 
+
+function showChartForKpiDateRange(data) {
+	
+	if ( null == data.categories || data.categories.length < 2 ) {
+		return;
+	}
+	
+	$('#kpi_daterange_alert_title').show();
+	
+    $('#kpi_daterange_container').highcharts({
+        title: {
+            text: 'Trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'KPI Score',
+            x: -20
+        },
+        xAxis: {
+            categories: data.categories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.series
+    });
+    
+}
+
 </script>
 
 </head>
@@ -433,8 +479,14 @@ function setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
 </tr>
 </table>
 	
+	
+	<div class="alert alert-success collapse" role="alert" id="kpi_daterange_alert_title">
+	  <strong>Trend</strong>
+	</div>
+	
 	<div id="kpi_daterange_container">
 	</div>		
+	
 	
 </div>
 

@@ -21,6 +21,8 @@
  */
 package com.netsteadfast.greenstep.bsc.mobile.action;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +46,7 @@ import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.util.BscMobileCardUtils;
 import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
@@ -65,6 +68,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	private VisionVO rootVision = new VisionVO();
 	private PerspectiveVO rootPerspective = new PerspectiveVO();
 	private ObjectiveVO rootObjective = new ObjectiveVO();
+	
+	// 給 Dashboard 頁面 trend line chart 用的資料
+	private List<String> categories = new LinkedList<String>();
+	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();
 	
 	// copy from KpiReportContentQueryAction
 	private void setDateValue() throws Exception {
@@ -326,6 +333,27 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		}
 		// 準備要顯示 highcharts 要用的資料
 		
+		// 給 Dashboard 頁面 trend line chart 用的資料
+		int c = 0;
+		for (PerspectiveVO perspective : this.rootVision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				for (KpiVO kpi : objective.getKpis()) {
+					Map<String, Object> mapData = new HashMap<String, Object>();
+					List<Float> rangeScore = new LinkedList<Float>();
+					for (DateRangeScoreVO dateRangeScore : kpi.getDateRangeScores()) {
+						if (c == 0) { // 用第1筆的資料來組  categories 就可已了
+							categories.add( dateRangeScore.getDate() );
+						}
+						rangeScore.add( dateRangeScore.getScore() );
+					}					
+					mapData.put("name", kpi.getName());
+					mapData.put("data", rangeScore);
+					this.series.add(mapData);
+					c++;
+				}				
+			}
+		}
+		
 	}
 	
 	@JSON(serialize=false)
@@ -522,6 +550,16 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	@Override
 	public Map<String, String> getFieldsMessage() {
 		return this.fieldsMessage;
+	}
+
+	@JSON
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getSeries() {
+		return series;
 	}
 		
 }
