@@ -52,8 +52,8 @@ function refresh_content() {
 		cache: false,
 		success: function(data) {
 			$('#myPleaseWait').modal('hide');
-			if ( data.success != 'Y' ) {				
-				alert( data.message );
+			if ( data.success != 'Y' ) {
+				bootbox.alert( data.message );
 				return;
 			}
 			
@@ -84,7 +84,7 @@ function query_perspective(uploadOid) {
 		success: function(data) {
 			$('#myPleaseWait').modal('hide');
 			if ( data.success != 'Y' ) {				
-				alert( data.message );
+				bootbox.alert( data.message );
 				return;
 			}
 			
@@ -117,7 +117,7 @@ function query_objectiveByPerspective(uploadOid, perspectiveOid) {
 		success: function(data) {
 			$('#myPleaseWait').modal('hide');
 			if ( data.success != 'Y' ) {				
-				alert( data.message );
+				bootbox.alert( data.message );
 				return;
 			}
 			
@@ -151,7 +151,7 @@ function query_kpiByObjective(uploadOid, objectiveOid) {
 		success: function(data) {
 			$('#myPleaseWait').modal('hide');
 			if ( data.success != 'Y' ) {				
-				alert( data.message );
+				bootbox.alert( data.message );
 				return;
 			}
 			

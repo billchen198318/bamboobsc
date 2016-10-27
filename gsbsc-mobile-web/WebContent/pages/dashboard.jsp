@@ -62,7 +62,7 @@ function refresh_dashboard() {
 		success: function(data) {
 			$('#myPleaseWait').modal('hide');
 			if ( data.success != 'Y' ) {				
-				alert( data.message );
+				bootbox.alert( data.message );
 				return;
 			}			
 			$('#perspectives_alert_title').show();
