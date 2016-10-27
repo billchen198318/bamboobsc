@@ -159,7 +159,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 			date2 = StringUtils.defaultString( this.getFields().get("date2") ).replaceAll("-", "/");
 			if (!SimpleUtils.isDate(date1) || !SimpleUtils.isDate(date2)) {
 				throw new ControllerException(this.getText("MESSAGE.ScorecardQueryContentAction_01"));
-			}			
+			}
+			if ( Integer.parseInt(date1.replaceAll("-", "").replaceAll("/", "")) > Integer.parseInt(date2.replaceAll("-", "").replaceAll("/", "")) ) {
+				throw new ControllerException( "Date range: " + date1 + " to " + date2 + " error!" );
+			}				
 		}
 		
 		this.getFields().put("startDate", date1);
