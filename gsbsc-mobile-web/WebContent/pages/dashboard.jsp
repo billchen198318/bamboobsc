@@ -85,7 +85,7 @@ function showChartForPerspectives(data) {
 	
 	var chartData = [];
 	for (var p in data.rootVision.perspectives) {
-		chartData.push([data.rootVision.perspectives[p].name, data.rootVision.perspectives[p].score]);
+		chartData.push( [ data.rootVision.perspectives[p].name, getScore(data.rootVision.perspectives[p].score) ] );
 	}
 	
     $('#perspectives_container').highcharts({
@@ -337,7 +337,7 @@ function setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
 
         series: [{
             name: textTitle,
-            data: [ score ],
+            data: [ getScore(score) ],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
@@ -394,6 +394,13 @@ function showChartForKpiDateRange(data) {
         series: data.series
     });
     
+}
+
+
+function getScore(score) {
+	var str = ( score ).toFixed(2) + '';
+	str = str.replace(".00", "");
+	return parseFloat(str);
 }
 
 </script>
