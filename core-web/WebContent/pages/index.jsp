@@ -80,6 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/highcharts/js/highcharts-more.js"></script>
 	<script src="<%=basePath%>/highcharts/js/modules/heatmap.js"></script>
 	<script src="<%=basePath%>/highcharts/js/modules/exporting.js"></script>	
+	<script src="<%=basePath%>/highcharts/js/modules/solid-gauge.js"></script>
 	
 	
 	<!-- ################################################################################ -->

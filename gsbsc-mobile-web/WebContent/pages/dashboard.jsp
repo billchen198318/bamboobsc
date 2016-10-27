@@ -302,13 +302,11 @@ function showChartForKpis(data) {
 				var kpi = objectiveItem.kpis[k];
 				var divChartId = "kpi_container_" + kpi.id;
 				
-				var maxVal = kpi.max;
-				if (kpi.target > maxVal) {
-					maxVal = kpi.target;
-				}
+				var maxVal = kpi.target;
 				if (kpi.score > maxVal) {
 					maxVal = kpi.score;
 				}
+				maxVal = parseInt(maxValue+'', 10);
 				
 				setSpeedGaugeChart(gaugeOptions, divChartId, kpi.name, maxVal, kpi.score);				
 				

@@ -240,7 +240,7 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 		*/
 
 		content += '<tr>';
-		content += '<td colspan="2" bgcolor="#ffffff" align="center" ><div id="BSC_PROG001D0006Q_charts_' + kpis[k].id + '" style="width:250px;height:200px;" ></td>';
+		content += '<td colspan="2" bgcolor="#ffffff" align="center" ><div id="BSC_PROG001D0006Q_charts_' + kpis[k].id + '" style="width:300px;height:200px;" ></td>';
 		content += '</tr>';					
 		
 	}
@@ -249,6 +249,7 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 	//dojo.byId("BSC_PROG001D0006Q_contentRelationKpis").innerHTML = content;
 	dojo.html.set(dojo.byId("BSC_PROG001D0006Q_contentRelationKpis"), content, {extractContent: true, parseContent: true});
 	
+	/*
 	for (var k in kpis) {
 		var target = kpis[k].target;
 		var score = kpis[k].score;
@@ -278,7 +279,117 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 		           }
 		       }
 		});		
-	}	
+	}
+	*/
+	
+    var gaugeOptions = {
+
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '140%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            // the value axis
+            yAxis: {
+                stops: [
+                    [0.1, '#DF5353'], // red
+                    [0.5, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
+                ],
+                lineWidth: 0,
+                minorTickInterval: null,
+                tickAmount: 2,
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            },
+
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: 5,
+                        borderWidth: 0,
+                        useHTML: true
+                    }
+                }
+            }
+        };	
+	
+	for (var k in kpis) {
+		var target = kpis[k].target;
+		var score = kpis[k].score;
+		var id = 'BSC_PROG001D0006Q_charts_' + kpis[k].id;
+		
+		if (document.getElementById(id)==null) {
+			alert('error lost id of div: ' + id);
+			continue;
+		} 
+		
+		var maxValue = target;
+		if (maxValue < score) {
+			maxValue = score;
+		}
+		maxValue = parseInt(maxValue+'', 10);
+		
+		var labelString = kpis[k].name + " ( " + score + " ) ";
+		
+		
+		var scoreStr = ( score ).toFixed(2) + '';
+		scoreStr = scoreStr.replace(".00", "");
+		score = parseFloat(scoreStr);		
+		
+	    $( '#'+id ).highcharts(Highcharts.merge(gaugeOptions, {
+	        yAxis: {
+	            min: 0,
+	            max: maxValue,
+	            title: {
+	                text: labelString
+	            }
+	        },
+
+	        credits: {
+	            enabled: false
+	        },
+
+	        series: [{
+	            name:  kpis[k].name,
+	            data: [ score ],
+	            dataLabels: {
+	                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+	                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+	                       '<span style="font-size:12px;color:silver">Score</span></div>'
+	            },
+	            tooltip: {
+	                valueSuffix: ' Score'
+	            }
+	        }]
+
+	    }));			
+		
+		
+	}
+	
 	
 }
 
@@ -312,7 +423,7 @@ function ${programId}_page_message() {
 	
 	<table border="0" width="100%" cellpadding="0" cellspacing="0" >
 		<tr valign="top">
-			<td width="80%" height="100%">
+			<td height="100%">
 			
 				<div dojoType="dijit.layout.BorderContainer" style="height:900px">
 					<div dojoType="dijit.layout.ContentPane" region="center" style="overflow:hidden">
@@ -321,7 +432,7 @@ function ${programId}_page_message() {
 				</div>    						
 				
 			</td>			
-			<td width="20%" height="100%">
+			<td width="310px" height="100%">
 				
 				<table border="0" width="100%" cellpadding="1" cellspacing="1" >
 					<tr>
