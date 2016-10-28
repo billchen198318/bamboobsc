@@ -71,9 +71,9 @@ contact: chen.xin.nien@gmail.com
 <br/>8 OLAP Client report.
 <br/>
 <img src="https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/bamboobsc-pic/OLAP-CLIENT.png"/><br/>
-<br/>9 Mobile version KPIs view.
+<br/>9 Mobile version dashboard view.
 <br/>
-<img src="https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/bamboobsc-pic/MOBILE_KPI_VIEW.png"/><br/>
+<img src="https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/bamboobsc-pic/MOBILE-02.png"/><br/>
 <br/>10 BSC strategy-map.
 <br/>
 <img src="https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/bamboobsc-pic/BSC-STRATEGY-MAP.png"/><br/>
