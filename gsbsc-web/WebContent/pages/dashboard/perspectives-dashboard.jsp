@@ -68,7 +68,8 @@ function BSC_PROG003D0004Q_query() {
 				'fields.dataFor'					:	'all',
 				'fields.measureDataOrganizationOid'	:	_gscore_please_select_id,
 				'fields.measureDataEmployeeOid'		:	_gscore_please_select_id,
-				'fields.frequency'					:	dijit.byId("BSC_PROG003D0004Q_frequency").get("value")
+				'fields.frequency'					:	dijit.byId("BSC_PROG003D0004Q_frequency").get("value"),
+				'fields.nobody'					: "Y"
 			}, 
 			'json', 
 			_gscore_dojo_ajax_timeout,

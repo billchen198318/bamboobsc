@@ -73,7 +73,8 @@ function BSC_PROG003D0009Q_query() {
 				'fields.dataFor'					:	dijit.byId("BSC_PROG003D0009Q_dataFor").get("value"),
 				'fields.measureDataOrganizationOid'	:	dijit.byId("BSC_PROG003D0009Q_measureDataOrganizationOid").get("value"),
 				'fields.measureDataEmployeeOid'		:	dijit.byId("BSC_PROG003D0009Q_measureDataEmployeeOid").get("value"),
-				'fields.frequency'					:	dijit.byId("BSC_PROG003D0009Q_frequency").get("value")
+				'fields.frequency'					:	dijit.byId("BSC_PROG003D0009Q_frequency").get("value"),
+				'fields.nobody'					: "Y"
 			}, 
 			'json', 
 			_gscore_dojo_ajax_timeout,
@@ -86,11 +87,10 @@ function BSC_PROG003D0009Q_query() {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
-				/*
-				BSC_PROG003D0009Q_showTables( data );
-				BSC_PROG003D0009Q_showKpisBarCharts( data );
-				BSC_PROG003D0009Q_showKpisMeterGauge( data );
-				*/
+				BSC_PROG003D0009Q_showChartForPerspectives(data);
+				BSC_PROG003D0009Q_showChartForObjectives(data);
+				BSC_PROG003D0009Q_showChartForKpis(data);
+				BSC_PROG003D0009Q_showChartForKpiDateRange(data);
 			}, 
 			function(error) {
 				alert(error);
@@ -146,8 +146,332 @@ function BSC_PROG003D0009Q_setFrequencyValue() {
 }
 
 
-function BSC_PROG003D0009Q_clearContent() {
+function BSC_PROG003D0009Q_showChartForPerspectives(data) {
+		
+	dojo.byId("BSC_PROG003D0009Q_perspectives_alert_title").innerHTML = '<span class="isa_info"><b>Perspectives</b></span>';
 	
+	var chartData = [];
+	for (var p in data.perspectiveItems) {
+		var score = parseFloat( BSC_PROG003D0009Q_parseScore(data.perspectiveItems[p].score) );
+		chartData.push( [ data.perspectiveItems[p].name, score ] );
+	}	
+	
+    $('#BSC_PROG003D0009Q_perspectives_container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: data.subTitle
+        },
+        subtitle: {
+            text: 'Perspectives item'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Score'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Score: <b>{point.y:.1f}</b>'
+        },
+        series: [{
+            name: 'Item',
+            data: chartData,
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+    
+}
+
+
+function BSC_PROG003D0009Q_showChartForObjectives(data) {
+	
+	dojo.byId("BSC_PROG003D0009Q_objectives_alert_title").innerHTML = '<span class="isa_info"><b>Strategy objectives</b></span>';
+	
+	var chartDivContent = "";
+	for (var p in data.perspectiveItems) {
+		for (var o in data.perspectiveItems[p].objectives) {
+			var objectiveItem = data.perspectiveItems[p].objectives[o];
+			var divChartId = "BSC_PROG003D0009Q_objectives_container_" + objectiveItem.objId;
+			chartDivContent += '<div id="' + divChartId +'" style="width: 300px; height: 200px; float: left"></div>';
+		}
+	}
+	$("#BSC_PROG003D0009Q_objectives_container").html( chartDivContent );
+	
+    var gaugeOptions = {
+
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '140%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            // the value axis
+            yAxis: {
+                stops: [
+                    [0.1, '#DF5353'], // red
+                    [0.5, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
+                ],
+                lineWidth: 0,
+                minorTickInterval: null,
+                tickAmount: 2,
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            },
+
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: 5,
+                        borderWidth: 0,
+                        useHTML: true
+                    }
+                }
+            }
+        };
+
+	for (var p in data.perspectiveItems) {
+		for (var o in data.perspectiveItems[p].objectives) {
+			var objectiveItem = data.perspectiveItems[p].objectives[o];
+			var divChartId = "BSC_PROG003D0009Q_objectives_container_" + objectiveItem.objId;
+			
+			var maxVal = objectiveItem.target;
+			if (objectiveItem.score > maxVal) {
+				maxVal = objectiveItem.score;
+			}
+			
+			BSC_PROG003D0009Q_setSpeedGaugeChart(gaugeOptions, divChartId, objectiveItem.name, maxVal, objectiveItem.score);
+			
+		}
+	}    
+	
+	
+}
+
+
+function BSC_PROG003D0009Q_showChartForKpis(data) {
+	
+	dojo.byId("BSC_PROG003D0009Q_kpis_alert_title").innerHTML = '<span class="isa_info"><b>KPIs</b></span>';
+	
+	var chartDivContent = "";
+	for (var p in data.perspectiveItems) {
+		for (var o in data.perspectiveItems[p].objectives) {
+			var objectiveItem = data.perspectiveItems[p].objectives[o];
+			for (var k in objectiveItem.kpis) {
+				var kpi = objectiveItem.kpis[k];
+				var divChartId = "BSC_PROG003D0009Q_kpi_container_" + kpi.id;
+				chartDivContent += '<div id="' + divChartId +'" style="width: 300px; height: 200px; float: left"></div>';
+			}
+		}
+	}
+	$("#BSC_PROG003D0009Q_kpis_container").html( chartDivContent );
+	
+    var gaugeOptions = {
+
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '140%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            // the value axis
+            yAxis: {
+                stops: [
+                    [0.1, '#DF5353'], // red
+                    [0.5, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
+                ],
+                lineWidth: 0,
+                minorTickInterval: null,
+                tickAmount: 2,
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            },
+
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: 5,
+                        borderWidth: 0,
+                        useHTML: true
+                    }
+                }
+            }
+        };
+
+	for (var p in data.perspectiveItems) {
+		for (var o in data.perspectiveItems[p].objectives) {
+			var objectiveItem = data.perspectiveItems[p].objectives[o];
+			for (var k in objectiveItem.kpis) {
+				
+				var kpi = objectiveItem.kpis[k];
+				var divChartId = "BSC_PROG003D0009Q_kpi_container_" + kpi.id;
+				
+				var maxVal = kpi.target;
+				if (kpi.score > maxVal) {
+					maxVal = kpi.score;
+				}
+				maxVal = parseInt(maxVal+'', 10);
+				
+				BSC_PROG003D0009Q_setSpeedGaugeChart(gaugeOptions, divChartId, kpi.name, maxVal, kpi.score);				
+				
+			}
+		}
+	}
+	
+	
+}
+
+
+function BSC_PROG003D0009Q_setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
+    // The speed gauge
+    $( '#'+chartId ).highcharts(Highcharts.merge(gaugeOptions, {
+        yAxis: {
+            min: 0,
+            max: maxVal,
+            title: {
+                text: textTitle
+            }
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        series: [{
+            name: textTitle,
+            data: [ parseFloat( BSC_PROG003D0009Q_parseScore(score) ) ],
+            dataLabels: {
+                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                       '<span style="font-size:12px;color:silver">Score</span></div>'
+            },
+            tooltip: {
+                valueSuffix: ' Score'
+            }
+        }]
+
+    }));		
+}
+
+
+function BSC_PROG003D0009Q_showChartForKpiDateRange(data) {
+	
+	if ( null == data.categories || data.categories.length < 2 ) {
+		return;
+	}
+	
+	dojo.byId("BSC_PROG003D0009Q_kpi_daterange_alert_title").innerHTML = '<span class="isa_info"><b>Trend</b></span>';
+	
+    $('#BSC_PROG003D0009Q_kpi_daterange_container').highcharts({
+        title: {
+            text: 'Trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'KPI Score',
+            x: -20
+        },
+        xAxis: {
+            categories: data.categories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.series
+    });
+    
+}
+
+
+function BSC_PROG003D0009Q_clearContent() {
+	// only clear Trend chart
+	dojo.byId("BSC_PROG003D0009Q_kpi_daterange_alert_title").innerHTML = "";
+	dojo.byId("BSC_PROG003D0009Q_kpi_daterange_container").innerHTML = "";
 }
 
 function BSC_PROG003D0009Q_parseScore( score ) {
@@ -301,9 +625,45 @@ function ${programId}_page_message() {
 		</tr>
 	</table>	
 	
-
-	<!-- chart div put this -->
+	<br/>
+	<br/>
 	
+	<div id="BSC_PROG003D0009Q_perspectives_alert_title"></div>
+	<div id="BSC_PROG003D0009Q_perspectives_container"></div>
+	
+	<br/>
+	<br/>
+	
+<table border="0">
+<tr>
+<td>	
+	<div id="BSC_PROG003D0009Q_objectives_alert_title"></div>
+	<div id="BSC_PROG003D0009Q_objectives_container"></div>	
+</td>
+</tr>
+</table>	
+	
+	<br/>
+	<br/>
+	
+<table border="0">
+<tr>
+<td>	
+	<div id="BSC_PROG003D0009Q_kpis_alert_title"></div>
+	<div id="BSC_PROG003D0009Q_kpis_container"></div>			
+</td>
+</tr>
+</table>	
+	
+	<br/>
+	<br/>
+	
+	<div id="BSC_PROG003D0009Q_kpi_daterange_alert_title"></div>
+	<div id="BSC_PROG003D0009Q_kpi_daterange_container"></div>			
+
+	<br/>
+	<br/>
+			
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
 </html>

@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- dlg -->			
 ${dialogData}
 
-<div id="pleaseWaitDlg" dojoType="dojox/widget/DialogSimple" style="width: 420px; height: 140px" title="Please wait">
+<div id="pleaseWaitDlg" dojoType="dojox/widget/DialogSimple" style="width: 420px; height: 150px" title="Please wait">
 	<table border="0" width="100%">
 		<tr valign="top">
 			<td>

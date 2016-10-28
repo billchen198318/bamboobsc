@@ -42,7 +42,9 @@ function refresh_dashboard() {
 		date2 = date2.replace("\-", "/").replace("\-", "/");
 	}
 	
-	$("#card_content").html('');
+	// only clear Trend chart
+	$('#kpi_daterange_alert_title').hide();
+	$("#kpi_daterange_container").html('');
 	
 	$('#myPleaseWait').modal('show');
 	$.ajax({

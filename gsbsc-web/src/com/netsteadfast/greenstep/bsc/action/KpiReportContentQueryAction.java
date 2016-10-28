@@ -92,6 +92,11 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	
 	private List<PerspectiveVO> perspectiveItems = new LinkedList<PerspectiveVO>(); // 給 04 - Perspectives Dashboard 用的
 	
+	private String subTitle = ""; // 給 09 - Dashboard 的 perspectives subTitle 用的
+	// 給 09 - Dashboard 頁面 trend line chart 用的資料
+	private List<String> categories = new LinkedList<String>();
+	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();	
+	
 	private InputStream inputStream;
 	
 	public KpiReportContentQueryAction() {
@@ -383,11 +388,13 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	
 	private void fillLineChartData(BscStructTreeObj treeObj) throws Exception {
 		
+		int c = 0; // 給 09 - Dashboard 用的 , 判斷 用第1筆的資料來組  categories 的變數
 		List<VisionVO> visions = treeObj.getVisions();
 		for (VisionVO vision : visions) {
 			if ( !vision.getOid().equals( this.getFields().get("visionOid") ) ) {
 				continue;
 			}
+			this.subTitle = vision.getTitle(); // 在  Dashboard 查詢時, 一定要選 vision, 所以只會有一個 vision , 給 09 - Dashboard 用的 
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				
 				this.perspectiveItems.add( perspective ); // 給 04 - Perspectives Dashboard 用的
@@ -406,6 +413,23 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 							dataList.add(dateScoreList);							
 						}						
 						this.lineChartValues.add(dataList);
+						
+						// ----------------------------------------------------------------------
+						// 給 09 - Dashboard 用的 
+						// 給 Dashboard 頁面 trend line chart 用的資料
+						Map<String, Object> mapData = new HashMap<String, Object>();
+						List<Float> rangeScore = new LinkedList<Float>();
+						for (DateRangeScoreVO dateRangeScore : kpi.getDateRangeScores()) {
+							if (c == 0) { // 用第1筆的資料來組  categories 就可已了
+								categories.add( dateRangeScore.getDate() );
+							}
+							rangeScore.add( dateRangeScore.getScore() );
+						}					
+						mapData.put("name", kpi.getName());
+						mapData.put("data", rangeScore);
+						this.series.add(mapData);
+						c++;					
+						// ----------------------------------------------------------------------
 						
 					}					
 				}				
@@ -432,6 +456,9 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		this.fillPerspectivesPieChartData(treeObj);
 		this.fillPerspectivesBarChartData(treeObj);
 		this.fillLineChartData(treeObj);
+		if (YesNo.YES.equals(this.getFields().get("nobody"))) {
+			this.body = "";
+		}
 	}
 	
 	private void getPdf() throws ControllerException, AuthorityException, ServiceException, Exception {
@@ -699,6 +726,21 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		return perspectiveItems;
 	}
 	
+	@JSON
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	@JSON
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getSeries() {
+		return series;
+	}
+
 	@JSON(serialize=false)
 	public InputStream getInputStream() {
 		if (this.inputStream==null) {
