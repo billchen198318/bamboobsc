@@ -214,6 +214,27 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	}		
 	
 	/**
+	 * bsc.dashboardNewAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG003D0009Q")
+	public String dashboardNew() throws Exception {
+		try {
+			this.initData();
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;		
+	}			
+	
+	/**
 	 * bsc.kpisDashboardExcelAction.action
 	 */
 	@ControllerMethodAuthority(programId="BSC_PROG003D0006Q")
