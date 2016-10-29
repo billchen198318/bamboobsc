@@ -445,6 +445,28 @@ jsPlumb.ready(function () {
     <s:if test=" \"Y\" == printMode ">
     setTimeout( function(){ print(); }, 2000 );    
     </s:if>
+
+    
+    <s:if test=" \"Y\" != printMode && divItems!=null && divItems.size!=0">
+    // node click event
+   $('#canvas > div').each(function () {
+	   
+	   var idStr = this.id;
+	   if ( null == idStr || "" == idStr ) {
+		   return;
+	   }
+	   if ( idStr.indexOf("jsPlumb") > -1 ) {
+		   return;
+	   }
+	   $("#" + idStr).dblclick(function() {
+		   parent.BSC_PROG002D0007Q_showObjectiveItem(idStr); // 請參考 page.js
+	   });
+	   
+   });   
+   
+   toastr.info( "Double Click Strategy objectives item, will show detail." );
+   
+   </s:if>
     
 });
 
