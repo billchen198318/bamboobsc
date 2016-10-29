@@ -246,7 +246,7 @@ function ${programId}_page_message() {
         </div>
         
         
-        <script src="<%=mainSysBasePath%>/jsPlumb/js/jsPlumb-2.1.4.js"></script>
+        <script src="<%=mainSysBasePath%>/jsPlumb/js/jsPlumb-2.1.8.js"></script>
         
         
 <script type="text/javascript">

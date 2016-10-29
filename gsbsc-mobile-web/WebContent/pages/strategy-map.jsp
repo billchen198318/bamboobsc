@@ -184,7 +184,7 @@ function refresh_map() {
         </div>
         
         
-        <script src="<%=basePath%>/jsPlumb/js/jsPlumb-2.1.4.js"></script>
+        <script src="<%=basePath%>/jsPlumb/js/jsPlumb-2.1.8.js"></script>
 
 <script type="text/javascript">
 
