@@ -26,7 +26,12 @@
 			<result name="input">/pages/strategy-map/strategy-map-management.jsp</result>		
 			<result name="success">/pages/strategy-map/strategy-map-management.jsp</result>
 		</action>		
-		
+
+		<action name="bsc.strategyMapOpenStrategyObjectiveItemWinDlgAction" class="bsc.web.controller.StrategyMapManagementAction" method="doOpenStrategyObjectiveItemWinDlg">
+			<result name="input">/pages/strategy-map/strategy-objective-detail.jsp</result>		
+			<result name="success">/pages/strategy-map/strategy-objective-detail.jsp</result>
+		</action>
+				
 	</package>
 	
 	<package name="bsc-strategyMap-json" extends="bsc-default,json-default" namespace="/" >			

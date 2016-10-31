@@ -36,6 +36,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.chain.SimpleChain;
@@ -44,12 +45,17 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
+import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.vo.StrategyMapItemsVO;
+import com.netsteadfast.greenstep.po.hbm.BbObjective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
@@ -58,12 +64,14 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 public class StrategyMapManagementAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = -818474109895868062L;
 	private IVisionService<VisionVO, BbVision, String> visionService;
+	private IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
 	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private String visionOid = "";
 	private List<String> divItems = new ArrayList<String>();
 	private List<String> cssItems = new ArrayList<String>();
 	private List<String> conItems = new ArrayList<String>();
 	private String printMode = YesNo.NO;
+	private ObjectiveVO objective; // 給 dbclick 地圖上的 策略目標方塊 , 開啟顯示策略目標內容Dialog用的
 	
 	public StrategyMapManagementAction() {
 		super();
@@ -81,6 +89,17 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 		this.visionService = visionService;
 	}
 	
+	public IObjectiveService<ObjectiveVO, BbObjective, String> getObjectiveService() {
+		return objectiveService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.ObjectiveService")
+	@Required	
+	public void setObjectiveService(IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService) {
+		this.objectiveService = objectiveService;
+	}
+
 	@SuppressWarnings("unchecked")
 	private Context getChainContext() throws Exception {
 		Context context = new ContextBase();
@@ -120,6 +139,20 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 			this.cssItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getCss();
 			this.conItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getCon();
 		}		
+	}
+	
+	private void loadObjectiveItem() throws ControllerException, ServiceException, Exception {
+		String objId = super.defaultString( super.getFields().get("oid") ).trim(); // 這裡的 fields.oid 放的是 BB_OBJECTIVE.OBJ_ID
+		if (StringUtils.isBlank(objId)) {
+			throw new ControllerException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		this.objective = new  ObjectiveVO();
+		this.objective.setObjId(objId);
+		DefaultResult<ObjectiveVO> result = this.objectiveService.findByUK(this.objective);
+		if ( result.getValue() == null ) {
+			throw new ServiceException( result.getSystemMessage().getValue() );
+		}
+		this.objective = result.getValue();
 	}
 	
 	/**
@@ -188,6 +221,29 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 		return forward;
 	}
 	
+	/**
+	 * bsc.strategyMapOpenStrategyObjectiveItemWinDlgAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG002D0007Q_S00")
+	public String doOpenStrategyObjectiveItemWinDlg() throws Exception {
+		String forward = INPUT;
+		try {
+			this.loadObjectiveItem();
+			forward = SUCCESS;
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return forward;
+	}
+	
 	@Override
 	public String getProgramName() {
 		try {
@@ -231,6 +287,10 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 
 	public String getPrintMode() {
 		return printMode;
+	}
+
+	public ObjectiveVO getObjective() {
+		return objective;
 	}
 	
 }
