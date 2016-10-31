@@ -50,12 +50,15 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
+import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.vo.StrategyMapItemsVO;
 import com.netsteadfast.greenstep.po.hbm.BbObjective;
+import com.netsteadfast.greenstep.po.hbm.BbPerspective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
@@ -64,6 +67,7 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 public class StrategyMapManagementAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = -818474109895868062L;
 	private IVisionService<VisionVO, BbVision, String> visionService;
+	private IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService;
 	private IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
 	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private String visionOid = "";
@@ -88,6 +92,17 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 			IVisionService<VisionVO, BbVision, String> visionService) {
 		this.visionService = visionService;
 	}
+	
+	public IPerspectiveService<PerspectiveVO, BbPerspective, String> getPerspectiveService() {
+		return perspectiveService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.PerspectiveService")
+	@Required		
+	public void setPerspectiveService(IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService) {
+		this.perspectiveService = perspectiveService;
+	}	
 	
 	public IObjectiveService<ObjectiveVO, BbObjective, String> getObjectiveService() {
 		return objectiveService;
@@ -153,6 +168,22 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}
 		this.objective = result.getValue();
+		
+		PerspectiveVO perspective = new PerspectiveVO();
+		perspective.setPerId( this.objective.getPerId() );
+		DefaultResult<PerspectiveVO> pResult = this.perspectiveService.findByUK(perspective);
+		if (pResult.getValue() == null) {
+			throw new ServiceException( pResult.getSystemMessage().getValue() );
+		}
+		perspective = pResult.getValue();
+		
+		DefaultResult<VisionVO> vResult = this.visionService.findForSimpleByVisId(perspective.getVisId());
+		if (vResult.getValue() == null) {
+			throw new ServiceException( vResult.getSystemMessage().getValue() );
+		}
+		VisionVO vision = vResult.getValue();
+		
+		this.visionOid = vision.getOid();
 	}
 	
 	/**
@@ -291,6 +322,10 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 
 	public ObjectiveVO getObjective() {
 		return objective;
+	}
+	
+	public String getYearDate() {
+		return super.getNowDate().substring(0, 4);
 	}
 	
 }
