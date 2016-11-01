@@ -43,6 +43,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
@@ -60,9 +61,11 @@ import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
@@ -456,9 +459,68 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		this.fillPerspectivesPieChartData(treeObj);
 		this.fillPerspectivesBarChartData(treeObj);
 		this.fillLineChartData(treeObj);
-		if (YesNo.YES.equals(this.getFields().get("nobody"))) {
+		if (YesNo.YES.equals(this.getFields().get("nobody"))) { // 不要有 HTML版本的輸出, 通常是給 dashboard 用的
 			this.body = "";
 		}
+		
+		// ------------------------------------------------------------------
+		// 2016-11-01
+		// 把輸出 ChainResultObj 與 BscStructTreeObj 轉成 Json 放入 MAP 存檔至 TB_SYS_UPLOAD , 主要給 workspace 用的
+		// ------------------------------------------------------------------
+		if (YesNo.YES.equals(this.getFields().get("saveResultJson")) && treeObj.getVisions()!=null && treeObj.getVisions().size()==1) {
+			ObjectMapper objectMapper = new ObjectMapper();
+			Map<String, Object> dataMap = new HashMap<String, Object>();
+			dataMap.put("treeObjJsonStr", SimpleUtils.toB64(objectMapper.writeValueAsString(treeObj)));
+			dataMap.put("resultObjJsonStr", SimpleUtils.toB64(objectMapper.writeValueAsString(resultObj)));			
+			String jsonData = objectMapper.writeValueAsString(dataMap);
+			this.uploadOid = UploadSupportUtils.create(
+					Constants.getSystem(), 
+					UploadTypes.IS_TEMP, 
+					false, 
+					jsonData.getBytes(), 
+					SimpleUtils.getUUIDStr() + ".json");
+		}
+		// ------------------------------------------------------------------
+		
+	}
+	
+//	public static void main(String args[]) throws Exception {
+//		//CONTENT.txt
+//		String jsonStr = FSUtils.readStr("/tmp/CONTENT.txt");
+//		Map<String, Object> dataMap = new ObjectMapper().readValue(jsonStr, Map.class);
+//		BscStructTreeObj treeObj = new ObjectMapper().readValue( SimpleUtils.deB64((String)dataMap.get("treeObjJsonStr")), BscStructTreeObj.class);
+//		ChainResultObj resultObj = new ObjectMapper().readValue( SimpleUtils.deB64((String)dataMap.get("resultObjJsonStr")), ChainResultObj.class);
+//		
+//	}
+	
+	/**
+	 * 2016-11-01
+	 * 主要給 workspace 圖表元件載入用的 
+	 * 
+	 * @throws ControllerException
+	 * @throws AuthorityException
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	private void loadContentFromUpload() throws ControllerException, AuthorityException, ServiceException, Exception {
+		String uploadOid = this.getFields().get("uploadOid");
+		byte[] content = UploadSupportUtils.getDataBytes(uploadOid);
+		String jsonStr = new String(content, Constants.BASE_ENCODING);
+		if (StringUtils.isBlank(jsonStr)) {
+			throw new Exception("Report json data error.");
+		}
+		@SuppressWarnings("unchecked")
+		Map<String, Object> dataMap = new ObjectMapper().readValue(jsonStr, Map.class);
+		BscStructTreeObj treeObj = new ObjectMapper().readValue( SimpleUtils.deB64((String)dataMap.get("treeObjJsonStr")), BscStructTreeObj.class);
+		ChainResultObj resultObj = new ObjectMapper().readValue( SimpleUtils.deB64((String)dataMap.get("resultObjJsonStr")), ChainResultObj.class);
+		this.body = String.valueOf( resultObj.getValue() );
+		this.message = resultObj.getMessage();
+		if ( !StringUtils.isBlank(this.body) && this.body.startsWith("<!-- BSC_PROG003D0001Q -->") ) {
+			this.success = IS_YES;
+		}
+		this.fillPerspectivesPieChartData(treeObj);
+		this.fillPerspectivesBarChartData(treeObj);
+		this.fillLineChartData(treeObj);		
 	}
 	
 	private void getPdf() throws ControllerException, AuthorityException, ServiceException, Exception {
@@ -537,6 +599,41 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		}
 		return SUCCESS;		
 	}		
+	
+	/**
+	 * bsc.kpiReportContentLoadFromUploadAction.action
+	 * 主要給 workspace 圖表元件載入用的 
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG003D0001Q")
+	public String doLoadFromUpload() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.loadContentFromUpload();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (e.getMessage()==null) { 
+				this.message=e.toString();
+				this.logger.error(e.toString());
+			} else {
+				this.message=e.getMessage().toString();
+				this.logger.error(e.getMessage());
+			}						
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}			
 	
 	/**
 	 * bsc.kpiReportPdfQueryAction.action

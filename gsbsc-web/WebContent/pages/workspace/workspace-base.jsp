@@ -48,16 +48,52 @@ function BSC_PROG001D0005Q_query() {
 	}
 	childTabId = 'BSC_PROG001D0005Q_TabContainerChildTab' + dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("value");
 	childTabTitle = dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("displayedValue") + " - " + dijit.byId("BSC_PROG001D0005Q_yearHorizontalSlider").get("value");
-	viewPage.addOrUpdateContentPane(
-			'BSC_PROG001D0005Q_TabContainer', 
-			childTabId, 
-			childTabTitle, 
-			'${basePath}/bsc.loadContentBody.action?fields.workspaceOid=' + dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("value") 
-					+ '&fields.visionOid=' + dijit.byId("BSC_PROG001D0005Q_visionOid").get("value") 
-					+ '&fields.year=' + dijit.byId("BSC_PROG001D0005Q_yearHorizontalSlider").get("value"), 
+	
+	xhrSendParameter(
+			'${basePath}/bsc.kpiReportContentQueryAction.action', 
+			{ 
+				'fields.visionOid' 					: 	dijit.byId("BSC_PROG001D0005Q_visionOid").get("value"),
+				'fields.startYearDate'				:	dijit.byId("BSC_PROG001D0005Q_yearHorizontalSlider").get("value"),
+				'fields.endYearDate'				:	dijit.byId("BSC_PROG001D0005Q_yearHorizontalSlider").get("value"),
+				'fields.startDate'					:	'',
+				'fields.endDate'					:	'',
+				'fields.dataFor'					:	'all',
+				'fields.measureDataOrganizationOid'	:	'',
+				'fields.measureDataEmployeeOid'		:	'',
+				'fields.frequency'					:	'6',
+				'fields.saveResultJson'					: 'Y'
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
 			true, 
-			true,
-			true);	
+			function(data) {
+				if ('Y' != data.success) {
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				if ( data.uploadOid != null && data.uploadOid != "" ) {
+					// 只有 LineChart 需要 year 參數, 其它只要 workspaceOid, uploadOid, visionOid 之後會淘汰 LineChart, 因為LineChart它的查詢條件與其它Chart不一樣
+					viewPage.addOrUpdateContentPane(
+							'BSC_PROG001D0005Q_TabContainer', 
+							childTabId, 
+							childTabTitle, 
+							'${basePath}/bsc.loadContentBody.action?fields.workspaceOid=' + dijit.byId("BSC_PROG001D0005Q_workspaceOid").get("value") 
+									+ '&fields.visionOid=' + dijit.byId("BSC_PROG001D0005Q_visionOid").get("value") 
+									+ '&fields.year=' + dijit.byId("BSC_PROG001D0005Q_yearHorizontalSlider").get("value")
+									+ '&fields.uploadOid=' + data.uploadOid,
+							true, 
+							true,
+							true);
+				}	else {
+					alert('Error for workspace!');
+				}			
+				
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);			
 	
 }
 

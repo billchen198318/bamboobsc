@@ -92,15 +92,14 @@ public class WorkspaceUtils {
 		return content;
 	}
 	
-	public static String getView(
-			String basePath,
-			String workspaceOid, String visionOid, String year) throws ServiceException, Exception {
+	public static String getView(String basePath, String workspaceOid, String visionOid, String year, String uploadOid) throws ServiceException, Exception {
 		
 		Map<String, Object> templateParameters = new HashMap<String, Object>();
 		templateParameters.put("basePath", basePath);
+		templateParameters.put("uploadOid", uploadOid);
 		templateParameters.put("visionOid", visionOid);
-		templateParameters.put("startYear", year);
-		templateParameters.put("endYear", year);		
+		templateParameters.put("startYear", year); // 只有 LineChartCompoment.ftl 需要
+		templateParameters.put("endYear", year); // 只有 LineChartCompoment.ftl 需要
 		return getContent(workspaceOid, true, templateParameters);
 	}
 	

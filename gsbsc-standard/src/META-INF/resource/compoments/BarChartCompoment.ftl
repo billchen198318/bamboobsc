@@ -3,17 +3,10 @@
 </div>	
 <script>
 	$.ajax({
-		url: "${basePath}/bsc.kpiReportContentQueryAction.action",
+		url: "${basePath}/bsc.kpiReportContentLoadFromUploadAction.action",
 		data: { 
-				'fields.visionOid' 					: 	'${visionOid}',
-				'fields.startYearDate'				:	'${startYear}',
-				'fields.endYearDate'				:	'${endYear}',
-				'fields.startDate'					:	'',
-				'fields.endDate'					:	'',
-				'fields.dataFor'					:	'all',
-				'fields.measureDataOrganizationOid'	:	'all',
-				'fields.measureDataEmployeeOid'		:	'all',
-				'fields.frequency'					:	'6'
+				'fields.visionOid' 					: 	'${visionOid}',		
+				'fields.uploadOid' 					: 	'${uploadOid}'
 		},
 		type: "POST",
 		dataType: "json",

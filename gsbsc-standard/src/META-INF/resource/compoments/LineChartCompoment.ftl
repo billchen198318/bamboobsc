@@ -1,5 +1,8 @@
 <div id="lineChart" style="margin-top:5px; margin-left:5px; width:${width?c}px; height:${height?c}px;"></div>
 <script>
+
+/* Need cancel / deprecated this component , because query parameter not same other Bar/Grid/Pie */
+
 	$.ajax({
 		url: "${basePath}/bsc.kpiReportContentQueryAction.action",
 		data: { 

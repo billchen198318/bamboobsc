@@ -125,7 +125,8 @@ public class LoadWorkspaceAction extends BaseSupportAction implements IBaseAddit
 		String workspaceOid = this.getFields().get("workspaceOid");
 		String visionOid = this.getFields().get("visionOid");
 		String year = this.getFields().get("year");
-		this.content = WorkspaceUtils.getView(super.getBasePath(), workspaceOid, visionOid, year);
+		String uploadOid = this.getFields().get("uploadOid");
+		this.content = WorkspaceUtils.getView(super.getBasePath(), workspaceOid, visionOid, year, uploadOid);
 	}
 	
 	/**
