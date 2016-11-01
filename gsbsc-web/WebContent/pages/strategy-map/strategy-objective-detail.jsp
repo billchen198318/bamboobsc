@@ -60,6 +60,9 @@ function BSC_PROG002D0007Q_S00_query() {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
+				
+				alertDialog(_getApplicationProgramNameById('${programId}'), 'Measure-data frequency year: ${yearDate}', function(){}, 'Y');
+				
 				$("#BSC_PROG002D0007Q_S00_content").html( data.body );
 				BSC_PROG002D0007Q_S00_showChartForObjectives(data);
 				BSC_PROG002D0007Q_S00_showChartForKpis(data);
@@ -322,7 +325,6 @@ function ${programId}_page_message() {
 <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="style: {overflow: 'auto', padding: 0, height: '470px'}">
 
 
-	<br/>
 	<br/>
 		
 	<table border="0">
