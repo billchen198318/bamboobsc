@@ -230,7 +230,7 @@ function BSC_PROG006D0001E_contentTab_showUploadDataTable() {
 	var size = BSC_PROG006D0001E_contentTab_uploads.length;	
 	var txtContent = '';
 	if (BSC_PROG006D0001E_contentTab_uploads.length > 0) {
-		txtContent += '<table border="0" width="100%" bgcolor="#d8d8d8">';
+		txtContent += '<table border="0" width="100%" bgcolor="#d8d8d8" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">';
 		txtContent += '<tr>';
 		txtContent += '<td width="20%" align="center" bgcolor="#f5f5f5">*</td>';
 		txtContent += '<td width="80%" align="left" bgcolor="#f5f5f5"><b>Documents (file name)</b></td>';
@@ -356,7 +356,7 @@ function BSC_PROG006D0001E_pdcaTab_tableContentDel(id) {
 function BSC_PROG006D0001E_pdcaTab_itemTablePaint() {
 	dojo.html.set(dojo.byId("BSC_PROG006D0001E_pdcaTab_tableContent"), "", {extractContent: true, parseContent: true});
 	var htm = '';
-	htm += '<table border="0" width="100%" bgcolor="#d8d8d8">';
+	htm += '<table border="0" width="100%" bgcolor="#d8d8d8" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">';
 	htm += '<tr>';
 	htm += '<td width="10%" align="center" bgcolor="#f5f5f5">*</td>';
 	htm += '<td width="10%" align="center" bgcolor="#f5f5f5"><b>Type</b></td>';
@@ -578,7 +578,7 @@ function BSC_PROG006D0001E_pdcaTab_tableContent_showUploadDataTable() {
 	var size = node.upload.length;	
 	var txtContent = '';
 	if (node.upload.length > 0) {
-		txtContent += '<table border="0" width="100%" bgcolor="#d8d8d8">';
+		txtContent += '<table border="0" width="100%" bgcolor="#d8d8d8" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">';
 		txtContent += '<tr>';
 		txtContent += '<td width="20%" align="center" bgcolor="#f5f5f5">*</td>';
 		txtContent += '<td width="80%" align="left" bgcolor="#f5f5f5"><b>Documents (file name)</b></td>';

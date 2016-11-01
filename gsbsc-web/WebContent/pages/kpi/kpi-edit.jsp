@@ -220,7 +220,7 @@ function BSC_PROG002D0004E_showUploadDataTable() {
 	var size = BSC_PROG002D0004E_uploads.length;	
 	var txtContent = '';
 	if (BSC_PROG002D0004E_uploads.length > 0) {
-		txtContent += '<table border="0" width="100%" bgcolor="#d8d8d8">';
+		txtContent += '<table border="0" width="100%" bgcolor="#d8d8d8" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">';
 		txtContent += '<tr>';
 		txtContent += '<td width="20%" align="center" bgcolor="#f5f5f5">*</td>';
 		txtContent += '<td width="80%" align="left" bgcolor="#f5f5f5"><b>Documents (file name)</b></td>';
