@@ -1,11 +1,14 @@
 0.7.0
 -----------------------------------------------------------
-1. Dashboards features update, maybe will replace jqplot to nvd3-js or highcharts.
+1. New dashboards features "09-Dashboards".
 2. Monitor score-performance JOB schedule for Vision、Strategy of objectives、KPI.
 3. Workspace upgrade, improve response speed for workspace component.
-4. QCHARTS-WEB upgrade.
-5. Add API ( SOAP / REST ) for Vision、Strategy of objectives、KPI、Measure-data and Formula.
-6. MOBILE version upgrade.
+4. Add API ( SOAP / REST ) for Vision、Strategy of objectives、KPI、Measure-data and Formula.
+5. MOBILE version upgrade.
+6. Strategy-MAP add dbclick event( only Default-WEB version, mobile version no support ).
+
+New features reference:
+https://github.com/billchen198318/bamboobsc/issues/33
 
 
 0.6.6
