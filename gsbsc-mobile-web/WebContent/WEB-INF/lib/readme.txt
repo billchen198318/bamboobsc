@@ -393,12 +393,12 @@ commons-dbcp-1.4.jar
 commons-math-2.2.jar
 commons-pool-1.6.jar
 commons-vfs-1.0.jar
-commons-vfs2-2.1-20151002.152640-465.jar
+commons-vfs2-2.1.jar
 commons-configuration-1.10.jar
 eigenbase-properties-1.1.4.jar
 eigenbase-resgen-1.3.6.jar
 eigenbase-xom-1.3.4.jar
-mondrian-3.11.0.0-353.jar
+mondrian-3.12.0.1-196.jar
 olap4j-1.2.0.jar
 olap4j-tck-1.2.0.jar
 olap4j-xmla-1.2.0.jar
