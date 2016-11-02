@@ -421,13 +421,13 @@ function ${programId}_page_message() {
 									</div>										
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0001Q_measureDataOrganizationOid')"/>
-									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataOrganizationOid_1" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0007Q_measureDataOrganizationOid_1" onChange="BSC_PROG003D0007Q_setMeasureDataOrgaValue('1');" readonly="Y"></gs:filteringSelect>
+									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataOrganizationOid_1" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0007Q_measureDataOrganizationOid_1" onChange="BSC_PROG003D0007Q_setMeasureDataOrgaValue('1');" readonly="Y" value="all"></gs:filteringSelect>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_measureDataOrganizationOid'">
 					    				Select measure data organization/department.
 									</div>									
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0001Q_measureDataEmployeeOid')"/>
-									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataEmployeeOid_1" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0007Q_measureDataEmployeeOid_1" onChange="BSC_PROG003D0007Q_setMeasureDataEmplValue('1');" readonly="Y"></gs:filteringSelect>
+									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataEmployeeOid_1" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0007Q_measureDataEmployeeOid_1" onChange="BSC_PROG003D0007Q_setMeasureDataEmplValue('1');" readonly="Y" value="all"></gs:filteringSelect>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_measureDataEmployeeOid'">
 					    				Select measure data personal/Employee.
 									</div>									
@@ -520,13 +520,13 @@ function ${programId}_page_message() {
 									</div>										
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0001Q_measureDataOrganizationOid')"/>
-									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataOrganizationOid_2" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0007Q_measureDataOrganizationOid_2" onChange="BSC_PROG003D0007Q_setMeasureDataOrgaValue('2');" readonly="Y"></gs:filteringSelect>
+									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataOrganizationOid_2" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0007Q_measureDataOrganizationOid_2" onChange="BSC_PROG003D0007Q_setMeasureDataOrgaValue('2');" readonly="Y" value="all"></gs:filteringSelect>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_measureDataOrganizationOid'">
 					    				Select measure data organization/department.
 									</div>									
 									&nbsp;&nbsp;
 									<s:property value="getText('BSC_PROG003D0001Q_measureDataEmployeeOid')"/>
-									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataEmployeeOid_2" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0007Q_measureDataEmployeeOid_2" onChange="BSC_PROG003D0007Q_setMeasureDataEmplValue('2');" readonly="Y"></gs:filteringSelect>
+									<gs:filteringSelect name="BSC_PROG003D0007Q_measureDataEmployeeOid_2" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0007Q_measureDataEmployeeOid_2" onChange="BSC_PROG003D0007Q_setMeasureDataEmplValue('2');" readonly="Y" value="all"></gs:filteringSelect>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_measureDataEmployeeOid'">
 					    				Select measure data personal/Employee.
 									</div>									

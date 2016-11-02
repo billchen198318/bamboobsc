@@ -329,7 +329,7 @@ function ${programId}_page_message() {
 									&nbsp;&nbsp;
 									
 									Frequency	
-									<gs:select name="BSC_PROG003D0008Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0008Q_frequency" value="1" onChange="BSC_PROG003D0008Q_changeValue();" width="140"></gs:select>
+									<gs:select name="BSC_PROG003D0008Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0008Q_frequency" value="6" onChange="BSC_PROG003D0008Q_changeValue();" width="140"></gs:select>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0008Q_frequency'">
 					    				Select frequency.
 									</div> 										
@@ -349,13 +349,13 @@ function ${programId}_page_message() {
 									</div>										
 									&nbsp;&nbsp;
 									Organization
-									<gs:filteringSelect name="BSC_PROG003D0008Q_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0008Q_measureDataOrganizationOid" onChange="BSC_PROG003D0008Q_setMeasureDataOrgaValue();" readonly="Y"></gs:filteringSelect>
+									<gs:filteringSelect name="BSC_PROG003D0008Q_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0008Q_measureDataOrganizationOid" onChange="BSC_PROG003D0008Q_setMeasureDataOrgaValue();" readonly="Y" value="all"></gs:filteringSelect>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0008Q_measureDataOrganizationOid'">
 					    				Select measure data organization/department.
 									</div>									
 									&nbsp;&nbsp;
 									Employee
-									<gs:filteringSelect name="BSC_PROG003D0008Q_measureDataEmployeeOid" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0008Q_measureDataEmployeeOid" onChange="BSC_PROG003D0008Q_setMeasureDataEmplValue();" readonly="Y"></gs:filteringSelect>
+									<gs:filteringSelect name="BSC_PROG003D0008Q_measureDataEmployeeOid" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0008Q_measureDataEmployeeOid" onChange="BSC_PROG003D0008Q_setMeasureDataEmplValue();" readonly="Y" value="all"></gs:filteringSelect>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0008Q_measureDataEmployeeOid'">
 					    				Select measure data personal/Employee.
 									</div>
