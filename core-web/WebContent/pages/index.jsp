@@ -23,12 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="bambooCORE">
 	<meta http-equiv="description" content="bambooCORE">
 	
-	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dojox/grid/resources/Grid.css">
-	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dojox/widget/Toaster/Toaster.css" />	
-	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dojox/widget/Calendar/Calendar.css" />
+	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dojox/grid/resources/Grid.css?ver=${jsVerBuild}">
+	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dojox/widget/Toaster/Toaster.css?ver=${jsVerBuild}" />	
+	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dojox/widget/Calendar/Calendar.css?ver=${jsVerBuild}" />
 	
 	<!-- Flat -->
-	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dijit/themes/flat/flat.css">
+	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dijit/themes/flat/flat.css?ver=${jsVerBuild}">
 		
 	
 	<link rel="stylesheet" href="<%=basePath%>/css/core.css?ver=${jsVerBuild}" media="screen">
@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    ]	
 	    };
 	</script>	    
-    <script type="text/javascript" src="<%=basePath%>${dojoLocal}/dojo/dojo.js"></script>
+    <script type="text/javascript" src="<%=basePath%>${dojoLocal}/dojo/dojo.js?ver=${jsVerBuild}"></script>
     <script type="text/javascript" src="<%=basePath%>/js/home.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
     <script type="text/javascript" src="<%=basePath%>/js/core.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
     <script type="text/javascript" src="<%=basePath%>/js/page.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
