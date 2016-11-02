@@ -318,7 +318,7 @@ function ${programId}_page_message() {
 									
 									&nbsp;
 									<s:property value="getText('BSC_PROG003D0002Q_employeeOid')"/>
-									<gs:select name="BSC_PROG003D0002Q_employeeOid" dataSource="employeeMap" id="BSC_PROG003D0002Q_employeeOid" ></gs:select>									
+									<gs:filteringSelect name="BSC_PROG003D0002Q_employeeOid" dataSource="employeeMap" id="BSC_PROG003D0002Q_employeeOid" value="all"></gs:filteringSelect>									
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0002Q_employeeOid'">
 					    				Select measure data personal/Employee.
 									</div>			
