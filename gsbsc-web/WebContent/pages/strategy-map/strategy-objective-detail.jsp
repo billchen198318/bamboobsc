@@ -309,20 +309,7 @@ function ${programId}_page_message() {
 
 <body class="flat">
 
-	<gs:toolBar
-		id="${programId}" 
-		cancelEnable="Y" 
-		cancelJsMethod="${programId}_DlgHide();" 
-		createNewEnable="N"
-		createNewJsMethod=""		 
-		saveEnabel="N" 
-		saveJsMethod=""
-		refreshEnable="Y" 		 
-		refreshJsMethod="${programId}_DlgShow('${fields.oid}');" 		
-		></gs:toolBar>
-	<jsp:include page="../header.jsp"></jsp:include>	
-
-<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="style: {overflow: 'auto', padding: 0, height: '470px'}">
+<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="style: {overflow: 'auto', padding: 0, height: '530px'}">
 
 
 	<br/>
