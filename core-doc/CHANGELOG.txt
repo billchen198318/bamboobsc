@@ -3,9 +3,11 @@
 1. New dashboards features "09-Dashboards".
 2. Monitor score-performance JOB schedule for Vision、Strategy of objectives、KPI.
 3. Workspace upgrade, improve response speed for workspace component.
-4. Add API ( SOAP / REST ) for Vision、Strategy of objectives、KPI、Measure-data and Formula. ( BETA1 no support )
+4. Add API ( SOAP / REST ) for Vision、Strategy of objectives、KPI、Measure-data and Formula. ( BETA1 now no support )
 5. MOBILE version upgrade.
 6. Strategy-MAP add dbclick event( only Default-WEB version, mobile version no support ).
+
+If have previous data in MYSQL(bbcore) E.g: 0.6.6 old version, please update sql command file patch_066_up_070.sql
 
 New features and development progress please reference:
 https://github.com/billchen198318/bamboobsc/issues/33
