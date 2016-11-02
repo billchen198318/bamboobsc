@@ -234,7 +234,7 @@ function doGridQueryShowPreviewHtml${id}() {
 	}
 	var structureFields = ${gridFieldStructure};
 	var body = '<a href="javascript:window.close();" style="text-decoration: none; font-weight: bold; color:#3794E5" >Close</a>';
-	body += '<table width="100%" border="0" cellspacing="1" cellpadding="1" style="border:1px #d5cdb5 solid; background: #d5cdb5">';
+	body += '<table width="100%" border="0" cellspacing="1" cellpadding="1" style="border:1px #d5cdb5 solid; background: #d5cdb5; border-radius: 5px;">';
 	body += '<tr>';	
 	for (var f=0; f<structureFields.length; f++) {
 		var title = structureFields[f].name.split('<br/>')[0];
