@@ -197,9 +197,9 @@ function BSC_PROG003D0005Q_showObjectivesMeterGauge( data ) {
 	});	
 	
 	var content = '';
-	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);" >';
+	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#E9E9E9" style="border:1px #E9E9E9 solid; border-radius: 5px;" >';
 	content += '<tr>';
-	content += '<td colspan="2" bgcolor="#f1eee5" align="center" ><font size="4"><b>Objectives metrics gauge ( ' + dijit.byId("BSC_PROG003D0005Q_startYearDate").get('displayedValue') + ' )</b></font></td>';
+	content += '<td colspan="2" bgcolor="#F6F6F6" align="center" ><font size="4"><b>Objectives metrics gauge ( ' + dijit.byId("BSC_PROG003D0005Q_startYearDate").get('displayedValue') + ' )</b></font></td>';
 	content += '</tr>';	
 	for (var n in data.perspectiveItems) {
 		for ( var o in data.perspectiveItems[n].objectives ) {

@@ -214,9 +214,9 @@ function BSC_PROG003D0007Q_lineChart(data) {
 	}
 	var n = 0;
 	var content = '';
-	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);" >';
+	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#E9E9E9" style="border:1px #E9E9E9 solid; border-radius: 5px;" >';
 	content += '<tr>';
-	content += '<td bgcolor="#f1eee5" align="center" ><font size="4"><b>KPIs period trends</b></font></td>';
+	content += '<td bgcolor="#F6F6F6" align="center" ><font size="4"><b>KPIs period trends</b></font></td>';
 	content += '</tr>';	
 	for (var i=0; i<data.length; i++) {
 		var periodData = data[i];
