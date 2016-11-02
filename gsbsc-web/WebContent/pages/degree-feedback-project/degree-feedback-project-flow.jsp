@@ -89,13 +89,13 @@ function ${programId}_page_message() {
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>
 	
-	<table border="0" width="100%" bgcolor="#d8d8d8">
+	<table border="0" width="100%" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">
 		<tr>
-			<td align="left" width="15%" bgcolor="#f5f5f5"><b>Id</b></td>
-			<td align="left" width="15%" bgcolor="#f5f5f5"><b>Name</b></td>
-			<td align="left" width="15%" bgcolor="#f5f5f5"><b>Assignee</b></td>
-			<td align="left" width="30%" bgcolor="#f5f5f5"><b>Reason</b></td>
-			<td align="center" width="25%" bgcolor="#f5f5f5"><b>#</b></td>
+			<td align="left" width="15%" bgcolor="#f1eee5"><b>Id</b></td>
+			<td align="left" width="15%" bgcolor="#f1eee5"><b>Name</b></td>
+			<td align="left" width="15%" bgcolor="#f1eee5"><b>Assignee</b></td>
+			<td align="left" width="30%" bgcolor="#f1eee5"><b>Reason</b></td>
+			<td align="center" width="25%" bgcolor="#f1eee5"><b>#</b></td>
 		</tr>
 		<s:if test="null != bpmTaskObj">
 		
