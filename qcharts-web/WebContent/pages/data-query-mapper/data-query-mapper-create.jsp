@@ -202,9 +202,9 @@ function ${programId}_page_message() {
 	</table>
 	<table id="QCHARTS_PROG001D0002A_mapperTable" width="600px" border="0" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);" >
 		<tr>
-			<td bgcolor="#F1F1F1" width="10%" align="center"><b>#</b></td>
-			<td bgcolor="#F1F1F1" width="45%" align="center"><b><s:property value="getText('QCHARTS_PROG001D0002A_mapperTableLabel')"/></b></td>
-			<td bgcolor="#F1F1F1" width="45%" align="center"><b><s:property value="getText('QCHARTS_PROG001D0002A_mapperTableValue')"/></b></td>			
+			<td bgcolor="#f1eee5" width="10%" align="center"><b>#</b></td>
+			<td bgcolor="#f1eee5" width="45%" align="center"><b><s:property value="getText('QCHARTS_PROG001D0002A_mapperTableLabel')"/></b></td>
+			<td bgcolor="#f1eee5" width="45%" align="center"><b><s:property value="getText('QCHARTS_PROG001D0002A_mapperTableValue')"/></b></td>			
 		</tr>
 	</table>	
 	<table border="0" width="100%" height="50px" cellpadding="1" cellspacing="0" >	
