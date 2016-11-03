@@ -1,0 +1,343 @@
+/* -- FLAT style -- */
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	
+	border: 0;	
+	overflow: hidden;
+	font-size: 12px !important; 
+	background: white; 
+	color: #333;
+	
+}
+body {
+	font: 12px Myriad,Helvetica,Tahoma,Arial,clean,sans-serif;
+}
+* {
+  outline: none;
+}
+.textarea {
+	width: 60%;
+}
+.tooltips {
+	font-size: 14px;
+}
+.tooltips span {
+	color: #007ac2;
+	cursor: pointer;
+}
+/*
+.dijitSliderH {
+	margin: 40px 0;
+	width: 340px;
+}
+.dijitSliderV {
+	float: left;
+	margin: 0 40px;
+	height: 340px;
+}
+*/
+.progressBar {
+	margin: 30px 0;
+	width: 320px;
+}
+.dnd {
+	width: 160px;
+}
+.icon {
+	display: inline-block;
+	margin: 8px;
+	padding: 8px;
+	color: #424242;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.icon:hover {
+	background-color: #9E9E9E;
+	color: #FAFAFA;
+}
+.icon.selected {
+	background-color: #424242;
+	color: #FAFAFA;
+}
+.icon i {
+	font-size: 24px;
+}
+/* -- FLAT style -- */
+
+/*
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0; 
+	padding: 0;
+	overflow: hidden;
+	font-size: 13px !important; 
+	background: white; 
+	color: #333;
+}
+*/
+
+#borderContainer {
+	width: 100%; height: 100%;
+}
+
+#topBar {
+	margin: 0; padding: 0; border: none;
+}
+
+h1 {
+	margin: 0; padding: 1px; background-color: #ffffff; color: #000000;
+}
+
+#loader {
+			padding:0;
+			margin:0;
+			position:absolute;
+			top:0; left:0;
+			width:100%; height:100%;
+			background:#ededed;
+			z-index:999;
+			vertical-align:middle;
+}
+ 
+#loaderInner {
+			padding:5px;
+			position:relative;
+			left:0;
+			top:0;
+			width:450px;
+			background:#224388;
+			color:#fff;
+}
+
+ul{  
+	border: 0px solid #ccc;  
+	padding: 2em;  
+	margin: 5em;  	
+	cursor: default;  
+}  
+
+.dijitToasterContainer {
+	display: block;
+	position: absolute;
+	width: 35em;
+	margin: 0px;
+	font:0.75em;
+}
+
+.dijitReadOnly * {
+	background-color: #E6E6E6;	
+}
+
+/* 2016-08-10 add button font bold style */
+.dijitButtonNode {
+	font-weight: bold;
+}
+
+/*
+.dijitReadOnly * {
+	background-color: #E6E6E6;
+	background-image: url("../icons/lock.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 16px auto;	
+}
+*/
+
+/**
+.dijitTextBoxReadOnly {
+	background-image: url("../icons/lock.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 16px auto;
+}
+**/
+
+/** Dojo claro style Override : Start **/
+
+
+/**
+.claro .dijitFolderOpened {
+    display: none;
+}
+
+.claro .dijitFolderClosed {
+    display: none;
+}
+
+.claro .dijitLeaf {
+    display: none;
+}
+
+.claro .dijitTreeNodeSelected {
+    font-size: 12px;
+}
+
+.claro .dijitTreeLabel {
+    font-size: 12px;
+}
+**/
+
+/** Dojo claro style Override : End **/
+
+
+
+/* -- FLAT style -- */
+.flat .dijitFolderOpened {
+    display: none;
+}
+
+.flat .dijitFolderClosed {
+    display: none;
+}
+
+.flat .dijitLeaf {
+    display: none;
+}
+
+.flat .dijitTreeNodeSelected {
+    font-size: 12px;
+}
+
+.flat .dijitTreeLabel {
+    font-size: 12px;
+}
+/* -- FLAT style -- */
+
+
+
+/* -- bambooBSC patch flat-themes-1.11.1 -- */
+.flat .dijitTreeExpandoLoading {
+	background: url(../patch_flat_themes_1_11_icons/loadingAnimation.gif) no-repeat;
+	height: 31px;
+	width: 31px;	
+}
+.flat .dijitTreeExpandoLoading:before {
+	content: ""; /* -- flat-icon.ttf no found "\e60e" -- */
+}
+
+.flat .dijitTreeExpandoOpened {
+	background-image: url(../patch_flat_themes_1_11_icons/expando_opened.png);
+  	width: 20px;
+  	height: 20px;
+}
+.flat .dijitTreeExpandoOpened::before {
+	content: ""; /* -- flat-icon.ttf no found "\e60d" -- */
+}
+
+.flat .dijitTreeExpandoClosed {
+	background-image: url(../patch_flat_themes_1_11_icons/expando_closed.png);
+  	width: 20px;
+  	height: 20px;
+}
+.flat .dijitTreeExpandoClosed::before {
+	content: ""; /* -- flat-icon.ttf no found "\e60a" -- */
+}
+
+.flat .dijitIconLoading {
+	background: url(../patch_flat_themes_1_11_icons/loadingAnimation.gif) no-repeat;
+	height: 31px;
+	width: 31px;
+}
+.flat .dijitIconLoading::before {
+	content: ""; /* -- flat-icon.ttf no found "\f01d" -- */
+}
+
+.flat .dijitIconError {
+	background-image: url(../patch_flat_themes_1_11_icons/error.png);
+	height: 24px;
+	width: 24px;
+}
+.flat .dijitIconError::before {
+	content: ""; /* -- flat-icon.ttf no found "\f017" -- */
+}
+/* -- bambooBSC patch flat-themes-1.11.1 -- */
+
+
+
+/** toolbar need icon **/
+.myExportIcon {
+  	background-image: url(../icons/document-export.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
+.myImportIcon {
+  	background-image: url(../icons/document-import.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
+.myFullScreenIcon {
+  	background-image: url(../icons/fullscreen.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
+
+
+/** fullscreen **/
+:-webkit-full-screen {
+	background: #ffffff;
+}
+
+:-moz-full-screen {
+	background: #ffffff;
+}
+
+:-ms-fullscreen {
+	background: #ffffff;
+}
+
+:full-screen { /*pre-spec */
+	background: #ffffff;
+}
+
+:fullscreen { /* spec */
+	background: #ffffff;
+}
+
+#mainToaster {
+	border-radius: 10px;
+	opacity: 0.9;
+	/* border: 1px solid; */	
+}
+
+
+/* -- http://isabelcastillo.com/error-info-messages-css -- */
+.isa_info, .isa_success, .isa_warning, .isa_error {
+	margin: 10px 0px;
+	padding:12px;
+	border-radius: 10px;
+}
+.isa_info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.isa_success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.isa_warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.isa_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.isa_info i, .isa_success i, .isa_warning i, .isa_error i {
+    margin:10px 22px;
+    font-size:2em;
+    vertical-align:middle;
+}
+
