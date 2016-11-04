@@ -26,7 +26,7 @@
      -->
      
 	<!-- Scheduler -->		
-   	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+   	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" destroy-method="destroy">
     	<property name="applicationContextSchedulerContextKey" value="applicationContext" />    	     
     	<property name="dataSource" ref="dataSource"/> 
     	<property name="transactionManager" ref="transactionManager"/>        
