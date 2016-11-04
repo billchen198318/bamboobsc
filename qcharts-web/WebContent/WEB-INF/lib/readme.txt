@@ -70,8 +70,8 @@ bsh-2.1.8.jar
 
 MYBATIS(iBATIS)  *** Must be compatible with the version of Activiti ***
 -------------------------
-mybatis-3.2.5.jar
-mybatis-spring-1.2.3.jar
+mybatis-3.4.1.jar
+mybatis-spring-1.3.0.jar
 
 
 JFreeChart
