@@ -34,12 +34,12 @@ import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 public class ContainerContextClosedMySqlDriversHandlerListener implements ServletContextListener {
 
 	@Override
-	public void contextDestroyed(ServletContextEvent contextEvent) {
+	public void contextInitialized(ServletContextEvent contextEvent) {
 		// TODO Auto-generated method stub
 	}
-
+	
 	@Override
-	public void contextInitialized(ServletContextEvent contextEvent) {
+	public void contextDestroyed(ServletContextEvent contextEvent) {
 		Enumeration<Driver> drivers = DriverManager.getDrivers();
 		Driver driver = null;
 		while(drivers.hasMoreElements()) {
@@ -54,7 +54,8 @@ public class ContainerContextClosedMySqlDriversHandlerListener implements Servle
 			AbandonedConnectionCleanupThread.shutdown();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}		
+		
 	}
 	
 }
