@@ -34,6 +34,14 @@
 		<listener-class>com.netsteadfast.greenstep.sys.WebSystemCtxBeanSupportListener</listener-class>
 	</listener>  
 	
+	<!-- shutdown tomcat 時, Quartz 沒有停掉的處理 -->	
+	<!-- mobile版本沒有開啟 quartz -->
+	<!--  
+	<listener>
+		<listener-class>com.netsteadfast.greenstep.sys.ContainerContextShutdownQuartzHandlerListener</listener-class>
+	</listener> 		
+	-->
+		
 	<!-- 處理 tomcat shutdown 時, 產生 the JDBC Driver has been forcibly unregistered 問題 -->	
 	<listener>
 		<listener-class>com.netsteadfast.greenstep.sys.ContainerContextClosedMySqlDriversHandlerListener</listener-class>
