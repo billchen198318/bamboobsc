@@ -36,6 +36,11 @@
 	<listener>
 		<listener-class>com.netsteadfast.greenstep.sys.WebSystemCtxBeanSupportListener</listener-class>
 	</listener>  
+	
+	<!-- 處理 tomcat shutdown 時, 產生 the JDBC Driver has been forcibly unregistered 問題 -->	
+	<listener>
+		<listener-class>com.netsteadfast.greenstep.sys.ContainerContextClosedMySqlDriversHandlerListener</listener-class>
+	</listener> 		
 		
 	<!-- lazy loading enabled in spring -->
 	<filter>

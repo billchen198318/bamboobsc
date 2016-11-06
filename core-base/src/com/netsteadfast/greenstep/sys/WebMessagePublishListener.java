@@ -72,6 +72,12 @@ public class WebMessagePublishListener implements ServletContextListener {
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		this.webMessagePublishRunnable.stopRunning();
+		this.webMessagePublishThread.interrupt();
+		try {
+			this.webMessagePublishThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.webMessagePublishThread = null;
 		this.webMessagePublishRunnable = null;
 	}	
