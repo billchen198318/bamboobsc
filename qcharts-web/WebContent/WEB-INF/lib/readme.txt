@@ -156,7 +156,8 @@ javax.mail.jar
 
 Quartz
 -------------------------
-quartz-all-2.1.7.jar
+quartz-2.2.3.jar
+quartz-jobs-2.2.3.jar
 
 
 junit
