@@ -21,44 +21,33 @@
  */
 package com.netsteadfast.greenstep.sys;
 
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Enumeration;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.mysql.jdbc.AbandonedConnectionCleanupThread;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+
+import com.netsteadfast.greenstep.base.AppContext;
 
 /**
- * shutdown tomcat 時, 產生 the JDBC Driver has been forcibly unregistered 問題處理
+ * shutdown tomcat 時, Quartz 沒有停掉的處理, 再 applicationContext-STANDARD-QUARTZ.xml 已經有加上 destroy-method="destroy" , 還是沒有正常的停止
  */
-public class ContainerContextClosedMySqlDriversHandlerListener implements ServletContextListener {
+public class ContainerContextShutdownQuartzHandlerListener implements ServletContextListener {
+
+	@Override
+	public void contextDestroyed(ServletContextEvent contextEvent) {
+		Scheduler scheduler = (Scheduler) AppContext.getBean("scheduler"); // 請參考 applicationContext-STANDARD-QUARTZ.xml 設定的 bean-id
+		try {
+			scheduler.shutdown(true);
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent contextEvent) {
 		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	public void contextDestroyed(ServletContextEvent contextEvent) {
-		Enumeration<Driver> drivers = DriverManager.getDrivers();
-		Driver driver = null;
-		while(drivers.hasMoreElements()) {
-			driver = drivers.nextElement();
-			try {
-				DriverManager.deregisterDriver(driver);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			AbandonedConnectionCleanupThread.shutdown();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}		
 		
 	}
-	
+
 }
