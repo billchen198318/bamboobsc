@@ -35,6 +35,7 @@
         </cxf:inInterceptors> 
     </cxf:bus>    	
 	
+	<bean id="webServiceContext" class="org.apache.cxf.jaxws.context.WebServiceContextImpl" />
 	
 	<!-- for TEST -->
 	<bean id="bsc.webservice.KpiWebService" class="com.netsteadfast.greenstep.bsc.webservice.impl.KpiWebServiceImpl" />
@@ -43,6 +44,8 @@
 	<bean id="core.webservice.ManualJobService" class="com.netsteadfast.greenstep.webservice.impl.ManualJobServiceImpl" />	
 	
 	<!-- base API service -->
-	<bean id="bsc.webservice.ApiWebService" class="com.netsteadfast.greenstep.bsc.webservice.impl.ApiWebServiceImpl" />
+	<bean id="bsc.webservice.ApiWebService" class="com.netsteadfast.greenstep.bsc.webservice.impl.ApiWebServiceImpl">
+		<property name="webServiceContext" ref="webServiceContext" />
+	</bean>
 	
 </beans>
