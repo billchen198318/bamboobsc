@@ -29,6 +29,7 @@ public class ApiServiceResponse implements java.io.Serializable {
 	private String success = YesNo.NO;
 	private String message = "";	
 	private VisionVO vision;
+	private String htmlBodyUrl = ""; // 產生一組 url , 顯示HTML報表內容 
 	
 	public String getSuccess() {
 		return success;
@@ -47,6 +48,12 @@ public class ApiServiceResponse implements java.io.Serializable {
 	}
 	public void setVision(VisionVO vision) {
 		this.vision = vision;
+	}
+	public String getHtmlBodyUrl() {
+		return htmlBodyUrl;
+	}
+	public void setHtmlBodyUrl(String htmlBodyUrl) {
+		this.htmlBodyUrl = htmlBodyUrl;
 	}
 	
 }

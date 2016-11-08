@@ -29,6 +29,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+
+import org.apache.cxf.jaxrs.ext.MessageContext;
 
 import com.netsteadfast.greenstep.bsc.vo.ApiServiceResponse;
 
@@ -40,8 +43,23 @@ public interface ApiWebService {
 	
 	@WebMethod
 	@GET
-	@Path("/scorecard/")
-	public ApiServiceResponse getScorecard(
+	@Path("/scorecard1/")
+	public ApiServiceResponse getScorecard1(
+			@WebParam(name="visionOid") @PathParam("visionOid") String visionOid, 
+			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
+			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
+			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid,
+			@Context MessageContext context) throws Exception;	
+	
+	@WebMethod
+	@GET
+	@Path("/scorecard2/")
+	public ApiServiceResponse getScorecard2(
 			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
 			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
 			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
@@ -50,6 +68,7 @@ public interface ApiWebService {
 			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception;
+			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId,
+			@Context MessageContext context) throws Exception;
 	
 }
