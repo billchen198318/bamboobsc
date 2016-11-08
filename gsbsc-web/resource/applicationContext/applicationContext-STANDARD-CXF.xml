@@ -41,5 +41,8 @@
 	
 	<!-- expression Job manual webService -->
 	<bean id="core.webservice.ManualJobService" class="com.netsteadfast.greenstep.webservice.impl.ManualJobServiceImpl" />	
-	                
+	
+	<!-- base API service -->
+	<bean id="bsc.webservice.ApiWebService" class="com.netsteadfast.greenstep.bsc.webservice.impl.ApiWebServiceImpl" />
+	
 </beans>

@@ -32,25 +32,37 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
+import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.command.KpiReportBodyCommand;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.util.PerformanceScoreChainUtils;
 import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 import com.netsteadfast.greenstep.bsc.webservice.ApiWebService;
 import com.netsteadfast.greenstep.model.UploadTypes;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
+import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
 import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @Service("bsc.webservice.ApiWebService")
@@ -151,8 +163,37 @@ public class ApiWebServiceImpl implements ApiWebService {
 		responseObj.setSuccess( YesNo.NO );
 		try {	
 			subject = WsAuthenticateUtils.login();
-			// do ....
-			
+			@SuppressWarnings("unchecked")
+			IVisionService<VisionVO, BbVision, String> visionService = 
+					(IVisionService<VisionVO, BbVision, String>) AppContext.getBean("bsc.service.VisionService");
+			@SuppressWarnings("unchecked")
+			IEmployeeService<EmployeeVO, BbEmployee, String> employeeService = 
+					(IEmployeeService<EmployeeVO, BbEmployee, String>) AppContext.getBean("bsc.service.EmployeeService");
+			@SuppressWarnings("unchecked")
+			IOrganizationService<OrganizationVO, BbOrganization, String> organizationService = 
+					(IOrganizationService<OrganizationVO, BbOrganization, String>) AppContext.getBean("bsc.service.OrganizationService");
+			String visionOid = "";
+			String measureDataOrganizationOid = "";
+			String measureDataEmployeeOid = ""; 
+			DefaultResult<VisionVO> visionResult = visionService.findForSimpleByVisId(visionId);
+			if (visionResult.getValue() == null) {
+				throw new Exception( visionResult.getSystemMessage().getValue() );
+			}
+			visionOid = visionResult.getValue().getOid();
+			if (StringUtils.isBlank(measureDataOrganizationId)) {
+				measureDataOrganizationOid = BscBaseLogicServiceCommonSupport
+						.findEmployeeDataByEmpId(employeeService, measureDataOrganizationId)
+						.getOid();
+			}
+			if (StringUtils.isBlank(measureDataEmployeeId)) {
+				measureDataEmployeeOid = BscBaseLogicServiceCommonSupport
+						.findOrganizationDataByUK(organizationService, measureDataEmployeeId)
+						.getOid();
+			}
+			this.processForScorecard(
+					responseObj, 
+					request, 
+					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
 		} catch (Exception e) {
 			responseObj.setMessage( e.getMessage() );
 		} finally {
