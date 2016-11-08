@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.sys;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.subject.Subject;
 
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.sys.IUSessLogHelper;
@@ -60,6 +61,25 @@ public class WsAuthenticateUtils {
     		return false;
     	}
     	return ( usessLogHelper.countByCurrent(id[1], id[0]) > 0 ? true : false );
+    }
+    
+    /**
+     * 使用 API 預設的使用者 
+     */
+    public static String getDefaultUser() {
+    	return "admin";
+    }
+    
+    public static Subject login() throws Exception {
+		ShiroLoginSupport loginSupport = new ShiroLoginSupport();
+		Subject subject = loginSupport.forceCreateLoginSubject(getDefaultUser());	
+		return subject;
+    }
+    
+    public static void logout(Subject subject) throws Exception {
+    	if (subject != null) {
+    		subject.logout();
+    	}
     }
     
 }
