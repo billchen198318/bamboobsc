@@ -21,16 +21,64 @@
  */
 package com.netsteadfast.greenstep.bsc.webservice.impl;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
+import com.netsteadfast.greenstep.base.SysMessageUtil;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.bsc.vo.ApiServiceResponse;
 import com.netsteadfast.greenstep.bsc.webservice.ApiWebService;
+import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
 
 @Service("bsc.webservice.ApiWebService")
 @WebService
 @SOAPBinding
+@Path("/")
+@Produces("application/json")
 public class ApiWebServiceImpl implements ApiWebService {
 
+	@WebMethod
+	@GET
+	@Path("/scorecard/")	
+	@Override
+	public ApiServiceResponse getScorecard(
+			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
+			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
+			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
+			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
+		
+		Subject subject = null;
+		ApiServiceResponse responseObj = new ApiServiceResponse();
+		responseObj.setSuccess( YesNo.NO );
+		try {	
+			subject = WsAuthenticateUtils.login();
+			// do ....
+			
+		} catch (Exception e) {
+			responseObj.setMessage( e.getMessage() );
+		} finally {
+			if (!YesNo.YES.equals(responseObj.getSuccess())) {
+				responseObj.setMessage( SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA) );
+			}	
+			WsAuthenticateUtils.logout(subject);			
+		}
+		subject = null;
+		return responseObj;
+	}
+	
 }
