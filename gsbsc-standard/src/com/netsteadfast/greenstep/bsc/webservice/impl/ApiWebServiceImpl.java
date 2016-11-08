@@ -25,20 +25,33 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 
+import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
+import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.bsc.command.KpiReportBodyCommand;
+import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
+import com.netsteadfast.greenstep.bsc.util.PerformanceScoreChainUtils;
 import com.netsteadfast.greenstep.bsc.vo.ApiServiceResponse;
 import com.netsteadfast.greenstep.bsc.webservice.ApiWebService;
+import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
+import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 @Service("bsc.webservice.ApiWebService")
 @WebService
@@ -46,12 +59,81 @@ import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
 @Path("/")
 @Produces("application/json")
 public class ApiWebServiceImpl implements ApiWebService {
+	
+	private void processForScorecard(
+			ApiServiceResponse responseObj, 
+			HttpServletRequest request,
+			String visionOid, String startDate, String endDate, String startYearDate, String endYearDate, String frequency, 
+			String dataFor, String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
+		
+		org.apache.commons.chain.Context context = PerformanceScoreChainUtils.getContext(
+				visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);			
+		ChainResultObj result = PerformanceScoreChainUtils.getResult(context);			
+		if (result.getValue() == null || ( (BscStructTreeObj)result.getValue() ).getVisions() == null || ( (BscStructTreeObj)result.getValue() ).getVisions().size() == 0) {
+			return;
+		}		
+		BscStructTreeObj resultObj = (BscStructTreeObj)result.getValue();
+		KpiReportBodyCommand reportBody = new KpiReportBodyCommand();
+		reportBody.execute(context);
+		Object htmlBody = reportBody.getResult(context);
+		if (htmlBody != null && htmlBody instanceof String) {
+			String htmlUploadOid = UploadSupportUtils.create(
+					Constants.getSystem(), UploadTypes.IS_TEMP, false, String.valueOf(htmlBody).getBytes(), "KPI-HTML-REPORT.html");
+			String url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
+			if (!url.endsWith("/")) {
+				url += "/";
+			}			
+			url += "bsc.printContentAction.action?oid=" + htmlUploadOid;
+			responseObj.setHtmlBodyUrl(url);
+		}
+		VisionVO visionObj = resultObj.getVisions().get(0);
+		responseObj.setSuccess(YesNo.YES);
+		responseObj.setVision(visionObj);		
+	}
 
 	@WebMethod
 	@GET
-	@Path("/scorecard/")	
+	@Path("/scorecard1/")	
 	@Override
-	public ApiServiceResponse getScorecard(
+	public ApiServiceResponse getScorecard1(
+			@WebParam(name="visionOid") @PathParam("visionOid") String visionOid, 
+			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
+			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
+			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid,
+			@Context MessageContext context) throws Exception {
+		
+		HttpServletRequest request = context.getHttpServletRequest();
+		Subject subject = null;
+		ApiServiceResponse responseObj = new ApiServiceResponse();
+		responseObj.setSuccess( YesNo.NO );
+		try {	
+			subject = WsAuthenticateUtils.login();			
+			this.processForScorecard(
+					responseObj, 
+					request,
+					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
+		} catch (Exception e) {
+			responseObj.setMessage( e.getMessage() );
+		} finally {
+			if (!YesNo.YES.equals(responseObj.getSuccess())) {
+				responseObj.setMessage( SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA) );
+			}	
+			WsAuthenticateUtils.logout(subject);			
+		}
+		subject = null;
+		return responseObj;
+	}
+	
+	@WebMethod
+	@GET
+	@Path("/scorecard2/")	
+	@Override
+	public ApiServiceResponse getScorecard2(
 			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
 			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
 			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
@@ -60,8 +142,10 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
+			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId,
+			@Context MessageContext context) throws Exception {
 		
+		HttpServletRequest request = context.getHttpServletRequest();
 		Subject subject = null;
 		ApiServiceResponse responseObj = new ApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
@@ -79,6 +163,6 @@ public class ApiWebServiceImpl implements ApiWebService {
 		}
 		subject = null;
 		return responseObj;
-	}
+	}	
 	
 }
