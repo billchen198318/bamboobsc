@@ -45,7 +45,7 @@ import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.command.KpiReportBodyCommand;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.util.PerformanceScoreChainUtils;
-import com.netsteadfast.greenstep.bsc.vo.ApiServiceResponse;
+import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 import com.netsteadfast.greenstep.bsc.webservice.ApiWebService;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
@@ -61,7 +61,7 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 public class ApiWebServiceImpl implements ApiWebService {
 	
 	private void processForScorecard(
-			ApiServiceResponse responseObj, 
+			BscApiServiceResponse responseObj, 
 			HttpServletRequest request,
 			String visionOid, String startDate, String endDate, String startYearDate, String endYearDate, String frequency, 
 			String dataFor, String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
@@ -95,7 +95,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 	@GET
 	@Path("/scorecard1/")	
 	@Override
-	public ApiServiceResponse getScorecard1(
+	public BscApiServiceResponse getScorecard1(
 			@WebParam(name="visionOid") @PathParam("visionOid") String visionOid, 
 			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
 			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
@@ -109,7 +109,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 		
 		HttpServletRequest request = context.getHttpServletRequest();
 		Subject subject = null;
-		ApiServiceResponse responseObj = new ApiServiceResponse();
+		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
 		try {	
 			subject = WsAuthenticateUtils.login();			
@@ -133,7 +133,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 	@GET
 	@Path("/scorecard2/")	
 	@Override
-	public ApiServiceResponse getScorecard2(
+	public BscApiServiceResponse getScorecard2(
 			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
 			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
 			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
@@ -147,7 +147,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 		
 		HttpServletRequest request = context.getHttpServletRequest();
 		Subject subject = null;
-		ApiServiceResponse responseObj = new ApiServiceResponse();
+		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
 		try {	
 			subject = WsAuthenticateUtils.login();
