@@ -33,7 +33,7 @@ import javax.ws.rs.core.Context;
 
 import org.apache.cxf.jaxrs.ext.MessageContext;
 
-import com.netsteadfast.greenstep.bsc.vo.ApiServiceResponse;
+import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 
 @WebService
 @SOAPBinding
@@ -44,7 +44,7 @@ public interface ApiWebService {
 	@WebMethod
 	@GET
 	@Path("/scorecard1/")
-	public ApiServiceResponse getScorecard1(
+	public BscApiServiceResponse getScorecard1(
 			@WebParam(name="visionOid") @PathParam("visionOid") String visionOid, 
 			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
 			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
@@ -59,7 +59,7 @@ public interface ApiWebService {
 	@WebMethod
 	@GET
 	@Path("/scorecard2/")
-	public ApiServiceResponse getScorecard2(
+	public BscApiServiceResponse getScorecard2(
 			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
 			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
 			@WebParam(name="endDate") @PathParam("endDate") String endDate, 

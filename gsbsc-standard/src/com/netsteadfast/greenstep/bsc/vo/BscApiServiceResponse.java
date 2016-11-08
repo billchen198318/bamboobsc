@@ -24,7 +24,7 @@ package com.netsteadfast.greenstep.bsc.vo;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
-public class ApiServiceResponse implements java.io.Serializable {
+public class BscApiServiceResponse implements java.io.Serializable {
 	private static final long serialVersionUID = 3784147952012520482L;
 	private String success = YesNo.NO;
 	private String message = "";	
