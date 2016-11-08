@@ -72,6 +72,9 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 @Produces("application/json")
 public class ApiWebServiceImpl implements ApiWebService {
 	
+    @Context
+    private MessageContext messageContext;	
+	
 	private void processForScorecard(
 			BscApiServiceResponse responseObj, 
 			HttpServletRequest request,
@@ -116,10 +119,9 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
-			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid,
-			@Context MessageContext context) throws Exception {
+			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception {
 		
-		HttpServletRequest request = context.getHttpServletRequest();
+		HttpServletRequest request = messageContext.getHttpServletRequest();
 		Subject subject = null;
 		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
@@ -154,10 +156,9 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId,
-			@Context MessageContext context) throws Exception {
+			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
 		
-		HttpServletRequest request = context.getHttpServletRequest();
+		HttpServletRequest request = messageContext.getHttpServletRequest();
 		Subject subject = null;
 		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
