@@ -29,9 +29,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-
-import org.apache.cxf.jaxrs.ext.MessageContext;
 
 import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 
@@ -53,8 +50,7 @@ public interface ApiWebService {
 			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
-			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid,
-			@Context MessageContext context) throws Exception;	
+			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception;	
 	
 	@WebMethod
 	@GET
@@ -68,7 +64,6 @@ public interface ApiWebService {
 			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId,
-			@Context MessageContext context) throws Exception;
+			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception;
 	
 }
