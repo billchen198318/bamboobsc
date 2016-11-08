@@ -22,36 +22,42 @@
 package com.netsteadfast.greenstep.bsc.vo;
 
 import com.netsteadfast.greenstep.base.model.YesNo;
-import com.netsteadfast.greenstep.vo.VisionVO;
 
 public class BscApiServiceResponse implements java.io.Serializable {
 	private static final long serialVersionUID = 3784147952012520482L;
 	private String success = YesNo.NO;
 	private String message = "";	
-	private VisionVO vision;
+	private String outJsonData = "{}";
 	private String htmlBodyUrl = ""; // 產生一組 url , 顯示HTML報表內容 
 	
 	public String getSuccess() {
 		return success;
 	}
+	
 	public void setSuccess(String success) {
 		this.success = success;
 	}
+	
 	public String getMessage() {
 		return message;
 	}
+	
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public VisionVO getVision() {
-		return vision;
+	
+	public String getOutJsonData() {
+		return outJsonData;
 	}
-	public void setVision(VisionVO vision) {
-		this.vision = vision;
+	
+	public void setOutJsonData(String outJsonData) {
+		this.outJsonData = outJsonData;
 	}
+	
 	public String getHtmlBodyUrl() {
 		return htmlBodyUrl;
 	}
+	
 	public void setHtmlBodyUrl(String htmlBodyUrl) {
 		this.htmlBodyUrl = htmlBodyUrl;
 	}

@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.bsc.webservice.impl;
 
+import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -30,13 +31,15 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
+import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.MessageContext;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
@@ -72,8 +75,17 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 @Produces("application/json")
 public class ApiWebServiceImpl implements ApiWebService {
 	
-    @Context
-    private MessageContext messageContext;	
+    private WebServiceContext webServiceContext;
+	
+	public WebServiceContext getWebServiceContext() {
+		return webServiceContext;
+	}
+
+	@Autowired
+	@Resource(name="webServiceContext")	
+	public void setWebServiceContext(WebServiceContext webServiceContext) {
+		this.webServiceContext = webServiceContext;
+	}
 	
 	private void processForScorecard(
 			BscApiServiceResponse responseObj, 
@@ -103,7 +115,9 @@ public class ApiWebServiceImpl implements ApiWebService {
 		}
 		VisionVO visionObj = resultObj.getVisions().get(0);
 		responseObj.setSuccess(YesNo.YES);
-		responseObj.setVision(visionObj);		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(visionObj);		
+		responseObj.setOutJsonData(jsonData);
 	}
 
 	@WebMethod
@@ -121,7 +135,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
 			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception {
 		
-		HttpServletRequest request = messageContext.getHttpServletRequest();
+		HttpServletRequest request = (HttpServletRequest) this.getWebServiceContext().getMessageContext().get(MessageContext.SERVLET_REQUEST);
 		Subject subject = null;
 		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
@@ -158,7 +172,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
 			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
 		
-		HttpServletRequest request = messageContext.getHttpServletRequest();
+		HttpServletRequest request = (HttpServletRequest) this.getWebServiceContext().getMessageContext().get(MessageContext.SERVLET_REQUEST);
 		Subject subject = null;
 		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
@@ -205,6 +219,6 @@ public class ApiWebServiceImpl implements ApiWebService {
 		}
 		subject = null;
 		return responseObj;
-	}	
+	}
 	
 }
