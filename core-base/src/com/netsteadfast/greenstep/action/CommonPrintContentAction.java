@@ -32,6 +32,9 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 
+/**
+ * 這個 controller action 主要是配合 ApiWebService , 讀取輸出的 url 顯示報表結果
+ */
 @ControllerAuthority(check=true)
 @Controller("core.web.controller.CommonPrintContentAction")
 @Scope
@@ -49,6 +52,11 @@ public class CommonPrintContentAction extends BaseSupportAction {
 		this.value = new String(data, Constants.BASE_ENCODING);
 	}
 	
+	/**
+	 * core.printContentAction.action
+	 * bsc.printContentAction.action
+	 * qcharts.printContentAction.action
+	 */
 	public String execute() throws Exception {
 		String forward = RESULT_BLANK;
 		try {
