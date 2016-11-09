@@ -29,8 +29,8 @@ import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
@@ -59,14 +59,21 @@ import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 import com.netsteadfast.greenstep.bsc.webservice.ApiWebService;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbMeasureData;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
 import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
+import com.netsteadfast.greenstep.util.HostUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
+import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
+import com.thoughtworks.xstream.XStream;
 
 @Service("bsc.webservice.ApiWebService")
 @WebService
@@ -106,7 +113,12 @@ public class ApiWebServiceImpl implements ApiWebService {
 		if (htmlBody != null && htmlBody instanceof String) {
 			String htmlUploadOid = UploadSupportUtils.create(
 					Constants.getSystem(), UploadTypes.IS_TEMP, false, String.valueOf(htmlBody).getBytes(), "KPI-HTML-REPORT.html");
-			String url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
+			String url = "";
+			if (request != null) {
+				url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
+			} else {
+				url = HostUtils.getHostAddress() + HostUtils.getHttpPort() + "/" + ApplicationSiteUtils.getContextPath(Constants.getSystem());
+			}
 			if (!url.endsWith("/")) {
 				url += "/";
 			}			
@@ -114,28 +126,74 @@ public class ApiWebServiceImpl implements ApiWebService {
 			responseObj.setHtmlBodyUrl(url);
 		}
 		VisionVO visionObj = resultObj.getVisions().get(0);
+		PerformanceScoreChainUtils.clearExpressionContentOut(visionObj);
 		responseObj.setSuccess(YesNo.YES);
 		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonData = objectMapper.writeValueAsString(visionObj);		
+		String jsonData = objectMapper.writeValueAsString(visionObj);	
+		XStream xstream = new XStream();
+		xstream.setMode(XStream.NO_REFERENCES);
+		xstream.alias("vision", VisionVO.class);
+		xstream.alias("perspective", PerspectiveVO.class);
+		xstream.alias("objective", ObjectiveVO.class);
+		xstream.alias("kpi", KpiVO.class);
+		xstream.alias("measureData", BbMeasureData.class);
+		xstream.alias("dateRangeScore", DateRangeScoreVO.class);
+		xstream.alias("employee", EmployeeVO.class);
+		xstream.alias("organization", OrganizationVO.class);
+		String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xstream.toXML(visionObj);
 		responseObj.setOutJsonData(jsonData);
+		responseObj.setOutXmlData(xmlData);
 	}
-
+	
+	/**
+	 * SOAP 請使用 SoapUI 來測試
+	 * ==================================================================================
+		<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.bsc.greenstep.netsteadfast.com/">
+		   <soapenv:Header/>
+		   <soapenv:Body>
+		   
+		      <web:getScorecard1>
+		      
+		         <visionOid>1089abb5-3faf-445d-88ff-cd7690ac6743</visionOid>
+		         <startDate></startDate>
+		         <endDate></endDate>
+		         <startYearDate>2015</startYearDate>
+		         <endYearDate>2016</endYearDate>
+		         <frequency>6</frequency>
+		         <dataFor>all</dataFor>
+		         <measureDataOrganizationOid></measureDataOrganizationOid>
+		         <measureDataEmployeeOid></measureDataEmployeeOid>
+		         
+		      </web:getScorecard1>
+		      
+		   </soapenv:Body>
+		</soapenv:Envelope>
+	 * ==================================================================================
+	 * 
+	 * 
+	 * REST 範例:
+	 * curl -i -X GET "http://127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1?visionOid=1089abb5-3faf-445d-88ff-cd7690ac6743&startDate=&endDate=&startYearDate=2015&endYearDate=2016&frequency=6&dataFor=all&measureDataOrganizationOid=&measureDataEmployeeOid="
+	 * 
+	 */
 	@WebMethod
 	@GET
 	@Path("/scorecard1/")	
 	@Override
 	public BscApiServiceResponse getScorecard1(
-			@WebParam(name="visionOid") @PathParam("visionOid") String visionOid, 
-			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
-			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
-			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
-			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
-			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
-			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
-			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
-			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception {
+			@WebParam(name="visionOid") @QueryParam("visionOid") String visionOid, 
+			@WebParam(name="startDate") @QueryParam("startDate") String startDate, 
+			@WebParam(name="endDate") @QueryParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @QueryParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @QueryParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationOid") @QueryParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
+			@WebParam(name="measureDataEmployeeOid") @QueryParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception {
 		
-		HttpServletRequest request = (HttpServletRequest) this.getWebServiceContext().getMessageContext().get(MessageContext.SERVLET_REQUEST);
+		HttpServletRequest request = null;
+		if (this.getWebServiceContext() != null && this.getWebServiceContext().getMessageContext() != null) {
+			request = (HttpServletRequest) this.getWebServiceContext().getMessageContext().get(MessageContext.SERVLET_REQUEST);
+		}
 		Subject subject = null;
 		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );
@@ -162,17 +220,20 @@ public class ApiWebServiceImpl implements ApiWebService {
 	@Path("/scorecard2/")	
 	@Override
 	public BscApiServiceResponse getScorecard2(
-			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
-			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
-			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
-			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
-			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
-			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
-			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
-			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
+			@WebParam(name="visionId") @QueryParam("visionId") String visionId, 
+			@WebParam(name="startDate") @QueryParam("startDate") String startDate, 
+			@WebParam(name="endDate") @QueryParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @QueryParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @QueryParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationId") @QueryParam("measureDataOrganizationId") String measureDataOrganizationId, 
+			@WebParam(name="measureDataEmployeeId") @QueryParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
 		
-		HttpServletRequest request = (HttpServletRequest) this.getWebServiceContext().getMessageContext().get(MessageContext.SERVLET_REQUEST);
+		HttpServletRequest request = null;
+		if (this.getWebServiceContext() != null && this.getWebServiceContext().getMessageContext() != null) {
+			request = (HttpServletRequest) this.getWebServiceContext().getMessageContext().get(MessageContext.SERVLET_REQUEST);
+		}
 		Subject subject = null;
 		BscApiServiceResponse responseObj = new BscApiServiceResponse();
 		responseObj.setSuccess( YesNo.NO );

@@ -28,6 +28,7 @@ public class BscApiServiceResponse implements java.io.Serializable {
 	private String success = YesNo.NO;
 	private String message = "";	
 	private String outJsonData = "{}";
+	private String outXmlData = "";
 	private String htmlBodyUrl = ""; // 產生一組 url , 顯示HTML報表內容 
 	
 	public String getSuccess() {
@@ -54,6 +55,14 @@ public class BscApiServiceResponse implements java.io.Serializable {
 		this.outJsonData = outJsonData;
 	}
 	
+	public String getOutXmlData() {
+		return outXmlData;
+	}
+
+	public void setOutXmlData(String outXmlData) {
+		this.outXmlData = outXmlData;
+	}
+
 	public String getHtmlBodyUrl() {
 		return htmlBodyUrl;
 	}
