@@ -4,4 +4,4 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<s:property value="value" />
+<s:property value="value" escapeHtml="false" escapeJavaScript="false" escapeXml="false" escapeCsv="false"/>

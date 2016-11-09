@@ -117,7 +117,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 			if (request != null) {
 				url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
 			} else {
-				url = HostUtils.getHostAddress() + HostUtils.getHttpPort() + "/" + ApplicationSiteUtils.getContextPath(Constants.getSystem());
+				url = HostUtils.getHostAddress() + ":" + HostUtils.getHttpPort() + "/" + ApplicationSiteUtils.getContextPath(Constants.getSystem());
 			}
 			if (!url.endsWith("/")) {
 				url += "/";

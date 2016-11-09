@@ -89,6 +89,9 @@
          		/index.action*=authc
          		/core.generateMenu.action*=anon
          		/core.generateMenuJs.action*=anon
+				/core.printContentAction.action*=anon
+				/bsc.printContentAction.action*=anon
+				/qcharts.printContentAction.action*=anon         		
          		/*.action=authc
          		
          		/publish/**=anon		
@@ -99,7 +102,7 @@
          		/css/**=anon
          		/js/**=anon
          		/camel/**=anon         
-         		
+         		/hessian/**=anon
          		
 			</value> 
    		</property> 
