@@ -359,6 +359,13 @@ jackson-databind-2.6.1.jar
 jackson-annotations-2.6.1.jar
 
 
+jackson for jaxrs
+-------------------------
+jackson-jaxrs-base-2.8.4.jar
+jackson-jaxrs-json-provider-2.8.4.jar
+jackson-module-jaxb-annotations-2.8.4.jar
+
+
 Apache Shiro
 -------------------------
 shiro-all-1.3.2.jar
