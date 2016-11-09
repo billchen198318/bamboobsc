@@ -43,6 +43,7 @@ import org.apache.cxf.jaxrs.provider.XPathProvider;
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.cxf.transport.servlet.CXFServlet;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -66,6 +67,7 @@ public class PublishingCXFServlet extends CXFServlet {
 		providers.add(new XPathProvider<Object>());
 		providers.add(new DataBindingProvider<Object>());
 		providers.add(new BinaryDataProvider<Object>());
+		providers.add(new JacksonJaxbJsonProvider());
 		return providers;
 	}
 	
