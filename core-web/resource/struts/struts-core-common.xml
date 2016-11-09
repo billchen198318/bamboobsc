@@ -37,6 +37,20 @@
 							  					
 	</package>
 	
+	
+	<package name="core-common-print-content" extends="core-default" namespace="/" >
+		
+		<default-interceptor-ref name="greenStepProvideCustomStack" />
+		
+		<action name="core.printContentAction" class="core.web.controller.CommonPrintContentAction">
+			<result name="input">/pages/system/blank.jsp</result>	
+			<result name="blank">/pages/system/blank.jsp</result>	
+			<result name="blankValue">/pages/system/blankValue.jsp</result>
+		</action>		
+		
+	</package>
+	
+	
 	<package name="core-common-config" extends="core-default" namespace="/" >
 		
 		<default-interceptor-ref name="greenStepProvideCustomStack" />
