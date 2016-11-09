@@ -99,6 +99,41 @@ public class PerformanceScoreChainUtils {
 		transactionTemplate = DataUtils.getTransactionTemplate();
 	}
 	
+	/**
+	 * 清除 公式 與 歸類方法 的表達式內容
+	 * 
+	 * @param vision
+	 * @throws Exception
+	 */
+	public static void clearExpressionContentOut(VisionVO vision) throws Exception {
+		if (null == vision) {
+			return;
+		}
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				for (KpiVO kpi : objective.getKpis()) {
+					kpi.getFormula().setExpression("");
+					kpi.getFormula().setDescription("");
+					kpi.getTrendsFormula().setExpression("");
+					kpi.getTrendsFormula().setDescription("");
+					kpi.getAggregationMethod().setExpression1("");
+					kpi.getAggregationMethod().setExpression2("");
+					kpi.getAggregationMethod().setDescription("");
+				}
+			}
+		}
+	}
+	
+	public static void clearExpressionContentOut(ChainResultObj result) throws Exception {
+		if (result.getValue() == null || ( (BscStructTreeObj)result.getValue() ).getVisions() == null || ( (BscStructTreeObj)result.getValue() ).getVisions().size() == 0) {
+			return;
+		}		
+		List<VisionVO> visions = ( (BscStructTreeObj)result.getValue() ).getVisions();
+		for (VisionVO vision : visions) {
+			clearExpressionContentOut(vision);
+		}
+	}
+	
 	public static Context getContext(String visionOid, String startDate, String endDate, 
 			String startYearDate, String endYearDate, String frequency, String dataFor, 
 			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {

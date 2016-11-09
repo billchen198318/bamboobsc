@@ -27,8 +27,8 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 
@@ -42,28 +42,28 @@ public interface ApiWebService {
 	@GET
 	@Path("/scorecard1/")
 	public BscApiServiceResponse getScorecard1(
-			@WebParam(name="visionOid") @PathParam("visionOid") String visionOid, 
-			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
-			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
-			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
-			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
-			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
-			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
-			@WebParam(name="measureDataOrganizationOid") @PathParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
-			@WebParam(name="measureDataEmployeeOid") @PathParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception;	
+			@WebParam(name="visionOid") @QueryParam("visionOid") String visionOid, 
+			@WebParam(name="startDate") @QueryParam("startDate") String startDate, 
+			@WebParam(name="endDate") @QueryParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @QueryParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @QueryParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationOid") @QueryParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
+			@WebParam(name="measureDataEmployeeOid") @QueryParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception;	
 	
 	@WebMethod
 	@GET
 	@Path("/scorecard2/")
 	public BscApiServiceResponse getScorecard2(
-			@WebParam(name="visionId") @PathParam("visionId") String visionId, 
-			@WebParam(name="startDate") @PathParam("startDate") String startDate, 
-			@WebParam(name="endDate") @PathParam("endDate") String endDate, 
-			@WebParam(name="startYearDate") @PathParam("startYearDate") String startYearDate, 
-			@WebParam(name="endYearDate") @PathParam("endYearDate") String endYearDate, 
-			@WebParam(name="frequency") @PathParam("frequency") String frequency, 
-			@WebParam(name="dataFor") @PathParam("dataFor") String dataFor, 
-			@WebParam(name="measureDataOrganizationId") @PathParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @PathParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception;
+			@WebParam(name="visionId") @QueryParam("visionId") String visionId, 
+			@WebParam(name="startDate") @QueryParam("startDate") String startDate, 
+			@WebParam(name="endDate") @QueryParam("endDate") String endDate, 
+			@WebParam(name="startYearDate") @QueryParam("startYearDate") String startYearDate, 
+			@WebParam(name="endYearDate") @QueryParam("endYearDate") String endYearDate, 
+			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
+			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
+			@WebParam(name="measureDataOrganizationId") @QueryParam("measureDataOrganizationId") String measureDataOrganizationId, 
+			@WebParam(name="measureDataEmployeeId") @QueryParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception;
 	
 }
