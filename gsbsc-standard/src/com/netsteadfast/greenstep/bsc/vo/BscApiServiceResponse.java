@@ -21,6 +21,9 @@
  */
 package com.netsteadfast.greenstep.bsc.vo;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.netsteadfast.greenstep.base.model.YesNo;
 
 public class BscApiServiceResponse implements java.io.Serializable {
@@ -30,6 +33,9 @@ public class BscApiServiceResponse implements java.io.Serializable {
 	private String outJsonData = "{}";
 	private String outXmlData = "";
 	private String htmlBodyUrl = ""; // 產生一組 url , 顯示HTML報表內容 
+	private List<String> perspectivesMeterChartUrl = new LinkedList<String>(); // 險示 Perspective Meter Chart 的 url, 會有多筆資料
+	private List<String> objectivesMeterChartUrl = new LinkedList<String>(); // 險示 Objective Meter Chart 的 url, 會有多筆資料
+	private List<String> kpisMeterChartUrl = new LinkedList<String>(); // 險示 KPI Meter Chart 的 url, 會有多筆資料
 	
 	public String getSuccess() {
 		return success;
@@ -69,6 +75,30 @@ public class BscApiServiceResponse implements java.io.Serializable {
 	
 	public void setHtmlBodyUrl(String htmlBodyUrl) {
 		this.htmlBodyUrl = htmlBodyUrl;
+	}
+
+	public List<String> getPerspectivesMeterChartUrl() {
+		return perspectivesMeterChartUrl;
+	}
+
+	public void setPerspectivesMeterChartUrl(List<String> perspectivesMeterChartUrl) {
+		this.perspectivesMeterChartUrl = perspectivesMeterChartUrl;
+	}
+
+	public List<String> getObjectivesMeterChartUrl() {
+		return objectivesMeterChartUrl;
+	}
+
+	public void setObjectivesMeterChartUrl(List<String> objectivesMeterChartUrl) {
+		this.objectivesMeterChartUrl = objectivesMeterChartUrl;
+	}
+
+	public List<String> getKpisMeterChartUrl() {
+		return kpisMeterChartUrl;
+	}
+
+	public void setKpisMeterChartUrl(List<String> kpisMeterChartUrl) {
+		this.kpisMeterChartUrl = kpisMeterChartUrl;
 	}
 	
 }

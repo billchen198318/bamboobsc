@@ -65,6 +65,7 @@ import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.sys.WsAuthenticateUtils;
 import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.HostUtils;
+import com.netsteadfast.greenstep.util.JFreeChartDataMapperUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
@@ -81,7 +82,8 @@ import com.thoughtworks.xstream.XStream;
 @Path("/")
 @Produces("application/json")
 public class ApiWebServiceImpl implements ApiWebService {
-	
+	private static final int MeterChart_width = 320;
+	private static final int MeterChart_height = 280;	
     private WebServiceContext webServiceContext;
 	
 	public WebServiceContext getWebServiceContext() {
@@ -92,6 +94,20 @@ public class ApiWebServiceImpl implements ApiWebService {
 	@Resource(name="webServiceContext")	
 	public void setWebServiceContext(WebServiceContext webServiceContext) {
 		this.webServiceContext = webServiceContext;
+	}
+	
+	private int getMeterChartLowerBound(float score, float min) {
+		if (score < min) {
+			return (int)score;
+		}
+		return (int)min;
+	}
+	
+	private int getMeterChartUpperBound(float score, float target) {
+		if (score > target) {
+			return (int)score;
+		}
+		return (int)target;
 	}
 	
 	private void processForScorecard(
@@ -106,26 +122,59 @@ public class ApiWebServiceImpl implements ApiWebService {
 		if (result.getValue() == null || ( (BscStructTreeObj)result.getValue() ).getVisions() == null || ( (BscStructTreeObj)result.getValue() ).getVisions().size() == 0) {
 			return;
 		}		
+		String meterChartBaseUrl = ""; // 給 Meter Chart 用的
+		String url = ""; // 給 HTML 報表用的
+		if (request != null) {
+			url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
+		} else {
+			url = HostUtils.getHostAddress() + ":" + HostUtils.getHttpPort() + "/" + ApplicationSiteUtils.getContextPath(Constants.getSystem());
+		}
+		if (!url.endsWith("/")) {
+			url += "/";
+		}		
+		meterChartBaseUrl = url + "bsc.commonMeterChartAction.action";		
 		BscStructTreeObj resultObj = (BscStructTreeObj)result.getValue();
 		KpiReportBodyCommand reportBody = new KpiReportBodyCommand();
 		reportBody.execute(context);
 		Object htmlBody = reportBody.getResult(context);
 		if (htmlBody != null && htmlBody instanceof String) {
 			String htmlUploadOid = UploadSupportUtils.create(
-					Constants.getSystem(), UploadTypes.IS_TEMP, false, String.valueOf(htmlBody).getBytes(), "KPI-HTML-REPORT.html");
-			String url = "";
-			if (request != null) {
-				url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
-			} else {
-				url = HostUtils.getHostAddress() + ":" + HostUtils.getHttpPort() + "/" + ApplicationSiteUtils.getContextPath(Constants.getSystem());
-			}
-			if (!url.endsWith("/")) {
-				url += "/";
-			}			
+					Constants.getSystem(), UploadTypes.IS_TEMP, false, String.valueOf(htmlBody).getBytes(), "KPI-HTML-REPORT.html");	
 			url += "bsc.printContentAction.action?oid=" + htmlUploadOid;
 			responseObj.setHtmlBodyUrl(url);
 		}
 		VisionVO visionObj = resultObj.getVisions().get(0);
+		// 產生 Meter Chart 資料
+		for (PerspectiveVO perspective : visionObj.getPerspectives()) {
+			String perspectiveMeterChartOid = JFreeChartDataMapperUtils.createMeterData(
+					perspective.getName(), 
+					perspective.getScore(), 
+					this.getMeterChartLowerBound(perspective.getScore(), perspective.getMin()), 
+					this.getMeterChartUpperBound(perspective.getScore(), perspective.getTarget()), 
+					MeterChart_width, 
+					MeterChart_height);
+			responseObj.getPerspectivesMeterChartUrl().add( meterChartBaseUrl + "?oid=" + perspectiveMeterChartOid );
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				String objectiveMeterChartOid = JFreeChartDataMapperUtils.createMeterData(
+						objective.getName(), 
+						(int)objective.getScore(), 
+						this.getMeterChartLowerBound(objective.getScore(), objective.getMin()), 
+						this.getMeterChartUpperBound(objective.getScore(), objective.getTarget()), 
+						MeterChart_width, 
+						MeterChart_height);
+				responseObj.getObjectivesMeterChartUrl().add( meterChartBaseUrl + "?oid=" + objectiveMeterChartOid );
+				for (KpiVO kpi : objective.getKpis()) {
+					String kpiMeterChartOid = JFreeChartDataMapperUtils.createMeterData(
+							kpi.getName(), 
+							kpi.getScore(), 
+							this.getMeterChartLowerBound(kpi.getScore(), kpi.getMin()), 
+							this.getMeterChartUpperBound(kpi.getScore(), kpi.getTarget()), 
+							MeterChart_width, 
+							MeterChart_height);
+					responseObj.getKpisMeterChartUrl().add( meterChartBaseUrl + "?oid=" + kpiMeterChartOid );
+				}
+			}
+		}
 		PerformanceScoreChainUtils.clearExpressionContentOut(visionObj);
 		responseObj.setSuccess(YesNo.YES);
 		ObjectMapper objectMapper = new ObjectMapper();
