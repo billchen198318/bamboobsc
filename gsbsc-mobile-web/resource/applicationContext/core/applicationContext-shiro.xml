@@ -93,6 +93,13 @@
          		/index.action*=authc
          		/core.generateMenu.action*=anon
          		/core.generateMenuJs.action*=anon
+				/core.printContentAction.action*=anon
+				/bsc.printContentAction.action*=anon
+				/qcharts.printContentAction.action*=anon         		
+				/core.commonMeterChartAction.action*=anon
+				/bsc.commonMeterChartAction.action*=anon
+				/charts.commonMeterChartAction.action*=anon
+				/bsc.mobile.commonMeterChartAction.action*=anon         		
          		/*.action=authc
          		
          		/publish/**=anon		
@@ -102,7 +109,8 @@
          		/images/**=anon
          		/css/**=anon
          		/js/**=anon         
-         		
+         		/camel/**=anon
+         		/hessian/**=anon         		
          		
 			</value> 
    		</property> 
