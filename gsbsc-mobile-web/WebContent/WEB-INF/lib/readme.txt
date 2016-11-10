@@ -354,9 +354,9 @@ itextpdf-5.5.1.jar
 jackson
 https://github.com/FasterXML
 -------------------------
-jackson-core-2.6.1.jar
-jackson-databind-2.6.1.jar
-jackson-annotations-2.6.1.jar
+jackson-annotations-2.8.4.jar
+jackson-core-2.8.4.jar
+jackson-databind-2.8.4.jar
 
 
 jackson for jaxrs
