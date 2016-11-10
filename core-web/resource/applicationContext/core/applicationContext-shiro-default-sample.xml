@@ -98,6 +98,12 @@
 				/bsc.commonMeterChartAction.action*=anon
 				/charts.commonMeterChartAction.action*=anon
 				/bsc.mobile.commonMeterChartAction.action*=anon
+				/core.commonBarChartAction.action*=anon
+				/bsc.commonBarChartAction.action*=anon
+				/charts.commonBarChartAction.action*=anon
+				/core.commonPieChartAction.action*=anon
+				/bsc.commonPieChartAction.action*=anon
+				/charts.commonPieChartAction.action*=anon								
          		/*.action=authc
          		
          		/publish/**=anon		
