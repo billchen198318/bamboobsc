@@ -21,6 +21,9 @@
  */
 package com.netsteadfast.greenstep.bsc.webservice.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -54,6 +57,7 @@ import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.bsc.util.BscReportSupportUtils;
 import com.netsteadfast.greenstep.bsc.util.PerformanceScoreChainUtils;
 import com.netsteadfast.greenstep.bsc.vo.BscApiServiceResponse;
 import com.netsteadfast.greenstep.bsc.webservice.ApiWebService;
@@ -123,6 +127,8 @@ public class ApiWebServiceImpl implements ApiWebService {
 			return;
 		}		
 		String meterChartBaseUrl = ""; // 給 Meter Chart 用的
+		String barChartBaseUrl = ""; // 給 BAR Chart 用的
+		String pieChartBaseUrl = ""; // 給 PIE Chart 用的
 		String url = ""; // 給 HTML 報表用的
 		if (request != null) {
 			url = ApplicationSiteUtils.getBasePath(Constants.getSystem(), request);
@@ -133,6 +139,8 @@ public class ApiWebServiceImpl implements ApiWebService {
 			url += "/";
 		}		
 		meterChartBaseUrl = url + "bsc.commonMeterChartAction.action";		
+		barChartBaseUrl = url + "bsc.commonBarChartAction.action";
+		pieChartBaseUrl = url + "bsc.commonPieChartAction.action";
 		BscStructTreeObj resultObj = (BscStructTreeObj)result.getValue();
 		KpiReportBodyCommand reportBody = new KpiReportBodyCommand();
 		reportBody.execute(context);
@@ -175,6 +183,38 @@ public class ApiWebServiceImpl implements ApiWebService {
 				}
 			}
 		}
+		
+		// 產生 Perspectives Bar/Pie chart
+		String barUploadOid = "";
+		String pieUploadOid = "";
+		List<String> names = new LinkedList<String>();
+		List<Float> values = new LinkedList<Float>();
+		List<String> colors = new LinkedList<String>();
+		for (PerspectiveVO perspective : visionObj.getPerspectives()) {
+			names.add( perspective.getName() + "(" + BscReportSupportUtils.parse2(perspective.getScore()) + ")" );
+			values.add(perspective.getScore());
+			colors.add(perspective.getBgColor());
+		}
+		barUploadOid = JFreeChartDataMapperUtils.createBarData(
+				visionObj.getTitle(), 
+				"Score", 
+				"", 
+				names, 
+				values, 
+				colors,
+				480,
+				280,
+				false);	
+		pieUploadOid = JFreeChartDataMapperUtils.createPieData(
+				visionObj.getTitle(), 
+				names, 
+				values, 
+				colors, 
+				480, 
+				280);
+		responseObj.setPieChartUrl( pieChartBaseUrl + "?oid=" + pieUploadOid );
+		responseObj.setBarChartUrl( barChartBaseUrl + "?oid=" + barUploadOid );
+		
 		PerformanceScoreChainUtils.clearExpressionContentOut(visionObj);
 		responseObj.setSuccess(YesNo.YES);
 		ObjectMapper objectMapper = new ObjectMapper();
