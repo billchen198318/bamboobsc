@@ -32,10 +32,12 @@ public class BscApiServiceResponse implements java.io.Serializable {
 	private String message = "";	
 	private String outJsonData = "{}";
 	private String outXmlData = "";
-	private String htmlBodyUrl = ""; // 產生一組 url , 顯示HTML報表內容 
+	private String htmlBodyUrl = ""; // 產生一組 url , 顯示HTML報表內容
 	private List<String> perspectivesMeterChartUrl = new LinkedList<String>(); // 險示 Perspective Meter Chart 的 url, 會有多筆資料
 	private List<String> objectivesMeterChartUrl = new LinkedList<String>(); // 險示 Objective Meter Chart 的 url, 會有多筆資料
 	private List<String> kpisMeterChartUrl = new LinkedList<String>(); // 險示 KPI Meter Chart 的 url, 會有多筆資料
+	private String pieChartUrl = ""; // 顯示 perspectives PIE chart
+	private String barChartUrl = ""; // 顯示 perspectives BAR chart
 	
 	public String getSuccess() {
 		return success;
@@ -99,6 +101,22 @@ public class BscApiServiceResponse implements java.io.Serializable {
 
 	public void setKpisMeterChartUrl(List<String> kpisMeterChartUrl) {
 		this.kpisMeterChartUrl = kpisMeterChartUrl;
+	}
+
+	public String getPieChartUrl() {
+		return pieChartUrl;
+	}
+
+	public void setPieChartUrl(String pieChartUrl) {
+		this.pieChartUrl = pieChartUrl;
+	}
+
+	public String getBarChartUrl() {
+		return barChartUrl;
+	}
+
+	public void setBarChartUrl(String barChartUrl) {
+		this.barChartUrl = barChartUrl;
 	}
 	
 }
