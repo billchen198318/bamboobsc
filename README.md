@@ -331,6 +331,9 @@ settings Text file encoding to UTF-8<br/>
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/15-Formula.md">15 - Formula</a>
 <br/>
 
+<a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/16-API.md">16 - API</a>
+<br/>
+
 <br>
 <br>
 <br>
