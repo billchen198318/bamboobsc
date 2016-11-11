@@ -50,7 +50,8 @@ public interface ApiWebService {
 			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationOid") @QueryParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
-			@WebParam(name="measureDataEmployeeOid") @QueryParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception;	
+			@WebParam(name="measureDataEmployeeOid") @QueryParam("measureDataEmployeeOid") String measureDataEmployeeOid,
+			@WebParam(name="contentFlag") @QueryParam("contentFlag") String contentFlag) throws Exception;	
 	
 	@WebMethod
 	@GET
@@ -64,6 +65,7 @@ public interface ApiWebService {
 			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationId") @QueryParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @QueryParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception;
+			@WebParam(name="measureDataEmployeeId") @QueryParam("measureDataEmployeeId") String measureDataEmployeeId,
+			@WebParam(name="contentFlag") @QueryParam("contentFlag") String contentFlag) throws Exception;
 	
 }

@@ -118,7 +118,8 @@ public class ApiWebServiceImpl implements ApiWebService {
 			BscApiServiceResponse responseObj, 
 			HttpServletRequest request,
 			String visionOid, String startDate, String endDate, String startYearDate, String endYearDate, String frequency, 
-			String dataFor, String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
+			String dataFor, String measureDataOrganizationOid, String measureDataEmployeeOid,
+			String contentFlag) throws ServiceException, Exception {
 		
 		org.apache.commons.chain.Context context = PerformanceScoreChainUtils.getContext(
 				visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);			
@@ -217,21 +218,23 @@ public class ApiWebServiceImpl implements ApiWebService {
 		
 		PerformanceScoreChainUtils.clearExpressionContentOut(visionObj);
 		responseObj.setSuccess(YesNo.YES);
-		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonData = objectMapper.writeValueAsString(visionObj);	
-		XStream xstream = new XStream();
-		xstream.setMode(XStream.NO_REFERENCES);
-		xstream.alias("vision", VisionVO.class);
-		xstream.alias("perspective", PerspectiveVO.class);
-		xstream.alias("objective", ObjectiveVO.class);
-		xstream.alias("kpi", KpiVO.class);
-		xstream.alias("measureData", BbMeasureData.class);
-		xstream.alias("dateRangeScore", DateRangeScoreVO.class);
-		xstream.alias("employee", EmployeeVO.class);
-		xstream.alias("organization", OrganizationVO.class);
-		String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xstream.toXML(visionObj);
-		responseObj.setOutJsonData(jsonData);
-		responseObj.setOutXmlData(xmlData);
+		if (YesNo.YES.equals(contentFlag)) {
+			ObjectMapper objectMapper = new ObjectMapper();
+			String jsonData = objectMapper.writeValueAsString(visionObj);	
+			XStream xstream = new XStream();
+			xstream.setMode(XStream.NO_REFERENCES);
+			xstream.alias("vision", VisionVO.class);
+			xstream.alias("perspective", PerspectiveVO.class);
+			xstream.alias("objective", ObjectiveVO.class);
+			xstream.alias("kpi", KpiVO.class);
+			xstream.alias("measureData", BbMeasureData.class);
+			xstream.alias("dateRangeScore", DateRangeScoreVO.class);
+			xstream.alias("employee", EmployeeVO.class);
+			xstream.alias("organization", OrganizationVO.class);
+			String xmlData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xstream.toXML(visionObj);
+			responseObj.setOutJsonData(jsonData);
+			responseObj.setOutXmlData(xmlData);			
+		}
 	}
 	
 	/**
@@ -252,6 +255,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 		         <dataFor>all</dataFor>
 		         <measureDataOrganizationOid></measureDataOrganizationOid>
 		         <measureDataEmployeeOid></measureDataEmployeeOid>
+		         <contentFlag></contentFlag>
 		         
 		      </web:getScorecard1>
 		      
@@ -261,7 +265,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 	 * 
 	 * 
 	 * REST 範例:
-	 * curl -i -X GET "http://127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1?visionOid=1089abb5-3faf-445d-88ff-cd7690ac6743&startDate=&endDate=&startYearDate=2015&endYearDate=2016&frequency=6&dataFor=all&measureDataOrganizationOid=&measureDataEmployeeOid="
+	 * curl -i -X GET "http://127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1?visionOid=1089abb5-3faf-445d-88ff-cd7690ac6743&startDate=&endDate=&startYearDate=2015&endYearDate=2016&frequency=6&dataFor=all&measureDataOrganizationOid=&measureDataEmployeeOid=&contentFlag="
 	 * 
 	 */
 	@WebMethod
@@ -277,7 +281,8 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationOid") @QueryParam("measureDataOrganizationOid") String measureDataOrganizationOid, 
-			@WebParam(name="measureDataEmployeeOid") @QueryParam("measureDataEmployeeOid") String measureDataEmployeeOid) throws Exception {
+			@WebParam(name="measureDataEmployeeOid") @QueryParam("measureDataEmployeeOid") String measureDataEmployeeOid,
+			@WebParam(name="contentFlag") @QueryParam("contentFlag") String contentFlag) throws Exception {
 		
 		HttpServletRequest request = null;
 		if (this.getWebServiceContext() != null && this.getWebServiceContext().getMessageContext() != null) {
@@ -291,7 +296,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 			this.processForScorecard(
 					responseObj, 
 					request,
-					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
+					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid, contentFlag);
 		} catch (Exception e) {
 			responseObj.setMessage( e.getMessage() );
 		} finally {
@@ -317,7 +322,8 @@ public class ApiWebServiceImpl implements ApiWebService {
 			@WebParam(name="frequency") @QueryParam("frequency") String frequency, 
 			@WebParam(name="dataFor") @QueryParam("dataFor") String dataFor, 
 			@WebParam(name="measureDataOrganizationId") @QueryParam("measureDataOrganizationId") String measureDataOrganizationId, 
-			@WebParam(name="measureDataEmployeeId") @QueryParam("measureDataEmployeeId") String measureDataEmployeeId) throws Exception {
+			@WebParam(name="measureDataEmployeeId") @QueryParam("measureDataEmployeeId") String measureDataEmployeeId,
+			@WebParam(name="contentFlag") @QueryParam("contentFlag") String contentFlag) throws Exception {
 		
 		HttpServletRequest request = null;
 		if (this.getWebServiceContext() != null && this.getWebServiceContext().getMessageContext() != null) {
@@ -358,7 +364,7 @@ public class ApiWebServiceImpl implements ApiWebService {
 			this.processForScorecard(
 					responseObj, 
 					request, 
-					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
+					visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid, contentFlag);
 		} catch (Exception e) {
 			responseObj.setMessage( e.getMessage() );
 		} finally {
