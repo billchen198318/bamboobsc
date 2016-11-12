@@ -137,9 +137,9 @@ function submitLoginForm() {
     <br/>
     <label>Please use <b>Chrome</b> (recommend) or <b>Firefox</b> browser, can not support other browser.</label>
     <br/>
-    <label>bambooBSC 0.7.0-BETA1 version</label>
+    <label>bambooBSC 0.7.0 version</label>
 	
-	<a href="../gsbsc-mobile-web/index.action" class="btn btn-success" role="button" aria-pressed="true">click move to Mobile version</a>
+	<a href="../gsbsc-mobile-web/index.action" class="btn btn-success" role="button" aria-pressed="true">click link to Mobile version</a>
 	
 </form>
 </div>
