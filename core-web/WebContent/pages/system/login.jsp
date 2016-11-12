@@ -17,8 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="./bootstrap-4.0.0-alpha.4/css/bootstrap.css" crossorigin="anonymous">
-<script src="./bootstrap-4.0.0-alpha.4/js/bootstrap.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="./bootstrap-4.0.0-alpha.5/css/bootstrap.css" crossorigin="anonymous">
+<script src="./bootstrap-4.0.0-alpha.5/js/bootstrap.js" crossorigin="anonymous"></script>
 
 
 <style type="text/css">
@@ -139,7 +139,7 @@ function submitLoginForm() {
     <br/>
     <label>bambooBSC 0.7.0-BETA1 version</label>
 	
-	<a href="../gsbsc-mobile-web/index.action" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Click to mobile version</a>
+	<a href="../gsbsc-mobile-web/index.action" class="btn btn-success" role="button" aria-pressed="true">click move to Mobile version</a>
 	
 </form>
 </div>
