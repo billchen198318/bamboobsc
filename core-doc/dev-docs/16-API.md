@@ -62,10 +62,21 @@ getScorecard1
 | endDate | measure-data end date, if frequency is 1,2,3 is required |
 | startYearDate | measure-data start year, if frequency is 4,5,6 is required |
 | endYearDate | measure-data end year, if frequency is 4,5,6 is required |
-| dataFor | all / employee / organization |
-| measureDataOrganizationOid | if dataFor is organization this field is required |
-| measureDataEmployeeOid | if dataFor is employee this field is required |
-| contentFlag | if value Y , will put xml and json data result out |
+| dataFor | `all` / `employee` / `organization` |
+| measureDataOrganizationOid | if dataFor is `organization` this field is required |
+| measureDataEmployeeOid | if dataFor is `employee` this field is required |
+| contentFlag | if value `Y` , will put xml and json data result out |
+
+
+###Frequency value description
+| Frequency |description | 
+| --- | --- |
+| 1 | Day |
+| 2 | Week |
+| 3 | Month |
+| 4 | Quarter |
+| 5 | Half of year |
+| 6 | Year |
 
 <br/>
 <br/>
