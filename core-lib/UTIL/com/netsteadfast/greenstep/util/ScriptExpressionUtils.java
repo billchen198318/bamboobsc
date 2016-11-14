@@ -23,10 +23,14 @@ package com.netsteadfast.greenstep.util;
 
 import java.util.Map;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
+import org.renjin.sexp.AbstractAtomicVector;
 
 import com.netsteadfast.greenstep.base.model.ScriptTypeCode;
 
@@ -35,9 +39,11 @@ import groovy.lang.GroovyShell;
 import bsh.Interpreter;
 
 public class ScriptExpressionUtils {
+	private static ScriptEngineManager manager = new ScriptEngineManager();
 	private static CompilerConfiguration groovyCompilerConfig = new CompilerConfiguration();
 	private static ThreadLocal<Interpreter> bshInterpreterTL = new ThreadLocal<Interpreter>();
 	private static ThreadLocal<GroovyShell> groovyShellTL = new ThreadLocal<GroovyShell>();
+	private static ThreadLocal<ScriptEngine> renjinScriptEngineTL = new ThreadLocal<ScriptEngine>();
 	
 	static {
 		groovyCompilerConfig.getOptimizationOptions().put("indy", true);
@@ -76,6 +82,15 @@ public class ScriptExpressionUtils {
 		return pyInterpreter;
 	}
 	
+	public static ScriptEngine buildRenjinScriptEngine() {
+		if (renjinScriptEngineTL.get()!=null) {
+			return renjinScriptEngineTL.get();
+		}
+		ScriptEngine engine = manager.getEngineByName("Renjin");
+		renjinScriptEngineTL.set(engine);
+		return engine;
+	}
+	
 	/**
 	 * 執行 script 
 	 * 
@@ -99,6 +114,9 @@ public class ScriptExpressionUtils {
 		}
 		if (ScriptTypeCode.IS_PYTHON.equals(type)) {
 			executeJython(scriptExpression, results, parameters);
+		}
+		if (ScriptTypeCode.IS_R.equals(type)) {
+			executeRenjin(scriptExpression, results, parameters);
 		}
 		return results;
 	}
@@ -169,5 +187,25 @@ public class ScriptExpressionUtils {
 			}
 		}
 	}
+	
+	private static void executeRenjin(String scriptExpression, Map<String, Object> results, Map<String, Object> parameters) throws Exception {
+		ScriptEngine engine = buildRenjinScriptEngine();
+		if (parameters!=null) {
+			for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+				engine.put(entry.getKey(), entry.getValue());
+			}
+		}
+		engine.eval(scriptExpression);
+		if (results!=null) {
+			for (Map.Entry<String, Object> entry : results.entrySet()) {
+				Object res = engine.get(entry.getKey());
+				if (res instanceof AbstractAtomicVector) {
+					if ( ((AbstractAtomicVector) res).length()>0 ) {
+						entry.setValue( ((AbstractAtomicVector) res).getElementAsObject(0) );
+					}
+				}
+			}
+		}
+	}	
 	
 }

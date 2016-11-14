@@ -146,6 +146,9 @@ public class BscFormulaUtils {
 			if (ScriptTypeCode.IS_PYTHON.equals(type)) {
 				bscExpression = DEFAULT_RETURN_MODE_VAR + "=" + bscExpression;
 			}			
+			if (ScriptTypeCode.IS_R.equals(type)) {
+				bscExpression = DEFAULT_RETURN_MODE_VAR + "=" + bscExpression;
+			}
 		}
 		return ScriptExpressionUtils.replaceFormulaExpression(type, bscExpression);
 	}
