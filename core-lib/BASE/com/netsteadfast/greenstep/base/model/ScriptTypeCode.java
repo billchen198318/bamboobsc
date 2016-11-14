@@ -30,9 +30,10 @@ public class ScriptTypeCode {
 	public static final String IS_BSH = "BSH"; // beanShell2
 	public static final String IS_GROOVY = "GROOVY"; // groovy
 	public static final String IS_PYTHON = "PYTHON"; // jpython
+	public static final String IS_R = "R"; // R , Renjin
 	
 	public static boolean isTypeCode(String type) {
-		if (IS_BSH.equals(type) || IS_GROOVY.equals(type) || IS_PYTHON.equals(type)) {
+		if (IS_BSH.equals(type) || IS_GROOVY.equals(type) || IS_PYTHON.equals(type) || IS_R.equals(type)) {
 			return true;
 		}
 		return false;
@@ -46,6 +47,7 @@ public class ScriptTypeCode {
 		dataMap.put(IS_BSH, "java ( BeanShell2 )");
 		dataMap.put(IS_GROOVY, "groovy");
 		dataMap.put(IS_PYTHON, "python");
+		dataMap.put(IS_R, "R (Renjin)");
 		return dataMap;
 	}
 	
