@@ -437,6 +437,14 @@ http://hessian.caucho.com/
 hessian-4.0.37.jar
 
 
+Renjin
+http://www.renjin.org/
+has manual remove apache common-math/logging/vfs and joda-time class binary file
+re-pack to renjin-script-engine-0.8.2266.jar
+-------------------------
+renjin-script-engine-0.8.2266.jar
+
+
 DOJO release 1.11.2 ( package file by self )
 *** Note: only for CORE-WEB ***
 -------------------------
