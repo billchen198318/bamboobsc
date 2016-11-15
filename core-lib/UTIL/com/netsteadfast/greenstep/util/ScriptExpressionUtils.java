@@ -203,6 +203,8 @@ public class ScriptExpressionUtils {
 					if ( ((AbstractAtomicVector) res).length()>0 ) {
 						entry.setValue( ((AbstractAtomicVector) res).getElementAsObject(0) );
 					}
+				} else {
+					entry.setValue(res);
 				}
 			}
 		}
