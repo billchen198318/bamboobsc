@@ -38,7 +38,15 @@
 	    	</list>
 		</property>
     	<property name="quartzProperties">            
-    		<props>    
+    		<props>
+    			<!-- 
+    			如果開啟 instanceName 設定, 就不需要設定不同的 tablePrefix 給 GSBSC, QCHARTS, 
+    			但是考慮系統會再多台Server上佈署, 所以會有多個 CORE, GSBSC, QCHARTS 同時執行的可能,
+    			為了清楚的切開資訊, 目前比較傾向使用不同的  tablePrefix
+    			-->    		
+    			<!-- 
+    			<prop key="org.quartz.scheduler.instanceName">QuartzSchedulerQCHARTS</prop>
+    			-->
     			<prop key="org.quartz.scheduler.instanceId">AUTO</prop>        
     			<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>                
     			<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>		               
@@ -47,6 +55,7 @@
     			<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>                
     			<prop key="org.quartz.threadPool.threadCount">8</prop>                
     			<prop key="org.quartz.threadPool.threadPriority">5</prop>            
+    			<prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
     		</props>      
     	</property> 			
    	</bean>        
