@@ -15,8 +15,7 @@
     <!--
     放在CORE的 JOB 要能在 CORE, GSBSC 兩個區域都能跑,
     如果只能在 GSBSC 跑, 卻無法在CORE跑  那請把
-    applicationContext-STANDARD-QUARTZ.xml 與 applicationContext-STANDARD-QUARTZ-JOB.xml
-    疑到 GSBSC 項目中 
+    applicationContext-STANDARD-QUARTZ.xml 與 applicationContext-STANDARD-QUARTZ-JOB.xml 移動至 GSBSC 項目中 
     
     2015-06-26
     將quartz設定檔從 core-base 移至  core-web, gsbsc-web, qcharts-web, gsbsc-mobile-web , 且只有 core-web 有開啟 Job 其餘設定檔內容都是空的
