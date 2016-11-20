@@ -84,7 +84,6 @@ Hibernate
 -------------------------
 dom4j-1.6.1.jar
 antlr-2.7.7.jar
-hibernate-c3p0-5.0.11.Final.jar
 hibernate-commons-annotations-5.0.1.Final.jar
 hibernate-core-5.0.11.Final.jar
 hibernate-entitymanager-5.0.11.Final.jar
@@ -166,11 +165,10 @@ junit-4.11.jar
 hamcrest-core-1.3.jar
 
 
-c3p0
+HikariCP
+https://github.com/brettwooldridge/HikariCP
 -------------------------
-c3p0-0.9.5.1.jar
-c3p0-oracle-thin-extras-0.9.5.1.jar
-mchange-commons-java-0.2.10.jar
+HikariCP-2.5.1.jar
 
 
 ASM	(require by Apache CXF ... etc )
@@ -508,3 +506,12 @@ https://github.com/ziplet/ziplet
 modify CompressingFilter.java add @WebFilter( asyncSupported = true )
 -------------------------
 ziplet-2.0.1-async.jar
+
+
+c3p0
+-------------------------
+c3p0-0.9.5.1.jar
+c3p0-oracle-thin-extras-0.9.5.1.jar
+mchange-commons-java-0.2.10.jar
+
+hibernate-c3p0-5.0.11.Final.jar
