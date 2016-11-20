@@ -8,9 +8,34 @@
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">            
-         
-         
+    
+    <!-- HikariCP configuration -->     
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${dataSource.driverClass}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${dataSource.jdbcUrl}</value>
+		</property>
+		<property name="username">
+			<value>${dataSource.user}</value>
+		</property>
+		<property name="password">
+			<value>${dataSource.password}</value>
+		</property>           
+		<property name="maximumPoolSize">
+			<value>${dataSource.maxPoolSize}</value>
+		</property>
+		<property name="minimumIdle">
+			<value>${dataSource.minPoolSize}</value>
+		</property>		
+        <property name="connectionTimeout" value="30000"/>
+        <property name="idleTimeout" value="600000"/>
+        <property name="maxLifetime" value="1800000 "/>	
+	</bean>
+	
     <!-- C3P0 configuration -->
+    <!--  
     <bean id="dataSource" destroy-method="close"
     	class="com.mchange.v2.c3p0.ComboPooledDataSource" >
 		<property name="driverClass">
@@ -38,7 +63,7 @@
 			<value>${dataSource.maxIdleTime}</value>
 		</property>		
 	</bean>	
-
+	-->
 			    
 </beans>
 
