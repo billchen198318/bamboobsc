@@ -28,6 +28,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
@@ -35,7 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.mchange.io.FileUtils;
 import com.netsteadfast.greenstep.action.utils.IdFieldCheckUtils;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
@@ -116,7 +116,7 @@ public class SystemJreportSaveOrUpdateAction extends BaseJsonAction {
 	private void fillContent(SysJreportVO report) throws IOException, Exception {
 		String uploadOid = super.getFields().get("uploadOid");
 		File file = UploadSupportUtils.getRealFile(uploadOid);		
-		report.setContent( FileUtils.getBytes(file) );
+		report.setContent( FileUtils.readFileToByteArray(file) );
 		file = null;
 	}
 	
