@@ -7,7 +7,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 %>
-<!doctype html>
+<!DOCTYPE html>
 <html itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <head>
 
