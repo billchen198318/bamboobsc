@@ -31,6 +31,11 @@
 			<result name="input">/pages/strategy-map.jsp</result>			
 			<result name="success">/pages/strategy-map.jsp</result>
 		</action>		
+
+		<action name="strategymapContent" class="bsc.mobile.web.controller.IndexAction" method="lnkStrategyMap">
+			<result name="input">/pages/strategy-map-content.jsp</result>			
+			<result name="success">/pages/strategy-map-content.jsp</result>
+		</action>
 									  					
 	</package>
 	
