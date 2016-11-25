@@ -127,20 +127,20 @@ dojo.addOnLoad(function(){
 				loadMenuTree();
 				</s:if>
 				
+				<s:if test=" \"Y\" != showConfigHost ">
 				<%=MenuSupportUtils.getFirstLoadJavascript()%>
-				
+				</s:if>
 				
 				<s:if test=" \"Y\" == showConfigHost ">
-				setTimeout(function(){ 
-					viewPage.addOrUpdateContentPane(			
-							'gscoreTabContainer',			
-							'CORE_PROGNON-CORE-NOT-WORK_ChildTab',			
-							'Warning, Non-core modules will not work',			
-							'showConfigHostAction.action',			
-							true,			
-							true,		
-							false);					
-				}, 1000);				
+				viewPage.addOrUpdateContentPane(			
+						'gscoreTabContainer',			
+						'CORE_PROGNON-CORE-NOT-WORK_ChildTab',			
+						'Warning, Non-core modules will not work',			
+						'showConfigHostAction.action',			
+						true,			
+						true,		
+						false);			
+				alertDialog('Warning', 'Warning, Non-core modules will not work', function(){}, 'E');
 				</s:if>				
 				
 			}
