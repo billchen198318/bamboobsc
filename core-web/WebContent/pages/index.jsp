@@ -128,6 +128,21 @@ dojo.addOnLoad(function(){
 				</s:if>
 				
 				<%=MenuSupportUtils.getFirstLoadJavascript()%>
+				
+				
+				<s:if test=" \"Y\" == showConfigHost ">
+				setTimeout(function(){ 
+					viewPage.addOrUpdateContentPane(			
+							'gscoreTabContainer',			
+							'CORE_PROGNON-CORE-NOT-WORK_ChildTab',			
+							'Warning, Non-core modules will not work',			
+							'showConfigHostAction.action',			
+							true,			
+							true,		
+							false);					
+				}, 1000);				
+				</s:if>				
+				
 			}
 		}).play();
 	}, 250);
@@ -232,6 +247,7 @@ if (realPath.indexOf("org.eclipse.wst.server.core")==-1) {
 <%
 }
 %>
+
 </body>
 
 </html>

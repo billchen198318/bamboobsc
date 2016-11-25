@@ -178,4 +178,32 @@ public class ApplicationSiteUtils {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static boolean checkLoginUrlWithAllSysHostConfig(HttpServletRequest request) {
+		boolean pathSuccess = true;
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+		String basePath80 = request.getScheme()+"://"+request.getServerName();
+		basePath = basePath.toLowerCase();
+		basePath80 = basePath80.toLowerCase();
+		ISysService<SysVO, TbSys, String> sysService = (ISysService<SysVO, TbSys, String>)AppContext.getBean("core.service.SysService");				
+		try {
+			List<TbSys> sysList = sysService.findListByParams( null );
+			for (TbSys sys : sysList) {
+				String host = sys.getHost().toLowerCase();
+				if (request.getServerPort() == 80) {
+					if (basePath.indexOf( host ) == -1 && basePath80.indexOf( host ) == -1) {
+						pathSuccess = false;
+					}
+				} else {
+					if (basePath.indexOf( host ) == -1) {
+						pathSuccess = false;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pathSuccess;
+	}
+	
 }
