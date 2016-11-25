@@ -11,6 +11,11 @@
 			<result name="input">/pages/index.jsp</result>			
 			<result name="success">/pages/index.jsp</result>
 		</action>			
+		
+		<action name="showConfigHostAction" class="core.web.controller.IndexAction" method="showConfigHost">
+			<result name="input">/pages/show-config-host.jsp</result>			
+			<result name="success">/pages/show-config-host.jsp</result>
+		</action>		
 
 		<action name="core.commonUploadAction" class="core.web.controller.CommonUploadAction">
 			<result name="input">/pages/sys-common/uploadDlg.jsp</result>			

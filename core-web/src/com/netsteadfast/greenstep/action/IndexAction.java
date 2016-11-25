@@ -27,11 +27,14 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.model.MenuResultObj;
+import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.LocaleLanguageUtils;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.util.SystemSettingConfigureUtils;
@@ -45,6 +48,8 @@ public class IndexAction extends BaseSupportAction {
 	private String comboButtonMenuData = "";
 	private String dialogData = "";
 	private String treeJsonData = "[]";
+	private String showConfigHost = YesNo.NO;
+	private String sysDefaultCoreHost = "";
 	
 	public IndexAction() {
 		super();
@@ -64,10 +69,20 @@ public class IndexAction extends BaseSupportAction {
 					UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext()));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		} finally {
+			if (!ApplicationSiteUtils.checkLoginUrlWithAllSysHostConfig(getHttpServletRequest())) {
+				showConfigHost = YesNo.YES;
+			}
+		}
 		return SUCCESS;
 	}
-
+	
+	@ControllerMethodAuthority(programId="CORE_INDEX")
+	public String showConfigHost() throws Exception {
+		sysDefaultCoreHost = ApplicationSiteUtils.getBasePath(Constants.getSystem(), getHttpServletRequest());
+		return SUCCESS;
+	}
+	
 	public String getComboButtonMenuData() {
 		return comboButtonMenuData;
 	}
@@ -102,6 +117,14 @@ public class IndexAction extends BaseSupportAction {
 			locale = LocaleLanguageUtils.getDefault();
 		}
 		return locale;
+	}
+
+	public String getShowConfigHost() {
+		return showConfigHost;
+	}
+
+	public String getSysDefaultCoreHost() {
+		return sysDefaultCoreHost;
 	}
 	
 }
