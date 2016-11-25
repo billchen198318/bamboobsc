@@ -37,18 +37,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 You login url path is:&nbsp;<font color="#8A0808"><b><%=basePath%></b></font><br/>
 But system config (01 - Application site) host settings value is:&nbsp;<font color="#8A0808"><b>${sysDefaultCoreHost}</b></font><br/>
 
+
 <br/>
 <br/>
 
+<div class="isa_success">
+
 <b>Solution:</b>
+
 <br/>
 <br/>
 <a href="${sysDefaultCoreHost}/pages/way.jsp" style="color:#3794E5">Solution 1. click Try link redirect login page from ${sysDefaultCoreHost}/pages/way.jsp</a>
 <br/>
 <br/>
-<a href="#" onclick="CORE_PROG001D0001Q_TabShow(); return false;" style="color:#3794E5">Solution 2. click to config "01 - Application site" host settings, please view install.pdf page(5 - 8)</a><br/>
+<a href="#" onclick="CORE_PROG001D0001Q_TabShow(); return false;" style="color:#3794E5">Solution 2. click to config "01 - Application site" host settings, please view install.pdf page(5 - 8)</a>&nbsp;&nbsp;( need admin login )<br/>
+<br/>
 <br/>
 
+
+<a href="#" style="text-decoration: none; color:#3794E5" onclick="window.open('https://github.com/billchen198318/bamboobsc/issues/24'); return false;">DHCP network, and no want manual config "01 - application-site host. Please reference: https://github.com/billchen198318/bamboobsc/issues/24</a>
+
+</div>
 
 
 </body>	
