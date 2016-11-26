@@ -21,6 +21,8 @@
  */
 package com.netsteadfast.greenstep.action;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
@@ -38,6 +40,7 @@ import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.LocaleLanguageUtils;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.util.SystemSettingConfigureUtils;
+import com.netsteadfast.greenstep.vo.SysVO;
 
 @ControllerAuthority(check=false)
 @Controller("core.web.controller.IndexAction")
@@ -50,6 +53,7 @@ public class IndexAction extends BaseSupportAction {
 	private String treeJsonData = "[]";
 	private String showConfigHost = YesNo.NO;
 	private String sysDefaultCoreHost = "";
+	private List<SysVO> sysList = null;
 	
 	public IndexAction() {
 		super();
@@ -80,6 +84,7 @@ public class IndexAction extends BaseSupportAction {
 	@ControllerMethodAuthority(programId="CORE_INDEX")
 	public String showConfigHost() throws Exception {
 		sysDefaultCoreHost = ApplicationSiteUtils.getBasePath(Constants.getSystem(), getHttpServletRequest());
+		this.sysList = ApplicationSiteUtils.getSystemsCheckCrossSite( getHttpServletRequest() );
 		return SUCCESS;
 	}
 	
@@ -125,6 +130,10 @@ public class IndexAction extends BaseSupportAction {
 
 	public String getSysDefaultCoreHost() {
 		return sysDefaultCoreHost;
+	}
+
+	public List<SysVO> getSysList() {
+		return sysList;
 	}
 	
 }

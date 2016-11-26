@@ -33,6 +33,12 @@ public class SysVO extends BaseValueObj implements java.io.Serializable {
 	private String isLocal;
 	private String icon;
 	
+	/**
+	 * ApplicationSiteUtils.checkLoginUrlWithAllSysHostConfig(HttpServletRequest request) 
+	 * 判斷是否有 cross site
+	 */
+	private String crossSiteFlag = "";
+	
 	public SysVO() {
 		
 	}
@@ -103,6 +109,14 @@ public class SysVO extends BaseValueObj implements java.io.Serializable {
 	
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getCrossSiteFlag() {
+		return crossSiteFlag;
+	}
+
+	public void setCrossSiteFlag(String crossSiteFlag) {
+		this.crossSiteFlag = crossSiteFlag;
 	}	
 		
 }
