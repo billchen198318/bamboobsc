@@ -31,33 +31,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <font size="3"><b>Warning, Non-core modules will not work</b></font>
 </div>
 
-<br/>
-<br/>
-
 You login url path is:&nbsp;<font color="#8A0808"><b><%=basePath%></b></font><br/>
-But system config (01 - Application site) host settings value is:&nbsp;<font color="#8A0808"><b>${sysDefaultCoreHost}</b></font><br/>
+But system config (01 - Application site) host settings value is:&nbsp;<font color="#8A0808"><b>${sysDefaultCoreHost}</b></font> , or has module is cross site.<br/>
 
 
 <br/>
+
+	<table border="0" width="700px" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">
+		<legend><b>System modules</b></legend>
+		<tr>
+			<td align="center" width="100px" bgcolor="#f1eee5"><b>ID</b></td>
+			<td align="center" width="150px" bgcolor="#f1eee5"><b>Name</b></td>
+			<td align="center" width="150px" bgcolor="#f1eee5"><b>Host</b></td>	
+			<td align="center" width="150px" bgcolor="#f1eee5"><b>Context path</b></td>
+			<td align="center" width="150px" bgcolor="#f1eee5"><b>Cross site</b></td>
+		</tr>
+		
+		<s:if test="sysList != null">
+		<s:iterator value="sysList" status="st">
+		
+		<tr>
+			<td align="left" bgcolor="#ffffff"><s:property value="sysId"/></td>
+			<td align="left" bgcolor="#ffffff"><s:property value="name"/></td>
+			<td align="left" bgcolor="#ffffff"><s:property value="host"/></td>
+			<td align="left" bgcolor="#ffffff"><s:property value="contextPath"/></td>
+			<td align="center" bgcolor="#ffffff">
+				<s:if test=" \"Y\" == crossSiteFlag "><div class="isa_warning">Warning, Cross site</div></s:if>
+				<s:else><div class="isa_success">${crossSiteFlag}</div></s:else>
+			</td>			
+		</tr>			
+		
+		</s:iterator>
+		</s:if>		
+		
+		
+	</table>	
+	
+	
 <br/>
 
-<div class="isa_success">
-
+<div class="isa_info">
 <b>Solution:</b>
-
 <br/>
 <br/>
-<a href="${sysDefaultCoreHost}/pages/way.jsp" style="color:#3794E5">Solution 1. click Try link redirect login page from ${sysDefaultCoreHost}/pages/way.jsp</a>
+<a href="${sysDefaultCoreHost}/pages/way.jsp" style="color:#00529B">Solution 1. click Try link redirect login page from ${sysDefaultCoreHost}/pages/way.jsp</a>
 <br/>
 <br/>
-<a href="#" onclick="CORE_PROG001D0001Q_TabShow(); return false;" style="color:#3794E5">Solution 2. click to config "01 - Application site" host settings, please view install.pdf page(5 - 8)</a>&nbsp;&nbsp;( need admin login )<br/>
+<a href="#" onclick="CORE_PROG001D0001Q_TabShow(); return false;" style="color:#00529B">Solution 2. click to config "01 - Application site" host settings, please view install.pdf page(5 - 8)</a>&nbsp;&nbsp;(&nbsp;need <b>admin</b> login&nbsp;/&nbsp;<a href="#" style="color:#00529B" onclick="window.open('https://github.com/billchen198318/bamboobsc/blob/master/core-doc/install.pdf'); return false;">view install.pdf</a>&nbsp;)<br/>
 <br/>
 <br/>
-
-
-<a href="#" style="text-decoration: none; color:#3794E5" onclick="window.open('https://github.com/billchen198318/bamboobsc/issues/24'); return false;">DHCP network, and no want manual config "01 - application-site host. Please reference: https://github.com/billchen198318/bamboobsc/issues/24</a>
-
+<b>Server IP address allocation by DHCP-server:</b>
+<br/>
+<br/>
+<a href="#" style="color:#00529B" onclick="window.open('https://github.com/billchen198318/bamboobsc/issues/24'); return false;">DHCP network, and no want manual config "01 - application-site host. Please reference: https://github.com/billchen198318/bamboobsc/issues/24</a>
 </div>
 
+
+<br/>
+
+
+<font color="RED">*</font>&nbsp;If it is an internal network environment with allow cross site, and there is has enable <font color="#00529B"><b>chrome --disable-web-security</b></font> please ignore this warning message page.
 
 </body>	

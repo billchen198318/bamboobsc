@@ -33,6 +33,7 @@ import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
 import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.vo.SysVO;
@@ -178,32 +179,63 @@ public class ApplicationSiteUtils {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static boolean checkLoginUrlWithAllSysHostConfig(HttpServletRequest request) {
-		boolean pathSuccess = true;
+	private static boolean checkCrossSite(String host, HttpServletRequest request) {
+		boolean corssSite = false;
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 		String basePath80 = request.getScheme()+"://"+request.getServerName();
 		basePath = basePath.toLowerCase();
-		basePath80 = basePath80.toLowerCase();
+		basePath80 = basePath80.toLowerCase();	
+		if (request.getServerPort() == 80 || request.getServerPort() == 443) {
+			if (basePath.indexOf( host ) == -1 && basePath80.indexOf( host ) == -1) {
+				corssSite = true;
+			}
+		} else {
+			if (basePath.indexOf( host ) == -1) {
+				corssSite = true;
+			}
+		}		
+		return corssSite;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static boolean checkLoginUrlWithAllSysHostConfig(HttpServletRequest request) {
+		boolean pathSuccess = true;
 		ISysService<SysVO, TbSys, String> sysService = (ISysService<SysVO, TbSys, String>)AppContext.getBean("core.service.SysService");				
 		try {
 			List<TbSys> sysList = sysService.findListByParams( null );
-			for (TbSys sys : sysList) {
+			for (int i=0; sysList != null && i < sysList.size() && pathSuccess; i++) {
+				TbSys sys = sysList.get(i);
 				String host = sys.getHost().toLowerCase();
-				if (request.getServerPort() == 80) {
-					if (basePath.indexOf( host ) == -1 && basePath80.indexOf( host ) == -1) {
-						pathSuccess = false;
-					}
-				} else {
-					if (basePath.indexOf( host ) == -1) {
-						pathSuccess = false;
-					}
-				}
+				pathSuccess = !checkCrossSite(host, request);
 			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pathSuccess;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<SysVO> getSystemsCheckCrossSite(HttpServletRequest request) {
+		ISysService<SysVO, TbSys, String> sysService = (ISysService<SysVO, TbSys, String>)AppContext.getBean("core.service.SysService");
+		List<SysVO> sysList = null;	
+		try {
+			sysList = sysService.findListVOByParams( null );
+			for (SysVO sys : sysList) {
+				String host = sys.getHost().toLowerCase();
+				if ( checkCrossSite(host, request) ) {
+					sys.setCrossSiteFlag( YesNo.YES );
+				} else {
+					sys.setCrossSiteFlag( YesNo.NO );
+				}
+			}			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sysList;
 	}
 	
 }

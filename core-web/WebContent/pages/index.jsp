@@ -127,9 +127,9 @@ dojo.addOnLoad(function(){
 				loadMenuTree();
 				</s:if>
 				
-				<s:if test=" \"Y\" != showConfigHost ">
+				
 				<%=MenuSupportUtils.getFirstLoadJavascript()%>
-				</s:if>
+				
 				
 				<s:if test=" \"Y\" == showConfigHost ">
 				viewPage.addOrUpdateContentPane(			
