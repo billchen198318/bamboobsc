@@ -112,7 +112,9 @@ public class CxfServerBean {
 		boolean status = true;
 		for (SysVO sys : systemList) {
 			try {
-				shutdownOrReloadCallSystem( request, sys.getSysId(), type );
+				if (!shutdownOrReloadCallSystem( request, sys.getSysId(), type )) {
+					status = false;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				status = false;
