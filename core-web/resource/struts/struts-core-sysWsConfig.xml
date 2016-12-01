@@ -55,6 +55,13 @@
   				<param name="noCache">true</param>
 			</result>
 		</action>					
+		
+		<action name="core.systemWsConfigStopOrReloadAction" class="core.web.controller.SystemWsConfigSaveOrUpdateAction" method="doStopOrReload">
+			<result type="json">
+  				<param name="contentType">text/html</param>
+  				<param name="noCache">true</param>
+			</result>
+		</action>			
 								
 	</package>
 			

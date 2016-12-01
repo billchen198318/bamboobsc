@@ -22,9 +22,16 @@
 package com.netsteadfast.greenstep.service.logic.impl;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -32,6 +39,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -39,12 +48,15 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.ServiceAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.service.logic.BaseLogicService;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
 import com.netsteadfast.greenstep.po.hbm.TbSysWsConfig;
 import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.service.ISysWsConfigService;
 import com.netsteadfast.greenstep.service.logic.ISystemWebServiceConfigLogicService;
+import com.netsteadfast.greenstep.sys.CxfServerBean;
+import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.vo.SysVO;
 import com.netsteadfast.greenstep.vo.SysWsConfigVO;
 
@@ -148,6 +160,57 @@ public class SystemWebServiceConfigLogicServiceImpl extends BaseLogicService imp
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
 		}
 		return this.sysWsConfigService.deleteObject(config);
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public void stopOrReload(HttpServletRequest request, String system, String type) throws ServiceException, Exception {
+		if (super.isBlank(system) || super.isBlank(type)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		String urlStr = ApplicationSiteUtils.getBasePath(system, request) + "config-services?type=" + type + "&value=" + CxfServerBean.createParamValue();
+		logger.info("stopOrReload , url=" + urlStr);
+		HttpClient client = new HttpClient();
+		HttpMethod method = new GetMethod(urlStr);
+		client.executeMethod(method);
+		byte[] responseBody = method.getResponseBody();
+		if (null == responseBody) {
+			throw new ServiceException("no response!");
+		}
+		String content = new String(responseBody, Constants.BASE_ENCODING);
+		logger.info("stopOrReload , system=" + system + " , type=" + type + " , response=" + content );
+		ObjectMapper mapper = new ObjectMapper();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> dataMap = (Map<String, Object>) mapper.readValue(content, HashMap.class);
+		if (!YesNo.YES.equals(dataMap.get("success"))) {
+			throw new ServiceException("fail!");
+		}
+	}
+
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public void stopOrReload(HttpServletRequest request, String type) throws ServiceException, Exception {
+		List<SysVO> systemList = ApplicationSiteUtils.getSystems();
+		boolean status = true;
+		for (SysVO sys : systemList) {
+			try {
+				stopOrReload( request, sys.getSysId(), type );
+			} catch (Exception e) {
+				e.printStackTrace();
+				status = false;
+			}
+		}
+		if (!status) {
+			throw new ServiceException("fail!");
+		}
 	}
 	
 }
