@@ -228,7 +228,6 @@
  	</filter-mapping>  	
     
  	<!-- 訊息發送的servlet -->
- 	<!--  
 	<servlet>
 		<servlet-name>WebMessagePublishServlet</servlet-name>		
 		<servlet-class>com.netsteadfast.greenstep.sys.WebMessagePublishServlet</servlet-class>
@@ -240,6 +239,5 @@
 		<servlet-name>WebMessagePublishServlet</servlet-name>
 		<url-pattern>/publish/*</url-pattern>
 	</servlet-mapping>
-	-->
 	    	
 </web-app>
