@@ -156,6 +156,16 @@
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>		
 	
+	<servlet>
+		<servlet-name>StopOrReloadCXFServlet</servlet-name>		
+		<servlet-class>com.netsteadfast.greenstep.sys.StopOrReloadCXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>	
+	
+	<servlet-mapping>
+		<servlet-name>StopOrReloadCXFServlet</servlet-name>
+		<url-pattern>/config-services/*</url-pattern>
+	</servlet-mapping>		
 	
 	<!-- Camel servlet -->
 	<servlet>

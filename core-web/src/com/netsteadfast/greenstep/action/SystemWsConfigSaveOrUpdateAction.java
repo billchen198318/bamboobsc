@@ -208,6 +208,38 @@ public class SystemWsConfigSaveOrUpdateAction extends BaseJsonAction {
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
+	}
+	
+	/**
+	 * core.systemWsConfigStopOrReloadAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */	
+	@ControllerMethodAuthority(programId="CORE_PROG003D0001Q")
+	public String doStopOrReload() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			String type = this.getFields().get("type");
+			this.systemWebServiceConfigLogicService.stopOrReload(super.getHttpServletRequest(), type);
+			this.success = IS_YES;
+			this.message = "config success!";
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
 	}	
 
 	@JSON

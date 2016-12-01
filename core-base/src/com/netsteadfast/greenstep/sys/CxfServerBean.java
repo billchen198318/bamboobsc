@@ -30,6 +30,7 @@ import javax.servlet.ServletConfig;
 import javax.xml.ws.Endpoint;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.binding.BindingFactoryManager;
@@ -44,13 +45,18 @@ import org.apache.cxf.jaxrs.provider.XPathProvider;
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.model.WSConfig;
 import com.netsteadfast.greenstep.po.hbm.TbSysWsConfig;
 import com.netsteadfast.greenstep.service.ISysWsConfigService;
+import com.netsteadfast.greenstep.util.EncryptorUtils;
+import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.SysWsConfigVO;
 
 public class CxfServerBean {
@@ -68,6 +74,30 @@ public class CxfServerBean {
 	
 	private static ServletConfig servletConfig = null;
 	
+	public static String createParamValue() throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("before", String.valueOf(System.currentTimeMillis()));
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonData = mapper.writeValueAsString(paramMap);
+		String uploadOid = UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				jsonData.getBytes(), 
+				SimpleUtils.getUUIDStr() + ".json");
+		return SimpleUtils.toHex( EncryptorUtils.encrypt(Constants.getEncryptorKey1(), Constants.getEncryptorKey2(), uploadOid) );
+	}
+	
+	public static Long getBeforeValue(String paramValue) throws Exception {
+		String value = EncryptorUtils.decrypt(Constants.getEncryptorKey1(), Constants.getEncryptorKey2(), SimpleUtils.deHex(paramValue));			
+		byte datas[] = UploadSupportUtils.getDataBytes(value);
+		String jsonData = new String(datas, Constants.BASE_ENCODING);		
+		ObjectMapper mapper = new ObjectMapper();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> dataMap = (Map<String, Object>) mapper.readValue(jsonData, HashMap.class);
+		return NumberUtils.toLong((String)dataMap.get("before"), 0);
+	}	
+	
 	public static void shutdown() {
 		logger.warn("shutdown");
 		server.stop();
@@ -75,7 +105,7 @@ public class CxfServerBean {
 		serverFactoryBean.getBus().shutdown(true);		
 	}
 	
-	public static void reStart() {
+	public static void restart() {
 		start(servlet, servletConfig, bus, true);
 	}
 	

@@ -86,6 +86,14 @@ function CORE_PROG003D0001Q_confirmDelete(oid) {
 	);	
 }
 
+function CORE_PROG003D0001Q_restartSuccess(data) {
+	alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+}
+
+function CORE_PROG003D0001Q_shutdownSuccess(data) {
+	alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+}
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -153,6 +161,40 @@ function ${programId}_page_message() {
     				label="${action.getText('CORE_PROG003D0001Q_clear')}" 
     				iconClass="dijitIconClear"
     				cssClass="alt-primary"></gs:button>
+    				
+    			&nbsp;&nbsp;	
+    			<gs:button id="CORE_PROG003D0001Q_restart" name="CORE_PROG003D0001Q_restart" onClick="CORE_PROG003D0001Q_restart();"
+    				handleAs="json"
+    				sync="N"
+    				xhrUrl="${basePath}/core.systemWsConfigStopOrReloadAction.action"
+    				parameterType="postData"
+    				xhrParameter="{ 'fields.type' : 'restart'}"
+    				errorFn=""
+    				loadFn="CORE_PROG003D0001Q_restartSuccess(data);" 
+    				programId="${programId}"
+    				label="Restart"
+    				iconClass="dijitIconConfigure"
+    				confirmDialogMode="Y"
+    				confirmDialogTitle=""
+    				confirmDialogMsg="Restart SOAP/REST service, are you sure?"
+    				cssClass="alt-warning"></gs:button>
+    			&nbsp;&nbsp;	
+    			<gs:button id="CORE_PROG003D0001Q_shutdown" name="CORE_PROG003D0001Q_shutdown" onClick="CORE_PROG003D0001Q_shutdown();"
+    				handleAs="json"
+    				sync="N"
+    				xhrUrl="${basePath}/core.systemWsConfigStopOrReloadAction.action"
+    				parameterType="postData"
+    				xhrParameter="{ 'fields.type' : 'shutdown'}"
+    				errorFn=""
+    				loadFn="CORE_PROG003D0001Q_shutdownSuccess(data);" 
+    				programId="${programId}"
+    				label="Shutdown"
+    				iconClass="dijitIconConfigure"
+    				confirmDialogMode="Y"
+    				confirmDialogTitle=""
+    				confirmDialogMsg="Shutdown SOAP/REST service, are you sure?"
+    				cssClass="alt-warning"></gs:button>
+    				    				
     		</td>
     	</tr>     	    	
     </table>	
