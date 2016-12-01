@@ -45,6 +45,7 @@ import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.model.WSConfig;
 import com.netsteadfast.greenstep.service.logic.ISystemWebServiceConfigLogicService;
+import com.netsteadfast.greenstep.sys.CxfServerBean;
 import com.netsteadfast.greenstep.vo.SysWsConfigVO;
 
 @ControllerAuthority(check=true)
@@ -218,15 +219,17 @@ public class SystemWsConfigSaveOrUpdateAction extends BaseJsonAction {
 	 */	
 	@ControllerMethodAuthority(programId="CORE_PROG003D0001Q")
 	public String doStopOrReload() throws Exception {
+		this.message = "config fail!";
 		try {
 			if (!this.allowJob()) {
 				this.message = this.getNoAllowMessage();
 				return SUCCESS;
 			}
 			String type = this.getFields().get("type");
-			this.systemWebServiceConfigLogicService.stopOrReload(super.getHttpServletRequest(), type);
-			this.success = IS_YES;
-			this.message = "config success!";
+			if (CxfServerBean.shutdownOrReloadCallSystem(super.getHttpServletRequest(), type)) {
+				this.success = IS_YES;
+				this.message = "config success!";				
+			}
 		} catch (ControllerException ce) {
 			this.message=ce.getMessage().toString();
 		} catch (AuthorityException ae) {

@@ -27,8 +27,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Endpoint;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.cxf.Bus;
@@ -49,14 +53,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.model.WSConfig;
 import com.netsteadfast.greenstep.po.hbm.TbSysWsConfig;
 import com.netsteadfast.greenstep.service.ISysWsConfigService;
+import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.EncryptorUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.SysVO;
 import com.netsteadfast.greenstep.vo.SysWsConfigVO;
 
 public class CxfServerBean {
@@ -73,6 +82,44 @@ public class CxfServerBean {
 	private static PublishingCXFServlet servlet = null;
 	
 	private static ServletConfig servletConfig = null;
+	
+	public static boolean shutdownOrReloadCallSystem(HttpServletRequest request, String system, String type) throws ServiceException, Exception {
+		if (StringUtils.isBlank(system) || StringUtils.isBlank(type)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		String urlStr = ApplicationSiteUtils.getBasePath(system, request) + "config-services?type=" + type + "&value=" + createParamValue();
+		logger.info("shutdownOrReloadCallSystem , url=" + urlStr);
+		HttpClient client = new HttpClient();
+		HttpMethod method = new GetMethod(urlStr);
+		client.executeMethod(method);
+		byte[] responseBody = method.getResponseBody();
+		if (null == responseBody) {
+			throw new Exception("no response!");
+		}
+		String content = new String(responseBody, Constants.BASE_ENCODING);
+		logger.info("shutdownOrReloadCallSystem , system=" + system + " , type=" + type + " , response=" + content );
+		ObjectMapper mapper = new ObjectMapper();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> dataMap = (Map<String, Object>) mapper.readValue(content, HashMap.class);
+		if (!YesNo.YES.equals(dataMap.get("success"))) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean shutdownOrReloadCallSystem(HttpServletRequest request, String type) throws ServiceException, Exception {
+		List<SysVO> systemList = ApplicationSiteUtils.getSystems();
+		boolean status = true;
+		for (SysVO sys : systemList) {
+			try {
+				shutdownOrReloadCallSystem( request, sys.getSysId(), type );
+			} catch (Exception e) {
+				e.printStackTrace();
+				status = false;
+			}
+		}
+		return status;
+	}	
 	
 	public static String createParamValue() throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
