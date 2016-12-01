@@ -21,8 +21,6 @@
  */
 package com.netsteadfast.greenstep.service.logic;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.vo.SysWsConfigVO;
@@ -34,9 +32,5 @@ public interface ISystemWebServiceConfigLogicService {
 	public DefaultResult<SysWsConfigVO> update(SysWsConfigVO config, String systemOid) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> delete(SysWsConfigVO config) throws ServiceException, Exception;
-	
-	public void stopOrReload(HttpServletRequest request, String system, String type) throws ServiceException, Exception;
-	
-	public void stopOrReload(HttpServletRequest request, String type) throws ServiceException, Exception;
 
 }
