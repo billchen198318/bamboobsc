@@ -149,9 +149,19 @@ public class CxfServerBean {
 	
 	public static void shutdown() {
 		logger.warn("shutdown");
-		server.stop();
-		server.destroy();
-		serverFactoryBean.getBus().shutdown(true);		
+		if (server != null) {
+			server.stop();
+			server.destroy();
+			server = null;
+		}
+		if (serverFactoryBean != null) {
+			serverFactoryBean.getBus().shutdown(true);
+			BindingFactoryManager manager = serverFactoryBean.getBus().getExtension(BindingFactoryManager.class);
+			manager.unregisterBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID);
+			serverFactoryBean = null;
+			bindingFactory.getBus().shutdown(true);
+			bindingFactory = null;
+		}
 	}
 	
 	public static void restart() {
@@ -163,15 +173,20 @@ public class CxfServerBean {
 		CxfServerBean.servlet = servlet;
 		CxfServerBean.servletConfig = servletConfig;
 		CxfServerBean.bus = bus;
+		if (server != null && serverFactoryBean != null) {
+			logger.warn( "Server is found , not start" );
+			return;
+		}
 		try {
 			if (loadBusManual) {
 				logger.info("load bus manual mode");
-				servlet.loadBusManual(servletConfig);
+				CxfServerBean.bus = servlet.loadBusManual(servletConfig);
 			}
-			BusFactory.setDefaultBus( bus );
+			BusFactory.setDefaultBus( CxfServerBean.bus );
 			serverFactoryBean = new JAXRSServerFactoryBean();
+			serverFactoryBean.setBus( CxfServerBean.bus );
 			List<TbSysWsConfig> configs = getSystemWsConfigs();
-			publishDefault(bus, configs );
+			publishDefault( configs );
 			int r = publishRest(serverFactoryBean, configs);			
 	        BindingFactoryManager manager = serverFactoryBean.getBus().getExtension(BindingFactoryManager.class);  
 	        bindingFactory = new JAXRSBindingFactory();  
@@ -212,7 +227,7 @@ public class CxfServerBean {
 		return configs;		
 	}	
 	
-	private static int publishDefault(Bus bus, List<TbSysWsConfig> configs) {
+	private static int publishDefault(List<TbSysWsConfig> configs) {
 		int c = 0;
 		for (TbSysWsConfig config : configs) {
 			if (!WSConfig.TYPE_SOAP.equals(config.getType()) || StringUtils.isBlank(config.getPublishAddress()) ) {

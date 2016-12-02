@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.sys;
 
 import javax.servlet.ServletConfig;
 
+import org.apache.cxf.Bus;
 import org.apache.cxf.transport.servlet.CXFServlet;
 
 public class PublishingCXFServlet extends CXFServlet {
@@ -32,8 +33,9 @@ public class PublishingCXFServlet extends CXFServlet {
 		super();
 	}	
 	
-	public void loadBusManual(ServletConfig servletConfig) {
+	public Bus loadBusManual(ServletConfig servletConfig) {
 		super.loadBus(servletConfig);
+		return bus;
 	}
 	
 	@Override
