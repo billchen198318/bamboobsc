@@ -36,6 +36,7 @@ import org.springframework.stereotype.Controller;
 import com.netsteadfast.greenstep.action.utils.IdFieldCheckUtils;
 import com.netsteadfast.greenstep.action.utils.NotBlankFieldCheckUtils;
 import com.netsteadfast.greenstep.action.utils.SelectItemFieldCheckUtils;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -43,6 +44,7 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.model.WSConfig;
 import com.netsteadfast.greenstep.service.logic.ISystemWebServiceConfigLogicService;
 import com.netsteadfast.greenstep.sys.CxfServerBean;
@@ -226,9 +228,10 @@ public class SystemWsConfigSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			String type = this.getFields().get("type");
-			if (CxfServerBean.shutdownOrReloadCallSystem(super.getHttpServletRequest(), type)) {
+			Map<String, String> result = CxfServerBean.shutdownOrReloadCallAllSystem(getHttpServletRequest(), type);
+			this.message = super.defaultString( result.get("message") ).trim().replaceAll("\n", Constants.HTML_BR);
+			if (YesNo.YES.equals(result.get("success"))) {
 				this.success = IS_YES;
-				this.message = "config success!";				
 			}
 		} catch (ControllerException ce) {
 			this.message=ce.getMessage().toString();

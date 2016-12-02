@@ -71,6 +71,8 @@ import com.netsteadfast.greenstep.vo.SysWsConfigVO;
 public class CxfServerBean {
 	protected static Logger logger = Logger.getLogger(CxfServerBean.class);
 	
+	private static int restartNum = 0;
+	
 	private static JAXRSServerFactoryBean serverFactoryBean = null;
 	
 	private static Bus bus = null;
@@ -83,7 +85,7 @@ public class CxfServerBean {
 	
 	private static ServletConfig servletConfig = null;
 	
-	public static boolean shutdownOrReloadCallSystem(HttpServletRequest request, String system, String type) throws ServiceException, Exception {
+	public static Map<String, Object> shutdownOrReloadCallOneSystem(HttpServletRequest request, String system, String type) throws ServiceException, Exception {
 		if (StringUtils.isBlank(system) || StringUtils.isBlank(type)) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
 		}
@@ -101,26 +103,34 @@ public class CxfServerBean {
 		ObjectMapper mapper = new ObjectMapper();
 		@SuppressWarnings("unchecked")
 		Map<String, Object> dataMap = (Map<String, Object>) mapper.readValue(content, HashMap.class);
-		if (!YesNo.YES.equals(dataMap.get("success"))) {
-			return false;
-		}
-		return true;
+		return dataMap;
 	}
 	
-	public static boolean shutdownOrReloadCallSystem(HttpServletRequest request, String type) throws ServiceException, Exception {
-		List<SysVO> systemList = ApplicationSiteUtils.getSystems();
+	public static Map<String, String> shutdownOrReloadCallAllSystem(HttpServletRequest request, String type) throws ServiceException, Exception {
+		Map<String, String> result = new HashMap<String, String>();
 		boolean status = true;
+		List<SysVO> systemList = ApplicationSiteUtils.getSystems();
+		StringBuilder out = new StringBuilder();
 		for (SysVO sys : systemList) {
 			try {
-				if (!shutdownOrReloadCallSystem( request, sys.getSysId(), type )) {
+				Map<String, Object> dataMap = shutdownOrReloadCallOneSystem( request, sys.getSysId(), type );
+				out.append( sys.getSysId() ).append(" = ").append( dataMap.get("message") ).append("\n");
+				if (!YesNo.YES.equals(dataMap.get("success"))) {
 					status = false;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				status = false;
+				out.append( sys.getSysId() ).append(" = ").append( e.getMessage().toString() ).append("\n");
 			}
 		}
-		return status;
+		result.put("message", out.toString());
+		if (status) {
+			result.put("success", YesNo.YES);
+		} else {
+			result.put("success", YesNo.NO);
+		}
+		return result;
 	}	
 	
 	public static String createParamValue() throws Exception {
@@ -147,8 +157,11 @@ public class CxfServerBean {
 		return NumberUtils.toLong((String)dataMap.get("before"), 0);
 	}	
 	
-	public static void shutdown() {
+	public static void shutdown() throws Exception {
 		logger.warn("shutdown");
+		if (restartNum > 0) {
+			throw new Exception("Cannot support shutdown again");
+		}		
 		if (server != null) {
 			server.stop();
 			server.destroy();
@@ -164,7 +177,11 @@ public class CxfServerBean {
 		}
 	}
 	
-	public static void restart() {
+	public static void restart() throws Exception {
+		logger.info("restart");
+		if (restartNum > 0) {
+			throw new Exception("Cannot support restart again");
+		}
 		start(servlet, servletConfig, bus, true);
 	}
 	
@@ -181,6 +198,7 @@ public class CxfServerBean {
 			if (loadBusManual) {
 				logger.info("load bus manual mode");
 				CxfServerBean.bus = servlet.loadBusManual(servletConfig);
+				restartNum = restartNum + 1;
 			}
 			BusFactory.setDefaultBus( CxfServerBean.bus );
 			serverFactoryBean = new JAXRSServerFactoryBean();
@@ -259,6 +277,10 @@ public class CxfServerBean {
 		sf.setProviders(getProvider());
 		sf.setAddress(WSConfig.getJAXRSServerFactoryBeanAddress());
 		return c;
+	}
+
+	public static int getRestartNum() {
+		return restartNum;
 	}		
 	
 }
