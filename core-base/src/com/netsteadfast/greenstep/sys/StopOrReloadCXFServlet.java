@@ -45,7 +45,6 @@ public class StopOrReloadCXFServlet extends HttpServlet {
 			long before = CxfServerBean.getBeforeValue(value);
 			if (now - before <= 30000) {
 				if ("restart".equals(type)) {
-					CxfServerBean.shutdown();
 					CxfServerBean.restart();
 					success = YesNo.YES;
 				}
