@@ -49,6 +49,8 @@ import org.apache.cxf.jaxrs.provider.XPathProvider;
 import org.apache.cxf.jaxrs.provider.json.JSONProvider;
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.netsteadfast.greenstep.base.AppContext;
@@ -85,6 +87,7 @@ public class CxfServerBean {
 	
 	private static ServletConfig servletConfig = null;
 	
+	@SuppressWarnings("unchecked")
 	public static Map<String, Object> shutdownOrReloadCallOneSystem(HttpServletRequest request, String system, String type) throws ServiceException, Exception {
 		if (StringUtils.isBlank(system) || StringUtils.isBlank(type)) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
@@ -101,8 +104,17 @@ public class CxfServerBean {
 		String content = new String(responseBody, Constants.BASE_ENCODING);
 		logger.info("shutdownOrReloadCallSystem , system=" + system + " , type=" + type + " , response=" + content );
 		ObjectMapper mapper = new ObjectMapper();
-		@SuppressWarnings("unchecked")
-		Map<String, Object> dataMap = (Map<String, Object>) mapper.readValue(content, HashMap.class);
+		Map<String, Object> dataMap = null;
+		try {
+			dataMap = (Map<String, Object>) mapper.readValue(content, HashMap.class);
+		} catch (JsonParseException e) {
+			logger.error(e.getMessage().toString());
+		} catch (JsonMappingException e) {
+			logger.error(e.getMessage().toString());
+		}
+		if (null == dataMap) {
+			throw new Exception("response content error!");
+		}
 		return dataMap;
 	}
 	
