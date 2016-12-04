@@ -27,8 +27,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -39,8 +47,10 @@ import com.netsteadfast.greenstep.service.ISysService;
 import com.netsteadfast.greenstep.vo.SysVO;
 
 public class ApplicationSiteUtils {
+	protected static Logger logger = Logger.getLogger(ApplicationSiteUtils.class);
 	public static final String UPDATE_HOST_ALWAYS = "2";
 	public static final String UPDATE_HOST_ONLY_FIRST_ONE = "1";
+	private static final long TEST_JSON_HTTP_TIMEOUT = 3000; // 3秒
 	private static Map<String, String> contextPathMap = new HashMap<String, String>();	
 	
 	@SuppressWarnings("unchecked")
@@ -197,6 +207,46 @@ public class ApplicationSiteUtils {
 		return corssSite;
 	}
 	
+	private static boolean checkTestConnection(String host, String contextPath, HttpServletRequest request) {
+		boolean test = false;
+		String basePath = request.getScheme()+"://" + host + "/" + contextPath;
+		String urlStr = basePath + "/pages/system/test.json";
+		try {
+			logger.info("checkTestConnection , url=" + urlStr);
+			HttpClient client = new HttpClient();
+			HttpMethod method = new GetMethod(urlStr);
+			HttpClientParams params = new HttpClientParams();
+			params.setConnectionManagerTimeout(TEST_JSON_HTTP_TIMEOUT);
+			client.setParams(params);
+			client.executeMethod(method);
+			byte[] responseBody = method.getResponseBody();
+			if (null == responseBody) {
+				test = false;
+				return test;
+			}			
+			String content = new String(responseBody, Constants.BASE_ENCODING);
+			ObjectMapper mapper = new ObjectMapper();
+			@SuppressWarnings("unchecked")
+			Map<String, Object> dataMap = (Map<String, Object>) mapper.readValue(content, HashMap.class);
+			if (YesNo.YES.equals(dataMap.get("success"))) {
+				test = true;
+			}
+		} catch (JsonParseException e) {
+			logger.error( e.getMessage().toString() );
+		} catch (JsonMappingException e) {
+			logger.error( e.getMessage().toString() );
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (!test) {
+				logger.warn("checkTestConnection : " + String.valueOf(test));
+			} else {
+				logger.info("checkTestConnection : " + String.valueOf(test));
+			}
+		}
+		return test;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static boolean checkLoginUrlWithAllSysHostConfig(HttpServletRequest request) {
 		boolean pathSuccess = true;
@@ -205,8 +255,10 @@ public class ApplicationSiteUtils {
 			List<TbSys> sysList = sysService.findListByParams( null );
 			for (int i=0; sysList != null && i < sysList.size() && pathSuccess; i++) {
 				TbSys sys = sysList.get(i);
-				String host = sys.getHost().toLowerCase();
-				pathSuccess = !checkCrossSite(host, request);
+				pathSuccess = !checkCrossSite(sys.getHost().toLowerCase(), request);
+				if (pathSuccess) {
+					pathSuccess = checkTestConnection(sys.getHost(), sys.getContextPath(), request);
+				}
 			}
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -217,17 +269,21 @@ public class ApplicationSiteUtils {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<SysVO> getSystemsCheckCrossSite(HttpServletRequest request) {
+	public static List<SysVO> getSystemsCheckCrossSiteWithTestConnection(HttpServletRequest request) {
 		ISysService<SysVO, TbSys, String> sysService = (ISysService<SysVO, TbSys, String>)AppContext.getBean("core.service.SysService");
 		List<SysVO> sysList = null;	
 		try {
 			sysList = sysService.findListVOByParams( null );
 			for (SysVO sys : sysList) {
-				String host = sys.getHost().toLowerCase();
-				if ( checkCrossSite(host, request) ) {
+				if ( checkCrossSite(sys.getHost().toLowerCase(), request) ) {
 					sys.setCrossSiteFlag( YesNo.YES );
 				} else {
 					sys.setCrossSiteFlag( YesNo.NO );
+				}
+				if ( checkTestConnection(sys.getHost(), sys.getContextPath(), request) ) {
+					sys.setTestFlag( YesNo.YES );
+				} else {
+					sys.setTestFlag( YesNo.NO );
 				}
 			}			
 		} catch (ServiceException e) {
