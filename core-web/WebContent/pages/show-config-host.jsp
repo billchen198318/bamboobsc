@@ -44,7 +44,7 @@ But system config (01 - Application site) host settings value is:&nbsp;<font col
 			<td align="center" width="150px" bgcolor="#f1eee5"><b>Name</b></td>
 			<td align="center" width="150px" bgcolor="#f1eee5"><b>Host</b></td>	
 			<td align="center" width="150px" bgcolor="#f1eee5"><b>Context path</b></td>
-			<td align="center" width="150px" bgcolor="#f1eee5"><b>Cross site</b></td>
+			<td align="center" width="150px" bgcolor="#f1eee5"><b>Status</b></td>
 		</tr>
 		
 		<s:if test="sysList != null">
@@ -56,8 +56,9 @@ But system config (01 - Application site) host settings value is:&nbsp;<font col
 			<td align="left" bgcolor="#ffffff"><s:property value="host"/></td>
 			<td align="left" bgcolor="#ffffff"><s:property value="contextPath"/></td>
 			<td align="center" bgcolor="#ffffff">
+				<s:if test=" \"Y\" != crossSiteFlag && \"Y\" == testFlag "><div class="isa_success">OK</div></s:if>
 				<s:if test=" \"Y\" == crossSiteFlag "><div class="isa_warning">Warning, Cross site</div></s:if>
-				<s:else><div class="isa_success">${crossSiteFlag}</div></s:else>
+				<s:if test=" \"Y\" != testFlag "><div class="isa_error">Error, connection fail</div></s:if>
 			</td>			
 		</tr>			
 		
@@ -84,6 +85,17 @@ But system config (01 - Application site) host settings value is:&nbsp;<font col
 <br/>
 <br/>
 <a href="#" style="color:#00529B" onclick="window.open('https://github.com/billchen198318/bamboobsc/issues/24'); return false;">DHCP network, and no want manual config "01 - application-site host. Please reference: https://github.com/billchen198318/bamboobsc/issues/24</a>
+
+<s:if test=" \"Y\" != testFlag ">
+<br/>
+<br/>
+<br/>
+<b>Connection fail:</b>
+<br/>
+<br/>
+<a href="#" style="color:#00529B" onclick="window.open('https://github.com/billchen198318/bamboobsc/blob/master/core-doc/install.pdf'); return false;">Maybe is config file ( applicationContext-dataSource.properties ) setting incorrect or database problems, causing the module to start failing, please view install.pdf</a>
+</s:if>
+
 </div>
 
 

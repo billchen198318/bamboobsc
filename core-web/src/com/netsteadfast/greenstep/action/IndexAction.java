@@ -84,7 +84,7 @@ public class IndexAction extends BaseSupportAction {
 	@ControllerMethodAuthority(programId="CORE_INDEX")
 	public String showConfigHost() throws Exception {
 		sysDefaultCoreHost = ApplicationSiteUtils.getBasePath(Constants.getSystem(), getHttpServletRequest());
-		this.sysList = ApplicationSiteUtils.getSystemsCheckCrossSite( getHttpServletRequest() );
+		this.sysList = ApplicationSiteUtils.getSystemsCheckCrossSiteWithTestConnection( getHttpServletRequest() );
 		return SUCCESS;
 	}
 	

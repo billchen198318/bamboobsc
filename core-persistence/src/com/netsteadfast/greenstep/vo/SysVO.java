@@ -39,6 +39,12 @@ public class SysVO extends BaseValueObj implements java.io.Serializable {
 	 */
 	private String crossSiteFlag = "";
 	
+	/**
+	 * ApplicationSiteUtils.checkLoginUrlWithAllSysHostConfig(HttpServletRequest request)
+	 * 測試 pages/system/test.json
+	 */
+	private String testFlag = "";
+	
 	public SysVO() {
 		
 	}
@@ -117,6 +123,14 @@ public class SysVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setCrossSiteFlag(String crossSiteFlag) {
 		this.crossSiteFlag = crossSiteFlag;
+	}
+
+	public String getTestFlag() {
+		return testFlag;
+	}
+
+	public void setTestFlag(String testFlag) {
+		this.testFlag = testFlag;
 	}	
 		
 }
