@@ -141,12 +141,14 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	private void loadDataQueryMapperSetItems() throws ControllerException, AuthorityException, ServiceException, Exception {
 		Map<String, String> mapperSetMap = this.dataQueryMapperSetService.findForMap(
 				true, this.getFields().get("dataQueryMapperOid"));
+		this.resetPleaseSelectDataMapFromLocaleLang(mapperSetMap);
 		this.fillDataMap2Items(mapperSetMap);
 		this.success = IS_YES;
 	}
 	
 	private void loadDataQueryItems() throws ControllerException, AuthorityException, ServiceException, Exception {
 		Map<String, String> queryMap = this.dataQueryService.findForMap(true);
+		this.resetPleaseSelectDataMapFromLocaleLang(queryMap);
 		this.fillDataMap2Items(queryMap);
 		this.success = IS_YES;
 	}
@@ -169,6 +171,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	
 	private void loadMdxItems() throws ControllerException, AuthorityException, ServiceException, Exception {
 		Map<String, String> mdxMap = this.olapMdxService.findForMap(true);
+		this.resetPleaseSelectDataMapFromLocaleLang(mdxMap);
 		this.fillDataMap2Items(mdxMap);
 		this.success = IS_YES;
 	}
