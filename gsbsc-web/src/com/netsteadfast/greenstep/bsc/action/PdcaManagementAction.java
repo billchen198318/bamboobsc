@@ -29,7 +29,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
@@ -45,7 +44,6 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.YesNo;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.PdcaType;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
@@ -507,7 +505,7 @@ public class PdcaManagementAction extends BaseSupportAction implements IBaseAddi
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -522,18 +520,22 @@ public class PdcaManagementAction extends BaseSupportAction implements IBaseAddi
 	}
 	
 	public Map<String, String> getFrequencyMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
 		return frequencyMap;
 	}
 
 	public Map<String, String> getMeasureDataOrganizationMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataOrganizationMap);
 		return measureDataOrganizationMap;
 	}
 
 	public Map<String, String> getMeasureDataEmployeeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataEmployeeMap);
 		return measureDataEmployeeMap;
 	}
 
 	public Map<String, String> getPdcaTypeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.pdcaTypeMap);
 		return pdcaTypeMap;
 	}
 

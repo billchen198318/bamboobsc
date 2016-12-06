@@ -28,7 +28,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
@@ -41,7 +40,6 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.YesNo;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
@@ -120,7 +118,7 @@ public class HistoryItemScoreReportAction extends BaseSupportAction implements I
 		 */
 		if ( this.measureDataOrganizationMap.size() <= 1 && this.measureDataEmployeeMap.size() <= 1 ) { // 第1筆是 - Please select -
 			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
-			this.measureDataEmployeeMap = this.employeeService.findForMap(true);			
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);
 		}		
 	}
 	
@@ -145,7 +143,7 @@ public class HistoryItemScoreReportAction extends BaseSupportAction implements I
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -160,14 +158,17 @@ public class HistoryItemScoreReportAction extends BaseSupportAction implements I
 	}
 
 	public Map<String, String> getFrequencyMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
 		return frequencyMap;
 	}
 
 	public Map<String, String> getMeasureDataOrganizationMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataOrganizationMap);
 		return measureDataOrganizationMap;
 	}
 
 	public Map<String, String> getMeasureDataEmployeeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataEmployeeMap);
 		return measureDataEmployeeMap;
 	}
 	

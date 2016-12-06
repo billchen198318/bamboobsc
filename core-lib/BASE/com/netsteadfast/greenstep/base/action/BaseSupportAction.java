@@ -43,6 +43,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.util.ServletContextAware;
@@ -52,6 +53,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.PleaseSelect;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.model.AccountObj;
 import com.netsteadfast.greenstep.base.model.ActionInfoProvide;
@@ -360,6 +362,11 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 		return SimpleUtils.getUUIDStr();
 	}
 	
+	public String getLocaleLang() {
+		String lang = this.defaultString( (String)UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ) );
+		return StringUtils.isBlank(lang) ? "en" : lang;
+	}
+	
 	protected void setPageMessage(String pageMessage) {
 		if (null!=pageMessage && pageMessage.length()>=500) {
 			pageMessage=pageMessage.substring(0, 500);
@@ -556,7 +563,8 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 	protected Map<String, String> providedSelectZeroDataMap(boolean pleaseSelectItem) {
 		Map<String, String> dataMap = new LinkedHashMap<String, String>();
 		if (pleaseSelectItem) {
-			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
+			//dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
+			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, PleaseSelect.getLabel(this.getLocaleLang()) );
 		}
 		return dataMap;
 	}	
@@ -566,6 +574,29 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 把下拉資料  - please select - 改為顯示語系的 please select 設定
+	 * @param dataMap
+	 */
+	protected void resetPleaseSelectDataMapFromLocaleLang(Map<String, String> dataMap) {
+		if (null == dataMap || dataMap.size() < 1) {
+			return;
+		}
+		if (dataMap.size() > 1 && !(dataMap instanceof LinkedHashMap)) { // 大於1筆資料的下拉 please select 資料必須是 LinkedHashMap
+			return;
+		}
+		int i = 0;
+		for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+			if (i > 0) { // please select 只會出現在 LinkedHashMap 中的第一筆
+				continue;
+			}
+			i++;
+			if (entry.getKey().equals(Constants.HTML_SELECT_NO_SELECT_ID) && entry.getValue().equals(Constants.HTML_SELECT_NO_SELECT_NAME)) {
+				entry.setValue( PleaseSelect.getLabel(this.getLocaleLang()) );
+			}
+		}
 	}
 	
 	/**

@@ -171,7 +171,7 @@ public class SystemProgramManagementAction extends BaseSupportAction implements 
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -277,6 +277,7 @@ public class SystemProgramManagementAction extends BaseSupportAction implements 
 	}
 
 	public Map<String, String> getProgSystemDataMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.progSystemDataMap);
 		return progSystemDataMap;
 	}
 

@@ -26,7 +26,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
@@ -39,7 +38,6 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.model.ExpressionJobConstants;
 import com.netsteadfast.greenstep.po.hbm.TbSys;
 import com.netsteadfast.greenstep.po.hbm.TbSysExprJob;
@@ -224,7 +222,7 @@ public class SystemExpressionJobManagementAction extends BaseSupportAction imple
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -239,6 +237,7 @@ public class SystemExpressionJobManagementAction extends BaseSupportAction imple
 	}
 
 	public Map<String, String> getSystemMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.systemMap);
 		return systemMap;
 	}
 
@@ -247,6 +246,7 @@ public class SystemExpressionJobManagementAction extends BaseSupportAction imple
 	}
 
 	public Map<String, String> getSysExprMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.sysExprMap);
 		return sysExprMap;
 	}
 
