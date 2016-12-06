@@ -111,6 +111,7 @@ public class CommonSelectItemsDataAction extends BaseQueryGridJsonAction {
 		boolean pleaseSelect = YesNo.YES.equals(this.getFields().get("pleaseSelect"));
 		if ("SYS".equals(this.getFields().get("type"))) { // 取 sys
 			Map<String, String> sysMap = this.sysService.findSysMap(super.getBasePath(), pleaseSelect);
+			this.resetPleaseSelectDataMapFromLocaleLang(sysMap);
 			for (Map.Entry<String, String> entry : sysMap.entrySet()) {
 				Map<String, String> dataMap = new HashMap<String, String>();
 				dataMap.put("key", entry.getKey());
@@ -124,6 +125,7 @@ public class CommonSelectItemsDataAction extends BaseQueryGridJsonAction {
 			SysVO sys = this.loadSysValueObj(sysOid);		
 			Map<String, String> sysProgMap = this.sysProgService.findSysProgFolderMap(
 					super.getBasePath(), sys.getSysId(), MenuItemType.FOLDER, pleaseSelect);
+			this.resetPleaseSelectDataMapFromLocaleLang(sysProgMap);
 			for (Map.Entry<String, String> entry : sysProgMap.entrySet()) {
 				Map<String, String> dataMap = new HashMap<String, String>();
 				dataMap.put("key", entry.getKey());
@@ -140,6 +142,7 @@ public class CommonSelectItemsDataAction extends BaseQueryGridJsonAction {
 			Map<String, String> dataMapFirst = new HashMap<String, String>();
 			dataMapFirst.put("key", Constants.HTML_SELECT_NO_SELECT_ID);
 			dataMapFirst.put("value", Constants.HTML_SELECT_NO_SELECT_NAME);
+			this.resetPleaseSelectDataMapFromLocaleLang(dataMapFirst);
 			this.items.add(dataMapFirst);
 			if (menuProgList!=null) {
 				for (SysProgVO sysProg : menuProgList) {

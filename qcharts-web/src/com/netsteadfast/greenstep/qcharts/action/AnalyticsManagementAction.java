@@ -25,7 +25,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
@@ -37,7 +36,6 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.po.hbm.QcOlapCatalog;
 import com.netsteadfast.greenstep.po.hbm.QcOlapConf;
 import com.netsteadfast.greenstep.po.hbm.QcOlapMdx;
@@ -128,7 +126,7 @@ public class AnalyticsManagementAction extends BaseSupportAction implements IBas
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -143,14 +141,17 @@ public class AnalyticsManagementAction extends BaseSupportAction implements IBas
 	}
 
 	public Map<String, String> getMdxMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.mdxMap);
 		return mdxMap;
 	}
 
 	public Map<String, String> getConfigMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.configMap);
 		return configMap;
 	}
 
 	public Map<String, String> getCatalogMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.catalogMap);
 		return catalogMap;
 	}
 

@@ -32,7 +32,6 @@ import javax.annotation.Resource;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -50,7 +49,6 @@ import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.YesNo;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
@@ -139,7 +137,7 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	}	
 	
 	private void initData() throws ServiceException, Exception {
-		this.visionMap = this.visionService.findForMap(true);		
+		this.visionMap = this.visionService.findForMap(true);	
 		if ( YesNo.YES.equals(super.getIsSuperRole()) ) {
 			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
 			this.measureDataEmployeeMap = this.employeeService.findForMap(true);
@@ -155,7 +153,7 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 		 */
 		if ( this.measureDataOrganizationMap.size() <= 1 && this.measureDataEmployeeMap.size() <= 1 ) { // 第1筆是 - Please select -
 			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
-			this.measureDataEmployeeMap = this.employeeService.findForMap(true);			
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);	
 		}		
 	}
 	
@@ -268,7 +266,7 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -319,21 +317,25 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 
 	@JSON(serialize=false)
 	public Map<String, String> getVisionMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.visionMap);
 		return visionMap;
 	}
 
 	@JSON(serialize=false)
 	public Map<String, String> getFrequencyMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
 		return frequencyMap;
 	}
 
 	@JSON(serialize=false)
 	public Map<String, String> getMeasureDataOrganizationMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataOrganizationMap);
 		return measureDataOrganizationMap;
 	}
 
 	@JSON(serialize=false)
 	public Map<String, String> getMeasureDataEmployeeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataEmployeeMap);
 		return measureDataEmployeeMap;
 	}
 	

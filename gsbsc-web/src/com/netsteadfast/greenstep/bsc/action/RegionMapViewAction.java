@@ -30,7 +30,6 @@ import javax.annotation.Resource;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -49,7 +48,6 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.YesNo;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
@@ -217,7 +215,7 @@ public class RegionMapViewAction extends BaseSupportAction implements IBaseAddit
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

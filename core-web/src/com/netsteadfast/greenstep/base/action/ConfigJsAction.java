@@ -34,6 +34,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.PleaseSelect;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.po.hbm.TbSysIcon;
@@ -76,7 +77,8 @@ public class ConfigJsAction extends BaseSupportAction {
 		sb.append("var _gscore_mainTabContainer='").append(super.getDojoMainTabContainer()).append("';\n");
 		sb.append("var _gscore_inputfieldNoticeMsgLabelIdName='").append(Constants.INPUTFIELD_NOTICE_MESSAGE_LABEL).append("';\n");
 		sb.append("var _gscore_please_select_id='").append(Constants.HTML_SELECT_NO_SELECT_ID).append("';\n");
-		sb.append("var _gscore_please_select_name='").append(Constants.HTML_SELECT_NO_SELECT_NAME).append("';\n");
+		//sb.append("var _gscore_please_select_name='").append(Constants.HTML_SELECT_NO_SELECT_NAME).append("';\n");
+		sb.append("var _gscore_please_select_name='").append( PleaseSelect.getLabel(this.getLocaleLang()) ).append("';\n");
 		sb.append("var _gscore_delimiter='").append(Constants.ID_DELIMITER).append("';\n");
 		sb.append("var _gscore_datetime_delimiter='").append(Constants.DATETIME_DELIMITER).append("';\n");
 		sb.append("var _gscore_success_flag='").append(YesNo.YES).append("';\n");

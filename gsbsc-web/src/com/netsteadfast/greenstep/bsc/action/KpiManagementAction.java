@@ -27,7 +27,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
@@ -41,7 +40,6 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.model.BscKpiCode;
 import com.netsteadfast.greenstep.bsc.service.IAggregationMethodService;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
@@ -405,7 +403,7 @@ public class KpiManagementAction extends BaseSupportAction implements IBaseAddit
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -420,38 +418,47 @@ public class KpiManagementAction extends BaseSupportAction implements IBaseAddit
 	}
 
 	public Map<String, String> getVisionMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.visionMap);
 		return visionMap;
 	}
 
 	public Map<String, String> getPerspectiveMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.perspectiveMap);
 		return perspectiveMap;
 	}
 
 	public Map<String, String> getObjectiveMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.objectiveMap);
 		return objectiveMap;
 	}
 
 	public Map<String, String> getManagementMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.managementMap);
 		return managementMap;
 	}
 
 	public Map<String, String> getCalculationMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.calculationMap);
 		return calculationMap;
 	}
 
 	public Map<String, String> getCompareTypeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.compareTypeMap);
 		return compareTypeMap;
 	}
 
 	public Map<String, String> getDataTypeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.dataTypeMap);
 		return dataTypeMap;
 	}
 
 	public Map<String, String> getFormulaMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.formulaMap);
 		return formulaMap;
 	}
 
 	public Map<String, String> getTrendsFormulaMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.trendsFormulaMap);
 		return trendsFormulaMap;
 	}
 
@@ -460,6 +467,7 @@ public class KpiManagementAction extends BaseSupportAction implements IBaseAddit
 	}
 
 	public Map<String, String> getQuasiRangeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.quasiRangeMap);
 		return quasiRangeMap;
 	}
 

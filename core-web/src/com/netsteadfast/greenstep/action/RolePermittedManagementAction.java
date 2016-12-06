@@ -26,14 +26,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.base.PleaseSelect;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
@@ -41,7 +42,6 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.po.hbm.TbRole;
 import com.netsteadfast.greenstep.service.IRoleService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
@@ -73,7 +73,7 @@ public class RolePermittedManagementAction extends BaseSupportAction implements 
 	}	
 	
 	private void init() throws ServiceException, Exception {
-		this.permTypeMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
+		this.permTypeMap.put(Constants.HTML_SELECT_NO_SELECT_ID, StringEscapeUtils.escapeEcmaScript( PleaseSelect.getLabel(this.getLocaleLang()) ));
 		this.permTypeMap.put("CONTROLLER", "Controller");
 		this.permTypeMap.put("COMPOMENT", "Compoment");
 	}
@@ -114,7 +114,7 @@ public class RolePermittedManagementAction extends BaseSupportAction implements 
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -137,6 +137,7 @@ public class RolePermittedManagementAction extends BaseSupportAction implements 
 	}
 
 	public Map<String, String> getPermTypeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.permTypeMap);
 		return permTypeMap;
 	}
 

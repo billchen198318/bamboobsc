@@ -215,6 +215,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		} else {
 			perspectiveMap = this.providedSelectZeroDataMap(true);
 		}
+		this.resetPleaseSelectDataMapFromLocaleLang(perspectiveMap);
 		this.fillDataMap2Items(perspectiveMap);
 		this.success = IS_YES;		
 	}
@@ -226,6 +227,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		} else {
 			objectiveMap = this.providedSelectZeroDataMap(true);
 		}
+		this.resetPleaseSelectDataMapFromLocaleLang(objectiveMap);
 		this.fillDataMap2Items(objectiveMap);
 		this.success = IS_YES;
 	}
@@ -252,6 +254,7 @@ public class CommonLoadDataAction extends BaseJsonAction {
 		Map<String, String> firstMap =new HashMap<String, String>();
 		firstMap.put("key", Constants.HTML_SELECT_NO_SELECT_ID);
 		firstMap.put("value", Constants.HTML_SELECT_NO_SELECT_NAME);
+		this.resetPleaseSelectDataMapFromLocaleLang(firstMap);
 		this.kpiOrga.add(firstMap);
 		this.kpiEmpl.add(firstMap);
 		if (orgResult.getValue()!=null) {

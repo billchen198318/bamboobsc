@@ -32,7 +32,6 @@ import javax.annotation.Resource;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -49,7 +48,6 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
-import com.netsteadfast.greenstep.base.sys.UserAccountHttpSessionSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
@@ -189,7 +187,7 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	@Override
 	public String getProgramName() {
 		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), UserAccountHttpSessionSupport.getLang( ServletActionContext.getContext() ));
+			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -235,11 +233,13 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 
 	@JSON(serialize=false)
 	public Map<String, String> getVisionMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.visionMap);
 		return visionMap;
 	}
 
 	@JSON(serialize=false)
 	public Map<String, String> getFrequencyMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
 		return frequencyMap;
 	}
 
