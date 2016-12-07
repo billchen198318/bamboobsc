@@ -136,14 +136,7 @@ public class VisionManagementAction extends BaseSupportAction implements IBaseAd
 	
 	@Override
 	public String getProgramName() {
-		try {
-			return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
+		return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 	}
 
 	@Override

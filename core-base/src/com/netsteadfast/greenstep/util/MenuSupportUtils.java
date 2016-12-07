@@ -556,25 +556,37 @@ public class MenuSupportUtils {
 		return treeMenuList;
 	}
 	
-	public static String getProgramName(String progId) throws ServiceException, Exception {
+	public static String getProgramName(String progId) {
+		String name = "unknown-program";
 		if (StringUtils.isBlank(progId)) {
-			return "unknown-program";
+			return name;
 		}
-		return sysProgService.findNameForProgId(progId);
+		try {
+			name = sysProgService.findNameForProgId(progId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return name;
 	}
 	
-	public static String getProgramName(String progId, String localeCode) throws ServiceException, Exception {
+	public static String getProgramName(String progId, String localeCode) {
 		if (StringUtils.isBlank(progId)) {
 			return "unknown-program";
 		}
-		String defaultName = getProgramName(progId);
+		String defaultName = "unknown-program";
+		String multiName = "unknown-program";		
+		defaultName = getProgramName(progId);
 		if (LocaleLanguageUtils.getMap().get(localeCode) == null) {
 			return defaultName;
 		}
 		TbSysProg sysProg = new TbSysProg();
 		sysProg.setName(defaultName);
 		sysProg.setProgId(progId);
-		String multiName = getProgramMultiName(sysProg, localeCode);
+		try {
+			multiName = getProgramMultiName(sysProg, localeCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if (!StringUtils.isBlank(multiName)) {
 			return multiName;
 		}
