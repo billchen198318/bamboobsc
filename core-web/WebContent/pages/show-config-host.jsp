@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 You login url path is:&nbsp;<font color="#8A0808"><b><%=basePath%></b></font><br/>
-But system config (01 - Application site) host settings value is:&nbsp;<font color="#8A0808"><b>${sysDefaultCoreHost}</b></font> , or has module is cross site.<br/>
+But system config (01 - Application site) host settings value is:&nbsp;<font color="#8A0808"><b>${sysDefaultCoreHost}</b></font> , or has module is cross site , or connection fail.<br/>
 
 
 <br/>
