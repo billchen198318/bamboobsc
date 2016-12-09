@@ -5,11 +5,11 @@ commons-io-2.4.jar
 commons-fileupload-1.3.2.jar
 freemarker-2.3.23.jar
 ognl-3.1.12.jar
-struts2-core-2.5.7.jar
-struts2-jasperreports-plugin-2.5.7.jar
-struts2-jfreechart-plugin-2.5.7.jar
-struts2-json-plugin-2.5.7.jar
-struts2-spring-plugin-2.5.7.jar
+struts2-core-2.5.8.jar
+struts2-jasperreports-plugin-2.5.8.jar
+struts2-jfreechart-plugin-2.5.8.jar
+struts2-json-plugin-2.5.8.jar
+struts2-spring-plugin-2.5.8.jar
 
 
 Spring4
