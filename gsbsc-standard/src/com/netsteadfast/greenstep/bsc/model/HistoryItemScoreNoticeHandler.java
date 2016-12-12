@@ -23,6 +23,7 @@ package com.netsteadfast.greenstep.bsc.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -155,53 +156,41 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 			return;
 		}
 		for (String orgId : organizations) {
-			for (int i=0; i<monitorItemScores.size(); i++) {
-				if (!orgId.equals(monitorItemScores.get(i).getOrgId())) {
-					monitorItemScores.remove(i);
-					continue;					
+			for (Iterator<BbMonitorItemScore> iterator = monitorItemScores.iterator(); iterator.hasNext(); ) {
+				BbMonitorItemScore itemScore = iterator.next();
+				if (!orgId.equals(itemScore.getOrgId())) {
+					iterator.remove();		
 				}
 			}
 		}
 		for (String empId : employees) {
-			for (int i=0; i<monitorItemScores.size(); i++) {
-				if (!empId.equals(monitorItemScores.get(i).getEmpId())) {
-					monitorItemScores.remove(i);
-					continue;
+			for (Iterator<BbMonitorItemScore> iterator = monitorItemScores.iterator(); iterator.hasNext(); ) {
+				BbMonitorItemScore itemScore = iterator.next();
+				if (!empId.equals(itemScore.getOrgId())) {
+					iterator.remove();		
 				}
 			}
 		}		
-		for (Entry<String, String> entry : visions.entrySet()) {
-			for (int i=0; i<monitorItemScores.size(); i++) {
-				if (MonitorItemType.VISION.equals(monitorItemScores.get(i).getItemType()) && !entry.getKey().equals(monitorItemScores.get(i).getItemId())) {
-					monitorItemScores.remove(i);
+		this.clearNoNeedItem(MonitorItemType.VISION, visions, monitorItemScores);
+		this.clearNoNeedItem(MonitorItemType.PERSPECTIVES, perspectives, monitorItemScores);
+		this.clearNoNeedItem(MonitorItemType.STRATEGY_OF_OBJECTIVES, objectives, monitorItemScores);
+		this.clearNoNeedItem(MonitorItemType.KPI, kpis, monitorItemScores);
+	}
+	
+	private void clearNoNeedItem(String itemType, Map<String, String> typeDataMap, List<BbMonitorItemScore> monitorItemScores) {
+		for (Entry<String, String> entry : typeDataMap.entrySet()) {
+			for (Iterator<BbMonitorItemScore> iterator = monitorItemScores.iterator(); iterator.hasNext(); ) {
+				BbMonitorItemScore itemScore = iterator.next();
+				if (itemType.equals(itemScore.getItemType()) && !entry.getKey().equals(itemScore.getItemId())) {
+					iterator.remove();
 					continue;
 				}
-			}
-		}
-		for (Entry<String, String> entry : perspectives.entrySet()) {
-			for (int i=0; i<monitorItemScores.size(); i++) {
-				if (MonitorItemType.PERSPECTIVES.equals(monitorItemScores.get(i).getItemType()) && !entry.getKey().equals(monitorItemScores.get(i).getItemId())) {
-					monitorItemScores.remove(i);
-					continue;
+				if (!this.isRule(itemScore, entry.getValue())) {
+					iterator.remove();
+					continue;		
 				}
 			}
-		}
-		for (Entry<String, String> entry : objectives.entrySet()) {
-			for (int i=0; i<monitorItemScores.size(); i++) {
-				if (MonitorItemType.STRATEGY_OF_OBJECTIVES.equals(monitorItemScores.get(i).getItemType()) && !entry.getKey().equals(monitorItemScores.get(i).getItemId())) {
-					monitorItemScores.remove(i);
-					continue;
-				}
-			}
-		}
-		for (Entry<String, String> entry : kpis.entrySet()) {
-			for (int i=0; i<monitorItemScores.size(); i++) {
-				if (MonitorItemType.KPI.equals(monitorItemScores.get(i).getItemType()) && !entry.getKey().equals(monitorItemScores.get(i).getItemId())) {
-					monitorItemScores.remove(i);
-					continue;
-				}
-			}
-		}
+		}		
 	}
 	
 	public HistoryItemScoreNoticeHandler employee(String empId) {
@@ -267,6 +256,22 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 		this.kpis.put(kpiId, StringUtils.defaultString(ruleExpression).trim());
 		return this;
 	}	
+	
+	public HistoryItemScoreNoticeHandler vision(String visionId) {
+		return this.vision(visionId, "null != score");
+	}	
+	
+	public HistoryItemScoreNoticeHandler perspective(String perspectiveId) {
+		return this.perspective(perspectiveId, "null != score");
+	}
+	
+	public HistoryItemScoreNoticeHandler objective(String objectiveId) {
+		return this.objective(objectiveId, "null != score");
+	}
+	
+	public HistoryItemScoreNoticeHandler kpi(String kpiId) {
+		return this.kpi(kpiId, "null != score");
+	}		
 	
 	public HistoryItemScoreNoticeHandler to(String email) {
 		if (StringUtils.isBlank(email) || this.toMail.contains(email) || email.indexOf("@") == -1 ) {
