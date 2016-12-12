@@ -22,7 +22,7 @@
 package com.netsteadfast.greenstep.model;
 
 public class TemplateCode {
-	private static final String _USE_CODE[] = new String[] { "TPLMSG0001", "TPLMSG0002" };
+	private static final String _USE_CODE[] = new String[] { "TPLMSG0001", "TPLMSG0002", "TPLMSG0003" };
 	
 	public static boolean isUsed(String code) {
 		boolean f = false;
@@ -43,5 +43,10 @@ public class TemplateCode {
 	 * 提供 message notice 用的
 	 */
 	public static final String TPLMSG0002 = "TPLMSG0002";
+	
+	/**
+	 * 提供 HistoryItemScoreNoticeHandler 發送 mail 內容要使用的樣板
+	 */
+	public static final String TPLMSG0003 = "TPLMSG0003";
 	
 }

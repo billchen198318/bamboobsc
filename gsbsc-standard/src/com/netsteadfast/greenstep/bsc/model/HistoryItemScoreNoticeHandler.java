@@ -33,26 +33,18 @@ import org.apache.log4j.Logger;
 
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
-import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
-import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
-import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
-import com.netsteadfast.greenstep.bsc.service.IVisionService;
-import com.netsteadfast.greenstep.po.hbm.BbKpi;
+import com.netsteadfast.greenstep.bsc.util.HistoryItemScoreReportContentQueryUtils;
+import com.netsteadfast.greenstep.model.TemplateCode;
+import com.netsteadfast.greenstep.model.TemplateResultObj;
 import com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore;
-import com.netsteadfast.greenstep.po.hbm.BbObjective;
-import com.netsteadfast.greenstep.po.hbm.BbPerspective;
-import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.po.hbm.TbSysMailHelper;
 import com.netsteadfast.greenstep.service.ISysMailHelperService;
 import com.netsteadfast.greenstep.util.MailClientUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
-import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.util.TemplateUtils;
 import com.netsteadfast.greenstep.vo.MonitorItemScoreVO;
-import com.netsteadfast.greenstep.vo.ObjectiveVO;
-import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.SysMailHelperVO;
-import com.netsteadfast.greenstep.vo.VisionVO;
 
 import ognl.Ognl;
 import ognl.OgnlException;
@@ -61,10 +53,6 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 	private static final long serialVersionUID = -2839229894386555550L;
 	protected static Logger logger = Logger.getLogger(HistoryItemScoreNoticeHandler.class);
 	private IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String> monitorItemScoreService;
-	private IVisionService<VisionVO, BbVision, String> visionService;
-	private IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService; 
-	private IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
-	private IKpiService<KpiVO, BbKpi, String> kpiService;	
 	private ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String> sysMailHelperService;
 	private List<String> toMail = new ArrayList<String>();
 	private Map<String, String> visions = new HashMap<String, String>();
@@ -80,10 +68,6 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 	public HistoryItemScoreNoticeHandler() {
 		super();
 		monitorItemScoreService = (IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String>) AppContext.getBean("bsc.service.MonitorItemScoreService");
-		visionService = (IVisionService<VisionVO, BbVision, String>) AppContext.getBean("bsc.service.VisionService");
-		perspectiveService = (IPerspectiveService<PerspectiveVO, BbPerspective, String>) AppContext.getBean("bsc.service.PerspectiveService");
-		objectiveService = (IObjectiveService<ObjectiveVO, BbObjective, String>) AppContext.getBean("bsc.service.ObjectiveService");
-		kpiService = (IKpiService<KpiVO, BbKpi, String>) AppContext.getBean("bsc.service.KpiService");	
 		sysMailHelperService = (ISysMailHelperService<SysMailHelperVO, TbSysMailHelper, String>) AppContext.getBean("core.service.SysMailHelperService");			
 	}
 	
@@ -123,19 +107,53 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 		sysMailHelperService.saveObject(sysMailHelper);
 	}
 	
-	private void createContent(List<BbMonitorItemScore> monitorItemScores, StringBuilder out) throws ServiceException, Exception {
+	private void createContent(List<BbMonitorItemScore> monitorItemScoresSrc, StringBuilder out) throws ServiceException, Exception {
 		// create mail content
 		
+		/*
+		 * TPLMSG0003 
+		 *
+		 * 
+<table bgcolor="#F3F3F3" border="0" width="100%" style="border:1px #F3F3F3 solid; border-radius: 5px;" >
+<tbody>
+	<tr>
+		<td align="left" bgcolor="#F5F5F5"><font size="2"><b>${title}</b></font></td>
+	</tr>	
+	<tr>
+		<td align="left" bgcolor="#ffffff"><font size="2">Date: ${date}</font></td>
+	</tr>	
+	<tr>
+		<td align="left" bgcolor="#ffffff"><font size="2">Frequency: ${frequency}</font></td>
+	</tr>		
+	<tr>
+		<td align="left" bgcolor="#ffffff"><font size="2">Score:</font> <font size="2">${score}</font></td>
+	</tr>
+	<tr>
+		<td align="left" bgcolor="#ffffff"><font size="2">Organization: ${organization}</font></td>
+	</tr>
+	<tr>
+		<td align="left" bgcolor="#ffffff"><font size="2">Employee: ${employee}</font></td>
+	</tr>	
+</tbody>
+</table>
+<br>
+		 */		
+		List<MonitorItemScoreVO> monitorItemScores = HistoryItemScoreReportContentQueryUtils.fill2ValueObjectList(monitorItemScoresSrc);
+		for (MonitorItemScoreVO itemScore : monitorItemScores) {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("title", itemScore.getName());
+			paramMap.put("date", SimpleUtils.getStrYMD(itemScore.getDateVal(), "/"));
+			paramMap.put("frequency", BscMeasureDataFrequency.getFrequencyMap(false).get(frequency));
+			paramMap.put("score", itemScore.getScore());
+			paramMap.put("organization", itemScore.getOrganizationName());
+			paramMap.put("employee", itemScore.getEmployeeName());
+			TemplateResultObj result = TemplateUtils.getResult(TemplateCode.TPLMSG0003, paramMap);
+			if (result.getContent() != null) {
+				out.append( result.getContent() );
+			}
+		}
+		
 	}
-	
-	/*
-	public static void main(String args[]) throws Exception {
-		BbMonitorItemScore monitorItemScore = new BbMonitorItemScore();
-		monitorItemScore.setScore("59");
-		String value = String.valueOf( Ognl.getValue("score >= 60", monitorItemScore) );
-		System.out.println(value);
-	}
-	*/
 	
 	private boolean isRule(BbMonitorItemScore monitorItemScore, String expression) {
 		boolean status = false;

@@ -34,6 +34,10 @@ public class MonitorItemScoreVO extends BaseValueObj implements java.io.Serializ
 	private String empId;
 	private String score;
 	
+	private String name;
+	private String employeeName;
+	private String organizationName;
+	
 	public MonitorItemScoreVO() {
 		
 	}
@@ -114,6 +118,30 @@ public class MonitorItemScoreVO extends BaseValueObj implements java.io.Serializ
 	
 	public void setScore(String score) {
 		this.score = score;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public String getOrganizationName() {
+		return organizationName;
+	}
+
+	public void setOrganizationName(String organizationName) {
+		this.organizationName = organizationName;
 	}
 
 }
