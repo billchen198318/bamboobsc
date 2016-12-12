@@ -295,7 +295,7 @@ public class HistoryItemScoreReportContentQueryUtils {
 				OrganizationVO organization = BscBaseLogicServiceCommonSupport.findOrganizationDataByUK(organizationService, monitorScoreSrc.getOrgId());
 				monitorScoreDest.setOrganizationName(monitorScoreSrc.getOrgId() + " - " + organization.getName());
 			}
-			if (!BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(monitorScoreSrc.getOrgId())) {
+			if (!BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(monitorScoreSrc.getEmpId())) {
 				EmployeeVO employee = BscBaseLogicServiceCommonSupport.findEmployeeDataByEmpId(employeeService, monitorScoreSrc.getEmpId());
 				monitorScoreDest.setEmployeeName(monitorScoreSrc.getEmpId() + " - " + employee.getFullName());
 			}
