@@ -32,23 +32,31 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.model.MonitorItemType;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IPerspectiveService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbKpi;
 import com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore;
 import com.netsteadfast.greenstep.po.hbm.BbObjective;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbPerspective;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.MonitorItemScoreVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
@@ -59,6 +67,8 @@ public class HistoryItemScoreReportContentQueryUtils {
 	private static IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService; 
 	private static IObjectiveService<ObjectiveVO, BbObjective, String> objectiveService;
 	private static IKpiService<KpiVO, BbKpi, String> kpiService;
+	private static IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private static IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
 	
 	static {
 		monitorItemScoreService = (IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String>)
@@ -70,6 +80,10 @@ public class HistoryItemScoreReportContentQueryUtils {
 		objectiveService = (IObjectiveService<ObjectiveVO, BbObjective, String>)
 				AppContext.getBean("bsc.service.ObjectiveService");
 		kpiService = (IKpiService<KpiVO, BbKpi, String>)AppContext.getBean("bsc.service.KpiService");
+		organizationService = (IOrganizationService<OrganizationVO, BbOrganization, String>)
+				AppContext.getBean("bsc.service.OrganizationService");
+		employeeService = (IEmployeeService<EmployeeVO, BbEmployee, String>)
+				AppContext.getBean("bsc.service.EmployeeService");		
 	}
 	
 	public static List<Map<String, Object>> getVisionLineChartData(String frequency, String dateVal,
@@ -222,6 +236,72 @@ public class HistoryItemScoreReportContentQueryUtils {
 		dataMap.put("yAxisCategories", getLineChartCategoriesFromData(dateVal, chartLineData));
 		dataMap.put("seriesData", dataList);
 		return dataMap;
+	}
+	
+	public static List<MonitorItemScoreVO> fill2ValueObjectList(List<BbMonitorItemScore> monitorItemScores) throws ServiceException, Exception {
+		List<MonitorItemScoreVO> results = new ArrayList<MonitorItemScoreVO>();
+		if (null == monitorItemScores) {
+			return results;
+		}
+		List<VisionVO> basicDataList = getBasicDataList();
+		for (BbMonitorItemScore monitorScoreSrc : monitorItemScores) {
+			MonitorItemScoreVO monitorScoreDest = new MonitorItemScoreVO();
+			monitorItemScoreService.doMapper(monitorScoreSrc, monitorScoreDest, IMonitorItemScoreService.MAPPER_ID_PO2VO);
+			String id = monitorScoreSrc.getItemId();
+			String name = "";
+			String itemType = monitorScoreSrc.getItemType();
+			if (MonitorItemType.VISION.equals(itemType)) {
+				DefaultResult<VisionVO> visionResult = visionService.findForSimpleByVisId(id);
+				if (visionResult.getValue() == null) {
+					throw new ServiceException( visionResult.getSystemMessage().getValue() );
+				}
+				VisionVO vision = visionResult.getValue();
+				name = getItemNameWithVisionGroup(MonitorItemType.VISION, vision.getVisId(), vision.getTitle(), basicDataList);
+			}
+			if (MonitorItemType.PERSPECTIVES.equals(itemType)) {
+				PerspectiveVO perspective = new PerspectiveVO();
+				perspective.setPerId(id);
+				DefaultResult<PerspectiveVO> perspectiveResult = perspectiveService.findByUK(perspective);
+				if (perspectiveResult.getValue() == null) {
+					throw new ServiceException( perspectiveResult.getSystemMessage().getValue() );
+				}
+				perspective = perspectiveResult.getValue();
+				name = getItemNameWithVisionGroup(MonitorItemType.PERSPECTIVES, perspective.getPerId(), perspective.getName(), basicDataList);
+			}
+			if (MonitorItemType.STRATEGY_OF_OBJECTIVES.equals(itemType)) {
+				ObjectiveVO objective = new ObjectiveVO();
+				objective.setObjId(id);
+				DefaultResult<ObjectiveVO> objectiveResult = objectiveService.findByUK(objective);
+				if (objectiveResult.getValue() == null) {
+					throw new ServiceException( objectiveResult.getSystemMessage().getValue() );
+				}
+				objective = objectiveResult.getValue();
+				name = getItemNameWithVisionGroup(MonitorItemType.STRATEGY_OF_OBJECTIVES, objective.getObjId(), objective.getName(), basicDataList);
+			}		
+			if (MonitorItemType.KPI.equals(itemType)) {
+				KpiVO kpi = new KpiVO();
+				kpi.setId(id);
+				DefaultResult<KpiVO> kpiResult = kpiService.findByUK(kpi);
+				if (kpiResult.getValue() == null) {
+					throw new ServiceException( kpiResult.getSystemMessage().getValue() );
+				}
+				kpi = kpiResult.getValue();
+				name = getItemNameWithVisionGroup(MonitorItemType.KPI, kpi.getId(), kpi.getName(), basicDataList);
+			}				
+			monitorScoreDest.setName(name);
+			monitorScoreDest.setOrganizationName( monitorScoreSrc.getOrgId() );
+			monitorScoreDest.setEmployeeName( monitorScoreSrc.getEmpId() );
+			if (!BscConstants.MEASURE_DATA_ORGANIZATION_FULL.equals(monitorScoreSrc.getOrgId())) {
+				OrganizationVO organization = BscBaseLogicServiceCommonSupport.findOrganizationDataByUK(organizationService, monitorScoreSrc.getOrgId());
+				monitorScoreDest.setOrganizationName(monitorScoreSrc.getOrgId() + " - " + organization.getName());
+			}
+			if (!BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(monitorScoreSrc.getOrgId())) {
+				EmployeeVO employee = BscBaseLogicServiceCommonSupport.findEmployeeDataByEmpId(employeeService, monitorScoreSrc.getEmpId());
+				monitorScoreDest.setEmployeeName(monitorScoreSrc.getEmpId() + " - " + employee.getFullName());
+			}
+			results.add(monitorScoreDest);
+		}
+		return results;
 	}
 	
 	private static String getItemNameWithVisionGroup(String itemType, String id, String name, List<VisionVO> basicDataList) throws Exception {
