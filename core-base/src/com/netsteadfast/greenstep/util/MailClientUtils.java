@@ -113,7 +113,7 @@ public class MailClientUtils {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, Constants.BASE_ENCODING);
 		helper.setFrom(from);
-		helper.setTo(to);
+		helper.setTo( to.endsWith(";") ? to.substring(0, to.length()-1) : to );
 		helper.setSubject(subject);
 		helper.setText(text, true);
 		if (null!=cc && cc.length>0) {

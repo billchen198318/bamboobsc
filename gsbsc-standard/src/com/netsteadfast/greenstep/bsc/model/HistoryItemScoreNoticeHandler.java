@@ -33,7 +33,9 @@ import org.apache.log4j.Logger;
 
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
+import com.netsteadfast.greenstep.bsc.util.BscScoreColorUtils;
 import com.netsteadfast.greenstep.bsc.util.HistoryItemScoreReportContentQueryUtils;
 import com.netsteadfast.greenstep.model.TemplateCode;
 import com.netsteadfast.greenstep.model.TemplateResultObj;
@@ -97,48 +99,23 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 		SysMailHelperVO sysMailHelper = new SysMailHelperVO();
 		sysMailHelper.setSubject("bambooBSC monitor item score mail - frequency: " + BscMeasureDataFrequency.getFrequencyMap(false).get(frequency) 
 				+ " , date: " + SimpleUtils.getStrYMD(dateStr, "/"));
-		sysMailHelper.setText( outContent.toString().getBytes() );
+		sysMailHelper.setText( outContent.toString().getBytes("utf-8") );
 		sysMailHelper.setMailFrom( MailClientUtils.getDefaultFrom() );
 		StringBuilder to = new StringBuilder();
 		for (String mail : toMail) {
 			to.append(mail).append(";");
 		}
 		sysMailHelper.setMailTo(to.toString());
+		sysMailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(dateStr) );
+		sysMailHelper.setRetainFlag(YesNo.NO);
+		sysMailHelper.setSuccessFlag(YesNo.NO);
 		sysMailHelperService.saveObject(sysMailHelper);
 	}
 	
 	private void createContent(List<BbMonitorItemScore> monitorItemScoresSrc, StringBuilder out) throws ServiceException, Exception {
 		// create mail content
-		
-		/*
-		 * TPLMSG0003 
-		 *
-		 * 
-<table bgcolor="#F3F3F3" border="0" width="100%" style="border:1px #F3F3F3 solid; border-radius: 5px;" >
-<tbody>
-	<tr>
-		<td align="left" bgcolor="#F5F5F5"><font size="2"><b>${title}</b></font></td>
-	</tr>	
-	<tr>
-		<td align="left" bgcolor="#ffffff"><font size="2">Date: ${date}</font></td>
-	</tr>	
-	<tr>
-		<td align="left" bgcolor="#ffffff"><font size="2">Frequency: ${frequency}</font></td>
-	</tr>		
-	<tr>
-		<td align="left" bgcolor="#ffffff"><font size="2">Score:</font> <font size="2">${score}</font></td>
-	</tr>
-	<tr>
-		<td align="left" bgcolor="#ffffff"><font size="2">Organization: ${organization}</font></td>
-	</tr>
-	<tr>
-		<td align="left" bgcolor="#ffffff"><font size="2">Employee: ${employee}</font></td>
-	</tr>	
-</tbody>
-</table>
-<br>
-		 */		
 		List<MonitorItemScoreVO> monitorItemScores = HistoryItemScoreReportContentQueryUtils.fill2ValueObjectList(monitorItemScoresSrc);
+		BscScoreColorUtils.loadScoreColors();
 		for (MonitorItemScoreVO itemScore : monitorItemScores) {
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("title", itemScore.getName());
@@ -147,6 +124,8 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 			paramMap.put("score", itemScore.getScore());
 			paramMap.put("organization", itemScore.getOrganizationName());
 			paramMap.put("employee", itemScore.getEmployeeName());
+			paramMap.put("bgColor", BscScoreColorUtils.getBackgroundColor(Float.parseFloat(itemScore.getScore())) );
+			paramMap.put("fnColor", BscScoreColorUtils.getFontColor(Float.parseFloat(itemScore.getScore())) );
 			TemplateResultObj result = TemplateUtils.getResult(TemplateCode.TPLMSG0003, paramMap);
 			if (result.getContent() != null) {
 				out.append( result.getContent() );
