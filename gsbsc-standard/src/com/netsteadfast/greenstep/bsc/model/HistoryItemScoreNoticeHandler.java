@@ -29,8 +29,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.ognl.Ognl;
-import org.apache.ibatis.ognl.OgnlException;
 import org.apache.log4j.Logger;
 
 import com.netsteadfast.greenstep.base.AppContext;
@@ -55,6 +53,9 @@ import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.SysMailHelperVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
+
+import ognl.Ognl;
+import ognl.OgnlException;
 
 public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 	private static final long serialVersionUID = -2839229894386555550L;
