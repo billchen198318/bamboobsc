@@ -27,8 +27,9 @@ import java.util.List;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -83,11 +84,11 @@ public class KpiPeriodTrendsExcelCommand extends BaseChainCommandSupport impleme
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
-		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );	
-		cellHeadStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);		
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );	
+		cellHeadStyle.setBorderBottom( BorderStyle.THIN );
+		cellHeadStyle.setBorderTop( BorderStyle.THIN );
+		cellHeadStyle.setBorderRight( BorderStyle.THIN );
+		cellHeadStyle.setBorderLeft( BorderStyle.THIN );		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);		
 		cellHeadStyle.setFont( cellHeadFont );

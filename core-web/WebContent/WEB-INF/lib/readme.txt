@@ -118,14 +118,15 @@ jsr107cache-1.1.jar
 
 POI
 -------------------------
-poi-3.12-20150511.jar
-poi-examples-3.12-20150511.jar
-poi-excelant-3.12-20150511.jar
-poi-ooxml-3.12-20150511.jar
-poi-ooxml-schemas-3.12-20150511.jar
-poi-scratchpad-3.12-20150511.jar
+poi-3.15.jar
+poi-examples-3.15.jar
+poi-excelant-3.15.jar
+poi-ooxml-3.15.jar
+poi-ooxml-schemas-3.15.jar
+poi-scratchpad-3.15.jar
 xmlbeans-2.6.0.jar (remove for Apache CXF xmlbeans-2.6.0.jar )
 stax-api-1.0.1.jar
+curvesapi-1.04.jar
 
 
 Apache - common
@@ -142,6 +143,7 @@ commons-validator-1.5.1.jar
 jakarta-oro-2.0.8.jar
 commons-net-3.0.1.jar
 commons-collections-3.2.2.jar
+commons-collections4-4.1.jar
 commons-digester3-3.2.jar
 commons-chain-1.2.jar
 commons-httpclient-3.1.jar

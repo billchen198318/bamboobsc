@@ -33,7 +33,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -99,7 +99,7 @@ public class ObjectivesDashboardExcelCommand extends BaseChainCommandSupport imp
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
-		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );				
 		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);		
@@ -131,7 +131,7 @@ public class ObjectivesDashboardExcelCommand extends BaseChainCommandSupport imp
 			
 			XSSFCellStyle cellStyle = wb.createCellStyle();
 			cellStyle.setFillForegroundColor( bgColor );
-			cellStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
+			cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );				
 			
 			XSSFFont cellFont = wb.createFont();
 			cellFont.setBold(true);

@@ -30,9 +30,12 @@ import java.util.Map;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -123,18 +126,18 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
-		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND );			
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );			
 		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);
 		cellHeadFont.setColor(fnColor);
 		cellHeadStyle.setFont(cellHeadFont);		
-		cellHeadStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellHeadStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		cellHeadStyle.setBorderBottom(BorderStyle.THIN);
+		cellHeadStyle.setBorderTop(BorderStyle.THIN);
+		cellHeadStyle.setBorderRight(BorderStyle.THIN);
+		cellHeadStyle.setBorderLeft(BorderStyle.THIN);
+		cellHeadStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellHeadStyle.setAlignment(HorizontalAlignment.CENTER);
 		cellHeadStyle.setWrapText(true);		
 		
 		// --------------------------------------------------------------------------------------
@@ -154,18 +157,18 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		XSSFCellStyle cellLabelStyle = wb.createCellStyle();
 		cellLabelStyle.setFillForegroundColor( bgLabelColor );
-		cellLabelStyle.setFillPattern( CellStyle.SOLID_FOREGROUND );				
+		cellLabelStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );				
 		
 		XSSFFont cellLabelFont = wb.createFont();
 		cellLabelFont.setBold(true);
 		cellLabelFont.setColor(fnColor);
 		cellLabelStyle.setFont(cellLabelFont);		
-		cellLabelStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellLabelStyle.setAlignment(XSSFCellStyle.ALIGN_LEFT);
+		cellLabelStyle.setBorderBottom(BorderStyle.THIN);
+		cellLabelStyle.setBorderTop(BorderStyle.THIN);
+		cellLabelStyle.setBorderRight(BorderStyle.THIN);
+		cellLabelStyle.setBorderLeft(BorderStyle.THIN);
+		cellLabelStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellLabelStyle.setAlignment(HorizontalAlignment.LEFT);
 		cellLabelStyle.setWrapText(true);		
 		
 		// --------------------------------------------------------------------------------------
@@ -174,18 +177,18 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		XSSFCellStyle cellNormalStyle = wb.createCellStyle();
 		cellNormalStyle.setFillForegroundColor( bgNormalColor );
-		cellNormalStyle.setFillPattern( CellStyle.SOLID_FOREGROUND );				
+		cellNormalStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );				
 		
 		XSSFFont cellNormalFont = wb.createFont();
 		cellNormalFont.setBold(false);
 		cellNormalFont.setColor(fnColor);
 		cellNormalStyle.setFont(cellNormalFont);		
-		cellNormalStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellNormalStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellNormalStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellNormalStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		cellNormalStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellNormalStyle.setAlignment(XSSFCellStyle.ALIGN_LEFT);
+		cellNormalStyle.setBorderBottom(BorderStyle.THIN);
+		cellNormalStyle.setBorderTop(BorderStyle.THIN);
+		cellNormalStyle.setBorderRight(BorderStyle.THIN);
+		cellNormalStyle.setBorderLeft(BorderStyle.THIN);
+		cellNormalStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellNormalStyle.setAlignment(HorizontalAlignment.LEFT);
 		cellNormalStyle.setWrapText(true);		
 		
 		// --------------------------------------------------------------------------------------
@@ -404,18 +407,18 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		XSSFCellStyle cellLabelStyle = wb.createCellStyle();
 		cellLabelStyle.setFillForegroundColor( bgLabelColor );
-		cellLabelStyle.setFillPattern( CellStyle.SOLID_FOREGROUND );				
+		cellLabelStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );				
 		
 		XSSFFont cellLabelFont = wb.createFont();
 		cellLabelFont.setBold(true);
 		cellLabelFont.setColor(fnColor);
 		cellLabelStyle.setFont(cellLabelFont);		
-		cellLabelStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		cellLabelStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellLabelStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		cellLabelStyle.setBorderBottom(BorderStyle.THIN);
+		cellLabelStyle.setBorderTop(BorderStyle.THIN);
+		cellLabelStyle.setBorderRight(BorderStyle.THIN);
+		cellLabelStyle.setBorderLeft(BorderStyle.THIN);
+		cellLabelStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellLabelStyle.setAlignment(HorizontalAlignment.CENTER);
 		cellLabelStyle.setWrapText(true);			
 		
 		Map<String, String> pdcaTypeMap = PdcaType.getDataMap(false);
