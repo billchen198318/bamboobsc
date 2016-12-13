@@ -324,11 +324,25 @@ public class OrganizationReportExcelCommand extends BaseChainCommandSupport impl
 		
 		for (int px=0; px<vision.getPerspectives().size(); px++) {
 			PerspectiveVO perspective = vision.getPerspectives().get(px);
-			sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow + perspective.getRow()-1, 0, 0));
+			// 2016-12-13 old work with POI 3.12
+			//sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow + perspective.getRow()-1, 0, 0));
+			
+			// 2016-12-13 new work with POI 3.15
+			int mrRow1 = mrRow + perspective.getRow()-1;
+			if (mrRow1 > mrRow) {
+				sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow1, 0, 0));
+			}
 			
 			for (int ox=0; ox<perspective.getObjectives().size(); ox++) {
 				ObjectiveVO objective = perspective.getObjectives().get(ox);
-				sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow + objective.getRow()-1, 1, 1));
+				// 2016-12-13 old work with POI 3.12
+				//sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow + objective.getRow()-1, 1, 1));
+				
+				// 2016-12-13 new work with POI 3.15
+				int mrRow2 = mrRow + objective.getRow()-1;
+				if (mrRow2 > mrRow) {
+					sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow2, 1, 1));
+				}
 				
 				mrRow += objective.getKpis().size();
 			}

@@ -389,7 +389,15 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 			for (ObjectiveVO objective : perspective.getObjectives()) {
 				int rowspan = objective.getRow();
 				if ( objective.getRow() > 1 ) {
-					sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow+rowspan-1, 0, 0));
+					// 2016-12-13 old work with POI 3.12
+					//sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow+rowspan-1, 0, 0));
+					
+					// 2016-12-13 new work with POI 3.15
+					int mrRow1 = mrRow+rowspan-1;
+					if (mrRow1 > mrRow) {
+						sh.addMergedRegion(new CellRangeAddress(mrRow, mrRow1, 0, 0));
+					}
+					
 				}
 				mrRow += rowspan;
 			}
