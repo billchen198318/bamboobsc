@@ -28,9 +28,12 @@ import java.util.List;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -169,18 +172,18 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
-		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND );			
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );			
 		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);
 		cellHeadFont.setColor(fnColor);
 		cellHeadStyle.setFont(cellHeadFont);		
-		cellHeadStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellHeadStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		cellHeadStyle.setBorderBottom(BorderStyle.THIN);
+		cellHeadStyle.setBorderTop(BorderStyle.THIN);
+		cellHeadStyle.setBorderRight(BorderStyle.THIN);
+		cellHeadStyle.setBorderLeft(BorderStyle.THIN);
+		cellHeadStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellHeadStyle.setAlignment(HorizontalAlignment.CENTER);
 		cellHeadStyle.setWrapText(true);		
 		
 		int cols = 6;
@@ -285,15 +288,15 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		
 		XSSFCellStyle titleStyle = wb.createCellStyle();
 		titleStyle.setFillForegroundColor( bgColor );
-		titleStyle.setFillPattern( CellStyle.SOLID_FOREGROUND );		
+		titleStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );		
 		titleStyle.setFillForegroundColor(  new XSSFColor(SimpleUtils.getColorRGB4POIColor("#F5F4F4")) );
 		titleStyle.setFont(cellHeadFont);		
-		titleStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		titleStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		titleStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		titleStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
-		titleStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		titleStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		titleStyle.setBorderBottom(BorderStyle.THIN);
+		titleStyle.setBorderTop(BorderStyle.THIN);
+		titleStyle.setBorderRight(BorderStyle.THIN);
+		titleStyle.setBorderLeft(BorderStyle.THIN);
+		titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		titleStyle.setAlignment(HorizontalAlignment.CENTER);
 		titleStyle.setWrapText(true);				
 		
 		titleCell6 = headRow.createCell(5);	
@@ -312,18 +315,18 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		
 		XSSFCellStyle cellStyle = wb.createCellStyle();
 		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#ffffff")) );
-		cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		
 		XSSFFont cellFont = wb.createFont();
 		cellFont.setBold(false);
 		cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#000000")) );
 		cellStyle.setFont(cellFont);				
 		cellStyle.setWrapText(true);
-		cellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+		cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellStyle.setBorderBottom(BorderStyle.THIN);
+		cellStyle.setBorderTop(BorderStyle.THIN);
+		cellStyle.setBorderRight(BorderStyle.THIN);
+		cellStyle.setBorderLeft(BorderStyle.THIN);
 		cellStyle.setWrapText(true);		
 		
 		for (PerspectiveVO perspective : vision.getPerspectives()) {
@@ -361,18 +364,18 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 					
 					XSSFCellStyle cellStyleScore=wb.createCellStyle();
 					cellStyleScore.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
-					cellStyleScore.setFillPattern(CellStyle.SOLID_FOREGROUND);
+					cellStyleScore.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 					
 					XSSFFont cellScoreFont=wb.createFont();
 					cellScoreFont.setBold(false);
 					cellScoreFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
 					cellStyleScore.setFont(cellScoreFont);				
 					cellStyleScore.setWrapText(true);
-					cellStyleScore.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-					cellStyleScore.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-					cellStyleScore.setBorderTop(XSSFCellStyle.BORDER_THIN);
-					cellStyleScore.setBorderRight(XSSFCellStyle.BORDER_THIN);
-					cellStyleScore.setBorderLeft(XSSFCellStyle.BORDER_THIN);					
+					cellStyleScore.setVerticalAlignment(VerticalAlignment.CENTER);
+					cellStyleScore.setBorderBottom(BorderStyle.THIN);
+					cellStyleScore.setBorderTop(BorderStyle.THIN);
+					cellStyleScore.setBorderRight(BorderStyle.THIN);
+					cellStyleScore.setBorderLeft(BorderStyle.THIN);					
 					
 					Cell contentCell6 = contentRow.createCell(kCol++);
 					contentCell6.setCellValue( BscReportSupportUtils.parse2(dateRangeScore.getScore()) );
@@ -402,12 +405,12 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		XSSFCellStyle cellStyle=wb.createCellStyle();
 		
 		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#FFFFFF")) );
-		cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);		
-		cellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-		cellStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);					
+		cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);		
+		cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellStyle.setBorderBottom(BorderStyle.THIN);
+		cellStyle.setBorderTop(BorderStyle.THIN);
+		cellStyle.setBorderRight(BorderStyle.THIN);
+		cellStyle.setBorderLeft(BorderStyle.THIN);					
 		XSSFFont cellFont=wb.createFont();
 		cellFont.setBold(true);
 		cellStyle.setFont(cellFont);

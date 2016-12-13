@@ -32,9 +32,12 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -87,11 +90,11 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
-		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );	
-		cellHeadStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-		cellHeadStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);		
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
+		cellHeadStyle.setBorderBottom(BorderStyle.THIN);
+		cellHeadStyle.setBorderTop(BorderStyle.THIN);
+		cellHeadStyle.setBorderRight(BorderStyle.THIN);
+		cellHeadStyle.setBorderLeft(BorderStyle.THIN);		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);		
 		cellHeadStyle.setFont( cellHeadFont );
@@ -140,18 +143,18 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 			XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor( (String)nodeData.get("fontColor") ) );	
 			XSSFCellStyle cellStyle = wb.createCellStyle();
 			cellStyle.setFillForegroundColor( bgColor );
-			cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);	
+			cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 			XSSFFont cellFont = wb.createFont();
 			cellFont.setBold(false);
 			cellFont.setColor( fnColor );
 			cellStyle.setFont(cellFont);
 			cellStyle.setWrapText(true);
-			cellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-			cellStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-			cellStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-			cellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-			cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-			cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+			cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+			cellStyle.setAlignment(HorizontalAlignment.CENTER);
+			cellStyle.setBorderBottom(BorderStyle.THIN);
+			cellStyle.setBorderTop(BorderStyle.THIN);
+			cellStyle.setBorderRight(BorderStyle.THIN);
+			cellStyle.setBorderLeft(BorderStyle.THIN);
 			
 			Cell cell1 = nowRow.createCell(0);
 			cell1.setCellValue( String.valueOf( nodeData.get("name") ) );				
@@ -172,18 +175,18 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 				fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor( (String)rangeScore.get("fontColor") ) );				
 				cellStyle = wb.createCellStyle();
 				cellStyle.setFillForegroundColor( bgColor );
-				cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);	
+				cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 				cellFont = wb.createFont();
 				cellFont.setBold(false);
 				cellFont.setColor( fnColor );
 				cellStyle.setFont(cellFont);
 				cellStyle.setWrapText(true);
-				cellStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-				cellStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-				cellStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
-				cellStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
-				cellStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
-				cellStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);				
+				cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+				cellStyle.setAlignment(HorizontalAlignment.CENTER);
+				cellStyle.setBorderBottom(BorderStyle.THIN);
+				cellStyle.setBorderTop(BorderStyle.THIN);
+				cellStyle.setBorderRight(BorderStyle.THIN);
+				cellStyle.setBorderLeft(BorderStyle.THIN);				
 				
 				Cell cell = nowRow.createCell( 5+left );
 				cell.setCellStyle(cellHeadStyle);
@@ -217,7 +220,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
-		cellHeadStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );				
 		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);		
@@ -249,7 +252,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 			
 			XSSFCellStyle cellStyle = wb.createCellStyle();
 			cellStyle.setFillForegroundColor( bgColor );
-			cellStyle.setFillPattern( CellStyle.SOLID_FOREGROUND  );				
+			cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );				
 			
 			XSSFFont cellFont = wb.createFont();
 			cellFont.setBold(true);

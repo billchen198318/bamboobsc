@@ -159,8 +159,7 @@ public abstract class BaseService<T extends java.io.Serializable, E extends java
 		this.mapper.map(sourceObject, targetObject, mapperId);
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public void populate(Object bean, Map properties) throws IllegalAccessException, InvocationTargetException {
+	public void populate(Object bean, Map<String, Object> properties) throws IllegalAccessException, InvocationTargetException {
 		org.apache.commons.beanutils.BeanUtils.populate(bean, properties);
 	}
 

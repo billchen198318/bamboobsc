@@ -45,10 +45,10 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.POIXMLDocument;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.poifs.filesystem.DocumentFactoryHelper;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
@@ -496,7 +496,7 @@ public class SimpleUtils {
     	if(POIFSFileSystem.hasPOIFSHeader(inp)) {
     		return new HSSFWorkbook(inp);
     	}
-    	if(POIXMLDocument.hasOOXMLHeader(inp)) {
+    	if(DocumentFactoryHelper.hasOOXMLHeader(inp)) {
     		return new XSSFWorkbook(OPCPackage.open(inp));
         }
     	throw new IllegalArgumentException("Your InputStream was neither an OLE2 stream, nor an OOXML stream");
