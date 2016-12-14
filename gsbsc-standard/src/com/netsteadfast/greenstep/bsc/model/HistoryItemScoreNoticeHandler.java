@@ -105,7 +105,10 @@ public class HistoryItemScoreNoticeHandler implements java.io.Serializable {
 		for (String mail : toMail) {
 			to.append(mail).append(";");
 		}
-		sysMailHelper.setMailTo(to.toString());
+		sysMailHelper.setMailTo(this.toMail.get(0));
+		if (this.toMail.size()>1) {
+			sysMailHelper.setMailCc(to.toString());
+		}
 		sysMailHelper.setMailId( this.sysMailHelperService.findForMaxMailIdComplete(dateStr) );
 		sysMailHelper.setRetainFlag(YesNo.NO);
 		sysMailHelper.setSuccessFlag(YesNo.NO);
