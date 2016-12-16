@@ -18,4 +18,8 @@
     <bean id="core.web.controller.CommonPieChartAction" class="com.netsteadfast.greenstep.action.CommonPieChartAction" scope="prototype" />
     <bean id="core.web.controller.CommonMeterChartAction" class="com.netsteadfast.greenstep.action.CommonMeterChartAction" scope="prototype" />    
     
+    <bean id="core.web.controller.CommonPrintContentAction" class="com.netsteadfast.greenstep.action.CommonPrintContentAction" scope="prototype" />
+    
+    <bean id="core.web.controller.CommonTestAction" class="com.netsteadfast.greenstep.action.CommonTestAction" scope="prototype" />
+    
 </beans>

@@ -210,7 +210,7 @@ public class ApplicationSiteUtils {
 	private static boolean checkTestConnection(String host, String contextPath, HttpServletRequest request) {
 		boolean test = false;
 		String basePath = request.getScheme()+"://" + host + "/" + contextPath;
-		String urlStr = basePath + "/pages/system/test.json";
+		String urlStr = basePath + "/pages/system/testJsonResult.action";
 		try {
 			logger.info("checkTestConnection , url=" + urlStr);
 			HttpClient client = new HttpClient();

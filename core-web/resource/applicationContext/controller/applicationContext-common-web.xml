@@ -31,4 +31,6 @@
     
     <bean id="core.web.controller.CommonPrintContentAction" class="com.netsteadfast.greenstep.action.CommonPrintContentAction" scope="prototype" />
     
+    <bean id="core.web.controller.CommonTestAction" class="com.netsteadfast.greenstep.action.CommonTestAction" scope="prototype" />
+    
 </beans>
