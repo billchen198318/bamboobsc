@@ -168,6 +168,7 @@ public class IndexAction extends BaseSupportAction {
 	}
 	
 	public Map<String, String> getVisionMap() {
+		super.resetPleaseSelectDataMapFromLocaleLang(visionMap);
 		return visionMap;
 	}
 
