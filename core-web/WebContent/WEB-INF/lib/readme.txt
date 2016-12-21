@@ -445,10 +445,10 @@ re-pack to renjin-script-engine-0.8.2266.jar
 renjin-script-engine-0.8.2266.jar
 
 
-DOJO release 1.11.2 ( package file by self )
+DOJO release 1.12.1 ( package file by self )
 *** Note: only for CORE-WEB ***
 -------------------------
-dojo-release-1.11.2.jar
+dojo-release-1.12.1.jar
 
 
 ---------------------------------------------------------------------------------------
