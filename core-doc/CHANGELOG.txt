@@ -1,15 +1,20 @@
 0.7.0
 -----------------------------------------------------------
 1. New dashboards features "09-Dashboards".
-2. Monitor score-performance JOB schedule for Vision、Strategy of objectives、KPI.
+2. Monitor score-performance JOB schedule (06 - Expression Job) expression (BSC_JOB_EXPR001 ~ BSC_JOB_EXPR006) for Vision、Strategy of objectives、KPI.
 3. Workspace upgrade, improve response speed for workspace component.
-4. Add API ( SOAP / REST ) for get Scorecard.
+4. Add API ( SOAP / REST ) API for get Scorecard.
 5. MOBILE version upgrade.
-6. Strategy-MAP add dbclick event( only Default-WEB version, mobile version no support ).
+6. Strategy-MAP add dbclick event show item dashboards ( only Default-WEB version, mobile version no support ).
+7. Formula and aggregation method and system expression add support R-language option expression.
+8. Add example expression( BSC_JOB_EXPR801 ) do send notice mail JOB schedule for monitor item score history data.
+9. Some third-party library file upgrade.
 
-If have previous data in MYSQL(bbcore) E.g: 0.6.6 or 0.7.0-BETA1 old version, please update sql command file patch_up_070.sql
 
-New features and development progress please reference:
+If have previous database data in MYSQL(bbcore) E.g: 0.6.6 or 0.7.0-BETA1 old version, please update sql command file patch_up_070R.sql
+NOTE: upgrade will lose some system data.recommend need "backup old database".
+
+New features please reference:
 https://github.com/billchen198318/bamboobsc/issues/33
 
 API for get Scorecard please reference:
