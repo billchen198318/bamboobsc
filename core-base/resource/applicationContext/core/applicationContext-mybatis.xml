@@ -122,6 +122,7 @@
                 <value>classpath*:mappers/BbPdcaMeasureFreq.xml</value>
                 <value>classpath*:mappers/BbPdcaOrga.xml</value>
                 <value>classpath*:mappers/BbMonitorItemScore.xml</value>
+                <value>classpath*:mappers/BbEmployeeHier.xml</value>
                 
                 <!-- #################################################### -->
                 <!-- QCharts -->
