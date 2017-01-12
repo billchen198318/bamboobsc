@@ -91,9 +91,9 @@ public class AggregationMethod {
 		return true;
 	}
 	
-	public float average(KpiVO kpi, float score) throws Exception {
+	public float average(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
-		score = 0.0f; // init zero
+		float score = 0.0f; // init zero
 		int size = 0;
 		for (BbMeasureData measureData : measureDatas) {
 			BscMeasureData data = new BscMeasureData();
@@ -156,10 +156,10 @@ public class AggregationMethod {
 		}
 	}
 	
-	public float averageDistinct(KpiVO kpi, float score) throws Exception {
+	public float averageDistinct(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
 		List<Float> scores = new ArrayList<Float>();
-		score = 0.0f; // init zero
+		float score = 0.0f; // init zero
 		int size = 0;
 		for (BbMeasureData measureData : measureDatas) {
 			BscMeasureData data = new BscMeasureData();
@@ -231,10 +231,9 @@ public class AggregationMethod {
 		}
 	}
 	
-	public float count(KpiVO kpi, float score) throws Exception {
+	public float count(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
-		score = Float.valueOf( measureDatas.size() );
-		return score;
+		return Float.valueOf( measureDatas.size() );
 	}
 	
 	public void countDateRange(KpiVO kpi, String frequency) throws Exception {
@@ -257,7 +256,7 @@ public class AggregationMethod {
 		}
 	}
 	
-	public float countDistinct(KpiVO kpi, float score) throws Exception {
+	public float countDistinct(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
 		List<Float> scores = new ArrayList<Float>();
 		for (BbMeasureData measureData : measureDatas) {
@@ -279,9 +278,8 @@ public class AggregationMethod {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		score = Float.valueOf( scores.size() );	
-		return score;
+		}	
+		return Float.valueOf( scores.size() );
 	}
 	
 	public void countDistinctDateRange(KpiVO kpi, String frequency) throws Exception {
@@ -322,9 +320,9 @@ public class AggregationMethod {
 		}		
 	}
 	
-	public float max(KpiVO kpi, float score) throws Exception {
+	public float max(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
-		score = 0.0f; // init
+		float score = 0.0f; // init
 		int size = 0;
 		float nowScore = 0.0f;
 		for (BbMeasureData measureData : measureDatas) {
@@ -397,9 +395,9 @@ public class AggregationMethod {
 		}		
 	}	
 	
-	public float min(KpiVO kpi, float score) throws Exception {
+	public float min(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
-		score = 0.0f; // init
+		float score = 0.0f; // init
 		int size = 0;
 		float nowScore = 0.0f;
 		for (BbMeasureData measureData : measureDatas) {
@@ -472,9 +470,9 @@ public class AggregationMethod {
 		}	
 	}	
 	
-	public float sum(KpiVO kpi, float score) throws Exception {
+	public float sum(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
-		score = 0.0f; // init
+		float score = 0.0f; // init
 		//int size = 0;
 		for (BbMeasureData measureData : measureDatas) {
 			BscMeasureData data = new BscMeasureData();
@@ -531,10 +529,10 @@ public class AggregationMethod {
 		}
 	}	
 	
-	public float sumDistinct(KpiVO kpi, float score) throws Exception {
+	public float sumDistinct(KpiVO kpi) throws Exception {
 		List<BbMeasureData> measureDatas = kpi.getMeasureDatas();
 		List<Float> scores = new ArrayList<Float>();
-		score = 0.0f; // init
+		float score = 0.0f; // init
 		//int size = 0;
 		for (BbMeasureData measureData : measureDatas) {
 			BscMeasureData data = new BscMeasureData();
