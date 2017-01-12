@@ -2,7 +2,7 @@ Avg:
 =================================================================================
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().average(kpi, score);
+score = AggregationMethod.build().average(kpi);
 
 
 import com.netsteadfast.greenstep.bsc.util.*;
@@ -20,7 +20,7 @@ Avg Dist:
 =================================================================================
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().averageDistinct(kpi, score);
+score = AggregationMethod.build().averageDistinct(kpi);
 
 
 import com.netsteadfast.greenstep.bsc.util.*;
@@ -38,7 +38,7 @@ Count:
 
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().count(kpi, score);
+score = AggregationMethod.build().count(kpi);
 
 
 
@@ -56,7 +56,7 @@ Count dist :
 
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().countDistinct(kpi, score);
+score = AggregationMethod.build().countDistinct(kpi);
 
 
 
@@ -74,7 +74,7 @@ Max:
 
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().max(kpi, score);
+score = AggregationMethod.build().max(kpi);
 
 
 
@@ -93,7 +93,7 @@ Min:
 
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().min(kpi, score);
+score = AggregationMethod.build().min(kpi);
 
 
 
@@ -111,7 +111,7 @@ Sum:
 
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().sum(kpi, score);
+score = AggregationMethod.build().sum(kpi);
 
 
 
@@ -129,7 +129,7 @@ Sum Dist:
 
 import com.netsteadfast.greenstep.bsc.util.*;
 
-score = AggregationMethod.build().sumDistinct(kpi, score);
+score = AggregationMethod.build().sumDistinct(kpi);
 
 
 
