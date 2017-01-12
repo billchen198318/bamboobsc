@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.bsc.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -37,5 +38,9 @@ public interface IEmployeeLogicService {
 	public DefaultResult<AccountVO> updatePassword(EmployeeVO employee, String newPassword) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> delete(EmployeeVO employee) throws ServiceException, Exception;
+	
+	public List<Map<String, Object>> getTreeData(String basePath) throws ServiceException, Exception;
+	
+	public DefaultResult<Boolean> updateSupervisor(EmployeeVO employee, String supervisorOid) throws ServiceException, Exception;
 	
 }

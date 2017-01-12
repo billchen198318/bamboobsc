@@ -47,6 +47,7 @@ import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicService;
 import com.netsteadfast.greenstep.bsc.service.IDegreeFeedbackAssignService;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeHierService;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeOrgaService;
 import com.netsteadfast.greenstep.bsc.service.IKpiEmplService;
 import com.netsteadfast.greenstep.bsc.service.IMeasureDataService;
@@ -56,6 +57,7 @@ import com.netsteadfast.greenstep.bsc.service.IPdcaOwnerService;
 import com.netsteadfast.greenstep.bsc.service.IReportRoleViewService;
 import com.netsteadfast.greenstep.bsc.service.logic.IEmployeeLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackAssign;
+import com.netsteadfast.greenstep.po.hbm.BbEmployeeHier;
 import com.netsteadfast.greenstep.po.hbm.BbEmployeeOrga;
 import com.netsteadfast.greenstep.po.hbm.BbKpiEmpl;
 import com.netsteadfast.greenstep.po.hbm.BbMeasureData;
@@ -71,6 +73,7 @@ import com.netsteadfast.greenstep.service.ISysMsgNoticeService;
 import com.netsteadfast.greenstep.service.logic.IRoleLogicService;
 import com.netsteadfast.greenstep.vo.AccountVO;
 import com.netsteadfast.greenstep.vo.DegreeFeedbackAssignVO;
+import com.netsteadfast.greenstep.vo.EmployeeHierVO;
 import com.netsteadfast.greenstep.vo.EmployeeOrgaVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiEmplVO;
@@ -100,6 +103,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 	private IPdcaItemOwnerService<PdcaItemOwnerVO, BbPdcaItemOwner, String> pdcaItemOwnerService;
 	private IRoleLogicService roleLogicService;
 	private IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String> monitorItemScoreService;
+	private IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> employeeHierService;
 	
 	public EmployeeLogicServiceImpl() {
 		super();
@@ -233,6 +237,17 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String> monitorItemScoreService) {
 		this.monitorItemScoreService = monitorItemScoreService;
 	}	
+	
+	public IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> getEmployeeHierService() {
+		return employeeHierService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.EmployeeHierService")
+	@Required		
+	public void setEmployeeHierService(IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> employeeHierService) {
+		this.employeeHierService = employeeHierService;
+	}
 	
 	private boolean isAdministrator(String account) {
 		if (account.equals("admin") || account.equals(Constants.SYSTEM_BACKGROUND_USER)) {
@@ -454,6 +469,23 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		for (BbEmployeeOrga empOrg : searchList) {
 			this.employeeOrgaService.delete(empOrg);
 		}		
+	}
+
+	@Override
+	public List<Map<String, Object>> getTreeData(String basePath) throws ServiceException, Exception {
+		
+		return null;
+	}
+	
+	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
+	@Override
+	public DefaultResult<Boolean> updateSupervisor(EmployeeVO employee, String supervisorOid) throws ServiceException, Exception {
+		
+		return null;
 	}
 
 }
