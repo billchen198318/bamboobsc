@@ -43,4 +43,6 @@ public interface IEmployeeLogicService {
 	
 	public DefaultResult<Boolean> updateSupervisor(EmployeeVO employee, String supervisorOid) throws ServiceException, Exception;
 	
+	public void initHierarchyForFirst() throws ServiceException, Exception;
+	
 }
