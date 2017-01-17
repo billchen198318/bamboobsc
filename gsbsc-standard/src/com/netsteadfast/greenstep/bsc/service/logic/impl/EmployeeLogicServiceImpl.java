@@ -681,4 +681,32 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		return result;
 	}
 
+	/**
+	 * for upgrade 0.7.1 need data
+	 * 
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
+	@ServiceMethodAuthority(type={ServiceMethodType.INSERT})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )	
+	@Override
+	public void initHierarchyForFirst() throws ServiceException, Exception {
+		List<EmployeeVO> employeeList = this.getEmployeeService().findListVOByParams(null);
+		if (null == employeeList || employeeList.size() < 1) {
+			return;
+		}
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		for (EmployeeVO employee : employeeList) {
+			paramMap.clear();
+			paramMap.put("empOid", employee.getOid());
+			if (this.employeeHierService.countByParams(paramMap) > 0) {
+				continue;
+			}
+			this.createHierarchy(employee, BscConstants.EMPLOYEE_HIER_ZERO_OID);
+		}
+	}
+
 }
