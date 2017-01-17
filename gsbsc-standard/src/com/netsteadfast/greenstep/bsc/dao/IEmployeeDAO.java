@@ -25,6 +25,7 @@ import java.util.List;
 
 import com.netsteadfast.greenstep.base.dao.IBaseDAO;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 
 public interface IEmployeeDAO<T extends java.io.Serializable, PK extends java.io.Serializable> extends IBaseDAO<BbEmployee, String> {
 	
@@ -45,5 +46,7 @@ public interface IEmployeeDAO<T extends java.io.Serializable, PK extends java.io
 	public List<String> findForAppendEmployeeOidsByPdcaOwner(String pdcaOid) throws Exception;
 	
 	public List<String> findForAppendEmployeeOidsByPdcaItemOwner(String pdcaOid, String itemOid) throws Exception;
+	
+	public List<EmployeeVO> findForJoinHier() throws Exception;
 	
 }

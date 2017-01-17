@@ -29,6 +29,11 @@ public class BscConstants {
 	public final static String ORGANIZATION_ZERO_ID="0000000000";
 	
 	/**
+	 * 空值的 BB_EMPLOYEE.OID , 當沒有主管關聯時 BB_EMPLOYEE_HIER.SUP_OID 為 0000000000
+	 */
+	public final static String EMPLOYEE_HIER_ZERO_OID="0000000000";
+	
+	/**
 	 * 部門選擇的checkbox 的 id 與 name , 其組成方式為 TREE_CBOX:加上OID , 如 TREE_CBOX:3ba52439-6756-45e8-8269-ae7b4fb6a3dc
 	 */
 	public final static String ORGA_SELECT_CHECKBOX_ID_DELIMITER = "TREE_CBOX:";

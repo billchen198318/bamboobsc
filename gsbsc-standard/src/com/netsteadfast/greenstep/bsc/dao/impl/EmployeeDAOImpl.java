@@ -30,6 +30,7 @@ import com.netsteadfast.greenstep.base.dao.BaseDAO;
 import com.netsteadfast.greenstep.bsc.dao.IEmployeeDAO;
 import com.netsteadfast.greenstep.bsc.model.ReportRoleViewTypes;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 
 @Repository("bsc.dao.EmployeeDAO")
 @Scope("prototype")
@@ -118,6 +119,19 @@ public class EmployeeDAOImpl extends BaseDAO<BbEmployee, String> implements IEmp
 				.createQuery("SELECT m.oid FROM BbEmployee m WHERE m.empId IN ( SELECT b.empId FROM BbPdcaItemOwner b WHERE b.pdcaOid = :pdcaOid AND b.itemOid = :itemOid ) ")
 				.setString("pdcaOid", pdcaOid)
 				.setString("itemOid", itemOid)
+				.list();
+	}
+
+	/**
+	 * select m.OID, m.ACCOUNT, m.EMP_ID, m.FULL_NAME, m.JOB_TITLE, h.SUP_OID
+	 * from bb_employee m, bb_employee_hier h 
+	 * where m.OID = h.EMP_OID
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EmployeeVO> findForJoinHier() throws Exception {
+		return this.getCurrentSession()
+				.createQuery("SELECT new com.netsteadfast.greenstep.vo.EmployeeVO(m.oid, m.account, m.empId, m.fullName, m.jobTitle, h.supOid) FROM BbEmployee m, BbEmployeeHier h WHERE m.OID = h.empOid")
 				.list();
 	}
 	

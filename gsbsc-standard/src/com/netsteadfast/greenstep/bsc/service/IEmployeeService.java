@@ -63,4 +63,7 @@ public interface IEmployeeService<T extends java.io.Serializable, E extends java
 	public List<String> findForAppendEmployeeOidsByPdcaOwner(String pdcaOid) throws ServiceException, Exception;
 	
 	public List<String> findForAppendEmployeeOidsByPdcaItemOwner(String pdcaOid, String itemOid) throws ServiceException, Exception;
+	
+	public List<EmployeeVO> findForJoinHier() throws ServiceException, Exception;
+	
 }

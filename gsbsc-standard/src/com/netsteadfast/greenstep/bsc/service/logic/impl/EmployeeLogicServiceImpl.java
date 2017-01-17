@@ -23,11 +23,14 @@ package com.netsteadfast.greenstep.bsc.service.logic.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -44,6 +48,7 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.model.ServiceAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
+import com.netsteadfast.greenstep.base.model.SystemMessage;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicService;
 import com.netsteadfast.greenstep.bsc.service.IDegreeFeedbackAssignService;
@@ -71,6 +76,7 @@ import com.netsteadfast.greenstep.po.hbm.TbUserRole;
 import com.netsteadfast.greenstep.service.ISysCalendarNoteService;
 import com.netsteadfast.greenstep.service.ISysMsgNoticeService;
 import com.netsteadfast.greenstep.service.logic.IRoleLogicService;
+import com.netsteadfast.greenstep.util.IconUtils;
 import com.netsteadfast.greenstep.vo.AccountVO;
 import com.netsteadfast.greenstep.vo.DegreeFeedbackAssignVO;
 import com.netsteadfast.greenstep.vo.EmployeeHierVO;
@@ -298,6 +304,8 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		userRole.setDescription(result.getValue().getAccount() + " `s role!");
 		this.getUserRoleService().saveObject(userRole);
 		
+		this.createHierarchy(employee, BscConstants.EMPLOYEE_HIER_ZERO_OID);
+		
 		return result;
 	}
 
@@ -387,6 +395,8 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		
 		this.monitorItemScoreService.deleteForEmpId( employee.getEmpId() );
 		
+		this.deleteHierarchy(employee);
+		
 		this.getAccountService().deleteByPKng(account.getOid());
 		return getEmployeeService().deleteObject(employee);
 	}
@@ -440,6 +450,10 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
 		}
 		
+		if (this.foundChild(employee)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
+		}
+		
 	}
 	
 	private void createEmployeeOrganization(EmployeeVO employee, List<String> organizationOid) throws ServiceException, Exception {
@@ -470,12 +484,172 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			this.employeeOrgaService.delete(empOrg);
 		}		
 	}
+	
+	private void createHierarchy(EmployeeVO employee, String supOid) throws ServiceException, Exception {
+		if (null == employee || super.isBlank(employee.getOid()) || super.isBlank(supOid)) {
+			return;
+		}
+		EmployeeHierVO hier = new EmployeeHierVO();
+		hier.setEmpOid(employee.getOid());
+		hier.setSupOid(supOid);
+		this.employeeHierService.saveObject(hier);
+	}
 
 	@Override
 	public List<Map<String, Object>> getTreeData(String basePath) throws ServiceException, Exception {
-		
-		return null;
+		List<Map<String, Object>> items = new LinkedList<Map<String, Object>>();
+		List<EmployeeVO> empList = this.getEmployeeService().findForJoinHier(); 
+		if (empList==null || empList.size()<1 ) {
+			return items;
+		}
+		for (EmployeeVO emp : empList) {
+			// 先放沒有父親的ORG-ID
+			if (!(super.isBlank(emp.getSupOid()) || BscConstants.EMPLOYEE_HIER_ZERO_OID.equals(emp.getSupOid()) ) ) {
+				continue;
+			}
+			Map<String, Object> parentDataMap = new LinkedHashMap<String, Object>();
+			parentDataMap.put("type", "parent");
+			parentDataMap.put("id", emp.getOid());
+			parentDataMap.put("name", IconUtils.getMenuIcon(basePath, "STOCK_HOME") + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );
+			parentDataMap.put("oid", emp.getOid());
+			items.add(parentDataMap);
+		}
+		// 再開始放孩子
+		for (int ix=0; ix<items.size(); ix++) {
+			Map<String, Object> parentDataMap=items.get(ix);
+			String orgId = (String)parentDataMap.get("orgId");
+			this.getTreeData(basePath, parentDataMap, empList, orgId);
+		}
+		return items;
 	}
+	
+	private void getTreeData(String basePath, Map<String, Object> putObject, List<EmployeeVO> searchList, String supOid) throws Exception {
+		List<String> childList = new LinkedList<String>();
+		this.getChildOrgIdLevelOne(searchList, supOid, childList);
+		if (childList.size()<1) {
+			return;
+		}
+		for (String childEmpOid : childList) {
+			EmployeeVO emp = this.getEmployeeFromSearchList(searchList, childEmpOid, false);
+			EmployeeVO childEmp = this.getEmployeeFromSearchList(searchList, childEmpOid, true);
+			if (emp==null) {
+				continue;
+			}
+			Map<String, Object> thePutObject=null;
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> childrenList = (List<Map<String, Object>>)putObject.get("children");
+			if (childrenList==null) {
+				childrenList=new LinkedList<Map<String, Object>>();
+			}
+			Map<String, Object> nodeMap=new LinkedHashMap<String, Object>();
+			nodeMap.put("id", emp.getOid());
+			nodeMap.put("name", IconUtils.getMenuIcon(basePath, "STOCK_HOME") + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );	
+			nodeMap.put("oid", emp.getOid() );
+			childrenList.add(nodeMap);
+			putObject.put("children", childrenList);
+			if (childEmp!=null) {					
+				thePutObject=nodeMap;
+			} else {
+				nodeMap.put("type", "Leaf");
+				thePutObject=putObject;
+			}
+			if (childEmp!=null) {
+				this.getTreeData(basePath, thePutObject, searchList, childEmpOid);
+			}			
+		}	
+	}	
+	
+	private List<String> getChildOrgIdLevelOne(List<EmployeeVO> searchList, String supOid, List<String> childList) throws Exception {
+		if (childList==null) {
+			childList=new LinkedList<String>();
+		}		 
+		for (EmployeeVO emp : searchList) {
+			if (supOid.equals(emp.getSupOid())) {
+				childList.add(emp.getOid());
+			} 
+		}
+		return childList;
+	}
+	
+	private EmployeeVO getEmployeeFromSearchList(List<EmployeeVO> searchList, String empOid, boolean isChild) throws Exception {
+		for (EmployeeVO emp : searchList) {
+			if (!isChild) {
+				if (emp.getOid().equals(empOid)) {
+					return emp;
+				}				
+			} else {
+				if (emp.getSupOid().equals(empOid)) {
+					return emp;
+				}					
+			}
+		}
+		return null;
+	}		
+	
+	private String getTreeShowName(EmployeeVO employee) throws Exception {
+		if ( !super.isBlank(employee.getJobTitle()) ) {
+			return StringEscapeUtils.escapeHtml4(employee.getFullName()) + " ( " + employee.getJobTitle().trim() + " )";
+		}
+		return StringEscapeUtils.escapeHtml4(employee.getFullName());
+	}
+	
+	private boolean foundChild(EmployeeVO employee) throws ServiceException, Exception {
+		if (null == employee || super.isBlank(employee.getOid())) {
+			return false;
+		}		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("supOid", employee.getOid());	
+		if (this.employeeHierService.countByParams(params) > 0 ) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean foundChild(String supOid, String checkEmpOid) throws ServiceException, Exception {
+		List<EmployeeVO> treeList = this.getEmployeeService().findForJoinHier();
+		if (treeList==null || treeList.size() <1 ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		boolean f = false;
+		List<EmployeeVO> childList=new LinkedList<EmployeeVO>();		
+		this.getChild(checkEmpOid, treeList, childList);
+		for (int ix=0; childList!=null && ix<childList.size(); ix++) {		
+			if (childList.get(ix).getOid().equals(checkEmpOid)) {
+				f = true;
+			}
+		}
+		return f;
+	}
+	
+	private void getChild(String supOid, List<EmployeeVO> tree, List<EmployeeVO> put) throws Exception {
+		if (put==null || tree==null) {
+			return;
+		}		
+		if (StringUtils.isBlank(supOid) || BscConstants.EMPLOYEE_HIER_ZERO_OID.equals(supOid) ) {
+			return;
+		}		
+		for (EmployeeVO emp : tree) {
+			if (emp.getSupOid().equals(supOid)) {
+				put.add(emp);
+				this.getChild(emp.getSupOid(), tree, put);
+			}
+		}
+	}		
+	
+	private void deleteHierarchy(EmployeeVO employee) throws ServiceException, Exception {
+		if (null == employee || super.isBlank(employee.getOid())) {
+			return;
+		}
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("supOid", employee.getOid());
+		List<BbEmployeeHier> hierList = this.employeeHierService.findListByParams(params);
+		if (null == hierList) {
+			return;
+		}
+		for (BbEmployeeHier hier : hierList) {
+			employeeHierService.delete(hier);
+		}
+	}	
 	
 	@ServiceMethodAuthority(type={ServiceMethodType.UPDATE})
 	@Transactional(
@@ -484,8 +658,27 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )		
 	@Override
 	public DefaultResult<Boolean> updateSupervisor(EmployeeVO employee, String supervisorOid) throws ServiceException, Exception {
-		
-		return null;
+		if (employee==null || super.isBlank(employee.getOid()) || super.isBlank(supervisorOid)) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
+		}
+		DefaultResult<Boolean> result = new DefaultResult<Boolean>();
+		result.setValue(Boolean.FALSE);
+		result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_FAIL)) );
+		employee = this.findEmployeeData(employee.getOid());
+		this.deleteHierarchy(employee);
+		if ("root".equals(supervisorOid) || "r".equals(supervisorOid)) {
+			this.createHierarchy(employee, BscConstants.EMPLOYEE_HIER_ZERO_OID);
+		} else {
+			EmployeeVO newHierEmployee = this.findEmployeeData(supervisorOid);
+			// 找當前員工的的資料, 不因該存在要update的新關聯主管
+			if ( this.foundChild(employee.getOid(), newHierEmployee.getOid()) ) {
+				throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_ERRORS));
+			}
+			this.createHierarchy(employee, newHierEmployee.getOid());			
+		}
+		result.setValue(Boolean.TRUE);
+		result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_SUCCESS)) );
+		return result;
 	}
 
 }
