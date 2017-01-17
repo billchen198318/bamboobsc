@@ -34,6 +34,8 @@ public class EmployeeVO extends BaseValueObj implements java.io.Serializable {
 	// 給新增時用的
 	private String password;
 	
+	private String supOid; // inner join bb_employee_hier select資料要用的
+	
 	public EmployeeVO() {
 		
 	}
@@ -45,6 +47,15 @@ public class EmployeeVO extends BaseValueObj implements java.io.Serializable {
 		this.fullName = fullName;
 		this.jobTitle = jobTitle;
 	}	
+	
+	public EmployeeVO(String oid, String account, String empId, String fullName, String jobTitle, String supOid) {
+		this.oid = oid;
+		this.account = account;
+		this.empId = empId;
+		this.fullName = fullName;
+		this.jobTitle = jobTitle;
+		this.supOid = supOid;
+	}
 	
 	@Override
 	public String getOid() {
@@ -93,6 +104,14 @@ public class EmployeeVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getSupOid() {
+		return supOid;
+	}
+
+	public void setSupOid(String supOid) {
+		this.supOid = supOid;
 	}	
 	
 }

@@ -235,4 +235,9 @@ public class EmployeeServiceImpl extends BaseService<EmployeeVO, BbEmployee, Str
 		return this.employeeDAO.findForAppendEmployeeOidsByPdcaItemOwner(pdcaOid, itemOid);
 	}
 
+	@Override
+	public List<EmployeeVO> findForJoinHier() throws ServiceException, Exception {
+		return this.employeeDAO.findForJoinHier();
+	}
+	
 }
