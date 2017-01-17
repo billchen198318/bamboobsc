@@ -503,7 +503,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			return items;
 		}
 		for (EmployeeVO emp : empList) {
-			// 先放沒有父親的ORG-ID
+			// 先放沒有父親的員工資料
 			if (!(super.isBlank(emp.getSupOid()) || BscConstants.EMPLOYEE_HIER_ZERO_OID.equals(emp.getSupOid()) ) ) {
 				continue;
 			}
