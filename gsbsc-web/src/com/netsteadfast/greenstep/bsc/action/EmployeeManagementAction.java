@@ -278,6 +278,27 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		}
 		return SUCCESS;		
 	}		
+	
+	/**
+	 * bsc.employeeHierarchySetAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG001D0001Q_S01")
+	public String hierarchySet() throws Exception {
+		try {
+			this.initData();
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;		
+	}
 
 	@JSON(serialize=false)
 	@Override
