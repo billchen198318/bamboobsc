@@ -164,6 +164,10 @@ function ${programId}_page_message() {
     				label="${action.getText('BSC_PROG001D0001Q_clear')}" 
     				iconClass="dijitIconClear"
     				cssClass="alt-primary"></gs:button>
+    			<gs:button name="BSC_PROG001D0001Q_employeeHier" id="BSC_PROG001D0001Q_employeeHier" onClick="BSC_PROG001D0001Q_S01_DlgShow();" 
+    				label="Employee hierarchy" 
+    				iconClass="dijitIconSearch"
+    				cssClass="alt-primary"></gs:button>    				
     		</td>
     	</tr> 	
 	</table>
