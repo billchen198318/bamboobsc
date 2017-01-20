@@ -5,6 +5,6 @@
 <%@ taglib prefix="gs" uri="http://www.gsweb.org/controller/tag" %>
 
 <script src="./jquery/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="./bootstrap-4.0.0-alpha.5/css/bootstrap.css" crossorigin="anonymous">
-<script src="./bootstrap-4.0.0-alpha.5/js/bootstrap.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="./bootstrap-4.0.0-alpha.6/css/bootstrap.css" crossorigin="anonymous">
+<script src="./bootstrap-4.0.0-alpha.6/js/bootstrap.js" crossorigin="anonymous"></script>
 <script src="./bootbox/bootbox.js" crossorigin="anonymous"></script>
