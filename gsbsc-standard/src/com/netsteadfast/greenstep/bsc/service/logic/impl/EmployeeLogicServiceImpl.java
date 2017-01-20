@@ -98,6 +98,7 @@ import com.netsteadfast.greenstep.vo.UserRoleVO;
 @Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEmployeeLogicService {
 	protected Logger logger=Logger.getLogger(EmployeeLogicServiceImpl.class);
+	private final static String TREE_ICON_ID = "PERSON";
 	private IEmployeeOrgaService<EmployeeOrgaVO, BbEmployeeOrga, String> employeeOrgaService;
 	private ISysMsgNoticeService<SysMsgNoticeVO, TbSysMsgNotice, String> sysMsgNoticeService;
 	private ISysCalendarNoteService<SysCalendarNoteVO, TbSysCalendarNote, String> sysCalendarNoteService;
@@ -510,7 +511,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			Map<String, Object> parentDataMap = new LinkedHashMap<String, Object>();
 			parentDataMap.put("type", "parent");
 			parentDataMap.put("id", emp.getOid());
-			parentDataMap.put("name", IconUtils.getMenuIcon(basePath, "PERSON") + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );
+			parentDataMap.put("name", IconUtils.getMenuIcon(basePath, TREE_ICON_ID) + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );
 			parentDataMap.put("oid", emp.getOid());
 			items.add(parentDataMap);
 		}
@@ -543,7 +544,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			}
 			Map<String, Object> nodeMap=new LinkedHashMap<String, Object>();
 			nodeMap.put("id", emp.getOid());
-			nodeMap.put("name", IconUtils.getMenuIcon(basePath, "STOCK_HOME") + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );	
+			nodeMap.put("name", IconUtils.getMenuIcon(basePath, TREE_ICON_ID) + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );	
 			nodeMap.put("oid", emp.getOid() );
 			childrenList.add(nodeMap);
 			putObject.put("children", childrenList);
@@ -641,7 +642,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			return;
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("supOid", employee.getOid());
+		params.put("empOid", employee.getOid());
 		List<BbEmployeeHier> hierList = this.employeeHierService.findListByParams(params);
 		if (null == hierList) {
 			return;
