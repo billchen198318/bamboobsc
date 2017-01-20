@@ -510,22 +510,22 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			Map<String, Object> parentDataMap = new LinkedHashMap<String, Object>();
 			parentDataMap.put("type", "parent");
 			parentDataMap.put("id", emp.getOid());
-			parentDataMap.put("name", IconUtils.getMenuIcon(basePath, "STOCK_HOME") + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );
+			parentDataMap.put("name", IconUtils.getMenuIcon(basePath, "PERSON") + StringEscapeUtils.escapeHtml4(this.getTreeShowName(emp)) );
 			parentDataMap.put("oid", emp.getOid());
 			items.add(parentDataMap);
 		}
 		// 再開始放孩子
 		for (int ix=0; ix<items.size(); ix++) {
 			Map<String, Object> parentDataMap=items.get(ix);
-			String orgId = (String)parentDataMap.get("orgId");
-			this.getTreeData(basePath, parentDataMap, empList, orgId);
+			String oid = (String)parentDataMap.get("oid");
+			this.getTreeData(basePath, parentDataMap, empList, oid);
 		}
 		return items;
 	}
 	
 	private void getTreeData(String basePath, Map<String, Object> putObject, List<EmployeeVO> searchList, String supOid) throws Exception {
 		List<String> childList = new LinkedList<String>();
-		this.getChildOrgIdLevelOne(searchList, supOid, childList);
+		this.getChildEmpLevelOne(searchList, supOid, childList);
 		if (childList.size()<1) {
 			return;
 		}
@@ -559,7 +559,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		}	
 	}	
 	
-	private List<String> getChildOrgIdLevelOne(List<EmployeeVO> searchList, String supOid, List<String> childList) throws Exception {
+	private List<String> getChildEmpLevelOne(List<EmployeeVO> searchList, String supOid, List<String> childList) throws Exception {
 		if (childList==null) {
 			childList=new LinkedList<String>();
 		}		 

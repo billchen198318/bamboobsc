@@ -26,6 +26,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
@@ -42,8 +43,10 @@ import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.bsc.service.logic.IEmployeeLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
+import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
@@ -55,15 +58,25 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 	private static final long serialVersionUID = 3624959005836569272L;
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private IEmployeeLogicService employeeLogicService;
 	private EmployeeVO employee = new EmployeeVO(); // 編輯edit模式要用
 	private String appendId; // 編輯edit模式要用
 	private String appendName; // 編輯edit模式要用
 	private String checkBoxIdDelimiter = BscConstants.EMPL_SELECT_CHECKBOX_ID_DELIMITER;
 	
+	// -------------------------------------------------------------------------------
+	// 產生組織json tree 資料用的
+	private String identifier="id";
+	private String label="name";
+	@SuppressWarnings("rawtypes")
+	private List items;
+	// -------------------------------------------------------------------------------			
+	
 	public EmployeeManagementAction() {
 		super();
 	}
 	
+	@JSON(serialize=false)
 	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
 		return employeeService;
 	}
@@ -76,6 +89,7 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		this.employeeService = employeeService;
 	}
 
+	@JSON(serialize=false)
 	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
 		return organizationService;
 	}
@@ -88,8 +102,24 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		this.organizationService = organizationService;
 	}
 
+	@JSON(serialize=false)
+	public IEmployeeLogicService getEmployeeLogicService() {
+		return employeeLogicService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.logic.EmployeeLogicService")
+	@Required		
+	public void setEmployeeLogicService(IEmployeeLogicService employeeLogicService) {
+		this.employeeLogicService = employeeLogicService;
+	}
+
 	private void initData() throws ServiceException, Exception {
 		
+	}
+	
+	private void initTreeData() throws ServiceException, Exception {
+		this.items = this.employeeLogicService.getTreeData( ApplicationSiteUtils.getBasePath(Constants.getMainSystem(), this.getHttpServletRequest()) );
 	}
 	
 	private void handlerSelectEmployee() throws Exception {
@@ -138,6 +168,29 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 			this.setPageMessage(e.getMessage().toString());
 		}
 		return SUCCESS;		
+	}	
+	
+	/**
+	 * 產生員工架構tree json資料
+	 * bsc.getEmployeeTreeJson.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG001D0001Q_S01")
+	@JSON(serialize=false)
+	public String getEmployeeTreeJson() throws Exception {
+		try {
+			this.initTreeData();
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}							
+		return SUCCESS;
 	}	
 	
 	/**
@@ -226,16 +279,19 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		return SUCCESS;		
 	}		
 
+	@JSON(serialize=false)
 	@Override
 	public String getProgramName() {
 		return MenuSupportUtils.getProgramName(this.getProgramId(), this.getLocaleLang());
 	}
 
+	@JSON(serialize=false)
 	@Override
 	public String getProgramId() {
 		return super.getActionMethodProgramId();
 	}
 
+	@JSON(serialize=false)
 	public EmployeeVO getEmployee() {
 		return employee;
 	}
@@ -244,6 +300,7 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		this.employee = employee;
 	}
 
+	@JSON(serialize=false)
 	public String getAppendId() {
 		return appendId;
 	}
@@ -252,6 +309,7 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		this.appendId = appendId;
 	}
 
+	@JSON(serialize=false)
 	public String getAppendName() {
 		return appendName;
 	}
@@ -260,8 +318,22 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 		this.appendName = appendName;
 	}
 
+	@JSON(serialize=false)
 	public String getCheckBoxIdDelimiter() {
 		return checkBoxIdDelimiter;
 	}
+	
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public List getItems() {
+		return items;
+	}	
 
 }
