@@ -1735,10 +1735,12 @@ var Modal = function ($) {
 
     Modal.prototype.show = function show(relatedTarget) {
       var _this9 = this;
-
+      
+      /*
       if (this._isTransitioning) {
         throw new Error('Modal is transitioning');
       }
+      */
 
       if (Util.supportsTransitionEnd() && $(this._element).hasClass(ClassName.FADE)) {
         this._isTransitioning = true;
@@ -1787,9 +1789,11 @@ var Modal = function ($) {
         event.preventDefault();
       }
 
+      /*
       if (this._isTransitioning) {
         throw new Error('Modal is transitioning');
       }
+      */
 
       var transition = Util.supportsTransitionEnd() && $(this._element).hasClass(ClassName.FADE);
       if (transition) {
