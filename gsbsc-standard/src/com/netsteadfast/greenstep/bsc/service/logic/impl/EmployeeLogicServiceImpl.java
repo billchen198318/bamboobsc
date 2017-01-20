@@ -632,7 +632,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		for (EmployeeVO emp : tree) {
 			if (emp.getSupOid().equals(supOid)) {
 				put.add(emp);
-				this.getChild(emp.getSupOid(), tree, put);
+				this.getChild(emp.getOid(), tree, put);
 			}
 		}
 	}		
