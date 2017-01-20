@@ -45,7 +45,10 @@
 			<font color="${objective.fontColor}" size="3"><b>Score: ${objective.score?string(',###.##')}</b></font>&nbsp;
 			<font color="${objective.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>
 			</div>
-			<progress class="progress progress-info" value="${hrWidth}" max="100"></progress><br/>
+			<div class="progress">
+			  <div class="progress-bar" role="progressbar" style="width: ${hrWidth}%;" aria-valuenow="${hrWidth}" aria-valuemin="0" aria-valuemax="100">${hrWidth}%</div>
+			</div>
+			<br/>			
 		</td>
 	</tr>				
 	<tr valign="top">
