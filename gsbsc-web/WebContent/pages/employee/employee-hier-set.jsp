@@ -39,6 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
+var BSC_PROG001D0001Q_S01_firstLoad = true;
+
 /* 員工關聯 TREE */
 function BSC_PROG001D0001Q_S01_getEmployeeTree() {
 	
@@ -73,6 +75,11 @@ function BSC_PROG001D0001Q_S01_getEmployeeTree() {
 	});		
 	
 	treeObject.expandAll();
+	
+	if (BSC_PROG001D0001Q_S01_firstLoad) {
+		BSC_PROG001D0001Q_S01_firstLoad = false;
+		alertDialog(_getApplicationProgramNameById('${programId}'), 'Drag-and-drop item to change employee hierarchy.', function(){ }, 'Y');
+	}
 	
 }
 
