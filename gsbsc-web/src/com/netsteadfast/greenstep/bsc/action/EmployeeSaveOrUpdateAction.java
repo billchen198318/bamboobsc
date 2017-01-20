@@ -162,6 +162,16 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 		}		
 	}
 	
+	private void updateSupervisor() throws ControllerException, AuthorityException, ServiceException, Exception {
+		EmployeeVO employee = new EmployeeVO();
+		this.transformFields2ValueObject(employee, new String[]{"oid"});		
+		DefaultResult<Boolean> result = this.employeeLogicService.updateSupervisor(employee, this.getFields().get("supOid"));
+		this.message = result.getSystemMessage().getValue();
+		if ( result.getValue() != null && result.getValue() ) {
+			this.success = IS_YES;
+		}
+	}
+	
 	/**
 	 * bsc.employeeSaveAction.action
 	 * 
@@ -278,6 +288,35 @@ public class EmployeeSaveOrUpdateAction extends BaseJsonAction {
 		}
 		return SUCCESS;		
 	}	
+	
+	/**
+	 * bsc.employeeUpdateSupervisorAction.action
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG001D0001Q_S01")
+	public String doUpdateSupervisor() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.updateSupervisor();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;
+	}		
 	
 	@JSON
 	@Override
