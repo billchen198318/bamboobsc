@@ -131,7 +131,7 @@ public class EmployeeDAOImpl extends BaseDAO<BbEmployee, String> implements IEmp
 	@Override
 	public List<EmployeeVO> findForJoinHier() throws Exception {
 		return this.getCurrentSession()
-				.createQuery("SELECT new com.netsteadfast.greenstep.vo.EmployeeVO(m.oid, m.account, m.empId, m.fullName, m.jobTitle, h.supOid) FROM BbEmployee m, BbEmployeeHier h WHERE m.OID = h.empOid")
+				.createQuery("SELECT new com.netsteadfast.greenstep.vo.EmployeeVO(m.oid, m.account, m.empId, m.fullName, m.jobTitle, h.supOid) FROM BbEmployee m, BbEmployeeHier h WHERE m.oid = h.empOid")
 				.list();
 	}
 	
