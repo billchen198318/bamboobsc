@@ -27,12 +27,16 @@ function logoutEvent() {
 
 </script>
 
-<nav class="navbar navbar-light bg-faded">
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#menuCollapsingNavbar" aria-controls="menuCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
-    &#9776;
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-toggleable-xs" id="menuCollapsingNavbar">
-    <a class="navbar-brand" href="./index.action"><img alt="bambooBSC mobile" src="./images/original.jpg" border="0"></a>
+  <a class="navbar-brand" href="./index.action"><img alt="bambooBSC mobile" src="./images/original.jpg" border="0"></a>
+  
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
     <ul class="nav navbar-nav">
       <li class="nav-item <% if ("home".equals(active)) { %> active <%} %>">
         <a class="nav-link" href="./index.action"><b>Scorecard</b></a>
@@ -50,26 +54,23 @@ function logoutEvent() {
         <a class="nav-link" href="#" onclick="logoutEvent();"><b>${action.getText("INDEX_Logout")}</b></a>
       </li>        
     </ul>
-  </div>
+    
+  </div>  
+  
 </nav>
 
+
 <!-- Modal Start here-->
-<div class="modal fade bs-example-modal-sm" id="myPleaseWait" tabindex="-1"
-    role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    <span class="glyphicon glyphicon-time">
-                    </span>${action.getText("MESSAGE.INDEX_pleaseWait")}
-                 </h4>
-            </div>
-            <div class="modal-body">
-                <div class="progress">
-                    <img alt="loading" src="./patch_flat_themes_1_11_icons/loadingAnimation.gif">
-                </div>
-            </div>
-        </div>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myPleaseWait">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="mySmallModalLabel">${action.getText("MESSAGE.INDEX_pleaseWait")}</h4>
+      </div>
+      <div class="modal-body">
+        <img alt="loading" src="./patch_flat_themes_1_11_icons/loadingAnimation.gif" border="0">
+      </div>
     </div>
+  </div>
 </div>
 <!-- Modal ends Here -->

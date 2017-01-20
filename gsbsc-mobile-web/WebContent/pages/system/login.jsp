@@ -67,23 +67,17 @@ function submitLoginForm() {
 <body>
 
 <!-- Modal Start here-->
-<div class="modal fade bs-example-modal-sm" id="myPleaseWait" tabindex="-1"
-    role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    <span class="glyphicon glyphicon-time">
-                    </span>Please wait!
-                 </h4>
-            </div>
-            <div class="modal-body">
-                <div class="progress">
-                    <img alt="loading" src="./patch_flat_themes_1_11_icons/loadingAnimation.gif">
-                </div>
-            </div>
-        </div>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myPleaseWait">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="mySmallModalLabel">Please wait!</h4>
+      </div>
+      <div class="modal-body">
+        <img alt="loading" src="./patch_flat_themes_1_11_icons/loadingAnimation.gif" border="0">
+      </div>
     </div>
+  </div>
 </div>
 <!-- Modal ends Here -->
 
