@@ -41,13 +41,16 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeHierService;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.logic.IEmployeeLogicService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbEmployeeHier;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.EmployeeHierVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
 
@@ -59,6 +62,7 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IEmployeeLogicService employeeLogicService;
+	private IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> employeeHierService;
 	private EmployeeVO employee = new EmployeeVO(); // 編輯edit模式要用
 	private String appendId; // 編輯edit模式要用
 	private String appendName; // 編輯edit模式要用
@@ -112,6 +116,18 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 	@Required		
 	public void setEmployeeLogicService(IEmployeeLogicService employeeLogicService) {
 		this.employeeLogicService = employeeLogicService;
+	}
+
+	@JSON(serialize=false)
+	public IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> getEmployeeHierService() {
+		return employeeHierService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.EmployeeHierService")
+	@Required	
+	public void setEmployeeHierService(IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> employeeHierService) {
+		this.employeeHierService = employeeHierService;
 	}
 
 	private void initData() throws ServiceException, Exception {
@@ -287,8 +303,12 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 	 */
 	@ControllerMethodAuthority(programId="BSC_PROG001D0001Q_S01")
 	public String hierarchySet() throws Exception {
+		String forward = RESULT_SEARCH_NO_DATA;
 		try {
 			this.initData();
+			if (this.employeeHierService.countByParams(null) > 0) {
+				forward = SUCCESS;
+			}
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
@@ -297,7 +317,7 @@ public class EmployeeManagementAction extends BaseSupportAction implements IBase
 			e.printStackTrace();
 			this.setPageMessage(e.getMessage().toString());
 		}
-		return SUCCESS;		
+		return forward;
 	}
 
 	@JSON(serialize=false)
