@@ -32,6 +32,7 @@ import org.joda.time.Months;
 import org.joda.time.Years;
 
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
+import com.netsteadfast.greenstep.bsc.util.AggregationMethod;
 import com.netsteadfast.greenstep.bsc.util.AggregationMethodUtils;
 import com.netsteadfast.greenstep.bsc.util.BscScoreColorUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
@@ -39,12 +40,14 @@ import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
 
 public class ScoreCalculationCallable implements Callable<ScoreCalculationCallableData> {
+	/*
 	private static final String QUARTER_1 = "Q1";
 	private static final String QUARTER_2 = "Q2";
 	private static final String QUARTER_3 = "Q3";
 	private static final String QUARTER_4 = "Q4";
 	private static final String HALF_YEAR_FIRST = "first";
-	private static final String HALF_YEAR_LAST = "last";	
+	private static final String HALF_YEAR_LAST = "last";
+	*/
 	private ScoreCalculationCallableData data = null;
 	
 	public ScoreCalculationCallable(ScoreCalculationCallableData data) {
@@ -137,10 +140,10 @@ public class ScoreCalculationCallable implements Callable<ScoreCalculationCallab
 			Date nowDate = dt1.toDate();
 			for (int i=0; i<=betweenYears; i++) {
 				String yyyy = SimpleUtils.getStrYMD(nowDate, "/").substring(0, 4);				
-				dateRange.add( yyyy + "/" + QUARTER_1 );
-				dateRange.add( yyyy + "/" + QUARTER_2 );
-				dateRange.add( yyyy + "/" + QUARTER_3 );
-				dateRange.add( yyyy + "/" + QUARTER_4 );
+				dateRange.add( yyyy + "/" + AggregationMethod.QUARTER_1 );
+				dateRange.add( yyyy + "/" + AggregationMethod.QUARTER_2 );
+				dateRange.add( yyyy + "/" + AggregationMethod.QUARTER_3 );
+				dateRange.add( yyyy + "/" + AggregationMethod.QUARTER_4 );
 				nowDate = DateUtils.addYears(nowDate, 1);
 			}
 			return dateRange;
@@ -152,8 +155,8 @@ public class ScoreCalculationCallable implements Callable<ScoreCalculationCallab
 			Date nowDate = dt1.toDate();
 			for (int i=0; i<=betweenYears; i++) {
 				String yyyy = SimpleUtils.getStrYMD(nowDate, "/").substring(0, 4);				
-				dateRange.add( yyyy + "/" + HALF_YEAR_FIRST );
-				dateRange.add( yyyy + "/" + HALF_YEAR_LAST );
+				dateRange.add( yyyy + "/" + AggregationMethod.HALF_YEAR_FIRST );
+				dateRange.add( yyyy + "/" + AggregationMethod.HALF_YEAR_LAST );
 				nowDate = DateUtils.addYears(nowDate, 1);
 			}
 			return dateRange;
