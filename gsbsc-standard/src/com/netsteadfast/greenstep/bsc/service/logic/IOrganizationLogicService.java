@@ -66,4 +66,6 @@ public interface IOrganizationLogicService {
 	
 	public DefaultResult<Boolean> updateParent(OrganizationVO organization, String parentOid) throws ServiceException, Exception;
 	
+	public DefaultResult<String> createOrgChartData(String basePath, OrganizationVO currentOrganization) throws ServiceException, Exception;
+	
 }

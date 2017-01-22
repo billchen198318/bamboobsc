@@ -45,4 +45,6 @@ public interface IEmployeeLogicService {
 	
 	public void initHierarchyForFirst() throws ServiceException, Exception;
 	
+	public DefaultResult<String> createOrgChartData(String basePath, EmployeeVO currentEmployee) throws ServiceException, Exception;
+	
 }
