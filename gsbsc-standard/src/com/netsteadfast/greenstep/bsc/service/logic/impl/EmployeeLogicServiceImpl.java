@@ -39,6 +39,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
@@ -61,6 +62,7 @@ import com.netsteadfast.greenstep.bsc.service.IPdcaItemOwnerService;
 import com.netsteadfast.greenstep.bsc.service.IPdcaOwnerService;
 import com.netsteadfast.greenstep.bsc.service.IReportRoleViewService;
 import com.netsteadfast.greenstep.bsc.service.logic.IEmployeeLogicService;
+import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackAssign;
 import com.netsteadfast.greenstep.po.hbm.BbEmployeeHier;
 import com.netsteadfast.greenstep.po.hbm.BbEmployeeOrga;
@@ -77,6 +79,8 @@ import com.netsteadfast.greenstep.service.ISysCalendarNoteService;
 import com.netsteadfast.greenstep.service.ISysMsgNoticeService;
 import com.netsteadfast.greenstep.service.logic.IRoleLogicService;
 import com.netsteadfast.greenstep.util.IconUtils;
+import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.AccountVO;
 import com.netsteadfast.greenstep.vo.DegreeFeedbackAssignVO;
 import com.netsteadfast.greenstep.vo.EmployeeHierVO;
@@ -710,5 +714,73 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			this.createHierarchy(employee, BscConstants.EMPLOYEE_HIER_ZERO_OID);
 		}
 	}
-
+	
+	/**
+	 * 這個 Method 的 ServiceMethodAuthority 權限給查詢狀態
+	 * 這裡的 basePath 只是要取 getTreeData 時參數要用, 再這是沒有用處的
+	 */
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})
+	@Transactional(
+			propagation=Propagation.REQUIRED, 
+			readOnly=false,
+			rollbackFor={RuntimeException.class, IOException.class, Exception.class} )	
+	@Override
+	public DefaultResult<String> createOrgChartData(String basePath, EmployeeVO currentEmployee) throws ServiceException, Exception {
+		if (null != currentEmployee && !super.isBlank(currentEmployee.getOid())) {
+			currentEmployee = this.findEmployeeData( currentEmployee.getOid() );
+		}
+		List<Map<String, Object>> treeMap = this.getTreeData(basePath);
+		if (null == treeMap || treeMap.size() < 1) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA));
+		}
+		this.resetTreeMapContentForOrgChartData(treeMap, currentEmployee);
+		Map<String, Object> rootMap = new HashMap<String, Object>();
+		rootMap.put("name", "Employee hierarchy");
+		rootMap.put("title", "hierarchy structure");
+		rootMap.put("children", treeMap);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(rootMap);		
+		String uploadOid = UploadSupportUtils.create(
+				Constants.getSystem(), 
+				UploadTypes.IS_TEMP, 
+				false, 
+				jsonData.getBytes(), 
+				SimpleUtils.getUUIDStr() + ".json");			
+		
+		DefaultResult<String> result = new DefaultResult<String>();
+		result.setValue(uploadOid);
+		result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS)) );
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void resetTreeMapContentForOrgChartData(List<Map<String, Object>> childMapList, EmployeeVO currentEmployee) throws Exception {
+		for (Map<String, Object> nodeMap : childMapList) {
+			String nodeEmployeeOid = String.valueOf( nodeMap.get("id") ); // 與 node.get("oid") 一樣
+			
+			// 去除 OrgChart 不需要的資料
+			nodeMap.remove("type");
+			nodeMap.remove("id");
+			nodeMap.remove("name");
+			nodeMap.remove("oid");
+			
+			EmployeeVO nodeEmployee = this.findEmployeeData(nodeEmployeeOid);
+			
+			// OrgChart 需要的資料, nodeMap 需要填入 name 與 title
+			if (currentEmployee != null && !super.isBlank(currentEmployee.getOid()) 
+					&& currentEmployee.getOid().equals(nodeEmployeeOid)) { // 有帶入當前員工來區別顏色
+				nodeMap.put("name", "<font color='#8A0808'>" + nodeEmployee.getEmpId() + " - " + nodeEmployee.getFullName() + "</font>" );
+				nodeMap.put("title", "<font color='#8A0808'>" + ( super.isBlank(nodeEmployee.getJobTitle()) ? "no job description" : nodeEmployee.getJobTitle().trim() ) + "</font>" );				
+			} else {
+				nodeMap.put("name", nodeEmployee.getEmpId() + " - " + nodeEmployee.getFullName());
+				nodeMap.put("title", ( super.isBlank(nodeEmployee.getJobTitle()) ? "no job description" : nodeEmployee.getJobTitle().trim() ) );				
+			}
+			
+			if (nodeMap.get("children") != null && (nodeMap.get("children") instanceof List<?>)) { // 還有孩子項目資料
+				this.resetTreeMapContentForOrgChartData( (List<Map<String, Object>>) nodeMap.get("children"), currentEmployee );
+			}
+		}
+	}
+	
 }
