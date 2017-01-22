@@ -47,4 +47,6 @@ public interface IEmployeeLogicService {
 	
 	public DefaultResult<String> createOrgChartData(String basePath, EmployeeVO currentEmployee) throws ServiceException, Exception;
 	
+	public DefaultResult<Map<String, Object>> getOrgChartData(String basePath, EmployeeVO currentEmployee) throws ServiceException, Exception;
+	
 }

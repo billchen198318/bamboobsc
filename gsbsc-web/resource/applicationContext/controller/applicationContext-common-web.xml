@@ -32,4 +32,7 @@
     
     <bean id="core.web.controller.CommonTestAction" class="com.netsteadfast.greenstep.action.CommonTestAction" scope="prototype" />
     
+    <!-- BSC 自己需要的 OrgChart 共用 Dialog window -->
+    <bean id="core.web.controller.CommonOrgChartAction" class="com.netsteadfast.greenstep.bsc.action.CommonOrgChartAction" scope="prototype" />
+    
 </beans>

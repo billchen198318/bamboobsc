@@ -754,6 +754,32 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		return result;
 	}
 	
+	/**
+	 * 這個 Method 的 ServiceMethodAuthority 權限給查詢狀態
+	 * 這裡的 basePath 只是要取 getTreeData 時參數要用, 再這是沒有用處的
+	 */
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})	
+	@Override
+	public DefaultResult<Map<String, Object>> getOrgChartData(String basePath, EmployeeVO currentEmployee) throws ServiceException, Exception {
+		if (null != currentEmployee && !super.isBlank(currentEmployee.getOid())) {
+			currentEmployee = this.findEmployeeData( currentEmployee.getOid() );
+		}
+		List<Map<String, Object>> treeMap = this.getTreeData(basePath);
+		if (null == treeMap || treeMap.size() < 1) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA));
+		}
+		this.resetTreeMapContentForOrgChartData(treeMap, currentEmployee);
+		Map<String, Object> rootMap = new HashMap<String, Object>();
+		rootMap.put("name", "Employee hierarchy");
+		rootMap.put("title", "hierarchy structure");
+		rootMap.put("children", treeMap);
+		
+		DefaultResult<Map<String, Object>> result = new DefaultResult<Map<String, Object>>();
+		result.setValue( rootMap );
+		result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS)) );
+		return result;
+	}	
+	
 	@SuppressWarnings("unchecked")
 	private void resetTreeMapContentForOrgChartData(List<Map<String, Object>> childMapList, EmployeeVO currentEmployee) throws Exception {
 		for (Map<String, Object> nodeMap : childMapList) {
