@@ -168,6 +168,10 @@ function ${programId}_page_message() {
     				label="Employee hierarchy" 
     				iconClass="dijitIconSearch"
     				cssClass="alt-primary"></gs:button>    				
+    			<gs:button name="BSC_PROG001D0001Q_employeeHierView" id="BSC_PROG001D0001Q_employeeHierView" onClick="BSC_PROGCOMM0001Q_showOrgChart('employee', '');" 
+    				label="Hierarchy view" 
+    				iconClass="dijitIconSearch"
+    				cssClass="alt-primary"></gs:button>     				
     		</td>
     	</tr> 	
 	</table>

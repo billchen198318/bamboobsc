@@ -25,3 +25,11 @@
 function BSC_PROG002D0007Q_showObjectiveItem(idStr) {
 	BSC_PROG002D0007Q_S00_DlgShow( idStr );
 }
+
+// for BSC common load OrgChart - Hierarchy structure view
+function BSC_PROGCOMM0001Q_showOrgChart(type, oid) {
+	var urlParam = type + _gscore_delimiter + oid;
+	// DlgShow 畫面太小了, 改用 TabShow
+	// BSC_PROGCOMM0001Q_DlgShow( urlParam );
+	BSC_PROGCOMM0001Q_TabShow( urlParam );
+}

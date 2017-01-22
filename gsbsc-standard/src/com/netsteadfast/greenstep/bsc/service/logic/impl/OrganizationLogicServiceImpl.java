@@ -614,6 +614,32 @@ public class OrganizationLogicServiceImpl extends BscBaseLogicService implements
 		return result;
 	}
 	
+	/**
+	 * 這個 Method 的 ServiceMethodAuthority 權限給查詢狀態
+	 * 這裡的 basePath 只是要取 getTreeData 時參數要用, 再這是沒有用處的
+	 */
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})	
+	@Override
+	public DefaultResult<Map<String, Object>> getOrgChartData(String basePath, OrganizationVO currentOrganization) throws ServiceException, Exception {
+		if (null != currentOrganization && !super.isBlank(currentOrganization.getOid())) {
+			currentOrganization = this.findOrganizationData( currentOrganization.getOid() );
+		}
+		List<Map<String, Object>> treeMap = this.getTreeData(basePath, false, "");
+		if (null == treeMap || treeMap.size() < 1) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA));
+		}
+		this.resetTreeMapContentForOrgChartData(treeMap, currentOrganization);
+		Map<String, Object> rootMap = new HashMap<String, Object>();
+		rootMap.put("name", "Organization / Department hierarchy");
+		rootMap.put("title", "hierarchy structure");
+		rootMap.put("children", treeMap);
+		
+		DefaultResult<Map<String, Object>> result = new DefaultResult<Map<String, Object>>();
+		result.setValue( rootMap );
+		result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS)) );
+		return result;
+	}		
+	
 	@SuppressWarnings("unchecked")
 	private void resetTreeMapContentForOrgChartData(List<Map<String, Object>> childMapList, OrganizationVO currentOrganization) throws Exception {
 		for (Map<String, Object> nodeMap : childMapList) {
@@ -641,6 +667,6 @@ public class OrganizationLogicServiceImpl extends BscBaseLogicService implements
 				this.resetTreeMapContentForOrgChartData( (List<Map<String, Object>>) nodeMap.get("children"), currentOrganization );
 			}
 		}
-	}	
+	}
 	
 }

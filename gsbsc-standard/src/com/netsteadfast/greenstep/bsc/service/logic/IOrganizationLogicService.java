@@ -68,4 +68,6 @@ public interface IOrganizationLogicService {
 	
 	public DefaultResult<String> createOrgChartData(String basePath, OrganizationVO currentOrganization) throws ServiceException, Exception;
 	
+	public DefaultResult<Map<String, Object>> getOrgChartData(String basePath, OrganizationVO currentOrganization) throws ServiceException, Exception;
+	
 }
