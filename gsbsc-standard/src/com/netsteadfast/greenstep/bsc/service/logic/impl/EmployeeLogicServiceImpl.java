@@ -496,6 +496,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		this.employeeHierService.saveObject(hier);
 	}
 
+	@ServiceMethodAuthority(type={ServiceMethodType.SELECT})
 	@Override
 	public List<Map<String, Object>> getTreeData(String basePath) throws ServiceException, Exception {
 		List<Map<String, Object>> items = new LinkedList<Map<String, Object>>();
@@ -589,9 +590,9 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 	
 	private String getTreeShowName(EmployeeVO employee) throws Exception {
 		if ( !super.isBlank(employee.getJobTitle()) ) {
-			return StringEscapeUtils.escapeHtml4(employee.getFullName()) + " ( " + employee.getJobTitle().trim() + " )";
+			return employee.getEmpId() + " - " + StringEscapeUtils.escapeHtml4(employee.getFullName()) + " ( " + employee.getJobTitle().trim() + " )";
 		}
-		return StringEscapeUtils.escapeHtml4(employee.getFullName());
+		return employee.getEmpId() + " - " + StringEscapeUtils.escapeHtml4(employee.getFullName());
 	}
 	
 	private boolean foundChild(EmployeeVO employee) throws ServiceException, Exception {
