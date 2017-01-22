@@ -294,7 +294,7 @@
 								<td align="left" bgcolor="${kpi.bgColor}" width="85%">
 									<font color="${kpi.fontColor}" >																			
 										<#list kpi.organizations as org >
-										${org.orgId}-${org.name},&nbsp;
+										<a href="#" onclick="BSC_PROGCOMM0001Q_showOrgChart('organization', '${org.oid}'); return false;" style="color:${kpi.fontColor}">${org.orgId}-${org.name}</a>,&nbsp;
 										</#list>
 									</font>
 								</td>
@@ -308,7 +308,7 @@
 								<td align="left" bgcolor="${kpi.bgColor}" width="85%">
 									<font color="${kpi.fontColor}" >
 										<#list kpi.employees as emp >
-										${emp.empId}-${emp.fullName},&nbsp;
+										<a href="#" onclick="BSC_PROGCOMM0001Q_showOrgChart('employee', '${emp.oid}'); return false;" style="color:${kpi.fontColor}">${emp.empId}-${emp.fullName}</a>,&nbsp;
 										</#list>
 									</font>
 								</td>

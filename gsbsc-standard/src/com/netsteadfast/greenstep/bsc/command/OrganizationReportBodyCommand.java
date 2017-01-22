@@ -62,6 +62,7 @@ public class OrganizationReportBodyCommand extends BaseChainCommandSupport imple
 		parameter.put("dateType", dateType);
 		parameter.put("year", (String)context.get("startYearDate"));
 		parameter.put("departmentName", " ");
+		parameter.put("departmentOid", " ");
 		parameter.put("total", 0.0f);
 		if ( context.get("total") != null && context.get("total") instanceof Float ) {
 			parameter.put("total", context.get("total") );
@@ -72,6 +73,7 @@ public class OrganizationReportBodyCommand extends BaseChainCommandSupport imple
 		if ( result.getValue() != null ) {
 			organization = result.getValue();
 			parameter.put("departmentName", organization.getName() );
+			parameter.put("departmentOid", organization.getOid() );
 		}		
 		this.fillReportProperty(parameter);
 		String content = TemplateUtils.processTemplate(
