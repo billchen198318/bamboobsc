@@ -1,9 +1,9 @@
 <!-- BSC_PROG003D0002Q -->
 <#list treeObj.visions as vision >
 
-	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">
+	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8" onclick="BSC_PROGCOMM0001Q_showOrgChart('employee', '${employeeOid}')" >
 		<tr>
-			<td colspan="6" bgcolor="#F2F2F2" align="center">
+			<td colspan="6" bgcolor="#F2F2F2" align="center" onclick="BSC_PROGCOMM0001Q_showOrgChart('employee', '${employeeOid}')" >
 				<b>
 				<font color="#000000" size="+3">
 					Personal Balance SourceCard
@@ -52,7 +52,7 @@
 			<td bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000" >
-					name: ${fullName}
+					name: <a href="#" onclick="BSC_PROGCOMM0001Q_showOrgChart('employee', '${employeeOid}'); return false;" style="color:#000000">${fullName}</a>
 				</font>
 				</b>
 			</td>	

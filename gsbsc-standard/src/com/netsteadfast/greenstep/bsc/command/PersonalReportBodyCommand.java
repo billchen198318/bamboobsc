@@ -74,6 +74,7 @@ public class PersonalReportBodyCommand extends BaseChainCommandSupport implement
 		parameter.put("fullName", " ");
 		parameter.put("jobTitle", " ");
 		parameter.put("departmentName", " ");
+		parameter.put("employeeOid", " ");
 		parameter.put("total", 0.0f);
 		if ( context.get("total") != null && context.get("total") instanceof Float ) {
 			parameter.put("total", context.get("total") );
@@ -85,6 +86,7 @@ public class PersonalReportBodyCommand extends BaseChainCommandSupport implement
 		if (result.getValue()!=null) {
 			parameter.put("fullName", result.getValue().getEmpId() + " - " + result.getValue().getFullName());
 			parameter.put("jobTitle", result.getValue().getJobTitle());		
+			parameter.put("employeeOid", result.getValue().getOid());
 			List<String> appendIds = this.organizationService.findForAppendOrganizationOids(
 					result.getValue().getEmpId());
 			List<String> appendNames = this.organizationService.findForAppendNames(appendIds);

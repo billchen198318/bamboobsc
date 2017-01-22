@@ -1,9 +1,9 @@
 <!-- BSC_PROG003D0003Q -->
 <#list treeObj.visions as vision >
 
-	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8">
+	<table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#d8d8d8" onclick="BSC_PROGCOMM0001Q_showOrgChart('organization', '${departmentOid}')" >
 		<tr>
-			<td colspan="6" bgcolor="#F2F2F2" align="center">
+			<td colspan="6" bgcolor="#F2F2F2" align="center" onclick="BSC_PROGCOMM0001Q_showOrgChart('organization', '${departmentOid}')" >
 				<b>
 				<font color="#000000" size="+3">
 					Department Balance SourceCard
@@ -31,7 +31,7 @@
 			<td colspan="4" bgcolor="#F2F2F2" align="center">
 				<b>
 				<font color="#000000">
-					${departmentName}
+					<a href="#" onclick="BSC_PROGCOMM0001Q_showOrgChart('organization', '${departmentOid}'); return false;" style="color:#000000">${departmentName}</a>
 				</font>
 				</b>			
 			</td>
