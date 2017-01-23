@@ -165,7 +165,7 @@ function ${programId}_page_message() {
     				iconClass="dijitIconClear"
     				cssClass="alt-primary"></gs:button>
     			<gs:button name="BSC_PROG001D0001Q_employeeHier" id="BSC_PROG001D0001Q_employeeHier" onClick="BSC_PROG001D0001Q_S01_DlgShow();" 
-    				label="Employee hierarchy" 
+    				label="Hierarchy settings" 
     				iconClass="dijitIconSearch"
     				cssClass="alt-primary"></gs:button>    				
     			<gs:button name="BSC_PROG001D0001Q_employeeHierView" id="BSC_PROG001D0001Q_employeeHierView" onClick="BSC_PROGCOMM0001Q_showOrgChart('employee', '');" 
