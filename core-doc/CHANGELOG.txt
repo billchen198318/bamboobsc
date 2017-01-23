@@ -1,3 +1,12 @@
+0.7.1
+-----------------------------------------------------------
+1. Employee/Organization hierarchy and Hierarchy view support for BSC-KPI/Department/Personal report.
+2. Streamlined the KPI aggregate method expression content.
+
+New features please reference:
+https://github.com/billchen198318/bamboobsc/issues/39
+
+
 0.7.0
 -----------------------------------------------------------
 1. New dashboards features "09-Dashboards".
