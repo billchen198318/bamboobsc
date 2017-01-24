@@ -147,6 +147,7 @@ commons-collections4-4.1.jar
 commons-digester3-3.2.jar
 commons-chain-1.2.jar
 commons-httpclient-3.1.jar
+commons-math3-3.6.1.jar
 
 
 JAF & JavaMail
@@ -443,6 +444,14 @@ has manual remove apache common-math/logging/vfs and joda-time class binary file
 re-pack to renjin-script-engine-0.8.2266.jar
 -------------------------
 renjin-script-engine-0.8.2266.jar
+
+
+espy-arima
+https://github.com/igor-loban/espy-arima
+Library for automatic time series forecasting based on ARIMA models https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
+author: Igor Loban https://github.com/igor-loban
+-------------------------
+espy-arima.jar
 
 
 DOJO release 1.12.1 ( package file by self )
