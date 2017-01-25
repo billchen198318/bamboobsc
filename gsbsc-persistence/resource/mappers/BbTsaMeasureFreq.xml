@@ -1,0 +1,42 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BbTsaMeasureFreq">
+
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq" id="baseResultMap">
+		<id column="OID" property="oid"/>
+		<result column="TSA_OID" property="tsaOid"/>
+		<result column="FREQ" property="freq"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="DATA_TYPE" property="dataType"/>
+		<result column="ORG_ID" property="orgId"/>
+		<result column="EMP_ID" property="empId"/>
+		<result column="CUSERID" property="cuserid"/>
+		<result column="CDATE" property="cdate"/>
+		<result column="UUSERID" property="uuserid"/>
+		<result column="UDATE" property="udate"/>
+	</resultMap>
+	
+	<select id="selectByParams" resultMap="baseResultMap" >
+		select * from bb_tsa_measure_freq where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="tsaOid != null">
+			AND TSA_OID = #{tsaOid}
+		</if>						
+	</select>
+	
+	<select id="selectByValue" resultMap="baseResultMap" >
+		select * from bb_tsa_measure_freq where 1=1
+		<if test="oid != null">
+			AND OID = #{oid}
+		</if>
+		<if test="tsaOid != null">
+			AND TSA_OID = #{tsaOid}
+		</if>				
+	</select>	
+	
+</mapper>

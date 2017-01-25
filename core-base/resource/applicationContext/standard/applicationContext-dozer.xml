@@ -110,6 +110,9 @@
 				<value>classpath*:dozer/dozerBeanMapping-pdcaOrga.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-monitorItemScore.xml</value>
 				<value>classpath*:dozer/dozerBeanMapping-employeeHier.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-tsa.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-tsaMeasureFreq.xml</value>
+				<value>classpath*:dozer/dozerBeanMapping-tsaMaCoefficients.xml</value>
 				
                 <!-- #################################################### -->
                 <!-- QCharts -->

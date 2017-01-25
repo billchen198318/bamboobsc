@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+	http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping map-id="tsaMeasureFreq.po2vo" >
+		<class-a>com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq</class-a>
+		<class-b>com.netsteadfast.greenstep.vo.TsaMeasureFreqVO</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>tsaOid</a>
+			<b>tsaOid</b>
+		</field>
+		<field>
+			<a>freq</a>
+			<b>freq</b>
+		</field>
+		<field>
+			<a>startDate</a>
+			<b>startDate</b>
+		</field>
+		<field>
+			<a>endDate</a>
+			<b>endDate</b>
+		</field>		
+		<field>
+			<a>dataType</a>
+			<b>dataType</b>
+		</field>
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>																																	
+	</mapping>
+
+	<mapping map-id="tsaMeasureFreq.vo2po" >
+		<class-a>com.netsteadfast.greenstep.vo.TsaMeasureFreqVO</class-a>
+		<class-b>com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq</class-b>
+		<field>
+			<a>oid</a>
+			<b>oid</b>
+		</field>
+		<field>
+			<a>tsaOid</a>
+			<b>tsaOid</b>
+		</field>
+		<field>
+			<a>freq</a>
+			<b>freq</b>
+		</field>
+		<field>
+			<a>startDate</a>
+			<b>startDate</b>
+		</field>
+		<field>
+			<a>endDate</a>
+			<b>endDate</b>
+		</field>		
+		<field>
+			<a>dataType</a>
+			<b>dataType</b>
+		</field>
+		<field>
+			<a>orgId</a>
+			<b>orgId</b>
+		</field>
+		<field>
+			<a>empId</a>
+			<b>empId</b>
+		</field>		
+	</mapping>
+	
+</mappings>
