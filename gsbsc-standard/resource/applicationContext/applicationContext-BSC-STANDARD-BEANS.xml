@@ -55,5 +55,8 @@
     <import resource="classpath*:applicationContext/bsc/standard/applicationContext-pdcaMeasureFreq.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/applicationContext-monitorItemScore.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/applicationContext-employeeHier.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-tsa.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-tsaMaCoefficients.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/applicationContext-tsaMeasureFreq.xml" />
     
 </beans>    
