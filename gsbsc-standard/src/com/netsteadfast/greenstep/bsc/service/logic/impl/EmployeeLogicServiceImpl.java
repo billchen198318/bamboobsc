@@ -59,8 +59,10 @@ import com.netsteadfast.greenstep.bsc.service.IKpiEmplService;
 import com.netsteadfast.greenstep.bsc.service.IMeasureDataService;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
 import com.netsteadfast.greenstep.bsc.service.IPdcaItemOwnerService;
+import com.netsteadfast.greenstep.bsc.service.IPdcaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.IPdcaOwnerService;
 import com.netsteadfast.greenstep.bsc.service.IReportRoleViewService;
+import com.netsteadfast.greenstep.bsc.service.ITsaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.logic.IEmployeeLogicService;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbDegreeFeedbackAssign;
@@ -70,8 +72,10 @@ import com.netsteadfast.greenstep.po.hbm.BbKpiEmpl;
 import com.netsteadfast.greenstep.po.hbm.BbMeasureData;
 import com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore;
 import com.netsteadfast.greenstep.po.hbm.BbPdcaItemOwner;
+import com.netsteadfast.greenstep.po.hbm.BbPdcaMeasureFreq;
 import com.netsteadfast.greenstep.po.hbm.BbPdcaOwner;
 import com.netsteadfast.greenstep.po.hbm.BbReportRoleView;
+import com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq;
 import com.netsteadfast.greenstep.po.hbm.TbSysCalendarNote;
 import com.netsteadfast.greenstep.po.hbm.TbSysMsgNotice;
 import com.netsteadfast.greenstep.po.hbm.TbUserRole;
@@ -91,10 +95,12 @@ import com.netsteadfast.greenstep.vo.MeasureDataVO;
 import com.netsteadfast.greenstep.vo.MonitorItemScoreVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.PdcaItemOwnerVO;
+import com.netsteadfast.greenstep.vo.PdcaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.PdcaOwnerVO;
 import com.netsteadfast.greenstep.vo.ReportRoleViewVO;
 import com.netsteadfast.greenstep.vo.SysCalendarNoteVO;
 import com.netsteadfast.greenstep.vo.SysMsgNoticeVO;
+import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.UserRoleVO;
 
 @ServiceAuthority(check=true)
@@ -115,6 +121,8 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 	private IRoleLogicService roleLogicService;
 	private IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String> monitorItemScoreService;
 	private IEmployeeHierService<EmployeeHierVO, BbEmployeeHier, String> employeeHierService;
+	private IPdcaMeasureFreqService<PdcaMeasureFreqVO, BbPdcaMeasureFreq, String> pdcaMeasureFreqService;
+	private ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService;
 	
 	public EmployeeLogicServiceImpl() {
 		super();
@@ -260,6 +268,30 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		this.employeeHierService = employeeHierService;
 	}
 	
+	public IPdcaMeasureFreqService<PdcaMeasureFreqVO, BbPdcaMeasureFreq, String> getPdcaMeasureFreqService() {
+		return pdcaMeasureFreqService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.PdcaMeasureFreqService")
+	@Required			
+	public void setPdcaMeasureFreqService(
+			IPdcaMeasureFreqService<PdcaMeasureFreqVO, BbPdcaMeasureFreq, String> pdcaMeasureFreqService) {
+		this.pdcaMeasureFreqService = pdcaMeasureFreqService;
+	}
+
+	public ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> getTsaMeasureFreqService() {
+		return tsaMeasureFreqService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.TsaMeasureFreqService")
+	@Required		
+	public void setTsaMeasureFreqService(
+			ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService) {
+		this.tsaMeasureFreqService = tsaMeasureFreqService;
+	}
+
 	private boolean isAdministrator(String account) {
 		if (account.equals("admin") || account.equals(Constants.SYSTEM_BACKGROUND_USER)) {
 			return true;
@@ -440,6 +472,18 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		
 		// bb_pdca_item_owner
 		if (this.pdcaItemOwnerService.countByParams(params) > 0) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
+		}
+		
+		// bb_pdca_measure_freq
+		params.clear();
+		params.put("empId", employee.getEmpId());
+		if (this.pdcaMeasureFreqService.countByParams(params) > 0) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
+		}
+		
+		// bb_tsa_measure_freq
+		if (this.tsaMeasureFreqService.countByParams(params) > 0) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
 		}
 		
