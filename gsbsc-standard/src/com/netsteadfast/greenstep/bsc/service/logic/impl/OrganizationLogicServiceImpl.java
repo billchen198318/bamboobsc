@@ -57,9 +57,11 @@ import com.netsteadfast.greenstep.bsc.service.IKpiOrgaService;
 import com.netsteadfast.greenstep.bsc.service.IMeasureDataService;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationParService;
+import com.netsteadfast.greenstep.bsc.service.IPdcaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.IPdcaOrgaService;
 import com.netsteadfast.greenstep.bsc.service.IReportRoleViewService;
 import com.netsteadfast.greenstep.bsc.service.ISwotService;
+import com.netsteadfast.greenstep.bsc.service.ITsaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.logic.IOrganizationLogicService;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbEmployeeOrga;
@@ -67,9 +69,11 @@ import com.netsteadfast.greenstep.po.hbm.BbKpiOrga;
 import com.netsteadfast.greenstep.po.hbm.BbMeasureData;
 import com.netsteadfast.greenstep.po.hbm.BbMonitorItemScore;
 import com.netsteadfast.greenstep.po.hbm.BbOrganizationPar;
+import com.netsteadfast.greenstep.po.hbm.BbPdcaMeasureFreq;
 import com.netsteadfast.greenstep.po.hbm.BbPdcaOrga;
 import com.netsteadfast.greenstep.po.hbm.BbReportRoleView;
 import com.netsteadfast.greenstep.po.hbm.BbSwot;
+import com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq;
 import com.netsteadfast.greenstep.util.IconUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
@@ -79,9 +83,11 @@ import com.netsteadfast.greenstep.vo.MeasureDataVO;
 import com.netsteadfast.greenstep.vo.MonitorItemScoreVO;
 import com.netsteadfast.greenstep.vo.OrganizationParVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.PdcaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.PdcaOrgaVO;
 import com.netsteadfast.greenstep.vo.ReportRoleViewVO;
 import com.netsteadfast.greenstep.vo.SwotVO;
+import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
 
 @ServiceAuthority(check=true)
 @Service("bsc.service.logic.OrganizationLogicService")
@@ -98,6 +104,8 @@ public class OrganizationLogicServiceImpl extends BscBaseLogicService implements
 	private IMeasureDataService<MeasureDataVO, BbMeasureData, String> measureDataService;
 	private IPdcaOrgaService<PdcaOrgaVO, BbPdcaOrga, String> pdcaOrgaService;
 	private IMonitorItemScoreService<MonitorItemScoreVO, BbMonitorItemScore, String> monitorItemScoreService;
+	private IPdcaMeasureFreqService<PdcaMeasureFreqVO, BbPdcaMeasureFreq, String> pdcaMeasureFreqService;
+	private ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService;
 	
 	public OrganizationLogicServiceImpl() {
 		super();
@@ -197,6 +205,30 @@ public class OrganizationLogicServiceImpl extends BscBaseLogicService implements
 		this.monitorItemScoreService = monitorItemScoreService;
 	}	
 	
+	public IPdcaMeasureFreqService<PdcaMeasureFreqVO, BbPdcaMeasureFreq, String> getPdcaMeasureFreqService() {
+		return pdcaMeasureFreqService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.PdcaMeasureFreqService")
+	@Required			
+	public void setPdcaMeasureFreqService(
+			IPdcaMeasureFreqService<PdcaMeasureFreqVO, BbPdcaMeasureFreq, String> pdcaMeasureFreqService) {
+		this.pdcaMeasureFreqService = pdcaMeasureFreqService;
+	}	
+	
+	public ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> getTsaMeasureFreqService() {
+		return tsaMeasureFreqService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.TsaMeasureFreqService")
+	@Required		
+	public void setTsaMeasureFreqService(
+			ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService) {
+		this.tsaMeasureFreqService = tsaMeasureFreqService;
+	}	
+	
 	private void handlerLongitudeAndLatitude(OrganizationVO organization) {
 		if ( !NumberUtils.isNumber(organization.getLat()) ) {
 			organization.setLat( (String)Constants.getSettingsMap().get("googleMap.defaultLat") );
@@ -271,6 +303,12 @@ public class OrganizationLogicServiceImpl extends BscBaseLogicService implements
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
 		}
 		if (this.pdcaOrgaService.countByParams(params) > 0 ) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
+		}
+		if (this.pdcaMeasureFreqService.countByParams(params) > 0) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
+		}
+		if (this.tsaMeasureFreqService.countByParams(params) > 0) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.DATA_CANNOT_DELETE));
 		}
 		this.deleteParent(organization);
