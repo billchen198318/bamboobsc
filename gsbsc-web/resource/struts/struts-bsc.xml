@@ -27,5 +27,6 @@
 	<include file="struts/struts-bsc-dashboard.xml" />
 	<include file="struts/struts-bsc-degreeFeedbackProject.xml" />
 	<include file="struts/struts-bsc-pdca.xml" />
+	<include file="struts/struts-bsc-tsa.xml" />
 	
 </struts>

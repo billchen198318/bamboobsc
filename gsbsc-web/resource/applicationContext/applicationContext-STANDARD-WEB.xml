@@ -35,6 +35,7 @@
     <import resource="classpath*:applicationContext/controller/applicationContext-dashboard-web.xml" />    
     <import resource="classpath*:applicationContext/controller/applicationContext-degreeFeedbackProject-web.xml" />
     <import resource="classpath*:applicationContext/controller/applicationContext-pdca-web.xml" />
+    <import resource="classpath*:applicationContext/controller/applicationContext-tsa-web.xml" />
     
     
     <!-- Apache CXF WEB Service BEANS -->
