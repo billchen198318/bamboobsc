@@ -42,7 +42,7 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 		super();
 	}
 	
-	private void initData() throws ServiceException, Exception {
+	private void initData(String type) throws ServiceException, Exception {
 		
 	}
 	
@@ -52,7 +52,7 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	@ControllerMethodAuthority(programId="BSC_PROG007D0001Q")
 	public String execute() throws Exception {
 		try {
-			this.initData();
+			this.initData("execute");
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
@@ -62,7 +62,25 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 			this.setPageMessage(e.getMessage().toString());
 		}
 		return SUCCESS;		
-	}		
+	}
+	
+	/**
+	 * bsc.tsaCreateAction.action
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG007D0001A")	
+	public String create() throws Exception {
+		try {
+			this.initData("create");
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;	
+	}	
 	
 	/**
 	 * bsc.tsaQueryAction.action 
@@ -70,7 +88,7 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	@ControllerMethodAuthority(programId="BSC_PROG007D0002Q")
 	public String queryForecast() throws Exception {
 		try {
-			this.initData();
+			this.initData("queryForecast");
 		} catch (ControllerException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (ServiceException e) {
