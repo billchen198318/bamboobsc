@@ -12,5 +12,7 @@
     
     <bean id="bsc.web.controller.TsaManagementAction" 
     	class="com.netsteadfast.greenstep.bsc.action.TsaManagementAction" scope="prototype" />
-    	    	
+    <bean id="bsc.web.controller.TsaManagementGridQueryAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.TsaManagementGridQueryAction" scope="prototype" />
+    	    	    	
 </beans>

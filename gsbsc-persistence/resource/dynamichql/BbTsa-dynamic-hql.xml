@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dynamic-hql>
+
+	<query name="findTsaPageGrid-select">	
+	<![CDATA[	
+		SELECT
+			new com.netsteadfast.greenstep.vo.TsaVO(m.oid, m.name, m.description, m.integrationOrder, m.forecastNext)
+		FROM BbTsa m WHERE 1=1
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>
+		
+		ORDER BY m.name ASC				
+	]]>
+	</query>
+	
+	<query name="findTsaPageGrid-count">
+	<![CDATA[
+		SELECT
+			count(*)
+		FROM BbTsa m WHERE 1=1
+		
+		<#if name??>
+		AND m.name LIKE :name
+		</#if>	
+	]]>		
+	</query>
+
+</dynamic-hql>
