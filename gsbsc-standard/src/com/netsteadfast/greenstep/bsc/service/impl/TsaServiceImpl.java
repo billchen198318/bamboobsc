@@ -21,6 +21,9 @@
  */
 package com.netsteadfast.greenstep.bsc.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -31,7 +34,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.dao.IBaseDAO;
+import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.base.model.PageOf;
+import com.netsteadfast.greenstep.base.model.QueryResult;
+import com.netsteadfast.greenstep.base.model.SearchValue;
 import com.netsteadfast.greenstep.base.service.BaseService;
 import com.netsteadfast.greenstep.bsc.dao.ITsaDAO;
 import com.netsteadfast.greenstep.po.hbm.BbTsa;
@@ -74,6 +83,25 @@ public class TsaServiceImpl extends BaseService<TsaVO, BbTsa, String> implements
 	@Override
 	public String getMapperIdVo2Po() {
 		return MAPPER_ID_VO2PO;
+	}
+	
+	private Map<String, Object> getQueryGridParameter(SearchValue searchValue) throws Exception {
+		return super.getQueryParamHandler(searchValue).containingLike("name").getValue();
+	}	
+
+	@Override
+	public QueryResult<List<TsaVO>> findGridResult(SearchValue searchValue, PageOf pageOf) throws ServiceException, Exception {
+		if (searchValue==null || pageOf==null) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA));
+		}
+		Map<String, Object> params = this.getQueryGridParameter(searchValue);	
+		int limit = Integer.parseInt(pageOf.getShowRow());
+		int offset = (Integer.parseInt(pageOf.getSelect())-1) * limit;		
+		QueryResult<List<TsaVO>> result=this.tsaDAO.findPageQueryResultByQueryName(
+				"findTsaPageGrid", params, offset, limit);
+		pageOf.setCountSize(String.valueOf(result.getRowCount()));
+		pageOf.toCalculateSize();
+		return result;
 	}
 
 }
