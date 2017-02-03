@@ -12,6 +12,11 @@
 			<result name="success">/pages/tsa/tsa-management.jsp</result>
 		</action>	
 		
+		<action name="bsc.tsaCreateAction" class="bsc.web.controller.TsaManagementAction" method="create">
+			<result name="input">/pages/tsa/tsa-create.jsp</result>		
+			<result name="success">/pages/tsa/tsa-create.jsp</result>
+		</action>			
+		
 	</package>
 	
 	<package name="bsc-tsa-json" extends="bsc-default,json-default" namespace="/" >			
