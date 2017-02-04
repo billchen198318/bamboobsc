@@ -83,6 +83,24 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	}	
 	
 	/**
+	 * bsc.tsaEditAction.action
+	 */
+	@ControllerMethodAuthority(programId="BSC_PROG007D0001E")	
+	public String edit() throws Exception {
+		try {
+			this.initData("edit");
+		} catch (ControllerException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (ServiceException e) {
+			this.setPageMessage(e.getMessage().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setPageMessage(e.getMessage().toString());
+		}
+		return SUCCESS;	
+	}		
+	
+	/**
 	 * bsc.tsaQueryAction.action 
 	 */
 	@ControllerMethodAuthority(programId="BSC_PROG007D0002Q")
