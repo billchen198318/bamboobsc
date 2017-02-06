@@ -21,6 +21,12 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -30,20 +36,58 @@ import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.TsaManagementAction")
 @Scope
 public class TsaManagementAction extends BaseSupportAction implements IBaseAdditionalSupportAction {
 	private static final long serialVersionUID = 5766362874404689604L;
+	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;	
+	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(true);
+	private Map<String, String> measureDataOrganizationMap = this.providedSelectZeroDataMap(true);
+	private Map<String, String> measureDataEmployeeMap = this.providedSelectZeroDataMap(true);	
 	
 	public TsaManagementAction() {
 		super();
 	}
 	
+	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
+		return organizationService;
+	}	
+	
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.OrganizationService")		
+	public void setOrganizationService(IOrganizationService<OrganizationVO, BbOrganization, String> organizationService) {
+		this.organizationService = organizationService;
+	}
+
+	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
+		return employeeService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.EmployeeService")		
+	public void setEmployeeService(IEmployeeService<EmployeeVO, BbEmployee, String> employeeService) {
+		this.employeeService = employeeService;
+	}	
+	
 	private void initData(String type) throws ServiceException, Exception {
-		
+		if ("create".equals(type) || "edit".equals(type)) {
+			// 這邊是設定配合需要被PDCA處理的項目, 所以不要限定
+			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);			
+		}		
 	}
 	
 	/**
@@ -127,5 +171,20 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	public String getProgramId() {
 		return super.getActionMethodProgramId();
 	}
+	
+	public Map<String, String> getFrequencyMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
+		return frequencyMap;
+	}
+
+	public Map<String, String> getMeasureDataOrganizationMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataOrganizationMap);
+		return measureDataOrganizationMap;
+	}
+
+	public Map<String, String> getMeasureDataEmployeeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataEmployeeMap);
+		return measureDataEmployeeMap;
+	}	
 	
 }
