@@ -29,9 +29,9 @@ import com.netsteadfast.greenstep.vo.TsaVO;
 
 public interface ITsaLogicService {
 	
-	public DefaultResult<TsaVO> create(TsaVO tsa, TsaMeasureFreqVO tsaMeasureFreq, TsaMaCoefficientsVO tsaMaCoefficients) throws ServiceException, Exception;
+	public DefaultResult<TsaVO> create(TsaVO tsa, TsaMeasureFreqVO tsaMeasureFreq, TsaMaCoefficientsVO coefficient1, TsaMaCoefficientsVO coefficient2, TsaMaCoefficientsVO coefficient3) throws ServiceException, Exception;
 	
-	public DefaultResult<TsaVO> update(TsaVO tsa, TsaMeasureFreqVO tsaMeasureFreq, TsaMaCoefficientsVO tsaMaCoefficients) throws ServiceException, Exception;
+	public DefaultResult<TsaVO> update(TsaVO tsa, TsaMeasureFreqVO tsaMeasureFreq, TsaMaCoefficientsVO coefficient1, TsaMaCoefficientsVO coefficient2, TsaMaCoefficientsVO coefficient3) throws ServiceException, Exception;
 	
 	public DefaultResult<Boolean> delete(TsaVO tsa) throws ServiceException, Exception;
 	
