@@ -27,5 +27,6 @@
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-importData.xml" />
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-degreeFeedback.xml" />    
     <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-pdca.xml" />
+    <import resource="classpath*:applicationContext/bsc/standard/ext/applicationContext-ext-tsa.xml" />
     
 </beans>    
