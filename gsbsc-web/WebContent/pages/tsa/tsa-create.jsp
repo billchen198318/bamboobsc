@@ -356,7 +356,24 @@ function ${programId}_page_message() {
     				parameterType="postData"
     				xhrParameter=" 
     					{ 
-    						
+    					
+    						'fields.measureFreq_frequency'					:	dijit.byId('BSC_PROG007D0001A_measureFreq_frequency').get('value'),    						
+							'fields.measureFreq_startYearDate'				:	dijit.byId('BSC_PROG007D0001A_measureFreq_startYearDate').get('displayedValue'),							
+							'fields.measureFreq_endYearDate'				:	dijit.byId('BSC_PROG007D0001A_measureFreq_endYearDate').get('displayedValue'),
+							'fields.measureFreq_startDate'					:	dijit.byId('BSC_PROG007D0001A_measureFreq_startDate').get('displayedValue'),
+							'fields.measureFreq_endDate'					:	dijit.byId('BSC_PROG007D0001A_measureFreq_endDate').get('displayedValue'),
+							'fields.measureFreq_dataFor'					:	dijit.byId('BSC_PROG007D0001A_measureFreq_dataFor').get('value'),
+							'fields.measureFreq_measureDataOrganizationOid'	:	dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid').get('value'),
+							'fields.measureFreq_measureDataEmployeeOid'		:	dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid').get('value'),
+							
+							'fields.name'									:	dijit.byId('BSC_PROG007D0001A_name').get('value'),
+							'fields.integration'							:	dijit.byId('BSC_PROG007D0001A_integration').get('value'),
+							'fields.forecast'								:	dijit.byId('BSC_PROG007D0001A_forecast').get('value'),
+							'fields.coefficient1'							:	dijit.byId('BSC_PROG007D0001A_coefficient1').get('value'),
+							'fields.coefficient2'							:	dijit.byId('BSC_PROG007D0001A_coefficient2').get('value'),
+							'fields.coefficient3'							:	dijit.byId('BSC_PROG007D0001A_coefficient3').get('value'),
+							'fields.description'							:	dijit.byId('BSC_PROG007D0001A_description').get('value')	
+								
     					} 
     				"
     				errorFn=""
