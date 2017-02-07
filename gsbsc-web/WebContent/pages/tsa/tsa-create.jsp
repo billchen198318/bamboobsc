@@ -28,6 +28,100 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 
+var BSC_PROG007D0001A_fieldsId = new Object();
+BSC_PROG007D0001A_fieldsId['name'] 				= 'BSC_PROG007D0001A_name';
+BSC_PROG007D0001A_fieldsId['integration'] 		= 'BSC_PROG007D0001A_integration';
+BSC_PROG007D0001A_fieldsId['forecast'] 			= 'BSC_PROG007D0001A_forecast';
+BSC_PROG007D0001A_fieldsId['coefficient1'] 		= 'BSC_PROG007D0001A_coefficient1';
+BSC_PROG007D0001A_fieldsId['coefficient2'] 		= 'BSC_PROG007D0001A_coefficient2';
+BSC_PROG007D0001A_fieldsId['coefficient3'] 		= 'BSC_PROG007D0001A_coefficient3';
+BSC_PROG006D0001A_fieldsId["measureFreq_frequency"] 					= "BSC_PROG007D0001A_measureFreq_frequency";
+BSC_PROG006D0001A_fieldsId["measureFreq_startYearDate"] 				= "BSC_PROG007D0001A_measureFreq_startYearDate";
+BSC_PROG006D0001A_fieldsId["measureFreq_endYearDate"] 					= "BSC_PROG007D0001A_measureFreq_endYearDate";
+BSC_PROG006D0001A_fieldsId["measureFreq_startDate"] 					= "BSC_PROG007D0001A_measureFreq_startDate";
+BSC_PROG006D0001A_fieldsId["measureFreq_endDate"] 						= "BSC_PROG007D0001A_measureFreq_endDate";
+BSC_PROG006D0001A_fieldsId["measureFreq_dataFor"] 						= "BSC_PROG007D0001A_measureFreq_dataFor";
+BSC_PROG006D0001A_fieldsId["measureFreq_measureDataOrganizationOid"] 	= "BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid";
+BSC_PROG006D0001A_fieldsId["measureFreq_measureDataEmployeeOid"] 		= "BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid";
+
+function BSC_PROG007D0001A_saveSuccess(data) {
+	setFieldsBackgroundDefault(BSC_PROG007D0001A_fieldsId);
+	setFieldsNoticeMessageLabelDefault(BSC_PROG007D0001A_fieldsId);
+	alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);	
+	if ('Y' != data.success) {						
+		setFieldsBackgroundAlert(data.fieldsId, BSC_PROG007D0001A_fieldsId);		
+		setFieldsNoticeMessageLabel(data.fieldsId, data.fieldsMessage, BSC_PROG007D0001A_fieldsId);
+		return;
+	}	
+	BSC_PROG007D0001A_clear();
+}
+
+function BSC_PROG007D0001A_clear() {
+	dijit.byId("BSC_PROG007D0001A_measureFreq_dataFor").set("value", "all");
+	BSC_PROG007D0001A_measureFreq_setDataForValue();
+	dijit.byId("BSC_PROG007D0001A_measureFreq_frequency").set("value", "6");
+	BSC_PROG007D0001A_measureFreq_setFrequencyValue();
+	dijit.byId('BSC_PROG007D0001A_measureFreq_startYearDate').set('displayedValue', '');
+	dijit.byId('BSC_PROG007D0001A_measureFreq_endYearDate').set('displayedValue', '');
+	dijit.byId('BSC_PROG007D0001A_measureFreq_startDate').set('displayedValue', '');
+	dijit.byId('BSC_PROG007D0001A_measureFreq_endDate').set('displayedValue', '');
+	dijit.byId("BSC_PROG007D0001A_name").set("value", "");
+	dijit.byId('BSC_PROG007D0001A_integration').set("value", "+1");
+	dijit.byId('BSC_PROG007D0001A_forecast').set("value", "+1");
+	dijit.byId('BSC_PROG007D0001A_coefficient1').set("value", "+0.50");
+	dijit.byId('BSC_PROG007D0001A_coefficient2').set("value", "+0.50");
+	dijit.byId('BSC_PROG007D0001A_coefficient3').set("value", "+0.50");
+	dijit.byId("BSC_PROG007D0001A_description").set("value", "");
+}
+
+//------------------------------------------------------------------------------
+// measure options settings function
+//------------------------------------------------------------------------------
+function BSC_PROG007D0001A_measureFreq_setDataForValue() {
+	dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid').set("value", _gscore_please_select_id);
+	dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid').set("value", _gscore_please_select_id);	
+	dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid').set('readOnly', true);
+	dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid').set('readOnly', true);
+	var dataFor = dijit.byId("BSC_PROG007D0001A_measureFreq_dataFor").get("value");
+	if ('employee' == dataFor) {
+		dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid').set('readOnly', false);
+	}
+	if ('organization' == dataFor) {
+		dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid').set('readOnly', false);
+	}	
+}
+
+function BSC_PROG007D0001A_measureFreq_setMeasureDataOrgaValue() {
+	var dataFor = dijit.byId("BSC_PROG007D0001A_measureFreq_dataFor").get("value");
+	if ('all' == dataFor || 'employee' == dataFor) {
+		dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid').set("value", _gscore_please_select_id);
+	}
+}
+
+function BSC_PROG007D0001A_measureFreq_setMeasureDataEmplValue() {
+	var dataFor = dijit.byId("BSC_PROG007D0001A_measureFreq_dataFor").get("value");
+	if ('all' == dataFor || 'organization' == dataFor) {
+		dijit.byId('BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid').set("value", _gscore_please_select_id);
+	}	
+}
+
+function BSC_PROG007D0001A_measureFreq_setFrequencyValue() {
+	var frequency = dijit.byId("BSC_PROG007D0001A_measureFreq_frequency").get("value");
+	dijit.byId("BSC_PROG007D0001A_measureFreq_startYearDate").set("readOnly", true);
+	dijit.byId("BSC_PROG007D0001A_measureFreq_endYearDate").set("readOnly", true);
+	dijit.byId("BSC_PROG007D0001A_measureFreq_startDate").set("readOnly", true);
+	dijit.byId("BSC_PROG007D0001A_measureFreq_endDate").set("readOnly", true);
+	if ( frequency == _gscore_please_select_id ) {
+		return;
+	}
+	if ('1' == frequency || '2' == frequency || '3' == frequency) { // day, week, month
+		dijit.byId("BSC_PROG007D0001A_measureFreq_startDate").set("readOnly", false);
+		dijit.byId("BSC_PROG007D0001A_measureFreq_endDate").set("readOnly", false);		
+	} else { // quarter, half-year, year
+		dijit.byId("BSC_PROG007D0001A_measureFreq_startYearDate").set("readOnly", false);
+		dijit.byId("BSC_PROG007D0001A_measureFreq_endYearDate").set("readOnly", false);				
+	}
+}
 
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
@@ -57,7 +151,7 @@ function ${programId}_page_message() {
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>
 	
-	<table border="0" width="100%" height="950px" cellpadding="1" cellspacing="0" >	
+	<table border="0" width="100%" height="600px" cellpadding="1" cellspacing="0" >	
 		<tr>
 			<td height="100px" width="100%"  align="left">
 			
@@ -189,7 +283,7 @@ function ${programId}_page_message() {
 		</tr>
 		<tr>
 			<td height="50px" width="100%"  align="left">
-				<gs:label text="Forecast size" id="BSC_PROG007D0001A_forecast" requiredFlag="Y"></gs:label>
+				<gs:label text="Forecast next" id="BSC_PROG007D0001A_forecast" requiredFlag="Y"></gs:label>
 				<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0001A_forecast"></gs:inputfieldNoticeMsgLabel>
 				<br/>
     			<input id="BSC_PROG007D0001A_forecast" name="BSC_PROG007D0001A_forecast" type="text" data-dojo-type="dijit/form/NumberSpinner" 
@@ -199,8 +293,50 @@ function ${programId}_page_message() {
 				</div>      		
 			</td>
 		</tr>		
+		
+		
 		<tr>
-		    <td height="150px" width="100%" align="left" colspan="2">
+			<td height="50px" width="100%"  align="left">
+				<gs:label text="Coefficient (1)" id="BSC_PROG007D0001A_coefficient1" requiredFlag="Y"></gs:label>
+				<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0001A_coefficient1"></gs:inputfieldNoticeMsgLabel>
+				<br/>
+    			<input id="BSC_PROG007D0001A_coefficient1" name="BSC_PROG007D0001A_coefficient1" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    				value="0.50" data-dojo-props="smallDelta:0.10, constraints:{min:-1.00,max:1.00, pattern: '+0.00;-0.00' } ,style:'width: 100px;' " />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0001A_coefficient1'">
+    				Input coefficient value, only allow numbers. range: -1.00 ~ 1.00
+				</div>      		
+			</td>
+		</tr>	
+		
+		<tr>
+			<td height="50px" width="100%"  align="left">
+				<gs:label text="Coefficient (2)" id="BSC_PROG007D0001A_coefficient2" requiredFlag="Y"></gs:label>
+				<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0001A_coefficient2"></gs:inputfieldNoticeMsgLabel>
+				<br/>
+    			<input id="BSC_PROG007D0001A_coefficient2" name="BSC_PROG007D0001A_coefficient2" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    				value="0.50" data-dojo-props="smallDelta:0.10, constraints:{min:-1.00,max:1.00, pattern: '+0.00;-0.00' } ,style:'width: 100px;' " />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0001A_coefficient2'">
+    				Input coefficient value, only allow numbers. range: -1.00 ~ 1.00
+				</div>      		
+			</td>
+		</tr>							
+		
+		<tr>
+			<td height="50px" width="100%"  align="left">
+				<gs:label text="Coefficient (3)" id="BSC_PROG007D0001A_coefficient3" requiredFlag="Y"></gs:label>
+				<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0001A_coefficient3"></gs:inputfieldNoticeMsgLabel>
+				<br/>
+    			<input id="BSC_PROG007D0001A_coefficient3" name="BSC_PROG007D0001A_coefficient3" type="text" data-dojo-type="dijit/form/NumberSpinner" 
+    				value="0.50" data-dojo-props="smallDelta:0.10, constraints:{min:-1.00,max:1.00, pattern: '+0.00;-0.00' } ,style:'width: 100px;' " />
+				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0001A_coefficient3'">
+    				Input coefficient value, only allow numbers. range: -1.00 ~ 1.00
+				</div>      		
+			</td>
+		</tr>	
+				
+		
+		<tr>
+		    <td height="150px" width="100%" align="left" >
 		    	<gs:label text="Description" id="BSC_PROG007D0001A_description"></gs:label>
 		    	<br/>
 		    	<textarea id="BSC_PROG007D0001A_description" name="BSC_PROG007D0001A_description" data-dojo-type="dijit/form/Textarea" rows="4" cols="50" style="width:300px;height:90px;max-height:100px"></textarea>
@@ -208,7 +344,33 @@ function ${programId}_page_message() {
     				Input description, the maximum allowed 500 characters. 
 				</div>   		    	
 		    </td>
-		</tr>		
+		</tr>			
+		
+		
+    	<tr>
+    		<td height="50px" width="100%"  align="left" >
+    			<gs:button name="BSC_PROG007D0001A_save" id="BSC_PROG007D0001A_save" onClick="BSC_PROG007D0001A_save();"
+    				handleAs="json"
+    				sync="N"
+    				xhrUrl="${basePath}/bsc.tsaSaveAction.action"
+    				parameterType="postData"
+    				xhrParameter=" 
+    					{ 
+    						
+    					} 
+    				"
+    				errorFn=""
+    				loadFn="BSC_PROG007D0001A_saveSuccess(data);" 
+    				programId="${programId}"
+    				label="Save" 
+    				iconClass="dijitIconSave"
+    				cssClass="alt-primary"></gs:button>    			
+    			<gs:button name="BSC_PROG007D0001A_clear" id="BSC_PROG007D0001A_clear" onClick="BSC_PROG007D0001A_clear();" 
+    				label="Clear" 
+    				iconClass="dijitIconClear"
+    				cssClass="alt-primary"></gs:button>    	    		
+    		</td>
+    	</tr>  		
 		
 		
 	</table>	
