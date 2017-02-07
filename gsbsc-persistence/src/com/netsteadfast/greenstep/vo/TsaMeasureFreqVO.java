@@ -34,6 +34,11 @@ public class TsaMeasureFreqVO extends BaseValueObj implements java.io.Serializab
 	private String orgId;
 	private String empId;
 	
+	// -----------------------------------------------------------
+	private String organizationOid;
+	private String employeeOid;
+	// -----------------------------------------------------------	
+	
 	public TsaMeasureFreqVO() {
 		
 	}
@@ -115,5 +120,25 @@ public class TsaMeasureFreqVO extends BaseValueObj implements java.io.Serializab
 	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
+	
+	// -----------------------------------------------------------
+	
+	public String getOrganizationOid() {
+		return organizationOid;
+	}
+
+	public void setOrganizationOid(String organizationOid) {
+		this.organizationOid = organizationOid;
+	}
+
+	public String getEmployeeOid() {
+		return employeeOid;
+	}
+
+	public void setEmployeeOid(String employeeOid) {
+		this.employeeOid = employeeOid;
+	}	
+	
+	// -----------------------------------------------------------	
 	
 }

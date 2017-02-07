@@ -312,6 +312,9 @@ public class PdcaLogicServiceImpl extends BscBaseBusinessProcessManagementLogicS
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
 		}		
 		DefaultResult<PdcaVO> oldResult = this.pdcaService.findObjectByOid(pdca);
+		if (oldResult.getValue() == null) {
+			throw new ServiceException(oldResult.getSystemMessage().getValue());
+		}
 		if ( pdca.getTitle().equals(oldResult.getValue().getTitle()) && !(pdca.getOid().equals(oldResult.getValue().getOid())) ) {
 			throw new ServiceException( "Same title is found: " + pdca.getTitle() );
 		}
