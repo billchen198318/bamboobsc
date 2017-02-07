@@ -161,7 +161,7 @@ function ${programId}_page_message() {
 				    	<tr>
 				    		<td height="50px" width="100%"  align="left">
 				    			
-				    			<div data-dojo-type="dijit.TitlePane" data-dojo-props=" title: 'Measure settings' " open="true">	
+				    			<div data-dojo-type="dijit.TitlePane" data-dojo-props=" title: 'Measure settings&nbsp;<font color=RED>*</font>' " open="true">	
 								<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:99%;height:140px">
 								
 									<table border="0" width="100%" >
