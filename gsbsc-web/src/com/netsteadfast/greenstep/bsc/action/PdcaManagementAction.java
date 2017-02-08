@@ -44,6 +44,7 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.PdcaType;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
@@ -266,12 +267,10 @@ public class PdcaManagementAction extends BaseSupportAction implements IBaseAddi
 		this.measureFreq = measureFreqResult.getValue();
 		this.measureFreq.setEmployeeOid("");
 		if (!BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(this.measureFreq.getEmpId()) && !StringUtils.isBlank(this.measureFreq.getEmpId())) {
-			EmployeeVO employee = new EmployeeVO();
-			employee.setEmpId(this.measureFreq.getEmpId());
-			DefaultResult<EmployeeVO> empResult = this.employeeService.findByUK(employee);
-			if (empResult.getValue()!=null) {
-				this.measureFreq.setEmployeeOid(empResult.getValue().getOid());
-			}
+			
+			EmployeeVO employee = BscBaseLogicServiceCommonSupport.findEmployeeDataByEmpId(this.employeeService, this.measureFreq.getEmpId());
+			this.measureFreq.setEmployeeOid(employee.getOid());
+			
 		}
 		this.measureFreq.setOrganizationOid("");
 		if (!BscConstants.MEASURE_DATA_ORGANIZATION_FULL.equals(this.measureFreq.getOrgId()) && !StringUtils.isBlank(this.measureFreq.getOrgId())) {

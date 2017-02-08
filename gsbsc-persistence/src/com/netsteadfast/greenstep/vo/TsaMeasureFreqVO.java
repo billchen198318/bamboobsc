@@ -55,6 +55,22 @@ public class TsaMeasureFreqVO extends BaseValueObj implements java.io.Serializab
 		this.orgId = orgId;
 		this.empId = empId;
 	}
+	
+	public String getStartDateDisplayValue() {
+		return super.getDateDisplayValue(this.startDate, "/");
+	}
+	
+	public String getEndDateDisplayValue() {
+		return super.getDateDisplayValue(this.endDate, "/");
+	}	
+	
+	public String getStartDateTextBoxValue() {
+		return super.getDateDisplayValue(this.startDate, "-");
+	}
+	
+	public String getEndDateTextBoxValue() {
+		return super.getDateDisplayValue(this.endDate, "-");
+	}		
 
 	@Override
 	public String getOid() {
