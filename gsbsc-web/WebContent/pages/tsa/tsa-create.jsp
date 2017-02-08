@@ -35,14 +35,14 @@ BSC_PROG007D0001A_fieldsId['forecast'] 			= 'BSC_PROG007D0001A_forecast';
 BSC_PROG007D0001A_fieldsId['coefficient1'] 		= 'BSC_PROG007D0001A_coefficient1';
 BSC_PROG007D0001A_fieldsId['coefficient2'] 		= 'BSC_PROG007D0001A_coefficient2';
 BSC_PROG007D0001A_fieldsId['coefficient3'] 		= 'BSC_PROG007D0001A_coefficient3';
-BSC_PROG006D0001A_fieldsId["measureFreq_frequency"] 					= "BSC_PROG007D0001A_measureFreq_frequency";
-BSC_PROG006D0001A_fieldsId["measureFreq_startYearDate"] 				= "BSC_PROG007D0001A_measureFreq_startYearDate";
-BSC_PROG006D0001A_fieldsId["measureFreq_endYearDate"] 					= "BSC_PROG007D0001A_measureFreq_endYearDate";
-BSC_PROG006D0001A_fieldsId["measureFreq_startDate"] 					= "BSC_PROG007D0001A_measureFreq_startDate";
-BSC_PROG006D0001A_fieldsId["measureFreq_endDate"] 						= "BSC_PROG007D0001A_measureFreq_endDate";
-BSC_PROG006D0001A_fieldsId["measureFreq_dataFor"] 						= "BSC_PROG007D0001A_measureFreq_dataFor";
-BSC_PROG006D0001A_fieldsId["measureFreq_measureDataOrganizationOid"] 	= "BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid";
-BSC_PROG006D0001A_fieldsId["measureFreq_measureDataEmployeeOid"] 		= "BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid";
+BSC_PROG007D0001A_fieldsId["measureFreq_frequency"] 					= "BSC_PROG007D0001A_measureFreq_frequency";
+BSC_PROG007D0001A_fieldsId["measureFreq_startYearDate"] 				= "BSC_PROG007D0001A_measureFreq_startYearDate";
+BSC_PROG007D0001A_fieldsId["measureFreq_endYearDate"] 					= "BSC_PROG007D0001A_measureFreq_endYearDate";
+BSC_PROG007D0001A_fieldsId["measureFreq_startDate"] 					= "BSC_PROG007D0001A_measureFreq_startDate";
+BSC_PROG007D0001A_fieldsId["measureFreq_endDate"] 						= "BSC_PROG007D0001A_measureFreq_endDate";
+BSC_PROG007D0001A_fieldsId["measureFreq_dataFor"] 						= "BSC_PROG007D0001A_measureFreq_dataFor";
+BSC_PROG007D0001A_fieldsId["measureFreq_measureDataOrganizationOid"] 	= "BSC_PROG007D0001A_measureFreq_measureDataOrganizationOid";
+BSC_PROG007D0001A_fieldsId["measureFreq_measureDataEmployeeOid"] 		= "BSC_PROG007D0001A_measureFreq_measureDataEmployeeOid";
 
 function BSC_PROG007D0001A_saveSuccess(data) {
 	setFieldsBackgroundDefault(BSC_PROG007D0001A_fieldsId);

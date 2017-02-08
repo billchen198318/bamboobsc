@@ -145,7 +145,10 @@ public class TsaSaveOrUpdateAction extends BaseJsonAction {
 	private void saveOrUpdate(String type) throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.checkFields();
 		TsaVO tsa = new TsaVO();
-		this.transformFields2ValueObject(tsa, new String[]{"name", "integration", "forecast", "description"});
+		this.transformFields2ValueObject(
+				tsa, 
+				new String[]{"name", "integrationOrder", "forecastNext", "description"}, 
+				new String[]{"name", "integration", "forecast", "description"});
 		this.getFields().remove("measureFreq_date1");
 		this.getFields().remove("measureFreq_date2");
 		this.getFields().remove("measureFreq_dateType");
@@ -189,9 +192,9 @@ public class TsaSaveOrUpdateAction extends BaseJsonAction {
 		TsaMaCoefficientsVO coefficient1 = new TsaMaCoefficientsVO();
 		TsaMaCoefficientsVO coefficient2 = new TsaMaCoefficientsVO();
 		TsaMaCoefficientsVO coefficient3 = new TsaMaCoefficientsVO();
-		this.transformFields2ValueObject(coefficient1, new String[]{"coefficient1"});
-		this.transformFields2ValueObject(coefficient2, new String[]{"coefficient2"});
-		this.transformFields2ValueObject(coefficient3, new String[]{"coefficient3"});
+		this.transformFields2ValueObject(coefficient1, new String[]{"seqValue"}, new String[]{"coefficient1"});
+		this.transformFields2ValueObject(coefficient2, new String[]{"seqValue"}, new String[]{"coefficient2"});
+		this.transformFields2ValueObject(coefficient3, new String[]{"seqValue"}, new String[]{"coefficient3"});
 		
 		DefaultResult<TsaVO> result = null;
 		if ("save".equals(type)) {
