@@ -44,7 +44,19 @@ function ${programId}_page_message() {
 
 <body class="flat">
 
-bbbbbbbbbbbbbbb
+	<gs:toolBar
+		id="${programId}" 
+		cancelEnable="Y" 
+		cancelJsMethod="${programId}_TabClose();" 
+		createNewEnable="N"
+		createNewJsMethod=""		 
+		saveEnabel="N" 
+		saveJsMethod=""
+		refreshEnable="Y" 		 
+		refreshJsMethod="${programId}_TabRefresh();" 				
+		></gs:toolBar>
+	<jsp:include page="../header.jsp"></jsp:include>
+	
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>

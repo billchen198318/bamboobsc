@@ -21,6 +21,11 @@
 			<result name="input">/pages/tsa/tsa-edit.jsp</result>		
 			<result name="success">/pages/tsa/tsa-edit.jsp</result>
 		</action>					
+
+		<action name="bsc.tsaQueryAction" class="bsc.web.controller.TsaManagementAction" method="queryForecast">
+			<result name="input">/pages/tsa/tsa-query.jsp</result>		
+			<result name="success">/pages/tsa/tsa-query.jsp</result>
+		</action>			
 		
 	</package>
 	

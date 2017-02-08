@@ -56,6 +56,8 @@ function BSC_PROG007D0001E_updateSuccess(data) {
 }
 
 function BSC_PROG007D0001E_clear() {
+	setFieldsBackgroundDefault(BSC_PROG007D0001E_fieldsId);
+	setFieldsNoticeMessageLabelDefault(BSC_PROG007D0001E_fieldsId);	
 	dijit.byId("BSC_PROG007D0001E_measureFreq_dataFor").set("value", "all");
 	BSC_PROG007D0001E_measureFreq_setDataForValue();
 	dijit.byId("BSC_PROG007D0001E_measureFreq_frequency").set("value", "6");
@@ -379,7 +381,7 @@ function ${programId}_page_message() {
     				errorFn=""
     				loadFn="BSC_PROG007D0001E_updateSuccess(data);" 
     				programId="${programId}"
-    				label="Update" 
+    				label="Save" 
     				iconClass="dijitIconSave"
     				cssClass="alt-primary"></gs:button>    			
     			<gs:button name="BSC_PROG007D0001E_clear" id="BSC_PROG007D0001E_clear" onClick="BSC_PROG007D0001E_clear();" 
