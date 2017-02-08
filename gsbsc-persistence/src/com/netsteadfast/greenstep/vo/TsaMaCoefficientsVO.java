@@ -74,5 +74,10 @@ public class TsaMaCoefficientsVO extends BaseValueObj implements java.io.Seriali
 	public void setSeqValue(float seqValue) {
 		this.seqValue = seqValue;
 	}
-
+	
+	// 編輯Edit頁面 dijit/form/NumberSpinner 要用的數值 
+	public String getSeqValueAsString() {
+		return ( this.seqValue >= 0.0f ? "+" : "" ) + String.valueOf(this.seqValue);
+	}
+	
 }

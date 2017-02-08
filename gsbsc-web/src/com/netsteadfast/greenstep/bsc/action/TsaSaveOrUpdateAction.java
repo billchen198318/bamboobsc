@@ -200,6 +200,7 @@ public class TsaSaveOrUpdateAction extends BaseJsonAction {
 		if ("save".equals(type)) {
 			result = this.tsaLogicService.create(tsa, measureFreq, coefficient1, coefficient2, coefficient3);
 		} else {
+			tsa.setOid( this.getFields().get("oid") );
 			result = this.tsaLogicService.update(tsa, measureFreq, coefficient1, coefficient2, coefficient3);
 		}
 		this.message = result.getSystemMessage().getValue();
