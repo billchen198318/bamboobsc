@@ -57,6 +57,8 @@ function BSC_PROG007D0001A_saveSuccess(data) {
 }
 
 function BSC_PROG007D0001A_clear() {
+	setFieldsBackgroundDefault(BSC_PROG007D0001A_fieldsId);
+	setFieldsNoticeMessageLabelDefault(BSC_PROG007D0001A_fieldsId);	
 	dijit.byId("BSC_PROG007D0001A_measureFreq_dataFor").set("value", "all");
 	BSC_PROG007D0001A_measureFreq_setDataForValue();
 	dijit.byId("BSC_PROG007D0001A_measureFreq_frequency").set("value", "6");
