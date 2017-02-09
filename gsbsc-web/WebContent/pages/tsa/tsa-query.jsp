@@ -40,6 +40,8 @@ BSC_PROG007D0002Q_fieldsId["measureFreq_measureDataEmployeeOid"] 		= "BSC_PROG00
 
 function BSC_PROG007D0002Q_query() {
 	
+	//bsc.tsaQueryForecastAction.action
+	
 }
 
 
