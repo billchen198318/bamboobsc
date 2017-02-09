@@ -38,6 +38,10 @@ BSC_PROG007D0002Q_fieldsId["measureFreq_dataFor"] 						= "BSC_PROG007D0002Q_mea
 BSC_PROG007D0002Q_fieldsId["measureFreq_measureDataOrganizationOid"] 	= "BSC_PROG007D0002Q_measureFreq_measureDataOrganizationOid";
 BSC_PROG007D0002Q_fieldsId["measureFreq_measureDataEmployeeOid"] 		= "BSC_PROG007D0002Q_measureFreq_measureDataEmployeeOid";
 
+function BSC_PROG007D0002Q_query() {
+	
+}
+
 
 //------------------------------------------------------------------------------
 //measure options settings function
@@ -131,7 +135,7 @@ function ${programId}_page_message() {
 											iconClass:'dijitIconSearch',
 											showLabel:false,
 											onClick:function(){  
-												
+												BSC_PROG007D0002Q_query();
 											}"><s:property value="Query"/></button>											
 											
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0002Q_visionOid"></gs:inputfieldNoticeMsgLabel>		
@@ -152,6 +156,13 @@ function ${programId}_page_message() {
 
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">	
+								
+									Param
+									<gs:select name="BSC_PROG007D0002Q_param" dataSource="paramMap" id="BSC_PROG007D0002Q_param"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0002Q_param'">
+					    				Select param item.
+									</div>  									
+						    		&nbsp;										
 								
 									Vision
 									<gs:select name="BSC_PROG007D0002Q_visionOid" dataSource="visionMap" id="BSC_PROG007D0002Q_visionOid"></gs:select>

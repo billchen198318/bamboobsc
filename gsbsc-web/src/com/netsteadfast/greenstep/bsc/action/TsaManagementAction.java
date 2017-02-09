@@ -76,6 +76,7 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> measureDataOrganizationMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> measureDataEmployeeMap = this.providedSelectZeroDataMap(true);
+	private Map<String, String> paramMap = this.providedSelectZeroDataMap(true);
 	private TsaVO tsa = null;
 	private TsaMeasureFreqVO measureFreq = null;
 	private TsaMaCoefficientsVO coefficient1 = null;
@@ -160,6 +161,7 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 		}		
 		if ("queryForecast".equals(type)) {
 			this.visionMap = this.visionService.findForMap(true);
+			this.paramMap = this.tsaService.findForMap(true);
 		}
 	}
 	
@@ -354,6 +356,11 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	public Map<String, String> getMeasureDataEmployeeMap() {
 		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataEmployeeMap);
 		return measureDataEmployeeMap;
+	}
+
+	public Map<String, String> getParamMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.paramMap);
+		return paramMap;
 	}
 
 	public TsaVO getTsa() {
