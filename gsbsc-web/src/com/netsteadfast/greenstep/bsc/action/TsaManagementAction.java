@@ -46,17 +46,20 @@ import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.ITsaMaCoefficientsService;
 import com.netsteadfast.greenstep.bsc.service.ITsaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.ITsaService;
+import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbTsa;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq;
+import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.TsaMaCoefficientsVO;
 import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.TsaVO;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.TsaManagementAction")
@@ -68,9 +71,11 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 	private ITsaService<TsaVO, BbTsa, String> tsaService;
 	private ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService;
 	private ITsaMaCoefficientsService<TsaMaCoefficientsVO, BbTsaMaCoefficients, String> tsaMaCoefficientsService;
+	private IVisionService<VisionVO, BbVision, String> visionService;
 	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(true);
+	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> measureDataOrganizationMap = this.providedSelectZeroDataMap(true);
-	private Map<String, String> measureDataEmployeeMap = this.providedSelectZeroDataMap(true);	
+	private Map<String, String> measureDataEmployeeMap = this.providedSelectZeroDataMap(true);
 	private TsaVO tsa = null;
 	private TsaMeasureFreqVO measureFreq = null;
 	private TsaMaCoefficientsVO coefficient1 = null;
@@ -136,12 +141,26 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 		this.tsaMaCoefficientsService = tsaMaCoefficientsService;
 	}	
 	
+	public IVisionService<VisionVO, BbVision, String> getVisionService() {
+		return visionService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.VisionService")	
+	public void setVisionService(IVisionService<VisionVO, BbVision, String> visionService) {
+		this.visionService = visionService;
+	}	
+	
 	private void initData(String type) throws ServiceException, Exception {
-		if ("create".equals(type) || "edit".equals(type)) {
+		if ("create".equals(type) || "edit".equals(type) || "queryForecast".equals(type)) {
 			// 這邊是設定不要限定 部門&員工下拉選項
 			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
 			this.measureDataEmployeeMap = this.employeeService.findForMap(true);			
 		}		
+		if ("queryForecast".equals(type)) {
+			this.visionMap = this.visionService.findForMap(true);
+		}
 	}
 	
 	private void fetchData() throws ServiceException, Exception {
@@ -321,6 +340,11 @@ public class TsaManagementAction extends BaseSupportAction implements IBaseAddit
 		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
 		return frequencyMap;
 	}
+	
+	public Map<String, String> getVisionMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.visionMap);
+		return visionMap;
+	}	
 
 	public Map<String, String> getMeasureDataOrganizationMap() {
 		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataOrganizationMap);
