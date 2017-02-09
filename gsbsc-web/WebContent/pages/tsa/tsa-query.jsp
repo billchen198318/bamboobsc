@@ -173,7 +173,7 @@ function ${programId}_page_message() {
 									</div>  									
 						    		&nbsp;		    			
 					    																	
-									Frequency
+									Measure data frequency
 									<gs:select name="BSC_PROG007D0002Q_measureFreq_frequency" dataSource="frequencyMap" id="BSC_PROG007D0002Q_measureFreq_frequency" value="6" onChange="BSC_PROG007D0002Q_measureFreq_setFrequencyValue();" width="140"></gs:select>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0002Q_measureFreq_frequency'">
 					    				Select frequency.
@@ -185,7 +185,7 @@ function ${programId}_page_message() {
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">
 											
-							    	Start year
+							    	Measure data start year
 							    	<input id="BSC_PROG007D0002Q_measureFreq_startYearDate" name="BSC_PROG007D0002Q_measureFreq_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0002Q_measureFreq_startYearDate'">
@@ -199,7 +199,7 @@ function ${programId}_page_message() {
 					    				Select end year.
 									</div>							    									    	
 							    	&nbsp;&nbsp;		
-									Start date
+									Measure data start date
 									<input id="BSC_PROG007D0002Q_measureFreq_startDate" type="text" name="BSC_PROG007D0002Q_measureFreq_startDate" data-dojo-type="dijit.form.DateTextBox"
 										maxlength="10" 
 										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />
@@ -218,7 +218,7 @@ function ${programId}_page_message() {
 							</tr>
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">							
-									Data type
+									Measure data type for
 									<gs:select name="BSC_PROG007D0002Q_measureFreq_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"Organization / department\", \"employee\":\"Personal / employee\" }" id="BSC_PROG007D0002Q_measureFreq_dataFor" onChange="BSC_PROG007D0002Q_measureFreq_setDataForValue();" width="140"></gs:select>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0002Q_measureFreq_dataFor'">
 					    				Select measure data type.
