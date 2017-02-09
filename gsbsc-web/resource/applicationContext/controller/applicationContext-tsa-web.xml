@@ -16,5 +16,7 @@
     	class="com.netsteadfast.greenstep.bsc.action.TsaManagementGridQueryAction" scope="prototype" />
     <bean id="bsc.web.controller.TsaSaveOrUpdateAction" 
     	class="com.netsteadfast.greenstep.bsc.action.TsaSaveOrUpdateAction" scope="prototype" />
-    	
+    <bean id="bsc.web.controller.TsaQueryForecastAction" 
+    	class="com.netsteadfast.greenstep.bsc.action.TsaQueryForecastAction" scope="prototype" />
+    	    	
 </beans>
