@@ -104,4 +104,17 @@ public class TsaServiceImpl extends BaseService<TsaVO, BbTsa, String> implements
 		return result;
 	}
 
+	@Override
+	public Map<String, String> findForMap(boolean pleaseSelect) throws ServiceException, Exception {
+		Map<String, String> dataMap = this.providedSelectZeroDataMap(pleaseSelect);
+		List<BbTsa> searchList = this.findListByParams(null);
+		if (searchList == null || searchList.size() < 1 ) {
+			return dataMap;
+		}
+		for (BbTsa tsa : searchList) {
+			dataMap.put(tsa.getOid(), tsa.getName());
+		}
+		return dataMap;
+	}
+
 }
