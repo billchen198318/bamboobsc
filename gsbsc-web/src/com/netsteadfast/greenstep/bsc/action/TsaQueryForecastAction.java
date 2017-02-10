@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,8 @@ import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 public class TsaQueryForecastAction extends BaseJsonAction {
 	private static final long serialVersionUID = -449705564005894371L;
 	protected Logger logger = Logger.getLogger(TsaQueryForecastAction.class);
-	
+	private List<String> categories = new LinkedList<String>(); // line chart 用的資料
+	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>(); // line chart 用的資料	
 	private String message = "";
 	private String success = IS_NO;	
 	
@@ -121,5 +123,15 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	public Map<String, String> getFieldsMessage() {
 		return this.fieldsMessage;
 	}
+	
+	@JSON
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getSeries() {
+		return series;
+	}	
 	
 }
