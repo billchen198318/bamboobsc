@@ -75,15 +75,19 @@ public class TimeSeriesAnalysisUtils {
 		return tsa;
 	}
 	
-	public static double[] getForecastNext(TsaVO tsa, double[] observations) throws ServiceException, Exception {
-		if (null == observations || observations.length < 1) {
-			throw new IllegalArgumentException("observations array cannot zero size");
-		}
+	public static List<BbTsaMaCoefficients> getCoefficients(TsaVO tsa) throws ServiceException, Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("tsaOid", tsa.getOid());
 		Map<String, String> orderByParam = new HashMap<String, String>();
 		orderByParam.put("seq", "ASC");
-		List<BbTsaMaCoefficients> coefficients = tsaMaCoefficientsService.findListByParams(paramMap, null, orderByParam);
+		return tsaMaCoefficientsService.findListByParams(paramMap, null, orderByParam);
+	}
+	
+	public static double[] getForecastNext(TsaVO tsa, double[] observations) throws ServiceException, Exception {
+		if (null == observations || observations.length < 1) {
+			throw new IllegalArgumentException("observations array cannot zero size");
+		}
+		List<BbTsaMaCoefficients> coefficients = getCoefficients(tsa);
 		if (coefficients == null || coefficients.size() != 3) {
 			throw new IllegalStateException("Ma coefficients data error");
 		}
