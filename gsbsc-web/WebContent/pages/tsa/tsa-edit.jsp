@@ -214,18 +214,18 @@ function ${programId}_page_message() {
 										<tr valign="top">
 											<td width="100%" align="left" height="25px">							
 												Data type
-												<gs:select name="BSC_PROG007D0001E_measureFreq_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"Organization / department\", \"employee\":\"Personal / employee\" }" id="BSC_PROG007D0001E_measureFreq_dataFor" value="fields.measureFreqDataFor" onChange="BSC_PROG007D0001E_measureFreq_setDataForValue();" width="140"></gs:select>
+												<gs:select name="BSC_PROG007D0001E_measureFreq_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"Organization\", \"employee\":\"Employee\" }" id="BSC_PROG007D0001E_measureFreq_dataFor" value="fields.measureFreqDataFor" onChange="BSC_PROG007D0001E_measureFreq_setDataForValue();" width="140"></gs:select>
 												<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0001E_measureFreq_dataFor'">
 								    				Select measure data type.
 												</div>										
 												&nbsp;&nbsp;
-												Organization / department
+												Organization
 												<gs:select name="BSC_PROG007D0001E_measureFreq_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG007D0001E_measureFreq_measureDataOrganizationOid" onChange="BSC_PROG007D0001E_measureFreq_setMeasureDataOrgaValue();" readonly="Y"></gs:select>
 												<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0001E_measureFreq_measureDataOrganizationOid'">
 								    				Select measure data organization/department.
 												</div>									
 												&nbsp;&nbsp;
-												Personal / employee
+												Employee
 												<gs:select name="BSC_PROG007D0001E_measureFreq_measureDataEmployeeOid" dataSource="measureDataEmployeeMap" id="BSC_PROG007D0001E_measureFreq_measureDataEmployeeOid" onChange="BSC_PROG007D0001E_measureFreq_setMeasureDataEmplValue();" readonly="Y"></gs:select>
 												<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG007D0001E_measureFreq_measureDataEmployeeOid'">
 								    				Select measure data personal/Employee.

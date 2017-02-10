@@ -40,13 +40,16 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
 import com.netsteadfast.greenstep.bsc.service.ITsaMaCoefficientsService;
+import com.netsteadfast.greenstep.bsc.service.ITsaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.ITsaService;
 import com.netsteadfast.greenstep.po.hbm.BbTsa;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients;
+import com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.TsaMaCoefficientsVO;
+import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.TsaVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
@@ -55,10 +58,12 @@ public class TimeSeriesAnalysisUtils {
 	
 	private static ITsaService<TsaVO, BbTsa, String> tsaService;
 	private static ITsaMaCoefficientsService<TsaMaCoefficientsVO, BbTsaMaCoefficients, String> tsaMaCoefficientsService;	
+	private static ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService;
 	
 	static {
 		tsaService = (ITsaService<TsaVO, BbTsa, String>) AppContext.getBean("bsc.service.TsaService");
 		tsaMaCoefficientsService = (ITsaMaCoefficientsService<TsaMaCoefficientsVO, BbTsaMaCoefficients, String>) AppContext.getBean("bsc.service.TsaMaCoefficientsService");
+		tsaMeasureFreqService = (ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String>) AppContext.getBean("bsc.service.TsaMeasureFreqService");
 	}
 	
 	public static TsaVO getParam(String tsaOid) throws ServiceException, Exception {
@@ -73,6 +78,17 @@ public class TimeSeriesAnalysisUtils {
 		}
 		tsa = result.getValue();
 		return tsa;
+	}
+	
+	public static TsaMeasureFreqVO getMeasureFreq(TsaVO tsa) throws ServiceException, Exception {
+		TsaMeasureFreqVO measureFreq = new TsaMeasureFreqVO();
+		measureFreq.setTsaOid( tsa.getOid() );
+		DefaultResult<TsaMeasureFreqVO> result = tsaMeasureFreqService.findByUK(measureFreq);
+		if (result.getValue() == null) {
+			throw new ServiceException( result.getSystemMessage().getValue() );
+		}
+		measureFreq = result.getValue();
+		return measureFreq;
 	}
 	
 	public static List<BbTsaMaCoefficients> getCoefficients(TsaVO tsa) throws ServiceException, Exception {

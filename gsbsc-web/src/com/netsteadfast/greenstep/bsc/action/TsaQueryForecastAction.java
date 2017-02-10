@@ -26,29 +26,42 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
 import org.joda.time.DateTime;
 import org.joda.time.Months;
 import org.joda.time.Years;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.action.utils.SelectItemFieldCheckUtils;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.util.TimeSeriesAnalysisUtils;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.TsaVO;
 
 @ControllerAuthority(check=true)
@@ -57,7 +70,10 @@ import com.netsteadfast.greenstep.vo.TsaVO;
 public class TsaQueryForecastAction extends BaseJsonAction {
 	private static final long serialVersionUID = -449705564005894371L;
 	protected Logger logger = Logger.getLogger(TsaQueryForecastAction.class);
+	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;		
 	private TsaVO tsa = new TsaVO();
+	private TsaMeasureFreqVO measureFreq = new TsaMeasureFreqVO();
 	private List<Map<String, String>> coefficients = new LinkedList<Map<String, String>>();
 	private List<String> categories = new LinkedList<String>(); // line chart 用的資料
 	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>(); // line chart 用的資料	
@@ -67,6 +83,28 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	public TsaQueryForecastAction() {
 		super();
 	}
+	
+	@JSON(serialize=false)
+	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
+		return organizationService;
+	}	
+	
+	@Autowired
+	@Resource(name="bsc.service.OrganizationService")		
+	public void setOrganizationService(IOrganizationService<OrganizationVO, BbOrganization, String> organizationService) {
+		this.organizationService = organizationService;
+	}
+
+	@JSON(serialize=false)
+	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
+		return employeeService;
+	}
+
+	@Autowired
+	@Resource(name="bsc.service.EmployeeService")		
+	public void setEmployeeService(IEmployeeService<EmployeeVO, BbEmployee, String> employeeService) {
+		this.employeeService = employeeService;
+	}		
 	
 	private void checkFields() throws ControllerException, Exception {
 		this.getCheckFieldHandler()
@@ -246,6 +284,32 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		this.message = "Success!";
 	}
 	
+	private void fetchParamMeasureFreqData() throws ControllerException, AuthorityException, ServiceException, Exception {
+		this.getCheckFieldHandler()
+		.add("tsaOid", SelectItemFieldCheckUtils.class, "Please select param!" )
+		.process().throwMessage();
+		this.tsa = TimeSeriesAnalysisUtils.getParam(this.getFields().get("tsaOid"));
+		this.measureFreq = TimeSeriesAnalysisUtils.getMeasureFreq( this.tsa );
+		this.measureFreq.setEmployeeOid("");
+		if (!BscConstants.MEASURE_DATA_EMPLOYEE_FULL.equals(this.measureFreq.getEmpId()) && !StringUtils.isBlank(this.measureFreq.getEmpId())) {
+			
+			EmployeeVO employee = BscBaseLogicServiceCommonSupport.findEmployeeDataByEmpId(this.employeeService, this.measureFreq.getEmpId());
+			this.measureFreq.setEmployeeOid(employee.getOid());
+			
+		}
+		this.measureFreq.setOrganizationOid("");
+		if (!BscConstants.MEASURE_DATA_ORGANIZATION_FULL.equals(this.measureFreq.getOrgId()) && !StringUtils.isBlank(this.measureFreq.getOrgId())) {
+			OrganizationVO organization = new OrganizationVO();
+			organization.setOrgId(this.measureFreq.getOrgId());
+			DefaultResult<OrganizationVO> orgResult = this.organizationService.findByUK(organization);
+			if (orgResult.getValue()!=null) {
+				this.measureFreq.setOrganizationOid(orgResult.getValue().getOid());
+			}
+		}		
+		this.success = IS_YES;
+		this.message = "Success!";
+	}
+	
 	/**
 	 * bsc.tsaQueryForecastAction.action
 	 */
@@ -277,6 +341,33 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		}
 		return SUCCESS;		
 	}
+	
+	/**
+	 * bsc.tsaParamMeasureFreqDataAction.action
+	 */
+	@JSON(serialize=false)
+	@ControllerMethodAuthority(programId="BSC_PROG007D0002Q")
+	public String loadParamMeasureFreq() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.fetchParamMeasureFreqData();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.message=e.getMessage().toString();
+			this.logger.error(e.getMessage());
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}		
 
 	@JSON
 	@Override
@@ -327,6 +418,11 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	@JSON
 	public TsaVO getTsa() {
 		return tsa;
+	}
+
+	@JSON
+	public TsaMeasureFreqVO getMeasureFreq() {
+		return measureFreq;
 	}
 
 	@JSON
