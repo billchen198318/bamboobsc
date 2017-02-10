@@ -21,12 +21,11 @@
  */
 package com.netsteadfast.greenstep.bsc.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
 import org.espy.arima.ArimaForecaster;
 import org.espy.arima.DefaultArimaForecaster;
@@ -35,14 +34,21 @@ import org.espy.arima.DefaultArimaProcess;
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
+import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
 import com.netsteadfast.greenstep.bsc.service.ITsaMaCoefficientsService;
 import com.netsteadfast.greenstep.bsc.service.ITsaService;
 import com.netsteadfast.greenstep.po.hbm.BbTsa;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients;
+import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.TsaMaCoefficientsVO;
 import com.netsteadfast.greenstep.vo.TsaVO;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 @SuppressWarnings("unchecked")
 public class TimeSeriesAnalysisUtils {
@@ -92,11 +98,36 @@ public class TimeSeriesAnalysisUtils {
 		return forecast;
 	}
 	
-//	public static VisionVO getResult(String tsaOid, Context queryContext) throws ServiceException, Exception {
-//		
-//		throw new java.lang.UnsupportedOperationException("not work");
-//		//return null;
-//		
-//	}
+	public static List<TimeSeriesAnalysisResult> getResult(
+			String tsaOid, 
+			String visionOid, String startDate, String endDate, 
+			String startYearDate, String endYearDate, String frequency, String dataFor, 
+			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
+		
+		List<TimeSeriesAnalysisResult> results = new ArrayList<TimeSeriesAnalysisResult>();		
+		ChainResultObj chainResult = PerformanceScoreChainUtils.getResult(
+				visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
+		if (chainResult.getValue() == null || ( (BscStructTreeObj)chainResult.getValue() ).getVisions() == null 
+				|| ( (BscStructTreeObj)chainResult.getValue() ).getVisions().size() == 0) {
+			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.SEARCH_NO_DATA));
+		}
+		TsaVO tsa = getParam(tsaOid);
+		BscStructTreeObj resultObj = (BscStructTreeObj)chainResult.getValue();
+		VisionVO visionObj = resultObj.getVisions().get(0);
+		for (PerspectiveVO perspective : visionObj.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				for (KpiVO kpi : objective.getKpis()) {
+					double[] observations = new double[kpi.getDateRangeScores().size()];
+					for (int i=0; i < observations.length; i++) {
+						observations[i] = Double.parseDouble( Float.toString(kpi.getDateRangeScores().get(i).getScore()) );
+					}
+					double[] forecastNext = getForecastNext(tsa, observations);
+					TimeSeriesAnalysisResult tsaModel = new TimeSeriesAnalysisResult(kpi, forecastNext);
+					results.add(tsaModel);
+				}
+			}
+		}
+		return results;
+	}
 	
 }
