@@ -24,6 +24,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <style type="text/css">
 
+.btnExcelIcon {
+  	background-image: url(./icons/excel.png);
+  	background-repeat: no-repeat;
+  	width: 16px;
+  	height: 16px;
+  	text-align: center;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -41,12 +49,21 @@ BSC_PROG007D0002Q_fieldsId["dataFor"] 						= "BSC_PROG007D0002Q_dataFor";
 BSC_PROG007D0002Q_fieldsId["measureDataOrganizationOid"] 	= "BSC_PROG007D0002Q_measureDataOrganizationOid";
 BSC_PROG007D0002Q_fieldsId["measureDataEmployeeOid"] 		= "BSC_PROG007D0002Q_measureDataEmployeeOid";
 
-function BSC_PROG007D0002Q_query() {
-	BSC_PROG007D0002Q_clearContent();
+function BSC_PROG007D0002Q_query(type) {
+	
+	var url = 'bsc.tsaQueryForecastAction.action';
+	if ('excel' == type) {
+		url = 'bsc.tsaQueryForecastForExcelAction.action';
+	}
+	
+	if ('html' == type) {
+		BSC_PROG007D0002Q_clearContent();
+	}
+	
 	setFieldsBackgroundDefault(BSC_PROG007D0002Q_fieldsId);
 	setFieldsNoticeMessageLabelDefault(BSC_PROG007D0002Q_fieldsId);
 	xhrSendParameter(
-			'${basePath}/bsc.tsaQueryForecastAction.action', 
+			'${basePath}/' + url, 
 			{ 
 				'fields.tsaOid' 					: 	dijit.byId("BSC_PROG007D0002Q_tsaOid").get("value"),
 				'fields.visionOid' 					: 	dijit.byId("BSC_PROG007D0002Q_visionOid").get("value"),
@@ -69,6 +86,10 @@ function BSC_PROG007D0002Q_query() {
 					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG007D0002Q_fieldsId);
 					setFieldsNoticeMessageLabel(data.fieldsId, data.fieldsMessage, BSC_PROG007D0002Q_fieldsId);
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				if ('excel' == type) {
+					openCommonLoadUpload( 'download', data.uploadOid, { } );
 					return;
 				}
 				BSC_PROG007D0002Q_showInfo(data);
@@ -324,9 +345,17 @@ function ${programId}_page_message() {
 											iconClass:'dijitIconSearch',
 											showLabel:false,
 											onClick:function(){  
-												BSC_PROG007D0002Q_query();
-											}"><s:property value="Query"/></button>											
-									
+												BSC_PROG007D0002Q_query('html');
+											}">Query</button>				
+																		
+									<button id="BSC_PROG007D0002Q_btnExcel" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											iconClass:'btnExcelIcon',
+											showLabel:false,
+											onClick:function(){  
+												BSC_PROG007D0002Q_query('excel');
+											}">Excel</button>
+																				
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0002Q_tsaOid"></gs:inputfieldNoticeMsgLabel>		
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0002Q_visionOid"></gs:inputfieldNoticeMsgLabel>		
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG007D0002Q_frequency"></gs:inputfieldNoticeMsgLabel>

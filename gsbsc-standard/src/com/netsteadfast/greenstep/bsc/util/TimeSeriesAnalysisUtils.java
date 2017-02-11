@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.chain.Context;
+import org.apache.commons.chain.impl.ContextBase;
 import org.apache.commons.lang3.StringUtils;
 import org.espy.arima.ArimaForecaster;
 import org.espy.arima.DefaultArimaForecaster;
@@ -33,6 +35,7 @@ import org.espy.arima.DefaultArimaProcess;
 
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
+import com.netsteadfast.greenstep.base.chain.SimpleChain;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
@@ -148,6 +151,28 @@ public class TimeSeriesAnalysisUtils {
 			}
 		}
 		return results;
+	}
+	
+	public static String getResultForExcel(
+			String tsaOid, 
+			String visionOid, String startDate, String endDate, 
+			String startYearDate, String endYearDate, String frequency, String dataFor, 
+			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
+		
+		List<TimeSeriesAnalysisResult> tsaResults = getResult(
+				tsaOid, visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
+		TsaVO tsa = getParam(tsaOid);
+		List<BbTsaMaCoefficients> coefficients = getCoefficients(tsa);
+		Context context = new ContextBase();
+		context.put("tsaResults", tsaResults);
+		context.put("tsa", tsa);
+		context.put("coefficients", coefficients);
+		SimpleChain chain = new SimpleChain();
+		ChainResultObj resultObj = chain.getResultFromResource("timeSeriesAnalysisExcelCommandContentChain", context);		
+		if ( !(resultObj.getValue() instanceof String) ) {
+			throw new java.lang.IllegalStateException( "timeSeriesAnalysisExcelCommandContentChain error!" );
+		}
+		return (String)resultObj.getValue();
 	}
 	
 }

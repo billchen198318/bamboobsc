@@ -77,6 +77,7 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	private List<Map<String, String>> coefficients = new LinkedList<Map<String, String>>();
 	private List<String> categories = new LinkedList<String>(); // line chart 用的資料
 	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>(); // line chart 用的資料	
+	private String uploadOid = "";
 	private String message = "";
 	private String success = IS_NO;	
 	
@@ -291,6 +292,25 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		this.message = "Success!";
 	}
 	
+	private void getContentForExcel() throws ControllerException, AuthorityException, ServiceException, Exception {
+		this.checkFields();
+		this.setDateValue();
+		this.checkDateRange();
+		this.uploadOid = TimeSeriesAnalysisUtils.getResultForExcel(
+				this.getFields().get("tsaOid"), 
+				this.getFields().get("visionOid"), 
+				this.getFields().get("startDate"), 
+				this.getFields().get("endDate"), 
+				this.getFields().get("startYearDate"), 
+				this.getFields().get("endYearDate"), 
+				this.getFields().get("frequency"), 
+				this.getFields().get("dataFor"), 
+				this.getFields().get("measureDataOrganizationOid"), 
+				this.getFields().get("measureDataEmployeeOid"));
+		this.success = IS_YES;
+		this.message = "Success!";		
+	}
+	
 	private void fetchParamMeasureFreqData() throws ControllerException, AuthorityException, ServiceException, Exception {
 		this.getCheckFieldHandler()
 		.add("tsaOid", SelectItemFieldCheckUtils.class, "Please select param!" )
@@ -375,6 +395,38 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		}
 		return SUCCESS;		
 	}		
+	
+	/**
+	 * bsc.tsaQueryForecastForExcelAction.action
+	 */
+	@JSON(serialize=false)
+	@ControllerMethodAuthority(programId="BSC_PROG007D0002Q")
+	public String doExcel() throws Exception {
+		try {
+			if (!this.allowJob()) {
+				this.message = this.getNoAllowMessage();
+				return SUCCESS;
+			}
+			this.getContentForExcel();
+		} catch (ControllerException ce) {
+			this.message=ce.getMessage().toString();
+		} catch (AuthorityException ae) {
+			this.message=ae.getMessage().toString();
+		} catch (ServiceException se) {
+			this.message=se.getMessage().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (e.getMessage()==null) { 
+				this.message=e.toString();
+				this.logger.error(e.toString());
+			} else {
+				this.message=e.getMessage().toString();
+				this.logger.error(e.getMessage());
+			}						
+			this.success = IS_EXCEPTION;
+		}
+		return SUCCESS;		
+	}	
 
 	@JSON
 	@Override
@@ -435,6 +487,11 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	@JSON
 	public List<Map<String, String>> getCoefficients() {
 		return coefficients;
+	}
+
+	@JSON
+	public String getUploadOid() {
+		return uploadOid;
 	}	
 	
 }

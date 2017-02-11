@@ -187,5 +187,10 @@
 		<command id="LoadPdcaDataCommand"			className="com.netsteadfast.greenstep.bsc.command.LoadPdcaDataCommand"/> 
 		<command id="PdcaReportExcelCommand"	className="com.netsteadfast.greenstep.bsc.command.PdcaReportExcelCommand"/>
 	</chain>	
+	
+	<!-- Forecast analysis 輸出 Excel 產生用的 chain -->				
+	<chain name="timeSeriesAnalysisExcelCommandContentChain">
+		<command id="TimeSeriesAnalysisExcelCommand"				className="com.netsteadfast.greenstep.bsc.command.TimeSeriesAnalysisExcelCommand"/> 
+	</chain>	
 							
 </catalog>  
