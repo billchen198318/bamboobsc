@@ -80,6 +80,13 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	private String message = "";
 	private String success = IS_NO;	
 	
+	/**
+	 * 今天接到家裏的電話，覺的自己很不孝順，都34歲了，一事無成，到台北工作沒賺到錢，
+	 * 也沒有女友，也沒房子車子，什麼都沒有，雖然平常沒亂花錢，生活簡樸，但工作薪水不高，
+	 * 如果這樣一直下去，完全沒人生希望了，覺的對生活很無奈... Orz...
+	 * 
+	 */
+	
 	public TsaQueryForecastAction() {
 		super();
 	}

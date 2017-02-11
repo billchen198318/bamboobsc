@@ -30,8 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 var BSC_PROG007D0002Q_fieldsId = new Object();
 BSC_PROG007D0002Q_fieldsId["tsaOid"] 						= "BSC_PROG007D0002Q_tsaOid";
-BSC_PROG007D0002Q_fieldsId['visionOid'] 					= 'BSC_PROG003D0001Q_visionOid';
-BSC_PROG007D0002Q_fieldsId['frequency'] 					= 'BSC_PROG003D0001Q_frequency';
+BSC_PROG007D0002Q_fieldsId['visionOid'] 					= 'BSC_PROG007D0002Q_visionOid';
+BSC_PROG007D0002Q_fieldsId['frequency'] 					= 'BSC_PROG007D0002Q_frequency';
 BSC_PROG007D0002Q_fieldsId["frequency"] 					= "BSC_PROG007D0002Q_frequency";
 BSC_PROG007D0002Q_fieldsId["startYearDate"] 				= "BSC_PROG007D0002Q_startYearDate";
 BSC_PROG007D0002Q_fieldsId["endYearDate"] 					= "BSC_PROG007D0002Q_endYearDate";
@@ -71,6 +71,7 @@ function BSC_PROG007D0002Q_query() {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
+				BSC_PROG007D0002Q_showInfo(data);
 				BSC_PROG007D0002Q_showChartForKpiDateRange(data);
 			}, 
 			function(error) {
@@ -79,18 +80,61 @@ function BSC_PROG007D0002Q_query() {
 	);	
 }
 
+function BSC_PROG007D0002Q_showInfo(data) {
+	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_paramInfo").innerHTML = '';
+	var str = '';
+	
+	var tsa = data.tsa;
+	var coefficients = data.coefficients;
+	
+	str += '<table border="0" width="600px" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">';
+	str += '<legend><b>Param infornation</b></legend>';
+	str += '<tr>';
+	str += '<td width="30%" align="center" bgcolor="#f1eee5"><b>Item</b></td>';
+	str += '<td width="70%" align="center" bgcolor="#f1eee5"><b>Value</b></td>';
+	str += '</tr>';
+	
+	str += '<tr>';
+	str += '<td width="30%" align="left" bgcolor="#ffffff">Param name</td>';
+	str += '<td width="70%" align="left" bgcolor="#ffffff">' + tsa.name + '</td>';
+	str += '</tr>';	
+	
+	str += '<tr>';
+	str += '<td width="30%" align="left" bgcolor="#ffffff">Integration order</td>';
+	str += '<td width="70%" align="left" bgcolor="#ffffff">' + tsa.integrationOrder + '</td>';
+	str += '</tr>';	
+	
+	str += '<tr>';
+	str += '<td width="30%" align="left" bgcolor="#ffffff">Forecast next</td>';
+	str += '<td width="70%" align="left" bgcolor="#ffffff">' + tsa.forecastNext + '</td>';
+	str += '</tr>';
+	
+	str += '<tr>';
+	str += '<td width="30%" align="left" bgcolor="#ffffff">Description</td>';
+	str += '<td width="70%" align="left" bgcolor="#ffffff">' + tsa.description + '</td>';
+	str += '</tr>';	
+	
+	for (var n = 0; n < coefficients.length; n++) {
+		str += '<tr>';
+		str += '<td width="30%" align="left" bgcolor="#ffffff">Coefficient&nbsp;(' + coefficients[n].seq + ')</td>';
+		str += '<td width="70%" align="left" bgcolor="#ffffff">' + coefficients[n].seqValue + '</td>';
+		str += '</tr>';			
+	}
+	
+	str += '</table>';
+	
+	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_paramInfo").innerHTML = str;
+}
+
 function BSC_PROG007D0002Q_showChartForKpiDateRange(data) {
 	
 	if ( null == data.categories || data.categories.length < 2 ) {
 		return;
 	}
 	
-	// 還需要補出參數資訊
-	//dojo.byId("BSC_PROG007D0002Q_kpi_daterange_paramInfo").innerHTML = '';
-	
     $('#BSC_PROG007D0002Q_kpi_daterange_container').highcharts({
         title: {
-            text: 'Trend / Forecast',
+            text: 'Forecast analysis',
             x: -20 //center
         },
         subtitle: {
@@ -393,8 +437,8 @@ function ${programId}_page_message() {
 	</table>	
 	
 	<BR/>
-	<BR/>
 	<div id="BSC_PROG007D0002Q_kpi_daterange_paramInfo"></div>
+	<BR/>
 	<div id="BSC_PROG007D0002Q_kpi_daterange_container"></div>
 	
 <script type="text/javascript">${programId}_page_message();</script>	
