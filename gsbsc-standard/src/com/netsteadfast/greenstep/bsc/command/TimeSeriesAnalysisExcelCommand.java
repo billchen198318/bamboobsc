@@ -122,16 +122,26 @@ public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport impl
 		Row nowRow = sh.createRow(row);
 		Cell cellTitle = nowRow.createCell(0);
 		cellTitle.setCellStyle( cellHeadStyleBlank );
-		cellTitle.setCellValue( "Forecast analysis" );				
+		cellTitle.setCellValue( "Forecast analysis - " + context.get("visionName") );				
 		
 		row++;
 		
 		
 		// ==============================================================
 		nowRow = sh.createRow(row);
-		Cell cell0 = nowRow.createCell(0);
-		cell0.setCellStyle( cellHeadStyleBlank );
-		cell0.setCellValue( "" );				
+		Cell cell0a = nowRow.createCell(0);
+		cell0a.setCellStyle( cellHeadStyleBlank );
+		cell0a.setCellValue( 
+				"Frequency: " + context.get("frequencyName") + " , Date range: " + context.get("date1") + " - " + context.get("date2") + " , " + 
+				"Measure data type for: " + context.get("dataFor") + " , " + context.get("organizationName") + context.get("employeeName") );				
+		
+		row++;		
+		
+		// ==============================================================
+		nowRow = sh.createRow(row);
+		Cell cell0b = nowRow.createCell(0);
+		cell0b.setCellStyle( cellHeadStyleBlank );
+		cell0b.setCellValue( "" );				
 		
 		row++;		
 		
