@@ -2,6 +2,7 @@
 -----------------------------------------------------------
 1. Employee/Organization hierarchy and Hierarchy view support for BSC-KPI/Department/Personal report.
 2. Streamlined the KPI aggregate method expression content.
+3. Time Series Analysis.
 
 New features please reference:
 https://github.com/billchen198318/bamboobsc/issues/39
