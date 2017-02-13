@@ -34,22 +34,31 @@ import org.espy.arima.DefaultArimaForecaster;
 import org.espy.arima.DefaultArimaProcess;
 
 import com.netsteadfast.greenstep.base.AppContext;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.chain.SimpleChain;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
+import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.ITsaMaCoefficientsService;
 import com.netsteadfast.greenstep.bsc.service.ITsaMeasureFreqService;
 import com.netsteadfast.greenstep.bsc.service.ITsaService;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbTsa;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMeasureFreq;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.TsaMaCoefficientsVO;
 import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
@@ -62,11 +71,15 @@ public class TimeSeriesAnalysisUtils {
 	private static ITsaService<TsaVO, BbTsa, String> tsaService;
 	private static ITsaMaCoefficientsService<TsaMaCoefficientsVO, BbTsaMaCoefficients, String> tsaMaCoefficientsService;	
 	private static ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String> tsaMeasureFreqService;
+	private static IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private static IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;		
 	
 	static {
 		tsaService = (ITsaService<TsaVO, BbTsa, String>) AppContext.getBean("bsc.service.TsaService");
 		tsaMaCoefficientsService = (ITsaMaCoefficientsService<TsaMaCoefficientsVO, BbTsaMaCoefficients, String>) AppContext.getBean("bsc.service.TsaMaCoefficientsService");
 		tsaMeasureFreqService = (ITsaMeasureFreqService<TsaMeasureFreqVO, BbTsaMeasureFreq, String>) AppContext.getBean("bsc.service.TsaMeasureFreqService");
+		organizationService = (IOrganizationService<OrganizationVO, BbOrganization, String>) AppContext.getBean("bsc.service.OrganizationService");
+		employeeService = (IEmployeeService<EmployeeVO, BbEmployee, String>) AppContext.getBean("bsc.service.EmployeeService");
 	}
 	
 	public static TsaVO getParam(String tsaOid) throws ServiceException, Exception {
@@ -127,6 +140,17 @@ public class TimeSeriesAnalysisUtils {
 			String startYearDate, String endYearDate, String frequency, String dataFor, 
 			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
 		
+		return (List<TimeSeriesAnalysisResult>) getResultWithVision(
+				tsaOid, visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid)
+				.get("result");
+	}
+	
+	public static Map<String, Object> getResultWithVision(
+			String tsaOid, 
+			String visionOid, String startDate, String endDate, 
+			String startYearDate, String endYearDate, String frequency, String dataFor, 
+			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
+		
 		List<TimeSeriesAnalysisResult> results = new ArrayList<TimeSeriesAnalysisResult>();		
 		ChainResultObj chainResult = PerformanceScoreChainUtils.getResult(
 				visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
@@ -150,7 +174,10 @@ public class TimeSeriesAnalysisUtils {
 				}
 			}
 		}
-		return results;
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("vision", visionObj);
+		dataMap.put("result", results);
+		return dataMap;
 	}
 	
 	public static String getResultForExcel(
@@ -159,14 +186,38 @@ public class TimeSeriesAnalysisUtils {
 			String startYearDate, String endYearDate, String frequency, String dataFor, 
 			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
 		
-		List<TimeSeriesAnalysisResult> tsaResults = getResult(
+		Map<String, Object> dataMap = getResultWithVision(
 				tsaOid, visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
+		List<TimeSeriesAnalysisResult> tsaResults = (List<TimeSeriesAnalysisResult>) dataMap.get("result");
+		VisionVO vision = (VisionVO) dataMap.get("vision");
 		TsaVO tsa = getParam(tsaOid);
 		List<BbTsaMaCoefficients> coefficients = getCoefficients(tsa);
 		Context context = new ContextBase();
 		context.put("tsaResults", tsaResults);
 		context.put("tsa", tsa);
 		context.put("coefficients", coefficients);
+		
+		// for show only.
+		context.put("visionName", vision.getTitle());
+		if (BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency) || BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency)
+				|| BscMeasureDataFrequency.FREQUENCY_QUARTER.equals(frequency)) {
+			context.put("date1", startYearDate);
+			context.put("date2", endYearDate);
+		} else {
+			context.put("date1", startDate);
+			context.put("date2", endDate);					
+		}
+		context.put("frequencyName", BscMeasureDataFrequency.getFrequencyMap(false).get(frequency));
+		context.put("dataFor", dataFor);
+		context.put("organizationName", "");
+		context.put("employeeName", "");
+		if (!Constants.HTML_SELECT_NO_SELECT_ID.equals(measureDataOrganizationOid) && !StringUtils.isBlank(measureDataOrganizationOid)) {
+			context.put("organizationName", BscBaseLogicServiceCommonSupport.findOrganizationData(organizationService, measureDataOrganizationOid).getName() );
+		}
+		if (!Constants.HTML_SELECT_NO_SELECT_ID.equals(measureDataEmployeeOid) && !StringUtils.isBlank(measureDataEmployeeOid)) {
+			context.put("employeeName", BscBaseLogicServiceCommonSupport.findEmployeeData(employeeService, measureDataEmployeeOid).getFullName() );
+		}
+		
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("timeSeriesAnalysisExcelCommandContentChain", context);		
 		if ( !(resultObj.getValue() instanceof String) ) {
