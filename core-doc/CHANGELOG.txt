@@ -7,6 +7,9 @@
 New features please reference:
 https://github.com/billchen198318/bamboobsc/issues/39
 
+If have previous database data (bbcore) in MYSQL E.g: 0.7.0 old version, please update sql command file patch_up_071R.sql
+NOTE: upgrade will lose some system data. recommend need "backup old database".
+
 
 0.7.0
 -----------------------------------------------------------
