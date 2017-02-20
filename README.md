@@ -151,7 +151,7 @@ and save my.cnf
 
 ###6. Import bbcore.sql to MySQL
 ```
-# cd /home/bamboobsc-06/
+# cd /home/bamboobsc-07/
 # mysql -u root -p
 ```
 mysql> create database bbcore;<br/>
@@ -161,13 +161,13 @@ mysql> exit;<br/>
 ```
 
 ###7. Config applicationContext-dataSource.properties
-config A ( CORE system ).<br/> /home/bamboobsc-06/apache-tomcat-8.0.41/webapps/<b>core-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config A ( CORE system ).<br/> /home/bamboobsc-07/apache-tomcat-8.0.41/webapps/<b>core-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
-config B (Balanced Scorecard system ).<br/> /home/bamboobsc-06/apache-tomcat-8.0.41/webapps/<b>gsbsc-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config B (Balanced Scorecard system ).<br/> /home/bamboobsc-07/apache-tomcat-8.0.41/webapps/<b>gsbsc-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
-config C (Simple OLAP system ).<br/> /home/bamboobsc-06/apache-tomcat-8.0.41/webapps/<b>qcharts-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config C (Simple OLAP system ).<br/> /home/bamboobsc-07/apache-tomcat-8.0.41/webapps/<b>qcharts-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
-config D (Mobile web ).<br/> /home/bamboobsc-06/apache-tomcat-8.0.41/webapps/<b>gsbsc-mobile-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
+config D (Mobile web ).<br/> /home/bamboobsc-07/apache-tomcat-8.0.41/webapps/<b>gsbsc-mobile-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
 settings <b>dataSource.user</b> and <b>dataSource.password</b> <br/>
 dataSource.user is MySQL account<br/>
@@ -187,7 +187,7 @@ dataSource.password=password
 
 ###9. Run bambooBSC
 ```
-# cd /home/bamboobsc-06/apache-tomcat-8.0.41/bin
+# cd /home/bamboobsc-07/apache-tomcat-8.0.41/bin
 # chmod a+x catalina.sh
 # chmod a+x shutdown.sh
 # chmod a+x startup.sh
