@@ -1,10 +1,5 @@
 <h2>bambooBSC is an opensource Balanced Scorecard (BSC) Business Intelligence</h2>
 <br/>
-[![Codewake](https://www.codewake.com/badges/codewake.svg)](https://www.codewake.com/p/bamboobsc-opensource-balanced-scorecard)
-[![Codewake](https://www.codewake.com/badges/codewake2.svg)](https://www.codewake.com/p/bamboobsc-opensource-balanced-scorecard)
-
-[![Join the chat at https://gitter.im/billchen198318/bamboobsc](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/billchen198318/bamboobsc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-<br/>
 Features:<br/>
 1. BSC's Vision, Perspectives, Objectives of strategy, Key Performance Indicators (KPIs). and Maintain measure-data.<br/>
 2. KPI report, Personal and organization BSC report. can custom workspace's layout<br/>
