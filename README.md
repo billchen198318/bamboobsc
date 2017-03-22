@@ -1,5 +1,7 @@
 <h2>bambooBSC is an opensource Balanced Scorecard (BSC) Business Intelligence</h2>
-<br/>
+
+
+
 Features:<br/>
 1. BSC's Vision, Perspectives, Objectives of strategy, Key Performance Indicators (KPIs). and Maintain measure-data.<br/>
 2. KPI report, Personal and organization BSC report. can custom workspace's layout<br/>
@@ -10,7 +12,9 @@ Features:<br/>
 7. PDCA & PDCA report.
 <br/><br/>
 
-#bambooBSC demo video
+
+
+<h3>bambooBSC demo video</h3>
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=N5BsWZL8bxQ" target="_blank">bambooBSC demo video</a>
 
 
