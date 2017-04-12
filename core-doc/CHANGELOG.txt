@@ -1,3 +1,14 @@
+0.7.1p1
+-----------------------------------------------------------
+1. Bug Fix create new employee but no hierarchy data.
+2. Upgrade DOJO javascript framework 1.12.1 to 1.12.2 .
+3. The VM(VirtualBox) version will not be released for ver 0.7.1p1 and later. 
+4. The bambooBSC 0.7.1p1 need JAVA8 must "2G Free RAM for JVM" start tomcat8, so maybe computer need has 4G or bigger RAM size.
+
+issues please reference:
+https://github.com/billchen198318/bamboobsc/issues/45
+
+
 0.7.1
 -----------------------------------------------------------
 1. Employee/Organization hierarchy and Hierarchy view support for BSC-KPI/Department/Personal report.
