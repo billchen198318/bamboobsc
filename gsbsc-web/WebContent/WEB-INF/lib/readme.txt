@@ -455,10 +455,10 @@ author: Igor Loban https://github.com/igor-loban
 espy-arima.jar
 
 
-DOJO release 1.12.1 ( package file by self )
+DOJO release 1.12.2 ( package file by self )
 *** Note: only for CORE-WEB ***
 -------------------------
-dojo-release-1.12.1.jar
+dojo-release-1.12.2.jar
 
 
 ---------------------------------------------------------------------------------------
