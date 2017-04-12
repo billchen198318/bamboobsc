@@ -332,6 +332,7 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 			throw new ServiceException( mResult.getSystemMessage().getValue() );
 		}		
 		DefaultResult<EmployeeVO> result = this.getEmployeeService().saveObject(employee);
+		employee = result.getValue();
 		this.createEmployeeOrganization(result.getValue(), organizationOid);
 		
 		// create default role
