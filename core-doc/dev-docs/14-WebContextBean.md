@@ -35,11 +35,12 @@ public class CleanTempUploadForContextInitAndDestroy extends ContextInitializedA
 # Create config
 Add config item.
 ![Image of WEB-CTX-BEAN-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/14-001.jpeg)
-<br/>
-<br/>
+<br>
+<br>
+
 ![Image of WEB-CTX-BEAN-mgr2](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/14-002.jpeg)
-<br/>
-<br/>
+<br>
+<br>
 
 **And need restart tomcat server to effective**
 
