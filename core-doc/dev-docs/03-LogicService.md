@@ -4,8 +4,8 @@
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/04-ControllerAction.md">⇨ Next section 04-Controller</a>
 
 
-#03 - Logic service
-#Introduction
+# 03 - Logic service
+# Introduction
 Logic service is do many base-service with complicated transaction script bean service.<br>
 
 
@@ -16,7 +16,7 @@ Logic service is do many base-service with complicated transaction script bean s
 4. MyBatis https://github.com/mybatis/mybatis-3<br/>
 5. Activiti BPMN http://activiti.org/<br/>
 
-###BaseLogicService
+### BaseLogicService
 BaseLogicService is minimum unit Logic Service, it main support CORE-SYSTEM used.
 
 
@@ -37,7 +37,7 @@ https://github.com/billchen198318/bamboobsc/blob/master/core-base/src/com/netste
 <br/>
 <br/>
 
-###CoreBaseLogicService 
+### CoreBaseLogicService 
 CoreBaseLogicService is extends BaseLogicService, it main support GSBSC-SYSTEM, QCHARTS-SYSTEM.
 
 | Name | Return | description |
@@ -57,7 +57,7 @@ https://github.com/billchen198318/bamboobsc/blob/master/qcharts-standard/src/com
 <br/>
 <br/>
 
-###BscBaseLogicService 
+### BscBaseLogicService 
 BscBaseLogicService is extends CoreBaseLogicService, it main support GSBSC-SYSTEM.
 
 | Name | Return | description |
@@ -79,7 +79,7 @@ https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-standard/src/com/n
 <br/>
 
 
-###BscBaseBusinessProcessManagementLogicService 
+### BscBaseBusinessProcessManagementLogicService 
 BscBaseBusinessProcessManagementLogicService is extends CoreBaseLogicService and BusinessProcessManagementBaseLogicService.<br/> 
 BscBaseBusinessProcessManagementLogicService it main support GSBSC-SYSTEM with BPMN.
 
@@ -113,7 +113,7 @@ https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-standard/resource/
 <br/>
 <br/>
 
-###Logic service Authority annotation
+### Logic service Authority annotation
 | Name | description |
 | --- | --- |
 | @ServiceAuthority | check=true this Logic service enable Authority check,  check=false disable |
@@ -132,7 +132,7 @@ https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-standard/resource/
 | DELETE | method delete data mode |
 
 
-#Logic service AOP scan package config
+# Logic service AOP scan package config
 ```JAVA
 package com.netsteadfast.greenstep.aspect;
 
@@ -154,7 +154,7 @@ public class AspectConstants {
 
 
 
-#Add Logic service authority
+# Add Logic service authority
 Please use: 
 Role's permitted settings -> `01 - Role` function to add permitted value
 
