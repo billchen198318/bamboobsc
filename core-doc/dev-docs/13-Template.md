@@ -29,11 +29,13 @@ Settings variable mapper.<br/>
 <br/>
 
 **Example java code:**
+
 ```JAVA
 TemplateResultObj tplResultObj = TemplateUtils.getResult("TPL-MSG-77", vision);
 ```
 
 Full code:
+
 ```JAVA
 @ServiceMethodAuthority(type={ServiceMethodType.INSERT})
 @Transactional(
@@ -69,8 +71,8 @@ public DefaultResult<VisionVO> create(VisionVO vision) throws ServiceException, 
 # Test result
 The test use sendmail to send template result content.
 ![Image of BPMN-res-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/13-004.jpeg)
-<br/>
-<br/>
+<br>
+<br>
 
 # TemplateUtils
 TemplateUtils is bambooBSC template util.
@@ -82,9 +84,11 @@ TemplateUtils is bambooBSC template util.
 | getResourceSrc(ClassLoader classLoader, String metaInfFile) | String | get FreeMarker ftl resource content, `classLoader` ClassLoader, `metaInfFile` resource on META-INF fullpath |
 | processTemplate(String name, ClassLoader classLoader, String templateResource, Map`<String, Object>` parameter) | String | do template from resource, `name` this event name, `classLoader` ClassLoader, `templateResource` resource on META-INF fullpath, `parameter` is Map`<String, Object>` param put template need variable's value  |
 
-<br/>
-<br/>
+<br>
+<br>
+
 `processTemplate(String name, ClassLoader classLoader, String templateResource, Map<String, Object> parameter)` Example:
+
 ```JAVA
 Map<String, Object> paramMap = new HashMap<String, Object>();
 paramMap.put("labels", labels);
