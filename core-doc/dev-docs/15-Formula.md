@@ -5,8 +5,8 @@ Previous section 14 - Web Context bean</a>
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/16-API.md">⇨ 
 Next section 16 - API</a>
 
-#15 - Formula
-#Introduction
+# 15 - Formula
+# Introduction
 Management bambooBSC formula for REPORT/KPI score calculate.
 
 
@@ -15,15 +15,15 @@ Management bambooBSC formula for REPORT/KPI score calculate.
 2. GROOVY http://www.groovy-lang.org/documentation.html<br/>
 3. BeanShell http://www.beanshell.org/intro.html
 
-#Management formula or KPI aggregation method
+# Management formula or KPI aggregation method
 management aggregation method use `A. Balanced scorecard -> Basic data -> 08 - Aggregation Method`<br/>
 management formula use `A. Balanced scorecard -> Basic data -> 03 - Formula`
 
-#Formula & Aggregation method computing architecture
+# Formula & Aggregation method computing architecture
 ![Image of FORMULA-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/15-001.jpg)
 <br/>
 <br/>
-#BscFormulaUtils
+# BscFormulaUtils
 | Name | return |description |
 | --- | --- | --- |
 | getFormulaById(String forId) | FormulaVO | get formula data by formula-id |
@@ -33,7 +33,7 @@ management formula use `A. Balanced scorecard -> Basic data -> 03 - Formula`
 | parse(FormulaVO formula, BscMeasureData data) | Object | parse expression |
 | parseKPIPeroidScoreChangeValue(FormulaVO formula, float currentPeroidScore, float previousPeroidScore) | Object | parse expression for peroid score change |
 
-#AggregationMethodUtils
+# AggregationMethodUtils
 | Name | return |description |
 | --- | --- | --- |
 | processDefaultMode(KpiVO kpi) | float | process expression |

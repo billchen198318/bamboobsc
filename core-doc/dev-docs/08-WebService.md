@@ -4,8 +4,8 @@
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/09-JasperReport.md"> ⇨ Next section 09 -  JasperReport</a>
 
 
-#08 - WebService
-#Introduction
+# 08 - WebService
+# Introduction
 bambooBSC public a SOAP / REST.<br>
 
 
@@ -14,7 +14,7 @@ bambooBSC public a SOAP / REST.<br>
 2. Apache CXF http://cxf.apache.org/<br/>
 3. Apache Camel http://camel.apache.org/examples.html
 
-###SOAP
+### SOAP
 Example for SOAP:
 
 **Service interfaces**
@@ -71,7 +71,7 @@ public class KpiWebServiceImpl implements KpiWebService {
 <bean id="bsc.webservice.KpiWebService" class="com.netsteadfast.greenstep.bsc.webservice.impl.KpiWebServiceImpl" />
 ```
 
-#REST
+# REST
 Example for REST:
 
 ```JAVA
@@ -118,7 +118,7 @@ public class KpiLogicServiceImpl extends BscBaseLogicService implements IKpiLogi
 }
 ```
 
-#Public the service
+# Public the service
 
 click `01 - WebService registration` to management
 ![Image of ws-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/08-001.jpg)
@@ -133,7 +133,7 @@ click `01 - WebService registration` to management
 <br/>
 <br/>
 
-#ESB service
+# ESB service
 Example for result out of servlet:
 
 ```JAVA
@@ -189,10 +189,10 @@ public class KPIsRouteBuilder extends RouteBuilder {
     
 ```
 
-#Hessian webService
+# Hessian webService
 client & remote service settings
 
-##1. config "web.xml"
+## 1. config "web.xml"
 <br/>
 Enable hessian servlet:
 ```XML
@@ -207,7 +207,7 @@ Enable hessian servlet:
 	</servlet-mapping> 	
 ```	
 
-##2. config "Hessian-servlet.xml"
+## 2. config "Hessian-servlet.xml"
 <br/>
 Example publish a service:
 ```XML
@@ -217,7 +217,7 @@ Example publish a service:
 </bean>
 ```
 
-##3. config "applicationContext-hessian.xml"
+## 3. config "applicationContext-hessian.xml"
 ```XML
 	<bean id="hessian.config" class="java.util.HashMap" scope="singleton" >
 		<constructor-arg>
@@ -254,7 +254,7 @@ Example publish a service:
     </bean>
 ```    
 
-##4. config "applicationContext-appSettings.properties"
+## 4. config "applicationContext-appSettings.properties"
 ```
 #######################################################
 #	for applicationContext-hessian.xml

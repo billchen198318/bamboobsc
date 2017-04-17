@@ -94,13 +94,13 @@ contact: chen.xin.nien@gmail.com
 
 <br/>
 <br/>
-###Install on Windows
+### Install on Windows
 install step video: https://www.youtube.com/watch?v=pM3q9udreDo
 <br/>
 <br/>
 
-###Install on Linux
-###1. must first install the MySQL and JDK8
+### Install on Linux
+### 1. must first install the MySQL and JDK8
 ```
 # apt-get install mysql-server
 # apt-get install oracle-java8-jdk
@@ -111,12 +111,12 @@ Java(TM) SE Runtime Environment (build 1.8.0-b132)
 Java HotSpot(TM) Client VM (build 25.0-b70, mixed mode)
 
 
-###config MySQL root account's password
+### config MySQL root account's password
 ```
 # mysqladmin -u root -p password
 ```
 
-###2. Config MySQL enable lower_case_table_names=1
+### 2. Config MySQL enable lower_case_table_names=1
 ```
 # service mysql stop
 # vi /etc/mysql/my.cnf
@@ -132,23 +132,23 @@ and save my.cnf
 # service mysql restart
 ```
 
-###3. Get bambooBSC environment file
+### 3. Get bambooBSC environment file
 ```
 # cd /home
 # wget --no-check-certificate https://github.com/billchen198318/bamboobsc/releases/download/v0.7.1/bamboobsc-0.7.1-RELEASE.7z
 ```
 
-###4. Install P7ZIP
+### 4. Install P7ZIP
 ```
 # apt-get install p7zip
 ```
 
-###5. Extract the archive
+### 5. Extract the archive
 ```
 # p7zip -d bamboobsc-0.7.1-RELEASE.7z
 ```
 
-###6. Import bbcore.sql to MySQL
+### 6. Import bbcore.sql to MySQL
 ```
 # cd /home/bamboobsc-07/
 # mysql -u root -p
@@ -159,7 +159,7 @@ mysql> exit;<br/>
 # mysql bbcore -u root -p < bbcore.sql
 ```
 
-###7. Config applicationContext-dataSource.properties
+### 7. Config applicationContext-dataSource.properties
 config A ( CORE system ).<br/> /home/bamboobsc-07/apache-tomcat-8.0.41/webapps/<b>core-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
 config B (Balanced Scorecard system ).<br/> /home/bamboobsc-07/apache-tomcat-8.0.41/webapps/<b>gsbsc-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
@@ -178,13 +178,13 @@ dataSource.user=root
 dataSource.password=password
 ```
 
-###8. The need to create the directory folder, for upload and report source file need.
+### 8. The need to create the directory folder, for upload and report source file need.
 ```
 # cd /var
 # mkdir gsbsc gsbsc/upload gsbsc/jasperreport
 ```
 
-###9. Run bambooBSC
+### 9. Run bambooBSC
 ```
 # cd /home/bamboobsc-07/apache-tomcat-8.0.41/bin
 # chmod a+x catalina.sh
@@ -207,7 +207,7 @@ the log file on /tmp/
 
 <br/>
 
-###Install on Amazon EC2 Failed to get local InetAddress for VMID
+### Install on Amazon EC2 Failed to get local InetAddress for VMID
 
 cannot connect to MySQL database<br/>
 Please refer to:<br/>
@@ -216,7 +216,7 @@ http://stackoverflow.com/questions/603351/can-we-set-easy-to-remember-hostnames-
 <br/>
 <br/>
 
-###Build development environments
+### Build development environments
 ```
 System required
 A. JDK8
@@ -224,23 +224,23 @@ B. Eclipse4 or later version
 C. Apache Tomcat8
 ```
 
-###1. Download archives file
+### 1. Download archives file
 click "Download ZIP" button<br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/001.png"></img>
 
-###2. Unzip the archive file bamboobsc-master.zip
+### 2. Unzip the archive file bamboobsc-master.zip
 Unzip to C:\home\git\ <br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/002.png"></img>
 
-###3. Open eclipse
+### 3. Open eclipse
 workspace dir input C:\home\git\bamboobsc-master<br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/003.png"></img>
 
-###4. Configure eclipse
+### 4. Configure eclipse
 settings Text file encoding to UTF-8<br/>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/005.png"></img>
 
-###5. Import project
+### 5. Import project
    a. core-persistence<br/>
    b. core-lib<br/>
    c. core-base<br/>
@@ -274,7 +274,7 @@ settings Text file encoding to UTF-8<br/>
    add External JARs: "core-base.jar", "gsbsc-persistence.jar" on C:\home\git\bamboobsc-master\core-export-lib\ <br/>
    <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/BUILD_DEV_ENV/011.png"></img>
    
-###5. Clean Java Problems ( if found Java Problem on Markers )
+### 5. Clean Java Problems ( if found Java Problem on Markers )
    1. Clean all project 
    2. Restart
 
@@ -283,7 +283,7 @@ settings Text file encoding to UTF-8<br/>
 
 
 
-#bambooBSC development manual
+# bambooBSC development manual
 
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/01-Entity.md">01 - Entitiy</a>
 <br/>

@@ -4,8 +4,8 @@
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/05-ProgramRegistrationAndMenuSettings.md">⇨ Next section 05-Program registration and Menu settings</a>
 
 
-#04 - Controller
-#Introduction
+# 04 - Controller
+# Introduction
 bambooBSC page view / controller is use JSP / Struts2 and DOJO.<br>
 
 
@@ -14,7 +14,7 @@ bambooBSC page view / controller is use JSP / Struts2 and DOJO.<br>
 2. Struts2 https://struts.apache.org/docs/home.html<br/>
 3. DOJO javascript framework https://dojotoolkit.org/<br/>
 
-#BaseSupportAction
+# BaseSupportAction
 BaseSupportAction is for default page action, usually use of Management page, Edit page, Create page.<br/>
 
 | Name | Return | description |
@@ -61,7 +61,7 @@ BaseSupportAction is for default page action, usually use of Management page, Ed
 | isNoSelectId(String value) | boolean | if no select options item return true |
 | transformAppendIds2ListByEncode(String appendIds)<br/><br/>transformAppendIds2List(String appendIds)<br/><br/>joinAppend2String(List`<String>` datas) | String | for text work |
 
-#IBaseAdditionalSupportAction interfaces
+# IBaseAdditionalSupportAction interfaces
 The IBaseAdditionalSupportAction interfaces support View Page( JSP ) to get action method program-id and program-name.
 ```JAVA
 @Override
@@ -90,7 +90,7 @@ JSP code for IBaseAdditionalSupportAction show head label.
 <br/>
 <br/>
 
-#BaseJsonAction
+# BaseJsonAction
 BaseJsonAction is extends BaseSupportAction, it is for Save/Update/Delete controller action use.
 
 | Name | Return | description |
@@ -105,7 +105,7 @@ BaseJsonAction is extends BaseSupportAction, it is for Save/Update/Delete contro
 
 <br/>
 <br/>
-#BaseQueryGridJsonAction
+# BaseQueryGridJsonAction
 BaseQueryGridJsonAction is extends BaseJsonAction, it main support Grid query.
 
 | Name | Return | description |
@@ -118,7 +118,7 @@ BaseQueryGridJsonAction is extends BaseJsonAction, it main support Grid query.
 
 <br/>
 <br/>
-#Controller annotation
+# Controller annotation
 
 | Name | description |
 | --- | --- |
@@ -138,7 +138,7 @@ Program id naming rules example:
 <br/>
 <br/>
 
-#Program page show at DOJO-Tab javascript
+# Program page show at DOJO-Tab javascript
 Show at DOJO-Tab javascript function system auto generated when the program has registered.
 
 | function-key | description |
@@ -168,7 +168,7 @@ Example:
 <br/>
 <br/>
 
-#GreenStep page Tag
+# GreenStep page Tag
 The gs tag is work with Struts2 and DOJO javascript.
 
 | Tag | description |
@@ -377,7 +377,7 @@ function BSC_PROG002D0001Q_GridButtonClick(itemOid) {
 <br/>
 <br/>
 
-#Page common javascript function
+# Page common javascript function
 
 | Name | return | description |
 | --- | --- | --- |
@@ -413,7 +413,7 @@ other:<br/>
 `setPageOfOrderBy(_id, queryFieldName)`<br/>
 `getGoogleMapAddressName(lat, lng, _setAddressFn)`<br/>
 
-#Add controller to menu item and config authority
+# Add controller to menu item and config authority
 Please use:
 <br/> 
 1. Registration use `02 - Program registration` to add.<br/> 
@@ -423,7 +423,7 @@ Please use:
 <br/>
 <br/>
 
-#reference example:
+# reference example:
 Management query action:<br>
 https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-web/src/com/netsteadfast/greenstep/bsc/action/VisionManagementAction.java<br/><br>
 Grid query action:<br/>
