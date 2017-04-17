@@ -67,6 +67,7 @@ public class KpiWebServiceImpl implements KpiWebService {
 ```
 
 **Config applicationContext-STANDARD-CXF.xml**
+
 ```XML
 <bean id="bsc.webservice.KpiWebService" class="com.netsteadfast.greenstep.bsc.webservice.impl.KpiWebServiceImpl" />
 ```
@@ -122,16 +123,18 @@ public class KpiLogicServiceImpl extends BscBaseLogicService implements IKpiLogi
 
 click `01 - WebService registration` to management
 ![Image of ws-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/08-001.jpg)
-<br/>
-<br/>
+<br>
+<br>
+
 ![Image of ws-mgr2](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/08-002.jpg)
-<br/>
-<br/>
+<br>
+<br>
+
 ***Note: need restart tomcat server to take effect***
 
 ![Image of ws-mgr3](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/08-003.jpg)
-<br/>
-<br/>
+<br>
+<br>
 
 # ESB service
 Example for result out of servlet:
@@ -181,6 +184,7 @@ public class KPIsRouteBuilder extends RouteBuilder {
 ```
 
 ***Config applicationContext-STANDARD-ESB.xml***
+
 ```XML
 
     <camel:camelContext id="esb.BSC-SystemCamelContext">
@@ -193,7 +197,7 @@ public class KPIsRouteBuilder extends RouteBuilder {
 client & remote service settings
 
 ## 1. config "web.xml"
-<br/>
+<br>
 Enable hessian servlet:
 ```XML
 	<servlet>  
@@ -208,8 +212,9 @@ Enable hessian servlet:
 ```	
 
 ## 2. config "Hessian-servlet.xml"
-<br/>
+<br>
 Example publish a service:
+
 ```XML
 <bean name="/core.service.TestHelloWorldService.hessian" class="com.netsteadfast.greenstep.sys.GreenStepHessianServiceExporter">
 	<property name="service" ref="core.service.TestHelloWorldService"/>
