@@ -10,13 +10,16 @@ bambooBSC API rest/soap for get Scorecard.
 
 ### only 0.7.0-RELEASE or later version has support.
 
-<br/>
-<br/>
+<br>
+<br>
+
 # 1. REST:
 ### REST url:
+
 127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1/
 
 ### Example:
+
 ```
 curl -i -X GET "http://127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1?visionOid=1089abb5-3faf-445d-88ff-cd7690ac6743&startDate=&endDate=&startYearDate=2015&endYearDate=2016&frequency=6&dataFor=all&measureDataOrganizationOid=&measureDataEmployeeOid=&contentFlag="
 ```
@@ -55,8 +58,9 @@ getScorecard1
 
 
 # Query parameter description
+
 | Name |description |
-| --- | --- | --- |
+| --- | --- |
 | visionOid | Vision PK, tb_vision.OID |
 | startDate | measure-data start date, if frequency is 1,2,3 is required |
 | endDate | measure-data end date, if frequency is 1,2,3 is required |
@@ -69,6 +73,7 @@ getScorecard1
 
 
 ### Frequency value description
+
 | Frequency |description | 
 | --- | --- |
 | 1 | Day |
@@ -78,8 +83,8 @@ getScorecard1
 | 5 | Half of year |
 | 6 | Year |
 
-<br/>
-<br/>
+<br>
+<br>
 
 # REST Result:
 
@@ -121,8 +126,9 @@ getScorecard1
 <br>
 
 # Result variable description
+
 | Name |description |
-| --- | --- | --- |
+| --- | --- |
 | htmlBodyUrl | This url will print BSC report html content |
 | pieChartUrl | This url will paint BSC-perspectives PIE chart |
 | barChartUrl | This url will paint BSC-perspectives BAR chart |
