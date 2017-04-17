@@ -22,34 +22,41 @@ bambooBSC expression.<br>
 
 # Create Expression for Logic Service bean
 使用 `02 - Expression` 去創建一個expression，這個 expression 必須能與被輔助的 Service Logic bean's method 配合<br/>
-<br/>
+<br>
 ![Image of expr-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/07-001.jpg)
-<br/>
-<br/>
-<br/>
+
+<br>
+<br>
+<br>
+
 新增 expression
 ![Image of expr-mgr2](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/07-002.jpg)
-<br/>
-<br/>
+
+<br>
+<br>
 
 # Create expression support Logic Service settings
-創建設定<br/>
+創建設定
+
+<br>
+
 ![Image of expr-mgr3](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/07-003.jpg)
-<br/>
-<br/>
+<br>
+<br>
+
 ![Image of expr-mgr4](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/07-004.jpg)
-<br/>
-<br/>
+<br>
+<br>
 
 設定 Logic service method 被執行前 / 後 ，執行 expression
 ![Image of expr-mgr5](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/07-005.jpg)
-<br/>
-<br/>
+<br>
+<br>
 
 設定 expression 需要的變數
 ![Image of expr-mgr6](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/07-006.jpg)
-<br/>
-<br/>
+<br>
+<br>
 
 **以上步驟設定完後，每次被設的的 LogicService method 觸發時，AOP ( ServiceScriptExpressionProcessAspect ) 都會去調用執行設定的 Expression**
 
@@ -63,8 +70,8 @@ bambooBSC expression.<br>
 | processAfter(String beanId, Method method, String system, Object resultObj, ProceedingJoinPoint pjp) | void | after process expression with ServiceLogic method |
 
 
-<br/>
-<br/>
+<br>
+<br>
 
 ### ScriptExpressionUtils
 | Name | return |description |
