@@ -4,32 +4,32 @@
 Previous section 15 - Formula</a>
 
 
-#16 - API (REST/SOAP) for get Scorecard
-#Introduction
+# 16 - API (REST/SOAP) for get Scorecard
+# Introduction
 bambooBSC API rest/soap for get Scorecard.
 
-###only 0.7.0-RELEASE or later version has support.
+### only 0.7.0-RELEASE or later version has support.
 
 <br/>
 <br/>
-#1. REST:
-###REST url:
+# 1. REST:
+### REST url:
 127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1/
 
-###Example:
+### Example:
 ```
 curl -i -X GET "http://127.0.0.1:8080/gsbsc-web/services/jaxrs/scorecard1?visionOid=1089abb5-3faf-445d-88ff-cd7690ac6743&startDate=&endDate=&startYearDate=2015&endYearDate=2016&frequency=6&dataFor=all&measureDataOrganizationOid=&measureDataEmployeeOid=&contentFlag="
 ```
 <br>
 
-#2. SOAP:
-###WSDL url:
+# 2. SOAP:
+### WSDL url:
 http://127.0.0.1:8080/gsbsc-web/services/api?wsdl
-###Method:
+### Method:
 getScorecard1
 
 <br>
-###Example:
+### Example:
 
 ```XML
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.bsc.greenstep.netsteadfast.com/">
@@ -54,7 +54,7 @@ getScorecard1
 ```
 
 
-#Query parameter description
+# Query parameter description
 | Name |description |
 | --- | --- | --- |
 | visionOid | Vision PK, tb_vision.OID |
@@ -68,7 +68,7 @@ getScorecard1
 | contentFlag | if value `Y` , will put xml and json data result out |
 
 
-###Frequency value description
+### Frequency value description
 | Frequency |description | 
 | --- | --- |
 | 1 | Day |
@@ -81,9 +81,9 @@ getScorecard1
 <br/>
 <br/>
 
-#REST Result:
+# REST Result:
 
-###Example:
+### Example:
 
 ```JSON
 {
@@ -120,7 +120,7 @@ getScorecard1
 
 <br>
 
-#Result variable description
+# Result variable description
 | Name |description |
 | --- | --- | --- |
 | htmlBodyUrl | This url will print BSC report html content |

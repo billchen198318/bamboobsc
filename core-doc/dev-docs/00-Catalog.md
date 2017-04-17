@@ -1,4 +1,4 @@
-#bambooBSC development manual
+# bambooBSC development manual
 
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/01-Entity.md">01 - Entitiy</a>
 <br/>

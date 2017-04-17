@@ -6,8 +6,8 @@ Previous section 12 - Job Scheduler</a>
 Next section 14 - Web Context bean</a>
 
 
-#13 - Template
-#Introduction
+# 13 - Template
+# Introduction
 bambooBSC template model.<br>
 
 
@@ -15,7 +15,7 @@ bambooBSC template model.<br>
 1. Spring http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/<br/>
 2. Apache FreeMarker http://freemarker.org/
 
-#Create template resource
+# Create template resource
 create a template resource.
 ![Image of BPMN-res-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/13-001.jpeg)
 <br/>
@@ -66,13 +66,13 @@ public DefaultResult<VisionVO> create(VisionVO vision) throws ServiceException, 
 }
 ```
 
-#Test result
+# Test result
 The test use sendmail to send template result content.
 ![Image of BPMN-res-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/13-004.jpeg)
 <br/>
 <br/>
 
-#TemplateUtils
+# TemplateUtils
 TemplateUtils is bambooBSC template util.
 
 

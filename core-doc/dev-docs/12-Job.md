@@ -6,8 +6,8 @@ Previous section 11 - Mail</a>
 Next section 13 - Template</a>
 
 
-#12 - Job scheduler
-#Introduction
+# 12 - Job scheduler
+# Introduction
 bambooBSC Job scheduler.<br>
 
 
@@ -15,7 +15,7 @@ bambooBSC Job scheduler.<br>
 1. Spring http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/<br/>
 2. Quartz http://www.quartz-scheduler.org/
 
-#BaseJob
+# BaseJob
 BaseJob is support Job scheduler object.<br/>
 Example:<br/>
 
@@ -77,7 +77,7 @@ protected void executeInternal(JobExecutionContext context) throws JobExecutionE
 
 
 
-#Config for Quartz with spring
+# Config for Quartz with spring
 **applicationContext-STANDARD-QUARTZ-JOB.xml**
 <br/>
 applicationContext-STANDARD-QUARTZ-JOB.xml is for Job Task config.

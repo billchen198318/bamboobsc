@@ -7,15 +7,15 @@ Next section 12 - Job</a>
 
 
 
-#11 - Mail
-#Introduction
+# 11 - Mail
+# Introduction
 Send email method description.<br>
 
 
 ***You must first understand the following framework***<br/>
 1. Spring http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/<br/>
 
-#Use CORE-system job to send mail
+# Use CORE-system job to send mail
 it will send mail by job, and pre job max 50s mail to send, a job task wait 2 min.<br/>
 Example:
 ```JAVA
@@ -35,7 +35,7 @@ mailHelper.setSuccessFlag(YesNo.NO);
 this.sysMailHelperService.saveObject(mailHelper);
 ```
 
-#Use MailClientUtils send mail
+# Use MailClientUtils send mail
 MailClientUtils is send mail tool for bambooBSC.
 
 
@@ -55,7 +55,7 @@ MailClientUtils.send("root@localhost", "tiffany@localhost", "Test", "hello world
 ```
 
 
-#Use Spring JavaMailSender
+# Use Spring JavaMailSender
 Use JavaMailSender . <br/>
 Example:
 ```JAVA
@@ -78,7 +78,7 @@ for (int i=0; fileNames!=null && i<fileNames.length; i++) {
 mailSender.send(message);
 ```
 
-#Config for mail, applicationContext-mail.properties
+# Config for mail, applicationContext-mail.properties
 
 mail.host=localhost<br/> 
 mail.port=25<br/>

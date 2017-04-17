@@ -6,8 +6,8 @@ Previous section 13 - Template</a>
 Next section 15 - Formula</a>
 
 
-#14 - Web Context bean
-#Introduction
+# 14 - Web Context bean
+# Introduction
 server web context start or shutdown will run java class bean.<br>
 WebSystemCtxBeanSupportListener will auto create bean( ContextInitializedAndDestroyedBean ) and call `execute(ServletContextEvent event)` method for INITIALIZE or DESTROY.
 
@@ -15,7 +15,7 @@ WebSystemCtxBeanSupportListener will auto create bean( ContextInitializedAndDest
 ***You must first understand the following framework***<br/>
 1. ServletContextListener https://tomcat.apache.org/tomcat-8.0-doc/servletapi/javax/servlet/ServletContextListener.html<br/>
 
-#Create a event bean
+# Create a event bean
 The class need extends ContextInitializedAndDestroyedBean<br/>
 Example:
 ```JAVA
@@ -32,7 +32,7 @@ public class CleanTempUploadForContextInitAndDestroy extends ContextInitializedA
 }
 ```
 
-#Create config
+# Create config
 Add config item.
 ![Image of WEB-CTX-BEAN-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/14-001.jpeg)
 <br/>
@@ -43,7 +43,7 @@ Add config item.
 
 **And need restart tomcat server to effective**
 
-#ContextInitializedAndDestroyedBean
+# ContextInitializedAndDestroyedBean
 
 | Name | return |description |
 | --- | --- | --- |
