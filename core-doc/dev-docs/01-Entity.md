@@ -1,9 +1,9 @@
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/00-Catalog.md">⌂ Catalog</a><br/>
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/02-DaoAndService.md">⇨ Next section 02-DAO and Service</a>
 
-#01 - Entitiy
+# 01 - Entitiy
 
-#Introduction
+# Introduction
 BaseValue recommend for Page view(VO) or transform (DTO) and for MyBatis custom query mapper, or page grid query.<br>
 BaseEntity recommend only for hibernate do save/update/delete.<br>
 
@@ -13,7 +13,7 @@ BaseEntity recommend only for hibernate do save/update/delete.<br>
 3. Dozer https://github.com/DozerMapper/dozer<br/>
 4. MyBatis https://github.com/mybatis/mybatis-3<br/>
 
-#Persistence entity
+# Persistence entity
 
 <br/>
 
@@ -138,7 +138,7 @@ public class BbTest extends BaseEntity<String> implements java.io.Serializable {
 <br/>
 <br/>
 
-###Persistence object (BaseEntity) must found variable field
+### Persistence object (BaseEntity) must found variable field
 
 | Name | Type |
 | --- | --- |
@@ -151,7 +151,7 @@ public class BbTest extends BaseEntity<String> implements java.io.Serializable {
 <br/>
 <br/>
 
-###Persistence object (BaseEntity) annotation
+### Persistence object (BaseEntity) annotation
 
 | Name | description | example |
 | --- | --- | --- |
@@ -163,7 +163,7 @@ if PO add the `@EntityPK` annotation, BaseService will check PK(primary key) whe
 if PO add the `@EntityUK` annotation, BaseService will check UK(unique key) when call saveObject method.<br/>
 
 
-#Value object
+# Value object
 a Value object extends BaseValue
 ```java
 package com.netsteadfast.greenstep.vo;
@@ -218,7 +218,7 @@ public class TestVO extends BaseValueObj implements java.io.Serializable {
 }
 ```	
 
-###Value object (BaseValue) must found variable field
+### Value object (BaseValue) must found variable field
 
 | Name | Type |
 | --- | --- |
@@ -228,7 +228,7 @@ BaseValue no need `cuserid, cdate, uuserid, udate` <br/>
 BaseService will convert VO(BaseValue) to PO(BaseEntity) and auto fill `cuserid,cdate,uuserid,udate` . when call saveObject method.<br/>
 BaseService will auto fill `oid` variable(PK) when call saveObject method.
 
-#Settings Mapper VO(value object) to PO(Persistence object) config xml ( Dozer )
+# Settings Mapper VO(value object) to PO(Persistence object) config xml ( Dozer )
 add dozerBeanMapping-test.xml into resource/dozer/
 
 ```xml
@@ -283,7 +283,7 @@ add dozerBeanMapping-test.xml into resource/dozer/
 <br/>
 <br/>
 
-#Options for MyBatis-3
+# Options for MyBatis-3
 ### Add BbTest.xml into /resource/mappers
 
 ```xml
@@ -338,7 +338,7 @@ add dozerBeanMapping-test.xml into resource/dozer/
 <br/>
 <br/>
 
-###Dynamic HQL from XML config
+### Dynamic HQL from XML config
 reference:<br/>
 for KPI page grid query:<br/>
 https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-persistence/resource/dynamichql/BbKpi-dynamic-hql.xml

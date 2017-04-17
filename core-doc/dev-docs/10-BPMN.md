@@ -4,8 +4,8 @@
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/11-Mail.md"> ⇨ Next section 11- Mail</a>
 
 
-#10 - BPMN resource
-#Introduction
+# 10 - BPMN resource
+# Introduction
 bambooBSC deploy BPMN resource.<br>
 
 
@@ -14,7 +14,7 @@ bambooBSC deploy BPMN resource.<br>
 2. Activiti BPMN http://activiti.org/<br/>
 
 
-#Package resource file
+# Package resource file
 Example for `PDCAProjectProcess` <br/>
 PDCAProjectProcess files:<br/>
 |--PDCAProjectProcess.bpmn<br/>
@@ -22,7 +22,7 @@ PDCAProjectProcess files:<br/>
 
 zip compression PDCAProjectProcess.bpmn and PDCAProjectProcess.png to PDCAProjectProcess.zip
 
-#Upload resource and deploy
+# Upload resource and deploy
 click `04 - BPMN Resource` to management
 ![Image of BPMN-res-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/10-001.png)
 <br/>
@@ -32,13 +32,13 @@ click `04 - BPMN Resource` to management
 <br/>
 
 
-#Settings resource audit roles
+# Settings resource audit roles
 click `05 - BPMN Resource role` to management
 ![Image of BPMN-res-mgr3](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/10-003.png)
 <br/>
 <br/>
 
-#Logic Service integrate BPMN resource example
+# Logic Service integrate BPMN resource example
 The example is PDCA Project. `getBusinessProcessManagementResourceId()` return value is deploy BPMN resource id.
 ```JAVA
 @ServiceAuthority(check=true)
@@ -69,7 +69,7 @@ https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/03-Log
 https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-standard/src/com/netsteadfast/greenstep/bsc/service/logic/IPdcaLogicService.java<br/>
 https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-standard/src/com/netsteadfast/greenstep/bsc/service/logic/impl/PdcaLogicServiceImpl.java
 
-#Force delete a work resource
+# Force delete a work resource
 Example:<br/>
 BusinessProcessManagementDeleteTools [true/false] [resource-Id]<br/>
 UNIX command: `delete_bpmn_res.sh true TestResourceId`<br/>

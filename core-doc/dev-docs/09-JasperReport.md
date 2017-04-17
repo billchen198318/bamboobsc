@@ -4,8 +4,8 @@
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/10-BPMN.md"> ⇨ Next section 10 - BPMN</a>
 
 
-#09 - JasperReport
-#Introduction
+# 09 - JasperReport
+# Introduction
 bambooBSC public a JasperReport.<br>
 
 
@@ -13,7 +13,7 @@ bambooBSC public a JasperReport.<br>
 1. JasperReport / iReport http://community.jaspersoft.com/<br/>
 
 
-###Report file and directory structure
+### Report file and directory structure
 Example is bambooBSC SWOT PDF report.
 
 BSC_RPT002<BR/>
@@ -23,7 +23,7 @@ BSC_RPT002<BR/>
  
 zip compression directory folder `BSC_RPT002` to `BSC_RPT002.zip`
 
-#Management and upload
+# Management and upload
 click `08 - Report management` to management
 ![Image of RPT-mgr1](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/09-001.jpg)
 <br/>
@@ -35,7 +35,7 @@ click `08 - Report management` to management
 ![Image of RPT-mgr3](https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/dev-docs/pics/09-003.jpg)
 <br/>
 <br/>
-#View page call show report 
+# View page call show report 
 use common javascript function to open.
 ```
 openCommonJasperReportLoadWindow( 
@@ -49,11 +49,11 @@ Example code:
 openCommonJasperReportLoadWindow( "SWOT-Report", "BSC_RPT002", "PDF", { 'reportId' : data.reportId } );
 ```
 
-#reference example:
+# reference example:
 https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-web/WebContent/pages/swot/swot-management.jsp
 
 
-#JReportUtils
+# JReportUtils
 
 | Name | return |description |
 | --- | --- | --- |

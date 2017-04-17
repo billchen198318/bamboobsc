@@ -3,9 +3,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/dev-docs/03-LogicService.md">⇨ Next section 03-Logic service</a>
 
-#02 - DAO and Service
+# 02 - DAO and Service
 
-#Introduction
+# Introduction
 BaseDAO for data basic operation.<br>
 BaseService for for data basic operation package call DAO.<br>
 
@@ -15,7 +15,7 @@ BaseService for for data basic operation package call DAO.<br>
 3. Dozer https://github.com/DozerMapper/dozer<br/>
 4. MyBatis https://github.com/mybatis/mybatis-3<br/>
 
-###DAO interfaces example
+### DAO interfaces example
 ```JAVA
 package com.netsteadfast.greenstep.bsc.dao;
 
@@ -30,7 +30,7 @@ public interface ITestDAO<T extends java.io.Serializable, PK extends java.io.Ser
 }
 ```
 
-###DAO implements example
+### DAO implements example
 ```JAVA
 package com.netsteadfast.greenstep.bsc.dao.impl;
 
@@ -55,7 +55,7 @@ public class TestDAOImpl extends BaseDAO<BbTest, String> implements ITestDAO<BbT
 }
 ```
 
-###BaseDAO method description.
+### BaseDAO method description.
 
 | Name | Return | description |
 | --- | --- | --- |
@@ -97,7 +97,7 @@ public class TestDAOImpl extends BaseDAO<BbTest, String> implements ITestDAO<BbT
 <br/>
 <br/>
 
-###Service interfaces example
+### Service interfaces example
 *** The service interfaces must define two static variable, `MAPPER_ID_PO2VO` with `MAPPER_ID_VO2PO`  ***
 ```JAVA
 package com.netsteadfast.greenstep.bsc.service;
@@ -124,7 +124,7 @@ public interface ITestService<T extends java.io.Serializable, E extends java.io.
 <br/>
 <br/>
 
-###Service implements example
+### Service implements example
 
 *** Template T, E, PK ***
 
@@ -198,7 +198,7 @@ public class TestServiceImpl extends BaseService<TestVO, BbTest, String> impleme
 }
 ```
 
-###BaseService method description.
+### BaseService method description.
 
 | Name | Return | description |
 | --- | --- | --- |
@@ -299,7 +299,7 @@ Map<String, Object> queryParam = super.getQueryParamHandler(searchValue)
 <br/>
 <br/>
 
-###Config bean settings
+### Config bean settings
 add applicationContext-test.xml into /resource/applicationContext/bsc/standard/
 ```XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -324,7 +324,7 @@ add applicationContext-test.xml into /resource/applicationContext/bsc/standard/
 <br/>
 <br/>
 
-###Config add resource xml
+### Config add resource xml
 Edit config applicationContext-BSC-STANDARD-BEANS.xml add item
 ```XML
 <import resource="classpath*:applicationContext/bsc/standard/applicationContext-test.xml" />
@@ -334,7 +334,7 @@ Edit config applicationContext-BSC-STANDARD-BEANS.xml add item
 <br/>
 <br/>
 
-###Page grid query example code ( for Dynamic HQL from XML config )
+### Page grid query example code ( for Dynamic HQL from XML config )
 reference:<br/>
 Dynamic HQL XML config:<br/>
 https://github.com/billchen198318/bamboobsc/blob/master/gsbsc-persistence/resource/dynamichql/BbVision-dynamic-hql.xml<br/>
