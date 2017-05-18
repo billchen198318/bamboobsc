@@ -333,13 +333,13 @@ public class EmployeeLogicServiceImpl extends BscBaseLogicService implements IEm
 		}		
 		DefaultResult<EmployeeVO> result = this.getEmployeeService().saveObject(employee);
 		employee = result.getValue();
-		this.createEmployeeOrganization(result.getValue(), organizationOid);
+		this.createEmployeeOrganization(employee, organizationOid);
 		
 		// create default role
 		UserRoleVO userRole = new UserRoleVO();
-		userRole.setAccount(result.getValue().getAccount());
+		userRole.setAccount(employee.getAccount());
 		userRole.setRole( this.roleLogicService.getDefaultUserRole() );
-		userRole.setDescription(result.getValue().getAccount() + " `s role!");
+		userRole.setDescription(employee.getAccount() + " `s role!");
 		this.getUserRoleService().saveObject(userRole);
 		
 		this.createHierarchy(employee, BscConstants.EMPLOYEE_HIER_ZERO_OID);

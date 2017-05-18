@@ -95,8 +95,9 @@ public class JReportUtils {
 			}
 			if (YesNo.YES.equals(report.getIsCompile()) && report.getFile().endsWith("jrxml")) {
 				logger.info("compile report...");
-				String outJasper = compileReportToJasperFile(new String[]{reportFileFullPath}, reportDeployDirName + report.getReportId() + "/");
-				logger.info("out : " + outJasper);
+				File d = new File( reportDeployDirName + report.getReportId() );
+				String outJasper = compileReportToJasperFile(d.listFiles(), reportDeployDirName + report.getReportId() + "/");
+				logger.info("out first : " + outJasper);
 			}
 		} catch (JRException re) {
 			re.printStackTrace();
@@ -141,6 +142,33 @@ public class JReportUtils {
 	/**
 	 * jasperreport compile jrxml 成 jasper
 	 * 
+	 * @param sourceFile		如: File[]
+	 * @param destDir			如: C:/report/     產生一個 test.jasper 到 C:/report/ 中
+	 * @return
+	 * @throws JRException
+	 */
+	public static String compileReportToJasperFile(File sourceFile[], String destDir) throws JRException {
+		String jasperFirst = "";
+		for (int ix=0; sourceFile!=null && ix<sourceFile.length; ix++) {
+			File srcFile = sourceFile[ix];
+			if (!srcFile.exists() || srcFile.getName().indexOf(".jrxml")==-1) {
+				srcFile=null;
+				continue;
+			}
+			//String destFileName=srcFile.getName().replaceAll(".jrxml", ".jasper");
+			String destFileName=srcFile.getPath().replaceAll(".jrxml", ".jasper");
+			if ("".equals(jasperFirst)) {
+				jasperFirst = destFileName;
+			}
+			JasperCompileManager.compileReportToFile(srcFile.getPath(), destFileName);
+			logger.info("out process : " + destFileName);
+		}
+		return jasperFirst;
+	}	
+	
+	/**
+	 * jasperreport compile jrxml 成 jasper
+	 * 
 	 * @param sourceFileName	如: new String[]{ "C:/report-source/test.jrxml" }
 	 * @param destDir			如: C:/report/     產生一個 test.jasper 到 C:/report/ 中
 	 * @return
@@ -154,11 +182,13 @@ public class JReportUtils {
 				srcFile=null;
 				continue;
 			}
-			String destFileName=srcFile.getName().replaceAll(".jrxml", ".jasper");
+			//String destFileName=srcFile.getName().replaceAll(".jrxml", ".jasper");
+			String destFileName=srcFile.getPath().replaceAll(".jrxml", ".jasper");
 			if ("".equals(jasperFirst)) {
 				jasperFirst = destFileName;
 			}
 			JasperCompileManager.compileReportToFile(srcFile.getPath(), destFileName);
+			logger.info("out process : " + destFileName);
 		}
 		return jasperFirst;
 	}
