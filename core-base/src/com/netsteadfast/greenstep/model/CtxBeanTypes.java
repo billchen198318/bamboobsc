@@ -30,6 +30,10 @@ public class CtxBeanTypes {
 	public static final String INIT = "INITIALIZE";
 	public static final String DESTROY = "DESTROY";
 	
+	public static boolean isType(String type) {
+		return ( INIT.equals(type) || DESTROY.equals(type) );
+	}
+	
 	public static Map<String, String> getTypes(boolean pleaseSelect) {
 		Map<String, String> dataMap = new LinkedHashMap<String, String>();
 		if (pleaseSelect) {

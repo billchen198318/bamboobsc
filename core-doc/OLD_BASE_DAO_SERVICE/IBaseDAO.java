@@ -105,6 +105,11 @@ public interface IBaseDAO<T extends java.io.Serializable, PK extends java.io.Ser
 	public String getIbatisMapperNameSpace();		
 	public List<T> ibatisSelectListByParams(Map<String, Object> params) throws Exception;
 	public T ibatisSelectOneByValue(T valueObj) throws Exception;
+	/*
+	public boolean ibatisInsert(T valueObj) throws Exception;
+	public boolean ibatisUpdate(T valueObj) throws Exception;
+	public boolean ibatisDelete(T valueObj) throws Exception;
+	*/
 	
 	public String getDynamicHql(String queryName, Map<String, Object> paramMap) throws Exception;
 	

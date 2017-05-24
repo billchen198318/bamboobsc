@@ -21,11 +21,28 @@
  */
 package com.netsteadfast.greenstep.model;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.netsteadfast.greenstep.base.Constants;
 
 public class WSConfig {
 	public static final String TYPE_SOAP = "SOAP";
 	public static final String TYPE_REST = "REST";
+	
+	public static boolean isType(String type) {
+		return (TYPE_SOAP.equals(type) || TYPE_REST.equals(type));
+	}
+	
+	public static Map<String, String> getTypes(boolean pleaseSelect) {
+		Map<String, String> dataMap = new LinkedHashMap<String, String>();
+		if (pleaseSelect) {
+			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
+		}
+		dataMap.put(TYPE_SOAP, TYPE_SOAP);
+		dataMap.put(TYPE_REST, TYPE_REST);
+		return dataMap;
+	}
 	
 	public static String getJAXRSServerFactoryBeanAddress() {
 		return Constants.getJAXRSServerFactoryBeanAddress();

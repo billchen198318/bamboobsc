@@ -22,35 +22,58 @@
 package com.netsteadfast.greenstep.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Connection;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
+import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.po.hbm.TbSysJreport;
+import com.netsteadfast.greenstep.po.hbm.TbSysJreportParam;
+import com.netsteadfast.greenstep.service.ISysJreportParamService;
 import com.netsteadfast.greenstep.service.ISysJreportService;
+import com.netsteadfast.greenstep.vo.SysJreportParamVO;
 import com.netsteadfast.greenstep.vo.SysJreportVO;
 
 @SuppressWarnings("unchecked")
 public class JReportUtils {
 	protected static Logger logger=Logger.getLogger(JReportUtils.class); 
 	private static ISysJreportService<SysJreportVO, TbSysJreport, String> sysJreportService;
+	private static ISysJreportParamService<SysJreportParamVO, TbSysJreportParam, String> sysJreportParamService;
 	
 	static {
 		sysJreportService = (ISysJreportService<SysJreportVO, TbSysJreport, String>)AppContext.getBean("core.service.SysJreportService");
+		sysJreportParamService = (ISysJreportParamService<SysJreportParamVO, TbSysJreportParam, String>)AppContext.getBean("core.service.SysJreportParamService");
 	}
 	
 	public static void deployReport(SysJreportVO report) throws Exception {
@@ -205,6 +228,89 @@ public class JReportUtils {
 			realFile = null;
 		}		
 		return extractDir;
+	}
+	
+	public static Map<String, Object> getParameter(String reportId, HttpServletRequest request) throws ServiceException, Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		if (StringUtils.isBlank(reportId)) {
+			return paramMap;
+		}
+		paramMap.put("reportId", reportId);
+		List<TbSysJreportParam> paramList = sysJreportParamService.findListByParams(paramMap);
+		paramMap.clear();
+		for (int i=0; paramList!=null && i<paramList.size(); i++) {
+			TbSysJreportParam sysJreportParam = paramList.get(i);
+			Enumeration<String> urlParams = request.getParameterNames();
+			while (urlParams.hasMoreElements()) {
+				String p = urlParams.nextElement();
+				if (p.equals(sysJreportParam.getUrlParam())) {
+					String value = request.getParameter(p);
+					paramMap.put(sysJreportParam.getRptParam(), value);
+				}
+			}
+		}
+		String reportFolder = Constants.getDeployJasperReportDir() + File.separator + reportId + File.separator;
+		paramMap.put("REPORT_FOLDER", reportFolder);
+		paramMap.put("SUBREPORT_DIR", reportFolder);
+		return paramMap;
+	}
+	
+	public static void fillReportToResponse(String reportId, HttpServletRequest request, HttpServletResponse response) throws ServiceException, Exception {
+		Map<String, Object> paramMap = getParameter(reportId, request);
+		fillReportToResponse(reportId, paramMap, response);
+	}
+	
+	public static void fillReportToResponse(String reportId, Map<String, Object> paramMap, HttpServletResponse response) throws ServiceException, Exception {
+		if (StringUtils.isBlank(reportId)) {
+			throw new java.lang.IllegalArgumentException("error, reportId is blank");
+		}
+		TbSysJreport sysJreport = new TbSysJreport();
+		sysJreport.setReportId(reportId);
+		DefaultResult<TbSysJreport> result = sysJreportService.findEntityByUK(sysJreport);
+		if ( result.getValue() == null ) {
+			throw new ServiceException( result.getSystemMessage().getValue() );
+		}
+		sysJreport = result.getValue();
+		String jasperFileFullPath = Constants.getDeployJasperReportDir() + "/" + sysJreport.getReportId() + "/" + sysJreport.getReportId() + ".jasper";
+		File jasperFile = new File(jasperFileFullPath);
+		if (!jasperFile.exists()) {
+			jasperFile = null;
+			throw new Exception("error, Files are missing : " + jasperFileFullPath);
+		}
+		InputStream reportSource = new FileInputStream( jasperFile );
+		Connection conn = null;
+		try {
+			conn = DataUtils.getConnection();
+			ServletOutputStream ouputStream = response.getOutputStream();
+		    JasperPrint jasperPrint = JasperFillManager.fillReport(
+		            reportSource,
+		            paramMap,
+		            conn);
+		    response.setContentType("application/pdf");
+		    response.setHeader("Content-disposition", "inline; filename=" + sysJreport.getReportId() + ".pdf");
+		    JRPdfExporter jrPdfExporter=new JRPdfExporter();
+		    jrPdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+		    jrPdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(ouputStream));		    
+		    SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+		    jrPdfExporter.setConfiguration(configuration);
+		    configuration.setOwnerPassword(Constants.getEncryptorKey1());
+		    jrPdfExporter.exportReport();
+		    ouputStream.flush();
+		    ouputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtils.doReleaseConnection(conn);
+			if (null != reportSource) {
+				try {
+					reportSource.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			reportSource = null;
+			jasperFile = null;
+		}
 	}
 	
 }
