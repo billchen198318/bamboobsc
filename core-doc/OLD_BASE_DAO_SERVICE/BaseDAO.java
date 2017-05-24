@@ -62,7 +62,13 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 	
 	private static String MAPPER_DEFINE_ID_SELECT_BY_PARAMS=".selectByParams";
 	private static String MAPPER_DEFINE_ID_SELECT_BY_VALUE=".selectByValue";
+	/*
+	private static String MAPPER_DEFINE_ID_INSERT=".insert";
+	private static String MAPPER_DEFINE_ID_UPDATE=".update";
+	private static String MAPPER_DEFINE_ID_DELETE=".delete";		
+	*/
 	
+	//private HibernateTemplate hibernateTemplate;	
 	private SqlSession sqlSession;
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -77,6 +83,19 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 	}
 	
 	// -------------------------------------------------------------------------------------------
+	
+	/*
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+	
+	@Autowired
+	@Required
+	@Resource(name="hibernateTemplate")
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	*/
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -128,6 +147,10 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 	}
 	
 	public Session getCurrentSession() throws Exception {
+		/*
+		this.hbmSession=this.sessionFactory.getCurrentSession();
+		return this.hbmSession;
+		*/
 		return sessionFactory.getCurrentSession();
 	}
 	
@@ -147,6 +170,7 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 	}
 	
 	public int queryByNativeSQL(String sql) throws DataAccessException, Exception {
+		//return this.getJdbcTemplate().queryForInt(sql);
 		return this.getJdbcTemplate().queryForObject(sql, Integer.class);
 	}
 	
@@ -165,16 +189,28 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		return this.getJdbcTemplate().queryForList(sql, args);
 	}
 	
+	/*
+	public List queryForListByNativeSQL(String sql, Map paramMap) throws DataAccessException, Exception {
+		return this.getNamedParameterJdbcTemplate().queryForList(sql, paramMap);
+	}
+	*/
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List queryForListByNativeSQL(String sql, Object[] args, RowMapper rowMapper) throws DataAccessException, Exception {
 		return this.getJdbcTemplate().query(sql, args, rowMapper);
 	}
+	
+	/*
+	public List queryForListByNativeSQL(String sql, Map paramMap, RowMapper rowMapper) throws DataAccessException, Exception {
+		return this.getNamedParameterJdbcTemplate().query(sql, paramMap, rowMapper);
+	}
+	*/
 
 	// -------------------------------------------------------------------------------------------
 	
 	@Override
 	public int count(String hql) throws Exception {
-		return DataAccessUtils.intResult(this.getCurrentSession().createQuery(hql).list());
+		return DataAccessUtils.intResult(this.getCurrentSession().createQuery(hql).list()); //this.getHibernateTemplate().find(hql)
 	}
 	
 	@Override
@@ -202,6 +238,31 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
+		
+		/*
+		if (hql==null || this.getHibernateTemplate()==null) {
+			return list;
+		}
+		list=this.getHibernateTemplate().executeFind(
+				new HibernateCallback() {
+					public Object doInHibernate(Session session) {
+						Query query=null;
+						List resultList=null;
+						try {
+							query=session.createQuery(hql);
+							query.setFirstResult(offset);
+							query.setMaxResults(length);
+							resultList=query.list();
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+						}
+						return resultList;
+					}
+				}
+		);
+		*/
+		
 		return list;
 	}
 	
@@ -374,6 +435,7 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 
 	@Override
 	public T save(T entityObject) throws Exception {
+		//this.getHibernateTemplate().save(entityObject);
 		this.getCurrentSession().save(entityObject);
 		return entityObject;
 	}
@@ -385,18 +447,21 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 
 	@Override
 	public T update(T entityObject) throws Exception {
+		//this.getHibernateTemplate().update(entityObject);
 		this.getCurrentSession().update(entityObject);
 		return entityObject;
 	}
 
 	@Override
 	public T merge(T entityObject) throws Exception {
+		//this.getHibernateTemplate().merge(entityObject);
 		this.getCurrentSession().merge(entityObject);
 		return entityObject;
 	}
 
 	@Override
 	public T delete(T entityObject) throws Exception {
+		//this.getHibernateTemplate().delete(entityObject);
 		this.getCurrentSession().delete(entityObject);
 		return entityObject;
 	}
@@ -408,12 +473,15 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 	@SuppressWarnings("unchecked")
 	@Override
 	public T findByOid(T entityObj) throws Exception {
+		//return this.findByPK(((BaseEntity<PK>)entityObj).getOid());
 		return this.findByPK((PK)BaseEntityUtil.getPKOneValue((BaseEntity<PK>)entityObj));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public int countByOid(T entityObj) throws Exception {
+		//return this.count("select count(*) from "+this.getPersisentName()+" where " + PK_FIELD + "=" + ((BaseEntity<PK>)entityObj).getOid() );
+		//return this.countByPK(((BaseEntity<PK>)entityObj).getOid());
 		return this.countByPK((PK)BaseEntityUtil.getPKOneValue((BaseEntity<PK>)entityObj));
 	}
 	
@@ -470,6 +538,13 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		}		
 		Query query=this.getQueryByKeyMap("", pkMap);
 		return (T)query.uniqueResult();
+		/*
+		List<T> list=(List<T>)query.list();
+		if (list==null || list.size()<1) {
+			return null;
+		}
+		return list.get(0);	
+		*/
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -549,6 +624,7 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		Query query=this.getCurrentSession().createQuery(sb.toString());
 		if (params!=null && params.size()>0) { // set query params value
 			for (Map.Entry<String, Object> entry : params.entrySet()) {
+				//this.setQueryParams(query, entry.getKey(), entry.getValue());
 				this.setQueryParams(query, String.valueOf(field), entry.getValue());
 				field++;
 			}
@@ -561,6 +637,7 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		}
 		if (likeParams!=null && likeParams.size()>0) { // set query params like value
 			for (Map.Entry<String, String> entry : likeParams.entrySet()) {
+				//this.setQueryParams(query, entry.getKey(), entry.getValue());
 				this.setQueryParams(query, String.valueOf(field), entry.getValue());
 				field++;
 			}			
@@ -637,6 +714,9 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		return (List<T>)this.getQueryByParams(Constants.QUERY_TYPE_OF_SELECT, params, likeParams, orderParams, customOperParams).list();
 	}
 	
+	//public abstract T findByUK(T entityObject) throws Exception;
+	//public abstract int countByUK(T entityObject) throws Exception;
+	
 	@SuppressWarnings("unchecked")
 	public T findByUK(T entityObject) throws Exception {
 		return this.findByEntityUK(BaseEntityUtil.getUKParameter((BaseEntity<PK>)entityObject));
@@ -654,6 +734,13 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 		}		
 		Query query=this.getQueryByKeyMap("", ukMap);
 		return (T)query.uniqueResult();
+		/*
+		List<T> list=(List<T>)query.list();
+		if (list==null || list.size()<1) {
+			return null;
+		}
+		return (T)list.get(0);	
+		*/
 	}
 	
 	public int countByEntityUK(Map<String, Object> ukMap) throws Exception {
@@ -695,6 +782,32 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 	public T ibatisSelectOneByValue(T valueObj) throws Exception {
 		return this.getSqlSession().selectOne(this.getIbatisMapperNameSpace()+MAPPER_DEFINE_ID_SELECT_BY_VALUE, valueObj);
 	}
+	
+	/*
+	@Override
+	public boolean ibatisInsert(T valueObj) throws Exception {
+		if (this.getSqlSession().insert(this.getIbatisMapperNameSpace()+MAPPER_DEFINE_ID_INSERT, valueObj)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean ibatisUpdate(T valueObj) throws Exception {
+		if (this.getSqlSession().update(this.getIbatisMapperNameSpace()+MAPPER_DEFINE_ID_UPDATE, valueObj)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean ibatisDelete(T valueObj) throws Exception {
+		if (this.getSqlSession().delete(this.getIbatisMapperNameSpace()+MAPPER_DEFINE_ID_DELETE, valueObj)>0) {
+			return true;
+		}
+		return false;
+	}
+	*/
 	
 	public DynamicHql getDynamicHqlResource(String resource) throws Exception {
 		return DynamicHqlUtils.loadResource(resource);

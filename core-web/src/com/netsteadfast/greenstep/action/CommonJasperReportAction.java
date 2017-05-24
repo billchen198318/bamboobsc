@@ -24,7 +24,6 @@ package com.netsteadfast.greenstep.action;
 import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +51,7 @@ import com.netsteadfast.greenstep.po.hbm.TbSysJreportParam;
 import com.netsteadfast.greenstep.service.ISysJreportParamService;
 import com.netsteadfast.greenstep.service.ISysJreportService;
 import com.netsteadfast.greenstep.util.DataUtils;
+import com.netsteadfast.greenstep.util.JReportUtils;
 import com.netsteadfast.greenstep.vo.SysJreportParamVO;
 import com.netsteadfast.greenstep.vo.SysJreportVO;
 
@@ -110,10 +110,11 @@ public class CommonJasperReportAction extends BaseSupportAction {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("reportId", sysJreport.getReportId());
-		List<TbSysJreportParam> paramList = this.sysJreportParamService.findListByParams(params);
+		//List<TbSysJreportParam> paramList = this.sysJreportParamService.findListByParams(params);
 		this.dataSource.add("1");
 		this.connection = DataUtils.getConnection();
 		String reportFolder = Constants.getDeployJasperReportDir() + File.separator + sysJreport.getReportId() + File.separator;
+		/*
 		this.reportParams.put("REPORT_FOLDER", reportFolder);
 		this.reportParams.put("SUBREPORT_DIR", reportFolder);
 		for (int i=0; paramList!=null && i<paramList.size(); i++) {
@@ -127,6 +128,8 @@ public class CommonJasperReportAction extends BaseSupportAction {
 				}
 			}
 		}
+		*/
+		this.reportParams = JReportUtils.getParameter(sysJreport.getReportId(), super.getHttpServletRequest());
 		this.location = reportFolder + sysJreport.getFile();
 	}
 	
