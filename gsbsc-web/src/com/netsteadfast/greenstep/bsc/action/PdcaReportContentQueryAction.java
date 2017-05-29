@@ -276,21 +276,10 @@ public class PdcaReportContentQueryAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.getContent();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;
@@ -308,21 +297,10 @@ public class PdcaReportContentQueryAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.getExcel();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -340,21 +318,10 @@ public class PdcaReportContentQueryAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.loadProjectRelatedData();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			

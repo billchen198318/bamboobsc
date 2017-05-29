@@ -37,6 +37,7 @@ import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.PleaseSelect;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
+import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
@@ -100,13 +101,10 @@ public class RolePermittedManagementAction extends BaseSupportAction implements 
 			this.init();
 			this.loadRoleData();
 			forward = SUCCESS;
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return forward;		
 	}	

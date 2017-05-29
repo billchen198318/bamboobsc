@@ -337,16 +337,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.save();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -366,16 +360,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.update();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -395,16 +383,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.delete();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -424,16 +406,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.deployment(false);
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;				
@@ -453,16 +429,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.export();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;				
@@ -482,16 +452,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.exportDiagram();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -511,16 +475,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.deleteRoleAssignee();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -540,16 +498,10 @@ public class SystemBpmnResourceSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.saveRoleAssignee();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		

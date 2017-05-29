@@ -41,6 +41,7 @@ import com.netsteadfast.greenstep.base.SysMessageUtil;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.chain.SimpleChain;
+import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
@@ -179,13 +180,10 @@ public class RegionMapViewAction extends BaseSupportAction implements IBaseAddit
 		}		
 		try {
 			this.initData();
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;		
 	}	
@@ -201,13 +199,10 @@ public class RegionMapViewAction extends BaseSupportAction implements IBaseAddit
 			if (!StringUtils.isBlank(this.content)) {
 				forward = SUCCESS;
 			}
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return forward;			
 	}

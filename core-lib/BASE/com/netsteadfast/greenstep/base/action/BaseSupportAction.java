@@ -41,6 +41,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
@@ -77,6 +78,8 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 	private static final long serialVersionUID = -6660355550728049961L;
 	private static Map<String, String> loadStrutsSettingConstatns = null;
 	public static final int DefaultPageRowSize=PageOf.Rows[0];	
+	
+	protected Logger log = Logger.getLogger(BaseSupportAction.class);
 	
 	private ServletContext servletContext=null;
 	private HttpServletResponse httpServletResponse=null;
@@ -701,6 +704,31 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 			loadStrutsSettingConstatns.put(nodeElement.getAttribute("name"), nodeElement.getAttribute("value"));
 		}
 		return loadStrutsSettingConstatns;
+	}
+	
+	protected String logException(Logger logger, Exception e) {
+		String str = "";
+		if (e != null && e.getMessage() != null ) {
+			str = e.getMessage().toString();
+		}
+		if (e != null && e.getMessage() == null) {
+			str = e.toString();
+		}
+		if (e == null ) {
+			str = "null undefined";
+		}
+		//logger.error( str ); // 暫時不要打開
+		return str;
+	}	
+	
+	protected String logException(Exception e) {
+		e.printStackTrace();
+		return logException(log, e);
+	}
+	
+	protected void exceptionPage(Exception e) {
+		this.setPageMessage( this.logException(e) );
+		e.printStackTrace();
 	}
 	
 }

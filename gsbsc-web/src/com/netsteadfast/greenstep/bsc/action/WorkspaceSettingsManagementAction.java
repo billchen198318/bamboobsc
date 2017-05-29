@@ -34,6 +34,7 @@ import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
+import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
@@ -121,13 +122,10 @@ public class WorkspaceSettingsManagementAction extends BaseSupportAction impleme
 	public String execute() throws Exception {
 		try {
 			this.initData("execute");
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;		
 	}	
@@ -139,13 +137,10 @@ public class WorkspaceSettingsManagementAction extends BaseSupportAction impleme
 	public String create() throws Exception {
 		try {
 			this.initData("create");
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;				
 	}
@@ -157,13 +152,10 @@ public class WorkspaceSettingsManagementAction extends BaseSupportAction impleme
 	public String createBase() throws Exception {
 		try {
 			this.initData("createBase");			
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;				
 	}
@@ -176,17 +168,10 @@ public class WorkspaceSettingsManagementAction extends BaseSupportAction impleme
 		try {
 			this.initData("createContent");
 			this.handlerConfContentBody();
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.setPageMessage(e.toString());
-			} else {
-				this.setPageMessage(e.getMessage().toString());
-			}						
+			this.exceptionPage(e);
 		}
 		return SUCCESS;			
 	}
@@ -199,17 +184,10 @@ public class WorkspaceSettingsManagementAction extends BaseSupportAction impleme
 		try {
 			this.initData("view");
 			this.handlerViewContentBody();
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.setPageMessage(e.toString());
-			} else {
-				this.setPageMessage(e.getMessage().toString());
-			}						
+			this.exceptionPage(e);
 		}
 		return SUCCESS;				
 	}

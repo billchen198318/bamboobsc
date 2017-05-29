@@ -33,6 +33,7 @@ import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
+import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
@@ -163,13 +164,10 @@ public class SystemExpressionJobManagementAction extends BaseSupportAction imple
 	public String execute() throws Exception {
 		try {
 			this.initData("execute");
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;
 	}	
@@ -184,13 +182,10 @@ public class SystemExpressionJobManagementAction extends BaseSupportAction imple
 	public String create() throws Exception {
 		try {
 			this.initData("create");
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;		
 	}
@@ -208,13 +203,10 @@ public class SystemExpressionJobManagementAction extends BaseSupportAction imple
 			this.initData("edit");
 			this.loadSysExprJobData();
 			forward = SUCCESS;
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return forward;		
 	}		
