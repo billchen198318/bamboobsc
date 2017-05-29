@@ -462,16 +462,10 @@ public class PdcaSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.save();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -491,16 +485,10 @@ public class PdcaSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.update();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -520,16 +508,10 @@ public class PdcaSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.delete();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -549,16 +531,10 @@ public class PdcaSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.startPdcaAuditProcess();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;		
@@ -582,16 +558,10 @@ public class PdcaSaveOrUpdateAction extends BaseJsonAction {
 				this.message = SysMessageUtil.get(GreenStepSysMsgConstants.INSERT_SUCCESS);
 				this.success = IS_YES;
 			}
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	
@@ -611,16 +581,10 @@ public class PdcaSaveOrUpdateAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.confirmAuditTask();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	

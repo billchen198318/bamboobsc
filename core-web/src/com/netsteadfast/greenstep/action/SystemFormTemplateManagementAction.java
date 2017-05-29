@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
+import com.netsteadfast.greenstep.base.exception.AuthorityException;
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
@@ -85,13 +86,10 @@ public class SystemFormTemplateManagementAction extends BaseSupportAction implem
 	public String execute() throws Exception {
 		try {
 			this.initData();
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;
 	}	
@@ -106,13 +104,10 @@ public class SystemFormTemplateManagementAction extends BaseSupportAction implem
 	public String create() throws Exception {
 		try {
 			this.initData();
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return SUCCESS;		
 	}	
@@ -130,13 +125,10 @@ public class SystemFormTemplateManagementAction extends BaseSupportAction implem
 			this.initData();
 			this.loadFormTemplateData();
 			forward = SUCCESS;
-		} catch (ControllerException e) {
-			this.setPageMessage(e.getMessage().toString());
-		} catch (ServiceException e) {
+		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.setPageMessage(e.getMessage().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.setPageMessage(e.getMessage().toString());
+			this.exceptionPage(e);
 		}
 		return forward;		
 	}	

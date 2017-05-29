@@ -340,16 +340,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getOrganizationNames() throws Exception {
 		try {
 			this.loadOrganizationAppendNames();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -365,16 +359,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getEmployeeNames() throws Exception {
 		try {
 			this.loadEmployeeAppendNames();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -390,16 +378,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getKpisNames() throws Exception {
 		try {
 			this.loadKpisAppendNames();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -415,16 +397,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getPerspectiveItems() throws Exception {
 		try {
 			this.loadPerspectiveItems();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -440,16 +416,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getObjectiveItems() throws Exception {
 		try {
 			this.loadObjectiveItems();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -465,16 +435,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getKpiData() throws Exception {
 		try {
 			this.loadKpiData();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -490,16 +454,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getKpiOrgaAndEmpl() throws Exception {
 		try {
 			this.loadMeasureDataOptions();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;				
@@ -515,16 +473,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getOrganizationData() throws Exception {
 		try {
 			this.loadOrganizationData();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;				
@@ -540,16 +492,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String doExportData2Csv() throws Exception {
 		try {
 			this.exportData2Csv();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -565,16 +511,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String doImportCsvData() throws Exception {
 		try {
 			this.importCsvData();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			

@@ -363,21 +363,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	public String doVisionCard() throws Exception {
 		try {
 			this.loadVisionCardContent();			
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { 
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	
@@ -387,21 +376,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	public String doPerspectiveCard() throws Exception {
 		try {
 			this.loadPerspectiveCardContent();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { 
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	
@@ -411,21 +389,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	public String doObjectiveCard() throws Exception {
 		try {
 			this.loadObjectiveCardContent();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { 
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	
@@ -435,21 +402,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	public String doKpiCard() throws Exception {
 		try {
 			this.loadKpiCardContent();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { 
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	
@@ -459,21 +415,10 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	public String doDashboard() throws Exception {
 		try {
 			this.loadDashboardData();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { 
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;	

@@ -214,21 +214,10 @@ public class QueryDataAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.query();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			if (e.getMessage()==null) { 
-				this.message=e.toString();
-				this.logger.error(e.toString());
-			} else {
-				this.message=e.getMessage().toString();
-				this.logger.error(e.getMessage());
-			}						
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -253,16 +242,10 @@ public class QueryDataAction extends BaseJsonAction {
 			} else {
 				this.update();
 			}
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());					
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -283,16 +266,10 @@ public class QueryDataAction extends BaseJsonAction {
 				return SUCCESS;
 			}
 			this.delete();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());					
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			

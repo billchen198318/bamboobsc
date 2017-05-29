@@ -197,16 +197,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getDataQueryMapperSetItems() throws Exception {
 		try {
 			this.loadDataQueryMapperSetItems();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -222,16 +216,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getDataQueryItems() throws Exception {
 		try {
 			this.loadDataQueryItems();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -247,16 +235,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getQueryHistory() throws Exception {
 		try {
 			this.loadQueryHistory();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -272,16 +254,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getMdxItems() throws Exception {
 		try {
 			this.loadMdxItems();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
@@ -297,16 +273,10 @@ public class CommonLoadDataAction extends BaseJsonAction {
 	public String getMdxHistory() throws Exception {
 		try {
 			this.loadMdxHistory();
-		} catch (ControllerException ce) {
-			this.message=ce.getMessage().toString();
-		} catch (AuthorityException ae) {
-			this.message=ae.getMessage().toString();
-		} catch (ServiceException se) {
-			this.message=se.getMessage().toString();
-		} catch (Exception e) { // 因為是 JSON 所以不用拋出 throw e 了
-			e.printStackTrace();
-			this.message=e.getMessage().toString();
-			this.logger.error(e.getMessage());
+		} catch (AuthorityException | ControllerException | ServiceException e) {
+			this.message = e.getMessage().toString();
+		} catch (Exception e) {
+			this.message = this.logException(e);
 			this.success = IS_EXCEPTION;
 		}
 		return SUCCESS;			
