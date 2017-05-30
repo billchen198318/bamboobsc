@@ -47,7 +47,8 @@ function BSC_PROG002D0001E_clear() {
 	setFieldsBackgroundDefault(BSC_PROG002D0001E_fieldsId);
 	setFieldsNoticeMessageLabelDefault(BSC_PROG002D0001E_fieldsId);
 	dijit.byId('BSC_PROG002D0001E_title').set("value", "");
-	dijit.byId('BSC_PROG002D0001E_content').set("value", "");	
+	//dijit.byId('BSC_PROG002D0001E_content').set("value", "");	
+	document.getElementById('BSC_PROG002D0001E_iframe').contentWindow.clearEditorValue();
 }
 
 //------------------------------------------------------------------------------
@@ -103,13 +104,17 @@ function ${programId}_page_message() {
 		</tr>	    	
 		<tr>
 			<td height="375px" width="100%"  align="left">
-				<gs:label text="${action.getText('BSC_PROG002D0001E_content')}" id="BSC_PROG002D0001E_content" requiredFlag="Y"></gs:label>
+				<gs:label text="${action.getText('BSC_PROG002D0001E_content')}" id="BSC_PROG002D0001E_content" requiredFlag="Y"></gs:label>&nbsp;<font size="2">( recommend content should not exceed A4 paper size )</font>
 				<gs:inputfieldNoticeMsgLabel id="BSC_PROG002D0001E_content"></gs:inputfieldNoticeMsgLabel>
 				<br/>
+				<!--  
 				<div data-dojo-type="dijit/Editor" id="BSC_PROG002D0001E_content" data-dojo-props="onChange:function(){ }">${vision.contentString}</div>
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0001E_content'">
     				Input content. ( recommend content should not exceed A4 paper size )
-				</div> 					
+				</div> 				
+				-->
+				<iframe id="BSC_PROG002D0001E_iframe" name="BSC_PROG002D0001E_iframe" src="./pages/common-froala-editor.jsp?oid=${contentOid}" style="height: 350px;" width="100%" height="350" frameBorder="0"></iframe>
+					
 			</td>
 		</tr>    	
 		<tr>
@@ -123,7 +128,7 @@ function ${programId}_page_message() {
     					{ 
     						'fields.oid'		: '${vision.oid}',		 
     						'fields.title'		: dijit.byId('BSC_PROG002D0001E_title').get('value'), 
-    						'fields.content'	: dijit.byId('BSC_PROG002D0001E_content').get('value')
+    						'fields.content'	: document.getElementById('BSC_PROG002D0001E_iframe').contentWindow.getEditorValue()
     					} 
     				"
     				errorFn=""
@@ -132,6 +137,7 @@ function ${programId}_page_message() {
     				label="${action.getText('BSC_PROG002D0001E_update')}" 
     				iconClass="dijitIconSave"
     				cssClass="alt-primary"></gs:button>    			
+    			<!-- 'fields.content'	: dijit.byId('BSC_PROG002D0001E_content').get('value') -->	
     			<gs:button name="BSC_PROG002D0001E_clear" id="BSC_PROG002D0001E_clear" onClick="BSC_PROG002D0001E_clear();" 
     				label="${action.getText('BSC_PROG002D0001E_clear')}" 
     				iconClass="dijitIconClear"

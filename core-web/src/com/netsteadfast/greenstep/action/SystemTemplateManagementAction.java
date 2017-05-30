@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
@@ -37,9 +38,11 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
+import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.TbSysTemplate;
 import com.netsteadfast.greenstep.service.ISysTemplateService;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.SysTemplateVO;
 
 @ControllerAuthority(check=true)
@@ -50,6 +53,7 @@ public class SystemTemplateManagementAction extends BaseSupportAction implements
 	protected Logger logger=Logger.getLogger(SystemTemplateManagementAction.class);
 	private ISysTemplateService<SysTemplateVO, TbSysTemplate, String> sysTemplateService;
 	private SysTemplateVO sysTemplate = new SysTemplateVO(); // edit 模式用
+	private String contentOid = ""; // 修改模式要代入 common-froala-editor.jsp 的參數 
 	
 	public SystemTemplateManagementAction() {
 		super();
@@ -73,7 +77,8 @@ public class SystemTemplateManagementAction extends BaseSupportAction implements
 		if (result.getValue()==null) {
 			throw new ServiceException(result.getSystemMessage().getValue());
 		}
-		this.sysTemplate = result.getValue();		
+		this.sysTemplate = result.getValue();	
+		this.contentOid = UploadSupportUtils.create(Constants.getSystem(), UploadTypes.IS_TEMP, false, this.sysTemplate.getMessage().getBytes(Constants.BASE_ENCODING), this.sysTemplate.getTemplateId()+".txt");
 	}
 	
 	/**
@@ -164,6 +169,14 @@ public class SystemTemplateManagementAction extends BaseSupportAction implements
 
 	public SysTemplateVO getSysTemplate() {
 		return sysTemplate;
+	}
+
+	public String getContentOid() {
+		return contentOid;
+	}
+
+	public void setContentOid(String contentOid) {
+		this.contentOid = contentOid;
 	}
 
 }

@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.action.BaseSupportAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
 import com.netsteadfast.greenstep.base.exception.AuthorityException;
@@ -37,8 +38,10 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
+import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
@@ -48,6 +51,7 @@ public class VisionManagementAction extends BaseSupportAction implements IBaseAd
 	private static final long serialVersionUID = -8778388464510867702L;
 	private IVisionService<VisionVO, BbVision, String> visionService;
 	private VisionVO vision = new VisionVO(); // 編輯edit 要用
+	private String contentOid = ""; // 修改模式要代入 common-froala-editor.jsp 的參數
 	
 	public VisionManagementAction() {
 		super();
@@ -76,6 +80,7 @@ public class VisionManagementAction extends BaseSupportAction implements IBaseAd
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}
 		this.vision = result.getValue();
+		this.contentOid = UploadSupportUtils.create(Constants.getSystem(), UploadTypes.IS_TEMP, false, this.vision.getContent(), this.vision.getVisId()+".txt");
 	}	
 	
 	/**
@@ -138,6 +143,14 @@ public class VisionManagementAction extends BaseSupportAction implements IBaseAd
 
 	public VisionVO getVision() {
 		return vision;
+	}
+
+	public String getContentOid() {
+		return contentOid;
+	}
+
+	public void setContentOid(String contentOid) {
+		this.contentOid = contentOid;
 	}
 
 }
