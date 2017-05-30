@@ -50,7 +50,8 @@ function CORE_PROG001D0007A_clear() {
 	setFieldsNoticeMessageLabelDefault(CORE_PROG001D0007A_fieldsId);
 	dijit.byId('CORE_PROG001D0007A_templateId').set("value", "");
 	dijit.byId('CORE_PROG001D0007A_title').set("value", "");
-	dijit.byId('CORE_PROG001D0007A_message').set("value", "");
+	//dijit.byId('CORE_PROG001D0007A_message').set("value", "");
+	document.getElementById('CORE_PROG001D0007A_iframe').contentWindow.clearEditorValue();
 	dijit.byId('CORE_PROG001D0007A_description').set("value", "");
 }
 
@@ -104,7 +105,11 @@ function ${programId}_page_message() {
     			<gs:label text="${action.getText('CORE_PROG001D0007A_message')}" id="CORE_PROG001D0007A_message" requiredFlag="Y"></gs:label>
     			<gs:inputfieldNoticeMsgLabel id="CORE_PROG001D0007A_message"></gs:inputfieldNoticeMsgLabel>
     			<br/>
+    			<!-- 
     			<div data-dojo-type="dijit/Editor" id="CORE_PROG001D0007A_message" data-dojo-props="onChange:function(){ }"></div>
+    			-->
+    			<iframe id="CORE_PROG001D0007A_iframe" name="CORE_PROG001D0007A_iframe" src="./pages/common-froala-editor.jsp" style="height: 350px;" width="100%" height="350" frameBorder="0"></iframe>
+    			
     		</td>    		
     	</tr>  
 		<tr>
@@ -125,7 +130,7 @@ function ${programId}_page_message() {
     					{ 
     						'fields.templateId'		: dijit.byId('CORE_PROG001D0007A_templateId').get('value'), 
     						'fields.title'			: dijit.byId('CORE_PROG001D0007A_title').get('value'),
-    						'fields.message'		: dijit.byId('CORE_PROG001D0007A_message').get('value'),    						
+    						'fields.message'		: document.getElementById('CORE_PROG001D0007A_iframe').contentWindow.getEditorValue(),
     						'fields.description'	: dijit.byId('CORE_PROG001D0007A_description').get('value')
     					} 
     				"
@@ -135,6 +140,7 @@ function ${programId}_page_message() {
     				label="${action.getText('CORE_PROG001D0007A_save')}" 
     				iconClass="dijitIconSave"
     				cssClass="alt-primary"></gs:button>    			
+    			<!-- 'fields.message'		: dijit.byId('CORE_PROG001D0007A_message').get('value'), -->	
     			<gs:button name="CORE_PROG001D0007A_clear" id="CORE_PROG001D0007A_clear" onClick="CORE_PROG001D0007A_clear();" 
     				label="${action.getText('CORE_PROG001D0007A_clear')}" 
     				iconClass="dijitIconClear"

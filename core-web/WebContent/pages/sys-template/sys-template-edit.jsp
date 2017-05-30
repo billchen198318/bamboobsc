@@ -49,7 +49,8 @@ function CORE_PROG001D0007E_clear() {
 	setFieldsNoticeMessageLabelDefault(CORE_PROG001D0007E_fieldsId);
 	//dijit.byId('CORE_PROG001D0007E_templateId').set("value", ""); // readOnly
 	dijit.byId('CORE_PROG001D0007E_title').set("value", "");
-	dijit.byId('CORE_PROG001D0007E_message').set("value", "");
+	//dijit.byId('CORE_PROG001D0007E_message').set("value", "");
+	document.getElementById('CORE_PROG001D0007E_iframe').contentWindow.clearEditorValue();
 	dijit.byId('CORE_PROG001D0007E_description').set("value", "");
 }
 
@@ -103,7 +104,11 @@ function ${programId}_page_message() {
     			<gs:label text="${action.getText('CORE_PROG001D0007E_message')}" id="CORE_PROG001D0007E_message" requiredFlag="Y"></gs:label>
     			<gs:inputfieldNoticeMsgLabel id="CORE_PROG001D0007E_message"></gs:inputfieldNoticeMsgLabel>
     			<br/>
-    			<div data-dojo-type="dijit/Editor" id="CORE_PROG001D0007E_message" data-dojo-props="onChange:function(){ }">${sysTemplate.message}</div>    			
+    			<!-- 
+    			<div data-dojo-type="dijit/Editor" id="CORE_PROG001D0007E_message" data-dojo-props="onChange:function(){ }">${sysTemplate.message}</div>    
+    			-->
+    			<iframe id="CORE_PROG001D0007E_iframe" name="CORE_PROG001D0007E_iframe" src="./pages/common-froala-editor.jsp?oid=${contentOid}" style="height: 350px;" width="100%" height="350" frameBorder="0"></iframe>
+    						
     		</td>
     	</tr>  
 		<tr>
@@ -125,7 +130,7 @@ function ${programId}_page_message() {
     						'fields.oid'			: '${sysTemplate.oid}',
     						'fields.templateId'		: dijit.byId('CORE_PROG001D0007E_templateId').get('value'), 
     						'fields.title'			: dijit.byId('CORE_PROG001D0007E_title').get('value'),
-    						'fields.message'		: dijit.byId('CORE_PROG001D0007E_message').get('value'),    						
+    						'fields.message'		: document.getElementById('CORE_PROG001D0007E_iframe').contentWindow.getEditorValue(),
     						'fields.description'	: dijit.byId('CORE_PROG001D0007E_description').get('value')
     					} 
     				"
@@ -135,6 +140,7 @@ function ${programId}_page_message() {
     				label="${action.getText('CORE_PROG001D0007E_update')}" 
     				iconClass="dijitIconSave"
     				cssClass="alt-primary"></gs:button>    			
+    			<!-- 'fields.message'		: dijit.byId('CORE_PROG001D0007E_message').get('value'), -->	
     			<gs:button name="CORE_PROG001D0007E_clear" id="CORE_PROG001D0007E_clear" onClick="CORE_PROG001D0007E_clear();" 
     				label="${action.getText('CORE_PROG001D0007E_clear')}" 
     				iconClass="dijitIconClear"
