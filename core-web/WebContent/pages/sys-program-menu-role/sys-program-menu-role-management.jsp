@@ -48,7 +48,8 @@ CORE_PROG002D0003Q_fieldsId['CORE_PROG002D0003Q_system']		= 'CORE_PROG002D0003Q_
 CORE_PROG002D0003Q_fieldsId['CORE_PROG002D0003Q_sysProg']	= 'CORE_PROG002D0003Q_sysProg';
 
 function CORE_PROG002D0003Q_system_change() {
-	CORE_PROG002D0003Q_clearOptions();
+	CORE_PROG002D0003Q_clearRoleListTable();
+	//CORE_PROG002D0003Q_clearOptions();
 	clearSelectItems(true, 'CORE_PROG002D0003Q_sysProg');
 	var systemOid = dijit.byId("CORE_PROG002D0003Q_system").get("value");
 	if ( _gscore_please_select_id == systemOid || _gscore_please_select_name == systemOid ) {
@@ -67,7 +68,8 @@ function CORE_PROG002D0003Q_system_change() {
 }
 
 function CORE_PROG002D0003Q_sysProg_change() {
-	CORE_PROG002D0003Q_clearOptions();
+	CORE_PROG002D0003Q_clearRoleListTable();
+	//CORE_PROG002D0003Q_clearOptions();
 	var progOid = dijit.byId("CORE_PROG002D0003Q_sysProg").get("value");
 	if ( _gscore_please_select_id == progOid || _gscore_please_select_name == progOid ) {
 		return;
@@ -84,8 +86,9 @@ function CORE_PROG002D0003Q_sysProg_change() {
     				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
     				return;
     			}	
-    			CORE_PROG002D0003Q_setOptions("CORE_PROG002D0003Q_enable", data.enableItems);
-    			CORE_PROG002D0003Q_setOptions("CORE_PROG002D0003Q_disable", data.disableItems);
+    			//CORE_PROG002D0003Q_setOptions("CORE_PROG002D0003Q_enable", data.enableItems);
+    			//CORE_PROG002D0003Q_setOptions("CORE_PROG002D0003Q_disable", data.disableItems);
+    			CORE_PROG002D0003Q_renderRoleListTable( data );
 			}, 
 			function(error){
 				alert(error);
@@ -103,6 +106,7 @@ function CORE_PROG002D0003Q_saveSuccess(data) {
 	}
 }
 
+/*
 function CORE_PROG002D0003Q_getEnableIds() {
 	var sel = document.CORE_PROG002D0003Q_form.CORE_PROG002D0003Q_enable.options;
 	var appendOids = '';
@@ -139,6 +143,75 @@ function CORE_PROG002D0003Q_clear() {
 function CORE_PROG002D0003Q_moveSelectItem(srcSelectId, destSelectId) {
 	dijit.byId(destSelectId).addSelected( dijit.byId(srcSelectId) );
 }
+*/
+
+function CORE_PROG002D0003Q_renderRoleListTable(data) {
+	var str = '<table border="0" width="100%" cellspacing="1" cellpadding="1" style="border:1px #ebeadb solid; border-radius: 5px; background: linear-gradient(to top, #f1eee5 , #fafafa);">';
+	str += '<tr>';
+	str += '<td width="10%" align="center" bgcolor="#f1eee5"><b>#</b></td>';
+	str += '<td width="90%" align="left" bgcolor="#f1eee5"><b>Role</b></td>';
+	str += '</tr>';	
+	var idHead = 'CORE_PROG002D0003Q_roleListTable_checkBox:';
+	// 先放開啟的
+	for (var i=0; data.enableItems!=null && i<data.enableItems.length; i++) {
+		var k = data.enableItems[i].key;
+		var v = data.enableItems[i].value;
+		var id = idHead + k;
+		str += '<tr>';
+		str += '<td width="10%" align="center" bgcolor="#ffffff"><input type="checkbox" id="' + id + '" name="' + id + '" onclick="CORE_PROG002D0003Q_updateRoleList();" value="' + k + '" checked="checked"></td>';
+		str += '<td width="90%" align="left" bgcolor="#ffffff">' + v + '</td>';
+		str += '</tr>';		
+	}
+	// 沒開啟的
+	for (var i=0; data.disableItems!=null && i<data.disableItems.length; i++) {
+		var k = data.disableItems[i].key;
+		var v = data.disableItems[i].value;
+		var id = idHead + k;
+		str += '<tr>';
+		str += '<td width="10%" align="center" bgcolor="#ffffff"><input type="checkbox" id="' + id + '" name="' + id + '" onclick="CORE_PROG002D0003Q_updateRoleList();" value="' + k + '"></td>';
+		str += '<td width="90%" align="left" bgcolor="#ffffff">' + v + '</td>';
+		str += '</tr>';		
+	}	
+	str += '</table>';
+	dojo.byId( "CORE_PROG002D0003Q_roleListTable" ).innerHTML = str;
+}
+
+function CORE_PROG002D0003Q_clearRoleListTable() {
+	dojo.byId( "CORE_PROG002D0003Q_roleListTable" ).innerHTML = "";
+}
+
+function CORE_PROG002D0003Q_updateRoleList() {
+	var idHead = 'CORE_PROG002D0003Q_roleListTable_checkBox:';
+	var appendOid = '';
+	require(["dojo/query"], function(query) {
+		  query("input").forEach(function(checkbox){
+			  if (checkbox.id.indexOf(idHead) > -1) {
+				  if ( dojo.byId(checkbox.id).checked ) {
+					  appendOid += checkbox.value + _gscore_delimiter;
+				  }
+			  }
+		  });
+	});
+	xhrSendParameterNoWatitDlg(
+			'core.systemProgramMenuRoleSaveAction.action',
+			{
+				'fields.sysProgOid'			:	dijit.byId('CORE_PROG002D0003Q_sysProg').get('value'),
+				'fields.appendRoleOid'		:	viewPage.getStrToHex( viewPage.getStrToBase64( appendOid ) )		
+			},
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+				CORE_PROG002D0003Q_sysProg_change();
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);	
+}
+
 
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
@@ -169,9 +242,9 @@ function ${programId}_page_message() {
 	<jsp:include page="../header.jsp"></jsp:include>	
 
 <form action="" name="CORE_PROG002D0003Q_form" id="CORE_PROG002D0003Q_form">	
-	<table border="0" width="750px" height="100px" cellpadding="1" cellspacing="0" >
+	<table border="0" width="100%" height="100px" cellpadding="1" cellspacing="0" >
 		<tr>
-			<td height="50px" width="100%"  align="center">
+			<td height="50px" width="100%"  align="left">
 				<gs:label text="${action.getText('CORE_PROG002D0003Q_system')}" id="CORE_PROG002D0003Q_system" requiredFlag="Y"></gs:label>
 				<gs:inputfieldNoticeMsgLabel id="CORE_PROG002D0003Q_system"></gs:inputfieldNoticeMsgLabel>
 				<br/>
@@ -179,7 +252,7 @@ function ${programId}_page_message() {
 			</td>
 		</tr>
 		<tr>
-			<td height="50px" width="100%"  align="center">
+			<td height="50px" width="100%"  align="left">
 				<gs:label text="${action.getText('CORE_PROG002D0003Q_sysProg')}" id="CORE_PROG002D0003Q_sysProg" requiredFlag="Y"></gs:label>
 				<gs:inputfieldNoticeMsgLabel id="CORE_PROG002D0003Q_sysProg"></gs:inputfieldNoticeMsgLabel>
 				<br/>
@@ -187,6 +260,8 @@ function ${programId}_page_message() {
 			</td>
 		</tr>		
 	</table>
+	
+	<!--  
 	<table width="750px" height="160px" border="0" cellpadding="1" cellspacing="0" >
 		<tr>
 			<td align="center" width="350px" height="200px">
@@ -250,6 +325,9 @@ function ${programId}_page_message() {
 			</td>
 		</tr>
 	</table>
+	-->
+	
+	<div id="CORE_PROG002D0003Q_roleListTable"></div>
 				
 </form>
 	
