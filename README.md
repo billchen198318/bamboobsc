@@ -192,7 +192,7 @@ dataSource.password=password
 # chmod a+x startup.sh
 ```
 
-add JAVA_OPTS="-Xmx1440M -XX:+UseG1GC -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US" to catalina.sh
+add JAVA_OPTS="-Xmx2048M -XX:+UseG1GC -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US" to catalina.sh
 ```
 # ./startup.sh
 ```
