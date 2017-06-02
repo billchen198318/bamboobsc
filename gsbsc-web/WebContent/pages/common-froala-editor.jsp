@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.math.NumberUtils"%>
 <%@page import="com.netsteadfast.greenstep.util.UploadSupportUtils"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.netsteadfast.greenstep.base.Constants"%>
@@ -12,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSystem(), request);
 
+int height = NumberUtils.toInt(request.getParameter("height"), 0);
 String uploadOid = request.getParameter("oid");
 String content = "";
 if (!StringUtils.isBlank(uploadOid)) {
@@ -60,7 +62,7 @@ if (!StringUtils.isBlank(uploadOid)) {
 
 $( document ).ready(function() {
 	
-	$('#commonEditor').froalaEditor();
+	$('#commonEditor').froalaEditor(<% if (height>=35 && height<=700) { %> { height: <%=height%> } <% } %>);
 	
 });
 

@@ -108,7 +108,7 @@ function ${programId}_page_message() {
     			<!-- 
     			<div data-dojo-type="dijit/Editor" id="CORE_PROG001D0007A_message" data-dojo-props="onChange:function(){ }"></div>
     			-->
-    			<iframe id="CORE_PROG001D0007A_iframe" name="CORE_PROG001D0007A_iframe" src="./pages/common-froala-editor.jsp" style="height: 350px;" width="100%" height="350" frameBorder="0"></iframe>
+    			<iframe id="CORE_PROG001D0007A_iframe" name="CORE_PROG001D0007A_iframe" src="./pages/common-froala-editor.jsp?height=200" style="height: 300px;" width="100%" height="350" frameBorder="0"></iframe>
     			
     		</td>    		
     	</tr>  
