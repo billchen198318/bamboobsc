@@ -32,6 +32,9 @@ import com.netsteadfast.greenstep.base.Constants;
 /**
  * from network resource
  * http://stackoverflow.com/questions/15554296/simple-java-aes-encrypt-decrypt-example
+ * 
+ * AES-256 , Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8 Download
+ * http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
  *
  */
 public class EncryptorUtils {
@@ -63,17 +66,6 @@ public class EncryptorUtils {
             ex.printStackTrace();
         }
         return null;
-    }
-    
-    public static void main(String[] args) {
-        String key1 = Constants.ENCRYPTOR_KEY1; // 128 bit key
-        String key2 = Constants.ENCRYPTOR_KEY2;
-        String str = "b4da1c48-4b6e-40cf-8232-aa23611b3cf7;1A530637289A03B07199A44E8D531427;admin";
-        String encData = "";
-        System.out.println("encrypt=" + ( encData=encrypt(key1, key2, str) ) );
-        System.out.println("decrypt=" + decrypt(key1, key2, encData) );       
-        System.out.println("encrypt toHex=" + SimpleUtils.toHex(encData) );        
-        //System.out.println(decrypt(key1, key2, encrypt(key1, key2, "Hello World")));
     }
     
 }
