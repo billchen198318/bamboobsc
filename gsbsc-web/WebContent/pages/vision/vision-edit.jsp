@@ -113,7 +113,7 @@ function ${programId}_page_message() {
     				Input content. ( recommend content should not exceed A4 paper size )
 				</div> 				
 				-->
-				<iframe id="BSC_PROG002D0001E_iframe" name="BSC_PROG002D0001E_iframe" src="./pages/common-froala-editor.jsp?oid=${contentOid}" style="height: 350px;" width="100%" height="350" frameBorder="0"></iframe>
+				<iframe id="BSC_PROG002D0001E_iframe" name="BSC_PROG002D0001E_iframe" src="./pages/common-froala-editor.jsp?height=250&oid=${contentOid}" style="height: 350px;" width="100%" height="350" frameBorder="0"></iframe>
 					
 			</td>
 		</tr>    	
