@@ -256,7 +256,7 @@ public abstract class BaseDAO<T extends java.io.Serializable, PK extends java.io
 				list=(List<VO>)query.list();					
 			}
 			result.setRowCount(count);
-			result.setOffset(offset);
+			result.setOffset(newOffset); // 2017-06-30 bug fix, result.setOffset(offset);
 			result.setLimit(limit);
 			result.setFindHQL(findHQL);
 			result.setCountHQL(countHQL);			
