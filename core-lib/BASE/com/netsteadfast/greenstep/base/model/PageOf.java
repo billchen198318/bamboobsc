@@ -137,6 +137,9 @@ public class PageOf implements java.io.Serializable {
 			}
 		}
 		this.setSize(_size+"");	
+		if ( NumberUtils.toInt(this.select, 0) > _size ) { // 2017-06-30 bug fix add
+			this.select = _size + "";
+		}
 	}
 	
 	/**
