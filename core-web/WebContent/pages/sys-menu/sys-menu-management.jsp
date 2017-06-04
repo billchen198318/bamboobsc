@@ -234,13 +234,16 @@ function ${programId}_page_message() {
 		cancelJsMethod="${programId}_TabClose();" 
 		createNewEnable="N"
 		createNewJsMethod=""		 
-		saveEnabel="Y" 
-		saveJsMethod="CORE_PROG001D0003Q_save();"
+		saveEnabel="N" 
+		saveJsMethod=""
 		refreshEnable="Y" 		 
 		refreshJsMethod="${programId}_TabRefresh();" 		
 		></gs:toolBar>
 	<jsp:include page="../header.jsp"></jsp:include>	
-
+	<!--
+		saveEnabel="Y" 
+		saveJsMethod="CORE_PROG001D0003Q_save();"	 
+	 -->
 <form action="" name="CORE_PROG001D0003Q_form" id="CORE_PROG001D0003Q_form">
 	
 	<table border="0" width="100%" height="100px" cellpadding="1" cellspacing="0" >
