@@ -344,6 +344,168 @@
 		</tr>		
 		
 		
+		<!-- Vision -->
+		<tr>
+			<td colspan="3" bgcolor="${backgroundColor}" align="left">
+				<b><font color="${fontColor}" size="2">Vision date range</font></b>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<table width="100%" border="0" cellspacing="1" cellpadding="0" >
+						
+				
+					
+					
+								
+					<tr>
+						<td rowspan="2" align="left" bgcolor="${vision.bgColor}" width="200px">
+							<font color="${vision.fontColor}" >
+							<b>${vision.title}</b>
+							</font>			
+						</td>
+						
+						<#list vision.dateRangeScores as dateRangeScore >
+						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
+							<font color="${dateRangeScore.fontColor}" >
+							<b>${dateRangeScore.date}</b>
+							</font>
+						</td>						
+						</#list>
+						
+					</tr>
+					<tr>
+					
+						<#list vision.dateRangeScores as dateRangeScore >
+						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
+							<font color="${dateRangeScore.fontColor}" >
+							${dateRangeScore.score?string(',###.##')}
+							</font>
+							<!-- vision dateRange no status image icon -->
+						</td>						
+						</#list>
+						
+					</tr>
+
+
+					
+				
+			
+				</table>
+			</td>						
+		</tr>	
+				
+		
+		<!-- Perspective dateRange score -->
+		<tr>
+			<td colspan="3" bgcolor="${backgroundColor}" align="left">
+				<b><font color="${fontColor}" size="2">${perspectiveTitle} date range</font></b>
+			</td>
+		</tr>		
+		<tr>
+			<td colspan="3">
+				<table width="100%" border="0" cellspacing="1" cellpadding="0" >
+						
+				<#list vision.perspectives as perspective >
+					
+					
+								
+					<tr>
+						<td rowspan="2" align="left" bgcolor="${perspective.bgColor}" width="200px">
+							<font color="${perspective.fontColor}" >
+							<b>${perspective.name}</b>
+							</font>			
+						</td>
+						
+						<#list perspective.dateRangeScores as dateRangeScore >
+						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
+							<font color="${dateRangeScore.fontColor}" >
+							<b>${dateRangeScore.date}</b>
+							</font>
+						</td>						
+						</#list>
+						
+					</tr>
+					<tr>
+					
+						<#list perspective.dateRangeScores as dateRangeScore >
+						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
+							<font color="${dateRangeScore.fontColor}" >
+							${dateRangeScore.score?string(',###.##')}
+							</font>
+							<!-- perspective dateRange no status image icon -->
+						</td>						
+						</#list>
+						
+					</tr>
+
+
+					
+				</#list>	
+			
+				</table>
+			</td>						
+		</tr>	
+				
+		
+		<!-- Objective dateRange score -->
+		<tr>
+			<td colspan="3" bgcolor="${backgroundColor}" align="left">
+				<b><font color="${fontColor}" size="2">${objectiveTitle} date range</font></b>
+			</td>
+		</tr>		
+		<tr>
+			<td colspan="3">
+				<table width="100%" border="0" cellspacing="1" cellpadding="0" >
+						
+				<#list vision.perspectives as perspective >
+					<#list perspective.objectives as objective >
+					
+								
+					<tr>
+						<td rowspan="2" align="left" bgcolor="${objective.bgColor}" width="200px">
+							<font color="${objective.fontColor}" >
+							<b>${objective.name}</b>
+							</font>			
+						</td>
+						
+						<#list objective.dateRangeScores as dateRangeScore >
+						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
+							<font color="${dateRangeScore.fontColor}" >
+							<b>${dateRangeScore.date}</b>
+							</font>
+						</td>						
+						</#list>
+						
+					</tr>
+					<tr>
+					
+						<#list objective.dateRangeScores as dateRangeScore >
+						<td align="center" width="80px" bgcolor="${dateRangeScore.bgColor}">
+							<font color="${dateRangeScore.fontColor}" >
+							${dateRangeScore.score?string(',###.##')}
+							</font>
+							<!-- objective dateRange no status image icon -->
+						</td>						
+						</#list>
+						
+					</tr>
+
+
+					</#list>
+				</#list>	
+			
+				</table>
+			</td>						
+		</tr>		
+		
+		
+		<!-- KPIs dateRange score -->
+		<tr>
+			<td colspan="3" bgcolor="${backgroundColor}" align="left">
+				<b><font color="${fontColor}" size="2">${kpiTitle} date range</font></b>
+			</td>
+		</tr>		
 		<tr>
 			<td colspan="3">
 				<table width="100%" border="0" cellspacing="1" cellpadding="0" >
