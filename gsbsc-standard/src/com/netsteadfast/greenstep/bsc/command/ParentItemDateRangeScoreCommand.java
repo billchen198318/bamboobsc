@@ -78,21 +78,6 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 	}
 	*/
 	
-	/**
-	 * 以後在改為使用動態腳本
-	 * 
-	 * @param score
-	 * @param target
-	 * @return
-	 */
-	private String getHtmIcon(float score, float target) {
-		String icon = "down.png";
-		if ( score >= target ) {
-			icon = "go-up.png";
-		} 
-		return "<img src='./images/" + icon + "' border='0' >";
-	}
-	
 	private void handlerObjectiveDateRangeScore(ObjectiveVO objective) throws Exception {
 		if (objective.getKpis() == null || objective.getKpis().size() < 1 || objective.getKpis().get(0).getDateRangeScores() == null || objective.getKpis().get(0).getDateRangeScores().size() <1) {
 			return;
@@ -119,7 +104,6 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 			dateRangeScore.setScore(score);
 			dateRangeScore.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
 			dateRangeScore.setFontColor( BscScoreColorUtils.getFontColor(score) );
-			dateRangeScore.setImgIcon( this.getHtmIcon(score, objective.getTarget()) );
 		}
 		
 	}
@@ -150,7 +134,6 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 			dateRangeScore.setScore(score);
 			dateRangeScore.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
 			dateRangeScore.setFontColor( BscScoreColorUtils.getFontColor(score) );
-			dateRangeScore.setImgIcon( this.getHtmIcon(score, perspective.getTarget()) );
 		}		
 		
 	}
