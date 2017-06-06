@@ -17,41 +17,45 @@
 	
 	<!-- 績效分數資料產生用的 chain -->
 	<chain name="performanceScoreChain">
-		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
-		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
-		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
-		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
-		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 			className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+		<command id="ParentItemDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.ParentItemDateRangeScoreCommand"/>
 	</chain>		
 	
 	<!-- KPI報表html版產生內容用的 chain -->
 	<chain name="kpiReportHtmlContentChain">
-		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
-		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
-		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
-		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
-		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>		
-		<command id="KpiReportBodyCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiReportBodyCommand"/>
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 			className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+		<command id="ParentItemDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.ParentItemDateRangeScoreCommand"/>
+		<command id="KpiReportBodyCommand" 				className="com.netsteadfast.greenstep.bsc.command.KpiReportBodyCommand"/>
 	</chain>	
 
 	<!-- KPI報表Excel版產生內容用的 chain -->
 	<chain name="kpiReportExcelContentChain">
-		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
-		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
-		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
-		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
-		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>		
-		<command id="KpiReportExcelCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiReportExcelCommand"/>
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 			className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+		<command id="ParentItemDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.ParentItemDateRangeScoreCommand"/>
+		<command id="KpiReportExcelCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiReportExcelCommand"/>
 	</chain>	
 	
 	<!-- KPI報表PDF版產生內容用的 chain -->
 	<chain name="kpiReportPdfContentChain">
-		<command id="LoadBscMixDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
-		<command id="LoadBscStructTreeCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
-		<command id="LoadMeasureDataCommand" 		className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
-		<command id="ScoreCalculationCommand" 		className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
-		<command id="KpiDateRangeScoreCommand" 		className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>		
-		<command id="KpiReportPdfCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiReportPdfCommand"/>
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 			className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+		<command id="ParentItemDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.ParentItemDateRangeScoreCommand"/>
+		<command id="KpiReportPdfCommand" 				className="com.netsteadfast.greenstep.bsc.command.KpiReportPdfCommand"/>
 	</chain>	
 	
 	<!-- KPI報表 coffeeChart json 資料產生內容用的 chain -->
