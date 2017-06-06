@@ -298,6 +298,98 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 		cell.setColspan(maxRows);
 		table.addCell(cell);				
 		
+		
+		// Vision date range , 2017-06-06 add
+		cell = new PdfPCell();
+		cell.addElement( new Phrase("Vision date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
+		cell.setColspan(maxRows);
+		table.addCell(cell);
+		cell = new PdfPCell();
+		cell.addElement( new Phrase(vision.getTitle(), this.getFont(vision.getFontColor(), false)) );
+		this.setCellBackgroundColor(cell, vision.getBgColor());
+		cell.setColspan(4);
+		cell.setRowspan(2);
+		table.addCell(cell);
+		for (DateRangeScoreVO dateScore : vision.getDateRangeScores()) {
+			cell = new PdfPCell();
+			cell.addElement( new Phrase(dateScore.getDate(), this.getFont(dateScore.getFontColor(), false)) );
+			this.setCellBackgroundColor(cell, dateScore.getBgColor());
+			table.addCell(cell);							
+		}
+		for (DateRangeScoreVO dateScore : vision.getDateRangeScores()) {
+			cell = new PdfPCell();
+			cell.addElement( new Phrase( BscReportSupportUtils.parse2(dateScore.getScore()), this.getFont(dateScore.getFontColor(), false)) );
+			this.setCellBackgroundColor(cell, dateScore.getBgColor());
+			table.addCell(cell);								
+		}
+		
+		
+		// Perspective date range , 2017-06-06 add
+		cell = new PdfPCell();
+		cell.addElement( new Phrase( BscReportPropertyUtils.getPerspectiveTitle() + " date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
+		cell.setColspan(maxRows);
+		table.addCell(cell);
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			cell = new PdfPCell();
+			cell.addElement( new Phrase(perspective.getName(), this.getFont(perspective.getFontColor(), false)) );
+			this.setCellBackgroundColor(cell, perspective.getBgColor());
+			cell.setColspan(4);
+			cell.setRowspan(2);
+			table.addCell(cell);
+			for (DateRangeScoreVO dateScore : perspective.getDateRangeScores()) {
+				cell = new PdfPCell();
+				cell.addElement( new Phrase(dateScore.getDate(), this.getFont(dateScore.getFontColor(), false)) );
+				this.setCellBackgroundColor(cell, dateScore.getBgColor());
+				table.addCell(cell);							
+			}
+			for (DateRangeScoreVO dateScore : perspective.getDateRangeScores()) {
+				cell = new PdfPCell();
+				cell.addElement( new Phrase( BscReportSupportUtils.parse2(dateScore.getScore()), this.getFont(dateScore.getFontColor(), false)) );
+				this.setCellBackgroundColor(cell, dateScore.getBgColor());
+				table.addCell(cell);								
+			}			
+		}
+		
+		
+		// Strategy objectives date range , 2017-06-06 add
+		cell = new PdfPCell();
+		cell.addElement( new Phrase( BscReportPropertyUtils.getObjectiveTitle() + " date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
+		cell.setColspan(maxRows);
+		table.addCell(cell);		
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				cell = new PdfPCell();
+				cell.addElement( new Phrase(objective.getName(), this.getFont(objective.getFontColor(), false)) );
+				this.setCellBackgroundColor(cell, objective.getBgColor());
+				cell.setColspan(4);
+				cell.setRowspan(2);
+				table.addCell(cell);
+				for (DateRangeScoreVO dateScore : objective.getDateRangeScores()) {
+					cell = new PdfPCell();
+					cell.addElement( new Phrase(dateScore.getDate(), this.getFont(dateScore.getFontColor(), false)) );
+					this.setCellBackgroundColor(cell, dateScore.getBgColor());
+					table.addCell(cell);							
+				}
+				for (DateRangeScoreVO dateScore : objective.getDateRangeScores()) {
+					cell = new PdfPCell();
+					cell.addElement( new Phrase( BscReportSupportUtils.parse2(dateScore.getScore()), this.getFont(dateScore.getFontColor(), false)) );
+					this.setCellBackgroundColor(cell, dateScore.getBgColor());
+					table.addCell(cell);								
+				}				
+			}
+		}
+		
+		
+		// KPIs date range , 2017-06-06 add title label
+		cell = new PdfPCell();
+		cell.addElement( new Phrase( BscReportPropertyUtils.getKpiTitle() + " date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
+		cell.setColspan(maxRows);
+		table.addCell(cell);		
+		// KPIs date range
 		for (PerspectiveVO perspective : vision.getPerspectives()) {
 			for (ObjectiveVO objective : perspective.getObjectives()) {
 				for (KpiVO kpi : objective.getKpis()) {
