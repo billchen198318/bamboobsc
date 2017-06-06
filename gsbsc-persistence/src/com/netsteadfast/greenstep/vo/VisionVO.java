@@ -43,6 +43,8 @@ public class VisionVO extends BaseValueObj implements java.io.Serializable {
 	
 	private List<PerspectiveVO> perspectives = new LinkedList<PerspectiveVO>(); // 給 StructTreeObj 用的
 	
+	private List<DateRangeScoreVO> dateRangeScores = new LinkedList<DateRangeScoreVO>(); // 報表要用的日期區間分數 , 2017-06-06
+	
 	@JsonIgnore // ObjectMapper writeValueAsString 不要輸出這個欄位, 因為造成 mobile 版報表顯示 出錯
 	public String getContentString() {
 		if (null == this.content) {
@@ -144,6 +146,14 @@ public class VisionVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setScore(float score) {
 		this.score = score;
+	}
+
+	public List<DateRangeScoreVO> getDateRangeScores() {
+		return dateRangeScores;
+	}
+
+	public void setDateRangeScores(List<DateRangeScoreVO> dateRangeScores) {
+		this.dateRangeScores = dateRangeScores;
 	}			
 
 }

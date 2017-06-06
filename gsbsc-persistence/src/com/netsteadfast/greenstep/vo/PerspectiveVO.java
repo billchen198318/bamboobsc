@@ -46,6 +46,8 @@ public class PerspectiveVO extends BaseValueObj implements java.io.Serializable 
 	private float score; // 報表要用的
 	private String imgIcon; // 報表要用的
 	
+	private List<DateRangeScoreVO> dateRangeScores = new LinkedList<DateRangeScoreVO>(); // 報表要用的日期區間分數 , 2017-06-06
+	
 	public PerspectiveVO() {
 		
 	}
@@ -198,6 +200,14 @@ public class PerspectiveVO extends BaseValueObj implements java.io.Serializable 
 
 	public void setImgIcon(String imgIcon) {
 		this.imgIcon = imgIcon;
+	}
+
+	public List<DateRangeScoreVO> getDateRangeScores() {
+		return dateRangeScores;
+	}
+
+	public void setDateRangeScores(List<DateRangeScoreVO> dateRangeScores) {
+		this.dateRangeScores = dateRangeScores;
 	}
 
 }
