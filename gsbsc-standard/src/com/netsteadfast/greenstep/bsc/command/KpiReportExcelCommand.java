@@ -472,7 +472,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		headRow.setHeight( (short)700 );
 		for (int i=0; i<cols; i++) {
 			Cell headCell1 = headRow.createCell(cell++);	
-			headCell1.setCellValue( "Vision date range" );
+			headCell1.setCellValue( "Vision date range score" );
 			headCell1.setCellStyle(cellStyleLabel);						
 		}
 		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );	
@@ -563,7 +563,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		headRow.setHeight( (short)700 );
 		for (int i=0; i<cols; i++) {
 			Cell headCell1 = headRow.createCell(cell++);	
-			headCell1.setCellValue( BscReportPropertyUtils.getPerspectiveTitle() + " date range" );
+			headCell1.setCellValue( BscReportPropertyUtils.getPerspectiveTitle() + " date range score" );
 			headCell1.setCellStyle(cellStyleLabel);						
 		}
 		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );
@@ -657,7 +657,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		headRow.setHeight( (short)700 );
 		for (int i=0; i<cols; i++) {
 			Cell headCell1 = headRow.createCell(cell++);	
-			headCell1.setCellValue( BscReportPropertyUtils.getObjectiveTitle() + " date range" );
+			headCell1.setCellValue( BscReportPropertyUtils.getObjectiveTitle() + " date range score" );
 			headCell1.setCellStyle(cellStyleLabel);						
 		}
 		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );	
@@ -754,7 +754,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		headRow.setHeight( (short)700 );
 		for (int i=0; i<cols; i++) {
 			Cell headCell1 = headRow.createCell(cell);	
-			headCell1.setCellValue( BscReportPropertyUtils.getKpiTitle() + " date range" );
+			headCell1.setCellValue( BscReportPropertyUtils.getKpiTitle() + " date range score" );
 			headCell1.setCellStyle(cellStyleLabel);						
 		}
 		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );	

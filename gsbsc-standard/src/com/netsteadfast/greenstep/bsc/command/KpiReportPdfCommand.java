@@ -301,7 +301,7 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 		
 		// Vision date range , 2017-06-06 add
 		cell = new PdfPCell();
-		cell.addElement( new Phrase("Vision date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		cell.addElement( new Phrase("Vision date range score", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
 		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
 		cell.setColspan(maxRows);
 		table.addCell(cell);
@@ -327,7 +327,7 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 		
 		// Perspective date range , 2017-06-06 add
 		cell = new PdfPCell();
-		cell.addElement( new Phrase( BscReportPropertyUtils.getPerspectiveTitle() + " date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		cell.addElement( new Phrase( BscReportPropertyUtils.getPerspectiveTitle() + " date range score", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
 		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
 		cell.setColspan(maxRows);
 		table.addCell(cell);
@@ -355,7 +355,7 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 		
 		// Strategy objectives date range , 2017-06-06 add
 		cell = new PdfPCell();
-		cell.addElement( new Phrase( BscReportPropertyUtils.getObjectiveTitle() + " date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		cell.addElement( new Phrase( BscReportPropertyUtils.getObjectiveTitle() + " date range score", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
 		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
 		cell.setColspan(maxRows);
 		table.addCell(cell);		
@@ -385,7 +385,7 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 		
 		// KPIs date range , 2017-06-06 add title label
 		cell = new PdfPCell();
-		cell.addElement( new Phrase( BscReportPropertyUtils.getKpiTitle() + " date range", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
+		cell.addElement( new Phrase( BscReportPropertyUtils.getKpiTitle() + " date range score", this.getFont(BscReportPropertyUtils.getFontColor(), false)) );
 		this.setCellBackgroundColor(cell, BscReportPropertyUtils.getBackgroundColor());
 		cell.setColspan(maxRows);
 		table.addCell(cell);		
