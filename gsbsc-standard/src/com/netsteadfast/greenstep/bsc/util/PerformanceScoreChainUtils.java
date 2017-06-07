@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.bsc.util;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -343,5 +344,15 @@ public class PerformanceScoreChainUtils {
 		item = result.getValue();
 		return item;
 	}
+	
+	public static float getWeightPercentage(BigDecimal weight) {
+		if (weight==null) {
+			return 0.0f;
+		}
+		if (weight.floatValue() == 0.0f ) {
+			return 0.0f;
+		}
+		return weight.floatValue() / 100.0f;
+	}	
 	
 }

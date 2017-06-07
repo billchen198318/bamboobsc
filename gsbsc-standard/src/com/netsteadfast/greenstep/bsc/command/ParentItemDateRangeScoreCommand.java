@@ -21,14 +21,13 @@
  */
 package com.netsteadfast.greenstep.bsc.command;
 
-import java.math.BigDecimal;
-
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
 import com.netsteadfast.greenstep.base.BaseChainCommandSupport;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.util.BscScoreColorUtils;
+import com.netsteadfast.greenstep.bsc.util.PerformanceScoreChainUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
@@ -99,7 +98,7 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 			DateRangeScoreVO dateRangeScore = objective.getDateRangeScores().get(i);
 			for (KpiVO kpi : objective.getKpis()) {
 				DateRangeScoreVO kpiDateRangeScore = kpi.getDateRangeScores().get(i);
-				score += kpiDateRangeScore.getScore() * this.getWeightPercentage(kpi.getWeight());
+				score += kpiDateRangeScore.getScore() * PerformanceScoreChainUtils.getWeightPercentage(kpi.getWeight());
 			}
 			dateRangeScore.setScore(score);
 			dateRangeScore.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
@@ -129,7 +128,7 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 			DateRangeScoreVO dateRangeScore = perspective.getDateRangeScores().get(i);
 			for (ObjectiveVO objective : perspective.getObjectives()) {
 				DateRangeScoreVO objDateRangeScore = objective.getDateRangeScores().get(i);
-				score += objDateRangeScore.getScore() * this.getWeightPercentage(objective.getWeight());
+				score += objDateRangeScore.getScore() * PerformanceScoreChainUtils.getWeightPercentage(objective.getWeight());
 			}
 			dateRangeScore.setScore(score);
 			dateRangeScore.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
@@ -159,7 +158,7 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 			DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(i);
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				DateRangeScoreVO perDateRangeScore = perspective.getDateRangeScores().get(i);
-				score += perDateRangeScore.getScore() * this.getWeightPercentage(perspective.getWeight());
+				score += perDateRangeScore.getScore() * PerformanceScoreChainUtils.getWeightPercentage(perspective.getWeight());
 			}
 			dateRangeScore.setScore(score);
 			dateRangeScore.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
@@ -167,15 +166,5 @@ public class ParentItemDateRangeScoreCommand extends BaseChainCommandSupport imp
 		}
 		
 	}
-	
-	private float getWeightPercentage(BigDecimal weight) {
-		if (weight==null) {
-			return 0.0f;
-		}
-		if (weight.floatValue() == 0.0f ) {
-			return 0.0f;
-		}
-		return weight.floatValue() / 100.0f;
-	}	
 	
 }
