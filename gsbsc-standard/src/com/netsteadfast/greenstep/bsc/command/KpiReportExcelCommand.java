@@ -437,7 +437,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		cellFontLabel.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getFontColor())) );
 		cellStyleLabel.setFont(cellFontLabel);
 		cellStyleLabel.setWrapText(true);
-		//cellStyleLabel.setVerticalAlignment(VerticalAlignment.CENTER);
+		cellStyleLabel.setVerticalAlignment(VerticalAlignment.CENTER);
 		cellStyleLabel.setBorderBottom(BorderStyle.THIN);
 		cellStyleLabel.setBorderTop(BorderStyle.THIN);
 		cellStyleLabel.setBorderRight(BorderStyle.THIN);
@@ -445,13 +445,13 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		
 		int cols = 4 + vision.getPerspectives().get(0).getObjectives().get(0).getKpis().get(0).getDateRangeScores().size();
 		int cell = 0;
+		Row headRow = sh.createRow(row);
+		headRow.setHeight( (short)700 );
 		for (int i=0; i<cols; i++) {
 			String content = "Frequency: " + BscMeasureDataFrequency.getFrequencyMap(false).get(frequency) + 
 					" Date range: " + date1 + " ~ " + date2 + "\n" +
 					StringUtils.defaultString((String)headContentMap.get("headContent"));
-			Row headRow = sh.createRow(row);
-			headRow.setHeight( (short)700 );
-			Cell headCell1 = headRow.createCell(cell);	
+			Cell headCell1 = headRow.createCell(cell++);	
 			headCell1.setCellValue( content );
 			headCell1.setCellStyle(cellStyleLabel);						
 		}
@@ -460,18 +460,316 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		
 		row++;
 		
-		int kpiCols = 4;
-		int kpiRows = 2;
+		int drCols = 4;
+		int drRows = 2;
+		
+		
+		// =======================================================================================================
+		// Vision date range , 2017-06-07 add
+		// =======================================================================================================
+		cell = 0;
+		headRow = sh.createRow(row);
+		headRow.setHeight( (short)700 );
+		for (int i=0; i<cols; i++) {
+			Cell headCell1 = headRow.createCell(cell++);	
+			headCell1.setCellValue( "Vision date range" );
+			headCell1.setCellStyle(cellStyleLabel);						
+		}
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );	
+		row++;
+		
+		for (int r=0; r<drRows; r++) {
+			Row contentRow = sh.createRow(row++);
+			contentRow.setHeight((short)400);		
+			
+			for (int c=0; c<drCols; c++) {							
+				XSSFCellStyle cellStyle = wb.createCellStyle();
+				cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(vision.getBgColor())) );
+				cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+				XSSFFont cellFont = wb.createFont();
+				cellFont.setBold(false);
+				cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(vision.getFontColor())) );
+				cellStyle.setFont(cellFont);
+				cellStyle.setWrapText(true);
+				cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+				cellStyle.setBorderBottom(BorderStyle.THIN);
+				cellStyle.setBorderTop(BorderStyle.THIN);
+				cellStyle.setBorderRight(BorderStyle.THIN);
+				cellStyle.setBorderLeft(BorderStyle.THIN);
+				Cell contentCell1 = contentRow.createCell(c);
+				contentCell1.setCellValue( vision.getTitle() );
+				contentCell1.setCellStyle(cellStyle);
+				
+			}
+			
+			cell = 4;
+			if (r == 0) { // date
+				
+				for (int d=0; d<vision.getDateRangeScores().size(); d++) {
+					DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(d);
+					XSSFCellStyle cellStyle = wb.createCellStyle();
+					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+					cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+					XSSFFont cellFont = wb.createFont();
+					cellFont.setBold(false);
+					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+					cellStyle.setFont(cellFont);
+					cellStyle.setWrapText(true);
+					cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+					cellStyle.setBorderBottom(BorderStyle.THIN);
+					cellStyle.setBorderTop(BorderStyle.THIN);
+					cellStyle.setBorderRight(BorderStyle.THIN);
+					cellStyle.setBorderLeft(BorderStyle.THIN);
+					Cell contentCell1 = contentRow.createCell(cell++);
+					contentCell1.setCellValue( dateRangeScore.getDate() );
+					contentCell1.setCellStyle(cellStyle);								
+				}
+											
+			}
+			if (r == 1) { // score
+
+				for (int d=0; d<vision.getDateRangeScores().size(); d++) {
+					DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(d);
+					XSSFCellStyle cellStyle = wb.createCellStyle();
+					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+					cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+					XSSFFont cellFont = wb.createFont();
+					cellFont.setBold(false);
+					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+					cellStyle.setFont(cellFont);
+					cellStyle.setWrapText(true);
+					cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+					cellStyle.setBorderBottom(BorderStyle.THIN);
+					cellStyle.setBorderTop(BorderStyle.THIN);
+					cellStyle.setBorderRight(BorderStyle.THIN);
+					cellStyle.setBorderLeft(BorderStyle.THIN);
+					Cell contentCell1 = contentRow.createCell(cell++);
+					contentCell1.setCellValue( "      " + BscReportSupportUtils.parse2(dateRangeScore.getScore()) );
+					contentCell1.setCellStyle(cellStyle);		
+					
+				}
+				
+			}
+			
+		}
+		sh.addMergedRegion( new CellRangeAddress(row-2, row-1, 0, drCols-1) );	
+		
+		
+		// =======================================================================================================
+		// Perspectives date range , 2017-06-07 add
+		// =======================================================================================================
+		cell = 0;
+		headRow = sh.createRow(row);
+		headRow.setHeight( (short)700 );
+		for (int i=0; i<cols; i++) {
+			Cell headCell1 = headRow.createCell(cell++);	
+			headCell1.setCellValue( BscReportPropertyUtils.getPerspectiveTitle() + " date range" );
+			headCell1.setCellStyle(cellStyleLabel);						
+		}
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );
+		row++;
+		
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			cell = 0;
+			for (int r=0; r<drRows; r++) {
+				Row contentRow = sh.createRow(row++);
+				contentRow.setHeight((short)400);		
+				
+				for (int c=0; c<drCols; c++) {							
+					XSSFCellStyle cellStyle = wb.createCellStyle();
+					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getBgColor())) );
+					cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+					XSSFFont cellFont = wb.createFont();
+					cellFont.setBold(false);
+					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getFontColor())) );
+					cellStyle.setFont(cellFont);
+					cellStyle.setWrapText(true);
+					cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+					cellStyle.setBorderBottom(BorderStyle.THIN);
+					cellStyle.setBorderTop(BorderStyle.THIN);
+					cellStyle.setBorderRight(BorderStyle.THIN);
+					cellStyle.setBorderLeft(BorderStyle.THIN);
+					Cell contentCell1 = contentRow.createCell(c);
+					contentCell1.setCellValue( perspective.getName() );
+					contentCell1.setCellStyle(cellStyle);
+					
+				}
+				
+				cell = 4;
+				if (r == 0) { // date
+					
+					for (int d=0; d<perspective.getDateRangeScores().size(); d++) {
+						DateRangeScoreVO dateRangeScore = perspective.getDateRangeScores().get(d);
+						XSSFCellStyle cellStyle = wb.createCellStyle();
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+						XSSFFont cellFont = wb.createFont();
+						cellFont.setBold(false);
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+						cellStyle.setFont(cellFont);
+						cellStyle.setWrapText(true);
+						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+						cellStyle.setBorderBottom(BorderStyle.THIN);
+						cellStyle.setBorderTop(BorderStyle.THIN);
+						cellStyle.setBorderRight(BorderStyle.THIN);
+						cellStyle.setBorderLeft(BorderStyle.THIN);
+						Cell contentCell1 = contentRow.createCell(cell++);
+						contentCell1.setCellValue( dateRangeScore.getDate() );
+						contentCell1.setCellStyle(cellStyle);								
+					}
+												
+				}
+				if (r == 1) { // score
+
+					for (int d=0; d<perspective.getDateRangeScores().size(); d++) {
+						DateRangeScoreVO dateRangeScore = perspective.getDateRangeScores().get(d);
+						XSSFCellStyle cellStyle = wb.createCellStyle();
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+						XSSFFont cellFont = wb.createFont();
+						cellFont.setBold(false);
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+						cellStyle.setFont(cellFont);
+						cellStyle.setWrapText(true);
+						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+						cellStyle.setBorderBottom(BorderStyle.THIN);
+						cellStyle.setBorderTop(BorderStyle.THIN);
+						cellStyle.setBorderRight(BorderStyle.THIN);
+						cellStyle.setBorderLeft(BorderStyle.THIN);
+						Cell contentCell1 = contentRow.createCell(cell++);
+						contentCell1.setCellValue( "      " + BscReportSupportUtils.parse2(dateRangeScore.getScore()) );
+						contentCell1.setCellStyle(cellStyle);		
+						
+					}
+					
+				}
+				
+			}
+			sh.addMergedRegion( new CellRangeAddress(row-2, row-1, 0, drCols-1) );	
+		}
+		
+		
+		// =======================================================================================================
+		// Strategy Objectives date range , 2017-06-07 add
+		// =======================================================================================================
+		cell = 0;
+		headRow = sh.createRow(row);
+		headRow.setHeight( (short)700 );
+		for (int i=0; i<cols; i++) {
+			Cell headCell1 = headRow.createCell(cell++);	
+			headCell1.setCellValue( BscReportPropertyUtils.getObjectiveTitle() + " date range" );
+			headCell1.setCellStyle(cellStyleLabel);						
+		}
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );	
+		row++;		
+		
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				cell = 0;
+				for (int r=0; r<drRows; r++) {
+					Row contentRow = sh.createRow(row++);
+					contentRow.setHeight((short)400);		
+					
+					for (int c=0; c<drCols; c++) {							
+						XSSFCellStyle cellStyle = wb.createCellStyle();
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getBgColor())) );
+						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+						XSSFFont cellFont = wb.createFont();
+						cellFont.setBold(false);
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getFontColor())) );
+						cellStyle.setFont(cellFont);
+						cellStyle.setWrapText(true);
+						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+						cellStyle.setBorderBottom(BorderStyle.THIN);
+						cellStyle.setBorderTop(BorderStyle.THIN);
+						cellStyle.setBorderRight(BorderStyle.THIN);
+						cellStyle.setBorderLeft(BorderStyle.THIN);
+						Cell contentCell1 = contentRow.createCell(c);
+						contentCell1.setCellValue( objective.getName() );
+						contentCell1.setCellStyle(cellStyle);
+						
+					}
+					
+					cell = 4;
+					if (r == 0) { // date
+						
+						for (int d=0; d<objective.getDateRangeScores().size(); d++) {
+							DateRangeScoreVO dateRangeScore = objective.getDateRangeScores().get(d);
+							XSSFCellStyle cellStyle = wb.createCellStyle();
+							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+							cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+							XSSFFont cellFont = wb.createFont();
+							cellFont.setBold(false);
+							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+							cellStyle.setFont(cellFont);
+							cellStyle.setWrapText(true);
+							cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+							cellStyle.setBorderBottom(BorderStyle.THIN);
+							cellStyle.setBorderTop(BorderStyle.THIN);
+							cellStyle.setBorderRight(BorderStyle.THIN);
+							cellStyle.setBorderLeft(BorderStyle.THIN);
+							Cell contentCell1 = contentRow.createCell(cell++);
+							contentCell1.setCellValue( dateRangeScore.getDate() );
+							contentCell1.setCellStyle(cellStyle);								
+						}
+													
+					}
+					if (r == 1) { // score
+
+						for (int d=0; d<objective.getDateRangeScores().size(); d++) {
+							DateRangeScoreVO dateRangeScore = objective.getDateRangeScores().get(d);
+							XSSFCellStyle cellStyle = wb.createCellStyle();
+							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+							cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
+							XSSFFont cellFont = wb.createFont();
+							cellFont.setBold(false);
+							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+							cellStyle.setFont(cellFont);
+							cellStyle.setWrapText(true);
+							cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+							cellStyle.setBorderBottom(BorderStyle.THIN);
+							cellStyle.setBorderTop(BorderStyle.THIN);
+							cellStyle.setBorderRight(BorderStyle.THIN);
+							cellStyle.setBorderLeft(BorderStyle.THIN);
+							Cell contentCell1 = contentRow.createCell(cell++);
+							contentCell1.setCellValue( "      " + BscReportSupportUtils.parse2(dateRangeScore.getScore()) );
+							contentCell1.setCellStyle(cellStyle);		
+							
+						}
+						
+					}
+					
+				}
+				sh.addMergedRegion( new CellRangeAddress(row-2, row-1, 0, drCols-1) );					
+			}
+		}
+		
+		
+		
+		// =======================================================================================================
+		// KPIs
+		// =======================================================================================================
+		cell = 0;
+		headRow = sh.createRow(row);
+		headRow.setHeight( (short)700 );
+		for (int i=0; i<cols; i++) {
+			Cell headCell1 = headRow.createCell(cell);	
+			headCell1.setCellValue( BscReportPropertyUtils.getKpiTitle() + " date range" );
+			headCell1.setCellStyle(cellStyleLabel);						
+		}
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, cols-1) );	
+		row++;
+		
 		for (PerspectiveVO perspective : vision.getPerspectives()) {
 			for (ObjectiveVO objective : perspective.getObjectives()) {
 				for (KpiVO kpi : objective.getKpis()) {
 					cell = 0;
 					
-					for (int r=0; r<kpiRows; r++) {
+					for (int r=0; r<drRows; r++) {
 						Row contentRow = sh.createRow(row++);
 						contentRow.setHeight((short)400);		
 						
-						for (int c=0; c<kpiCols; c++) {							
+						for (int c=0; c<drCols; c++) {							
 							XSSFCellStyle cellStyle = wb.createCellStyle();
 							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getBgColor())) );
 							cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
@@ -547,7 +845,7 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						
 					}
 										
-					sh.addMergedRegion( new CellRangeAddress(row-2, row-1, 0, kpiCols-1) );
+					sh.addMergedRegion( new CellRangeAddress(row-2, row-1, 0, drCols-1) );
 										
 				}
 			}
