@@ -21,7 +21,6 @@
  */
 package com.netsteadfast.greenstep.bsc.command;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,6 +33,7 @@ import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.support.ScoreCalculationCallable;
 import com.netsteadfast.greenstep.bsc.support.ScoreCalculationCallableData;
 import com.netsteadfast.greenstep.bsc.util.BscScoreColorUtils;
+import com.netsteadfast.greenstep.bsc.util.PerformanceScoreChainUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.KpiVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
@@ -66,7 +66,7 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 		for (VisionVO vision : visions) {
 			float score = 0.0f;
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
-				score += perspective.getScore() * this.getWeightPercentage(perspective.getWeight());
+				score += perspective.getScore() * PerformanceScoreChainUtils.getWeightPercentage(perspective.getWeight());
 			}
 			vision.setScore(score);
 			vision.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
@@ -79,7 +79,7 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				float score = 0.0f;
 				for (ObjectiveVO objective : perspective.getObjectives()) {
-					score += objective.getScore() * this.getWeightPercentage(objective.getWeight());
+					score += objective.getScore() * PerformanceScoreChainUtils.getWeightPercentage(objective.getWeight());
 				}
 				perspective.setScore(score);
 				perspective.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
@@ -106,7 +106,7 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 				for (ObjectiveVO objective : perspective.getObjectives()) {
 					float score = 0.0f;
 					for (KpiVO kpi : objective.getKpis()) {
-						score += kpi.getScore() * this.getWeightPercentage(kpi.getWeight());						
+						score += kpi.getScore() * PerformanceScoreChainUtils.getWeightPercentage(kpi.getWeight());						
 					}
 					objective.setScore(score);
 					objective.setBgColor( BscScoreColorUtils.getBackgroundColor(score) );
@@ -193,15 +193,5 @@ public class ScoreCalculationCommand extends BaseChainCommandSupport implements 
 //		// 2015-03-11 更換成以 bb_aggregation_method.EXPRESSION1 處理計算方式		
 //		return AggregationMethodUtils.processDefaultMode(kpi);		
 //	}
-	
-	private float getWeightPercentage(BigDecimal weight) {
-		if (weight==null) {
-			return 0.0f;
-		}
-		if (weight.floatValue() == 0.0f ) {
-			return 0.0f;
-		}
-		return weight.floatValue() / 100.0f;
-	}
 
 }
