@@ -362,7 +362,7 @@
 		<!-- Vision -->
 		<tr>
 			<td colspan="3" bgcolor="${backgroundColor}" align="left">
-				<b><font color="${fontColor}" size="2">Vision date range</font></b>
+				<b><font color="${fontColor}" size="2">Vision date range score</font></b>
 			</td>
 		</tr>
 		<tr>
@@ -414,7 +414,7 @@
 		<!-- Perspective dateRange score -->
 		<tr>
 			<td colspan="3" bgcolor="${backgroundColor}" align="left">
-				<b><font color="${fontColor}" size="2">${perspectiveTitle} date range</font></b>
+				<b><font color="${fontColor}" size="2">${perspectiveTitle} date range score</font></b>
 			</td>
 		</tr>		
 		<tr>
@@ -466,7 +466,7 @@
 		<!-- Objective dateRange score -->
 		<tr>
 			<td colspan="3" bgcolor="${backgroundColor}" align="left">
-				<b><font color="${fontColor}" size="2">${objectiveTitle} date range</font></b>
+				<b><font color="${fontColor}" size="2">${objectiveTitle} date range score</font></b>
 			</td>
 		</tr>		
 		<tr>
@@ -518,7 +518,7 @@
 		<!-- KPIs dateRange score -->
 		<tr>
 			<td colspan="3" bgcolor="${backgroundColor}" align="left">
-				<b><font color="${fontColor}" size="2">${kpiTitle} date range</font></b>
+				<b><font color="${fontColor}" size="2">${kpiTitle} date range score</font></b>
 			</td>
 		</tr>		
 		<tr>
