@@ -52,270 +52,59 @@ var BSC_PROG003D0004Q_fieldsId = new Object();
 BSC_PROG003D0004Q_fieldsId['visionOid'] 					= 'BSC_PROG003D0004Q_visionOid';
 BSC_PROG003D0004Q_fieldsId['frequency'] 					= 'BSC_PROG003D0004Q_frequency';
 BSC_PROG003D0004Q_fieldsId['startYearDate'] 				= 'BSC_PROG003D0004Q_startYearDate';
+BSC_PROG003D0004Q_fieldsId['endYearDate'] 					= 'BSC_PROG003D0004Q_endYearDate';
+BSC_PROG003D0004Q_fieldsId['startDate'] 					= 'BSC_PROG003D0004Q_startDate';
+BSC_PROG003D0004Q_fieldsId['endDate'] 						= 'BSC_PROG003D0004Q_endDate';
+BSC_PROG003D0004Q_fieldsId['measureDataOrganizationOid'] 	= 'BSC_PROG003D0004Q_measureDataOrganizationOid';
+BSC_PROG003D0004Q_fieldsId['measureDataEmployeeOid'] 		= 'BSC_PROG003D0004Q_measureDataEmployeeOid';
 
-function BSC_PROG003D0004Q_query() {
-	BSC_PROG003D0004Q_clearContent();
-	setFieldsBackgroundDefault(BSC_PROG003D0004Q_fieldsId);
-	setFieldsNoticeMessageLabelDefault(BSC_PROG003D0004Q_fieldsId);
-	xhrSendParameter(
-			'${basePath}/bsc.kpiReportContentQueryAction.action', 
-			{ 
-				'fields.visionOid' 					: 	dijit.byId("BSC_PROG003D0004Q_visionOid").get("value"),
-				'fields.startYearDate'				:	dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue'),
-				'fields.endYearDate'				:	dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue'),
-				'fields.startDate'					:	'',
-				'fields.endDate'					:	'',
-				'fields.dataFor'					:	'all',
-				'fields.measureDataOrganizationOid'	:	_gscore_please_select_id,
-				'fields.measureDataEmployeeOid'		:	_gscore_please_select_id,
-				'fields.frequency'					:	dijit.byId("BSC_PROG003D0004Q_frequency").get("value"),
-				'fields.nobody'					: "Y"
-			}, 
-			'json', 
-			_gscore_dojo_ajax_timeout,
-			_gscore_dojo_ajax_sync, 
-			true, 
-			function(data) {
-				if ('Y' != data.success) {
-					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0004Q_fieldsId);
-					setFieldsNoticeMessageLabel(data.fieldsId, data.fieldsMessage, BSC_PROG003D0004Q_fieldsId);
-					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
-					return;
-				}
-				BSC_PROG003D0004Q_paintPieCharts(data);
-				BSC_PROG003D0004Q_paintBarCharts(data);	
-				BSC_PROG003D0004Q_showPerspectivesMeterGauge( data );
-			}, 
-			function(error) {
-				alert(error);
-			}
-	);	
-}
 
-function BSC_PROG003D0004Q_paintPieCharts(data) {
-    var myColors = data.perspectivesPieChartBgColor;
-    d3.scale.myColors = function() {
-        return d3.scale.ordinal().range(myColors);
-    };
-    
-	nv.addGraph(function() {
-		var chart = nv.models.pieChart()
-			.x(function(d) { return d.label })
-			.y(function(d) { return d.value })
-			.showLabels(true).color(d3.scale.myColors().range());
-				
-		chart.pie.labelsOutside(false).labelType("percent");
-		
-		d3.select("#BSC_PROG003D0004Q_pieChart svg")
-			.datum(data.perspectivesPieChartValue)
-			.transition().duration(350)
-			.call(chart);
-		
-		return chart;
-	});		
-}
-
-function BSC_PROG003D0004Q_paintBarCharts(data) {
-    var myColors = data.perspectivesBarChartBgColor;
-    d3.scale.myColors = function() {
-        return d3.scale.ordinal().range(myColors);
-    };
-    
-	nv.addGraph(function() {
-		var chart = nv.models.discreteBarChart()
-			.x(function(d) { return d.label })    //Specify the data accessors.
-			.y(function(d) { return d.value })
-			.staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-			//.tooltips(false)        //Don't show tooltips , 2016-01-09 tooltips no need for nvd3 1.8.1
-			.showValues(true)       //...instead, show the bar value right on top of each bar.
-			.color( myColors );
-
-		d3.select('#BSC_PROG003D0004Q_barChart svg')
-			.datum(data.perspectivesBarChartValue)
-			.call(chart);
-
-		nv.utils.windowResize(chart.update);
-
-		return chart;
-	});	
-}
-
-function BSC_PROG003D0004Q_showPerspectivesMeterGauge( data ) {
-	
-	// 清除要上傳的資料
-	dojo.query("input").forEach(function(node){
-		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_meterGaugeChartDatas:')>-1) {
-			dojo.destroy(node.id);
-		}	
-		if (node.id!=null && ( node.id.indexOf('BSC_PROG003D0004Q_barChartDatas')>-1 
-				|| node.id.indexOf('BSC_PROG003D0004Q_pieChartDatas')>-1
-				|| node.id.indexOf('BSC_PROG003D0004Q_year')>-1 ) ) {
-			dojo.destroy(node.id);
-		}
-	});	
-	
-	var content = '';
-	content += '<table width="1100px" border="0" cellpadding="1" cellspacing="1" bgcolor="#E9E9E9" style="border:1px #E9E9E9 solid; border-radius: 5px;" >';
-	content += '<tr>';
-	content += '<td colspan="2" bgcolor="#F6F6F6" align="center" ><font size="4"><b>Perspectives metrics gauge ( ' + dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue') + ' )</b></font></td>';
-	content += '</tr>';	
-	for (var n in data.perspectiveItems) {
-		content += '<tr>';
-		content += '<td width="50%" bgcolor="#ffffff" align="center" ><div id="BSC_PROG003D0004Q_charts_' + data.perspectiveItems[n].perId + '" style="width:450px;height:320px;" ></td>';
-		content += '<td width="50%" bgcolor="#ffffff" align="center">' + BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( data.perspectiveItems[n] ) + '<td>';
-		content += '</tr>';							
-	}	
-	content += '</table>';
-	dojo.html.set(dojo.byId("BSC_PROG003D0004Q_contentPerspectives"), content, {extractContent: true, parseContent: true});	
-	for (var n in data.perspectiveItems) {
-		var perspective = data.perspectiveItems[n];
-		var target = perspective.target;
-		var score = perspective.score;
-		var id = 'BSC_PROG003D0004Q_charts_' + perspective.perId;
-		
-		if (document.getElementById(id)==null) {
-			alert('error lost id of div: ' + id);
-			continue;
-		} 
-		
-		var maxValue = target;
-		if (maxValue < score) {
-			maxValue = score;
-		}	
-		maxValue = parseInt(maxValue+'', 10);
-		
-		var labelString = perspective.name + " ( " + score + " ) ";
-		
-		$.jqplot(id, [ [parseInt(score+'', 10)] ], {
-		       seriesDefaults: {
-		           renderer: $.jqplot.MeterGaugeRenderer,
-		           rendererOptions: {
-		               label: labelString,
-		               labelPosition: 'bottom',
-		               intervals:[parseInt((maxValue*0.6)+'', 10), parseInt((maxValue*0.8)+'', 10), maxValue],
-		               intervalColors:['#cc6666', '#E7E658', '#66cc66']
-		           }
-		       }
-		});	
-		
-		var inputDataId = 'BSC_PROG003D0004Q_meterGaugeChartDatas:' + perspective.perId;
-		var datas = [];
-		datas.push({
-			id: perspective.perId,
-			name: perspective.name,
-			target: perspective.target,
-			min: perspective.min,
-			score: perspective.score,
-			bgColor: perspective.bgColor,
-			fontColor: perspective.fontColor,
-			outerHTML: $('#' + id).jqplotToImageElem().outerHTML
-		});
-		var chartDatas = {};
-		chartDatas.id = id;
-		chartDatas.datas = datas;
-		dojo.create(
-				"input", {
-					id: 	inputDataId,
-					name:	inputDataId,
-					type: 	"hidden",
-					value:	JSON.stringify(chartDatas)
-				},
-				"BSC_PROG003D0004Q_form"
-		);			
-		
+function BSC_PROG003D0004Q_setDataForValue() {
+	dijit.byId('BSC_PROG003D0004Q_measureDataOrganizationOid').set("value", _gscore_please_select_id);
+	dijit.byId('BSC_PROG003D0004Q_measureDataEmployeeOid').set("value", _gscore_please_select_id);	
+	dijit.byId('BSC_PROG003D0004Q_measureDataOrganizationOid').set('readOnly', true);
+	dijit.byId('BSC_PROG003D0004Q_measureDataEmployeeOid').set('readOnly', true);
+	var dataFor = dijit.byId("BSC_PROG003D0004Q_dataFor").get("value");
+	if ('employee' == dataFor) {
+		dijit.byId('BSC_PROG003D0004Q_measureDataEmployeeOid').set('readOnly', false);
+	}
+	if ('organization' == dataFor) {
+		dijit.byId('BSC_PROG003D0004Q_measureDataOrganizationOid').set('readOnly', false);
 	}	
 }
-function BSC_PROG003D0004Q_showPerspectiveItemsDataContentTable( perspective ) {
-	var content = '';
-	content += '<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE" >';
-	content += '<tr>';
-	content += '<td bgcolor="' + perspective.bgColor + '" align="center" ><b><font size="4" color="' + perspective.fontColor + '" >' + perspective.name + '</font></b></td>';
-	content += '</tr>';		
-	content += '<tr>';
-	content += '<td bgcolor="#ffffff" align="center" ><b>Target:&nbsp;</b>' + perspective.target + '</td>';
-	content += '</tr>';
-	content += '<tr>';
-	content += '<td bgcolor="#ffffff" align="center" ><b>Min:&nbsp;</b>' + perspective.min + '</td>';
-	content += '</tr>';
-	content += '<tr>';
-	content += '<td bgcolor="#ffffff" align="center" ><b>Score:&nbsp;</b>' + perspective.score + '</td>';
-	content += '</tr>';				
-	content += '<tr>';
-	content += '<td bgcolor="#ffffff" align="center" >' + perspective.description + '</td>';
-	content += '</tr>';	
-	content += '</table>';
-	return content;
+
+function BSC_PROG003D0004Q_setMeasureDataOrgaValue() {
+	var dataFor = dijit.byId("BSC_PROG003D0004Q_dataFor").get("value");
+	if ('all' == dataFor || 'employee' == dataFor) {
+		dijit.byId('BSC_PROG003D0004Q_measureDataOrganizationOid').set("value", _gscore_please_select_id);
+	}
 }
 
-function BSC_PROG003D0004Q_generateExport(type) {
-	
-	var chartsCount = 0;
-	dojo.query("input").forEach(function(node){
-		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_meterGaugeChartDatas:')>-1) {
-			chartsCount++;
-		}	
-	});
-	if ( chartsCount < 1 ) {
-		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0004Q_msg1')" escapeJavaScript="true"/>', function(){}, 'Y');
-		showFieldsNoticeMessageLabel('BSC_PROG003D0004Q_visionOid'+_gscore_inputfieldNoticeMsgLabelIdName, '<s:property value="getText('MESSAGE.BSC_PROG003D0004Q_msg1')" escapeJavaScript="true"/>');
+function BSC_PROG003D0004Q_setMeasureDataEmplValue() {
+	var dataFor = dijit.byId("BSC_PROG003D0004Q_dataFor").get("value");
+	if ('all' == dataFor || 'organization' == dataFor) {
+		dijit.byId('BSC_PROG003D0004Q_measureDataOrganizationOid').set("value", _gscore_please_select_id);
+	}	
+}
+
+function BSC_PROG003D0004Q_setFrequencyValue() {
+	var frequency = dijit.byId("BSC_PROG003D0004Q_frequency").get("value");
+	dijit.byId("BSC_PROG003D0004Q_startYearDate").set("readOnly", true);
+	dijit.byId("BSC_PROG003D0004Q_endYearDate").set("readOnly", true);
+	dijit.byId("BSC_PROG003D0004Q_startDate").set("readOnly", true);
+	dijit.byId("BSC_PROG003D0004Q_endDate").set("readOnly", true);
+	if ( frequency == _gscore_please_select_id ) {
 		return;
 	}
-	
-	dojo.create(
-			"input", {
-				id: 	'BSC_PROG003D0004Q_barChartDatas',
-				name:	'BSC_PROG003D0004Q_barChartDatas',
-				type: 	"hidden",
-				value:	viewPage.getStrToHex( viewPage.getSVGImage2CanvasToDataUrlPNG('#BSC_PROG003D0004Q_barChart svg') )
-			},
-			"BSC_PROG003D0004Q_form"
-	);
-	dojo.create(
-			"input", {
-				id: 	'BSC_PROG003D0004Q_pieChartDatas',
-				name:	'BSC_PROG003D0004Q_pieChartDatas',
-				type: 	"hidden",
-				value:	viewPage.getStrToHex( viewPage.getSVGImage2CanvasToDataUrlPNG('#BSC_PROG003D0004Q_pieChart svg') )
-			},
-			"BSC_PROG003D0004Q_form"
-	);	
-	dojo.create(
-			"input", {
-				id: 	'BSC_PROG003D0004Q_year',
-				name:	'BSC_PROG003D0004Q_year',
-				type: 	"hidden",
-				value:	dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue')
-			},
-			"BSC_PROG003D0004Q_form"
-	);		
-	setFieldsBackgroundDefault(BSC_PROG003D0004Q_fieldsId);
-	setFieldsNoticeMessageLabelDefault(BSC_PROG003D0004Q_fieldsId);
-	xhrSendForm(
-			'${basePath}/bsc.perspectivesDashboardExcelAction.action', 
-			'BSC_PROG003D0004Q_form', 
-			'json', 
-			_gscore_dojo_ajax_timeout,
-			_gscore_dojo_ajax_sync, 
-			true, 
-			function(data) {
-				if ('Y' != data.success) {
-					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0004Q_fieldsId);
-					setFieldsNoticeMessageLabel(data.fieldsId, data.fieldsMessage, BSC_PROG003D0004Q_fieldsId);
-					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
-					return;
-				}
-				openCommonLoadUpload( 'download', data.uploadOid, { } );  									
-			}, 
-			function(error) {
-				alert(error);
-			}
-	);
-	
+	if ('1' == frequency || '2' == frequency || '3' == frequency) { // day, week, month
+		dijit.byId("BSC_PROG003D0004Q_startDate").set("readOnly", false);
+		dijit.byId("BSC_PROG003D0004Q_endDate").set("readOnly", false);		
+	} else { // quarter, half-year, year
+		dijit.byId("BSC_PROG003D0004Q_startYearDate").set("readOnly", false);
+		dijit.byId("BSC_PROG003D0004Q_endYearDate").set("readOnly", false);				
+	}
 }
 
-function BSC_PROG003D0004Q_clearContent() {
-	
-}
 
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
@@ -343,13 +132,14 @@ function ${programId}_page_message() {
 		refreshEnable="Y" 		 
 		refreshJsMethod="${programId}_TabRefresh();" 		
 		></gs:toolBar>
-	<jsp:include page="../header.jsp"></jsp:include>	
-	
+	<jsp:include page="../header.jsp"></jsp:include>		
+
+
 	<table border="0" width="100%" >
 		<tr valign="top">
 			<td width="100%" align="center" height="35%">
 				<div data-dojo-type="dijit.TitlePane" data-dojo-props="title: '<s:property value="getText('BSC_PROG003D0004Q_options')" escapeJavaScript="true"/>' " >						
-					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:99%;height:80px">
+					<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:99%;height:145px">
 					
 						<table border="0" width="100%" >
 							<tr valign="top">
@@ -362,21 +152,33 @@ function ${programId}_page_message() {
 											onClick:function(){  
 												BSC_PROG003D0004Q_query();
 											}"><s:property value="getText('BSC_PROG003D0004Q_btnQuery')"/></button>		
-											
+																
+									<button id="BSC_PROG003D0004Q_btnPdf" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											iconClass:'btnPdfIcon',
+											showLabel:false,
+											onClick:function(){
+												BSC_PROG003D0004Q_generateExport('PDF');
+											}"><s:property value="getText('BSC_PROG003D0004Q_btnPdf')"/></button>	
+									            
 									<button id="BSC_PROG003D0004Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
 											iconClass:'btnExcelIcon',
 											showLabel:false,
 											onClick:function(){
 												BSC_PROG003D0004Q_generateExport('EXCEL');																			  
-											}"><s:property value="getText('BSC_PROG003D0004Q_btnXls')"/></button>		
-									
-									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_visionOid"></gs:inputfieldNoticeMsgLabel>
+											}"><s:property value="getText('BSC_PROG003D0004Q_btnXls')"/></button>	
+
+									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_visionOid"></gs:inputfieldNoticeMsgLabel>		
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_frequency"></gs:inputfieldNoticeMsgLabel>
-									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_startYearDate"></gs:inputfieldNoticeMsgLabel>							
+									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_startYearDate"></gs:inputfieldNoticeMsgLabel>
+									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_startDate"></gs:inputfieldNoticeMsgLabel>
+									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_measureDataOrganizationOid"></gs:inputfieldNoticeMsgLabel>
+									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_measureDataEmployeeOid"></gs:inputfieldNoticeMsgLabel>
 											
-								</td>
-							</tr>
+								</td>											
+							</tr>	
+
 							<tr valign="top">
 								<td width="100%" align="left" height="25px">	
 								
@@ -388,54 +190,80 @@ function ${programId}_page_message() {
 						    		&nbsp;		    			
 					    																	
 									<s:property value="getText('BSC_PROG003D0004Q_frequency')"/>
-									<gs:select name="BSC_PROG003D0004Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0004Q_frequency" value="6" width="140" readonly="Y"></gs:select>
+									<gs:select name="BSC_PROG003D0004Q_frequency" dataSource="frequencyMap" id="BSC_PROG003D0004Q_frequency" value="6" onChange="BSC_PROG003D0004Q_setFrequencyValue();" width="140"></gs:select>
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_frequency'">
-					    				Select frequency. ( fixed for year )
-									</div> 										
-									&nbsp;
-									
+					    				Select frequency.
+									</div> 									
+								</td>											
+							</tr>	
+												
+							<tr valign="top">
+								<td width="100%" align="left" height="25px">
+								
 							    	<s:property value="getText('BSC_PROG003D0004Q_startYearDate')"/>
 							    	<input id="BSC_PROG003D0004Q_startYearDate" name="BSC_PROG003D0004Q_startYearDate" data-dojo-type="dojox.form.YearTextBox" 
 							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_startYearDate'">
-					    				Select year.
-									</div>								    		
-							    	&nbsp;				
-							    										
-								</td>											
-							</tr>								
-														
-						</table>										
-					
-					</div>
-				</div>
+					    				Select start year.
+									</div>							    		
+							    	&nbsp;	
+							    	<s:property value="getText('BSC_PROG003D0004Q_endYearDate')"/>
+							    	<input id="BSC_PROG003D0004Q_endYearDate" name="BSC_PROG003D0004Q_endYearDate" data-dojo-type="dojox.form.YearTextBox" 
+							    		maxlength="4"  type="text" data-dojo-props='style:"width: 80px;" ' />
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_endYearDate'">
+					    				Select end year.
+									</div>							    									    	
+							    	&nbsp;&nbsp;		
+									<s:property value="getText('BSC_PROG003D0004Q_startDate')"/>
+									<input id="BSC_PROG003D0004Q_startDate" type="text" name="BSC_PROG003D0004Q_startDate" data-dojo-type="dijit.form.DateTextBox"
+										maxlength="10" 
+										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_startDate'">
+					    				Select start date.
+									</div>											
+									&nbsp;						
+									<s:property value="getText('BSC_PROG003D0004Q_endDate')"/>
+									<input id="BSC_PROG003D0004Q_endDate" type="text" name="BSC_PROG003D0004Q_endDate" data-dojo-type="dijit.form.DateTextBox"
+										maxlength="10" 
+										constraints="{datePattern:'yyyy/MM/dd', selector:'date' }" style="width:120px;" readonly />																	    									    	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_endDate'">
+					    				Select end date.
+									</div>							    			
+							    </td>	
+							</tr>
+							<tr valign="top">
+								<td width="100%" align="left" height="25px">							
+									<s:property value="getText('BSC_PROG003D0004Q_dataFor')"/>
+									<gs:select name="BSC_PROG003D0004Q_dataFor" dataSource="{ \"all\":\"All\", \"organization\":\"${action.getText('BSC_PROG003D0004Q_measureDataOrganizationOid')}\", \"employee\":\"${action.getText('BSC_PROG003D0004Q_measureDataEmployeeOid')}\" }" id="BSC_PROG003D0004Q_dataFor" onChange="BSC_PROG003D0004Q_setDataForValue();" width="140"></gs:select>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_dataFor'">
+					    				Select measure data type.
+									</div>										
+									&nbsp;&nbsp;
+									<s:property value="getText('BSC_PROG003D0004Q_measureDataOrganizationOid')"/>
+									<gs:filteringSelect name="BSC_PROG003D0004Q_measureDataOrganizationOid" dataSource="measureDataOrganizationMap" id="BSC_PROG003D0004Q_measureDataOrganizationOid" onChange="BSC_PROG003D0004Q_setMeasureDataOrgaValue();" readonly="Y" value="all"></gs:filteringSelect>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_measureDataOrganizationOid'">
+					    				Select measure data organization/department.
+									</div>									
+									&nbsp;&nbsp;
+									<s:property value="getText('BSC_PROG003D0004Q_measureDataEmployeeOid')"/>
+									<gs:filteringSelect name="BSC_PROG003D0004Q_measureDataEmployeeOid" dataSource="measureDataEmployeeMap" id="BSC_PROG003D0004Q_measureDataEmployeeOid" onChange="BSC_PROG003D0004Q_setMeasureDataEmplValue();" readonly="Y" value="all"></gs:filteringSelect>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0004Q_measureDataEmployeeOid'">
+					    				Select measure data personal/Employee.
+									</div>									
+								</td>
+							</tr>																						
+																											
+						</table>
+			    			
+		    		</div>		    		
+		    	</div>	
+		    	
+			    			
 			</td>
 		</tr>
-	</table>					
-	
-	<table border="0" width="1100px" >
-		<tr>
-			<td width="50%" align="center">
-				<div id='BSC_PROG003D0004Q_pieChart' >
-			  		<svg style='height:350px;width:500px'> </svg>
-				</div>				
-			</td>
-			<td width="50%" align="center">
-				<div id='BSC_PROG003D0004Q_barChart' >
-			  		<svg style='height:350px;width:500px'> </svg>
-				</div>				
-			</td>			
-		</tr>
-	</table>	
-	
-	
-	<br/>
-	
-	<div id="BSC_PROG003D0004Q_contentPerspectives" style="height:100%; width:1100px"></div>
-	
-	<form name="BSC_PROG003D0004Q_form" id="BSC_PROG003D0004Q_form" action="."></form>
+	</table>
+		
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
 </html>
-	

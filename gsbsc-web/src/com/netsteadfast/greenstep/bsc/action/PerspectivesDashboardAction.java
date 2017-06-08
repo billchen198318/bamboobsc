@@ -48,11 +48,19 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
+import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
+import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.bsc.service.logic.IReportRoleViewLogicService;
+import com.netsteadfast.greenstep.po.hbm.BbEmployee;
+import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.vo.EmployeeVO;
+import com.netsteadfast.greenstep.vo.OrganizationVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
@@ -62,8 +70,13 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	private static final long serialVersionUID = -2448544036438639172L;
 	protected Logger logger=Logger.getLogger(PerspectivesDashboardAction.class);
 	private IVisionService<VisionVO, BbVision, String> visionService;
+	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
+	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;	
+	private IReportRoleViewLogicService reportRoleViewLogicService;
 	private Map<String, String> visionMap = this.providedSelectZeroDataMap(true);
 	private Map<String, String> frequencyMap = BscMeasureDataFrequency.getFrequencyMap(true);
+	private Map<String, String> measureDataOrganizationMap = this.providedSelectZeroDataMap(true);
+	private Map<String, String> measureDataEmployeeMap = this.providedSelectZeroDataMap(true);	
 	private String message = "";
 	private String success = IS_NO;
 	private String uploadOid = "";
@@ -80,14 +93,62 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	@Autowired
 	@Required
 	@Resource(name="bsc.service.VisionService")	
-	public void setVisionService(
-			IVisionService<VisionVO, BbVision, String> visionService) {
+	public void setVisionService(IVisionService<VisionVO, BbVision, String> visionService) {
 		this.visionService = visionService;
 	}	
 	
+	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
+		return organizationService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.OrganizationService")		
+	public void setOrganizationService(IOrganizationService<OrganizationVO, BbOrganization, String> organizationService) {
+		this.organizationService = organizationService;
+	}
+
+	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
+		return employeeService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.EmployeeService")		
+	public void setEmployeeService(IEmployeeService<EmployeeVO, BbEmployee, String> employeeService) {
+		this.employeeService = employeeService;
+	}
+
+	public IReportRoleViewLogicService getReportRoleViewLogicService() {
+		return reportRoleViewLogicService;
+	}
+
+	@Autowired
+	@Required
+	@Resource(name="bsc.service.logic.ReportRoleViewLogicService")		
+	public void setReportRoleViewLogicService(IReportRoleViewLogicService reportRoleViewLogicService) {
+		this.reportRoleViewLogicService = reportRoleViewLogicService;
+	}
+	
 	private void initData() throws ServiceException, Exception {
 		this.visionMap = this.visionService.findForMap(true);
-		
+		if ( YesNo.YES.equals(super.getIsSuperRole()) ) {
+			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);
+			return;
+		} 
+		this.measureDataOrganizationMap = this.reportRoleViewLogicService.findForOrganizationMap(
+				true, this.getAccountId());
+		this.measureDataEmployeeMap = this.reportRoleViewLogicService.findForEmployeeMap(
+				true, this.getAccountId());
+		/**
+		 * 沒有資料表示,沒有限定使用者的角色,只能選取某些部門或某些員工
+		 * 因為沒有限定就全部取出
+		 */
+		if ( this.measureDataOrganizationMap.size() <= 1 && this.measureDataEmployeeMap.size() <= 1 ) { // 第1筆是 - Please select -
+			this.measureDataOrganizationMap = this.organizationService.findForMap(true);
+			this.measureDataEmployeeMap = this.employeeService.findForMap(true);	
+		}		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -220,6 +281,24 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	public Map<String, String> getFrequencyMap() {
 		this.resetPleaseSelectDataMapFromLocaleLang(this.frequencyMap);
 		return frequencyMap;
+	}
+
+	public Map<String, String> getMeasureDataOrganizationMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataOrganizationMap);
+		return measureDataOrganizationMap;
+	}
+
+	public void setMeasureDataOrganizationMap(Map<String, String> measureDataOrganizationMap) {
+		this.measureDataOrganizationMap = measureDataOrganizationMap;
+	}
+
+	public Map<String, String> getMeasureDataEmployeeMap() {
+		this.resetPleaseSelectDataMapFromLocaleLang(this.measureDataEmployeeMap);
+		return measureDataEmployeeMap;
+	}
+
+	public void setMeasureDataEmployeeMap(Map<String, String> measureDataEmployeeMap) {
+		this.measureDataEmployeeMap = measureDataEmployeeMap;
 	}
 
 	@JSON
