@@ -381,9 +381,8 @@ dojo.declare("GS.ViewPage", GS.CORE, {
     		.attr('xmlns', 'http://www.w3.org/2000/svg')
     		.node().parentNode.innerHTML;
     	return exportData;	
-    },       
-    getSVGImage2CanvasToDataUrlPNG : function(_selectId) {
-    	var svg = viewPage.getSVGImageData( _selectId );
+    },
+    getSVGImage2CanvasToDataUrlPNGfromData : function( svg ) {
     	var canvas = document.createElement('canvas');
     	canvg(canvas, svg, {
     		ignoreMouse: true,
@@ -391,6 +390,10 @@ dojo.declare("GS.ViewPage", GS.CORE, {
     		useCORS: true
     	});    	
     	return canvas.toDataURL('image/png');
+    },    
+    getSVGImage2CanvasToDataUrlPNG : function(_selectId) {
+    	var svg = viewPage.getSVGImageData( _selectId );
+    	return this.getSVGImage2CanvasToDataUrlPNGfromData( svg );
     },
     toggleFullscreen : function(element) {
     	/**
