@@ -106,6 +106,60 @@ function BSC_PROG003D0004Q_setFrequencyValue() {
 }
 
 
+function BSC_PROG003D0004Q_query() {
+	BSC_PROG003D0004Q_clearContent();
+	setFieldsBackgroundDefault(BSC_PROG003D0004Q_fieldsId);
+	setFieldsNoticeMessageLabelDefault(BSC_PROG003D0004Q_fieldsId);
+	xhrSendParameter(
+			'${basePath}/bsc.perspectivesDashboardContentAction.action', 
+			{ 
+				'fields.visionOid' 					: 	dijit.byId("BSC_PROG003D0004Q_visionOid").get("value"),
+				'fields.startYearDate'				:	dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue'),
+				'fields.endYearDate'				:	dijit.byId("BSC_PROG003D0004Q_endYearDate").get('displayedValue'),
+				'fields.startDate'					:	dijit.byId("BSC_PROG003D0004Q_startDate").get('displayedValue'),
+				'fields.endDate'					:	dijit.byId("BSC_PROG003D0004Q_endDate").get('displayedValue'),
+				'fields.dataFor'					:	dijit.byId("BSC_PROG003D0004Q_dataFor").get("value"),
+				'fields.measureDataOrganizationOid'	:	dijit.byId("BSC_PROG003D0004Q_measureDataOrganizationOid").get("value"),
+				'fields.measureDataEmployeeOid'		:	dijit.byId("BSC_PROG003D0004Q_measureDataEmployeeOid").get("value"),
+				'fields.frequency'					:	dijit.byId("BSC_PROG003D0004Q_frequency").get("value")
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if ('Y' != data.success) {
+					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0004Q_fieldsId);
+					setFieldsNoticeMessageLabel(data.fieldsId, data.fieldsMessage, BSC_PROG003D0004Q_fieldsId);
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				dojo.byId("BSC_PROG003D0004Q_content").innerHTML = data.body;
+				dijit.byId("BSC_PROG003D0004Q_startDate").set("displayedValue", data.startDate);
+				dijit.byId("BSC_PROG003D0004Q_endDate").set("displayedValue", data.endDate);
+				
+				if ( data != null && data.vision != null ) {
+					console.log( data.vision );
+				}
+				
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);		
+}
+
+
+function BSC_PROG003D0004Q_generateExport(type) {
+	
+}
+
+
+function BSC_PROG003D0004Q_clearContent() {
+	dojo.byId("BSC_PROG003D0004Q_content").innerHTML = "";
+}
+
+
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
 	var pageMessage='<s:property value="pageMessage" escapeJavaScript="true"/>';
@@ -262,7 +316,8 @@ function ${programId}_page_message() {
 			</td>
 		</tr>
 	</table>
-		
+	
+	<div id="BSC_PROG003D0004Q_content"></div>	
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
