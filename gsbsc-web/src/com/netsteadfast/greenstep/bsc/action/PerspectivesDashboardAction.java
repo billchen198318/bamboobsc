@@ -102,6 +102,7 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 		this.visionService = visionService;
 	}	
 	
+	@JSON(serialize=false)
 	public IOrganizationService<OrganizationVO, BbOrganization, String> getOrganizationService() {
 		return organizationService;
 	}
@@ -113,6 +114,7 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 		this.organizationService = organizationService;
 	}
 
+	@JSON(serialize=false)
 	public IEmployeeService<EmployeeVO, BbEmployee, String> getEmployeeService() {
 		return employeeService;
 	}
@@ -124,6 +126,7 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 		this.employeeService = employeeService;
 	}
 
+	@JSON(serialize=false)
 	public IReportRoleViewLogicService getReportRoleViewLogicService() {
 		return reportRoleViewLogicService;
 	}
@@ -480,6 +483,16 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	@JSON
 	public VisionVO getVision() {
 		return vision;
+	}
+	
+	@JSON
+	public String getStartDate() {
+		return this.defaultString( this.getFields().get("startDate") );
+	}
+
+	@JSON
+	public String getEndDate() {
+		return this.defaultString( this.getFields().get("endDate") );
 	}
 	
 }
