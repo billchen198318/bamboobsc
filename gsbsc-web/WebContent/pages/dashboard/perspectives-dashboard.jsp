@@ -137,9 +137,9 @@ function BSC_PROG003D0004Q_query() {
 				dijit.byId("BSC_PROG003D0004Q_startDate").set("displayedValue", data.startDate);
 				dijit.byId("BSC_PROG003D0004Q_endDate").set("displayedValue", data.endDate);
 				
-				BSC_PROG003D0004Q_showTableContent( data.vision );
+				BSC_PROG003D0004Q_showTableContent( data );
 				
-				BSC_PROG003D0004Q_showChartForObjectives( data.vision );
+				BSC_PROG003D0004Q_showChartForObjectives( data );
 				
 				BSC_PROG003D0004Q_showChartForKpiDateRange( data );
 				
@@ -156,20 +156,21 @@ function BSC_PROG003D0004Q_generateExport(type) {
 }
 
 
-function BSC_PROG003D0004Q_showTableContent( vision ) {
+function BSC_PROG003D0004Q_showTableContent( data ) {
+	var vision = data.vision;
 	var t = '';
 	var c = 0;
-	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="#E9E9E9" style="border:1px #E9E9E9 solid; border-radius: 5px;" >';
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
 	for (var p in vision.perspectives) {
 		var perspective = vision.perspectives[p];
 		if ( c == 0 ) {
 			t += '<tr>';
-			t += '<td bgcolor="#F6F6F6" align="left" width="320px"><b>Perspectives</b></td>';
-			t += '<td bgcolor="#F6F6F6" align="left"><b>Target</b></td>';
-			t += '<td bgcolor="#F6F6F6" align="left"><b>Minimum</b></td>';	
-			t += '<td bgcolor="#F6F6F6" align="left"><b>Score</b></td>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>Perspectives</b></font></td>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Target</b></font></td>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Minimum</b></font></td>';	
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
 			for ( var r in perspective.dateRangeScores ) {
-				t += '<td bgcolor="#f5f5f5" align="left"><b>' + perspective.dateRangeScores[r].date + '</b></td>';					
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>' + perspective.dateRangeScores[r].date + '</b></font></td>';					
 			}
 			t += '</tr>';			
 		}
@@ -184,13 +185,17 @@ function BSC_PROG003D0004Q_showTableContent( vision ) {
 		t += '</tr>';			
 		c++;
 	}
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + (4 + vision.perspectives[0].dateRangeScores.length ) + '"><font color="' + data.fontColor + '"><b>' + data.displayFrequencyDateRange + '</b></font></td>';
+	t += '</tr>';	
 	t += '</table>';
 	dojo.byId("BSC_PROG003D0004Q_content").innerHTML = t;
 }
 
 
-function BSC_PROG003D0004Q_showChartForObjectives(vision) {
+function BSC_PROG003D0004Q_showChartForObjectives(data) {
 	
+	var vision = data.vision;
 	
 	var chartDivContent = "";
 	for (var p in vision.perspectives) {
