@@ -60,6 +60,7 @@ import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.service.logic.IReportRoleViewLogicService;
+import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
@@ -394,6 +395,7 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 			this.getContext();
 			if (IS_YES.equals(this.success)) {
 				this.fillCategoriesAndSeries();
+				BscReportPropertyUtils.loadData();
 			}
 		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.message = e.getMessage().toString();
@@ -511,15 +513,17 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	}
 	
 	@JSON
-	public String getStartDate() {
-		return this.defaultString( this.getFields().get("startDate") );
+	public String getDisplayFrequencyDateRange() {
+		String frequency = this.getFields().get("frequency");
+		String str = "Frequency: " + BscMeasureDataFrequency.getFrequencyMap(false).get( frequency );
+		if (!BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) && !BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
+			str += " date range: " + this.getFields().get("startYearDate") + " ~ " + this.getFields().get("endYearDate");
+		} else {
+			str += " date range: " + this.getFields().get("startDate") + " ~ " + this.getFields().get("endDate");
+		}
+		return str;
 	}
-
-	@JSON
-	public String getEndDate() {
-		return this.defaultString( this.getFields().get("endDate") );
-	}
-
+	
 	@JSON
 	public List<String> getCategories() {
 		return categories;
@@ -529,5 +533,20 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	public List<Map<String, Object>> getSeries() {
 		return series;
 	}
+	
+	@JSON
+	public String getBackgroundColor() {
+		return BscReportPropertyUtils.getBackgroundColor();
+	}
+	
+	@JSON
+	public String getFontColor() {
+		return BscReportPropertyUtils.getFontColor();
+	}
+	
+	@JSON
+	public String getPerspectiveTitle() {
+		return BscReportPropertyUtils.getPerspectiveTitle();
+	}	
 	
 }
