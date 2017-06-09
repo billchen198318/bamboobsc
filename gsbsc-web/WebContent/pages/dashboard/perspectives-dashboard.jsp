@@ -141,6 +141,8 @@ function BSC_PROG003D0004Q_query() {
 				
 				BSC_PROG003D0004Q_showChartForObjectives( data.vision );
 				
+				BSC_PROG003D0004Q_showChartForKpiDateRange( data );
+				
 			}, 
 			function(error) {
 				alert(error);
@@ -292,6 +294,49 @@ function BSC_PROG003D0004Q_showChartForObjectives(vision) {
     }  
 	
 	
+}
+
+
+function BSC_PROG003D0004Q_showChartForKpiDateRange(data) {
+	
+	if ( null == data.categories || data.categories.length < 2 ) {
+		return;
+	}
+	
+    $('#BSC_PROG003D0004Q_perspectives_daterange_container').highcharts({
+        title: {
+            text: 'Trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Perspectives date range score',
+            x: -20
+        },
+        xAxis: {
+            categories: data.categories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.series
+    });
+    
 }
 
 

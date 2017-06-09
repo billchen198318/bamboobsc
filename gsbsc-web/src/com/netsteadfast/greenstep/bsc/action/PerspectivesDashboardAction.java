@@ -21,6 +21,8 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,8 +65,10 @@ import com.netsteadfast.greenstep.po.hbm.BbOrganization;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.util.MenuSupportUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
+import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
@@ -85,6 +89,8 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	private String success = IS_NO;
 	private String uploadOid = "";
 	private VisionVO vision = null;
+	private List<String> categories = new LinkedList<String>();
+	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();	
 	
 	public PerspectivesDashboardAction() {
 		super();
@@ -344,6 +350,22 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 		}			
 	}
 	
+	private void fillCategoriesAndSeries() throws Exception {
+		for (DateRangeScoreVO dateRangeScore : this.vision.getPerspectives().get(0).getDateRangeScores()) { // 用第1筆的資料來組  categories 就可已了
+			this.categories.add( dateRangeScore.getDate() );
+		}
+		for (PerspectiveVO perspective : this.vision.getPerspectives()) {
+			Map<String, Object> mapData = new HashMap<String, Object>();
+			List<Float> rangeScore = new LinkedList<Float>();			
+			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
+				rangeScore.add( dateRangeScore.getScore() );
+			}
+			mapData.put("name", perspective.getName());
+			mapData.put("data", rangeScore);
+			this.series.add( mapData );
+		}
+	}
+	
 	/**
 	 *  bsc.perspectivesDashboardAction.action
 	 */
@@ -370,6 +392,9 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 				return SUCCESS;
 			}
 			this.getContext();
+			if (IS_YES.equals(this.success)) {
+				this.fillCategoriesAndSeries();
+			}
 		} catch (AuthorityException | ControllerException | ServiceException e) {
 			this.message = e.getMessage().toString();
 		} catch (Exception e) {
@@ -493,6 +518,16 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	@JSON
 	public String getEndDate() {
 		return this.defaultString( this.getFields().get("endDate") );
+	}
+
+	@JSON
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getSeries() {
+		return series;
 	}
 	
 }
