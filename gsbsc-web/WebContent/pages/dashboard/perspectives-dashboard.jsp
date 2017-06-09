@@ -523,7 +523,7 @@ function ${programId}_page_message() {
 	
 	<br>
 	
-	<div id="BSC_PROG003D0004Q_perspectives_daterange_container"></div>
+	<div id="BSC_PROG003D0004Q_perspectives_daterange_container"  style="width: 100%; height: 450px; float: left"></div>
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
