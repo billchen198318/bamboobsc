@@ -134,13 +134,12 @@ function BSC_PROG003D0004Q_query() {
 					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
 					return;
 				}
-				dojo.byId("BSC_PROG003D0004Q_content").innerHTML = data.body;
 				dijit.byId("BSC_PROG003D0004Q_startDate").set("displayedValue", data.startDate);
 				dijit.byId("BSC_PROG003D0004Q_endDate").set("displayedValue", data.endDate);
 				
-				if ( data != null && data.vision != null ) {
-					console.log( data.vision );
-				}
+				BSC_PROG003D0004Q_showTableContent( data.vision );
+				
+				BSC_PROG003D0004Q_showChartForObjectives( data.vision );
 				
 			}, 
 			function(error) {
@@ -155,10 +154,159 @@ function BSC_PROG003D0004Q_generateExport(type) {
 }
 
 
-function BSC_PROG003D0004Q_clearContent() {
-	dojo.byId("BSC_PROG003D0004Q_content").innerHTML = "";
+function BSC_PROG003D0004Q_showTableContent( vision ) {
+	var t = '';
+	var c = 0;
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="#E9E9E9" style="border:1px #E9E9E9 solid; border-radius: 5px;" >';
+	for (var p in vision.perspectives) {
+		var perspective = vision.perspectives[p];
+		if ( c == 0 ) {
+			t += '<tr>';
+			t += '<td bgcolor="#F6F6F6" align="left" width="320px"><b>Perspectives</b></td>';
+			t += '<td bgcolor="#F6F6F6" align="left"><b>Target</b></td>';
+			t += '<td bgcolor="#F6F6F6" align="left"><b>Minimum</b></td>';	
+			t += '<td bgcolor="#F6F6F6" align="left"><b>Score</b></td>';
+			for ( var r in perspective.dateRangeScores ) {
+				t += '<td bgcolor="#f5f5f5" align="left"><b>' + perspective.dateRangeScores[r].date + '</b></td>';					
+			}
+			t += '</tr>';			
+		}
+		t += '<tr>';
+		t += '<td bgcolor="#ffffff" align="left">' + perspective.name + '</td>';
+		t += '<td bgcolor="#ffffff" align="left">' + perspective.target + '</td>';
+		t += '<td bgcolor="#ffffff" align="left">' + perspective.min + '</td>';	
+		t += '<td bgcolor="' + perspective.bgColor + '" align="center"><font color="' + perspective.fontColor + '">' + BSC_PROG003D0004Q_parseScore(perspective.score) + '</font></td>';	
+		for ( var r in perspective.dateRangeScores ) {
+			t += '<td bgcolor="' + perspective.dateRangeScores[r].bgColor + '" align="center"><font color="' + perspective.dateRangeScores[r].fontColor + '">' + BSC_PROG003D0004Q_parseScore(perspective.dateRangeScores[r].score) + '</font></td>';					
+		}
+		t += '</tr>';			
+		c++;
+	}
+	t += '</table>';
+	dojo.byId("BSC_PROG003D0004Q_content").innerHTML = t;
 }
 
+
+function BSC_PROG003D0004Q_showChartForObjectives(vision) {
+	
+	
+	var chartDivContent = "";
+	for (var p in vision.perspectives) {
+		var perspective = vision.perspectives[p];
+		var divChartId = "BSC_PROG003D0004Q_perspectives_container_" + perspective.perId;
+		chartDivContent += '<div id="' + divChartId +'" style="width: 300px; height: 200px; float: left"></div>';
+	}
+	$("#BSC_PROG003D0004Q_perspectives_container").html( chartDivContent );
+	
+    var gaugeOptions = {
+
+            chart: {
+                type: 'solidgauge'
+            },
+
+            title: null,
+
+            pane: {
+                center: ['50%', '85%'],
+                size: '140%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            // the value axis
+            yAxis: {
+                stops: [
+                    [0.1, '#DF5353'], // red
+                    [0.5, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
+                ],
+                lineWidth: 0,
+                minorTickInterval: null,
+                tickAmount: 2,
+                title: {
+                    y: -70
+                },
+                labels: {
+                    y: 16
+                }
+            },
+
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: 5,
+                        borderWidth: 0,
+                        useHTML: true
+                    }
+                }
+            }
+        };
+    
+    for (var p in vision.perspectives) {
+    	var perspective = vision.perspectives[p];
+		var divChartId = "BSC_PROG003D0004Q_perspectives_container_" + perspective.perId;
+		
+		var maxVal = perspective.target;
+		if (perspective.score > maxVal) {
+			maxVal = perspective.score;
+		}
+		
+	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
+	        yAxis: {
+	            min: 0,
+	            max: maxVal,
+	            title: {
+	                text: perspective.name
+	            }
+	        },
+
+	        credits: {
+	            enabled: false
+	        },
+
+	        series: [{
+	            name: perspective.name,
+	            data: [ parseFloat( BSC_PROG003D0004Q_parseScore(perspective.score) ) ],
+	            dataLabels: {
+	                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+	                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+	                       '<span style="font-size:12px;color:silver">Score</span></div>'
+	            },
+	            tooltip: {
+	                valueSuffix: ' Score'
+	            }
+	        }]
+
+	    }));
+	    
+    }  
+	
+	
+}
+
+
+function BSC_PROG003D0004Q_clearContent() {
+	dojo.byId("BSC_PROG003D0004Q_content").innerHTML = "";
+	dojo.byId("BSC_PROG003D0004Q_perspectives_container").innerHTML = "";
+	dojo.byId("BSC_PROG003D0004Q_perspectives_daterange_container").innerHTML = "";
+}
+
+
+function BSC_PROG003D0004Q_parseScore( score ) {
+	var scoreStr = viewPage.roundFloat(score, 2) + '';
+	scoreStr = scoreStr.replace('.00', '');
+	return scoreStr;
+}
 
 //------------------------------------------------------------------------------
 function ${programId}_page_message() {
@@ -318,6 +466,14 @@ function ${programId}_page_message() {
 	</table>
 	
 	<div id="BSC_PROG003D0004Q_content"></div>	
+	
+	<br>
+	
+	<div id="BSC_PROG003D0004Q_perspectives_container"></div>
+	
+	<br>
+	
+	<div id="BSC_PROG003D0004Q_perspectives_daterange_container"></div>
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
