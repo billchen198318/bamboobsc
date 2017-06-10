@@ -151,7 +151,67 @@ function BSC_PROG003D0004Q_query() {
 }
 
 
-function BSC_PROG003D0004Q_generateExport(type) {
+function BSC_PROG003D0004Q_generateExport() {
+	
+	var gaugeDatas = [];
+	var dateRangeChartPngData = null;
+	if ( '' != $('#BSC_PROG003D0004Q_perspectives_daterange_container').html() ) {
+		var dateRangeSvg = $('#BSC_PROG003D0004Q_perspectives_daterange_container').highcharts().getSVG();
+		dateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+	}
+	dojo.query("div").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0004Q_perspectives_container_')>-1) {
+			var gaugeChartPngData = '';
+			var gaugeSvg = $('#' + node.id ).highcharts().getSVG();
+			gaugeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( gaugeSvg );
+			gaugeDatas.push({
+				id: node.id,
+				data: gaugeChartPngData
+			});			
+			
+		}	
+	});		
+	if ( dateRangeChartPngData == null ) {
+		dateRangeChartPngData = '';
+	}
+	if (null == gaugeDatas || gaugeDatas.length < 1) {
+		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0004Q_msg1')" escapeJavaScript="true"/>', function(){}, 'Y');
+		showFieldsNoticeMessageLabel('BSC_PROG003D0004Q_visionOid'+_gscore_inputfieldNoticeMsgLabelIdName, '<s:property value="getText('MESSAGE.BSC_PROG003D0004Q_msg1')" escapeJavaScript="true"/>');		
+		return;
+	}
+	
+	xhrSendParameter(
+			'${basePath}/bsc.perspectivesDashboardExcelAction.action', 
+			{ 
+				'fields.visionOid' 					: 	dijit.byId("BSC_PROG003D0004Q_visionOid").get("value"),
+				'fields.startYearDate'				:	dijit.byId("BSC_PROG003D0004Q_startYearDate").get('displayedValue'),
+				'fields.endYearDate'				:	dijit.byId("BSC_PROG003D0004Q_endYearDate").get('displayedValue'),
+				'fields.startDate'					:	dijit.byId("BSC_PROG003D0004Q_startDate").get('displayedValue'),
+				'fields.endDate'					:	dijit.byId("BSC_PROG003D0004Q_endDate").get('displayedValue'),
+				'fields.dataFor'					:	dijit.byId("BSC_PROG003D0004Q_dataFor").get("value"),
+				'fields.measureDataOrganizationOid'	:	dijit.byId("BSC_PROG003D0004Q_measureDataOrganizationOid").get("value"),
+				'fields.measureDataEmployeeOid'		:	dijit.byId("BSC_PROG003D0004Q_measureDataEmployeeOid").get("value"),
+				'fields.frequency'					:	dijit.byId("BSC_PROG003D0004Q_frequency").get("value"),
+				'fields.dateRangeChartPngData'	:	dateRangeChartPngData,
+				'fields.gaugeDatas'	: JSON.stringify( { 'gaugeMapList' : gaugeDatas } )
+			}, 
+			'json', 
+			_gscore_dojo_ajax_timeout,
+			_gscore_dojo_ajax_sync, 
+			true, 
+			function(data) {
+				if ('Y' != data.success) {
+					setFieldsBackgroundAlert(data.fieldsId, BSC_PROG003D0004Q_fieldsId);
+					setFieldsNoticeMessageLabel(data.fieldsId, data.fieldsMessage, BSC_PROG003D0004Q_fieldsId);
+					alertDialog(_getApplicationProgramNameById('${programId}'), data.message, function(){}, data.success);
+					return;
+				}
+				openCommonLoadUpload( 'download', data.uploadOid, { } );
+			}, 
+			function(error) {
+				alert(error);
+			}
+	);		
 	
 }
 
@@ -161,6 +221,12 @@ function BSC_PROG003D0004Q_showTableContent( data ) {
 	var t = '';
 	var c = 0;
 	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
+	
+	var headColspan = 4 + vision.perspectives[0].dateRangeScores.length;
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
+	t += '</tr>';
+	
 	for (var p in vision.perspectives) {
 		var perspective = vision.perspectives[p];
 		if ( c == 0 ) {
@@ -410,7 +476,7 @@ function ${programId}_page_message() {
 											iconClass:'btnExcelIcon',
 											showLabel:false,
 											onClick:function(){
-												BSC_PROG003D0004Q_generateExport('EXCEL');																			  
+												BSC_PROG003D0004Q_generateExport();																			  
 											}"><s:property value="getText('BSC_PROG003D0004Q_btnXls')"/></button>	
 
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0004Q_visionOid"></gs:inputfieldNoticeMsgLabel>		

@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.bsc.action;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.BscConstants;
 import com.netsteadfast.greenstep.base.action.BaseJsonAction;
 import com.netsteadfast.greenstep.base.action.IBaseAdditionalSupportAction;
@@ -337,9 +339,13 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	
 	@SuppressWarnings("unchecked")
 	private void getExcel() throws ControllerException, AuthorityException, ServiceException, Exception {
+		String dateRangeChartPngData = this.defaultString( this.getFields().get("dateRangeChartPngData") ).trim();
+		String gaugeDatasJsonStr = this.defaultString( this.getFields().get("gaugeDatas") );
+		Map<String, Object> gaugeDatas = (Map<String, Object>) new ObjectMapper().readValue(gaugeDatasJsonStr, LinkedHashMap.class);
 		Context context = this.getChainContext();
-		List< Map<String, Object> > chartDatas = (List<Map<String, Object>>) context.get("chartDatas");
-		if ( chartDatas == null || chartDatas.size() < 1 ) {
+		context.put("dateRangeChartPngData", dateRangeChartPngData);
+		context.put("gaugeDatas", gaugeDatas);
+		if ( gaugeDatas == null || gaugeDatas.size() < 1 ) {
 			super.throwMessage( this.getText("MESSAGE.BSC_PROG003D0004Q_msg1") );
 		}
 		SimpleChain chain = new SimpleChain();
