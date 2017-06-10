@@ -404,14 +404,6 @@ function ${programId}_page_message() {
 											onClick:function(){  
 												BSC_PROG003D0004Q_query();
 											}"><s:property value="getText('BSC_PROG003D0004Q_btnQuery')"/></button>		
-																
-									<button id="BSC_PROG003D0004Q_btnPdf" data-dojo-type="dijit.form.Button"
-										data-dojo-props="
-											iconClass:'btnPdfIcon',
-											showLabel:false,
-											onClick:function(){
-												BSC_PROG003D0004Q_generateExport('PDF');
-											}"><s:property value="getText('BSC_PROG003D0004Q_btnPdf')"/></button>	
 									            
 									<button id="BSC_PROG003D0004Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
