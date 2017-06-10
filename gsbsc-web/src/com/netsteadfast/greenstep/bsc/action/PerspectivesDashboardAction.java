@@ -513,16 +513,34 @@ public class PerspectivesDashboardAction extends BaseJsonAction implements IBase
 	}
 	
 	@JSON
-	public String getDisplayFrequencyDateRange() {
+	public String getDisplayFrequency() {
 		String frequency = this.getFields().get("frequency");
-		String str = "Frequency: " + BscMeasureDataFrequency.getFrequencyMap(false).get( frequency );
+		return BscMeasureDataFrequency.getFrequencyMap(false).get( frequency );
+	}
+	
+	@JSON
+	public String getDisplayDateRange1() {
+		String frequency = this.getFields().get("frequency");
+		String str = "";
 		if (!BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) && !BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
-			str += " date range: " + this.getFields().get("startYearDate") + " ~ " + this.getFields().get("endYearDate");
+			str += this.getFields().get("startYearDate");
 		} else {
-			str += " date range: " + this.getFields().get("startDate") + " ~ " + this.getFields().get("endDate");
+			str += this.getFields().get("startDate");
 		}
 		return str;
 	}
+	
+	@JSON
+	public String getDisplayDateRange2() {
+		String frequency = this.getFields().get("frequency");
+		String str = "";
+		if (!BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) && !BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
+			str = this.getFields().get("endYearDate");
+		} else {
+			str = this.getFields().get("endDate");
+		}
+		return str;
+	}		
 	
 	@JSON
 	public List<String> getCategories() {
