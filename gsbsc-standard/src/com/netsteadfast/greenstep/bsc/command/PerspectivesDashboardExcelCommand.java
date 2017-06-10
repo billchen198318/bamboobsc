@@ -32,6 +32,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Row;
@@ -44,9 +46,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.netsteadfast.greenstep.base.BaseChainCommandSupport;
 import com.netsteadfast.greenstep.base.Constants;
+import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
+import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
+import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
+import com.netsteadfast.greenstep.bsc.util.BscReportSupportUtils;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
+import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport implements Command {
 	
@@ -67,7 +76,10 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		XSSFWorkbook wb = new XSSFWorkbook();				
 		XSSFSheet sh = wb.createSheet();
 		
-		this.putCharts(wb, sh, context);
+		BscReportPropertyUtils.loadData();
+		
+		int row = this.putDateRange(wb, sh, context);
+		this.putCharts(wb, sh, context, row);
 		
         FileOutputStream out = new FileOutputStream(fileFullPath);
         wb.write(out);
@@ -81,92 +93,191 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		return oid;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private int putCharts(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {
-		String pieBase64Content = SimpleUtils.getPNGBase64Content( (String)context.get("pieCanvasToData") );
-		String barBase64Content = SimpleUtils.getPNGBase64Content( (String)context.get("barCanvasToData") );
-		BufferedImage pieImage = SimpleUtils.decodeToImage( pieBase64Content );
-		BufferedImage barImage = SimpleUtils.decodeToImage( barBase64Content );
-		ByteArrayOutputStream pieBos = new ByteArrayOutputStream();
-		ImageIO.write( pieImage, "png", pieBos );
-		pieBos.flush();
-		ByteArrayOutputStream barBos = new ByteArrayOutputStream();
-		ImageIO.write( barImage, "png", barBos );
-		barBos.flush();		
-		SimpleUtils.setCellPicture(wb, sh, pieBos.toByteArray(), 0, 0);		
-		SimpleUtils.setCellPicture(wb, sh, barBos.toByteArray(), 0, 9);		
-		int row = 21;
-		
-		List< Map<String, Object> > chartDatas = (List< Map<String, Object> >)context.get("chartDatas");
-		String year = (String)context.get("year");
-		
+	private int putDateRange(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {
+		BscStructTreeObj treeObj = (BscStructTreeObj)this.getResult(context);
+		VisionVO vision = treeObj.getVisions().get(0);
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
-		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );				
-		
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( BscReportPropertyUtils.getBackgroundColor() ) ) );
+		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
+		cellHeadStyle.setBorderBottom(BorderStyle.THIN);
+		cellHeadStyle.setBorderTop(BorderStyle.THIN);
+		cellHeadStyle.setBorderRight(BorderStyle.THIN);
+		cellHeadStyle.setBorderLeft(BorderStyle.THIN);		
 		XSSFFont cellHeadFont = wb.createFont();
-		cellHeadFont.setBold(true);
-		//cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ) ) );		
+		cellHeadFont.setBold(true);		
+		cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( BscReportPropertyUtils.getFontColor() ) ) ); 
 		cellHeadStyle.setFont( cellHeadFont );
 		
-		int titleRow = row - 1;
-		int titleCellSize = 14;
-		Row headRow = sh.createRow( titleRow );
-		for (int i=0; i<titleCellSize; i++) {
-			Cell headCell = headRow.createCell( i );
-			headCell.setCellStyle(cellHeadStyle);
-			headCell.setCellValue( "Perspectives metrics gauge ( " + year + " )" );					
-		}
-		sh.addMergedRegion( new CellRangeAddress(titleRow, titleRow, 0, titleCellSize-1) );
+		sh.setColumnWidth(0, 12000);	
 		
-		int cellLeft = 10;
-		int rowSpace = 17;
-		for (Map<String, Object> data : chartDatas) {							
-			Map<String, Object> nodeData = (Map<String, Object>) ( (List<Object>)data.get("datas") ).get(0); 
-			String pngImageData = SimpleUtils.getPNGBase64Content( (String)nodeData.get("outerHTML") );			
-			BufferedImage imageData = SimpleUtils.decodeToImage( pngImageData );
-			ByteArrayOutputStream imgBos = new ByteArrayOutputStream();
-			ImageIO.write( imageData, "png", imgBos );
-			imgBos.flush();		
-			SimpleUtils.setCellPicture(wb, sh, imgBos.toByteArray(), row, 0);
-			
-			XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor( (String)nodeData.get("bgColor") ) );
-			XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor( (String)nodeData.get("fontColor") ) );			
-			
-			XSSFCellStyle cellStyle = wb.createCellStyle();
-			cellStyle.setFillForegroundColor( bgColor );
-			cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );				
-			
-			XSSFFont cellFont = wb.createFont();
-			cellFont.setBold(true);
-			cellFont.setColor(fnColor);			
-			
-			cellStyle.setFont(cellFont);
-			
-			int perTitleCellSize = 4;
-			Row nowRow = sh.createRow(row);
-			for (int i=0; i<perTitleCellSize; i++) {
-				Cell cell1 = nowRow.createCell(cellLeft);
-				cell1.setCellStyle(cellStyle);
-				cell1.setCellValue( (String)nodeData.get("name") );				
-			}
-			sh.addMergedRegion( new CellRangeAddress(row, row, cellLeft, cellLeft+perTitleCellSize-1) );
-			
-			nowRow = sh.createRow(row+1);
-			Cell cell2 = nowRow.createCell(cellLeft);
-			cell2.setCellValue( "Target: " + String.valueOf( nodeData.get("target") ) );			
-			
-			nowRow = sh.createRow(row+2);
-			Cell cell3 = nowRow.createCell(cellLeft);
-			cell3.setCellValue( "Min: " + String.valueOf( nodeData.get("min") ) );				
-			
-			nowRow = sh.createRow(row+3);
-			Cell cell4 = nowRow.createCell(cellLeft);
-			cell4.setCellValue( "Score: " + String.valueOf( nodeData.get("score") ) );				
-			
-			row += rowSpace;			
+		int drSize = vision.getPerspectives().get(0).getDateRangeScores().size();
+		
+		int dCol = 4;
+		int left = 0;
+		int row = 0;	
+		
+		Row nowRow = sh.createRow( row );
+		for (int i = 0; i<dCol+drSize; i++) {
+			Cell cell1 = nowRow.createCell(i);
+			cell1.setCellStyle(cellHeadStyle);
+			cell1.setCellValue( vision.getTitle() );
 		}
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, dCol+drSize-1) );
+		row++;
+		
+		nowRow = sh.createRow( row++ );
+		Cell cell1 = nowRow.createCell(0);
+		cell1.setCellStyle(cellHeadStyle);
+		cell1.setCellValue( BscReportPropertyUtils.getPerspectiveTitle() );				
+		Cell cell2 = nowRow.createCell(1);
+		cell2.setCellStyle(cellHeadStyle);
+		cell2.setCellValue( "Target" );									
+		Cell cell3 = nowRow.createCell(2);
+		cell3.setCellStyle(cellHeadStyle);
+		cell3.setCellValue( "Minimum" );	
+		Cell cell4 = nowRow.createCell(3);
+		cell4.setCellStyle(cellHeadStyle);
+		cell4.setCellValue( "Score" );								
+		// date range cell
+		for (DateRangeScoreVO dateRangeScore : vision.getPerspectives().get(0).getDateRangeScores()) {
+			Cell cell = nowRow.createCell( dCol + left );
+			cell.setCellStyle(cellHeadStyle);
+			cell.setCellValue( dateRangeScore.getDate() );	
+			left++;			
+		}
+		
+		// perspective and date range score
+		XSSFCellStyle cellStyle = wb.createCellStyle();
+		cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ) ) );
+		cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
+		cellStyle.setBorderBottom(BorderStyle.THIN);
+		cellStyle.setBorderTop(BorderStyle.THIN);
+		cellStyle.setBorderRight(BorderStyle.THIN);
+		cellStyle.setBorderLeft(BorderStyle.THIN);		
+		XSSFFont cellFont = wb.createFont();
+		cellFont.setBold( false );		
+		cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ) ) );
+		cellStyle.setFont( cellFont );		
+		for (int p = 0; p < vision.getPerspectives().size(); p++) {
+			left = 0;
+			PerspectiveVO perspective = vision.getPerspectives().get(p);
+			
+			nowRow = sh.createRow( row++ );
+			cell1 = nowRow.createCell(0);
+			cell1.setCellStyle(cellStyle);
+			cell1.setCellValue( perspective.getName() );				
+			cell2 = nowRow.createCell(1);
+			cell2.setCellStyle(cellStyle);
+			cell2.setCellValue( perspective.getTarget() );									
+			cell3 = nowRow.createCell(2);
+			cell3.setCellStyle(cellStyle);
+			cell3.setCellValue( perspective.getMin() );	
+			cell4 = nowRow.createCell(3);
+			
+			XSSFCellStyle s_cellStyle = wb.createCellStyle();
+			s_cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( perspective.getBgColor() ) ) );
+			s_cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
+			s_cellStyle.setBorderBottom(BorderStyle.THIN);
+			s_cellStyle.setBorderTop(BorderStyle.THIN);
+			s_cellStyle.setBorderRight(BorderStyle.THIN);
+			s_cellStyle.setBorderLeft(BorderStyle.THIN);		
+			XSSFFont s_cellFont = wb.createFont();
+			s_cellFont.setBold( false );		
+			s_cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( perspective.getFontColor() ) ) );
+			s_cellStyle.setFont( s_cellFont );	
+			
+			cell4.setCellStyle(s_cellStyle);
+			cell4.setCellValue( BscReportSupportUtils.parse2( perspective.getScore() ) );					
+			
+			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
+				
+				XSSFCellStyle drs_cellStyle = wb.createCellStyle();
+				drs_cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( dateRangeScore.getBgColor() ) ) );
+				drs_cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
+				drs_cellStyle.setBorderBottom(BorderStyle.THIN);
+				drs_cellStyle.setBorderTop(BorderStyle.THIN);
+				drs_cellStyle.setBorderRight(BorderStyle.THIN);
+				drs_cellStyle.setBorderLeft(BorderStyle.THIN);		
+				XSSFFont drs_cellFont = wb.createFont();
+				drs_cellFont.setBold( false );		
+				drs_cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( dateRangeScore.getFontColor() ) ) );
+				drs_cellStyle.setFont( drs_cellFont );				
+				
+				Cell cell = nowRow.createCell( dCol + left );
+				cell.setCellStyle(drs_cellStyle);
+				cell.setCellValue( BscReportSupportUtils.parse2(dateRangeScore.getScore()) );	
+				left++;					
+			}		
+			
+		}
+		
+		// foot row/cell
+		String frequency = (String) context.get("frequency");
+		String footContent = "";
+		footContent += "Frequency : " + BscMeasureDataFrequency.getFrequencyMap(false).get(frequency) + "  ";
+		footContent += "date range : ";
+		if (!BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) && !BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
+			footContent += context.get("startYearDate") + " ~ " + context.get("endYearDate");
+		} else {
+			footContent += context.get("startDate") + " ~ " + context.get("endDate");
+		}
+		nowRow = sh.createRow( row );
+		for (int i=0; i < dCol+drSize; i++) {
+			Cell cell = nowRow.createCell(0);
+			cell.setCellStyle( cellHeadStyle );
+			cell.setCellValue( footContent );					
+		}
+		sh.addMergedRegion( new CellRangeAddress(row, row, 0, dCol+drSize-1) );
+		row++;
+		return row;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private int putCharts(XSSFWorkbook wb, XSSFSheet sh, Context context, int row) throws Exception {
+		
+		int chart_need_row_size = 12;
+		
+		// perspectives gauge chart
+		row = row + 1;
+		int c = 0;
+		Map<String, Object> gaugeDatas = (Map<String, Object>) context.get("gaugeDatas");
+		List< Map<String, Object> > gaugeMapList = (List<Map<String, Object>>) gaugeDatas.get("gaugeMapList");
+		for (int i=0; i<gaugeMapList.size(); i++) {
+			
+			// 每row 只放2個 gauge chart
+			if (c>1) {
+				c = 0;
+			}
+			if (i>0 && i % 2 == 0) {
+				row += chart_need_row_size;
+			}
+			
+			Map<String, Object> gaugeMap = gaugeMapList.get(i);
+			String imageDataStr = SimpleUtils.getPNGBase64Content( (String) gaugeMap.get("data") );
+			BufferedImage image = SimpleUtils.decodeToImage( imageDataStr );
+			ByteArrayOutputStream imgBos = new ByteArrayOutputStream();
+			ImageIO.write( image, "png", imgBos );
+			imgBos.flush();
+			
+			SimpleUtils.setCellPicture(wb, sh, imgBos.toByteArray(), row, c++);
+			
+		}
+		
+		row = row + chart_need_row_size;
+		
+		// perspectives date range line chart
+		String dateRangeChartPngData = (String) context.get("dateRangeChartPngData");
+		if (StringUtils.isBlank(dateRangeChartPngData)) {
+			return row;
+		}
+		String imageDataStr = SimpleUtils.getPNGBase64Content( dateRangeChartPngData );
+		BufferedImage image = SimpleUtils.decodeToImage( imageDataStr );
+		ByteArrayOutputStream imgBos = new ByteArrayOutputStream();
+		ImageIO.write( image, "png", imgBos );
+		imgBos.flush();
+		
+		SimpleUtils.setCellPicture(wb, sh, imgBos.toByteArray(), row, 0);
 		
 		return row;
 	}	
