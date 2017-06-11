@@ -141,7 +141,7 @@ function BSC_PROG003D0004Q_query() {
 				
 				BSC_PROG003D0004Q_showChartForPerspectives( data );
 				
-				BSC_PROG003D0004Q_showChartForKpiDateRange( data );
+				BSC_PROG003D0004Q_showChartForPerspectivesDateRange( data );
 				
 			}, 
 			function(error) {
@@ -368,7 +368,7 @@ function BSC_PROG003D0004Q_showChartForPerspectives(data) {
 }
 
 
-function BSC_PROG003D0004Q_showChartForKpiDateRange(data) {
+function BSC_PROG003D0004Q_showChartForPerspectivesDateRange(data) {
 	
 	if ( null == data.categories || data.categories.length < 2 ) {
 		return;
