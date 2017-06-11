@@ -77,10 +77,10 @@ import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
-@Controller("bsc.web.controller.KpisDashboardAction")
+@Controller("bsc.web.controller.DashboardNewAction")
 @Scope
-public class KpisDashboardAction extends BaseJsonAction implements IBaseAdditionalSupportAction {
-	private static final long serialVersionUID = -848981346998195723L;
+public class DashboardNewAction extends BaseJsonAction implements IBaseAdditionalSupportAction {
+	private static final long serialVersionUID = 319046058780225891L;
 	private IVisionService<VisionVO, BbVision, String> visionService;
 	private IOrganizationService<OrganizationVO, BbOrganization, String> organizationService;
 	private IEmployeeService<EmployeeVO, BbEmployee, String> employeeService;	
@@ -93,10 +93,14 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	private String success = IS_NO;
 	private String uploadOid = "";
 	private VisionVO vision = null;
-	private List<String> categories = new LinkedList<String>();
-	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();	
+	private List<String> perspectiveCategories = new LinkedList<String>();
+	private List<Map<String, Object>> perspectiveSeries = new LinkedList<Map<String, Object>>();	
+	private List<String> objectiveCategories = new LinkedList<String>();
+	private List<Map<String, Object>> objectiveSeries = new LinkedList<Map<String, Object>>();		
+	private List<String> kpiCategories = new LinkedList<String>();
+	private List<Map<String, Object>> kpiSeries = new LinkedList<Map<String, Object>>();	
 	
-	public KpisDashboardAction() {
+	public DashboardNewAction() {
 		super();
 	}
 	
@@ -171,8 +175,8 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	
 	private void checkFields() throws ControllerException, Exception {
 		this.getCheckFieldHandler()
-		.add("visionOid", SelectItemFieldCheckUtils.class, this.getText("MESSAGE.BSC_PROG003D0006Q_visionOid") )
-		.add("frequency", SelectItemFieldCheckUtils.class, this.getText("MESSAGE.BSC_PROG003D0006Q_frequency") )
+		.add("visionOid", SelectItemFieldCheckUtils.class, this.getText("MESSAGE.BSC_PROG003D0009Q_visionOid") )
+		.add("frequency", SelectItemFieldCheckUtils.class, this.getText("MESSAGE.BSC_PROG003D0009Q_frequency") )
 		.process().throwMessage();
 		
 		String frequency = this.getFields().get("frequency");
@@ -184,18 +188,18 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 				|| BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) 
 				|| BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
 			if ( StringUtils.isBlank( startDate ) || StringUtils.isBlank( endDate ) ) {
-				super.throwMessage("startDate|endDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg1"));			
+				super.throwMessage("startDate|endDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg1"));			
 			}
 			if ( !StringUtils.isBlank( startDate ) || !StringUtils.isBlank( endDate ) ) {
 				if ( !SimpleUtils.isDate( startDate ) ) {
-					super.throwMessage("startDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg3"));
+					super.throwMessage("startDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg3"));
 				}
 				if ( !SimpleUtils.isDate( endDate ) ) {
-					super.throwMessage("endDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg4"));		
+					super.throwMessage("endDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg4"));		
 				}
 				if ( Integer.parseInt( endDate.replaceAll("/", "").replaceAll("-", "") )
 						< Integer.parseInt( startDate.replaceAll("/", "").replaceAll("-", "") ) ) {
-					super.throwMessage("startDate|endDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg5"));	
+					super.throwMessage("startDate|endDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg5"));	
 				}			
 			}			
 		}
@@ -203,29 +207,29 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 				|| BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency) 
 				|| BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency) ) {
 			if ( StringUtils.isBlank( startYearDate ) || StringUtils.isBlank( endYearDate ) ) {
-				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg2"));			
+				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg2"));			
 			}
 			if ( !StringUtils.isBlank( startYearDate ) || !StringUtils.isBlank( endYearDate ) ) {
 				if ( !SimpleUtils.isDate( startYearDate+"/01/01" ) ) {
-					super.throwMessage("startYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg6"));		
+					super.throwMessage("startYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg6"));		
 				}
 				if ( !SimpleUtils.isDate( endYearDate+"/01/01" ) ) {
-					super.throwMessage("endYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg7"));					
+					super.throwMessage("endYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg7"));					
 				}
 				if ( Integer.parseInt( endYearDate.replaceAll("/", "").replaceAll("-", "") )
 						< Integer.parseInt( startYearDate.replaceAll("/", "").replaceAll("-", "") ) ) {
-					super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg8"));	
+					super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg8"));	
 				}					
 			}			
 		}		
 		String dataFor = this.getFields().get("dataFor");
 		if ("organization".equals(dataFor) 
 				&& this.isNoSelectId(this.getFields().get("measureDataOrganizationOid")) ) {
-			super.throwMessage("measureDataOrganizationOid", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg9"));
+			super.throwMessage("measureDataOrganizationOid", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg9"));
 		}
 		if ("employee".equals(dataFor)
 				&& this.isNoSelectId(this.getFields().get("measureDataEmployeeOid")) ) {
-			super.throwMessage("measureDataEmployeeOid", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg10"));
+			super.throwMessage("measureDataEmployeeOid", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg10"));
 		}
 	}		
 	
@@ -258,7 +262,7 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 			DateTime dt2 = new DateTime(endDate);
 			int betweenMonths = Months.monthsBetween(dt1, dt2).getMonths();
 			if ( betweenMonths >= 12 ) {
-				super.throwMessage("startDate|endDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg11"));
+				super.throwMessage("startDate|endDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg11"));
 			}
 			return;
 		}
@@ -267,17 +271,17 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 		int betweenYears = Years.yearsBetween(dt1, dt2).getYears();
 		if (BscMeasureDataFrequency.FREQUENCY_QUARTER.equals(frequency)) {
 			if ( betweenYears >= 3 ) {
-				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg12"));			
+				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg12"));			
 			}
 		}
 		if (BscMeasureDataFrequency.FREQUENCY_HALF_OF_YEAR.equals(frequency)) {
 			if ( betweenYears >= 4 ) {
-				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg13"));		
+				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg13"));		
 			}			
 		}
 		if (BscMeasureDataFrequency.FREQUENCY_YEAR.equals(frequency)) {
 			if ( betweenYears >= 6 ) {
-				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0006Q_contentQuery_msg14"));			
+				super.throwMessage("startYearDate|endYearDate", this.getText("MESSAGE.BSC_PROG003D0009Q_contentQuery_msg14"));			
 			}			
 		}
 	}
@@ -349,7 +353,7 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 		context.put("dateRangeChartPngData", dateRangeChartPngData);
 		context.put("gaugeDatas", gaugeDatas);
 		if ( gaugeDatas == null || gaugeDatas.size() < 1 ) {
-			super.throwMessage( this.getText("MESSAGE.BSC_PROG003D0006Q_msg1") );
+			super.throwMessage( this.getText("MESSAGE.BSC_PROG003D0009Q_msg1") );
 		}
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("kpisDashboardExcelContentChain", context);
@@ -361,8 +365,42 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	}
 	
 	private void fillCategoriesAndSeries() throws Exception {
+		
+		// Perspective
+		for (DateRangeScoreVO dateRangeScore : this.vision.getPerspectives().get(0).getDateRangeScores()) { // 用第1筆的資料來組  categories 就可已了
+			this.perspectiveCategories.add( dateRangeScore.getDate() );
+		}
+		for (PerspectiveVO perspective : this.vision.getPerspectives()) {
+			Map<String, Object> mapData = new HashMap<String, Object>();
+			List<Float> rangeScore = new LinkedList<Float>();			
+			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
+				rangeScore.add( dateRangeScore.getScore() );
+			}
+			mapData.put("name", perspective.getName());
+			mapData.put("data", rangeScore);
+			this.perspectiveSeries.add( mapData );
+		}		
+		
+		// Strategy objective
+		for (DateRangeScoreVO dateRangeScore : this.vision.getPerspectives().get(0).getObjectives().get(0).getDateRangeScores()) { // 用第1筆的資料來組  categories 就可已了
+			this.objectiveCategories.add( dateRangeScore.getDate() );
+		}
+		for (PerspectiveVO perspective : this.vision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				Map<String, Object> mapData = new HashMap<String, Object>();
+				List<Float> rangeScore = new LinkedList<Float>();			
+				for (DateRangeScoreVO dateRangeScore : objective.getDateRangeScores()) {
+					rangeScore.add( dateRangeScore.getScore() );
+				}
+				mapData.put("name", objective.getName());
+				mapData.put("data", rangeScore);
+				this.objectiveSeries.add( mapData );				
+			}
+		}		
+		
+		// KPI
 		for (DateRangeScoreVO dateRangeScore : this.vision.getPerspectives().get(0).getObjectives().get(0).getKpis().get(0).getDateRangeScores()) { // 用第1筆的資料來組  categories 就可已了
-			this.categories.add( dateRangeScore.getDate() );
+			this.kpiCategories.add( dateRangeScore.getDate() );
 		}
 		for (PerspectiveVO perspective : this.vision.getPerspectives()) {
 			for (ObjectiveVO objective : perspective.getObjectives()) {
@@ -374,16 +412,17 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 					}
 					mapData.put("name", kpi.getName());
 					mapData.put("data", rangeScore);
-					this.series.add( mapData );							
+					this.kpiSeries.add( mapData );							
 				}
 			}
 		}
+		
 	}
 	
 	/**
-	 *  bsc.kpisDashboardAction.action
+	 *  bsc.dashboardNewAction.action
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG003D0006Q")
+	@ControllerMethodAuthority(programId="BSC_PROG003D0009Q")
 	public String execute() throws Exception {
 		try {
 			this.initData();
@@ -396,9 +435,9 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	}	
 	
 	/**
-	 * bsc.kpisDashboardContentAction.action
+	 * bsc.dashboardNewContentAction.action
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG003D0006Q")
+	@ControllerMethodAuthority(programId="BSC_PROG003D0009Q")
 	public String doContentScore() throws Exception {
 		try {
 			if (!this.allowJob()) {
@@ -420,9 +459,9 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	}	
 	
 	/**
-	 * bsc.kpiDashboardExcelAction.action
+	 * bsc.dashboardNewExcelAction.action
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG003D0006Q")
+	@ControllerMethodAuthority(programId="BSC_PROG003D0009Q")
 	public String doExcel() throws Exception {
 		try {
 			if (!this.allowJob()) {
@@ -556,15 +595,35 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 	}		
 	
 	@JSON
-	public List<String> getCategories() {
-		return categories;
+	public List<String> getPerspectiveCategories() {
+		return perspectiveCategories;
 	}
 
 	@JSON
-	public List<Map<String, Object>> getSeries() {
-		return series;
+	public List<Map<String, Object>> getPerspectiveSeries() {
+		return perspectiveSeries;
 	}
-	
+
+	@JSON
+	public List<String> getObjectiveCategories() {
+		return objectiveCategories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getObjectiveSeries() {
+		return objectiveSeries;
+	}
+
+	@JSON
+	public List<String> getKpiCategories() {
+		return kpiCategories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getKpiSeries() {
+		return kpiSeries;
+	}
+
 	@JSON
 	public String getBackgroundColor() {
 		return BscReportPropertyUtils.getBackgroundColor();
@@ -601,5 +660,5 @@ public class KpisDashboardAction extends BaseJsonAction implements IBaseAddition
 		}
 		return str;
 	}	
-		
+	
 }
