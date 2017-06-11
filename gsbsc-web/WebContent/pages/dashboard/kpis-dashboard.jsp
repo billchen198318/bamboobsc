@@ -139,7 +139,7 @@ function BSC_PROG003D0006Q_query() {
 				
 				BSC_PROG003D0006Q_showTableContent( data );
 				
-				BSC_PROG003D0006Q_showChartForObjectives( data );
+				BSC_PROG003D0006Q_showChartForKpis( data );
 				
 				BSC_PROG003D0006Q_showChartForKpiDateRange( data );
 				
@@ -274,7 +274,7 @@ function BSC_PROG003D0006Q_showTableContent( data ) {
 }
 
 
-function BSC_PROG003D0006Q_showChartForObjectives(data) {
+function BSC_PROG003D0006Q_showChartForKpis(data) {
 	
 	var vision = data.vision;
 	
