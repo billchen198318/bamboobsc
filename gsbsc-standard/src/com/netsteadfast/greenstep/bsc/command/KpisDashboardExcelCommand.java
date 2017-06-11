@@ -113,7 +113,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		
 		sh.setColumnWidth(0, 12000);	
 		
-		int drSize = vision.getPerspectives().get(0).getObjectives().get(0).getDateRangeScores().size();
+		int drSize = vision.getPerspectives().get(0).getObjectives().get(0).getKpis().get(0).getDateRangeScores().size();
 		
 		int dCol = 5;
 		int left = 0;
