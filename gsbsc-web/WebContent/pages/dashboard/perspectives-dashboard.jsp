@@ -376,11 +376,11 @@ function BSC_PROG003D0004Q_showChartForKpiDateRange(data) {
 	
     $('#BSC_PROG003D0004Q_perspectives_daterange_container').highcharts({
         title: {
-            text: 'Trend',
+            text: data.perspectiveTitle + ' trend',
             x: -20 //center
         },
         subtitle: {
-            text: 'Perspectives date range score',
+            text: 'Frequency : ' + data.displayFrequency + '  date range : ' + data.displayDateRange1 + ' ~ ' + data.displayDateRange2,
             x: -20
         },
         xAxis: {
