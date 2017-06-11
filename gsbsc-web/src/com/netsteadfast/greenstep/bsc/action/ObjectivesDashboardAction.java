@@ -55,6 +55,7 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.model.YesNo;
+import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.action.utils.SelectItemFieldCheckUtils;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
@@ -304,6 +305,7 @@ public class ObjectivesDashboardAction extends BaseJsonAction implements IBaseAd
 			}
 			organization = result.getValue();
 			context.put("orgId", organization.getOrgId() );
+			context.put("organizationName", organization.getOrgId() + " - " + organization.getName() );
 		}
 		if (!this.isNoSelectId(this.getFields().get("measureDataEmployeeOid"))) {
 			EmployeeVO employee = new EmployeeVO();
@@ -315,6 +317,7 @@ public class ObjectivesDashboardAction extends BaseJsonAction implements IBaseAd
 			employee = result.getValue();
 			context.put("empId", employee.getEmpId() );
 			context.put("account", employee.getAccount() );
+			context.put("employeeName", employee.getEmpId() + " - " + employee.getFullName() );
 		}		
 		return context;
 	}	
@@ -574,6 +577,28 @@ public class ObjectivesDashboardAction extends BaseJsonAction implements IBaseAd
 	@JSON
 	public String getObjectiveTitle() {
 		return BscReportPropertyUtils.getObjectiveTitle();
+	}	
+	
+	@JSON
+	public String getMeasureDataTypeForTitle() {
+		String str = "All";
+		if (!this.isNoSelectId(this.getFields().get("measureDataOrganizationOid"))) {
+			try {
+				OrganizationVO organization = BscBaseLogicServiceCommonSupport.findOrganizationData(this.organizationService, this.getFields().get("measureDataOrganizationOid"));
+				str = organization.getOrgId() + " - " + organization.getName();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (!this.isNoSelectId(this.getFields().get("measureDataEmployeeOid"))) {
+			try {
+				EmployeeVO employee = BscBaseLogicServiceCommonSupport.findEmployeeData(this.employeeService, this.getFields().get("measureDataEmployeeOid"));
+				str = employee.getEmpId() + " - " + employee.getFullName();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return str;
 	}	
 		
 }

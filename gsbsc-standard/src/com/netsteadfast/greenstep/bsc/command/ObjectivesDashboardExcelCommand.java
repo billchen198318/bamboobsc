@@ -227,6 +227,17 @@ public class ObjectivesDashboardExcelCommand extends BaseChainCommandSupport imp
 		} else {
 			footContent += context.get("startDate") + " ~ " + context.get("endDate");
 		}
+		String dataType = "";
+		if (!StringUtils.isBlank( (String) context.get("organizationName") )) {
+			dataType = (String) context.get("organizationName");
+		}
+		if (!StringUtils.isBlank( (String) context.get("employeeName") )) {
+			dataType = (String) context.get("employeeName");
+		}		
+		if (StringUtils.isBlank(dataType)) {
+			dataType = "All";
+		}
+		footContent += "  Measure data type : " + dataType;		
 		nowRow = sh.createRow( row );
 		for (int i=0; i < dCol+drSize; i++) {
 			Cell cell = nowRow.createCell(0);
