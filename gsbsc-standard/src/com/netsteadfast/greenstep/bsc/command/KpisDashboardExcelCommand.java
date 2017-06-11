@@ -152,7 +152,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 			left++;			
 		}
 		
-		// objectives and date range score
+		// KPIs and date range score
 		XSSFCellStyle cellStyle = wb.createCellStyle();
 		cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ) ) );
 		cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
@@ -266,7 +266,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		
 		int chart_need_row_size = 12;
 		
-		// objectives gauge chart
+		// KPIs gauge chart
 		row = row + 1;
 		int c = 0;
 		Map<String, Object> gaugeDatas = (Map<String, Object>) context.get("gaugeDatas");
@@ -294,7 +294,7 @@ public class KpisDashboardExcelCommand extends BaseChainCommandSupport implement
 		
 		row = row + chart_need_row_size;
 		
-		// objectives date range line chart
+		// KPIs date range line chart
 		String dateRangeChartPngData = (String) context.get("dateRangeChartPngData");
 		if (StringUtils.isBlank(dateRangeChartPngData)) {
 			return row;

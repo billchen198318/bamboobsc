@@ -346,17 +346,34 @@ public class DashboardNewAction extends BaseJsonAction implements IBaseAdditiona
 	
 	@SuppressWarnings("unchecked")
 	private void getExcel() throws ControllerException, AuthorityException, ServiceException, Exception {
-		String dateRangeChartPngData = this.defaultString( this.getFields().get("dateRangeChartPngData") ).trim();
-		String gaugeDatasJsonStr = this.defaultString( this.getFields().get("gaugeDatas") );
-		Map<String, Object> gaugeDatas = (Map<String, Object>) new ObjectMapper().readValue(gaugeDatasJsonStr, LinkedHashMap.class);
+		
+		// Perspectives
+		String perspectiveDateRangeChartPngData = this.defaultString( this.getFields().get("perspectiveDateRangeChartPngData") ).trim();
+		String perspectiveGaugeDatasJsonStr = this.defaultString( this.getFields().get("perspectiveGaugeDatas") );
+		Map<String, Object> perspectiveGaugeDatas = (Map<String, Object>) new ObjectMapper().readValue(perspectiveGaugeDatasJsonStr, LinkedHashMap.class);
 		Context context = this.getChainContext();
-		context.put("dateRangeChartPngData", dateRangeChartPngData);
-		context.put("gaugeDatas", gaugeDatas);
-		if ( gaugeDatas == null || gaugeDatas.size() < 1 ) {
+		context.put("perspectiveDateRangeChartPngData", perspectiveDateRangeChartPngData);
+		context.put("perspectiveGaugeDatas", perspectiveGaugeDatas);
+		
+		// Objectives
+		String objectiveDateRangeChartPngData = this.defaultString( this.getFields().get("objectiveDateRangeChartPngData") ).trim();
+		String objectiveGaugeDatasJsonStr = this.defaultString( this.getFields().get("objectiveGaugeDatas") );
+		Map<String, Object> objectiveGaugeDatas = (Map<String, Object>) new ObjectMapper().readValue(objectiveGaugeDatasJsonStr, LinkedHashMap.class);
+		context.put("objectiveDateRangeChartPngData", objectiveDateRangeChartPngData);
+		context.put("objectiveGaugeDatas", objectiveGaugeDatas);
+		
+		// KPIs
+		String kpiDateRangeChartPngData = this.defaultString( this.getFields().get("kpiDateRangeChartPngData") ).trim();
+		String kpiGaugeDatasJsonStr = this.defaultString( this.getFields().get("kpiGaugeDatas") );
+		Map<String, Object> kpiGaugeDatas = (Map<String, Object>) new ObjectMapper().readValue(kpiGaugeDatasJsonStr, LinkedHashMap.class);
+		context.put("kpiDateRangeChartPngData", kpiDateRangeChartPngData);
+		context.put("kpiGaugeDatas", kpiGaugeDatas);
+		
+		if ( perspectiveGaugeDatas == null || perspectiveGaugeDatas.size() < 1 ) {
 			super.throwMessage( this.getText("MESSAGE.BSC_PROG003D0009Q_msg1") );
 		}
 		SimpleChain chain = new SimpleChain();
-		ChainResultObj resultObj = chain.getResultFromResource("kpisDashboardExcelContentChain", context);
+		ChainResultObj resultObj = chain.getResultFromResource("dashboardNewExcelContentChain", context);
 		this.message = resultObj.getMessage();
 		if ( resultObj.getValue() instanceof String ) {
 			this.uploadOid = (String)resultObj.getValue();

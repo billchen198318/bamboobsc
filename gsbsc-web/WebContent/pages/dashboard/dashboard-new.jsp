@@ -165,35 +165,84 @@ function BSC_PROG003D0009Q_query() {
 
 function BSC_PROG003D0009Q_generateExport() {
 	
-	var gaugeDatas = [];
-	var dateRangeChartPngData = null;
+	// Perspectives
+	var perspectiveGaugeDatas = [];
+	var perspectiveDateRangeChartPngData = null;
 	if ( '' != $('#BSC_PROG003D0009Q_perspectives_daterange_container').html() ) {
 		var dateRangeSvg = $('#BSC_PROG003D0009Q_perspectives_daterange_container').highcharts().getSVG();
-		dateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+		perspectiveDateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
 	}
 	dojo.query("div").forEach(function(node){
 		if (node.id!=null && node.id.indexOf('BSC_PROG003D0009Q_perspectives_container_')>-1) {
 			var gaugeChartPngData = '';
 			var gaugeSvg = $('#' + node.id ).highcharts().getSVG();
 			gaugeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( gaugeSvg );
-			gaugeDatas.push({
+			perspectiveGaugeDatas.push({
 				id: node.id,
 				data: gaugeChartPngData
 			});			
 			
 		}	
 	});		
-	if ( dateRangeChartPngData == null ) {
-		dateRangeChartPngData = '';
+	if ( perspectiveDateRangeChartPngData == null ) {
+		perspectiveDateRangeChartPngData = '';
 	}
-	if (null == gaugeDatas || gaugeDatas.length < 1) {
+	
+	// Objectives
+	var objectiveGaugeDatas = [];
+	var objectiveDateRangeChartPngData = null;
+	if ( '' != $('#BSC_PROG003D0009Q_objectives_daterange_container').html() ) {
+		var dateRangeSvg = $('#BSC_PROG003D0009Q_objectives_daterange_container').highcharts().getSVG();
+		objectiveDateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+	}
+	dojo.query("div").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0009Q_objectives_container_')>-1) {
+			var gaugeChartPngData = '';
+			var gaugeSvg = $('#' + node.id ).highcharts().getSVG();
+			gaugeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( gaugeSvg );
+			objectiveGaugeDatas.push({
+				id: node.id,
+				data: gaugeChartPngData
+			});			
+			
+		}	
+	});		
+	if ( objectiveDateRangeChartPngData == null ) {
+		objectiveDateRangeChartPngData = '';
+	}	
+	
+	// KPIs
+	var kpiGaugeDatas = [];
+	var kpiDateRangeChartPngData = null;
+	if ( '' != $('#BSC_PROG003D0009Q_kpis_daterange_container').html() ) {
+		var dateRangeSvg = $('#BSC_PROG003D0009Q_kpis_daterange_container').highcharts().getSVG();
+		kpiDateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+	}
+	dojo.query("div").forEach(function(node){
+		if (node.id!=null && node.id.indexOf('BSC_PROG003D0009Q_kpis_container_')>-1) {
+			var gaugeChartPngData = '';
+			var gaugeSvg = $('#' + node.id ).highcharts().getSVG();
+			gaugeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( gaugeSvg );
+			kpiGaugeDatas.push({
+				id: node.id,
+				data: gaugeChartPngData
+			});			
+			
+		}	
+	});		
+	if ( kpiDateRangeChartPngData == null ) {
+		kpiDateRangeChartPngData = '';
+	}	
+	
+	
+	if (null == perspectiveGaugeDatas || perspectiveGaugeDatas.length < 1) {
 		alertDialog(_getApplicationProgramNameById('${programId}'), '<s:property value="getText('MESSAGE.BSC_PROG003D0009Q_msg1')" escapeJavaScript="true"/>', function(){}, 'Y');
 		showFieldsNoticeMessageLabel('BSC_PROG003D0009Q_visionOid'+_gscore_inputfieldNoticeMsgLabelIdName, '<s:property value="getText('MESSAGE.BSC_PROG003D0009Q_msg1')" escapeJavaScript="true"/>');		
 		return;
 	}
 	
 	xhrSendParameter(
-			'${basePath}/bsc.perspectivesDashboardExcelAction.action', 
+			'${basePath}/bsc.dashboardNewExcelAction.action', 
 			{ 
 				'fields.visionOid' 					: 	dijit.byId("BSC_PROG003D0009Q_visionOid").get("value"),
 				'fields.startYearDate'				:	dijit.byId("BSC_PROG003D0009Q_startYearDate").get('displayedValue'),
@@ -204,8 +253,12 @@ function BSC_PROG003D0009Q_generateExport() {
 				'fields.measureDataOrganizationOid'	:	dijit.byId("BSC_PROG003D0009Q_measureDataOrganizationOid").get("value"),
 				'fields.measureDataEmployeeOid'		:	dijit.byId("BSC_PROG003D0009Q_measureDataEmployeeOid").get("value"),
 				'fields.frequency'					:	dijit.byId("BSC_PROG003D0009Q_frequency").get("value"),
-				'fields.dateRangeChartPngData'	:	dateRangeChartPngData,
-				'fields.gaugeDatas'	: JSON.stringify( { 'gaugeMapList' : gaugeDatas } )
+				'fields.perspectiveDateRangeChartPngData'	:	perspectiveDateRangeChartPngData,
+				'fields.perspectiveGaugeDatas'	: JSON.stringify( { 'gaugeMapList' : perspectiveGaugeDatas } ),
+				'fields.objectiveDateRangeChartPngData'	:	objectiveDateRangeChartPngData,
+				'fields.objectiveGaugeDatas'	: JSON.stringify( { 'gaugeMapList' : objectiveGaugeDatas } )	,
+				'fields.kpiDateRangeChartPngData'	:	kpiDateRangeChartPngData,
+				'fields.kpiGaugeDatas'	: JSON.stringify( { 'gaugeMapList' : kpiGaugeDatas } )					
 			}, 
 			'json', 
 			_gscore_dojo_ajax_timeout,
