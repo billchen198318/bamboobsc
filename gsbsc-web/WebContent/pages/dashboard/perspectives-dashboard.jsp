@@ -231,7 +231,7 @@ function BSC_PROG003D0004Q_showTableContent( data ) {
 		var perspective = vision.perspectives[p];
 		if ( c == 0 ) {
 			t += '<tr>';
-			t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>Perspectives</b></font></td>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>' + data.perspectiveTitle + '</b></font></td>';
 			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Target</b></font></td>';
 			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Minimum</b></font></td>';	
 			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
