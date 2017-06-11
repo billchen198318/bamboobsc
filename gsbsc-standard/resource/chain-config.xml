@@ -173,6 +173,12 @@
 	
 	<!-- Objectives Dashboard 輸出 Excel 產生用的 chain -->
 	<chain name="objectivesDashboardExcelContentChain">
+		<command id="LoadBscMixDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscMixDataCommand"/> 
+		<command id="LoadBscStructTreeCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadBscStructTreeCommand"/>
+		<command id="LoadMeasureDataCommand" 			className="com.netsteadfast.greenstep.bsc.command.LoadMeasureDataCommand"/>
+		<command id="ScoreCalculationCommand" 			className="com.netsteadfast.greenstep.bsc.command.ScoreCalculationCommand"/>
+		<command id="KpiDateRangeScoreCommand" 			className="com.netsteadfast.greenstep.bsc.command.KpiDateRangeScoreCommand"/>
+		<command id="ParentItemDateRangeScoreCommand"	className="com.netsteadfast.greenstep.bsc.command.ParentItemDateRangeScoreCommand"/>	
 		<command id="ObjectivesDashboardExcelCommand"		className="com.netsteadfast.greenstep.bsc.command.ObjectivesDashboardExcelCommand"/> 
 	</chain>	
 
