@@ -635,6 +635,16 @@ public class DashboardNewAction extends BaseJsonAction implements IBaseAdditiona
 	}
 	
 	@JSON
+	public String getPerspectiveTitle() {
+		return BscReportPropertyUtils.getPerspectiveTitle();
+	}		
+	
+	@JSON
+	public String getObjectiveTitle() {
+		return BscReportPropertyUtils.getObjectiveTitle();
+	}	
+	
+	@JSON
 	public String getKpiTitle() {
 		return BscReportPropertyUtils.getKpiTitle();
 	}	
