@@ -260,7 +260,7 @@ function BSC_PROG003D0005Q_showTableContent( data ) {
 	}
 	
 	t += '<tr>';
-	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + (4 + vision.perspectives[0].dateRangeScores.length ) + '"><font color="' + data.fontColor + '"><b>Frequency&nbsp;:&nbsp;' + data.displayFrequency + '&nbsp;&nbsp;date range&nbsp;:&nbsp;' + data.displayDateRange1 + '&nbsp;~&nbsp;' + data.displayDateRange2 + '&nbsp;&nbsp;Measure data type&nbsp;:&nbsp;' + data.measureDataTypeForTitle + '</b></font></td>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>Frequency&nbsp;:&nbsp;' + data.displayFrequency + '&nbsp;&nbsp;date range&nbsp;:&nbsp;' + data.displayDateRange1 + '&nbsp;~&nbsp;' + data.displayDateRange2 + '&nbsp;&nbsp;Measure data type&nbsp;:&nbsp;' + data.measureDataTypeForTitle + '</b></font></td>';
 	t += '</tr>';	
 	t += '</table>';
 	dojo.byId("BSC_PROG003D0005Q_content").innerHTML = t;

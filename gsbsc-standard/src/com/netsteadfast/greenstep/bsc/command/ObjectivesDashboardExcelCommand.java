@@ -112,7 +112,7 @@ public class ObjectivesDashboardExcelCommand extends BaseChainCommandSupport imp
 		
 		sh.setColumnWidth(0, 12000);	
 		
-		int drSize = vision.getPerspectives().get(0).getDateRangeScores().size();
+		int drSize = vision.getPerspectives().get(0).getObjectives().get(0).getDateRangeScores().size();
 		
 		int dCol = 4;
 		int left = 0;
