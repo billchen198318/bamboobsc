@@ -255,24 +255,24 @@ xmlbeans-2.6.0.jar
 xmlschema-core-2.2.1.jar
 xmlsec-2.0.8.jar
 ehcache-2.10.2.jar (is found)
-cxf-services-ws-discovery-api-3.1.8.jar (REMOVE 不需要)
-cxf-services-ws-discovery-service-3.1.8.jar (REMOVE 不需要)
+cxf-services-ws-discovery-api-3.1.11.jar (REMOVE 不需要)
+cxf-services-ws-discovery-service-3.1.11.jar (REMOVE 不需要)
 
 
 Apache Camel
 -------------------------
-camel-core-2.18.0.jar
-camel-cxf-2.18.0.jar
-camel-cxf-transport-2.18.0.jar
-camel-ftp-2.18.0.jar
-camel-groovy-2.18.0.jar
-camel-http-2.18.0.jar
-camel-http-common-2.18.0.jar
-camel-jms-2.18.0.jar
-camel-servlet-2.18.0.jar
-camel-spring-2.18.0.jar
-camel-ssh-2.18.0.jar
-camel-stream-2.18.0.jar
+camel-core-2.19.0.jar
+camel-cxf-2.19.0.jar
+camel-cxf-transport-2.19.0.jar
+camel-ftp-2.19.0.jar
+camel-groovy-2.19.0.jar
+camel-http-2.19.0.jar
+camel-http-common-2.19.0.jar
+camel-jms-2.19.0.jar
+camel-servlet-2.19.0.jar
+camel-spring-2.19.0.jar
+camel-ssh-2.19.0.jar
+camel-stream-2.19.0.jar
 
 
 Activiti
