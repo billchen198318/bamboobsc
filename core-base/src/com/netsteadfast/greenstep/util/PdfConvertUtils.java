@@ -31,8 +31,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.util.ImageIOUtil;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -52,18 +53,25 @@ public class PdfConvertUtils {
 		return oids;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static List<File> toImageFiles(File pdfFile, int resolution) throws Exception {
-		PDDocument document = PDDocument.loadNonSeq(pdfFile, null);		
-		List<PDPage> pages = document.getDocumentCatalog().getAllPages();
+		PDDocument document = PDDocument.load(pdfFile);		
+		PDFRenderer pdfRenderer = new PDFRenderer(document);
+		/*
+		List<PDPage> pages = new LinkedList<PDPage>();
+		for (int i=0; i < document.getDocumentCatalog().getPages().getCount(); i++) {
+			pages.add( document.getDocumentCatalog().getPages().get(i) );
+		}
+		*/
 		File tmpDir = new File(Constants.getWorkTmpDir() + "/" + PdfConvertUtils.class.getSimpleName() 
 				+ "/" + System.currentTimeMillis() + "/");
 		FileUtils.forceMkdir( tmpDir );
-		List<File> files = new LinkedList<File>();	
-		int len = String.valueOf(pages.size()+1).length();
-		for (int i=0; i<pages.size(); i++) {
+		List<File> files = new LinkedList<File>();
+		//int len = String.valueOf(pages.size()+1).length();
+		int len = String.valueOf(document.getDocumentCatalog().getPages().getCount()+1).length();
+		//for (int i=0; i<pages.size(); i++) {
+		for (int i=0; i<document.getDocumentCatalog().getPages().getCount(); i++) {
 			String name = StringUtils.leftPad(String.valueOf(i+1), len, "0");
-			BufferedImage bufImage = pages.get(i).convertToImage(BufferedImage.TYPE_INT_RGB, resolution);
+			BufferedImage bufImage = pdfRenderer.renderImageWithDPI(i, resolution, ImageType.RGB);
 			File imageFile = new File( tmpDir.getPath() + "/" + name + ".png" );
 			FileOutputStream fos = new FileOutputStream(imageFile);
 			ImageIOUtil.writeImage(bufImage, "png", fos, resolution);
@@ -75,7 +83,7 @@ public class PdfConvertUtils {
 		tmpDir = null;
 		return files;
 	}
-		
+	
 	public static void main(String args[]) throws Exception {
 		if (args == null || args.length != 2) {
 			System.out.println("PdfConvertUtils [FILE] [RESOLUTION]");
@@ -88,6 +96,6 @@ public class PdfConvertUtils {
 		for (File file : imageFiles) {
 			System.out.println( file.getPath() );
 		}
-	}	
+	}
 
 }

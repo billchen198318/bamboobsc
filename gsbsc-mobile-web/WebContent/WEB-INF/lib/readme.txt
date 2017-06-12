@@ -426,11 +426,11 @@ jsch-0.1.52.jar
 
 http://pdfbox.apache.org/index.html
 -------------------------
-pdfbox-1.8.9.jar
-fontbox-1.8.9.jar
-jempbox-1.8.9.jar
-preflight-1.8.9.jar
-xmpbox-1.8.9.jar
+fontbox-2.0.6.jar
+pdfbox-2.0.6.jar
+pdfbox-tools-2.0.6.jar
+preflight-2.0.6.jar
+xmpbox-2.0.6.jar
 
 
 Hessian
