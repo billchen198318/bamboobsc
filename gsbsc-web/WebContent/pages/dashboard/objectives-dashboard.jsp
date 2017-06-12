@@ -347,13 +347,20 @@ function BSC_PROG003D0005Q_showChartForObjectives(data) {
     		var divChartId = "BSC_PROG003D0005Q_objectives_container_" + objective.objId;
     		
     		var maxVal = objective.target;
+    		var minVal = objective.min;
     		if (objective.score > maxVal) {
     			maxVal = objective.score;
+    		}
+    		if (objective.score < minVal) {
+    			minVal = objective.score;
+    		}    
+    		if (minVal > 0) {
+    			minVal = 0;
     		}
     		
     	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
     	        yAxis: {
-    	            min: 0,
+    	            min: minVal,
     	            max: maxVal,
     	            title: {
     	                text: objective.name

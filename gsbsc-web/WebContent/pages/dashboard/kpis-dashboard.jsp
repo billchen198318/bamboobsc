@@ -364,13 +364,20 @@ function BSC_PROG003D0006Q_showChartForKpis(data) {
 	    		var divChartId = "BSC_PROG003D0006Q_kpis_container_" + kpi.id;
 	    		
 	    		var maxVal = kpi.target;
+	    		var minVal = kpi.min;
 	    		if (kpi.score > maxVal) {
 	    			maxVal = kpi.score;
 	    		}
+	    		if (kpi.score < minVal) {
+	    			minVal = kpi.score;
+	    		}    
+	    		if (minVal > 0) {
+	    			minVal = 0;
+	    		}	    		
 	    		
 	    	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
 	    	        yAxis: {
-	    	            min: 0,
+	    	            min: minVal,
 	    	            max: maxVal,
 	    	            title: {
 	    	                text: kpi.name
