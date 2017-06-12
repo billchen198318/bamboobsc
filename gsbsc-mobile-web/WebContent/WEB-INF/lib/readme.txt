@@ -172,7 +172,7 @@ hamcrest-core-1.3.jar
 HikariCP
 https://github.com/brettwooldridge/HikariCP
 -------------------------
-HikariCP-2.5.1.jar
+HikariCP-2.6.2.jar
 
 
 ASM	(require by Apache CXF ... etc )
