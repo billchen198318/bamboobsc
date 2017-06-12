@@ -32,6 +32,7 @@ http://127.0.0.1:8080/gsbsc-web/services/api?wsdl
 getScorecard1
 
 <br>
+
 ### Example:
 
 ```XML
