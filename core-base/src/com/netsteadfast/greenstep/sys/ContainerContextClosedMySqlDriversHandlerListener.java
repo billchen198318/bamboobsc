@@ -53,12 +53,14 @@ public class ContainerContextClosedMySqlDriversHandlerListener implements Servle
 				e.printStackTrace();
 			}
 		}
+		/*
 		try {
 			AbandonedConnectionCleanupThread.shutdown();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}		
-		
+		*/
+		AbandonedConnectionCleanupThread.checkedShutdown();
 	}
 	
 }
