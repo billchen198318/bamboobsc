@@ -184,7 +184,8 @@ public class TimeSeriesAnalysisUtils {
 			String tsaOid, 
 			String visionOid, String startDate, String endDate, 
 			String startYearDate, String endYearDate, String frequency, String dataFor, 
-			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
+			String measureDataOrganizationOid, String measureDataEmployeeOid,
+			String dateRangeChartPngData) throws ServiceException, Exception {
 		
 		Map<String, Object> dataMap = getResultWithVision(
 				tsaOid, visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
@@ -217,6 +218,7 @@ public class TimeSeriesAnalysisUtils {
 		if (!Constants.HTML_SELECT_NO_SELECT_ID.equals(measureDataEmployeeOid) && !StringUtils.isBlank(measureDataEmployeeOid)) {
 			context.put("employeeName", BscBaseLogicServiceCommonSupport.findEmployeeData(employeeService, measureDataEmployeeOid).getFullName() );
 		}
+		context.put("dateRangeChartPngData", dateRangeChartPngData);
 		
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("timeSeriesAnalysisExcelCommandContentChain", context);		

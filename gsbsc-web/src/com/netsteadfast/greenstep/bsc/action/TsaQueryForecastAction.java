@@ -306,7 +306,8 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 				this.getFields().get("frequency"), 
 				this.getFields().get("dataFor"), 
 				this.getFields().get("measureDataOrganizationOid"), 
-				this.getFields().get("measureDataEmployeeOid"));
+				this.getFields().get("measureDataEmployeeOid"),
+				this.getFields().get("dateRangeChartPngData"));
 		this.success = IS_YES;
 		this.message = "Success!";		
 	}
