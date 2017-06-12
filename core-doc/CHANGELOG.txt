@@ -1,3 +1,14 @@
+0.7.2
+-----------------------------------------------------------
+1. Change DOJO RichEditor( vision content / template editor ) replace to Froala WYSIWYG Editor.
+2. Menu settings/ Role & Authority settings config item MultiSelect change table list checkBox.
+3. Report and dashboard update ( 01 - BSC/KPI Report, 04 - Perspectives Dashboard, 05 - Objectives Dashboard, 06 - KPIs Dashboard, 09 - Dashboard)
+4. Bug fix, Query grid page change page select value. Log query form groovy expression bug.
+
+issues please reference:
+https://github.com/billchen198318/bamboobsc/issues/47
+
+
 0.7.1p1
 -----------------------------------------------------------
 1. Bug Fix create new employee but no hierarchy data.
