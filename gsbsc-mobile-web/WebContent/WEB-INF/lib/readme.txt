@@ -58,7 +58,7 @@ json-lib-2.4-jdk15.jar
 
 MySQL
 -------------------------
-mysql-connector-java-5.1.40-bin.jar
+mysql-connector-java-5.1.42-bin.jar
 
 
 http://code.google.com/p/beanshell2/
