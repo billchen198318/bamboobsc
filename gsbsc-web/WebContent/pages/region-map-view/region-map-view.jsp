@@ -347,10 +347,18 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 		} 
 		
 		var maxValue = target;
+		var minValue = kpis[k].min;
 		if (maxValue < score) {
 			maxValue = score;
 		}
 		maxValue = parseInt(maxValue+'', 10);
+		if (score < minValue) {
+			minValue = score;
+		}    
+		if (minValue > 0) {
+			minValue = 0;
+		}			
+		
 		
 		var labelString = kpis[k].name + " ( " + score + " ) ";
 		
@@ -361,7 +369,7 @@ function BSC_PROG001D0006Q_showRelationKpis(kpis) {
 		
 	    $( '#'+id ).highcharts(Highcharts.merge(gaugeOptions, {
 	        yAxis: {
-	            min: 0,
+	            min: minValue,
 	            max: maxValue,
 	            title: {
 	                text: labelString
