@@ -256,10 +256,16 @@ function BSC_PROG002D0007Q_S00_showChartForKpis(data) {
 
 
 function BSC_PROG002D0007Q_S00_setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
+	
+	var minVal = 0;
+	if ( minVal > score ) {
+		minVal = score;
+	}
+	
     // The speed gauge
     $( '#'+chartId ).highcharts(Highcharts.merge(gaugeOptions, {
         yAxis: {
-            min: 0,
+            min: minVal,
             max: maxVal,
             title: {
                 text: textTitle
