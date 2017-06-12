@@ -93,12 +93,12 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	private List<Map<String, String>> lineChartNames = new LinkedList<Map<String, String>>();
 	private List<List<List<Object>>> lineChartValues = new LinkedList<List<List<Object>>>();
 	
-	private List<PerspectiveVO> perspectiveItems = new LinkedList<PerspectiveVO>(); // 給 04 - Perspectives Dashboard 用的
+	private List<PerspectiveVO> perspectiveItems = new LinkedList<PerspectiveVO>(); // Strategy map 險示明細會用到  // 給 04 - Perspectives Dashboard 用的
 	
-	private String subTitle = ""; // 給 09 - Dashboard 的 perspectives subTitle 用的
-	// 給 09 - Dashboard 頁面 trend line chart 用的資料
-	private List<String> categories = new LinkedList<String>();
-	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();	
+//	private String subTitle = ""; // 給 09 - Dashboard 的 perspectives subTitle 用的
+//	// 給 09 - Dashboard 頁面 trend line chart 用的資料
+//	private List<String> categories = new LinkedList<String>();
+//	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();	
 	
 	private InputStream inputStream;
 	
@@ -391,16 +391,16 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	
 	private void fillLineChartData(BscStructTreeObj treeObj) throws Exception {
 		
-		int c = 0; // 給 09 - Dashboard 用的 , 判斷 用第1筆的資料來組  categories 的變數
+		//int c = 0; // 給 09 - Dashboard 用的 , 判斷 用第1筆的資料來組  categories 的變數
 		List<VisionVO> visions = treeObj.getVisions();
 		for (VisionVO vision : visions) {
 			if ( !vision.getOid().equals( this.getFields().get("visionOid") ) ) {
 				continue;
 			}
-			this.subTitle = vision.getTitle(); // 在  Dashboard 查詢時, 一定要選 vision, 所以只會有一個 vision , 給 09 - Dashboard 用的 
+			//this.subTitle = vision.getTitle(); // 在  Dashboard 查詢時, 一定要選 vision, 所以只會有一個 vision , 給 09 - Dashboard 用的 
 			for (PerspectiveVO perspective : vision.getPerspectives()) {
 				
-				this.perspectiveItems.add( perspective ); // 給 04 - Perspectives Dashboard 用的
+				this.perspectiveItems.add( perspective ); // Strategy map 險示 opw明細會用到 , // 給 04 - Perspectives Dashboard 用的
 				
 				for (ObjectiveVO objective : perspective.getObjectives()) {
 					for (KpiVO kpi : objective.getKpis()) {
@@ -420,6 +420,7 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 						// ----------------------------------------------------------------------
 						// 給 09 - Dashboard 用的 
 						// 給 Dashboard 頁面 trend line chart 用的資料
+						/*
 						Map<String, Object> mapData = new HashMap<String, Object>();
 						List<Float> rangeScore = new LinkedList<Float>();
 						for (DateRangeScoreVO dateRangeScore : kpi.getDateRangeScores()) {
@@ -431,7 +432,8 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 						mapData.put("name", kpi.getName());
 						mapData.put("data", rangeScore);
 						this.series.add(mapData);
-						c++;					
+						c++;		
+						*/
 						// ----------------------------------------------------------------------
 						
 					}					
@@ -768,6 +770,7 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 		return perspectiveItems;
 	}
 	
+	/*
 	@JSON
 	public String getSubTitle() {
 		return subTitle;
@@ -782,6 +785,7 @@ public class KpiReportContentQueryAction extends BaseJsonAction {
 	public List<Map<String, Object>> getSeries() {
 		return series;
 	}
+	*/
 
 	@JSON(serialize=false)
 	public InputStream getInputStream() {
