@@ -330,13 +330,20 @@ function BSC_PROG003D0004Q_showChartForPerspectives(data) {
 		var divChartId = "BSC_PROG003D0004Q_perspectives_container_" + perspective.perId;
 		
 		var maxVal = perspective.target;
+		var minVal = perspective.min;
 		if (perspective.score > maxVal) {
 			maxVal = perspective.score;
+		}
+		if (perspective.score < minVal) {
+			minVal = perspective.score;
+		}
+		if (minVal > 0) {
+			minVal = 0;
 		}
 		
 	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
 	        yAxis: {
-	            min: 0,
+	            min: minVal,
 	            max: maxVal,
 	            title: {
 	                text: perspective.name

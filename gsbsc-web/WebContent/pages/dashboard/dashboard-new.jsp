@@ -436,13 +436,20 @@ function BSC_PROG003D0009Q_showChartForPerspectives(data) {
 		var divChartId = "BSC_PROG003D0009Q_perspectives_container_" + perspective.perId;
 		
 		var maxVal = perspective.target;
+		var minVal = perspective.min;
 		if (perspective.score > maxVal) {
 			maxVal = perspective.score;
 		}
+		if (perspective.score < minVal) {
+			minVal = perspective.score;
+		}
+		if (minVal > 0) {
+			minVal = 0;
+		}		
 		
 	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
 	        yAxis: {
-	            min: 0,
+	            min: minVal,
 	            max: maxVal,
 	            title: {
 	                text: perspective.name
@@ -655,13 +662,20 @@ function BSC_PROG003D0009Q_showChartForObjectives(data) {
     		var divChartId = "BSC_PROG003D0009Q_objectives_container_" + objective.objId;
     		
     		var maxVal = objective.target;
+    		var minVal = objective.min;
     		if (objective.score > maxVal) {
     			maxVal = objective.score;
     		}
+    		if (objective.score < minVal) {
+    			minVal = objective.score;
+    		}    
+    		if (minVal > 0) {
+    			minVal = 0;
+    		}    		
     		
     	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
     	        yAxis: {
-    	            min: 0,
+    	            min: minVal,
     	            max: maxVal,
     	            title: {
     	                text: objective.name
@@ -895,13 +909,20 @@ function BSC_PROG003D0009Q_showChartForKpis(data) {
 	    		var divChartId = "BSC_PROG003D0009Q_kpis_container_" + kpi.id;
 	    		
 	    		var maxVal = kpi.target;
+	    		var minVal = kpi.min;
 	    		if (kpi.score > maxVal) {
 	    			maxVal = kpi.score;
 	    		}
+	    		if (kpi.score < minVal) {
+	    			minVal = kpi.score;
+	    		}    
+	    		if (minVal > 0) {
+	    			minVal = 0;
+	    		}	    		
 	    		
 	    	    $( '#'+divChartId ).highcharts(Highcharts.merge(gaugeOptions, {
 	    	        yAxis: {
-	    	            min: 0,
+	    	            min: minVal,
 	    	            max: maxVal,
 	    	            title: {
 	    	                text: kpi.name
