@@ -309,7 +309,7 @@ guava-gwt-13.0.1.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.7-indy.jar
+groovy-all-2.4.11-indy.jar
 
 
 Apache ActiveMQ
@@ -436,7 +436,7 @@ xmpbox-1.8.9.jar
 Hessian
 http://hessian.caucho.com/
 -------------------------
-hessian-4.0.37.jar
+hessian-4.0.51.jar
 
 
 Renjin
