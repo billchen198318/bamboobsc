@@ -21,9 +21,13 @@
  */
 package com.netsteadfast.greenstep.bsc.command;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -292,6 +296,21 @@ public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport impl
 			
 			row++;
 		}
+		
+		row = row + 2; // 區格空間
+		
+		// 放 date range line 圖表
+		String dateRangeChartPngData = (String) context.get("dateRangeChartPngData");
+		if (StringUtils.isBlank(dateRangeChartPngData)) {
+			return;
+		}
+		String imageDataStr = SimpleUtils.getPNGBase64Content( dateRangeChartPngData );
+		BufferedImage image = SimpleUtils.decodeToImage( imageDataStr );
+		ByteArrayOutputStream imgBos = new ByteArrayOutputStream();
+		ImageIO.write( image, "png", imgBos );
+		imgBos.flush();
+		
+		SimpleUtils.setCellPicture(wb, sh, imgBos.toByteArray(), row, 0);
 		
 	}
 

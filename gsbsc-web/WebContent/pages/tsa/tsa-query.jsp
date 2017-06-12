@@ -60,6 +60,17 @@ function BSC_PROG007D0002Q_query(type) {
 		BSC_PROG007D0002Q_clearContent();
 	}
 	
+	var dateRangeChartPngData = null;
+	if ('excel' == type) {
+		if ( '' != $('#BSC_PROG007D0002Q_kpi_daterange_container').html() ) {
+			var dateRangeSvg = $('#BSC_PROG007D0002Q_kpi_daterange_container').highcharts().getSVG();
+			dateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+		}		
+	}
+	if ( dateRangeChartPngData == null ) {
+		dateRangeChartPngData = '';
+	}	
+	
 	setFieldsBackgroundDefault(BSC_PROG007D0002Q_fieldsId);
 	setFieldsNoticeMessageLabelDefault(BSC_PROG007D0002Q_fieldsId);
 	xhrSendParameter(
@@ -75,7 +86,7 @@ function BSC_PROG007D0002Q_query(type) {
 				'fields.measureDataOrganizationOid'	:	dijit.byId("BSC_PROG007D0002Q_measureDataOrganizationOid").get("value"),
 				'fields.measureDataEmployeeOid'		:	dijit.byId("BSC_PROG007D0002Q_measureDataEmployeeOid").get("value"),
 				'fields.frequency'					:	dijit.byId("BSC_PROG007D0002Q_frequency").get("value"),
-				'fields.nobody'						: 	"Y"
+				'fields.dateRangeChartPngData'		:	dateRangeChartPngData
 			}, 
 			'json', 
 			_gscore_dojo_ajax_timeout,
