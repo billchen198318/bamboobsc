@@ -43,7 +43,9 @@ function refresh_dashboard() {
 	}
 	
 	// only clear Trend chart
-	$('#kpi_daterange_alert_title').hide();
+	$('#daterange_alert_title').hide();
+	$("#perspective_daterange_container").html('');
+	$("#objective_daterange_container").html('');
 	$("#kpi_daterange_container").html('');
 	
 	$('#myPleaseWait').modal('show');
@@ -73,6 +75,8 @@ function refresh_dashboard() {
 			showChartForPerspectives(data);
 			showChartForObjectives(data);
 			showChartForKpis(data);
+			showChartForPerspectiveDateRange(data);
+			showChartForObjectiveDateRange(data);
 			showChartForKpiDateRange(data);
 		},
 		error: function(e) {		
@@ -351,18 +355,103 @@ function setSpeedGaugeChart(gaugeOptions, chartId, textTitle, maxVal, score) {
     }));		
 }
 
-
+function showChartForPerspectiveDateRange(data) {
+	
+	if ( null == data.perspectiveCategories || data.perspectiveCategories.length < 2 ) {
+		return;
+	}
+	
+	$('#daterange_alert_title').show();
+	
+    $('#perspective_daterange_container').highcharts({
+        title: {
+            text: 'Perspectives trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Perspectives Score',
+            x: -20
+        },
+        xAxis: {
+            categories: data.perspectiveCategories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.perspectiveSeries
+    });
+    
+}
+function showChartForObjectiveDateRange(data) {
+	
+	if ( null == data.objectiveCategories || data.objectiveCategories.length < 2 ) {
+		return;
+	}
+	
+	$('#daterange_alert_title').show();
+	
+    $('#objective_daterange_container').highcharts({
+        title: {
+            text: 'Strategy objectives trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Strategy objectives Score',
+            x: -20
+        },
+        xAxis: {
+            categories: data.objectiveCategories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.objectiveSeries
+    });
+    
+}
 function showChartForKpiDateRange(data) {
 	
 	if ( null == data.categories || data.categories.length < 2 ) {
 		return;
 	}
 	
-	$('#kpi_daterange_alert_title').show();
+	$('#daterange_alert_title').show();
 	
     $('#kpi_daterange_container').highcharts({
         title: {
-            text: 'Trend',
+            text: 'KPIs trend',
             x: -20 //center
         },
         subtitle: {
@@ -487,10 +576,16 @@ function getScore(score) {
 </table>
 	
 	
-	<div class="alert alert-success collapse" role="alert" id="kpi_daterange_alert_title">
+	<div class="alert alert-success collapse" role="alert" id="daterange_alert_title">
 	  <strong>Trend</strong>
 	</div>
 	
+	<div id="perspective_daterange_container">
+	</div>
+	<br>	
+	<div id="objective_daterange_container">
+	</div>	
+	<br>		
 	<div id="kpi_daterange_container">
 	</div>		
 	

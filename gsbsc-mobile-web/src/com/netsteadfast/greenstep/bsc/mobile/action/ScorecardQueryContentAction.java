@@ -69,9 +69,18 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	private PerspectiveVO rootPerspective = new PerspectiveVO();
 	private ObjectiveVO rootObjective = new ObjectiveVO();
 	
-	// 給 Dashboard 頁面 trend line chart 用的資料
+	// 給 Dashboard 頁面 trend line chart 用的資料 ( KPIs trends )
 	private List<String> categories = new LinkedList<String>();
 	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>();
+	
+	// Perspectives trends
+	private List<String> perspectiveCategories = new LinkedList<String>();
+	private List<Map<String, Object>> perspectiveSeries = new LinkedList<Map<String, Object>>();
+
+	// Objectives trends
+	private List<String> objectiveCategories = new LinkedList<String>();
+	private List<Map<String, Object>> objectiveSeries = new LinkedList<Map<String, Object>>();
+	
 	
 	// copy from KpiReportContentQueryAction
 	private void setDateValue() throws Exception {
@@ -337,9 +346,37 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 		// 準備要顯示 highcharts 要用的資料
 		
 		// 給 Dashboard 頁面 trend line chart 用的資料
+		int p = 0;
+		int o = 0;
 		int c = 0;
 		for (PerspectiveVO perspective : this.rootVision.getPerspectives()) {
+			Map<String, Object> pMapData = new HashMap<String, Object>();
+			List<Float> pRangeScore = new LinkedList<Float>();
+			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
+				if ( p == 0 ) {
+					this.perspectiveCategories.add( dateRangeScore.getDate() );
+				}
+				pRangeScore.add( dateRangeScore.getScore() );
+			}
+			pMapData.put("name", perspective.getName());
+			pMapData.put("data", pRangeScore);
+			this.perspectiveSeries.add(pMapData);
+			p++;			
+			
 			for (ObjectiveVO objective : perspective.getObjectives()) {
+				Map<String, Object> oMapData = new HashMap<String, Object>();
+				List<Float> oRangeScore = new LinkedList<Float>();
+				for (DateRangeScoreVO dateRangeScore : objective.getDateRangeScores()) {
+					if ( o == 0 ) {
+						this.objectiveCategories.add( dateRangeScore.getDate() );
+					}
+					oRangeScore.add( dateRangeScore.getScore() );
+				}
+				oMapData.put("name", objective.getName());
+				oMapData.put("data", oRangeScore);
+				this.objectiveSeries.add(oMapData);
+				o++;				
+				
 				for (KpiVO kpi : objective.getKpis()) {
 					Map<String, Object> mapData = new HashMap<String, Object>();
 					List<Float> rangeScore = new LinkedList<Float>();
@@ -508,6 +545,26 @@ public class ScorecardQueryContentAction extends BaseJsonAction {
 	@JSON
 	public List<Map<String, Object>> getSeries() {
 		return series;
+	}
+
+	@JSON
+	public List<String> getPerspectiveCategories() {
+		return perspectiveCategories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getPerspectiveSeries() {
+		return perspectiveSeries;
+	}
+
+	@JSON
+	public List<String> getObjectiveCategories() {
+		return objectiveCategories;
+	}
+
+	@JSON
+	public List<Map<String, Object>> getObjectiveSeries() {
+		return objectiveSeries;
 	}
 		
 }
