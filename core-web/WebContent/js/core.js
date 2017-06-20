@@ -373,7 +373,7 @@ dojo.declare("GS.ViewPage", GS.CORE, {
         var deferred = dojo.xhrPost(xhrArgs);	    	
     },
     getSVGImageData : function(_selectId) {
-    	return 'data:image/svg+xml;charset=UTF-8,' + this.getSVGData(_selectId)
+    	return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(this.getSVGData(_selectId))
     },  
     getSVGData : function(_selectId) {
     	var exportData = d3.select( _selectId )
