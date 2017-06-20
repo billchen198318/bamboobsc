@@ -280,10 +280,8 @@ function exportCoffeeChartsAsPNG() {
 	.node().parentNode.innerHTML;
 	exportHTML=exportHTML.replace('<p id="intro">Click to zoom!</p>', '');
 	
-	//alert( btoa(exportHTML) );
-	//window.location.href = 'data:image/svg+xml;base64,' + btoa(exportHTML);
 	var image = new Image();
-	image.src = 'data:image/svg+xml;base64,' + btoa(exportHTML);
+	image.src = 'data:image/svg+xml;charset=UTF-8,' + exportHTML;
 	image.onload = function() {
 		var canvas = document.createElement('canvas');
 		canvas.width = image.width;

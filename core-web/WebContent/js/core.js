@@ -373,7 +373,7 @@ dojo.declare("GS.ViewPage", GS.CORE, {
         var deferred = dojo.xhrPost(xhrArgs);	    	
     },
     getSVGImageData : function(_selectId) {
-    	return 'data:image/svg+xml;base64,' + btoa( this.getSVGData(_selectId) );	
+    	return 'data:image/svg+xml;charset=UTF-8,' + this.getSVGData(_selectId)
     },  
     getSVGData : function(_selectId) {
     	var exportData = d3.select( _selectId )
@@ -392,7 +392,7 @@ dojo.declare("GS.ViewPage", GS.CORE, {
     	return canvas.toDataURL('image/png');
     },    
     getSVGImage2CanvasToDataUrlPNG : function(_selectId) {
-    	var svg = viewPage.getSVGImageData( _selectId );
+    	var svg = this.getSVGImageData( _selectId );
     	return this.getSVGImage2CanvasToDataUrlPNGfromData( svg );
     },
     toggleFullscreen : function(element) {
