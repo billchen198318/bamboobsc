@@ -1,3 +1,11 @@
+0.7.2p1
+-----------------------------------------------------------
+1. Bug for export SVG chart
+
+issues please reference:
+https://github.com/billchen198318/bamboobsc/issues/49
+
+
 0.7.2
 -----------------------------------------------------------
 1. Change DOJO RichEditor( vision content / template editor ) replace to Froala WYSIWYG Editor.

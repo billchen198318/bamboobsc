@@ -130,7 +130,7 @@ function submitLoginForm() {
     <br/>
     <label>Only support <b>Chrome</b> (recommend) or support <b>HTML5 date field</b> browser.</label>
     <br/>
-	<label>bambooBSC 0.7.2 mobile version</label>
+	<label>bambooBSC 0.7.2p1 mobile version</label>
 
 </form>
 </div>
