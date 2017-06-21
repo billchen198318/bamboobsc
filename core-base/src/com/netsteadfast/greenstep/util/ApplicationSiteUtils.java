@@ -50,7 +50,7 @@ public class ApplicationSiteUtils {
 	protected static Logger logger = Logger.getLogger(ApplicationSiteUtils.class);
 	public static final String UPDATE_HOST_ALWAYS = "2";
 	public static final String UPDATE_HOST_ONLY_FIRST_ONE = "1";
-	private static final long TEST_JSON_HTTP_TIMEOUT = 3000; // 3秒
+	private static final int TEST_JSON_HTTP_TIMEOUT = 3000; // 3秒
 	private static Map<String, String> contextPathMap = new HashMap<String, String>();	
 	
 	@SuppressWarnings("unchecked")
@@ -217,6 +217,7 @@ public class ApplicationSiteUtils {
 			HttpMethod method = new GetMethod(urlStr);
 			HttpClientParams params = new HttpClientParams();
 			params.setConnectionManagerTimeout(TEST_JSON_HTTP_TIMEOUT);
+			params.setSoTimeout(TEST_JSON_HTTP_TIMEOUT);
 			client.setParams(params);
 			client.executeMethod(method);
 			byte[] responseBody = method.getResponseBody();
