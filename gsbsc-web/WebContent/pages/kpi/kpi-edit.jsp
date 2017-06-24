@@ -70,9 +70,14 @@ function BSC_PROG002D0004E_clear() {
 	dijit.byId('BSC_PROG002D0004E_formulaOid').set("value", _gscore_please_select_id);
 	dijit.byId('BSC_PROG002D0004E_trendsFormulaOid').set("value", _gscore_please_select_id);
 	dijit.byId('BSC_PROG002D0004E_weight').set("value", "+000.00");
+	/*
 	dijit.byId('BSC_PROG002D0004E_max').set("value", "+000.00");
 	dijit.byId('BSC_PROG002D0004E_target').set("value", "+000.00");
-	dijit.byId('BSC_PROG002D0004E_min').set("value", "+000.00");
+	dijit.byId('BSC_PROG002D0004E_min').set("value", "+000.00");	
+	*/
+	dijit.byId('BSC_PROG002D0004E_max').set("value", "+0000000.00");
+	dijit.byId('BSC_PROG002D0004E_target').set("value", "+0000000.00");
+	dijit.byId('BSC_PROG002D0004E_min').set("value", "+0000000.00");
 	dijit.byId('BSC_PROG002D0004E_compareType').set("value", _gscore_please_select_id);
 	dijit.byId('BSC_PROG002D0004E_unit').set("value", "");
 	dijit.byId('BSC_PROG002D0004E_management').set("value", _gscore_please_select_id);
@@ -384,7 +389,7 @@ function ${programId}_page_message() {
     			<gs:inputfieldNoticeMsgLabel id="BSC_PROG002D0004E_max"></gs:inputfieldNoticeMsgLabel>
     			<br/>
 	   			<input id="BSC_PROG002D0004E_max" name="BSC_PROG002D0004E_max" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-	    				value="${kpi.max}" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+	    				value="${kpi.max}" data-dojo-props="smallDelta:10, constraints:{min:-9999999.00,max:9999999.00, pattern: '+0000000.00;-0.00' }" /><!-- constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' } -->
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004E_max'">
     				Input Maximum value, only allow numbers.
 				</div>  	    				      			
@@ -405,7 +410,7 @@ function ${programId}_page_message() {
     			<gs:inputfieldNoticeMsgLabel id="BSC_PROG002D0004E_target"></gs:inputfieldNoticeMsgLabel>
     			<br/>
 	   			<input id="BSC_PROG002D0004E_target" name="BSC_PROG002D0004E_target" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-	    				value="${kpi.target}" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+	    				value="${kpi.target}" data-dojo-props="smallDelta:10, constraints:{min:-9999999.00,max:9999999.00, pattern: '+0000000.00;-0.00' }" /><!-- constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' } -->
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004E_target'">
     				Input target value, only allow numbers.
 				</div>  	    				      			
@@ -415,7 +420,7 @@ function ${programId}_page_message() {
     			<gs:inputfieldNoticeMsgLabel id="BSC_PROG002D0004E_min"></gs:inputfieldNoticeMsgLabel>
     			<br/>
     			<input id="BSC_PROG002D0004E_min" name="BSC_PROG002D0004E_min" type="text" data-dojo-type="dijit/form/NumberSpinner" 
-    				value="${kpi.min}" data-dojo-props="smallDelta:10, constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' }" />
+    				value="${kpi.min}" data-dojo-props="smallDelta:10, constraints:{min:-9999999.00,max:9999999.00, pattern: '+0000000.00;-0.00' }" /><!-- constraints:{min:-9999999999.99,max:9999999999.99, pattern: '+000.00;-0.00' } -->
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG002D0004E_min'">
     				Input Minimum value, only allow numbers.
 				</div>       				      			
