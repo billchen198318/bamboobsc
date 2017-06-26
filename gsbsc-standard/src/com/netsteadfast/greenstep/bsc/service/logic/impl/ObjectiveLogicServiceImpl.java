@@ -45,6 +45,7 @@ import com.netsteadfast.greenstep.base.model.ServiceAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.service.logic.CoreBaseLogicService;
+import com.netsteadfast.greenstep.bsc.model.ItemTargetOrMaximumAndMinimalValue;
 import com.netsteadfast.greenstep.bsc.model.MonitorItemType;
 import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
@@ -163,6 +164,8 @@ public class ObjectiveLogicServiceImpl extends CoreBaseLogicService implements I
 			objective.setObjId( this.findForMaxObjId(SimpleUtils.getStrYMD("")) );
 		}		
 		this.setStringValueMaxLength(objective, "description", MAX_DESCRIPTION_LENGTH);
+		objective.setTarget( ItemTargetOrMaximumAndMinimalValue.get(objective.getTarget()) );
+		objective.setMin( ItemTargetOrMaximumAndMinimalValue.get(objective.getMin()) );
 		return this.objectiveService.saveObject(objective);
 	}
 
@@ -190,6 +193,8 @@ public class ObjectiveLogicServiceImpl extends CoreBaseLogicService implements I
 		objective.setObjId( oldResult.getValue().getObjId() );
 		objective.setPerId(perspective.getPerId());
 		this.setStringValueMaxLength(objective, "description", MAX_DESCRIPTION_LENGTH);
+		objective.setTarget( ItemTargetOrMaximumAndMinimalValue.get(objective.getTarget()) );
+		objective.setMin( ItemTargetOrMaximumAndMinimalValue.get(objective.getMin()) );		
 		return this.objectiveService.updateObject(objective);
 	}
 

@@ -45,6 +45,7 @@ import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.model.SystemMessage;
 import com.netsteadfast.greenstep.base.service.logic.CoreBaseLogicService;
+import com.netsteadfast.greenstep.bsc.model.ItemTargetOrMaximumAndMinimalValue;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IKpiService;
 import com.netsteadfast.greenstep.bsc.service.IMeasureDataService;
@@ -208,6 +209,8 @@ public class MeasureDataLogicServiceImpl extends CoreBaseLogicService implements
 		result.setValue(Boolean.FALSE);
 		this.delete(kpi, date, frequency, organizationId, employeeId);
 		for (MeasureDataVO measureData : measureDatas) {
+			measureData.setActual( ItemTargetOrMaximumAndMinimalValue.get(measureData.getActual()) );
+			measureData.setTarget( ItemTargetOrMaximumAndMinimalValue.get(measureData.getTarget()) );
 			this.measureDataService.saveObject(measureData);
 		}
 		result.setSystemMessage( new SystemMessage(SysMessageUtil.get(GreenStepSysMsgConstants.UPDATE_SUCCESS)) );

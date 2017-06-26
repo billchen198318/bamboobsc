@@ -45,6 +45,7 @@ import com.netsteadfast.greenstep.base.model.ServiceAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.service.logic.CoreBaseLogicService;
+import com.netsteadfast.greenstep.bsc.model.ItemTargetOrMaximumAndMinimalValue;
 import com.netsteadfast.greenstep.bsc.model.MonitorItemType;
 import com.netsteadfast.greenstep.bsc.service.IMonitorItemScoreService;
 import com.netsteadfast.greenstep.bsc.service.IObjectiveService;
@@ -177,6 +178,8 @@ public class PerspectiveLogicServiceImpl extends CoreBaseLogicService implements
 			perspective.setPerId( this.findForMaxPerId(SimpleUtils.getStrYMD("")) );
 		}		
 		this.setStringValueMaxLength(perspective, "description", MAX_DESCRIPTION_LENGTH);
+		perspective.setTarget( ItemTargetOrMaximumAndMinimalValue.get(perspective.getTarget()) );
+		perspective.setMin( ItemTargetOrMaximumAndMinimalValue.get(perspective.getMin()) );
 		return this.perspectiveService.saveObject(perspective);
 	}
 
@@ -202,6 +205,8 @@ public class PerspectiveLogicServiceImpl extends CoreBaseLogicService implements
 		perspective.setVisId( vision.getVisId() );
 		perspective.setPerId(oldResult.getValue().getPerId());
 		this.setStringValueMaxLength(perspective, "description", MAX_DESCRIPTION_LENGTH);
+		perspective.setTarget( ItemTargetOrMaximumAndMinimalValue.get(perspective.getTarget()) );
+		perspective.setMin( ItemTargetOrMaximumAndMinimalValue.get(perspective.getMin()) );		
 		return this.perspectiveService.updateObject(perspective);
 	}
 

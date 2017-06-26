@@ -54,6 +54,7 @@ import com.netsteadfast.greenstep.base.model.ServiceMethodAuthority;
 import com.netsteadfast.greenstep.base.model.ServiceMethodType;
 import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicService;
+import com.netsteadfast.greenstep.bsc.model.ItemTargetOrMaximumAndMinimalValue;
 import com.netsteadfast.greenstep.bsc.model.MonitorItemType;
 import com.netsteadfast.greenstep.bsc.service.IFormulaService;
 import com.netsteadfast.greenstep.bsc.service.IKpiAttacService;
@@ -259,6 +260,9 @@ public class KpiLogicServiceImpl extends BscBaseLogicService implements IKpiLogi
 		}
 		this.setStringValueMaxLength(kpi, "description", MAX_DESCRIPTION_LENGTH);
 		this.handlerDataForCreateOrUpdate(kpi, objectiveOid, formulaOid, aggrOid, trendsFormulaOid);
+		kpi.setTarget( ItemTargetOrMaximumAndMinimalValue.get(kpi.getTarget()) );
+		kpi.setMin( ItemTargetOrMaximumAndMinimalValue.get(kpi.getMin()) );
+		kpi.setMax( ItemTargetOrMaximumAndMinimalValue.get(kpi.getMax()) );
 		DefaultResult<KpiVO> result = this.kpiService.saveObject(kpi);
 		if (result.getValue()==null) {
 			throw new ServiceException( result.getSystemMessage().getValue() );
@@ -295,6 +299,9 @@ public class KpiLogicServiceImpl extends BscBaseLogicService implements IKpiLogi
 		this.setStringValueMaxLength(kpi, "description", MAX_DESCRIPTION_LENGTH);
 		this.handlerDataForCreateOrUpdate(kpi, objectiveOid, formulaOid, aggrOid, trendsFormulaOid);
 		kpi.setId( oldResult.getValue().getId() );		
+		kpi.setTarget( ItemTargetOrMaximumAndMinimalValue.get(kpi.getTarget()) );
+		kpi.setMin( ItemTargetOrMaximumAndMinimalValue.get(kpi.getMin()) );
+		kpi.setMax( ItemTargetOrMaximumAndMinimalValue.get(kpi.getMax()) );		
 		DefaultResult<KpiVO> result = this.kpiService.updateObject(kpi);
 		if (result.getValue()==null) {
 			throw new ServiceException( result.getSystemMessage().getValue() );
