@@ -70,6 +70,8 @@ public class KpiVO extends BaseValueObj implements java.io.Serializable {
 	private List<OrganizationVO> organizations = new ArrayList<OrganizationVO>(); // KPI所屬部門, 目前只有KPI報表要用到
 	private List<KpiAttacVO> attachments = new ArrayList<KpiAttacVO>(); // KPI的上傳文件
 	
+	private List<Double> forecastNext = new LinkedList<Double>(); // 給 BSC_PROG007D0002Q ( 02 - Forecast analysis ) 用的 , 2017-01-01
+	
 	public KpiVO() {
 		
 	}
@@ -380,6 +382,14 @@ public class KpiVO extends BaseValueObj implements java.io.Serializable {
 
 	public void setAttachments(List<KpiAttacVO> attachments) {
 		this.attachments = attachments;
+	}
+
+	public List<Double> getForecastNext() {
+		return forecastNext;
+	}
+
+	public void setForecastNext(List<Double> forecastNext) {
+		this.forecastNext = forecastNext;
 	}	
 
 }

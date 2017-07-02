@@ -44,13 +44,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.netsteadfast.greenstep.base.BaseChainCommandSupport;
 import com.netsteadfast.greenstep.base.Constants;
-import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
+import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
 import com.netsteadfast.greenstep.model.UploadTypes;
 import com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
+import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.TsaVO;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport implements Command {
 	
@@ -90,8 +94,7 @@ public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport impl
 		TsaVO tsa = (TsaVO) context.get("tsa");
 		@SuppressWarnings("unchecked")
 		List<BbTsaMaCoefficients> coefficients = (List<BbTsaMaCoefficients>) context.get("coefficients");
-		@SuppressWarnings("unchecked")
-		List<TimeSeriesAnalysisResult> tsaResults = (List<TimeSeriesAnalysisResult>) context.get("tsaResults");
+		VisionVO vision = (VisionVO) context.get("tsaVisionResult");
 		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);				
@@ -242,64 +245,294 @@ public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport impl
 		
 		row++;
 		
-		// 填寫標題
+		
+		BscReportPropertyUtils.loadData();
+		
+		
+		// ==============================================================
+		// Vision 填寫標題
+		// ==============================================================
 		nowRow = sh.createRow(row);
 		Cell cellTitle2a = nowRow.createCell(0);
 		cellTitle2a.setCellStyle(cellHeadStyle);
-		cellTitle2a.setCellValue( "KPIs" );			
+		cellTitle2a.setCellValue( "Vision" );			
 		
 		int j = 1;
-		TimeSeriesAnalysisResult firstResult = tsaResults.get(0);
-		for (int i=0; i<firstResult.getKpi().getDateRangeScores().size(); i++) {
-			DateRangeScoreVO dateRangeScore = firstResult.getKpi().getDateRangeScores().get(i);
+		for (int i=0; i<vision.getDateRangeScores().size(); i++) {
+			DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(i);
 			Cell cellTitle2a_dateRange = nowRow.createCell( j );
 			j++;
 			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
 			cellTitle2a_dateRange.setCellValue( dateRangeScore.getDate() );				
 		}
-		for (int i=0; i<firstResult.getForecastNext().size(); i++) {
+		for (int i=0; i<vision.getForecastNext().size(); i++) {
 			Cell cellTitle2a_dateRange = nowRow.createCell( j );
 			j++;
 			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
 			cellTitle2a_dateRange.setCellValue( "next("+ (i+1) + ")" );				
 		}
+		row++;
+		
+		
+		// ==============================================================
+		// Vision 填寫 Date Range score 與 Forecast next score
+		// ==============================================================
+		nowRow = sh.createRow(row);
+		j = 0;
+		Cell cell_item = nowRow.createCell( j );
+		cell_item.setCellStyle(cellHeadStyle);
+		cell_item.setCellValue( vision.getTitle() );
+		j++;
+		
+		for (int n=0; n<vision.getDateRangeScores().size(); n++) {
+			DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(n);
+			Cell cell_dateRangeScore = nowRow.createCell( j );
+			cell_dateRangeScore.setCellStyle(cellHeadStyle2);
+			cell_dateRangeScore.setCellValue( dateRangeScore.getScore() );
+			j++;				
+		}
+		for (int n=0; n<vision.getForecastNext().size(); n++) {
+			double forecastScore = vision.getForecastNext().get(n);
+			Cell cell_forecastScore = nowRow.createCell( j );
+			cell_forecastScore.setCellStyle(cellHeadStyle2);
+			cell_forecastScore.setCellValue( forecastScore );
+			j++;
+		}
 		
 		row++;
 		
-		// 填寫 Date Range score 與 Forecast next score
-		for (int i=0; i<tsaResults.size(); i++) {
+		row++;
+		
+		// ==============================================================
+		// Perspectives 填寫標題
+		// ==============================================================		
+		nowRow = sh.createRow(row);
+		cellTitle2a = nowRow.createCell(0);
+		cellTitle2a.setCellStyle(cellHeadStyle);
+		cellTitle2a.setCellValue( BscReportPropertyUtils.getPerspectiveTitle() );			
+		
+		j = 1;
+		for (int i=0; i<vision.getPerspectives().get(0).getDateRangeScores().size(); i++) {
+			DateRangeScoreVO dateRangeScore = vision.getPerspectives().get(0).getDateRangeScores().get(i);
+			Cell cellTitle2a_dateRange = nowRow.createCell( j );
+			j++;
+			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
+			cellTitle2a_dateRange.setCellValue( dateRangeScore.getDate() );				
+		}
+		for (int i=0; i<vision.getPerspectives().get(0).getForecastNext().size(); i++) {
+			Cell cellTitle2a_dateRange = nowRow.createCell( j );
+			j++;
+			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
+			cellTitle2a_dateRange.setCellValue( "next("+ (i+1) + ")" );				
+		}
+		row++;		
+		
+		for (int i=0; i<vision.getPerspectives().size(); i++) {
+			PerspectiveVO perspective = vision.getPerspectives().get(i);
 			
 			nowRow = sh.createRow(row);
 			
 			j = 0;
-			TimeSeriesAnalysisResult resultModel = tsaResults.get(i);
 			
-			Cell cell_kpi = nowRow.createCell( j );
-			cell_kpi.setCellStyle(cellHeadStyle);
-			cell_kpi.setCellValue( resultModel.getKpi().getName() );
+			cell_item = nowRow.createCell( j );
+			cell_item.setCellStyle(cellHeadStyle);
+			cell_item.setCellValue( perspective.getName() );
 			j++;
 			
-			for (int n=0; n<resultModel.getKpi().getDateRangeScores().size(); n++) {
-				DateRangeScoreVO dateRangeScore = resultModel.getKpi().getDateRangeScores().get(n);
+			for (int n=0; n<perspective.getDateRangeScores().size(); n++) {
+				DateRangeScoreVO dateRangeScore = perspective.getDateRangeScores().get(n);
 				Cell cell_dateRangeScore = nowRow.createCell( j );
 				cell_dateRangeScore.setCellStyle(cellHeadStyle2);
 				cell_dateRangeScore.setCellValue( dateRangeScore.getScore() );
-				j++;				
+				j++;					
 			}
-			for (int n=0; n<resultModel.getForecastNext().size(); n++) {
-				double forecastScore = resultModel.getForecastNext().get(n);
+			for (int n=0; n<perspective.getForecastNext().size(); n++) {
+				double forecastScore = perspective.getForecastNext().get(n);
 				Cell cell_forecastScore = nowRow.createCell( j );
 				cell_forecastScore.setCellStyle(cellHeadStyle2);
 				cell_forecastScore.setCellValue( forecastScore );
-				j++;
+				j++;				
 			}
-			
 			row++;
+		}		
+		
+		row++;
+		
+		
+		// ==============================================================
+		// Strategy objectives 填寫標題
+		// ==============================================================	
+		nowRow = sh.createRow(row);
+		cellTitle2a = nowRow.createCell(0);
+		cellTitle2a.setCellStyle(cellHeadStyle);
+		cellTitle2a.setCellValue( BscReportPropertyUtils.getObjectiveTitle() );			
+		
+		j = 1;
+		for (int i=0; i<vision.getPerspectives().get(0).getObjectives().get(0).getDateRangeScores().size(); i++) {
+			DateRangeScoreVO dateRangeScore = vision.getPerspectives().get(0).getObjectives().get(0).getDateRangeScores().get(i);
+			Cell cellTitle2a_dateRange = nowRow.createCell( j );
+			j++;
+			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
+			cellTitle2a_dateRange.setCellValue( dateRangeScore.getDate() );				
 		}
+		for (int i=0; i<vision.getPerspectives().get(0).getObjectives().get(0).getForecastNext().size(); i++) {
+			Cell cellTitle2a_dateRange = nowRow.createCell( j );
+			j++;
+			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
+			cellTitle2a_dateRange.setCellValue( "next("+ (i+1) + ")" );				
+		}
+		row++;		
 		
-		row = row + 2; // 區格空間
+		for (int i=0; i<vision.getPerspectives().size(); i++) {
+			PerspectiveVO perspective = vision.getPerspectives().get(i);
+			for (int o = 0; o < perspective.getObjectives().size(); o++) {
+				ObjectiveVO objective = perspective.getObjectives().get(o);
+				
+				nowRow = sh.createRow(row);
+				
+				j = 0;
+				
+				cell_item = nowRow.createCell( j );
+				cell_item.setCellStyle(cellHeadStyle);
+				cell_item.setCellValue( objective.getName() );
+				j++;
+				
+				for (int n=0; n<objective.getDateRangeScores().size(); n++) {
+					DateRangeScoreVO dateRangeScore = objective.getDateRangeScores().get(n);
+					Cell cell_dateRangeScore = nowRow.createCell( j );
+					cell_dateRangeScore.setCellStyle(cellHeadStyle2);
+					cell_dateRangeScore.setCellValue( dateRangeScore.getScore() );
+					j++;					
+				}
+				for (int n=0; n<objective.getForecastNext().size(); n++) {
+					double forecastScore = objective.getForecastNext().get(n);
+					Cell cell_forecastScore = nowRow.createCell( j );
+					cell_forecastScore.setCellStyle(cellHeadStyle2);
+					cell_forecastScore.setCellValue( forecastScore );
+					j++;				
+				}
+				row++;				
+				
+			}			
+		}		
 		
-		// 放 date range line 圖表
+		row++;
+		
+		
+		// ==============================================================
+		// KPIs 填寫標題
+		// ==============================================================	
+		nowRow = sh.createRow(row);
+		cellTitle2a = nowRow.createCell(0);
+		cellTitle2a.setCellStyle(cellHeadStyle);
+		cellTitle2a.setCellValue( BscReportPropertyUtils.getKpiTitle() );			
+		
+		j = 1;
+		for (int i=0; i<vision.getPerspectives().get(0).getObjectives().get(0).getKpis().get(0).getDateRangeScores().size(); i++) {
+			DateRangeScoreVO dateRangeScore = vision.getPerspectives().get(0).getObjectives().get(0).getKpis().get(0).getDateRangeScores().get(i);
+			Cell cellTitle2a_dateRange = nowRow.createCell( j );
+			j++;
+			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
+			cellTitle2a_dateRange.setCellValue( dateRangeScore.getDate() );				
+		}
+		for (int i=0; i<vision.getPerspectives().get(0).getObjectives().get(0).getKpis().get(0).getForecastNext().size(); i++) {
+			Cell cellTitle2a_dateRange = nowRow.createCell( j );
+			j++;
+			cellTitle2a_dateRange.setCellStyle(cellHeadStyle);
+			cellTitle2a_dateRange.setCellValue( "next("+ (i+1) + ")" );				
+		}
+		row++;				
+		
+		for (int i=0; i<vision.getPerspectives().size(); i++) {
+			PerspectiveVO perspective = vision.getPerspectives().get(i);
+			for (int o = 0; o < perspective.getObjectives().size(); o++) {
+				ObjectiveVO objective = perspective.getObjectives().get(o);
+				for (int k = 0; k < objective.getKpis().size(); k++) {
+					KpiVO kpi = objective.getKpis().get(k);
+					
+					nowRow = sh.createRow(row);
+					
+					j = 0;
+					
+					cell_item = nowRow.createCell( j );
+					cell_item.setCellStyle(cellHeadStyle);
+					cell_item.setCellValue( kpi.getName() );
+					j++;
+					
+					for (int n=0; n<kpi.getDateRangeScores().size(); n++) {
+						DateRangeScoreVO dateRangeScore = kpi.getDateRangeScores().get(n);
+						Cell cell_dateRangeScore = nowRow.createCell( j );
+						cell_dateRangeScore.setCellStyle(cellHeadStyle2);
+						cell_dateRangeScore.setCellValue( dateRangeScore.getScore() );
+						j++;					
+					}
+					for (int n=0; n<kpi.getForecastNext().size(); n++) {
+						double forecastScore = kpi.getForecastNext().get(n);
+						Cell cell_forecastScore = nowRow.createCell( j );
+						cell_forecastScore.setCellStyle(cellHeadStyle2);
+						cell_forecastScore.setCellValue( forecastScore );
+						j++;				
+					}
+					row++;							
+					
+				}		
+			}			
+		}		
+		
+		row++;	
+		
+		
+		
+		// Vision 放 date range line 圖表
+		
+		int chart_need_row_size = 22;
+		
+		String visionDateRangeChartPngData = (String) context.get("visionDateRangeChartPngData");
+		if (StringUtils.isBlank(visionDateRangeChartPngData)) {
+			return;
+		}
+		String visionImageDataStr = SimpleUtils.getPNGBase64Content( visionDateRangeChartPngData );
+		BufferedImage visionImage = SimpleUtils.decodeToImage( visionImageDataStr );
+		ByteArrayOutputStream visionImgBos = new ByteArrayOutputStream();
+		ImageIO.write( visionImage, "png", visionImgBos );
+		visionImgBos.flush();
+		
+		SimpleUtils.setCellPicture(wb, sh, visionImgBos.toByteArray(), row, 0);		
+		
+		row = row + chart_need_row_size; // 區格空間
+		
+		// Perspectives 放 date range line 圖表
+		String perspectiveDateRangeChartPngData = (String) context.get("perspectiveDateRangeChartPngData");
+		if (StringUtils.isBlank(perspectiveDateRangeChartPngData)) {
+			return;
+		}
+		String perspectiveImageDataStr = SimpleUtils.getPNGBase64Content( perspectiveDateRangeChartPngData );
+		BufferedImage perspectiveImage = SimpleUtils.decodeToImage( perspectiveImageDataStr );
+		ByteArrayOutputStream perspectiveImgBos = new ByteArrayOutputStream();
+		ImageIO.write( perspectiveImage, "png", perspectiveImgBos );
+		perspectiveImgBos.flush();
+		
+		SimpleUtils.setCellPicture(wb, sh, perspectiveImgBos.toByteArray(), row, 0);		
+		
+		row = row + chart_need_row_size; // 區格空間		
+		
+		
+		// Strategy objectives 放 date range line 圖表
+		String objectiveDateRangeChartPngData = (String) context.get("objectiveDateRangeChartPngData");
+		if (StringUtils.isBlank(objectiveDateRangeChartPngData)) {
+			return;
+		}
+		String objectiveImageDataStr = SimpleUtils.getPNGBase64Content( objectiveDateRangeChartPngData );
+		BufferedImage objectiveImage = SimpleUtils.decodeToImage( objectiveImageDataStr );
+		ByteArrayOutputStream objectiveImgBos = new ByteArrayOutputStream();
+		ImageIO.write( objectiveImage, "png", objectiveImgBos );
+		objectiveImgBos.flush();
+		
+		SimpleUtils.setCellPicture(wb, sh, objectiveImgBos.toByteArray(), row, 0);		
+		
+		row = row + chart_need_row_size; // 區格空間				
+		
+		// KPIs 放 date range line 圖表
 		String dateRangeChartPngData = (String) context.get("dateRangeChartPngData");
 		if (StringUtils.isBlank(dateRangeChartPngData)) {
 			return;

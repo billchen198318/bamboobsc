@@ -48,6 +48,8 @@ public class PerspectiveVO extends BaseValueObj implements java.io.Serializable 
 	
 	private List<DateRangeScoreVO> dateRangeScores = new LinkedList<DateRangeScoreVO>(); // 報表要用的日期區間分數 , 2017-06-06
 	
+	private List<Double> forecastNext = new LinkedList<Double>(); // 給 BSC_PROG007D0002Q ( 02 - Forecast analysis ) 用的 , 2017-01-01
+	
 	public PerspectiveVO() {
 		
 	}
@@ -208,6 +210,14 @@ public class PerspectiveVO extends BaseValueObj implements java.io.Serializable 
 
 	public void setDateRangeScores(List<DateRangeScoreVO> dateRangeScores) {
 		this.dateRangeScores = dateRangeScores;
+	}
+
+	public List<Double> getForecastNext() {
+		return forecastNext;
+	}
+
+	public void setForecastNext(List<Double> forecastNext) {
+		this.forecastNext = forecastNext;
 	}
 
 }

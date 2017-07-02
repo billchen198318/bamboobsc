@@ -21,7 +21,6 @@
  */
 package com.netsteadfast.greenstep.bsc.util;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +43,6 @@ import com.netsteadfast.greenstep.base.model.GreenStepSysMsgConstants;
 import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
-import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
 import com.netsteadfast.greenstep.bsc.service.ITsaMaCoefficientsService;
@@ -134,24 +132,12 @@ public class TimeSeriesAnalysisUtils {
 		return forecast;
 	}
 	
-	public static List<TimeSeriesAnalysisResult> getResult(
+	public static VisionVO getResult(
 			String tsaOid, 
 			String visionOid, String startDate, String endDate, 
 			String startYearDate, String endYearDate, String frequency, String dataFor, 
 			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
 		
-		return (List<TimeSeriesAnalysisResult>) getResultWithVision(
-				tsaOid, visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid)
-				.get("result");
-	}
-	
-	public static Map<String, Object> getResultWithVision(
-			String tsaOid, 
-			String visionOid, String startDate, String endDate, 
-			String startYearDate, String endYearDate, String frequency, String dataFor, 
-			String measureDataOrganizationOid, String measureDataEmployeeOid) throws ServiceException, Exception {
-		
-		List<TimeSeriesAnalysisResult> results = new ArrayList<TimeSeriesAnalysisResult>();		
 		ChainResultObj chainResult = PerformanceScoreChainUtils.getResult(
 				visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
 		if (chainResult.getValue() == null || ( (BscStructTreeObj)chainResult.getValue() ).getVisions() == null 
@@ -160,24 +146,56 @@ public class TimeSeriesAnalysisUtils {
 		}
 		TsaVO tsa = getParam(tsaOid);
 		BscStructTreeObj resultObj = (BscStructTreeObj)chainResult.getValue();
-		VisionVO visionObj = resultObj.getVisions().get(0);
-		for (PerspectiveVO perspective : visionObj.getPerspectives()) {
+		VisionVO vision = resultObj.getVisions().get(0);
+		
+		// Vision
+		double[] observations = new double[vision.getDateRangeScores().size()];
+		for (int i=0; i < observations.length; i++) {
+			observations[i] = Double.parseDouble( Float.toString(vision.getDateRangeScores().get(i).getScore()) );
+		}
+		double[] forecastNext = getForecastNext(tsa, observations);
+		for (int i=0; i< forecastNext.length; i++) {
+			vision.getForecastNext().add(forecastNext[i]);
+		}
+		
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			// Perspectives
+			observations = new double[perspective.getDateRangeScores().size()];
+			for (int i=0; i < observations.length; i++) {
+				observations[i] = Double.parseDouble( Float.toString(perspective.getDateRangeScores().get(i).getScore()) );
+			}
+			forecastNext = getForecastNext(tsa, observations);
+			for (int i=0; i< forecastNext.length; i++) {
+				perspective.getForecastNext().add(forecastNext[i]);
+			}
+			
 			for (ObjectiveVO objective : perspective.getObjectives()) {
+				// Objectives
+				observations = new double[objective.getDateRangeScores().size()];
+				for (int i=0; i < observations.length; i++) {
+					observations[i] = Double.parseDouble( Float.toString(objective.getDateRangeScores().get(i).getScore()) );
+				}
+				forecastNext = getForecastNext(tsa, observations);
+				for (int i=0; i< forecastNext.length; i++) {
+					objective.getForecastNext().add(forecastNext[i]);
+				}
+				
 				for (KpiVO kpi : objective.getKpis()) {
-					double[] observations = new double[kpi.getDateRangeScores().size()];
+					// KPIs
+					observations = new double[kpi.getDateRangeScores().size()];
 					for (int i=0; i < observations.length; i++) {
 						observations[i] = Double.parseDouble( Float.toString(kpi.getDateRangeScores().get(i).getScore()) );
 					}
-					double[] forecastNext = getForecastNext(tsa, observations);
-					TimeSeriesAnalysisResult tsaModel = new TimeSeriesAnalysisResult(kpi, forecastNext);
-					results.add(tsaModel);
+					forecastNext = getForecastNext(tsa, observations);
+					for (int i=0; i< forecastNext.length; i++) {
+						kpi.getForecastNext().add(forecastNext[i]);
+					}
+					
 				}
 			}
 		}
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("vision", visionObj);
-		dataMap.put("result", results);
-		return dataMap;
+		
+		return vision;
 	}
 	
 	public static String getResultForExcel(
@@ -185,16 +203,17 @@ public class TimeSeriesAnalysisUtils {
 			String visionOid, String startDate, String endDate, 
 			String startYearDate, String endYearDate, String frequency, String dataFor, 
 			String measureDataOrganizationOid, String measureDataEmployeeOid,
+			String visionDateRangeChartPngData,
+			String perspectiveDateRangeChartPngData,
+			String objectiveDateRangeChartPngData,
 			String dateRangeChartPngData) throws ServiceException, Exception {
 		
-		Map<String, Object> dataMap = getResultWithVision(
+		VisionVO vision = getResult(
 				tsaOid, visionOid, startDate, endDate, startYearDate, endYearDate, frequency, dataFor, measureDataOrganizationOid, measureDataEmployeeOid);
-		List<TimeSeriesAnalysisResult> tsaResults = (List<TimeSeriesAnalysisResult>) dataMap.get("result");
-		VisionVO vision = (VisionVO) dataMap.get("vision");
 		TsaVO tsa = getParam(tsaOid);
 		List<BbTsaMaCoefficients> coefficients = getCoefficients(tsa);
 		Context context = new ContextBase();
-		context.put("tsaResults", tsaResults);
+		context.put("tsaVisionResult", vision);
 		context.put("tsa", tsa);
 		context.put("coefficients", coefficients);
 		
@@ -218,6 +237,9 @@ public class TimeSeriesAnalysisUtils {
 		if (!Constants.HTML_SELECT_NO_SELECT_ID.equals(measureDataEmployeeOid) && !StringUtils.isBlank(measureDataEmployeeOid)) {
 			context.put("employeeName", BscBaseLogicServiceCommonSupport.findEmployeeData(employeeService, measureDataEmployeeOid).getFullName() );
 		}
+		context.put("visionDateRangeChartPngData", visionDateRangeChartPngData);
+		context.put("perspectiveDateRangeChartPngData", perspectiveDateRangeChartPngData);
+		context.put("objectiveDateRangeChartPngData", objectiveDateRangeChartPngData);
 		context.put("dateRangeChartPngData", dateRangeChartPngData);
 		
 		SimpleChain chain = new SimpleChain();
@@ -226,6 +248,6 @@ public class TimeSeriesAnalysisUtils {
 			throw new java.lang.IllegalStateException( "timeSeriesAnalysisExcelCommandContentChain error!" );
 		}
 		return (String)resultObj.getValue();
-	}
+	}	
 	
 }

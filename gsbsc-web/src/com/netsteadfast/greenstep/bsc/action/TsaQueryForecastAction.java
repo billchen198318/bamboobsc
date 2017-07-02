@@ -49,9 +49,9 @@ import com.netsteadfast.greenstep.base.model.DefaultResult;
 import com.netsteadfast.greenstep.base.service.logic.BscBaseLogicServiceCommonSupport;
 import com.netsteadfast.greenstep.bsc.action.utils.SelectItemFieldCheckUtils;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
-import com.netsteadfast.greenstep.bsc.model.TimeSeriesAnalysisResult;
 import com.netsteadfast.greenstep.bsc.service.IEmployeeService;
 import com.netsteadfast.greenstep.bsc.service.IOrganizationService;
+import com.netsteadfast.greenstep.bsc.util.BscReportPropertyUtils;
 import com.netsteadfast.greenstep.bsc.util.TimeSeriesAnalysisUtils;
 import com.netsteadfast.greenstep.po.hbm.BbEmployee;
 import com.netsteadfast.greenstep.po.hbm.BbOrganization;
@@ -60,9 +60,12 @@ import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.DateRangeScoreVO;
 import com.netsteadfast.greenstep.vo.EmployeeVO;
 import com.netsteadfast.greenstep.vo.KpiVO;
+import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.OrganizationVO;
+import com.netsteadfast.greenstep.vo.PerspectiveVO;
 import com.netsteadfast.greenstep.vo.TsaMeasureFreqVO;
 import com.netsteadfast.greenstep.vo.TsaVO;
+import com.netsteadfast.greenstep.vo.VisionVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.TsaQueryForecastAction")
@@ -75,8 +78,14 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	private TsaVO tsa = new TsaVO();
 	private TsaMeasureFreqVO measureFreq = new TsaMeasureFreqVO();
 	private List<Map<String, String>> coefficients = new LinkedList<Map<String, String>>();
-	private List<String> categories = new LinkedList<String>(); // line chart 用的資料
-	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>(); // line chart 用的資料	
+	private List<String> categories = new LinkedList<String>(); // KPIs line chart 用的資料
+	private List<Map<String, Object>> series = new LinkedList<Map<String, Object>>(); // KPIs line chart 用的資料	
+	private List<String> visionCategories = new LinkedList<String>(); // Vision line chart 用的資料
+	private List<Map<String, Object>> visionSeries = new LinkedList<Map<String, Object>>(); // Vision line chart 用的資料		
+	private List<String> perspectiveCategories = new LinkedList<String>(); // Perspectives line chart 用的資料
+	private List<Map<String, Object>> perspectiveSeries = new LinkedList<Map<String, Object>>(); // Perspectives line chart 用的資料		
+	private List<String> objectiveCategories = new LinkedList<String>(); // Strategy Objectives line chart 用的資料
+	private List<Map<String, Object>> objectiveSeries = new LinkedList<Map<String, Object>>(); // Strategy Objectives line chart 用的資料		
 	private String uploadOid = "";
 	private String message = "";
 	private String success = IS_NO;	
@@ -228,7 +237,7 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		}
 	}	
 	
-	private void fillLineChartData(List<TimeSeriesAnalysisResult> results) throws Exception {
+	private void fillLineChartData(VisionVO vision) throws Exception {
 		this.tsa = TimeSeriesAnalysisUtils.getParam(this.getFields().get("tsaOid"));
 		List<BbTsaMaCoefficients> coefficientsList = TimeSeriesAnalysisUtils.getCoefficients(this.tsa);
 		for (BbTsaMaCoefficients maCoefficients : coefficientsList) {
@@ -240,34 +249,122 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		
 		// ==============================================================================
 		// 產生 categories 資料
-		KpiVO firstKpi = results.get(0).getKpi();
-		for (DateRangeScoreVO dateRangeScore : firstKpi.getDateRangeScores()) {
-			this.categories.add( dateRangeScore.getDate() );
+		
+		String varName = "${value}";
+		String nextLabel = "next(" + varName + ")";
+		
+		// Vision
+		for (DateRangeScoreVO dateRangeScore : vision.getDateRangeScores()) {
+			this.visionCategories.add( dateRangeScore.getDate() );
 		}
-		List<Double> firstForecastNext = results.get(0).getForecastNext();
-		for (int i=0; i < firstForecastNext.size(); i++) {
-			this.categories.add( "next(" + (i+1) + ")" );
+		for (int i=0; i<vision.getForecastNext().size(); i++) {
+			this.visionCategories.add( StringUtils.replaceOnce( nextLabel, varName, String.valueOf(i+1)) );
 		}
+		
+		// Perspectives
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
+				this.perspectiveCategories.add( dateRangeScore.getDate() );
+			}
+			for (int i=0; i<perspective.getForecastNext().size(); i++) {
+				this.perspectiveCategories.add( StringUtils.replaceOnce( nextLabel, varName, String.valueOf(i+1)) );
+			}
+			
+			// Strategy objectives
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				for (DateRangeScoreVO dateRangeScore : objective.getDateRangeScores()) {
+					this.objectiveCategories.add( dateRangeScore.getDate() );
+				}
+				for (int i=0; i<objective.getForecastNext().size(); i++) {
+					this.objectiveCategories.add( StringUtils.replaceOnce( nextLabel, varName, String.valueOf(i+1)) );
+				}
+				
+				// KPIs
+				for (KpiVO kpi : objective.getKpis()) {
+					for (DateRangeScoreVO dateRangeScore : kpi.getDateRangeScores()) {
+						this.categories.add( dateRangeScore.getDate() );
+					}
+					for (int i=0; i<kpi.getForecastNext().size(); i++) {
+						this.categories.add( StringUtils.replaceOnce( nextLabel, varName, String.valueOf(i+1)) );
+					}
+					
+				}
+				
+			}
+		}
+		
+		
 		// ==============================================================================
 		
 		
 		// ==============================================================================
 		// 產生 series 資料
-		for (int i=0; results != null && i < results.size(); i++) {
-			KpiVO kpi = results.get(i).getKpi();
-			List<Double> forecastNext = results.get(i).getForecastNext();
-			Map<String, Object> mapData = new HashMap<String, Object>();
-			List<Float> rangeScore = new LinkedList<Float>();	
-			for (DateRangeScoreVO dateRangeScore : kpi.getDateRangeScores()) {
-				rangeScore.add( dateRangeScore.getScore() );
-			}
-			for (int j=0; j < forecastNext.size(); j++) {
-				rangeScore.add( Float.parseFloat( Double.toString(forecastNext.get(j)) ) );
-			}				
-			mapData.put("name", kpi.getName());
-			mapData.put("data", rangeScore);
-			this.series.add(mapData);		
+		
+		// Vision
+		Map<String, Object> visionMapData = new HashMap<String, Object>();
+		List<Float> visionRangeScore = new LinkedList<Float>();
+		for (DateRangeScoreVO dateRangeScore : vision.getDateRangeScores()) {
+			visionRangeScore.add( dateRangeScore.getScore() );
 		}
+		for (int i=0; i<vision.getForecastNext().size(); i++) {
+			visionRangeScore.add( Float.parseFloat( Double.toString(vision.getForecastNext().get(i)) ) );
+		}
+		visionMapData.put("name", vision.getTitle());
+		visionMapData.put("data", visionRangeScore);
+		this.visionSeries.add(visionMapData);
+		
+		// Perspectives	
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			Map<String, Object> perspectiveMapData = new HashMap<String, Object>();
+			List<Float> perspectiveRangeScore = new LinkedList<Float>();			
+			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
+				perspectiveRangeScore.add( dateRangeScore.getScore() );
+			}
+			for (int i=0; i<perspective.getForecastNext().size(); i++) {
+				perspectiveRangeScore.add( Float.parseFloat( Double.toString(perspective.getForecastNext().get(i)) ) );
+			}
+			perspectiveMapData.put("name", perspective.getName());
+			perspectiveMapData.put("data", perspectiveRangeScore);
+			this.perspectiveSeries.add(perspectiveMapData);
+		}
+		
+		// Strategy objectives
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				Map<String, Object> objectiveMapData = new HashMap<String, Object>();
+				List<Float> objectiveRangeScore = new LinkedList<Float>();				
+				for (DateRangeScoreVO dateRangeScore : objective.getDateRangeScores()) {
+					objectiveRangeScore.add( dateRangeScore.getScore() );
+				}
+				for (int i=0; i<objective.getForecastNext().size(); i++) {
+					objectiveRangeScore.add( Float.parseFloat( Double.toString(objective.getForecastNext().get(i)) ) );
+				}
+				objectiveMapData.put("name", objective.getName());
+				objectiveMapData.put("data", objectiveRangeScore);
+				this.objectiveSeries.add(objectiveMapData);
+			}
+		}
+		
+		// KPIs
+		for (PerspectiveVO perspective : vision.getPerspectives()) {
+			for (ObjectiveVO objective : perspective.getObjectives()) {
+				for (KpiVO kpi : objective.getKpis()) {
+					Map<String, Object> kpiMapData = new HashMap<String, Object>();
+					List<Float> kpiRangeScore = new LinkedList<Float>();						
+					for (DateRangeScoreVO dateRangeScore : kpi.getDateRangeScores()) {
+						kpiRangeScore.add( dateRangeScore.getScore() );
+					}
+					for (int i=0; i<kpi.getForecastNext().size(); i++) {
+						kpiRangeScore.add( Float.parseFloat( Double.toString(kpi.getForecastNext().get(i)) ) );
+					}
+					kpiMapData.put("name", kpi.getName());
+					kpiMapData.put("data", kpiRangeScore);
+					this.series.add(kpiMapData);
+				}
+			}
+		}
+		
+		
 		// ==============================================================================
 		
 	}
@@ -276,7 +373,8 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		this.checkFields();
 		this.setDateValue();
 		this.checkDateRange();
-		List<TimeSeriesAnalysisResult> results = TimeSeriesAnalysisUtils.getResult(
+		BscReportPropertyUtils.loadData();
+		VisionVO vision = TimeSeriesAnalysisUtils.getResult(
 				this.getFields().get("tsaOid"), 
 				this.getFields().get("visionOid"), 
 				this.getFields().get("startDate"), 
@@ -287,7 +385,7 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 				this.getFields().get("dataFor"), 
 				this.getFields().get("measureDataOrganizationOid"), 
 				this.getFields().get("measureDataEmployeeOid"));
-		this.fillLineChartData(results);
+		this.fillLineChartData(vision);
 		this.success = IS_YES;
 		this.message = "Success!";
 	}
@@ -307,6 +405,9 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 				this.getFields().get("dataFor"), 
 				this.getFields().get("measureDataOrganizationOid"), 
 				this.getFields().get("measureDataEmployeeOid"),
+				this.getFields().get("visionDateRangeChartPngData"),
+				this.getFields().get("perspectiveDateRangeChartPngData"),
+				this.getFields().get("objectiveDateRangeChartPngData"),
 				this.getFields().get("dateRangeChartPngData"));
 		this.success = IS_YES;
 		this.message = "Success!";		
@@ -447,6 +548,54 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		return series;
 	}
 
+	public List<String> getVisionCategories() {
+		return visionCategories;
+	}
+
+	public void setVisionCategories(List<String> visionCategories) {
+		this.visionCategories = visionCategories;
+	}
+
+	public List<Map<String, Object>> getVisionSeries() {
+		return visionSeries;
+	}
+
+	public void setVisionSeries(List<Map<String, Object>> visionSeries) {
+		this.visionSeries = visionSeries;
+	}
+
+	public List<String> getPerspectiveCategories() {
+		return perspectiveCategories;
+	}
+
+	public void setPerspectiveCategories(List<String> perspectiveCategories) {
+		this.perspectiveCategories = perspectiveCategories;
+	}
+
+	public List<Map<String, Object>> getPerspectiveSeries() {
+		return perspectiveSeries;
+	}
+
+	public void setPerspectiveSeries(List<Map<String, Object>> perspectiveSeries) {
+		this.perspectiveSeries = perspectiveSeries;
+	}
+
+	public List<String> getObjectiveCategories() {
+		return objectiveCategories;
+	}
+
+	public void setObjectiveCategories(List<String> objectiveCategories) {
+		this.objectiveCategories = objectiveCategories;
+	}
+
+	public List<Map<String, Object>> getObjectiveSeries() {
+		return objectiveSeries;
+	}
+
+	public void setObjectiveSeries(List<Map<String, Object>> objectiveSeries) {
+		this.objectiveSeries = objectiveSeries;
+	}
+
 	@JSON
 	public TsaVO getTsa() {
 		return tsa;
@@ -465,6 +614,31 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	@JSON
 	public String getUploadOid() {
 		return uploadOid;
+	}	
+	
+	@JSON
+	public String getBackgroundColor() {
+		return BscReportPropertyUtils.getBackgroundColor();
+	}
+	
+	@JSON
+	public String getFontColor() {
+		return BscReportPropertyUtils.getFontColor();
+	}
+	
+	@JSON
+	public String getPerspectiveTitle() {
+		return BscReportPropertyUtils.getPerspectiveTitle();
+	}		
+	
+	@JSON
+	public String getObjectiveTitle() {
+		return BscReportPropertyUtils.getObjectiveTitle();
+	}	
+	
+	@JSON
+	public String getKpiTitle() {
+		return BscReportPropertyUtils.getKpiTitle();
 	}	
 	
 }

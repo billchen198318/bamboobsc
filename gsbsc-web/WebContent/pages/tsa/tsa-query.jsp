@@ -60,13 +60,37 @@ function BSC_PROG007D0002Q_query(type) {
 		BSC_PROG007D0002Q_clearContent();
 	}
 	
+	var visionDateRangeChartPngData = null;
+	var perspectiveDateRangeChartPngData = null;
+	var objectiveDateRangeChartPngData = null;
 	var dateRangeChartPngData = null;
 	if ('excel' == type) {
+		if ( '' != $('#BSC_PROG007D0002Q_vision_daterange_container').html() ) {
+			var dateRangeSvg = $('#BSC_PROG007D0002Q_vision_daterange_container').highcharts().getSVG();
+			visionDateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+		}
+		if ( '' != $('#BSC_PROG007D0002Q_perspective_daterange_container').html() ) {
+			var dateRangeSvg = $('#BSC_PROG007D0002Q_perspective_daterange_container').highcharts().getSVG();
+			perspectiveDateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+		}
+		if ( '' != $('#BSC_PROG007D0002Q_objective_daterange_container').html() ) {
+			var dateRangeSvg = $('#BSC_PROG007D0002Q_objective_daterange_container').highcharts().getSVG();
+			objectiveDateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
+		}
 		if ( '' != $('#BSC_PROG007D0002Q_kpi_daterange_container').html() ) {
 			var dateRangeSvg = $('#BSC_PROG007D0002Q_kpi_daterange_container').highcharts().getSVG();
 			dateRangeChartPngData = viewPage.getSVGImage2CanvasToDataUrlPNGfromData( dateRangeSvg );
-		}		
+		}
 	}
+	if ( visionDateRangeChartPngData == null ) {
+		visionDateRangeChartPngData = '';
+	}	
+	if ( perspectiveDateRangeChartPngData == null ) {
+		perspectiveDateRangeChartPngData = '';
+	}	
+	if ( objectiveDateRangeChartPngData == null ) {
+		objectiveDateRangeChartPngData = '';
+	}		
 	if ( dateRangeChartPngData == null ) {
 		dateRangeChartPngData = '';
 	}	
@@ -86,6 +110,9 @@ function BSC_PROG007D0002Q_query(type) {
 				'fields.measureDataOrganizationOid'	:	dijit.byId("BSC_PROG007D0002Q_measureDataOrganizationOid").get("value"),
 				'fields.measureDataEmployeeOid'		:	dijit.byId("BSC_PROG007D0002Q_measureDataEmployeeOid").get("value"),
 				'fields.frequency'					:	dijit.byId("BSC_PROG007D0002Q_frequency").get("value"),
+				'fields.visionDateRangeChartPngData'		:	visionDateRangeChartPngData,
+				'fields.perspectiveDateRangeChartPngData'		:	perspectiveDateRangeChartPngData,
+				'fields.objectiveDateRangeChartPngData'		:	objectiveDateRangeChartPngData,
 				'fields.dateRangeChartPngData'		:	dateRangeChartPngData
 			}, 
 			'json', 
@@ -104,6 +131,9 @@ function BSC_PROG007D0002Q_query(type) {
 					return;
 				}
 				BSC_PROG007D0002Q_showInfo(data);
+				BSC_PROG007D0002Q_showChartForVisionDateRange(data);
+				BSC_PROG007D0002Q_showChartForPerspectiveDateRange(data);
+				BSC_PROG007D0002Q_showChartForObjectiveDateRange(data);
 				BSC_PROG007D0002Q_showChartForKpiDateRange(data);
 			}, 
 			function(error) {
@@ -113,7 +143,7 @@ function BSC_PROG007D0002Q_query(type) {
 }
 
 function BSC_PROG007D0002Q_showInfo(data) {
-	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_paramInfo").innerHTML = '';
+	dojo.byId("BSC_PROG007D0002Q_daterange_paramInfo").innerHTML = '';
 	var str = '';
 	
 	var tsa = data.tsa;
@@ -155,9 +185,154 @@ function BSC_PROG007D0002Q_showInfo(data) {
 	
 	str += '</table>';
 	
-	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_paramInfo").innerHTML = str;
+	dojo.byId("BSC_PROG007D0002Q_daterange_paramInfo").innerHTML = str;
 }
 
+
+// =========================================================================================
+// Vision date range chart
+// =========================================================================================
+function BSC_PROG007D0002Q_showChartForVisionDateRange(data) {
+	
+	if ( null == data.visionCategories || data.visionCategories.length < 2 ) {
+		return;
+	}
+	
+    $('#BSC_PROG007D0002Q_vision_daterange_container').highcharts({
+        title: {
+            text: 'Vision - forecast analysis',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Actual and next',
+            x: -20
+        },
+        xAxis: {
+            categories: data.visionCategories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.visionSeries
+    });
+    
+}
+
+
+
+// =========================================================================================
+// Perspectives date range chart
+// =========================================================================================
+function BSC_PROG007D0002Q_showChartForPerspectiveDateRange(data) {
+	
+	if ( null == data.perspectiveCategories || data.perspectiveCategories.length < 2 ) {
+		return;
+	}
+	
+    $('#BSC_PROG007D0002Q_perspective_daterange_container').highcharts({
+        title: {
+            text: data.perspectiveTitle + ' - forecast analysis',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Actual and next',
+            x: -20
+        },
+        xAxis: {
+            categories: data.perspectiveCategories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.perspectiveSeries
+    });
+    
+}
+
+
+
+// =========================================================================================
+// Strategy objectives date range chart
+// =========================================================================================
+function BSC_PROG007D0002Q_showChartForObjectiveDateRange(data) {
+	
+	if ( null == data.objectiveCategories || data.objectiveCategories.length < 2 ) {
+		return;
+	}
+	
+    $('#BSC_PROG007D0002Q_objective_daterange_container').highcharts({
+        title: {
+            text: data.objectiveTitle + ' - forecast analysis',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Actual and next',
+            x: -20
+        },
+        xAxis: {
+            categories: data.objectiveCategories
+        },
+        yAxis: {
+            title: {
+                text: 'Score'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Score'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: data.objectiveSeries
+    });
+    
+}
+
+
+
+// =========================================================================================
+// KPIs date range chart
+// =========================================================================================
 function BSC_PROG007D0002Q_showChartForKpiDateRange(data) {
 	
 	if ( null == data.categories || data.categories.length < 2 ) {
@@ -166,11 +341,11 @@ function BSC_PROG007D0002Q_showChartForKpiDateRange(data) {
 	
     $('#BSC_PROG007D0002Q_kpi_daterange_container').highcharts({
         title: {
-            text: 'Forecast analysis',
+            text: data.kpiTitle + ' - forecast analysis',
             x: -20 //center
         },
         subtitle: {
-            text: 'KPI Score',
+            text: 'Actual and next',
             x: -20
         },
         xAxis: {
@@ -200,9 +375,14 @@ function BSC_PROG007D0002Q_showChartForKpiDateRange(data) {
     
 }
 
+
+
 function BSC_PROG007D0002Q_clearContent() {
 	// only clear chart
-	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_paramInfo").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_daterange_paramInfo").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_vision_daterange_container").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_perspective_daterange_container").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_objective_daterange_container").innerHTML = "";
 	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_container").innerHTML = "";
 }
 
@@ -477,9 +657,16 @@ function ${programId}_page_message() {
 	</table>	
 	
 	<BR/>
-	<div id="BSC_PROG007D0002Q_kpi_daterange_paramInfo"></div>
+	<div id="BSC_PROG007D0002Q_daterange_paramInfo"></div>
+	<BR/>
+	<div id="BSC_PROG007D0002Q_vision_daterange_container"></div>
+	<BR/>
+	<div id="BSC_PROG007D0002Q_perspective_daterange_container"></div>		
+	<BR/>
+	<div id="BSC_PROG007D0002Q_objective_daterange_container"></div>	
 	<BR/>
 	<div id="BSC_PROG007D0002Q_kpi_daterange_container"></div>
+	<BR/>
 	
 <script type="text/javascript">${programId}_page_message();</script>	
 </body>
