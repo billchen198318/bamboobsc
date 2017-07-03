@@ -201,7 +201,7 @@ function BSC_PROG007D0002Q_showTableContentForVision( data ) {
 	var c = 0;
 	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
 	
-	var headColspan = 2 + vision.dateRangeScores.length;
+	var headColspan = 2 + vision.dateRangeScores.length + vision.forecastNext.length;
 	t += '<tr>';
 	t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>Vision</b></font></td>';	
 	t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
@@ -284,7 +284,7 @@ function BSC_PROG007D0002Q_showTableContentForPerspective( data ) {
 	var c = 0;
 	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
 	
-	var headColspan = 4 + vision.perspectives[0].dateRangeScores.length;
+	var headColspan = 4 + vision.perspectives[0].dateRangeScores.length + vision.perspectives[0].forecastNext.length;
 	t += '<tr>';
 	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
 	t += '</tr>';
@@ -382,7 +382,7 @@ function BSC_PROG007D0002Q_showTableContentForStrategyObjective( data ) {
 	var c = 0;
 	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
 	
-	var headColspan = 4 + vision.perspectives[0].objectives[0].dateRangeScores.length;
+	var headColspan = 4 + vision.perspectives[0].objectives[0].dateRangeScores.length + vision.perspectives[0].objectives[0].forecastNext.length;
 	t += '<tr>';
 	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
 	t += '</tr>';
@@ -487,7 +487,7 @@ function BSC_PROG007D0002Q_showTableContentForKpi( data ) {
 	var c = 0;
 	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
 	
-	var headColspan = 4 + vision.perspectives[0].objectives[0].kpis[0].dateRangeScores.length;
+	var headColspan = 4 + vision.perspectives[0].objectives[0].kpis[0].dateRangeScores.length + vision.perspectives[0].objectives[0].kpis[0].forecastNext.length;
 	t += '<tr>';
 	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
 	t += '</tr>';
