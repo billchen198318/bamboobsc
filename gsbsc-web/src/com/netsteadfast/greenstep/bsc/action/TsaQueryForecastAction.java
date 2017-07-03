@@ -85,7 +85,8 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	private List<String> perspectiveCategories = new LinkedList<String>(); // Perspectives line chart 用的資料
 	private List<Map<String, Object>> perspectiveSeries = new LinkedList<Map<String, Object>>(); // Perspectives line chart 用的資料		
 	private List<String> objectiveCategories = new LinkedList<String>(); // Strategy Objectives line chart 用的資料
-	private List<Map<String, Object>> objectiveSeries = new LinkedList<Map<String, Object>>(); // Strategy Objectives line chart 用的資料		
+	private List<Map<String, Object>> objectiveSeries = new LinkedList<Map<String, Object>>(); // Strategy Objectives line chart 用的資料
+	private VisionVO vision = null;
 	private String uploadOid = "";
 	private String message = "";
 	private String success = IS_NO;	
@@ -385,6 +386,7 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 				this.getFields().get("dataFor"), 
 				this.getFields().get("measureDataOrganizationOid"), 
 				this.getFields().get("measureDataEmployeeOid"));
+		this.vision = vision;
 		this.fillLineChartData(vision);
 		this.success = IS_YES;
 		this.message = "Success!";
@@ -548,52 +550,39 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 		return series;
 	}
 
+	@JSON
 	public List<String> getVisionCategories() {
 		return visionCategories;
 	}
 
-	public void setVisionCategories(List<String> visionCategories) {
-		this.visionCategories = visionCategories;
-	}
-
+	@JSON
 	public List<Map<String, Object>> getVisionSeries() {
 		return visionSeries;
 	}
-
-	public void setVisionSeries(List<Map<String, Object>> visionSeries) {
-		this.visionSeries = visionSeries;
-	}
-
+	
+	@JSON
 	public List<String> getPerspectiveCategories() {
 		return perspectiveCategories;
-	}
+	}	
 
-	public void setPerspectiveCategories(List<String> perspectiveCategories) {
-		this.perspectiveCategories = perspectiveCategories;
-	}
-
+	@JSON
 	public List<Map<String, Object>> getPerspectiveSeries() {
 		return perspectiveSeries;
 	}
 
-	public void setPerspectiveSeries(List<Map<String, Object>> perspectiveSeries) {
-		this.perspectiveSeries = perspectiveSeries;
-	}
-
+	@JSON
 	public List<String> getObjectiveCategories() {
 		return objectiveCategories;
 	}
 
-	public void setObjectiveCategories(List<String> objectiveCategories) {
-		this.objectiveCategories = objectiveCategories;
-	}
-
+	@JSON
 	public List<Map<String, Object>> getObjectiveSeries() {
 		return objectiveSeries;
 	}
-
-	public void setObjectiveSeries(List<Map<String, Object>> objectiveSeries) {
-		this.objectiveSeries = objectiveSeries;
+	
+	@JSON
+	public VisionVO getVision() {
+		return vision;
 	}
 
 	@JSON
@@ -639,6 +628,58 @@ public class TsaQueryForecastAction extends BaseJsonAction {
 	@JSON
 	public String getKpiTitle() {
 		return BscReportPropertyUtils.getKpiTitle();
+	}	
+	
+	@JSON
+	public String getDisplayFrequency() {
+		String frequency = this.getFields().get("frequency");
+		return BscMeasureDataFrequency.getFrequencyMap(false).get( frequency );
+	}
+	
+	@JSON
+	public String getDisplayDateRange1() {
+		String frequency = this.getFields().get("frequency");
+		String str = "";
+		if (!BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) && !BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
+			str += this.getFields().get("startYearDate");
+		} else {
+			str += this.getFields().get("startDate");
+		}
+		return str;
+	}
+	
+	@JSON
+	public String getDisplayDateRange2() {
+		String frequency = this.getFields().get("frequency");
+		String str = "";
+		if (!BscMeasureDataFrequency.FREQUENCY_WEEK.equals(frequency) && !BscMeasureDataFrequency.FREQUENCY_MONTH.equals(frequency) ) {
+			str = this.getFields().get("endYearDate");
+		} else {
+			str = this.getFields().get("endDate");
+		}
+		return str;
+	}		
+	
+	@JSON
+	public String getMeasureDataTypeForTitle() {
+		String str = "All";
+		if (!this.isNoSelectId(this.getFields().get("measureDataOrganizationOid"))) {
+			try {
+				OrganizationVO organization = BscBaseLogicServiceCommonSupport.findOrganizationData(this.organizationService, this.getFields().get("measureDataOrganizationOid"));
+				str = organization.getOrgId() + " - " + organization.getName();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (!this.isNoSelectId(this.getFields().get("measureDataEmployeeOid"))) {
+			try {
+				EmployeeVO employee = BscBaseLogicServiceCommonSupport.findEmployeeData(this.employeeService, this.getFields().get("measureDataEmployeeOid"));
+				str = employee.getEmpId() + " - " + employee.getFullName();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return str;
 	}	
 	
 }

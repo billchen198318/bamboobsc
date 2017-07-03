@@ -131,9 +131,13 @@ function BSC_PROG007D0002Q_query(type) {
 					return;
 				}
 				BSC_PROG007D0002Q_showInfo(data);
+				BSC_PROG007D0002Q_showTableContentForVision( data );
 				BSC_PROG007D0002Q_showChartForVisionDateRange(data);
+				BSC_PROG007D0002Q_showTableContentForPerspective( data );
 				BSC_PROG007D0002Q_showChartForPerspectiveDateRange(data);
+				BSC_PROG007D0002Q_showTableContentForStrategyObjective( data );
 				BSC_PROG007D0002Q_showChartForObjectiveDateRange(data);
+				BSC_PROG007D0002Q_showTableContentForKpi( data );
 				BSC_PROG007D0002Q_showChartForKpiDateRange(data);
 			}, 
 			function(error) {
@@ -188,6 +192,42 @@ function BSC_PROG007D0002Q_showInfo(data) {
 	dojo.byId("BSC_PROG007D0002Q_daterange_paramInfo").innerHTML = str;
 }
 
+//=========================================================================================================
+//Begin - Vision
+//=========================================================================================================
+function BSC_PROG007D0002Q_showTableContentForVision( data ) {
+	var vision = data.vision;
+	var t = '';
+	var c = 0;
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
+	
+	var headColspan = 2 + vision.dateRangeScores.length;
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>Vision</b></font></td>';	
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
+	for ( var r in vision.dateRangeScores ) {
+		t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>' + vision.dateRangeScores[r].date + '</b></font></td>';					
+	}
+	for ( var r in vision.forecastNext ) {
+		t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>next(' + ( parseInt(r) + 1 ) + ')</b></font></td>';
+	}
+	t += '</tr>';	
+	t += '<tr>';
+	t += '<td bgcolor="#ffffff" align="left">' + vision.title + '</td>';
+	t += '<td bgcolor="' + vision.bgColor + '" align="center"><font color="' + vision.fontColor + '">' + BSC_PROG007D0002Q_parseScore(vision.score) + '</font></td>';	
+	for ( var r in vision.dateRangeScores ) {
+		t += '<td bgcolor="' + vision.dateRangeScores[r].bgColor + '" align="center"><font color="' + vision.dateRangeScores[r].fontColor + '">' + BSC_PROG007D0002Q_parseScore(vision.dateRangeScores[r].score) + '</font></td>';					
+	}
+	for ( var r in vision.forecastNext ) {
+		t += '<td bgcolor="#ffffff" align="center">' + BSC_PROG007D0002Q_parseScore(vision.forecastNext[r]) + '</td>';
+	}
+	t += '</tr>';			
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>Frequency&nbsp;:&nbsp;' + data.displayFrequency + '&nbsp;&nbsp;date range&nbsp;:&nbsp;' + data.displayDateRange1 + '&nbsp;~&nbsp;' + data.displayDateRange2 + '&nbsp;&nbsp;Measure data type&nbsp;:&nbsp;' + data.measureDataTypeForTitle + '</b></font></td>';
+	t += '</tr>';	
+	t += '</table>';
+	dojo.byId("BSC_PROG007D0002Q_content_vision").innerHTML = t;	
+}
 
 // =========================================================================================
 // Vision date range chart
@@ -235,6 +275,56 @@ function BSC_PROG007D0002Q_showChartForVisionDateRange(data) {
 }
 
 
+//=========================================================================================================
+//Begin - Perspectives
+//=========================================================================================================
+function BSC_PROG007D0002Q_showTableContentForPerspective( data ) {
+	var vision = data.vision;
+	var t = '';
+	var c = 0;
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
+	
+	var headColspan = 4 + vision.perspectives[0].dateRangeScores.length;
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
+	t += '</tr>';
+	
+	for (var p in vision.perspectives) {
+		var perspective = vision.perspectives[p];
+		if ( c == 0 ) {
+			t += '<tr>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>' + data.perspectiveTitle + '</b></font></td>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Target</b></font></td>';
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Minimum</b></font></td>';	
+			t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
+			for ( var r in perspective.dateRangeScores ) {
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>' + perspective.dateRangeScores[r].date + '</b></font></td>';					
+			}
+			for ( var r in perspective.forecastNext ) {
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>next(' + ( parseInt(r) + 1 ) + ')</b></font></td>';
+			}			
+			t += '</tr>';			
+		}
+		t += '<tr>';
+		t += '<td bgcolor="#ffffff" align="left">' + perspective.name + '</td>';
+		t += '<td bgcolor="#ffffff" align="left">' + perspective.target + '</td>';
+		t += '<td bgcolor="#ffffff" align="left">' + perspective.min + '</td>';	
+		t += '<td bgcolor="' + perspective.bgColor + '" align="center"><font color="' + perspective.fontColor + '">' + BSC_PROG007D0002Q_parseScore(perspective.score) + '</font></td>';	
+		for ( var r in perspective.dateRangeScores ) {
+			t += '<td bgcolor="' + perspective.dateRangeScores[r].bgColor + '" align="center"><font color="' + perspective.dateRangeScores[r].fontColor + '">' + BSC_PROG007D0002Q_parseScore(perspective.dateRangeScores[r].score) + '</font></td>';					
+		}
+		for ( var r in perspective.forecastNext ) {
+			t += '<td bgcolor="#ffffff" align="center">' + BSC_PROG007D0002Q_parseScore(perspective.forecastNext[r]) + '</td>';
+		}		
+		t += '</tr>';			
+		c++;
+	}
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>Frequency&nbsp;:&nbsp;' + data.displayFrequency + '&nbsp;&nbsp;date range&nbsp;:&nbsp;' + data.displayDateRange1 + '&nbsp;~&nbsp;' + data.displayDateRange2 + '&nbsp;&nbsp;Measure data type&nbsp;:&nbsp;' + data.measureDataTypeForTitle + '</b></font></td>';
+	t += '</tr>';	
+	t += '</table>';
+	dojo.byId("BSC_PROG007D0002Q_content_perspective").innerHTML = t;
+}
 
 // =========================================================================================
 // Perspectives date range chart
@@ -283,6 +373,65 @@ function BSC_PROG007D0002Q_showChartForPerspectiveDateRange(data) {
 
 
 
+//=========================================================================================================
+//Begin - Strategy objectives
+//=========================================================================================================
+function BSC_PROG007D0002Q_showTableContentForStrategyObjective( data ) {
+	var vision = data.vision;
+	var t = '';
+	var c = 0;
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
+	
+	var headColspan = 4 + vision.perspectives[0].objectives[0].dateRangeScores.length;
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
+	t += '</tr>';
+	
+	for (var p in vision.perspectives) {
+		var perspective = vision.perspectives[p];
+		
+		for (var o in perspective.objectives) {
+			
+			var objective = perspective.objectives[o];
+			
+			if ( c == 0 ) {
+				t += '<tr>';
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>' + data.objectiveTitle + '</b></font></td>';
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Target</b></font></td>';
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Minimum</b></font></td>';	
+				t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
+				for ( var r in objective.dateRangeScores ) {
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>' + objective.dateRangeScores[r].date + '</b></font></td>';					
+				}
+				for ( var r in objective.forecastNext ) {
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>next(' + ( parseInt(r) + 1 ) + ')</b></font></td>';
+				}				
+				t += '</tr>';			
+			}
+			t += '<tr>';
+			t += '<td bgcolor="#ffffff" align="left">' + objective.name + '</td>';
+			t += '<td bgcolor="#ffffff" align="left">' + objective.target + '</td>';
+			t += '<td bgcolor="#ffffff" align="left">' + objective.min + '</td>';	
+			t += '<td bgcolor="' + objective.bgColor + '" align="center"><font color="' + objective.fontColor + '">' + BSC_PROG007D0002Q_parseScore(objective.score) + '</font></td>';	
+			for ( var r in objective.dateRangeScores ) {
+				t += '<td bgcolor="' + objective.dateRangeScores[r].bgColor + '" align="center"><font color="' + objective.dateRangeScores[r].fontColor + '">' + BSC_PROG007D0002Q_parseScore(objective.dateRangeScores[r].score) + '</font></td>';					
+			}
+			for ( var r in objective.forecastNext ) {
+				t += '<td bgcolor="#ffffff" align="center">' + BSC_PROG007D0002Q_parseScore(objective.forecastNext[r]) + '</td>';
+			}			
+			t += '</tr>';			
+			c++;			
+		}
+		
+	}
+	
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>Frequency&nbsp;:&nbsp;' + data.displayFrequency + '&nbsp;&nbsp;date range&nbsp;:&nbsp;' + data.displayDateRange1 + '&nbsp;~&nbsp;' + data.displayDateRange2 + '&nbsp;&nbsp;Measure data type&nbsp;:&nbsp;' + data.measureDataTypeForTitle + '</b></font></td>';
+	t += '</tr>';	
+	t += '</table>';
+	dojo.byId("BSC_PROG007D0002Q_content_objective").innerHTML = t;
+}
+
 // =========================================================================================
 // Strategy objectives date range chart
 // =========================================================================================
@@ -329,6 +478,71 @@ function BSC_PROG007D0002Q_showChartForObjectiveDateRange(data) {
 }
 
 
+//=========================================================================================================
+//Begin - KPIs
+//=========================================================================================================
+function BSC_PROG007D0002Q_showTableContentForKpi( data ) {
+	var vision = data.vision;
+	var t = '';
+	var c = 0;
+	t += '<table width="1100px" cellspacing="1" cellpadding="1" bgcolor="' + data.backgroundColor + '" style="border:1px ' + data.backgroundColor  + ' solid; border-radius: 5px;" >';
+	
+	var headColspan = 4 + vision.perspectives[0].objectives[0].kpis[0].dateRangeScores.length;
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="center" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>' + data.vision.title + '</b></font></td>';
+	t += '</tr>';
+	
+	for (var p in vision.perspectives) {
+		var perspective = vision.perspectives[p];
+		
+		for (var o in perspective.objectives) {
+			var objective = perspective.objectives[o];
+			
+			for (var k in objective.kpis) {
+				var kpi = objective.kpis[k];
+				
+				if ( c == 0 ) {
+					t += '<tr>';
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left" width="320px"><font color="' + data.fontColor + '"><b>' + data.kpiTitle + '</b></font></td>';
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Maximum</b></font></td>';
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Target</b></font></td>';
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Minimum</b></font></td>';	
+					t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>Score</b></font></td>';
+					for ( var r in kpi.dateRangeScores ) {
+						t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>' + kpi.dateRangeScores[r].date + '</b></font></td>';					
+					}
+					for ( var r in kpi.forecastNext ) {
+						t += '<td bgcolor="' + data.backgroundColor + '" align="left"><font color="' + data.fontColor + '"><b>next(' + ( parseInt(r) + 1 ) + ')</b></font></td>';
+					}					
+					t += '</tr>';			
+				}
+				t += '<tr>';
+				t += '<td bgcolor="#ffffff" align="left">' + kpi.name + '</td>';
+				t += '<td bgcolor="#ffffff" align="left">' + kpi.max + '</td>';
+				t += '<td bgcolor="#ffffff" align="left">' + kpi.target + '</td>';
+				t += '<td bgcolor="#ffffff" align="left">' + kpi.min + '</td>';	
+				t += '<td bgcolor="' + kpi.bgColor + '" align="center"><font color="' + kpi.fontColor + '">' + BSC_PROG007D0002Q_parseScore(kpi.score) + '</font></td>';	
+				for ( var r in kpi.dateRangeScores ) {
+					t += '<td bgcolor="' + kpi.dateRangeScores[r].bgColor + '" align="center"><font color="' + kpi.dateRangeScores[r].fontColor + '">' + BSC_PROG007D0002Q_parseScore(kpi.dateRangeScores[r].score) + '</font></td>';					
+				}
+				for ( var r in kpi.forecastNext ) {
+					t += '<td bgcolor="#ffffff" align="center">' + BSC_PROG007D0002Q_parseScore(kpi.forecastNext[r]) + '</td>';
+				}				
+				t += '</tr>';			
+				c++;						
+				
+			}
+			
+		}
+		
+	}
+	
+	t += '<tr>';
+	t += '<td bgcolor="' + data.backgroundColor + '" align="left" colspan="' + headColspan + '"><font color="' + data.fontColor + '"><b>Frequency&nbsp;:&nbsp;' + data.displayFrequency + '&nbsp;&nbsp;date range&nbsp;:&nbsp;' + data.displayDateRange1 + '&nbsp;~&nbsp;' + data.displayDateRange2 + '&nbsp;&nbsp;Measure data type&nbsp;:&nbsp;' + data.measureDataTypeForTitle + '</b></font></td>';
+	t += '</tr>';	
+	t += '</table>';
+	dojo.byId("BSC_PROG007D0002Q_content_kpi").innerHTML = t;
+}
 
 // =========================================================================================
 // KPIs date range chart
@@ -380,9 +594,13 @@ function BSC_PROG007D0002Q_showChartForKpiDateRange(data) {
 function BSC_PROG007D0002Q_clearContent() {
 	// only clear chart
 	dojo.byId("BSC_PROG007D0002Q_daterange_paramInfo").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_content_vision").innerHTML = "";
 	dojo.byId("BSC_PROG007D0002Q_vision_daterange_container").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_content_perspective").innerHTML = "";
 	dojo.byId("BSC_PROG007D0002Q_perspective_daterange_container").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_content_objective").innerHTML = "";
 	dojo.byId("BSC_PROG007D0002Q_objective_daterange_container").innerHTML = "";
+	dojo.byId("BSC_PROG007D0002Q_content_kpi").innerHTML = "";
 	dojo.byId("BSC_PROG007D0002Q_kpi_daterange_container").innerHTML = "";
 }
 
@@ -491,6 +709,12 @@ function BSC_PROG007D0002Q_setFrequencyValue() {
 		dijit.byId("BSC_PROG007D0002Q_startYearDate").set("readOnly", false);
 		dijit.byId("BSC_PROG007D0002Q_endYearDate").set("readOnly", false);				
 	}
+}
+
+function BSC_PROG007D0002Q_parseScore( score ) {
+	var scoreStr = viewPage.roundFloat(score, 2) + '';
+	scoreStr = scoreStr.replace('.00', '');
+	return scoreStr;
 }
 
 //------------------------------------------------------------------------------
@@ -658,14 +882,27 @@ function ${programId}_page_message() {
 	
 	<BR/>
 	<div id="BSC_PROG007D0002Q_daterange_paramInfo"></div>
+	
+	<BR/>
+	<div id="BSC_PROG007D0002Q_content_vision"></div>
 	<BR/>
 	<div id="BSC_PROG007D0002Q_vision_daterange_container"></div>
+
 	<BR/>
-	<div id="BSC_PROG007D0002Q_perspective_daterange_container"></div>		
+	<div id="BSC_PROG007D0002Q_content_perspective"></div>	
 	<BR/>
-	<div id="BSC_PROG007D0002Q_objective_daterange_container"></div>	
+	<div id="BSC_PROG007D0002Q_perspective_daterange_container"></div>
+
+	<BR/>
+	<div id="BSC_PROG007D0002Q_content_objective"></div>			
+	<BR/>
+	<div id="BSC_PROG007D0002Q_objective_daterange_container"></div>
+
+	<BR/>
+	<div id="BSC_PROG007D0002Q_content_kpi"></div>		
 	<BR/>
 	<div id="BSC_PROG007D0002Q_kpi_daterange_container"></div>
+	
 	<BR/>
 	
 <script type="text/javascript">${programId}_page_message();</script>	
