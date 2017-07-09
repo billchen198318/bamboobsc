@@ -49,17 +49,29 @@
 	</tr>
 	-->
 	<tr>
-		<td width="100%" align="left" bgcolor="#ffffff">
-			<div class="text-xs-center" id="example-progress-vision">
+		<td width="100%" align="left" bgcolor="${vision.bgColor}">
 			<font color="${vision.fontColor}" size="3"><b>Score: ${vision.score?string(',###.##')}</b></font>&nbsp;
 			<font color="${vision.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>
-			</div>
+		</td>
+	</tr>		
+	<tr>
+		<td width="100%" align="left" bgcolor="#ffffff">
 			<div class="progress">
 			  <div class="progress-bar" role="progressbar" style="width: ${hrWidth}%;" aria-valuenow="${hrWidth}" aria-valuemin="0" aria-valuemax="100">${hrWidth}%</div>
 			</div>
-			<br/>
 		</td>
 	</tr>	
+<#if ( vision.dateRangeScores?size > 1 ) >	
+	<#list vision.dateRangeScores as dateRange >
+	<tr>
+		<td width="100%" align="left" bgcolor="${dateRange.bgColor}">
+			<div class="text-xs-center" id="example-progress-vision">
+			<font color="${dateRange.fontColor}" size="3"><b>Date: ${dateRange.date}&nbsp;Score: ${dateRange.score?string(',###.##')}</b></font>
+			</div>
+		</td>
+	</tr>	
+	</#list>
+</#if>	
 	<tr valign="top">
 		<td width="100%" bgcolor="#ffffff">
 		${visionContent}

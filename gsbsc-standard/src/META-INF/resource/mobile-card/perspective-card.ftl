@@ -40,17 +40,29 @@
 	</tr>	
 	-->
 	<tr>
-		<td width="100%" align="left" bgcolor="#ffffff">
-			<div class="text-xs-center" id="example-progress-perspective">
+		<td width="100%" align="left" bgcolor="${perspective.bgColor}">
 			<font color="${perspective.fontColor}" size="3"><b>Score: ${perspective.score?string(',###.##')}</b></font>&nbsp;
 			<font color="${perspective.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>
-			</div>
+		</td>
+	</tr>		
+	<tr>
+		<td width="100%" align="left" bgcolor="#ffffff">
 			<div class="progress">
 			  <div class="progress-bar" role="progressbar" style="width: ${hrWidth}%;" aria-valuenow="${hrWidth}" aria-valuemin="0" aria-valuemax="100">${hrWidth}%</div>
 			</div>
-			<br/>
 		</td>
-	</tr>		
+	</tr>
+<#if ( perspective.dateRangeScores?size > 1 ) >	
+	<#list perspective.dateRangeScores as dateRange >
+	<tr>
+		<td width="100%" align="left" bgcolor="${dateRange.bgColor}">
+			<div class="text-xs-center" id="example-progress-vision">
+			<font color="${dateRange.fontColor}" size="3"><b>Date: ${dateRange.date}&nbsp;Score: ${dateRange.score?string(',###.##')}</b></font>
+			</div>
+		</td>
+	</tr>	
+	</#list>
+</#if>		
 	<tr valign="top">
 		<td width="100%" align="left" bgcolor="#ffffff">
 		<font size="2" color="#333333"><b>Description:</b></font><BR/>

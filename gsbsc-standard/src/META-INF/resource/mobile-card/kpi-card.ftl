@@ -69,17 +69,29 @@
 	</tr>	
 	-->
 	<tr>
-		<td width="100%" align="left" bgcolor="#ffffff">
-			<div class="text-xs-center" id="example-progress-kpi">
+		<td width="100%" align="left" bgcolor="${kpi.bgColor}">
 			<font color="${kpi.fontColor}" size="3"><b>Score: ${kpi.score?string(',###.##')}</b></font>&nbsp;
 			<font color="${kpi.fontColor}" size="3"><b>Percentage: ${percentage} %</b></font>
-			</div>
+		</td>
+	</tr>
+	<tr>
+		<td width="100%" align="left" bgcolor="#ffffff">
 			<div class="progress">
 			  <div class="progress-bar" role="progressbar" style="width: ${hrWidth}%;" aria-valuenow="${hrWidth}" aria-valuemin="0" aria-valuemax="100">${hrWidth}%</div>
 			</div>
-			<br/>
 		</td>
-	</tr>			
+	</tr>		
+<#if ( kpi.dateRangeScores?size > 1 ) >	
+	<#list kpi.dateRangeScores as dateRange >
+	<tr>
+		<td width="100%" align="left" bgcolor="${dateRange.bgColor}">
+			<div class="text-xs-center" id="example-progress-vision">
+			<font color="${dateRange.fontColor}" size="3"><b>Date: ${dateRange.date}&nbsp;Score: ${dateRange.score?string(',###.##')}</b></font>
+			</div>
+		</td>
+	</tr>	
+	</#list>
+</#if>			
 	<tr valign="top">
 		<td width="100%" align="center" bgcolor="#ffffff">
 			<img src="./bsc.mobile.commonMeterChartAction.action?oid=${chartDataOid}" border="0" alt="score-meter-chart" />

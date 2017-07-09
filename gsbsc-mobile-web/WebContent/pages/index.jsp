@@ -202,13 +202,13 @@ function getTitleContent(backgroundColor, fontColor, title, fnname) {
     </select>
   </div>
 <div class="form-group row">
-  <label for="date1" class="col-xs-2 col-form-label">${action.getText('INDEX_date1')}</label>
+  <label for="date1">&nbsp;&nbsp;&nbsp;&nbsp;${action.getText('INDEX_date1')}</label>
   <div class="col-xs-10">
     <input  class="form-control" type="date" value="${measureDataDate2}" id="date1" />
   </div>
 </div>
 <div class="form-group row">
-  <label for="date2" class="col-xs-2 col-form-label">${action.getText('INDEX_date2')}</label>
+  <label for="date2">&nbsp;&nbsp;&nbsp;&nbsp;${action.getText('INDEX_date2')}</label>
   <div class="col-xs-10">
     <input class="form-control" type="date" value="${measureDataDate2}" id="date2" />
   </div>
