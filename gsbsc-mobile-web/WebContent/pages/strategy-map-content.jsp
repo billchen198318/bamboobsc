@@ -115,7 +115,17 @@ path, .jsplumb-endpoint { cursor:pointer; }
 
 
 
-
+/* 2017-07-10 取代  jsPlumbToolkit-demo.css 中的 jtk-demo-canvas */
+.jtk-demo-canvas {
+    margin-left: 0px;
+    height:600px;
+    max-height:700px;
+    border:1px solid #CCC;
+    background-color:white;
+    /* 2017-07-10 增加背景grid圖, 之後會在調整 */
+    background-image: url(./images/s-map-bg-grid.png);
+    background-repeat:repeat;    
+}
 
 <s:iterator value="cssItems" status="st" >
 	<s:property escapeHtml="false" escapeJavaScript="false" />
