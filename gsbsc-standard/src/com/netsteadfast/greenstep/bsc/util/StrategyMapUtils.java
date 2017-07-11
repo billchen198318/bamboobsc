@@ -228,7 +228,7 @@ public class StrategyMapUtils {
 		if (data == null) {
 			return "";
 		}
-		return "data:image/gif;base64," + Base64.getEncoder().encodeToString(data);
+		return "data:image/png;base64," + Base64.getEncoder().encodeToString(data);
 	}
 	
 }
