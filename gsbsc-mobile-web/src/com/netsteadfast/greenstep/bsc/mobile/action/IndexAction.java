@@ -45,6 +45,7 @@ import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
+import com.netsteadfast.greenstep.bsc.util.StrategyMapUtils;
 import com.netsteadfast.greenstep.bsc.vo.StrategyMapItemsVO;
 import com.netsteadfast.greenstep.po.hbm.BbVision;
 import com.netsteadfast.greenstep.vo.VisionVO;
@@ -63,6 +64,8 @@ public class IndexAction extends BaseSupportAction {
 	private List<String> divItems = new ArrayList<String>();
 	private List<String> cssItems = new ArrayList<String>();
 	private List<String> conItems = new ArrayList<String>();	
+	
+	private String backgroundImgBase64 = ""; // 策略地圖 strategy-map 的背景圖
 	
 	public IndexAction() {
 		super();
@@ -95,6 +98,8 @@ public class IndexAction extends BaseSupportAction {
 		context.put("visionOid", visionOid);		
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("strategyMapItemsForRecChain", context);
+		String backgroundOid = (String) context.get("backgroundOid");
+		this.backgroundImgBase64 = StrategyMapUtils.getBackgroundImageBase64FromUpload(backgroundOid);
 		this.setPageMessage( resultObj.getMessage() );
 		if ( resultObj.getValue() instanceof StrategyMapItemsVO ) {
 			this.divItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getDiv();
@@ -183,6 +188,10 @@ public class IndexAction extends BaseSupportAction {
 
 	public List<String> getConItems() {
 		return conItems;
+	}
+
+	public String getBackgroundImgBase64() {
+		return backgroundImgBase64;
 	}
 	
 }

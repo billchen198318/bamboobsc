@@ -26,6 +26,7 @@ import org.apache.commons.chain.Context;
 
 import com.netsteadfast.greenstep.base.BaseChainCommandSupport;
 import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
+import com.netsteadfast.greenstep.bsc.util.StrategyMapUtils;
 import com.netsteadfast.greenstep.bsc.vo.StrategyMapItemsVO;
 import com.netsteadfast.greenstep.vo.ObjectiveVO;
 import com.netsteadfast.greenstep.vo.PerspectiveVO;
@@ -33,6 +34,7 @@ import com.netsteadfast.greenstep.vo.VisionVO;
 
 public class LoadStrategyMapItemsForNewCommand extends BaseChainCommandSupport implements Command {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean execute(Context context) throws Exception {
 		if ( this.getResult(context)==null || !(this.getResult(context) instanceof BscStructTreeObj) ) {
@@ -47,6 +49,7 @@ public class LoadStrategyMapItemsForNewCommand extends BaseChainCommandSupport i
 			}
 		}
 		StrategyMapItemsVO mapItems = this.fillStrategyMapItems(vision);
+		context.put("backgroundOid", StrategyMapUtils.createUpload(vision, 800, 600));
 		this.setResult(context, mapItems);
 		return false;
 	}

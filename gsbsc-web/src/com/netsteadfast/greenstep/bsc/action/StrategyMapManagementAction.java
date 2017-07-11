@@ -75,6 +75,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 	private List<String> conItems = new ArrayList<String>();
 	private String printMode = YesNo.NO;
 	private ObjectiveVO objective; // 給 dbclick 地圖上的 策略目標方塊 , 開啟顯示策略目標內容Dialog用的
+	private String backgroundOid = ""; // 背景圖片資料的 upload oid
 	
 	public StrategyMapManagementAction() {
 		super();
@@ -132,6 +133,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 		Context context = this.getChainContext();
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("strategyMapItemsForNewChain", context);
+		this.backgroundOid = (String) context.get("backgroundOid");
 		this.setPageMessage( resultObj.getMessage() );
 		if ( resultObj.getValue() instanceof StrategyMapItemsVO ) {
 			this.divItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getDiv();
@@ -147,6 +149,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 		Context context = this.getChainContext();
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("strategyMapItemsForRecChain", context);
+		this.backgroundOid = (String) context.get("backgroundOid");
 		this.setPageMessage( resultObj.getMessage() );
 		if ( resultObj.getValue() instanceof StrategyMapItemsVO ) {
 			this.divItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getDiv();
@@ -306,6 +309,10 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 	
 	public String getYearDate() {
 		return super.getNowDate().substring(0, 4);
+	}
+
+	public String getBackgroundOid() {
+		return backgroundOid;
 	}
 	
 }

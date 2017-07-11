@@ -36,6 +36,7 @@ import com.netsteadfast.greenstep.bsc.model.BscStructTreeObj;
 import com.netsteadfast.greenstep.bsc.service.IStrategyMapConnsService;
 import com.netsteadfast.greenstep.bsc.service.IStrategyMapNodesService;
 import com.netsteadfast.greenstep.bsc.service.IStrategyMapService;
+import com.netsteadfast.greenstep.bsc.util.StrategyMapUtils;
 import com.netsteadfast.greenstep.bsc.vo.StrategyMapItemsVO;
 import com.netsteadfast.greenstep.po.hbm.BbStrategyMap;
 import com.netsteadfast.greenstep.po.hbm.BbStrategyMapConns;
@@ -61,6 +62,7 @@ public class LoadStrategyMapItemsForRecCommand extends BaseChainCommandSupport i
 				AppContext.getBean("bsc.service.StrategyMapConnsService");		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean execute(Context context) throws ServiceException, Exception {
 		if ( this.getResult(context)==null || !(this.getResult(context) instanceof BscStructTreeObj) ) {
@@ -75,6 +77,7 @@ public class LoadStrategyMapItemsForRecCommand extends BaseChainCommandSupport i
 			}
 		}
 		StrategyMapItemsVO mapItems = this.fillStrategyMapItems(vision, context);
+		context.put("backgroundOid", StrategyMapUtils.createUpload(vision, 800, 600));
 		this.setResult(context, mapItems);		
 		return false;
 	}

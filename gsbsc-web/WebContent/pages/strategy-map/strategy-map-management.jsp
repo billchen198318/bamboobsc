@@ -178,9 +178,16 @@ path, .jsplumb-endpoint { cursor:pointer; }
     max-height:700px;
     border:1px solid #CCC;
     background-color:white;
+<s:if test=" null != backgroundOid && \"\" != backgroundOid ">
+    /* 2017-07-11 增加背景圖  */
+    background-image: url(<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=view&oid=${backgroundOid});
+    background-repeat:repeat;
+</s:if>
+<s:else>
     /* 2017-07-10 增加背景grid圖, 之後會在調整 */
     background-image: url(./images/s-map-bg-grid.png);
     background-repeat:repeat;
+</s:else>    
 }
 
 <s:iterator value="cssItems" status="st" >

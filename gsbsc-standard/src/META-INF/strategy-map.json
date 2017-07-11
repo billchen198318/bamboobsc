@@ -1,0 +1,7 @@
+{ 
+	"minWidth"			: 800,
+	"minHeight"			: 600,
+	"maxWidth"			: 4096,
+	"maxHeight"			: 2160,	
+	"background-img"	: "META-INF/resource/s-map-bg-grid.png"
+}
