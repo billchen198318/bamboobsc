@@ -1071,7 +1071,65 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												BSC_PROG003D0009Q_query();
-											}"><s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/></button>		
+											}"><s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/></button>	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0009Q_btnQuery'">
+					    				<s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/>
+									</div>
+																				
+									<!-- ####################################################################################################### -->
+									<!-- Current year -->		
+									<button id="BSC_PROG003D0009Q_btnQueryForCurrentYear" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0009Q_frequency').set('value', '6');
+												setReportQueryDateFieldForCurrent('6', 'BSC_PROG003D0009Q_startYearDate', 'BSC_PROG003D0009Q_endYearDate');
+												BSC_PROG003D0009Q_query();
+											}"><b>Y</b></button>	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0009Q_btnQueryForCurrentYear'">
+					    				<s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/> (Current year)
+									</div>
+																																	
+									<!-- Current half-year -->		
+									<button id="BSC_PROG003D0009Q_btnQueryForCurrentHalfYear" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0009Q_frequency').set('value', '5');
+												setReportQueryDateFieldForCurrent('5', 'BSC_PROG003D0009Q_startYearDate', 'BSC_PROG003D0009Q_endYearDate');
+												BSC_PROG003D0009Q_query();
+											}"><b>H</b></button>		
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0009Q_btnQueryForCurrentHalfYear'">
+					    				<s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/> (Half-year of the current year)
+									</div>											
+											
+									<!-- Current quarterly -->		
+									<button id="BSC_PROG003D0009Q_btnQueryForCurrentQuarter" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0009Q_frequency').set('value', '4');
+												setReportQueryDateFieldForCurrent('4', 'BSC_PROG003D0009Q_startYearDate', 'BSC_PROG003D0009Q_endYearDate');
+												BSC_PROG003D0009Q_query();
+											}"><b>Q</b></button>			
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0009Q_btnQueryForCurrentQuarter'">
+					    				<s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/> (Quarterly of the current year)
+									</div>
+																				
+									<!-- Current month -->		
+									<button id="BSC_PROG003D0009Q_btnQueryForCurrentMonth" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0009Q_frequency').set('value', '3');
+												setReportQueryDateFieldForCurrent('3', 'BSC_PROG003D0009Q_startDate', 'BSC_PROG003D0009Q_endDate');
+												BSC_PROG003D0009Q_query();
+											}"><b>M</b></button>		
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0009Q_btnQueryForCurrentMonth'">
+					    				<s:property value="getText('BSC_PROG003D0009Q_btnQuery')"/> (Current month)
+									</div>
+																																																	
+									<!-- ####################################################################################################### -->												
 									            
 									<button id="BSC_PROG003D0009Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -1080,7 +1138,10 @@ function ${programId}_page_message() {
 											onClick:function(){
 												BSC_PROG003D0009Q_generateExport();																			  
 											}"><s:property value="getText('BSC_PROG003D0009Q_btnXls')"/></button>	
-
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0009Q_btnXls'">
+					    				<s:property value="getText('BSC_PROG003D0009Q_btnXls')"/>
+									</div>
+									
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0009Q_visionOid"></gs:inputfieldNoticeMsgLabel>		
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0009Q_frequency"></gs:inputfieldNoticeMsgLabel>
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0009Q_startYearDate"></gs:inputfieldNoticeMsgLabel>
