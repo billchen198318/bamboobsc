@@ -91,6 +91,33 @@ dojo.declare("GS.CORE", null ,{
     		.replace(/'/g, "’")
     		.replace(/\//g, "╱")
     		.replace(/\\/g, "╲");
+    },
+    getCurrentYear : function() {
+    	var dateObj = new Date();
+    	return dateObj.getUTCFullYear();
+    },
+    getCurrentMonth : function() {
+    	var dateObj = new Date();
+    	return dateObj.getUTCMonth() + 1;
+    },
+    getLastDayOfMonth : function(year, month) {
+    	var d = new Date(year, month, 0);
+    	return d.getDate();
+    },
+    getCurrentDay : function() {
+    	var dateObj = new Date();
+    	return dateObj.getDate();
+    },
+    getCurrentDateStr : function(spStr) {
+    	var m = this.getCurrentMonth() + '';
+    	var d = this.getCurrentDay() + '';
+    	if (m.length < 2) {
+    		m = '0' + m;
+    	}
+    	if (d.length < 2) {
+    		d = '0' + d;
+    	}
+    	return this.getCurrentYear() + spStr + m + spStr + d;
     }
     
 });

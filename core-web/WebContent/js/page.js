@@ -33,3 +33,24 @@ function BSC_PROGCOMM0001Q_showOrgChart(type, oid) {
 	// BSC_PROGCOMM0001Q_DlgShow( urlParam );
 	BSC_PROGCOMM0001Q_TabShow( urlParam );
 }
+
+//主要給 BSC/KPI/Employee/Department report 與 dashboard 頁面使用
+//報表查詢日期欄位會用到, 頻率(6-年,5-半年,4-季,3-月,2-周,1-日) , 目前只提供, 當前年, 當前半年, 當前季, 當前月
+function setReportQueryDateFieldForCurrent(frequency, dateField1, dateField2) {
+	if ('6' == frequency || '5' == frequency || '4' == frequency) { // 6-年,5-半年,4-季
+		dijit.byId( dateField1 ).set("displayedValue", viewPage.getCurrentYear()+"");
+		dijit.byId( dateField2 ).set("displayedValue", viewPage.getCurrentYear()+"");
+		return;
+	}
+	var dateStr1 = '';
+	var dateStr2 = '';
+	if ('3' == frequency) { // 3-月
+		var y = viewPage.getCurrentYear();
+		var m = viewPage.getCurrentMonth();
+		var d = viewPage.getLastDayOfMonth(y, m);
+		dateStr1 = y + '/' + ( m < 10 ? '0' + m : m ) + '/' + '01';
+		dateStr2 = y + '/' + ( m < 10 ? '0' + m : m ) + '/' + ( d < 10 ? '0' + d : d);
+	}
+	dijit.byId( dateField1 ).set("displayedValue", dateStr1);
+	dijit.byId( dateField2 ).set("displayedValue", dateStr2);
+}

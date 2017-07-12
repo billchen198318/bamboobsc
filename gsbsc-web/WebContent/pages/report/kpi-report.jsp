@@ -454,7 +454,65 @@ function ${programId}_page_message() {
 											showLabel:false,
 											onClick:function(){  
 												BSC_PROG003D0001Q_query();
-											}"><s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/></button>		
+											}"><s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/></button>
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQuery'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/>
+									</div>											
+									
+									<!-- ####################################################################################################### -->
+									<!-- Current year -->		
+									<button id="BSC_PROG003D0001Q_btnQueryForCurrentYear" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0001Q_frequency').set('value', '6');
+												setReportQueryDateFieldForCurrent('6', 'BSC_PROG003D0001Q_startYearDate', 'BSC_PROG003D0001Q_endYearDate');
+												BSC_PROG003D0001Q_query();
+											}"><b>Y</b></button>	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQueryForCurrentYear'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Current year)
+									</div>
+																																	
+									<!-- Current half-year -->		
+									<button id="BSC_PROG003D0001Q_btnQueryForCurrentHalfYear" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0001Q_frequency').set('value', '5');
+												setReportQueryDateFieldForCurrent('5', 'BSC_PROG003D0001Q_startYearDate', 'BSC_PROG003D0001Q_endYearDate');
+												BSC_PROG003D0001Q_query();
+											}"><b>H</b></button>		
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQueryForCurrentHalfYear'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Current half-year)
+									</div>											
+											
+									<!-- Current quarterly -->		
+									<button id="BSC_PROG003D0001Q_btnQueryForCurrentQuarter" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0001Q_frequency').set('value', '4');
+												setReportQueryDateFieldForCurrent('4', 'BSC_PROG003D0001Q_startYearDate', 'BSC_PROG003D0001Q_endYearDate');
+												BSC_PROG003D0001Q_query();
+											}"><b>Q</b></button>			
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQueryForCurrentQuarter'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Current quarterly of the year)
+									</div>
+																				
+									<!-- Current month -->		
+									<button id="BSC_PROG003D0001Q_btnQueryForCurrentMonth" data-dojo-type="dijit.form.Button"
+										data-dojo-props="
+											showLabel:true,
+											onClick:function(){  
+												dijit.byId('BSC_PROG003D0001Q_frequency').set('value', '3');
+												setReportQueryDateFieldForCurrent('3', 'BSC_PROG003D0001Q_startDate', 'BSC_PROG003D0001Q_endDate');
+												BSC_PROG003D0001Q_query();
+											}"><b>M</b></button>		
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQueryForCurrentMonth'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Current month)
+									</div>
+																																																	
+									<!-- ####################################################################################################### -->
 																
 									<button id="BSC_PROG003D0001Q_btnExportPng" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -479,6 +537,9 @@ function ${programId}_page_message() {
 												});
 												*/											  
 											}"><s:property value="getText('BSC_PROG003D0001Q_btnExportPng')"/></button>	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnExportPng'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnExportPng')"/>
+									</div>																						
 					
 									<button id="BSC_PROG003D0001Q_btnPdf" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -487,6 +548,9 @@ function ${programId}_page_message() {
 											onClick:function(){
 												BSC_PROG003D0001Q_generateExport('PDF');
 											}"><s:property value="getText('BSC_PROG003D0001Q_btnPdf')"/></button>	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnPdf'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnPdf')"/>
+									</div>											
 									            
 									<button id="BSC_PROG003D0001Q_btnXls" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -495,6 +559,9 @@ function ${programId}_page_message() {
 											onClick:function(){
 												BSC_PROG003D0001Q_generateExport('EXCEL');																			  
 											}"><s:property value="getText('BSC_PROG003D0001Q_btnXls')"/></button>	
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnXls'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnXls')"/>
+									</div>											
 									
 									<button id="BSC_PROG003D0001Q_btnCoffeeChart" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -503,7 +570,10 @@ function ${programId}_page_message() {
 											onClick:function(){
 												BSC_PROG003D0001Q_openClickShowReportInDialog( BSC_PROG003D0001Q_getCoffeeChartOpenWindowUrl() );																			  
 											}">Coffee chart</button>										
-									
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnCoffeeChart'">
+					    				Coffee chart
+									</div>
+																		
 									&nbsp;&nbsp;&nbsp;&nbsp;		
 									<button id="BSC_PROG003D0001Q_btnSignature" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
@@ -512,7 +582,10 @@ function ${programId}_page_message() {
 											onClick:function(){
 												openCommonSignatureDialog('BSC', 'BSC_PROG003D0001Q_uploadSignatureOid', 'BSC_PROG003D0001Q_uploadSignatureSuccess', 'BSC_PROG003D0001Q_uploadSignatureFail');													  
 											}"><s:property value="getText('BSC_PROG003D0001Q_btnSignature')"/></button>												
-										
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnSignature'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnSignature')"/>
+									</div>
+																			
 									<button id="BSC_PROG003D0001Q_btnSignatureClear" data-dojo-type="dijit.form.Button"
 										data-dojo-props="
 											iconClass:'dijitIconClear',
@@ -520,7 +593,10 @@ function ${programId}_page_message() {
 											onClick:function(){
 												BSC_PROG003D0001Q_uploadSignatureClear();
 											}"><s:property value="getText('BSC_PROG003D0001Q_btnSignatureClear')"/></button>		
-											
+									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnSignatureClear'">
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnSignatureClear')"/>
+									</div>
+																				
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0001Q_visionOid"></gs:inputfieldNoticeMsgLabel>		
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0001Q_frequency"></gs:inputfieldNoticeMsgLabel>
 									<gs:inputfieldNoticeMsgLabel id="BSC_PROG003D0001Q_startYearDate"></gs:inputfieldNoticeMsgLabel>
