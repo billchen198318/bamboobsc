@@ -483,7 +483,7 @@ function ${programId}_page_message() {
 												BSC_PROG003D0001Q_query();
 											}"><b>H</b></button>		
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQueryForCurrentHalfYear'">
-					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Current half-year)
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Half-year of the current year)
 									</div>											
 											
 									<!-- Current quarterly -->		
@@ -496,7 +496,7 @@ function ${programId}_page_message() {
 												BSC_PROG003D0001Q_query();
 											}"><b>Q</b></button>			
 									<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'BSC_PROG003D0001Q_btnQueryForCurrentQuarter'">
-					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Current quarterly of the year)
+					    				<s:property value="getText('BSC_PROG003D0001Q_btnQuery')"/> (Quarterly of the current year)
 									</div>
 																				
 									<!-- Current month -->		
