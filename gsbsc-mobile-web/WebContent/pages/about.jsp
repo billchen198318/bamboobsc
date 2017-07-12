@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</td>
 			<td align="center">
 				<font size='2'>				
-				bambooBSC 0.7.2p1 - opensource Balanced Scorecard (BSC) Business Intelligence<BR>
+				bambooBSC 0.7.3 - opensource Balanced Scorecard (BSC) Business Intelligence<BR>
 				<hr size="1" width="90%"/>
 				Developer: Bill Chen / Chen Xin Nien<BR>
 				Contact: <a href="mailto:chen.xin.nien@gmail.com">chen.xin.nien@gmail.com</a><BR>
