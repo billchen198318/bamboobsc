@@ -37,6 +37,7 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
 	<script src="<%=mainSysBasePath%>/jquery/jquery-1.11.1.min.js"></script>
+	<script src="<%=mainSysBasePath%>/jquery/jquery.blockUI.js"></script>
 	
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
     <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	   	
@@ -386,6 +387,7 @@ jsPlumb.ready(function () {
     		toastr.info('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}
+    	$.blockUI();
     	window.location = "<%=basePath%>/bsc.strategyMapLoadNewAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
     });
     
@@ -394,6 +396,7 @@ jsPlumb.ready(function () {
     		toastr.info('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}
+    	$.blockUI();
     	window.location = "<%=basePath%>/bsc.strategyMapLoadRecordAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
     });    
     
@@ -402,6 +405,7 @@ jsPlumb.ready(function () {
     		toastr.info('<s:property value="getText('MESSAGE.BSC_PROG002D0007Q_vision')" escapeJavaScript="true"/>');
     		return;
     	}    	
+    	$.blockUI();
         e.preventDefault();
         var jsonData = getToJson();
         var mapData = btoa( encodeURIComponent( jsonData ) );
@@ -417,6 +421,7 @@ jsPlumb.ready(function () {
         		'fields.visionOid'	: $("#visionOid").val()
         	},
         	success	: function(data) {
+        		$.unblockUI();
         		if ('Y' == data.success) {
         			toastr.info( data.message );
         		} else if ('N' == data.success || 'E' == data.success ) {
@@ -426,6 +431,7 @@ jsPlumb.ready(function () {
         		}        		
         	},
          	error: function(data) {
+         		$.unblockUI();
          		alert(data);
          	}        	
 		});        
