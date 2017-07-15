@@ -1,3 +1,15 @@
+0.7.3
+-----------------------------------------------------------
+1. Provide current year/half-year/quarterly/month query button for Report and Dashboard.
+2. Expand KPI Target and Minimal and Maximum field values, current only can input -999.99 ~ 999.99.
+3. Time Series Analysis add support show for Vision, Perspectives, Strategy objectives.
+4. Mobile version add date range score show on score-card.
+5. Update Strategy MAP style. backbround image content item from perspectives.
+
+issues please reference:
+https://github.com/billchen198318/bamboobsc/issues/48
+
+
 0.7.2p1
 -----------------------------------------------------------
 1. Bug for export SVG chart
