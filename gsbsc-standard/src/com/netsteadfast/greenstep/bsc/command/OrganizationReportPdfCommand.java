@@ -24,7 +24,6 @@ package com.netsteadfast.greenstep.bsc.command;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.UUID;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -94,7 +93,7 @@ public class OrganizationReportPdfCommand extends BaseChainCommandSupport implem
 			}
 		}		
 		FontFactory.register(BscConstants.PDF_ITEXT_FONT);
-		String fileName = UUID.randomUUID().toString() + ".pdf";
+		String fileName = SimpleUtils.getUUIDStr() + ".pdf";
 		String fileFullPath = Constants.getWorkTmpDir() + "/" + fileName;
 		OutputStream os = new FileOutputStream(fileFullPath);
 		Document document = new Document(PageSize.A4.rotate(), 10, 10, 10, 10);	

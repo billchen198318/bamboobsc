@@ -37,7 +37,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -380,7 +379,8 @@ public class SimpleUtils {
 	}
 	
 	public static String getUUIDStr() {
-		return UUID.randomUUID().toString();
+		//return UUID.randomUUID().toString();
+		return com.datastax.driver.core.utils.UUIDs.timeBased().toString();
 	}
 	
 	public static byte[] toMD5(final String sourceValue) {

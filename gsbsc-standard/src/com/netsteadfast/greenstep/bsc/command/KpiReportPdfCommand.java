@@ -29,7 +29,6 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
@@ -112,7 +111,7 @@ public class KpiReportPdfCommand extends BaseChainCommandSupport implements Comm
 			}
 		}		
 		FontFactory.register(BscConstants.PDF_ITEXT_FONT);
-		String fileName = UUID.randomUUID().toString() + ".pdf";
+		String fileName = SimpleUtils.getUUIDStr() + ".pdf";
 		String fileFullPath = Constants.getWorkTmpDir() + "/" + fileName;
 		OutputStream os = new FileOutputStream(fileFullPath);
 		//Document document = new Document(PageSize.A4.rotate(), 10, 10, 10, 10);
