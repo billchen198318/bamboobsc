@@ -461,10 +461,10 @@ https://mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core
 cassandra-driver-core-3.3.0.jar
 
 
-DOJO release 1.12.2 ( package file by self )
+DOJO release 1.13.0 ( package file by self )
 *** Note: only for CORE-WEB ***
 -------------------------
-dojo-release-1.12.2.jar
+dojo-release-1.13.0.jar
 
 
 ---------------------------------------------------------------------------------------
