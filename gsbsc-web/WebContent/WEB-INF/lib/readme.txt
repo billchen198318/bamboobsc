@@ -303,8 +303,7 @@ activiti-spring-5.21.0.jar
 
 Guava: Google Core Libraries for Java
 -------------------------
-guava-13.0.1.jar
-guava-gwt-13.0.1.jar
+guava-23.0.jar
 
 
 Groovy
