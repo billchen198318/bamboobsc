@@ -1,15 +1,15 @@
 Struts2
 -------------------------
 commons-logging-1.1.3.jar
-commons-io-2.4.jar
-commons-fileupload-1.3.2.jar
+commons-io-2.5.jar
+commons-fileupload-1.3.3.jar
 freemarker-2.3.23.jar
-ognl-3.1.12.jar
-struts2-core-2.5.10.1.jar
-struts2-jasperreports-plugin-2.5.10.1.jar
-struts2-jfreechart-plugin-2.5.10.1.jar
-struts2-json-plugin-2.5.10.1.jar
-struts2-spring-plugin-2.5.10.1.jar
+ognl-3.1.15.jar
+struts2-core-2.5.13.jar
+struts2-jasperreports-plugin-2.5.13.jar
+struts2-jfreechart-plugin-2.5.13.jar
+struts2-json-plugin-2.5.13.jar
+struts2-spring-plugin-2.5.13.jar
 
 
 Spring4
@@ -134,7 +134,7 @@ Apache - common
 -------------------------
 commons-codec-1.10.jar
 commons-email-1.4.jar
-commons-lang3-3.4.jar
+commons-lang3-3.6.jar
 commons-beanutils-1.9.3.jar
 commons-beanutils-core-1.8.3.jar
 commons-beanutils-bean-collections-1.8.3.jar
@@ -257,6 +257,11 @@ xmlsec-2.0.8.jar
 ehcache-2.10.2.jar (is found)
 cxf-services-ws-discovery-api-3.1.11.jar (REMOVE 不需要)
 cxf-services-ws-discovery-service-3.1.11.jar (REMOVE 不需要)
+
+
+JSR311
+-------------------------
+javax.ws.rs-api-2.0.1.jar
 
 
 Apache Camel
