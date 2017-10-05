@@ -24,8 +24,8 @@ package com.netsteadfast.greenstep.bsc.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.netsteadfast.greenstep.base.AppContext;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
@@ -117,7 +117,7 @@ public class AggregationMethodUtils {
 		if ( null == value ) {
 			return 0.0f;
 		}
-		if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {			
+		if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {			
 			return 0.0f;
 		}
 		return NumberUtils.toFloat( String.valueOf(value), 0.0f);			
@@ -129,7 +129,7 @@ public class AggregationMethodUtils {
 		if ( null == value ) {
 			return 0.0f;
 		}
-		if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {			
+		if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {			
 			return 0.0f;
 		}
 		return NumberUtils.toFloat( String.valueOf(value), 0.0f);	

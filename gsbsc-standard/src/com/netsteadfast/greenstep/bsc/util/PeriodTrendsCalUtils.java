@@ -145,7 +145,7 @@ public class PeriodTrendsCalUtils {
 					periodData.getCurrent().getScore(), 
 					periodData.getPrevious().getScore());
 			String change = String.valueOf(ans);
-			if ( NumberUtils.isNumber( String.valueOf(change) ) ) {
+			if ( NumberUtils.isCreatable( String.valueOf(change) ) ) {
 				periodData.setChange( NumberUtils.toFloat(change)  );
 			}
 			
@@ -169,7 +169,7 @@ public class PeriodTrendsCalUtils {
 					currentRangeScore.getScore(), 
 					previousRangeScore.getScore());
 			String change = String.valueOf(ans);
-			if ( NumberUtils.isNumber( String.valueOf(change) ) ) {
+			if ( NumberUtils.isCreatable( String.valueOf(change) ) ) {
 				score = NumberUtils.toFloat(change);
 			}			
 			periodData.getDateRangeScores().add( NumberUtils.toFloat(BscReportSupportUtils.parse2(score)) );

@@ -184,7 +184,7 @@ public class StrategyMapLogicServiceImpl extends CoreBaseLogicService implements
 			String positionX = String.valueOf( data.get("positionX") );
 			String positionY = String.valueOf( data.get("positionY") );
 			if ( StringUtils.isBlank(id) || StringUtils.isBlank(text) 
-					|| !NumberUtils.isNumber(positionX) || !NumberUtils.isNumber(positionY) ) {
+					|| !NumberUtils.isCreatable(positionX) || !NumberUtils.isCreatable(positionY) ) {
 				continue;
 			}
 			StrategyMapNodesVO mapNodes = new StrategyMapNodesVO();

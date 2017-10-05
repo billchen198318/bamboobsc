@@ -21,7 +21,7 @@
  */
 package com.netsteadfast.greenstep.action.utils;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.netsteadfast.greenstep.base.exception.ControllerException;
 import com.netsteadfast.greenstep.base.model.IActionFieldsCheckUtils;
@@ -31,7 +31,7 @@ public class PositiveIntegerFieldCheckUtils implements IActionFieldsCheckUtils {
 	
 	@Override
 	public boolean check(String value) throws ControllerException {
-		if (NumberUtils.isNumber(value) && SimpleUtils.getInt(value, -1) > -1) {
+		if (NumberUtils.isCreatable(value) && SimpleUtils.getInt(value, -1) > -1) {
 			return true;
 		}
 		return false;

@@ -133,7 +133,7 @@ public class MeasureDataSaveOrUpdateAction extends BaseJsonAction {
 				continue;
 			}
 			String date = this.getDateFromInputName(name);
-			if (!NumberUtils.isNumber(value)) {
+			if (!NumberUtils.isCreatable(value)) {
 				value = "0";
 			}
 			/*

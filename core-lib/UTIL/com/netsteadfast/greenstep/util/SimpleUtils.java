@@ -113,7 +113,7 @@ public class SimpleUtils {
 	}	
 	
 	public static boolean checkBeTrueOfNumber(final String sourceValue) {
-		return org.apache.commons.lang3.math.NumberUtils.isNumber(sourceValue);
+		return org.apache.commons.lang3.math.NumberUtils.isCreatable(sourceValue);
 	}	
 	
 	public static String createRandomString(final int length) {
@@ -319,7 +319,7 @@ public class SimpleUtils {
 			throw new java.lang.IllegalArgumentException("yyyyMMdd error.");
 		}
 		yyyyMMdd=yyyyMMdd.replaceAll("/", "");
-		if (yyyyMMdd.length()!=8 || !org.apache.commons.lang3.math.NumberUtils.isNumber(yyyyMMdd)) {
+		if (yyyyMMdd.length()!=8 || !org.apache.commons.lang3.math.NumberUtils.isCreatable(yyyyMMdd)) {
 			throw new java.lang.IllegalArgumentException("yyyyMMdd error.");
 		}
 		int yyyy=Integer.parseInt(yyyyMMdd.substring(0, 4));

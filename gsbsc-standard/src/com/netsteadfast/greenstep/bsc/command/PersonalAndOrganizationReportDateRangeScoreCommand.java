@@ -82,7 +82,7 @@ public class PersonalAndOrganizationReportDateRangeScoreCommand extends BaseChai
 				}
 				*/
 				// 2016-07-01
-				if (NumberUtils.isNumber( String.valueOf(value)) ) {
+				if (NumberUtils.isCreatable( String.valueOf(value)) ) {
 					score = NumberUtils.toFloat(String.valueOf(value), 0.0f);
 				}
 			}

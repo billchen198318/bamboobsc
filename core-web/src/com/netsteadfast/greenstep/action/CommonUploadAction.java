@@ -21,7 +21,7 @@
  */
 package com.netsteadfast.greenstep.action;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.StrutsConstants;
 import org.springframework.context.annotation.Scope;
@@ -72,7 +72,7 @@ public class CommonUploadAction extends BaseSupportAction {
 	
 	public String getUploadMultipartMaxSize() {
 		String maxsize = super.getLoadStrutsConstants().get(StrutsConstants.STRUTS_MULTIPART_MAXSIZE);
-		return NumberUtils.isNumber(maxsize) ? maxsize : "8388608";
+		return NumberUtils.isCreatable(maxsize) ? maxsize : "8388608";
 	}
 	
 	public String getUploadMultipartMaxSizeLabel() {

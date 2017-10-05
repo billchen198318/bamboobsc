@@ -53,7 +53,7 @@ public class ChartsDataUtils {
 	}
 	
 	private static boolean isChartsValue(Object value) {		
-		return NumberUtils.isNumber( String.valueOf(value) );
+		return NumberUtils.isCreatable( String.valueOf(value) );
 	}
 	
 	public static List<Map<String, Object>> getHighchartsPieData(String dataQueryMapperSetOid, 

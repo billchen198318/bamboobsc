@@ -27,8 +27,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -144,7 +144,7 @@ public class PerspectiveLogicServiceImpl extends CoreBaseLogicService implements
 	@Transactional(propagation=Propagation.REQUIRES_NEW, readOnly=true)		
 	@Override
 	public String findForMaxPerId(String date) throws ServiceException, Exception {
-		if (super.isBlank(date) || !NumberUtils.isNumber(date) || date.length()!=8 ) {
+		if (super.isBlank(date) || !NumberUtils.isCreatable(date) || date.length()!=8 ) {
 			throw new ServiceException(SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_BLANK));
 		}
 		String maxVisionId = this.perspectiveService.findForMaxPerId(BscConstants.HEAD_FOR_PER_ID+date); 

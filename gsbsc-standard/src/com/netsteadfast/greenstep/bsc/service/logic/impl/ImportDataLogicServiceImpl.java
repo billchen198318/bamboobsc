@@ -370,15 +370,15 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				msg.append("row: " + row + " min is blank." + Constants.HTML_BR);
 				continue;				
 			}			
-			if ( !NumberUtils.isNumber(weight) ) {
+			if ( !NumberUtils.isCreatable(weight) ) {
 				msg.append("row: " + row + " weight is not number." + Constants.HTML_BR);
 				continue;					
 			}
-			if ( !NumberUtils.isNumber(target) ) {
+			if ( !NumberUtils.isCreatable(target) ) {
 				msg.append("row: " + row + " target is not number." + Constants.HTML_BR);
 				continue;					
 			}
-			if ( !NumberUtils.isNumber(min) ) {
+			if ( !NumberUtils.isCreatable(min) ) {
 				msg.append("row: " + row + " min is not number." + Constants.HTML_BR);
 				continue;					
 			}		
@@ -467,15 +467,15 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				msg.append("row: " + row + " min is blank." + Constants.HTML_BR);
 				continue;				
 			}
-			if ( !NumberUtils.isNumber(weight) ) {
+			if ( !NumberUtils.isCreatable(weight) ) {
 				msg.append("row: " + row + " weight is not number." + Constants.HTML_BR);
 				continue;					
 			}
-			if ( !NumberUtils.isNumber(target) ) {
+			if ( !NumberUtils.isCreatable(target) ) {
 				msg.append("row: " + row + " target is not number." + Constants.HTML_BR);
 				continue;					
 			}
-			if ( !NumberUtils.isNumber(min) ) {
+			if ( !NumberUtils.isCreatable(min) ) {
 				msg.append("row: " + row + " min is not number." + Constants.HTML_BR);
 				continue;					
 			}		
@@ -568,19 +568,19 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 		if ( super.isBlank(quasiRange) ) {
 			return "row: " + row + " quasi range is blank." + Constants.HTML_BR;
 		}				
-		if ( !NumberUtils.isNumber(weight) ) {
+		if ( !NumberUtils.isCreatable(weight) ) {
 			return "row: " + row + " weight is not number." + Constants.HTML_BR;		
 		}
-		if ( !NumberUtils.isNumber(max) ) {
+		if ( !NumberUtils.isCreatable(max) ) {
 			return "row: " + row + " max is not number." + Constants.HTML_BR;				
 		}		
-		if ( !NumberUtils.isNumber(target) ) {
+		if ( !NumberUtils.isCreatable(target) ) {
 			return "row: " + row + " target is not number." + Constants.HTML_BR;				
 		}
-		if ( !NumberUtils.isNumber(min) ) {
+		if ( !NumberUtils.isCreatable(min) ) {
 			return "row: " + row + " min is not number." + Constants.HTML_BR;			
 		}		
-		if ( !NumberUtils.isNumber(quasiRange) ) {
+		if ( !NumberUtils.isCreatable(quasiRange) ) {
 			return "row: " + row + " quasi range is not number." + Constants.HTML_BR;			
 		}		
 		if ( BscKpiCode.getCompareTypeMap(false).get(compareType) == null ) {
@@ -784,11 +784,11 @@ public class ImportDataLogicServiceImpl extends BaseLogicService implements IImp
 				msg.append("row: " + row + " is not date " + date + Constants.HTML_BR);
 				continue;					
 			}			
-			if ( !NumberUtils.isNumber(target) ) {
+			if ( !NumberUtils.isCreatable(target) ) {
 				msg.append("row: " + row + " target is not number." + Constants.HTML_BR);
 				continue;					
 			}
-			if ( !NumberUtils.isNumber(actual) ) {
+			if ( !NumberUtils.isCreatable(actual) ) {
 				msg.append("row: " + row + " actual is not number." + Constants.HTML_BR);
 				continue;					
 			}		

@@ -26,8 +26,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,16 +147,16 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 		String target = this.getFields().get("target");
 		String cv = this.getFields().get("cv");
 		String pv = this.getFields().get("pv");
-		if (!NumberUtils.isNumber(actual)) {
+		if (!NumberUtils.isCreatable(actual)) {
 			actual = "60.0";
 		}
-		if (!NumberUtils.isNumber(target)) {
+		if (!NumberUtils.isCreatable(target)) {
 			target = "100.0";
 		}		
-		if (!NumberUtils.isNumber(cv)) {
+		if (!NumberUtils.isCreatable(cv)) {
 			cv = "70.0";
 		}
-		if (!NumberUtils.isNumber(pv)) {
+		if (!NumberUtils.isCreatable(pv)) {
 			pv = "55.0";
 		}
 		FormulaVO formula = new FormulaVO();

@@ -30,9 +30,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -230,10 +230,10 @@ public class OrganizationLogicServiceImpl extends BscBaseLogicService implements
 	}	
 	
 	private void handlerLongitudeAndLatitude(OrganizationVO organization) {
-		if ( !NumberUtils.isNumber(organization.getLat()) ) {
+		if ( !NumberUtils.isCreatable(organization.getLat()) ) {
 			organization.setLat( (String)Constants.getSettingsMap().get("googleMap.defaultLat") );
 		}
-		if ( !NumberUtils.isNumber(organization.getLng()) ) {
+		if ( !NumberUtils.isCreatable(organization.getLng()) ) {
 			organization.setLng( (String)Constants.getSettingsMap().get("googleMap.defaultLng") );
 		}				
 	}

@@ -40,7 +40,7 @@ public class CustomJFreeChartResult extends ChartResult {
 	public void doExecute(String finalLocation, ActionInvocation invocation) throws Exception {		
 		Object newWidth = ActionContext.getContext().getValueStack().findValue("width");
 		Object newHeight = ActionContext.getContext().getValueStack().findValue("height");
-		if ( NumberUtils.isNumber(String.valueOf(newWidth)) && NumberUtils.isNumber(String.valueOf(newHeight)) ) {			
+		if ( NumberUtils.isCreatable(String.valueOf(newWidth)) && NumberUtils.isCreatable(String.valueOf(newHeight)) ) {			
 			int w = NumberUtils.toInt( String.valueOf(newWidth) );
 			int h = NumberUtils.toInt( String.valueOf(newHeight) );
 			if ( w > MAX_WIDTH ) {

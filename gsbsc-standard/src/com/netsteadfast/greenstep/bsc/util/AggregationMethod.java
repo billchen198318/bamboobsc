@@ -104,7 +104,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				score += NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -137,7 +137,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					score += NumberUtils.toFloat( String.valueOf(value), 0.0f);
@@ -170,7 +170,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				float nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -208,7 +208,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					float nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -268,7 +268,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				float nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -301,7 +301,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					float nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -334,7 +334,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -372,7 +372,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					nowScore = NumberUtils.toFloat( String.valueOf(value), 0.0f);
@@ -409,7 +409,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -447,7 +447,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -483,7 +483,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				score += NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -513,7 +513,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					score += NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -543,7 +543,7 @@ public class AggregationMethod {
 				if (value == null) {
 					continue;
 				}
-				if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+				if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 					continue;
 				}
 				float nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);
@@ -578,7 +578,7 @@ public class AggregationMethod {
 					if (value == null) {
 						continue;
 					}
-					if ( !NumberUtils.isNumber( String.valueOf(value) ) ) {
+					if ( !NumberUtils.isCreatable( String.valueOf(value) ) ) {
 						continue;
 					}
 					float nowScore = NumberUtils.toFloat(String.valueOf(value), 0.0f);

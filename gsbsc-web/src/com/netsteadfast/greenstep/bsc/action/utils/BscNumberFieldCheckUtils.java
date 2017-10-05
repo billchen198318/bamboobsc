@@ -30,7 +30,7 @@ public class BscNumberFieldCheckUtils implements IActionFieldsCheckUtils {
 
 	@Override
 	public boolean check(String value) throws ControllerException {		
-		boolean p1 = NumberUtils.isNumber(value);
+		boolean p1 = NumberUtils.isCreatable(value);
 		boolean p2 = true;
 		if (p1 && value.indexOf(".") > -1 ) {
 			String bit[] = value.trim().split("[.]");
