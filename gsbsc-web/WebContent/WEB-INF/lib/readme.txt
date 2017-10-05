@@ -149,6 +149,7 @@ commons-digester3-3.2.jar
 commons-chain-1.2.jar
 commons-httpclient-3.1.jar
 commons-math3-3.6.1.jar
+commons-text-1.1.jar
 
 
 JAF & JavaMail
