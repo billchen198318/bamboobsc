@@ -32,7 +32,7 @@ import java.util.Map;
 import ognl.Ognl;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.netsteadfast.greenstep.base.AppContext;
