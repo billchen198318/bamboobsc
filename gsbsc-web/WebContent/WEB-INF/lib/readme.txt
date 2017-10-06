@@ -315,7 +315,7 @@ guava-23.0.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.11-indy.jar
+groovy-all-2.4.12-indy.jar
 
 
 Apache ActiveMQ
