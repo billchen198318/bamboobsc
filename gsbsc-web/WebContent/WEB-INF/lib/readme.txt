@@ -450,7 +450,7 @@ http://www.renjin.org/
 has manual remove apache common-math/logging/vfs and joda-time class binary file
 re-pack to renjin-script-engine-0.8.2266.jar
 -------------------------
-renjin-script-engine-0.8.2266.jar
+renjin-script-engine-0.8.2468.jar
 
 
 espy-arima
