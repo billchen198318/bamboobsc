@@ -268,18 +268,18 @@ javax.ws.rs-api-2.0.1.jar
 
 Apache Camel
 -------------------------
-camel-core-2.19.0.jar
-camel-cxf-2.19.0.jar
-camel-cxf-transport-2.19.0.jar
-camel-ftp-2.19.0.jar
-camel-groovy-2.19.0.jar
-camel-http-2.19.0.jar
-camel-http-common-2.19.0.jar
-camel-jms-2.19.0.jar
-camel-servlet-2.19.0.jar
-camel-spring-2.19.0.jar
-camel-ssh-2.19.0.jar
-camel-stream-2.19.0.jar
+camel-core-2.19.3.jar
+camel-cxf-2.19.3.jar
+camel-cxf-transport-2.19.3.jar
+camel-ftp-2.19.3.jar
+camel-groovy-2.19.3.jar
+camel-http-2.19.3.jar
+camel-http-common-2.19.3.jar
+camel-jms-2.19.3.jar
+camel-servlet-2.19.3.jar
+camel-spring-2.19.3.jar
+camel-ssh-2.19.3.jar
+camel-stream-2.19.3.jar
 
 
 Activiti
