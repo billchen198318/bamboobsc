@@ -387,7 +387,7 @@ kaptcha-2.3.2.jar
 Jython
 http://www.jython.org/
 -------------------------
-jython-standalone-2.7.1b3.jar
+jython-standalone-2.7.1.jar
 
 
 ZIP4J							
