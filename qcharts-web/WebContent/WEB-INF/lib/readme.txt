@@ -14,25 +14,25 @@ struts2-spring-plugin-2.5.13.jar
 
 Spring4
 -------------------------
-spring-aop-4.3.4.RELEASE.jar
-spring-aspects-4.3.4.RELEASE.jar
-spring-beans-4.3.4.RELEASE.jar
-spring-context-4.3.4.RELEASE.jar
-spring-context-support-4.3.4.RELEASE.jar
-spring-core-4.3.4.RELEASE.jar
-spring-expression-4.3.4.RELEASE.jar
-spring-instrument-4.3.4.RELEASE.jar
-spring-instrument-tomcat-4.3.4.RELEASE.jar
-spring-jdbc-4.3.4.RELEASE.jar
-spring-jms-4.3.4.RELEASE.jar
-spring-messaging-4.3.4.RELEASE.jar
-spring-orm-4.3.4.RELEASE.jar
-spring-oxm-4.3.4.RELEASE.jar
-spring-tx-4.3.4.RELEASE.jar
-spring-web-4.3.4.RELEASE.jar
-spring-webmvc-4.3.4.RELEASE.jar
-spring-webmvc-portlet-4.3.4.RELEASE.jar
-spring-websocket-4.3.4.RELEASE.jar
+spring-aop-4.3.9.RELEASE.jar
+spring-aspects-4.3.9.RELEASE.jar
+spring-beans-4.3.9.RELEASE.jar
+spring-context-4.3.9.RELEASE.jar
+spring-context-support-4.3.9.RELEASE.jar
+spring-core-4.3.9.RELEASE.jar
+spring-expression-4.3.9.RELEASE.jar
+spring-instrument-4.3.9.RELEASE.jar
+spring-instrument-tomcat-4.3.9.RELEASE.jar
+spring-jdbc-4.3.9.RELEASE.jar
+spring-jms-4.3.9.RELEASE.jar
+spring-messaging-4.3.9.RELEASE.jar
+spring-orm-4.3.9.RELEASE.jar
+spring-oxm-4.3.9.RELEASE.jar
+spring-tx-4.3.9.RELEASE.jar
+spring-web-4.3.9.RELEASE.jar
+spring-webmvc-4.3.9.RELEASE.jar
+spring-webmvc-portlet-4.3.9.RELEASE.jar
+spring-websocket-4.3.9.RELEASE.jar
 
 
 AOP
