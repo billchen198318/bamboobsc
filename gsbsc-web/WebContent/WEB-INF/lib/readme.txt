@@ -376,7 +376,7 @@ jackson-module-jaxb-annotations-2.8.4.jar
 
 Apache Shiro
 -------------------------
-shiro-all-1.3.2.jar
+shiro-all-1.4.0.jar
 
 
 https://code.google.com/p/kaptcha/
