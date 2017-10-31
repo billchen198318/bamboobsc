@@ -284,28 +284,57 @@ camel-stream-2.19.3.jar
 
 Activiti
 -------------------------
-activiti-bpmn-converter-5.21.0.jar
-activiti-bpmn-layout-5.21.0.jar
-activiti-bpmn-model-5.21.0.jar
-activiti-camel-5.21.0.jar
-activiti-cdi.jar
-activiti-common-rest-5.21.0.jar
-activiti-crystalball-5.21.0.jar
-activiti-cxf-5.21.0.jar
-activiti-diagram-rest-5.21.0.jar
-activiti-engine-5.21.0.jar
-activiti-explorer-5.21.0.jar
-activiti-image-generator-5.21.0.jar
-activiti-jmx-5.21.0.jar 	(remove, not currently needed)
-activiti-json-converter-5.21.0.jar
-activiti-ldap-5.21.0.jar
-activiti-modeler-5.21.0.jar
-activiti-mule-5.21.0.jar
-activiti-osgi-5.21.0.jar
-activiti-process-validation-5.21.0.jar
-activiti-rest-5.21.0.jar
-activiti-simple-workflow-5.21.0.jar
-activiti-spring-5.21.0.jar
+activiti5-compatibility-6.0.0.jar
+activiti5-engine-6.0.0.jar
+activiti5-spring-6.0.0.jar
+activiti5-spring-compatibility-6.0.0.jar
+activiti-app-logic-6.0.0.jar
+activiti-app-rest-6.0.0.jar
+activiti-bpmn-converter-6.0.0.jar
+activiti-bpmn-layout-6.0.0.jar
+activiti-bpmn-model-6.0.0.jar
+activiti-camel-6.0.0.jar
+activiti-cdi-6.0.0.jar
+activiti-common-rest-6.0.0.jar
+activiti-cxf-6.0.0.jar
+activiti-dmn-api-6.0.0.jar
+activiti-dmn-engine-6.0.0.jar
+activiti-dmn-engine-configurator-6.0.0.jar
+activiti-dmn-json-converter-6.0.0.jar
+activiti-dmn-model-6.0.0.jar
+activiti-dmn-rest-6.0.0.jar
+activiti-dmn-xml-converter-6.0.0.jar
+activiti-engine-6.0.0.jar
+activiti-form-api-6.0.0.jar
+activiti-form-engine-6.0.0.jar
+activiti-form-engine-configurator-6.0.0.jar
+activiti-form-json-converter-6.0.0.jar
+activiti-form-model-6.0.0.jar
+activiti-image-generator-6.0.0.jar
+activiti-jms-spring-executor-6.0.0.jar
+activiti-jmx-6.0.0.jar ( 目前沒放這個jar檔 )
+activiti-json-converter-6.0.0.jar
+activiti-ldap-6.0.0.jar
+activiti-mule-6.0.0.jar
+activiti-osgi-6.0.0.jar
+activiti-process-validation-6.0.0.jar
+activiti-rest-6.0.0.jar
+activiti-secure-javascript-6.0.0.jar
+activiti-spring-6.0.0.jar
+activiti-spring-boot-starter-actuator-6.0.0.jar
+activiti-spring-boot-starter-basic-6.0.0.jar
+activiti-spring-boot-starter-integration-6.0.0.jar
+activiti-spring-boot-starter-jpa-6.0.0.jar
+activiti-spring-boot-starter-rest-api-6.0.0.jar
+activiti-spring-boot-starter-security-6.0.0.jar
+content-storage-api-6.0.0.jar
+content-storage-fs-6.0.0.jar
+editor-image-generator-6.0.0.jar
+
+
+Juel
+-------------------------
+juel-impl-2.2.7.jar ( require start Activiti with spring )
 
 
 Guava: Google Core Libraries for Java
