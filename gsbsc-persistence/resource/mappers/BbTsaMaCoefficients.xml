@@ -4,7 +4,7 @@
 
 <mapper namespace="BbTsaMaCoefficients">
 
-	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbTsa" id="baseResultMap">
+	<resultMap type="com.netsteadfast.greenstep.po.hbm.BbTsaMaCoefficients" id="baseResultMap">
 		<id column="OID" property="oid"/>
 		<result column="TSA_OID" property="tsaOid"/>
 		<result column="SEQ" property="seq"/>
