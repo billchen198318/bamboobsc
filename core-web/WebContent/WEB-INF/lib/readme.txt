@@ -48,7 +48,7 @@ aspectjweaver-1.8.9.jar
 
 CGLIB
 -------------------------
-cglib-2.2.3.jar
+cglib-3.2.5.jar
 
 
 json
@@ -177,12 +177,12 @@ https://github.com/brettwooldridge/HikariCP
 HikariCP-2.6.2.jar
 
 
-ASM	(require by Apache CXF ... etc )
+ASM	*** Must be compatible with the version of Apache-CXF & CGLIB ***
 http://asm.ow2.org/	
 -------------------------
-asm-5.1.jar
-asm-commons-5.1.jar
-asm-tree-5.1.jar
+asm-5.2.jar
+asm-commons-5.2.jar
+asm-tree-5.2.jar
 
 
 Apache CXF with require	
