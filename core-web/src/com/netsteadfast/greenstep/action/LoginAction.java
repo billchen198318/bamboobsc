@@ -52,6 +52,9 @@ public class LoginAction extends BaseSupportAction {
 		
 		Object errObj = super.getHttpServletRequest().getAttribute(
 				org.apache.shiro.web.filter.authc.FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+		if ("com.netsteadfast.greenstep.sys.InvalidAccountException".equals(errObj)) {
+			this.setPageMessage("Invalid account.");
+		}		
 		if ("com.netsteadfast.greenstep.sys.IncorrectCaptchaException".equals(errObj)) {
 			this.setPageMessage("Captcha code incorrect.");
 		}		
