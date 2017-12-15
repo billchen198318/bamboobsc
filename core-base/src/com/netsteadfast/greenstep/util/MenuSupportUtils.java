@@ -313,9 +313,31 @@ public class MenuSupportUtils {
 	public static Map<String, String> getMenuData(String basePath, TbSys sys, String jsessionId, String localeCode) throws ServiceException, Exception {
 		Map<String, String> menuData = new HashMap<String, String>();			
 		List<SysMenuVO> menuList = loadSysMenuData(sys.getSysId());
+		
+		/*
+		 * 2018-12-15
+		 * 因為 CORE 系統有一些功能是一定要的
+		 * 
+		 * 如:
+		 * CORE_PROGCOMM0001Q
+		 * CORE_PROGCOMM0002Q
+		 * CORE_PROGCOMM0003Q
+		 * CORE_PROGCOMM0004Q
+		 *
+		 */
+		/*
 		if (menuList==null || menuList.size()<1) {
 			return menuData;
 		}
+		*/
+		/*
+		 * 2018-12-15
+		 * 因為 CORE 系統有一些功能是一定要的
+		 */
+		if ( (menuList==null || menuList.size()<1) && !Constants.getSystem().equals(sys.getSysId()) ) {
+			return menuData;
+		}		
+		
 		StringBuilder htmlSb = new StringBuilder();
 		StringBuilder jsSb = new StringBuilder();
 		StringBuilder dlgSb = new StringBuilder();
