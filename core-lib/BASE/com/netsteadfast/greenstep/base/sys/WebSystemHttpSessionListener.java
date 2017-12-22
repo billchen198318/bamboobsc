@@ -65,6 +65,8 @@ public class WebSystemHttpSessionListener implements HttpSessionListener, HttpSe
 
 	@Override
 	public void sessionCreated(HttpSessionEvent event) {
+		// 2017-12-22 rem
+		/*
 		try {
 			sessionsMap.put(event.getSession().getId(), event.getSession());
 			if (this.uSessLogHelper.count(event.getSession().getId())>0) {
@@ -72,7 +74,8 @@ public class WebSystemHttpSessionListener implements HttpSessionListener, HttpSe
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}	
+		*/
 	}
 
 	@Override
@@ -94,6 +97,15 @@ public class WebSystemHttpSessionListener implements HttpSessionListener, HttpSe
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent event) {
 		try {
+			// --------------------------------------------------
+			// 2017-12-22 add
+			// --------------------------------------------------
+			String name=event.getName();
+			if (Constants.SESS_ACCOUNT.equals(name)) {
+				sessionsMap.put(event.getSession().getId(), event.getSession());
+			}
+			// --------------------------------------------------
+			
 			this.cleanBeforeLoginUser(event);
 			this.writeLoginUser(event);
 		} catch (Exception e) {
