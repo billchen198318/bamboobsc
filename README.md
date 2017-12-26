@@ -18,6 +18,13 @@ Features:<br/>
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=N5BsWZL8bxQ" target="_blank">bambooBSC demo video</a>
 
 
+<h3>Who use bambooBSC</h3>
+<a href="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/PRESENTACIN-PROPUESTADEDISEODELCUADRODEMANDO-JUDITHMCA.pdf" target="_blank">PROPUESTA DE DISEÑO DEL
+CUADRO DE MANDO INTEGRAL
+PARA LA TOMA DE DECISIONES EN EL
+INSTITUTO FINLAY DE VACUNAS</a>
+
+
 <h2>bambooBSC architecture</h2>
 <img src="https://github.com/billchen198318/bamboobsc/blob/master/core-doc/bamboobsc_05_web_arch.png"/><br/>
 <br/><br/>
