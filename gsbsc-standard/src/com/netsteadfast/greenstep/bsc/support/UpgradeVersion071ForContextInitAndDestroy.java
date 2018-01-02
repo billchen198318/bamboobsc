@@ -33,8 +33,9 @@ import com.netsteadfast.greenstep.sys.BackgroundProgramUserUtils;
 
 /**
  * 準備 0.7.1 版本需要的 bb_employee_hier 資料
- *
+ * 0.7.4 廢除使用, 請用 "09 - Web Context bean" 來移除設定
  */
+@Deprecated
 public class UpgradeVersion071ForContextInitAndDestroy extends ContextInitializedAndDestroyedBean {
 	private static final long serialVersionUID = 6662283552130953159L;
 	protected static Logger logger = Logger.getLogger(UpgradeVersion071ForContextInitAndDestroy.class);
@@ -54,6 +55,7 @@ public class UpgradeVersion071ForContextInitAndDestroy extends ContextInitialize
 		} finally {
 			BackgroundProgramUserUtils.logout();
 		}
+		logger.warn("Please use [09 - Web Context bean] remove [UpgradeVersion071ForContextInitAndDestroy] config item in 0.7.4 version or later.");
 		logger.info("end....");
 	}
 
