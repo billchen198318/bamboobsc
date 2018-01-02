@@ -41,7 +41,7 @@ public class BackgroundProgramUserUtils {
 	
 	public static boolean isLogin() {
 		if (subjectThreadLocal.get() != null) {
-			return true;
+			return subjectThreadLocal.get().isAuthenticated();
 		}
 		return false;
 	}
@@ -52,6 +52,7 @@ public class BackgroundProgramUserUtils {
 	
 	public static void logout() throws Exception {
 		getSubject().logout();
+		subjectThreadLocal.remove();
 	}
 	
 	public static void login() throws Exception {
