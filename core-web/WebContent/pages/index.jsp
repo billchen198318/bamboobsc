@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- modify applicationContext-appSettings.properties settings googleMap.enable=Y -->
     </s:else>
 	
-    <script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/html2canvas/html2canvas.js"></script>
     <script type="text/javascript" src="<%=basePath%>/html2canvas/html2canvas.svg.js"></script>	    
 	

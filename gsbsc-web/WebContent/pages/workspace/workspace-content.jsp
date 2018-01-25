@@ -32,7 +32,7 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="<%=mainSysBasePath%>/d3/d3.js"></script>
 	<script type="text/javascript" src="<%=mainSysBasePath%>/d3/nv.d3.js"></script>
 	

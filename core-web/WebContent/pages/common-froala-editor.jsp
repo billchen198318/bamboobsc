@@ -48,7 +48,7 @@ if (!StringUtils.isBlank(uploadOid)) {
 	<link href="<%=mainSysBasePath%>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	
 	
-    <script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-3.2.1.min.js"></script>
     
     
 	 <!-- Include Editor style. -->
