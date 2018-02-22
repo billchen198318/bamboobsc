@@ -128,7 +128,7 @@ public class HessianServiceProxyAspect implements IBaseAspectService {
 			 */
 			if (StringUtils.isBlank(userId)) {
 				logger.warn( "no userId" );
-				pjp.proceed();
+				return pjp.proceed();
 			}
 			
 			/**
