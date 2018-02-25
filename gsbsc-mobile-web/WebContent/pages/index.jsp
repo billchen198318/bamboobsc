@@ -193,6 +193,8 @@ function getTitleContent(backgroundColor, fontColor, title, fnname) {
 	<jsp:param value="home" name="active"/>
 </jsp:include>
 
+<div class="container">	
+
   <div class="form-group">
     <label for="frequency">${action.getText('INDEX_frequency')}</label>
     <select class="form-control" id="frequency">
@@ -230,6 +232,8 @@ function getTitleContent(backgroundColor, fontColor, title, fnname) {
 </div>	
 	
 	</div>
+</div>
+
 </div>
 
 <%

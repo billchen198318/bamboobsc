@@ -508,6 +508,8 @@ function getScore(score) {
 	<jsp:param value="dashboard" name="active"/>
 </jsp:include>
 
+<div class="container">	
+
   <div class="form-group">
     <label for="vision">Vision</label>
     <select class="form-control" id="vision">
@@ -598,6 +600,7 @@ function getScore(score) {
 	
 </div>
 
+</div>
 
 <%
 String realPath = getServletContext().getRealPath("/");

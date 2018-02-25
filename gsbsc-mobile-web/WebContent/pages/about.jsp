@@ -25,6 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include page="topNavbar.jsp">
 	<jsp:param value="about" name="active"/>
 </jsp:include>
+
+<div class="container">	
 		
 	<table border="0" width="100%" bgcolor="#ffffff">
 		<tr valign="top">
@@ -58,6 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</td>
 		</tr>
 	</table>
+
+</div>
 
 </body>
 </html>

@@ -135,6 +135,8 @@ function submitLoginForm() {
     <label>Only support <b>Chrome</b> (recommend) or support <b>HTML5 date field</b> browser.</label>
     <br/>
 	<label>bambooBSC 0.7.4 mobile version</label>
+	
+	<a href="../core-web/index.action" class="btn btn-success" role="button" aria-pressed="true">click link to Default WEB version</a>
 
 </form>
 </div>

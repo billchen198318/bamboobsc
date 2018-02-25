@@ -44,6 +44,8 @@ function refresh_map() {
 	<jsp:param value="strategy-map" name="active"/>
 </jsp:include>
 
+<div class="container">	
+
   <div class="form-group">
     <label for="visionOid">Vision</label>
     <select class="form-control" id="visionOid" onchange="refresh_map();">
@@ -56,6 +58,8 @@ function refresh_map() {
  <div id="my-iframe" style="-webkit-overflow-scrolling: touch;  overflow: auto;" align="center">
 	<iframe id="map-iframe" style='width:800px;height:600px;' src="<%=basePath%>/strategymapContent.action">
 	</iframe>
+</div>
+
 </div>
 
 </body>
