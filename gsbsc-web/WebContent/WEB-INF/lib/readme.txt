@@ -3,13 +3,13 @@ Struts2
 commons-logging-1.1.3.jar
 commons-io-2.5.jar
 commons-fileupload-1.3.3.jar
-freemarker-2.3.23.jar
+freemarker-2.3.26-incubating.jar
 ognl-3.1.15.jar
-struts2-core-2.5.13.jar
-struts2-jasperreports-plugin-2.5.13.jar
-struts2-jfreechart-plugin-2.5.13.jar
-struts2-json-plugin-2.5.13.jar
-struts2-spring-plugin-2.5.13.jar
+struts2-core-2.5.15.jar
+struts2-jasperreports-plugin-2.5.15.jar
+struts2-jfreechart-plugin-2.5.15.jar
+struts2-json-plugin-2.5.15.jar
+struts2-spring-plugin-2.5.15.jar
 
 
 Spring4
@@ -446,7 +446,7 @@ olap4j-tck-1.2.0.jar
 olap4j-xmla-1.2.0.jar
 olap4j-xmlaserver-1.2.0.jar
 pivot4j-core-0.9.jar
-freemarker-2.3.21.jar ( change struts2 freemarker-2.3.23.jar )
+freemarker-2.3.21.jar ( change struts2 freemarker-2.3.26-incubating.jar )
 java-cup-11b.jar
 java-cup-11b-runtime.jar
 
