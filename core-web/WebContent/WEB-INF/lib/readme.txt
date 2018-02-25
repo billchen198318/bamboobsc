@@ -475,9 +475,9 @@ hessian-4.0.51.jar
 Renjin
 http://www.renjin.org/
 has manual remove apache common-math/logging/vfs and joda-time class binary file
-re-pack to renjin-script-engine-0.8.2266.jar
+re-pack to renjin-script-engine-0.9.2597.jar
 -------------------------
-renjin-script-engine-0.8.2468.jar
+renjin-script-engine-0.9.2597.jar
 
 
 espy-arima
