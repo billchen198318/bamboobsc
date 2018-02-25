@@ -58,7 +58,7 @@ json-lib-2.4-jdk15.jar
 
 MySQL
 -------------------------
-mysql-connector-java-5.1.44-bin.jar
+mysql-connector-java-5.1.45-bin.jar
 
 
 http://code.google.com/p/beanshell2/
@@ -174,7 +174,7 @@ hamcrest-core-1.3.jar
 HikariCP
 https://github.com/brettwooldridge/HikariCP
 -------------------------
-HikariCP-2.6.2.jar
+HikariCP-2.7.8.jar
 
 
 ASM	*** Must be compatible with the version of Apache-CXF & CGLIB ***
@@ -341,7 +341,7 @@ guava-23.0.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.12-indy.jar
+groovy-all-2.4.13-indy.jar
 
 
 Apache ActiveMQ
