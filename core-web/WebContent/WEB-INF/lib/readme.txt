@@ -364,13 +364,14 @@ jstl-api-1.2.jar
 
 JasperReports
 -------------------------
-jasperreports-6.3.1.jar
-jasperreports-chart-themes-6.3.1.jar
-jasperreports-fonts-6.3.1.jar
-jasperreports-functions-6.3.1.jar
-jasperreports-javaflow-6.3.1.jar
+jasperreports-6.5.1.jar
+jasperreports-chart-customizers-6.5.1.jar
+jasperreports-chart-themes-6.5.1.jar
+jasperreports-fonts-6.5.1.jar
+jasperreports-functions-6.5.1.jar
+jasperreports-javaflow-6.5.1.jar
 jasperreports-core-renderer.jar
-jasperreports-htmlcomponent-5.0.1.jar
+jasperreports-html-component-6.5.1.jar
 commons-javaflow-20060411.jar
 itext-2.1.7.js3.jar
 jdt-compiler-3.1.1.jar
