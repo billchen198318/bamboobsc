@@ -1,7 +1,6 @@
 0.7.4
 -----------------------------------------------------------
-1. DOJO framework upgrade 1.13.0 version.
-2. Update upgrade thirdparty lib files, extend the software lifecycle.
+1. Update upgrade thirdparty lib files, extend the software lifecycle.
 
 If have previous database data (bbcore) in MYSQL E.g: 0.7.3 old version, please update sql command file patch_up_074.sql
 NOTE: upgrade will lose some system data. recommend need "backup old database".
