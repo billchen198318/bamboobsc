@@ -30,19 +30,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	<table border="0" width="100%" bgcolor="#ffffff">
 		<tr valign="top">
-			<td colspan="2">
-			<table border="0" width="100%" cellpadding="0" cellspacing="0">
-				<tr valign="top">
-					<td align="left" valign="middle" bgcolor="#F5F5F5">
-						<img src="./images/head_logo.jpg" border="0" alt="logo" style="vertical-align:middle;margin-top:0.25em"/><b><font size='2' color='#394045' style="vertical-align:middle;margin-top:0.25em">&nbsp;About me</font></b>
-						<br/>
-						<hr color="#3794E5" size="2">
-					</td>
-				</tr>
-			</table>				
-			</td>
-		</tr>
-		<tr valign="top">
 			<td align="center" width="128px">
 				<img alt="logo" src="./images/bamboobsc-logo.png" border="0" width="128px" height="128px"/>
 			</td>
