@@ -315,7 +315,7 @@ public class MenuSupportUtils {
 		List<SysMenuVO> menuList = loadSysMenuData(sys.getSysId());
 		
 		/*
-		 * 2018-12-15
+		 * 2017-12-15
 		 * 因為 CORE 系統有一些功能是一定要的
 		 * 
 		 * 如:
@@ -331,7 +331,7 @@ public class MenuSupportUtils {
 		}
 		*/
 		/*
-		 * 2018-12-15
+		 * 2017-12-15
 		 * 因為 CORE 系統有一些功能是一定要的
 		 */
 		if ( (menuList==null || menuList.size()<1) && !Constants.getSystem().equals(sys.getSysId()) ) {
