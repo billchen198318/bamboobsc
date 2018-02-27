@@ -333,6 +333,7 @@ public class MenuSupportUtils {
 		/*
 		 * 2017-12-15
 		 * 因為 CORE 系統有一些功能是一定要的
+		 * MenuSupportUtils只會再CORE被執行, 所以當前Constants.getSystem() 一定會是CORE
 		 */
 		if ( (menuList==null || menuList.size()<1) && !Constants.getSystem().equals(sys.getSysId()) ) {
 			return menuData;
