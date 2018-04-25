@@ -259,7 +259,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG002D0003A")
+	@ControllerMethodAuthority(programId="BSC_PROG002D0004A")
 	public String doSave() throws Exception {
 		try {
 			if (!this.allowJob()) {
@@ -282,7 +282,7 @@ public class KpiSaveOrUpdateAction extends BaseJsonAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@ControllerMethodAuthority(programId="BSC_PROG002D0003E")
+	@ControllerMethodAuthority(programId="BSC_PROG002D0004E")
 	public String doUpdate() throws Exception {
 		try {
 			if (!this.allowJob()) {
