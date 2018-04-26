@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Traditional Chinese spoken in Taiwan.
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['zh_tw'] = {
     "Colors": "\u984f\u8272",
     "Background": "\u80cc\u666f",
     "Text": "\u6587\u5b57",
+    "HEX Color": "十六進制顏色",
 
     // Paragraphs
     "Paragraph Format": "\u683c\u5f0f",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['zh_tw'] = {
     "Width": "\u5bec\u5ea6",
     "Height": "\u9ad8\u5ea6",
     "Something went wrong. Please try again.": "\u932f\u8aa4\uff0c\u8acb\u518d\u8a66\u4e00\u6b21\u3002",
+    "Image Caption": "圖片說明",
+    "Advanced Edit": "高級編輯",
 
     // Video
     "Insert Video": "\u63d2\u5165\u5f71\u7247",
     "Embedded Code": "\u5d4c\u5165\u7a0b\u5f0f\u78bc",
+    "Paste in a video URL": "粘貼在視頻網址",
+    "Drop video": "放下視頻",
+    "Your browser does not support HTML5 video.": "您的瀏覽器不支持html5視頻。",
+    "Upload Video": "上傳視頻",
 
     // Tables
     "Insert Table": "\u63d2\u5165\u8868\u683c",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['zh_tw'] = {
     "Decrease": "\u53bb\u9664\u7e2e\u6392",
 
     // Quick Insert
-    "Quick Insert": "\u5feb\u63d2"
+    "Quick Insert": "\u5feb\u63d2",
+
+    // Spcial Characters
+    "Special Characters": "特殊字符",
+    "Latin": "拉丁",
+    "Greek": "希臘語",
+    "Cyrillic": "西里爾",
+    "Punctuation": "標點",
+    "Currency": "貨幣",
+    "Arrows": "箭頭",
+    "Math": "數學",
+    "Misc": "雜項",
+
+    // Print.
+    "Print": "打印",
+
+    // Spell Checker.
+    "Spell Checker": "拼寫檢查器",
+
+    // Help
+    "Help": "幫幫我",
+    "Shortcuts": "快捷鍵",
+    "Inline Editor": "內聯編輯器",
+    "Show the editor": "顯示編輯",
+    "Common actions": "共同行動",
+    "Copy": "複製",
+    "Cut": "切",
+    "Paste": "糊",
+    "Basic Formatting": "基本格式",
+    "Increase quote level": "提高報價水平",
+    "Decrease quote level": "降低報價水平",
+    "Image / Video": "圖像/視頻",
+    "Resize larger": "調整大小更大",
+    "Resize smaller": "調整大小更小",
+    "Table": "表",
+    "Select table cell": "選擇表單元格",
+    "Extend selection one cell": "擴展選擇一個單元格",
+    "Extend selection one row": "擴展選擇一行",
+    "Navigation": "導航",
+    "Focus popup / toolbar": "焦點彈出/工具欄",
+    "Return focus to previous position": "將焦點返回到上一個位置",
+
+    // Embed.ly
+    "Embed URL": "嵌入網址",
+    "Paste in a URL to embed": "粘貼在一個網址中嵌入",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "粘貼的內容來自微軟Word文檔。你想保留格式還是清理它？",
+    "Keep": "保持",
+    "Clean": "清潔",
+    "Word Paste Detected": "檢測到字貼"
   },
   direction: "ltr"
 };
+
+}));

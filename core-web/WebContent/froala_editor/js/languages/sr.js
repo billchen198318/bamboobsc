@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Serbian (Latin)
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['sr'] = {
     "Colors": "Boje",
     "Background": "Pozadina",
     "Text": "Tekst",
+    "HEX Color": "HEX boje",
 
     // Paragraphs
     "Paragraph Format": "Format pasusa",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['sr'] = {
     "Width": "\u0160irina",
     "Height": "Visina",
     "Something went wrong. Please try again.": "Ne\u0161to krenulo naopako. Poku\u0161ajte ponovo.",
+    "Image Caption": "Slika natpisa",
+    "Advanced Edit": "Napredno uređivanje",
 
     // Video
     "Insert Video": "Umetanje video",
     "Embedded Code": "Ugra\u0111eni k\u00f4d",
+    "Paste in a video URL": "Lepljenje u video URL",
+    "Drop video": "Baci snimak",
+    "Your browser does not support HTML5 video.": "Vaš pregledač ne podržava HTML5 video.",
+    "Upload Video": "Otpremanje video",
 
     // Tables
     "Insert Table": "Umetni tabelu",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['sr'] = {
     "Decrease": "Smanjivanje",
 
     // Quick Insert
-    "Quick Insert": "Brzo umetanje"
+    "Quick Insert": "Brzo umetanje",
+
+    // Spcial Characters
+    "Special Characters": "Specijalni znakovi",
+    "Latin": "Latino",
+    "Greek": "Grk",
+    "Cyrillic": "Ćirilica",
+    "Punctuation": "Interpunkcije",
+    "Currency": "Valuta",
+    "Arrows": "Strelice",
+    "Math": "Matematika",
+    "Misc": "Misc",
+
+    // Print.
+    "Print": "Odštampaj",
+
+    // Spell Checker.
+    "Spell Checker": "Kontrolor pravopisa",
+
+    // Help
+    "Help": "Pomoć",
+    "Shortcuts": "Prečice",
+    "Inline Editor": "Pri upisivanju Editor",
+    "Show the editor": "Prikaži urednik",
+    "Common actions": "Zajedničke akcije",
+    "Copy": "Kopija",
+    "Cut": "Rez",
+    "Paste": "Nalepi",
+    "Basic Formatting": "Osnovno oblikovanje",
+    "Increase quote level": "Povećati ponudu za nivo",
+    "Decrease quote level": "Smanjenje ponude nivo",
+    "Image / Video": "Slika / Video",
+    "Resize larger": "Veće veličine",
+    "Resize smaller": "Promena veličine manji",
+    "Table": "Sto",
+    "Select table cell": "Select ćelije",
+    "Extend selection one cell": "Proširite selekciju jednu ćeliju",
+    "Extend selection one row": "Proširite selekciju jedan red",
+    "Navigation": "Navigacija",
+    "Focus popup / toolbar": "Fokus Iskačući meni / traka sa alatkama",
+    "Return focus to previous position": "Vratiti fokus na prethodnu poziciju",
+
+    // Embed.ly
+    "Embed URL": "Ugradite URL",
+    "Paste in a URL to embed": "Nalepite URL adresu da biste ugradili",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Nalepljeni sadržaj dolazi iz Microsoft Word dokument. Da li želite zadržati u formatu ili počistiti?",
+    "Keep": "Nastavi",
+    "Clean": "Oиisti",
+    "Word Paste Detected": "Word Nalepi otkriven"
   },
   direction: "ltr"
 };
+
+}));

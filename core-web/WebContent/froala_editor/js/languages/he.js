@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Hebrew
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['he'] = {
     "Colors": "\u05e6\u05d1\u05e2\u05d9\u05dd",
     "Background": "\u05e8\u05e7\u05e2",
     "Text": "\u05d4\u05d8\u05e1\u05d8",
+    "HEX Color": "צבע הקס",
 
     // Paragraphs
     "Paragraph Format": "\u05e4\u05d5\u05e8\u05de\u05d8",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['he'] = {
     "Width": "\u05e8\u05d5\u05d7\u05d1",
     "Height": "\u05d2\u05d5\u05d1\u05d4",
     "Something went wrong. Please try again.": "\u05de\u05e9\u05d4\u05d5 \u05d4\u05e9\u05ea\u05d1\u05e9. \u05d1\u05d1\u05e7\u05e9\u05d4 \u05e0\u05e1\u05d4 \u05e9\u05d5\u05d1.",
+    "Image Caption": "כיתוב תמונה",
+    "Advanced Edit": "עריכה מתקדמת",
 
     // Video
     "Insert Video": "\u05d4\u05d5\u05e1\u05e4\u05ea \u05d5\u05d9\u05d3\u05d9\u05d0\u05d5",
     "Embedded Code": "\u05e7\u05d5\u05d3 \u05de\u05d5\u05d8\u05d1\u05e2",
+    "Paste in a video URL": "הדבק בכתובת אתר של סרטון",
+    "Drop video": "ירידה וידאו",
+    "Your browser does not support HTML5 video.": "הדפדפן שלך אינו תומך וידאו html5.",
+    "Upload Video": "להעלות וידאו",
 
     // Tables
     "Insert Table": "\u05d4\u05db\u05e0\u05e1 \u05d8\u05d1\u05dc\u05d4",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['he'] = {
     "Decrease": "\u05d9\u05e8\u05d9\u05d3\u05d4",
 
     // Quick Insert
-    "Quick Insert": "\u05db\u05e0\u05e1 \u05de\u05d4\u05d9\u05e8"
+    "Quick Insert": "\u05db\u05e0\u05e1 \u05de\u05d4\u05d9\u05e8",
+
+    // Spcial Characters
+    "Special Characters": "תווים מיוחדים",
+    "Latin": "לָטִינִית",
+    "Greek": "יווני",
+    "Cyrillic": "קירילית",
+    "Punctuation": "פיסוק",
+    "Currency": "מַטְבֵּעַ",
+    "Arrows": "חצים",
+    "Math": "מתמטיקה",
+    "Misc": "שונות",
+
+    // Print.
+    "Print": "הדפס",
+
+    // Spell Checker.
+    "Spell Checker": "בודק איות",
+
+    // Help
+    "Help": "עֶזרָה",
+    "Shortcuts": "קיצורי דרך",
+    "Inline Editor": "עורך מוטבע",
+    "Show the editor": "להראות את העורך",
+    "Common actions": "פעולות נפוצות",
+    "Copy": "עותק",
+    "Cut": "גזירה",
+    "Paste": "לְהַדבִּיק",
+    "Basic Formatting": "עיצוב בסיסי",
+    "Increase quote level": "רמת ציטוט",
+    "Decrease quote level": "רמת ציטוט ירידה",
+    "Image / Video": "תמונה / וידאו",
+    "Resize larger": "גודל גדול יותר",
+    "Resize smaller": "גודל קטן יותר",
+    "Table": "שולחן",
+    "Select table cell": "בחר תא תא - -",
+    "Extend selection one cell": "להאריך את הבחירה תא אחד",
+    "Extend selection one row": "להאריך את הבחירה שורה אחת",
+    "Navigation": "ניווט",
+    "Focus popup / toolbar": "מוקד קופץ / סרגל הכלים",
+    "Return focus to previous position": "חזרה להתמקד קודם",
+
+    // Embed.ly
+    "Embed URL": "כתובת אתר להטביע",
+    "Paste in a URL to embed": "הדבק כתובת אתר להטביע",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "התוכן המודבק מגיע ממסמך Word של Microsoft. האם ברצונך לשמור את הפורמט או לנקות אותו?",
+    "Keep": "לִשְׁמוֹר",
+    "Clean": "לְנַקוֹת",
+    "Word Paste Detected": "הדבק מילה זוהתה"
   },
   direction: "rtl"
 };
+
+}));

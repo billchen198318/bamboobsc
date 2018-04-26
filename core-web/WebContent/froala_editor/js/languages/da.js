@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Danish
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['da'] = {
     "Colors": "Farver",
     "Background": "Baggrunds",
     "Text": "Tekst",
+    "HEX Color": "Hex farve",
 
     // Paragraphs
     "Paragraph Format": "S\u00e6tning format",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['da'] = {
     "Width": "Bredde",
     "Height": "H\u00f8jde",
     "Something went wrong. Please try again.": "Noget gik galt. Pr\u00f8v igen.",
+    "Image Caption": "Billedtekst",
+    "Advanced Edit": "Avanceret redigering",
 
     // Video
     "Insert Video": "Inds\u00e6t video",
     "Embedded Code": "Embedded kode",
+    "Paste in a video URL": "Indsæt i en video url",
+    "Drop video": "Slip video",
+    "Your browser does not support HTML5 video.": "Din browser understøtter ikke html5 video.",
+    "Upload Video": "Upload video",
 
     // Tables
     "Insert Table": "Inds\u00e6t tabel",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['da'] = {
     "Decrease": "Mindsk",
 
     // Quick Insert
-    "Quick Insert": "Hurtig indsats"
+    "Quick Insert": "Hurtig indsats",
+
+    // Spcial Characters
+    "Special Characters": "Specialtegn",
+    "Latin": "Latin",
+    "Greek": "Græsk",
+    "Cyrillic": "Kyrillisk",
+    "Punctuation": "Tegnsætning",
+    "Currency": "Betalingsmiddel",
+    "Arrows": "Pile",
+    "Math": "Matematik",
+    "Misc": "Misc",
+
+    // Print.
+    "Print": "Print",
+
+    // Spell Checker.
+    "Spell Checker": "Stavekontrol",
+
+    // Help
+    "Help": "Hjælp",
+    "Shortcuts": "Genveje",
+    "Inline Editor": "Inline editor",
+    "Show the editor": "Vis redaktøren",
+    "Common actions": "Fælles handlinger",
+    "Copy": "Kopi",
+    "Cut": "Skære",
+    "Paste": "Sæt ind",
+    "Basic Formatting": "Grundlæggende formatering",
+    "Increase quote level": "Øge tilbudsniveau",
+    "Decrease quote level": "Sænk citeringsniveauet",
+    "Image / Video": "Billede / video",
+    "Resize larger": "Ændre størrelse større",
+    "Resize smaller": "Ændre størrelsen mindre",
+    "Table": "Tabel",
+    "Select table cell": "Vælg tabel celle",
+    "Extend selection one cell": "Udvide valget en celle",
+    "Extend selection one row": "Udvide markeringen en række",
+    "Navigation": "Navigation",
+    "Focus popup / toolbar": "Fokus popup / værktøjslinje",
+    "Return focus to previous position": "Returnere fokus til tidligere position",
+
+    // Embed.ly
+    "Embed URL": "Integrere url",
+    "Paste in a URL to embed": "Indsæt i en URL for at indlejre",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Det indsatte indhold kommer fra et Microsoft Word-dokument. Vil du beholde formateringen eller fjerne det?",
+    "Keep": "Beholde",
+    "Clean": "Fjerne",
+    "Word Paste Detected": "Indsættelse fra Word er detekteret"
   },
   direction: "ltr"
 };
+
+}));

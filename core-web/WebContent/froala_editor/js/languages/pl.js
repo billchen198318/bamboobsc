@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Polish
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['pl'] = {
     "Colors": "Kolory",
     "Background": "T\u0142o",
     "Text": "Tekstu",
+    "HEX Color": "Sześciokąt",
 
     // Paragraphs
     "Paragraph Format": "Formaty",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['pl'] = {
     "Width": "Szeroko\u015b\u0107",
     "Height": "Wysoko\u015b\u0107",
     "Something went wrong. Please try again.": "Co\u015b posz\u0142o nie tak. Prosz\u0119 spr\u00f3buj ponownie.",
+    "Image Caption": "Podpis obrazu",
+    "Advanced Edit": "Zaawansowana edycja",
 
     // Video
     "Insert Video": "Wstaw wideo",
     "Embedded Code": "Kod osadzone",
+    "Paste in a video URL": "Wklej adres URL filmu",
+    "Drop video": "Upuść wideo",
+    "Your browser does not support HTML5 video.": "Twoja przeglądarka nie obsługuje wideo html5.",
+    "Upload Video": "Prześlij wideo",
 
     // Tables
     "Insert Table": "Wstaw tabel\u0119",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['pl'] = {
     "Decrease": "Zmniejszenie",
 
     // Quick Insert
-    "Quick Insert": "Szybkie wstaw"
+    "Quick Insert": "Szybkie wstaw",
+
+    // Spcial Characters
+    "Special Characters": "Znaki specjalne",
+    "Latin": "Łacina",
+    "Greek": "Grecki",
+    "Cyrillic": "Cyrylica",
+    "Punctuation": "Interpunkcja",
+    "Currency": "Waluta",
+    "Arrows": "Strzałki",
+    "Math": "Matematyka",
+    "Misc": "Misc",
+
+    // Print.
+    "Print": "Wydrukować",
+
+    // Spell Checker.
+    "Spell Checker": "Sprawdzanie pisowni",
+
+    // Help
+    "Help": "Wsparcie",
+    "Shortcuts": "Skróty",
+    "Inline Editor": "Edytor w wierszu",
+    "Show the editor": "Pokazać edytor",
+    "Common actions": "Wspólne działania",
+    "Copy": "Kopiuj",
+    "Cut": "Ciąć",
+    "Paste": "Pasta",
+    "Basic Formatting": "Podstawowe formatowanie",
+    "Increase quote level": "Zwiększyć poziom notowań",
+    "Decrease quote level": "Zmniejszyć poziom notowań",
+    "Image / Video": "Obraz / wideo",
+    "Resize larger": "Zmienić rozmiar większy",
+    "Resize smaller": "Zmienić rozmiar mniejszy",
+    "Table": "Stół",
+    "Select table cell": "Wybierz komórkę tabeli",
+    "Extend selection one cell": "Przedłużyć wybór jednej komórki",
+    "Extend selection one row": "Przedłużyć wybór jednego rzędu",
+    "Navigation": "Nawigacja",
+    "Focus popup / toolbar": "Focus popup / toolbar",
+    "Return focus to previous position": "Powrót do poprzedniej pozycji",
+
+    // Embed.ly
+    "Embed URL": "Osadzaj url",
+    "Paste in a URL to embed": "Wklej w adresie URL do osadzenia",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Wklejana treść pochodzi z programu Microsoft Word. Czy chcesz zachować formatowanie czy wkleić jako zwykły tekst?",
+    "Keep": "Zachowaj formatowanie",
+    "Clean": "Wklej jako tekst",
+    "Word Paste Detected": "Wykryto sformatowany tekst"
   },
   direction: "ltr"
 };
+
+}));

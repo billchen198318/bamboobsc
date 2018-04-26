@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Czech
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['cs'] = {
     "Colors": "Barvy",
     "Background": "Pozad\u00ed",
     "Text": "P\u00edsmo",
+    "HEX Color": "Hex Barvy",
 
     // Paragraphs
     "Paragraph Format": "Form\u00e1t odstavec",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['cs'] = {
     "Width": "\u0160\u00ed\u0159ka",
     "Height": "V\u00fd\u0161ka",
     "Something went wrong. Please try again.": "N\u011bco se pokazilo. Pros\u00edm zkuste to znovu.",
+    "Image Caption": "Obrázek titulku",
+    "Advanced Edit": "Pokročilá úprava",
 
     // Video
     "Insert Video": "Vlo\u017eit video",
     "Embedded Code": "Vlo\u017een\u00fd k\u00f3d",
+    "Paste in a video URL": "Vložit adresu URL videa",
+    "Drop video": "Drop video",
+    "Your browser does not support HTML5 video.": "Váš prohlížeč nepodporuje video html5.",
+    "Upload Video": "Nahrát video",
 
     // Tables
     "Insert Table": "Vlo\u017eit tabulku",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['cs'] = {
     "Decrease": "Sn\u00ed\u017een\u00ed",
 
     // Quick Insert
-    "Quick Insert": "Rychl\u00e1 vlo\u017eka"
+    "Quick Insert": "Rychl\u00e1 vlo\u017eka",
+
+    // Spcial Characters
+    "Special Characters": "Speciální znaky",
+    "Latin": "Latinský",
+    "Greek": "Řecký",
+    "Cyrillic": "Cyrilice",
+    "Punctuation": "Interpunkce",
+    "Currency": "Měna",
+    "Arrows": "Šipky",
+    "Math": "Matematika",
+    "Misc": "Misc",
+
+    // Print.
+    "Print": "Tisk",
+
+    // Spell Checker.
+    "Spell Checker": "Kontrola pravopisu",
+
+    // Help
+    "Help": "Pomoc",
+    "Shortcuts": "Zkratky",
+    "Inline Editor": "Inline editor",
+    "Show the editor": "Zobrazit editor",
+    "Common actions": "Společné akce",
+    "Copy": "Kopírovat",
+    "Cut": "Střih",
+    "Paste": "Vložit",
+    "Basic Formatting": "Základní formátování",
+    "Increase quote level": "Zvýšení cenové hladiny",
+    "Decrease quote level": "Snížit úroveň cenové nabídky",
+    "Image / Video": "Obraz / video",
+    "Resize larger": "Změna velikosti větší",
+    "Resize smaller": "Změnit velikost menší",
+    "Table": "Stůl",
+    "Select table cell": "Vyberte buňku tabulky",
+    "Extend selection one cell": "Rozšířit výběr o jednu buňku",
+    "Extend selection one row": "Rozšířit výběr o jeden řádek",
+    "Navigation": "Navigace",
+    "Focus popup / toolbar": "Popup / panel nástrojů zaostření",
+    "Return focus to previous position": "Návrat na předchozí pozici",
+
+    // Embed.ly
+    "Embed URL": "Vložte url",
+    "Paste in a URL to embed": "Vložit adresu URL, kterou chcete vložit",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Vložený obsah pochází z dokumentu Microsoft Word. chcete formát uchovat nebo jej vyčistit?",
+    "Keep": "Držet",
+    "Clean": "Čistý",
+    "Word Paste Detected": "Slovní vložka zjištěna"
   },
   direction: "ltr"
 };
+
+}));

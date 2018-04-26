@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 /**
  * Persian
  */
@@ -38,6 +64,7 @@ $.FE.LANGUAGE['fa'] = {
     "Colors": "\u0631\u0646\u06af",
     "Background": "\u0632\u0645\u06cc\u0646\u0647 \u0645\u062a\u0646",
     "Text": "\u0645\u062a\u0646",
+    "HEX Color": "شصت رنگ",
 
     // Paragraphs
     "Paragraph Format": "\u0642\u0627\u0644\u0628",
@@ -99,10 +126,16 @@ $.FE.LANGUAGE['fa'] = {
     "Width": "\u0639\u0631\u0636",
     "Height": "\u0627\u0631\u062a\u0641\u0627\u0639",
     "Something went wrong. Please try again.": "\u0686\u06cc\u0632\u06cc \u0631\u0627 \u0627\u0634\u062a\u0628\u0627\u0647 \u0631\u0641\u062a\u002e \u0644\u0637\u0641\u0627 \u062f\u0648\u0628\u0627\u0631\u0647 \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f\u002e",
+    "Image Caption": "عنوان تصویر",
+    "Advanced Edit": "ویرایش پیشرفته",
 
     // Video
     "Insert Video": "\u0627\u0636\u0627\u0641\u0647 \u06a9\u0631\u062f\u0646 \u0641\u0627\u06cc\u0644 \u062a\u0635\u0648\u06cc\u0631\u06cc",
     "Embedded Code": "\u06a9\u062f \u062c\u0627\u0633\u0627\u0632\u06cc \u0634\u062f\u0647",
+    "Paste in a video URL": "در URL ویدیو وارد کنید",
+    "Drop video": "رها کردن ویدیو",
+    "Your browser does not support HTML5 video.": "مرورگر شما ویدیو HTML5 را پشتیبانی نمی کند.",
+    "Upload Video": "آپلود ویدیو",
 
     // Tables
     "Insert Table": "\u0627\u0636\u0627\u0641\u0647 \u06a9\u0631\u062f\u0646 \u062c\u062f\u0648\u0644",
@@ -227,7 +260,59 @@ $.FE.LANGUAGE['fa'] = {
     "Decrease": "\u0646\u0632\u0648\u0644 \u06a9\u0631\u062f\u0646",
 
     // Quick Insert
-    "Quick Insert": "\u062f\u0631\u062c \u0633\u0631\u06cc\u0639"
+    "Quick Insert": "\u062f\u0631\u062c \u0633\u0631\u06cc\u0639",
+
+    // Spcial Characters
+    "Special Characters": "کاراکترهای خاص",
+    "Latin": "لاتین",
+    "Greek": "یونانی",
+    "Cyrillic": "سیریلیک",
+    "Punctuation": "نقطه گذاری",
+    "Currency": "واحد پول",
+    "Arrows": "فلش ها",
+    "Math": "ریاضی",
+    "Misc": "متاسفم",
+
+    // Print.
+    "Print": "چاپ",
+
+    // Spell Checker.
+    "Spell Checker": "بررسی کننده غلط املایی",
+
+    // Help
+    "Help": "کمک",
+    "Shortcuts": "کلید های میانبر",
+    "Inline Editor": "ویرایشگر خطی",
+    "Show the editor": "ویرایشگر را نشان بده",
+    "Common actions": "اقدامات مشترک",
+    "Copy": "کپی کنید",
+    "Cut": "برش",
+    "Paste": "چسباندن",
+    "Basic Formatting": "قالب بندی اولیه",
+    "Increase quote level": "افزایش سطح نقل قول",
+    "Decrease quote level": "کاهش میزان نقل قول",
+    "Image / Video": "تصویر / ویدئو",
+    "Resize larger": "تغییر اندازه بزرگتر",
+    "Resize smaller": "تغییر اندازه کوچکتر",
+    "Table": "جدول",
+    "Select table cell": "سلول جدول را انتخاب کنید",
+    "Extend selection one cell": "انتخاب یک سلول را گسترش دهید",
+    "Extend selection one row": "یک ردیف را انتخاب کنید",
+    "Navigation": "جهت یابی",
+    "Focus popup / toolbar": "تمرکز پنجره / نوار ابزار",
+    "Return focus to previous position": "تمرکز بازگشت به موقعیت قبلی",
+
+    // Embed.ly
+    "Embed URL": "آدرس جاسازی",
+    "Paste in a URL to embed": "یک URL برای جاسازی کپی کنید",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "محتوای جا به جا از یک سند Word Microsoft می آید. آیا می خواهید فرمت را نگه دارید یا پاک کنید؟",
+    "Keep": "نگاه داشتن",
+    "Clean": "پاک کن",
+    "Word Paste Detected": "کلمه رب تشخیص داده شده است"
   },
   direction: "rtl"
 };
+
+}));

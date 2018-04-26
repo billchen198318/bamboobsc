@@ -1,9 +1,35 @@
 /*!
- * froala_editor v2.6.0 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.8.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2017 Froala Labs
+ * Copyright 2014-2018 Froala Labs
  */
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            return factory(jQuery);
+        };
+    } else {
+        // Browser globals
+        factory(window.jQuery);
+    }
+}(function ($) {
 $.FE.LANGUAGE['vi'] = {
   translation: {
     // Place holder
@@ -34,6 +60,7 @@ $.FE.LANGUAGE['vi'] = {
     "Colors": "M\u00E0u s\u1EAFc",
     "Background": "N\u1EC1n",
     "Text": "Ch\u1EEF",
+    "HEX Color": "Màu hex",
 
     // Paragraphs
     "Paragraph Format": "\u0110\u1ECBnh d\u1EA1ng \u0111o\u1EA1n v\u0103n b\u1EA3n",
@@ -95,10 +122,16 @@ $.FE.LANGUAGE['vi'] = {
     "Width": "Chi\u1EC1u r\u1ED9ng",
     "Height": "Chi\u1EC1u cao",
     "Something went wrong. Please try again.": "C\u00F3 l\u1ED7i x\u1EA3y ra. Vui l\u00F2ng th\u1EED l\u1EA1i sau.",
+    "Image Caption": "Chú thích hình ảnh",
+    "Advanced Edit": "Chỉnh sửa tiên tiến",
 
     // Video
     "Insert Video": "Ch\u00E8n video",
     "Embedded Code": "M\u00E3 nh\u00FAng",
+    "Paste in a video URL": "Dán vào một url video",
+    "Drop video": "Thả video",
+    "Your browser does not support HTML5 video.": "Trình duyệt của bạn không hỗ trợ video html5.",
+    "Upload Video": "Tải video lên",
 
     // Tables
     "Insert Table": "Ch\u00E8n b\u1EA3ng",
@@ -167,7 +200,59 @@ $.FE.LANGUAGE['vi'] = {
     "Decrease": "Gi\u1EA3m",
 
     // Quick Insert
-    "Quick Insert": "Ch\u00E8n nhanh"
+    "Quick Insert": "Ch\u00E8n nhanh",
+
+    // Spcial Characters
+    "Special Characters": "Nhân vật đặc biệt",
+    "Latin": "Latin",
+    "Greek": "Người Hy Lạp",
+    "Cyrillic": "Chữ viết tay",
+    "Punctuation": "Chấm câu",
+    "Currency": "Tiền tệ",
+    "Arrows": "Mũi tên",
+    "Math": "Môn Toán",
+    "Misc": "Misc",
+
+    // Print.
+    "Print": "In",
+
+    // Spell Checker.
+    "Spell Checker": "Công cụ kiểm tra chính tả",
+
+    // Help
+    "Help": "Cứu giúp",
+    "Shortcuts": "Phím tắt",
+    "Inline Editor": "Trình biên tập nội tuyến",
+    "Show the editor": "Hiển thị trình soạn thảo",
+    "Common actions": "Hành động thông thường",
+    "Copy": "Sao chép",
+    "Cut": "Cắt tỉa",
+    "Paste": "Dán",
+    "Basic Formatting": "Định dạng cơ bản",
+    "Increase quote level": "Tăng mức báo giá",
+    "Decrease quote level": "Giảm mức giá",
+    "Image / Video": "Hình ảnh / video",
+    "Resize larger": "Thay đổi kích thước lớn hơn",
+    "Resize smaller": "Thay đổi kích thước nhỏ hơn",
+    "Table": "Bàn",
+    "Select table cell": "Chọn ô trong bảng",
+    "Extend selection one cell": "Mở rộng lựa chọn một ô",
+    "Extend selection one row": "Mở rộng lựa chọn một hàng",
+    "Navigation": "Dẫn đường",
+    "Focus popup / toolbar": "Tập trung popup / thanh công cụ",
+    "Return focus to previous position": "Quay trở lại vị trí trước",
+
+    // Embed.ly
+    "Embed URL": "Url nhúng",
+    "Paste in a URL to embed": "Dán vào một url để nhúng",
+
+    // Word Paste.
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Nội dung dán là đến từ một tài liệu từ microsoft. bạn có muốn giữ định dạng hoặc làm sạch nó?",
+    "Keep": "Giữ",
+    "Clean": "Dọn dẹp",
+    "Word Paste Detected": "Dán từ được phát hiện"
   },
   direction: "ltr"
 };
+
+}));
