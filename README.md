@@ -102,12 +102,6 @@ contact: chen.xin.nien@gmail.com
 <br/>
 <br/>
 
-### Install on Windows
-install step video: https://www.youtube.com/watch?v=pM3q9udreDo
-
-<br/>
-<br/>
-
 ### Install on Linux
 ### 1. must first install the MySQL and JDK8
 ```
