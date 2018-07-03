@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012-2018 bambooCORE, greenstep of copyright Chen Xin Nien
+ * Copyright 2012-2016 bambooCORE, greenstep of copyright Chen Xin Nien
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,21 +23,20 @@ package com.netsteadfast.greenstep.sys;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.env.IniWebEnvironment;
+import org.apache.shiro.util.Factory;
 
 import com.netsteadfast.greenstep.base.Constants;
 
 public class BackgroundProgramUserUtils {
-	private static IniWebEnvironment environment;
+	private static Factory<org.apache.shiro.mgt.SecurityManager> factory;
 	private static org.apache.shiro.mgt.SecurityManager securityManager;	
 	private static ThreadLocal<Subject> subjectThreadLocal = new ThreadLocal<Subject>();
 	
 	static {
-		environment = new IniWebEnvironment();
-		environment.setConfigLocations("classpath:shiro.ini");
-		environment.init();
-		securityManager = environment.getSecurityManager();
+		factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+		securityManager = factory.getInstance();		
 	}
 	
 	public static boolean isLogin() {
@@ -52,14 +51,12 @@ public class BackgroundProgramUserUtils {
 	}
 	
 	public static void logout() throws Exception {
-		if (getSubject() != null) {
-			getSubject().logout();
-		}
+		getSubject().logout();
 		subjectThreadLocal.remove();
 	}
 	
 	public static void login() throws Exception {
-		if (securityManager==null) {
+		if (factory==null || securityManager==null) {
 			throw new Exception("Security manager is null!");
 		}
 		SecurityUtils.setSecurityManager(securityManager);		
