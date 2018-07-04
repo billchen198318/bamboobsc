@@ -67,7 +67,9 @@
 		<property name="passwordParam" value="password"/>
 		<property name="captchaParam" value="captcha"/>
 		<property name="rememberMeParam" value="rememberme"/>
+		<!--  
 		<property name="accountService" ref="core.service.AccountService"/>
+		-->
 	</bean>		
 	
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> 
