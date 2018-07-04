@@ -17,6 +17,8 @@
  	
 	<bean id="ldapContextFactory" class="org.apache.shiro.realm.ldap.JndiLdapContextFactory">
     	<property name="url" value="ldap://127.0.0.1:389" />       
+    	<property name="systemUsername" value="cn=Manager,dc=example,dc=com" />
+    	<property name="systemPassword" value="secret" />
 	</bean>
 	
 	<bean id="greenStepBaseAuthorizingLdapRealm" class="com.netsteadfast.greenstep.sys.GreenStepBaseAuthorizingLdapRealm">
