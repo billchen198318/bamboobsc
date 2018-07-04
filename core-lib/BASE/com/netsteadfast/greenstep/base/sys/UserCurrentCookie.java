@@ -64,7 +64,8 @@ public class UserCurrentCookie {
 			cookie.setPath("/");
 			cookie.setValue(encValue);
 			cookie.setMaxAge( 60*60*24 ); // 1-day
-			cookie.setHttpOnly(true);
+			//cookie.setHttpOnly(true); // 2018-07-04 rem
+			cookie.setHttpOnly(false); // 2018-07-04 add
 			response.addCookie(cookie);				
 		} catch (Exception e) {
 			e.printStackTrace();
