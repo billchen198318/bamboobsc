@@ -39,7 +39,7 @@ C. ActiveDirectory login mode.
    		<property name="userRoleService" ref="core.service.UserRoleService"/>
    		<property name="rolePermissionService" ref="core.service.RolePermissionService"/>	
 		<property name="cacheManager" ref="shiroCacheManager"/>
-    	<property name="contextFactory" ref="ldapContextFactory" />
-    	<property name="userDnTemplate" value="CN={0},OU=your-ou,DC=your-dc,DC=you-dc-com" />    	
+    	<property name="ldapContextFactory" ref="ldapContextFactory" />
+    	<property name="searchBase" value="CN={0},OU=your-ou,DC=your-dc,DC=you-dc-com" />      
 	</bean> 	
 			
