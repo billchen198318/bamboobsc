@@ -46,6 +46,8 @@ public class GreenStepBaseAuthorizingActiveDirectoryRealm extends ActiveDirector
 	private IUserRoleService<UserRoleVO, TbUserRole, String> userRoleService;
 	private IRolePermissionService<RolePermissionVO, TbRolePermission, String> rolePermissionService;	
 	
+	private String customQueryAttributeValue = "sAMAccountName={0}"; // for GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm
+	
 	public GreenStepBaseAuthorizingActiveDirectoryRealm() {
 		super();
 	}
@@ -71,6 +73,14 @@ public class GreenStepBaseAuthorizingActiveDirectoryRealm extends ActiveDirector
 	public void setRolePermissionService(IRolePermissionService<RolePermissionVO, TbRolePermission, String> rolePermissionService) {
 		this.rolePermissionService = rolePermissionService;
 	}	
+	
+	public String getCustomQueryAttributeValue() {
+		return customQueryAttributeValue;
+	}
+	
+	public void setCustomQueryAttributeValue(String customQueryAttributeValue) {
+		this.customQueryAttributeValue = customQueryAttributeValue;
+	}
 	
 	private SimpleAuthorizationInfo getSimpleAuthorizationInfo(String username) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();

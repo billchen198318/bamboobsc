@@ -16,17 +16,23 @@
  	</bean> 
  	
 	<bean id="ldapContextFactory" class="org.apache.shiro.realm.ldap.JndiLdapContextFactory">
-    	<property name="url" value="ldap://127.0.0.1:389" />       
-    	<property name="systemUsername" value="cn=Manager,dc=example,dc=com" />
-    	<property name="systemPassword" value="secret" />
+    	<property name="url" value="ldap://192.168.0.2:389" />       
+    	<property name="systemUsername" value="AD_ADMIN_ACCOUNT" />
+    	<property name="systemPassword" value="AD_ADMIN_PASSWORD" />
 	</bean>
 	
+	<!-- 
+	class "com.netsteadfast.greenstep.sys.GreenStepBaseAuthorizingActiveDirectoryRealm" no effective "customQueryAttributeValue"
+	class "com.netsteadfast.greenstep.sys.GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm" will effective "customQueryAttributeValue"
+	-->
 	<bean id="greenStepBaseAuthorizingActiveDirectoryRealm" class="com.netsteadfast.greenstep.sys.GreenStepBaseAuthorizingActiveDirectoryRealm">
    		<property name="userRoleService" ref="core.service.UserRoleService"/>
    		<property name="rolePermissionService" ref="core.service.RolePermissionService"/>	
 		<property name="cacheManager" ref="shiroCacheManager"/>
     	<property name="ldapContextFactory" ref="ldapContextFactory" />
-    	<property name="searchBase" value="CN={0},OU=your-ou,DC=your-dc,DC=you-dc-com" />      
+    	<property name="searchBase" value="OU=nsgroup,DC=netsteadfast,DC=com" />   
+    	<!-- "customQueryAttributeValue" property, only change class "GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm" will effective -->
+    	<property name="customQueryAttributeValue" value="sAMAccountName={0}" />
 	</bean> 	
 	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
