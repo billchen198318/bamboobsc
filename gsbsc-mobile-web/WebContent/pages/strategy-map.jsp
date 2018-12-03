@@ -20,13 +20,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <style type="text/css">
 
+<s:if test=" \"Y\" == userAgentMobile  ">
+.wrap {
+    width: 960px;
+    height: 100vh;
+    padding: 0;
+    overflow: hidden;
+}
+.frame {
+    width: 960px;
+    height: 100vh;
+    border: 0;
+    -ms-transform: scale(0.40);
+    -moz-transform: scale(0.40);
+    -o-transform: scale(0.40);
+    -webkit-transform: scale(0.40);
+    transform: scale(0.40);
+    
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+</s:if>
+<s:else>
+.wrap { }
+.frame { }
+</s:else>
+
 </style>
 
 <script type="text/javascript">
 
 function refresh_map() {
 	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {    		
-		bootbox.alert( 'Please select vision!' );
+		//bootbox.alert( 'Please select vision!' );
 		document.getElementById('map-iframe').src = "<%=basePath%>/strategymapContent.action";
 		return;
 	}
@@ -55,8 +84,8 @@ function refresh_map() {
     </select>
   </div>
 
- <div id="my-iframe" style="-webkit-overflow-scrolling: touch;  overflow: auto;" align="center">
-	<iframe id="map-iframe" style='width:800px;height:600px;' src="<%=basePath%>/strategymapContent.action">
+ <div id="my-iframe" class="wrap" style="-webkit-overflow-scrolling: touch;  overflow: auto; height: 100vh;" align="center">
+	<iframe id="map-iframe" class="frame" style='width:100%; height: 100%;' src="<%=basePath%>/strategymapContent.action" align="center">
 	</iframe>
 </div>
 

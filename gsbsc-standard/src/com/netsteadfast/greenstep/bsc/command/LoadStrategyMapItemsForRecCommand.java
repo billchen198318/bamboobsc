@@ -77,7 +77,12 @@ public class LoadStrategyMapItemsForRecCommand extends BaseChainCommandSupport i
 			}
 		}
 		StrategyMapItemsVO mapItems = this.fillStrategyMapItems(vision, context);
-		context.put("backgroundOid", StrategyMapUtils.createUpload(vision, 800, 600));
+		int mapHeight = StrategyMapUtils.getMIN_HEIGHT();
+		if (vision.getPerspectives().size() > 4) {
+			mapHeight = StrategyMapUtils.getONE_HEIGHT() * vision.getPerspectives().size();
+		}		
+		context.put("backgroundOid", StrategyMapUtils.createUpload(vision, 800, mapHeight));
+		context.put("mapHeight", String.valueOf(mapHeight));
 		this.setResult(context, mapItems);		
 		return false;
 	}

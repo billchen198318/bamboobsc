@@ -76,6 +76,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 	private String printMode = YesNo.NO;
 	private ObjectiveVO objective; // 給 dbclick 地圖上的 策略目標方塊 , 開啟顯示策略目標內容Dialog用的
 	private String backgroundOid = ""; // 背景圖片資料的 upload oid
+	private String mapHeight = ""; // 背景圖片的高度
 	
 	public StrategyMapManagementAction() {
 		super();
@@ -134,6 +135,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("strategyMapItemsForNewChain", context);
 		this.backgroundOid = (String) context.get("backgroundOid");
+		this.mapHeight = (String) context.get("mapHeight");
 		this.setPageMessage( resultObj.getMessage() );
 		if ( resultObj.getValue() instanceof StrategyMapItemsVO ) {
 			this.divItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getDiv();
@@ -150,6 +152,7 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 		SimpleChain chain = new SimpleChain();
 		ChainResultObj resultObj = chain.getResultFromResource("strategyMapItemsForRecChain", context);
 		this.backgroundOid = (String) context.get("backgroundOid");
+		this.mapHeight = (String) context.get("mapHeight");
 		this.setPageMessage( resultObj.getMessage() );
 		if ( resultObj.getValue() instanceof StrategyMapItemsVO ) {
 			this.divItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getDiv();
@@ -313,6 +316,10 @@ public class StrategyMapManagementAction extends BaseSupportAction implements IB
 
 	public String getBackgroundOid() {
 		return backgroundOid;
+	}
+
+	public String getMapHeight() {
+		return mapHeight;
 	}
 	
 }

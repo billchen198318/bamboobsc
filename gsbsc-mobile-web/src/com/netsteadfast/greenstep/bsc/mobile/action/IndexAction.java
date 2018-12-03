@@ -43,6 +43,7 @@ import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.base.model.ChainResultObj;
 import com.netsteadfast.greenstep.base.model.ControllerAuthority;
 import com.netsteadfast.greenstep.base.model.ControllerMethodAuthority;
+import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.bsc.model.BscMeasureDataFrequency;
 import com.netsteadfast.greenstep.bsc.service.IVisionService;
 import com.netsteadfast.greenstep.bsc.util.StrategyMapUtils;
@@ -66,6 +67,8 @@ public class IndexAction extends BaseSupportAction {
 	private List<String> conItems = new ArrayList<String>();	
 	
 	private String backgroundImgBase64 = ""; // 策略地圖 strategy-map 的背景圖
+	private String mapHeight = ""; // 策略地圖 strategy-map 的背景圖 高度
+	private String userAgentMobile = YesNo.YES;
 	
 	public IndexAction() {
 		super();
@@ -100,6 +103,7 @@ public class IndexAction extends BaseSupportAction {
 		ChainResultObj resultObj = chain.getResultFromResource("strategyMapItemsForRecChain", context);
 		String backgroundOid = (String) context.get("backgroundOid");
 		this.backgroundImgBase64 = StrategyMapUtils.getBackgroundImageBase64FromUpload(backgroundOid);
+		this.mapHeight = (String) context.get("mapHeight");
 		this.setPageMessage( resultObj.getMessage() );
 		if ( resultObj.getValue() instanceof StrategyMapItemsVO ) {
 			this.divItems = ( (StrategyMapItemsVO)resultObj.getValue() ).getDiv();
@@ -147,6 +151,11 @@ public class IndexAction extends BaseSupportAction {
 	@ControllerMethodAuthority(programId="BSC_MOBILE_INDEX")
 	public String lnkStrategyMap() throws Exception {
 		try {
+			if (this.getHttpServletRequest().getHeader("User-Agent").indexOf("Mobile") != -1) {
+				this.userAgentMobile = YesNo.YES;
+			} else {
+				this.userAgentMobile = YesNo.NO;
+			}
 			this.initData("lnkStrategyMap");
 			this.loadRecord();
 		} catch (AuthorityException | ControllerException | ServiceException e) {
@@ -192,6 +201,14 @@ public class IndexAction extends BaseSupportAction {
 
 	public String getBackgroundImgBase64() {
 		return backgroundImgBase64;
+	}
+
+	public String getMapHeight() {
+		return mapHeight;
+	}
+
+	public String getUserAgentMobile() {
+		return userAgentMobile;
 	}
 	
 }

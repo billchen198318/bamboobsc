@@ -175,8 +175,13 @@ path, .jsplumb-endpoint { cursor:pointer; }
 /* 2017-07-10 取代  jsPlumbToolkit-demo.css 中的 jtk-demo-canvas */
 .jtk-demo-canvas {
     margin-left: 0px;
-    height:600px;
-    max-height:700px;
+<s:if test=" null != mapHeight && \"\" != mapHeight ">    
+    height:${mapHeight}px;
+</s:if>
+<s:else>    
+	height:600px;
+</s:else> 
+    max-height:2160px;
     border:1px solid #CCC;
     background-color:white;
 <s:if test=" null != backgroundOid && \"\" != backgroundOid ">
@@ -461,8 +466,11 @@ jsPlumb.ready(function () {
     $("#print").click(function (e) {
     	
     	var url = "<%=basePath%>/bsc.strategyMapOpenWinDlgAction.action?visionOid=" + $("#visionOid").val();
+    	<s:if test=" null != mapHeight && \"\" != mapHeight ">   </s:if>
+    	window.open(url, "Strategy Map print", "width=1024", "height=${mapHeight}");
+    	<s:else>
     	window.open(url, "Strategy Map print", "width=1024", "height=600");
-    	
+    	</s:else>
     });
     
     <s:if test=" \"Y\" == printMode ">

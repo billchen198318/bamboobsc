@@ -64,10 +64,11 @@ public class StrategyMapUtils {
 	private static final String _CONFIG = "META-INF/strategy-map.json";
 	private static String _datas = " { } ";
 	private static Map<String, Object> _configDataMap;	
+	private static int ONE_HEIGHT = 150;
 	private static int MIN_WIDTH = 800;
-	private static int MIN_HEIGH = 600;
+	private static int MIN_HEIGHT = 600;
 	private static int MAX_WIDTH = 4096;
-	private static int MAX_HEIGH = 2160;
+	private static int MAX_HEIGHT = 2160;
 	private static String SRC_IMG = "META-INF/resource/s-map-bg-grid.png";
 	private static IVisionService<VisionVO, BbVision, String> visionService;
 	private static IPerspectiveService<PerspectiveVO, BbPerspective, String> perspectiveService;
@@ -89,13 +90,13 @@ public class StrategyMapUtils {
 				MIN_WIDTH = (int) _configDataMap.get("minWidth");
 			}
 			if (_configDataMap.get("minHeight") != null) {
-				MIN_HEIGH = (int) _configDataMap.get("minHeight");
+				MIN_HEIGHT = (int) _configDataMap.get("minHeight");
 			}		
 			if (_configDataMap.get("maxWidth") != null) {
 				MAX_WIDTH = (int) _configDataMap.get("maxWidth");
 			}
 			if (_configDataMap.get("maxHeight") != null) {
-				MAX_HEIGH = (int) _configDataMap.get("maxHeight");
+				MAX_HEIGHT = (int) _configDataMap.get("maxHeight");
 			}	
 			if (!StringUtils.isBlank((String)_configDataMap.get("background-img"))) {
 				SRC_IMG = (String) _configDataMap.get("background-img");
@@ -125,12 +126,12 @@ public class StrategyMapUtils {
 		return width;
 	}
 	
-	public static int getHeigth(int height) {
-		if (height < MIN_HEIGH) {
-			return MIN_HEIGH;
+	public static int getHeight(int height) {
+		if (height < MIN_HEIGHT) {
+			return MIN_HEIGHT;
 		}
-		if (height > MAX_HEIGH) {
-			return MAX_HEIGH;
+		if (height > MAX_HEIGHT) {
+			return MAX_HEIGHT;
 		}
 		return height;
 	}
@@ -150,14 +151,14 @@ public class StrategyMapUtils {
 		byte[] data = null;
 		List<PerspectiveVO> perspectivesList = perspectiveService.findForListByVisionOid(vision.getOid());
 		
-		BufferedImage bi = new BufferedImage(getWidth(width), getHeigth(height), BufferedImage.TYPE_INT_RGB);
+		BufferedImage bi = new BufferedImage(getWidth(width), getHeight(height), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = bi.createGraphics();	
 		Font font = new Font("", Font.BOLD, 16);
 		g2.setFont(font);		
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);		
 		
 		int fontLeft = 3;
-		int fontAddY = 150;
+		int fontAddY = ONE_HEIGHT; // 150
 		int fontNowY = 80;
 		int lineAddY = 60;
 		
@@ -229,6 +230,14 @@ public class StrategyMapUtils {
 			return "";
 		}
 		return "data:image/png;base64," + Base64.getEncoder().encodeToString(data);
+	}
+
+	public static int getMIN_HEIGHT() {
+		return MIN_HEIGHT;
+	}
+
+	public static int getONE_HEIGHT() {
+		return ONE_HEIGHT;
 	}
 	
 }

@@ -14,7 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <title>bambooBSC mobile version</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <jsp:include page="common-include.jsp"></jsp:include>
 
@@ -23,6 +22,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="<%=basePath%>/jsPlumb/css/jsPlumbToolkit-demo.css">        	
 
 <style type="text/css">
+
+html, body {
+    touch-action: auto;
+}
 
 .demo {
     /* for IE10+ touch devices */
@@ -118,8 +121,13 @@ path, .jsplumb-endpoint { cursor:pointer; }
 /* 2017-07-10 取代  jsPlumbToolkit-demo.css 中的 jtk-demo-canvas */
 .jtk-demo-canvas {
     margin-left: 0px;
-    height:600px;
-    max-height:700px;
+<s:if test=" null != mapHeight && \"\" != mapHeight ">    
+    height:${mapHeight}px;
+</s:if>
+<s:else>    
+	height:600px;
+</s:else> 
+    max-height:2160px;
     border:1px solid #CCC;
     background-color:white;
 <s:if test=" null != backgroundImgBase64 && \"\" != backgroundImgBase64 ">
