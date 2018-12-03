@@ -99,6 +99,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -132,6 +133,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {
@@ -165,6 +167,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -203,6 +206,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {
@@ -263,6 +267,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -296,6 +301,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {
@@ -329,6 +335,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -367,6 +374,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {
@@ -404,6 +412,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -442,6 +451,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {
@@ -478,6 +488,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -508,6 +519,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {
@@ -538,6 +550,7 @@ public class AggregationMethod {
 			BscMeasureData data = new BscMeasureData();
 			data.setActual( measureData.getActual() );
 			data.setTarget( measureData.getTarget() );
+			data.setKpi(kpi); // 2018-12-02
 			try {
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				if (value == null) {
@@ -573,6 +586,7 @@ public class AggregationMethod {
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				try {
 					Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 					if (value == null) {

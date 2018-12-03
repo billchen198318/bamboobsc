@@ -25,6 +25,7 @@ public class BscMeasureData implements java.io.Serializable {
 	private static final long serialVersionUID = 4898208147104099246L;
 	private Object target;
 	private Object actual;
+	private Object kpi; // 2018-12-02
 	
 	public Object getTarget() {
 		return target;
@@ -40,6 +41,14 @@ public class BscMeasureData implements java.io.Serializable {
 	
 	public void setActual(Object actual) {
 		this.actual = actual;
+	}
+
+	public Object getKpi() {
+		return kpi;
+	}
+
+	public void setKpi(Object kpi) {
+		this.kpi = kpi;
 	}
 	
 }

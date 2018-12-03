@@ -76,7 +76,10 @@ public class BscFormulaUtils {
 		}
 		if (data.getActual()!=null) {
 			parameter.put(BscMeasureVariable.ACTUAL, data.getActual());
-		}		
+		}	
+		if (data.getKpi() != null) {
+			parameter.put(BscMeasureVariable.KPI, data.getKpi());
+		}
 		return parameter;
 	}
 	

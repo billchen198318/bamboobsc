@@ -75,6 +75,7 @@ public class PersonalAndOrganizationReportDateRangeScoreCommand extends BaseChai
 				BscMeasureData data = new BscMeasureData();
 				data.setActual( measureData.getActual() );
 				data.setTarget( measureData.getTarget() );
+				data.setKpi(kpi); // 2018-12-02
 				Object value = BscFormulaUtils.parse(kpi.getFormula(), data);
 				/* 2016-07-01 rem
 				if (value != null && (value instanceof Integer || value instanceof Float || value instanceof Long) ) {

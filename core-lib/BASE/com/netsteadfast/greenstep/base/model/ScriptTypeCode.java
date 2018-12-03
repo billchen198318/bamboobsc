@@ -45,7 +45,7 @@ public class ScriptTypeCode {
 			dataMap.put(Constants.HTML_SELECT_NO_SELECT_ID, Constants.HTML_SELECT_NO_SELECT_NAME);
 		}
 		dataMap.put(IS_BSH, "java ( BeanShell2 )");
-		dataMap.put(IS_GROOVY, "groovy");
+		dataMap.put(IS_GROOVY, "groovy ( recommend )");
 		dataMap.put(IS_PYTHON, "python");
 		dataMap.put(IS_R, "R (Renjin)");
 		return dataMap;

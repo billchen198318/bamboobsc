@@ -21,6 +21,7 @@
  */
 package com.netsteadfast.greenstep.bsc.action;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,7 @@ import com.netsteadfast.greenstep.bsc.model.FormulaMode;
 import com.netsteadfast.greenstep.bsc.service.logic.IFormulaLogicService;
 import com.netsteadfast.greenstep.bsc.util.BscFormulaUtils;
 import com.netsteadfast.greenstep.vo.FormulaVO;
+import com.netsteadfast.greenstep.vo.KpiVO;
 
 @ControllerAuthority(check=true)
 @Controller("bsc.web.controller.FormulaSaveOrUpdateAction")
@@ -147,6 +149,10 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 		String target = this.getFields().get("target");
 		String cv = this.getFields().get("cv");
 		String pv = this.getFields().get("pv");
+		String kpiMax = this.getFields().get("kpiMax");
+		String kpiMin = this.getFields().get("kpiMin");
+		String kpiTarget = this.getFields().get("kpiTarget");
+		String kpiWeight = this.getFields().get("kpiWeight");
 		if (!NumberUtils.isCreatable(actual)) {
 			actual = "60.0";
 		}
@@ -159,6 +165,18 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 		if (!NumberUtils.isCreatable(pv)) {
 			pv = "55.0";
 		}
+		if (!NumberUtils.isCreatable(kpiMax)) {
+			kpiMax = "150";
+		}
+		if (!NumberUtils.isCreatable(kpiMin)) {
+			kpiMin = "50";
+		}
+		if (!NumberUtils.isCreatable(kpiTarget)) {
+			kpiTarget = "75";
+		}
+		if (!NumberUtils.isCreatable(kpiWeight)) {
+			kpiWeight = "50.00";
+		}
 		FormulaVO formula = new FormulaVO();
 		this.transformFields2ValueObject(formula, new String[]{"type", "trendsFlag", "returnMode", "returnVar", "expression"});		
 		if (YesNo.YES.equals(formula.getTrendsFlag())) {
@@ -167,7 +185,21 @@ public class FormulaSaveOrUpdateAction extends BaseJsonAction {
 		BscMeasureData data = new BscMeasureData();
 		data.setActual( Float.parseFloat(actual) );
 		data.setTarget( Float.parseFloat(target) );
+		// 2018-12-02
+		data.setKpi(
+				this.createKpiVarForTestFormula(
+						NumberUtils.toFloat(kpiMax, 150f), NumberUtils.toFloat(kpiMin, 50f), NumberUtils.toFloat(kpiTarget, 75f), new BigDecimal(kpiWeight))
+		);
 		return BscFormulaUtils.parse(formula, data);
+	}
+	
+	private KpiVO createKpiVarForTestFormula(float kpiMax, float kpiMin, float kpiTarget, BigDecimal kpiWeight) {
+		KpiVO kpi = new KpiVO();
+		kpi.setMax(kpiMax);
+		kpi.setMin(kpiMin);
+		kpi.setTarget(kpiTarget);
+		kpi.setWeight(kpiWeight);
+		return kpi;
 	}
 	
 	/**

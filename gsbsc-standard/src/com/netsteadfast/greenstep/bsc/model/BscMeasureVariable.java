@@ -35,5 +35,11 @@ public class BscMeasureVariable {
 	 * 實際值
 	 */
 	public static final String ACTUAL = "actual";
+	
+	/**
+	 * KPI
+	 * 2018-12-02, https://github.com/billchen198318/bamboobsc/issues/67
+	 */
+	public static final String KPI = "kpi";
 
 }

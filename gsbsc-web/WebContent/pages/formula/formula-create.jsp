@@ -267,7 +267,55 @@ function ${programId}_page_message() {
 		  										</td>
 		  									</tr>			  											  									
 		  									
-		  																	  									
+		  									<tr>
+		  										<td width="70%" align="right"><label>KPI (max):</label></td>
+		  										<td width="30%" align="left">
+													<input id="BSC_PROG001D0003A_kpiMax" type="text"
+													    data-dojo-type="dijit/form/NumberTextBox"
+													    name= "elevation"
+													    required="true"
+													    value="150"
+													    data-dojo-props="constraints:{min:-9999,max:9999,places:0},
+													    invalidMessage:'Invalid elevation.'" />			  										
+		  										</td>
+		  									</tr>		  									
+		  									<tr>
+		  										<td width="70%" align="right"><label>KPI (min):</label></td>
+		  										<td width="30%" align="left">
+													<input id="BSC_PROG001D0003A_kpiMin" type="text"
+													    data-dojo-type="dijit/form/NumberTextBox"
+													    name= "elevation"
+													    required="true"
+													    value="50"
+													    data-dojo-props="constraints:{min:-9999,max:9999,places:0},
+													    invalidMessage:'Invalid elevation.'" />			  										
+		  										</td>
+		  									</tr>		  				
+		  									<tr>
+		  										<td width="70%" align="right"><label>KPI (target):</label></td>
+		  										<td width="30%" align="left">
+													<input id="BSC_PROG001D0003A_kpiTarget" type="text"
+													    data-dojo-type="dijit/form/NumberTextBox"
+													    name= "elevation"
+													    required="true"
+													    value="75"
+													    data-dojo-props="constraints:{min:-9999,max:9999,places:0},
+													    invalidMessage:'Invalid elevation.'" />			  										
+		  										</td>
+		  									</tr>		
+		  									<tr>
+		  										<td width="70%" align="right"><label>KPI (weight):</label></td>
+		  										<td width="30%" align="left">
+													<input id="BSC_PROG001D0003A_kpiWeight" type="text"
+													    data-dojo-type="dijit/form/NumberTextBox"
+													    name= "elevation"
+													    required="true"
+													    value="50.00"
+													    data-dojo-props="constraints:{min:-0.00,max:100.00,places:0.00},
+													    invalidMessage:'Invalid elevation.'" />			  										
+		  										</td>
+		  									</tr>		
+		  											  											  											  																	  									
 		  								</table>
 		  							</div>
 								</div>									
@@ -294,6 +342,44 @@ function ${programId}_page_message() {
 									">KPI Previous peroid score(pv)</button>												  				
 			  				</td>
 			  			</tr>			  			
+			  			
+			  			<tr>
+			  				<td colspan="6">			  			
+								<button id="BSC_PROG001D0003A_btnCalKpiMax" data-dojo-type="dijit.form.Button"
+									data-dojo-props="
+										iconClass:'',
+										showLabel:true,
+										onClick:function(){ 
+											BSC_PROG001D0003A_putValue('BSC_PROG001D0003A_expression', 'kpi.max');
+										}
+									">KPI (max)</button>
+								<button id="BSC_PROG001D0003A_btnCalKpiMin" data-dojo-type="dijit.form.Button"
+									data-dojo-props="
+										iconClass:'',
+										showLabel:true,
+										onClick:function(){ 
+											BSC_PROG001D0003A_putValue('BSC_PROG001D0003A_expression', 'kpi.min');
+										}
+									">KPI (min)</button>			
+								<button id="BSC_PROG001D0003A_btnCalKpiTarget" data-dojo-type="dijit.form.Button"
+									data-dojo-props="
+										iconClass:'',
+										showLabel:true,
+										onClick:function(){ 
+											BSC_PROG001D0003A_putValue('BSC_PROG001D0003A_expression', 'kpi.target');
+										}
+									">KPI (target)</button>			
+								<button id="BSC_PROG001D0003A_btnCalKpiWeight" data-dojo-type="dijit.form.Button"
+									data-dojo-props="
+										iconClass:'',
+										showLabel:true,
+										onClick:function(){ 
+											BSC_PROG001D0003A_putValue('BSC_PROG001D0003A_expression', 'kpi.weight');
+										}
+									">KPI (weight)</button>																									  				
+			  				</td>
+			  			</tr>			
+			  						  			
 			  			<tr>
 			  				<td width="17%">
 								<button id="BSC_PROG001D0003A_btnCal7" data-dojo-type="dijit.form.Button"
@@ -351,7 +437,11 @@ function ${programId}_page_message() {
 				    						'fields.actual'			: dijit.byId('BSC_PROG001D0003A_actual').get('value'),
 				    						'fields.target'			: dijit.byId('BSC_PROG001D0003A_target').get('value'),
 				    						'fields.cv'				: dijit.byId('BSC_PROG001D0003A_cv').get('value'),
-				    						'fields.pv'				: dijit.byId('BSC_PROG001D0003A_pv').get('value')
+				    						'fields.pv'				: dijit.byId('BSC_PROG001D0003A_pv').get('value'),
+				    						'fields.kpiMax'		: dijit.byId('BSC_PROG001D0003A_kpiMax').get('value'),
+				    						'fields.kpiMin'		: dijit.byId('BSC_PROG001D0003A_kpiMin').get('value'),
+				    						'fields.kpiTarget'	: dijit.byId('BSC_PROG001D0003A_kpiTarget').get('value'),
+				    						'fields.kpiWeight'	: dijit.byId('BSC_PROG001D0003A_kpiWeight').get('value')
 				    					} 
 				    				"
 				    				errorFn=""
@@ -577,7 +667,11 @@ function ${programId}_page_message() {
     						'fields.expression'		: dijit.byId('BSC_PROG001D0003A_expression').get('value'),
     						'fields.description'	: dijit.byId('BSC_PROG001D0003A_description').get('value'),
     						'fields.actual'			: dijit.byId('BSC_PROG001D0003A_actual').get('value'),
-    						'fields.target'			: dijit.byId('BSC_PROG001D0003A_target').get('value')
+    						'fields.target'			: dijit.byId('BSC_PROG001D0003A_target').get('value'),
+				    		'fields.kpiMax'		: dijit.byId('BSC_PROG001D0003A_kpiMax').get('value'),
+				    		'fields.kpiMin'		: dijit.byId('BSC_PROG001D0003A_kpiMin').get('value'),
+				    		'fields.kpiTarget'	: dijit.byId('BSC_PROG001D0003A_kpiTarget').get('value'),
+				    		'fields.kpiWeight'	: dijit.byId('BSC_PROG001D0003A_kpiWeight').get('value')    						
     					} 
     				"
     				errorFn=""
