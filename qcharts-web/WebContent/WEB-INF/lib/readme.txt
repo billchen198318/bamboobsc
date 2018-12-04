@@ -42,13 +42,13 @@ aopalliance.jar
 
 aspectj
 -------------------------
-aspectjrt-1.8.9.jar
-aspectjweaver-1.8.9.jar
+aspectjrt-1.9.2.jar
+aspectjweaver-1.9.2.jar
 
 
 CGLIB
 -------------------------
-cglib-3.2.5.jar
+cglib-3.2.9.jar
 
 
 json
