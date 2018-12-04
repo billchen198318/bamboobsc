@@ -110,7 +110,7 @@ slf4j-log4j12-1.7.21.jar
 
 ehcache
 -------------------------
-ehcache-2.10.2.jar
+ehcache-2.10.5.jar
 
 
 backport-util-concurrent.jar
@@ -125,7 +125,7 @@ poi-excelant-3.16.jar
 poi-ooxml-3.16.jar
 poi-ooxml-schemas-3.16.jar
 poi-scratchpad-3.16.jar
-xmlbeans-2.6.0.jar (remove for Apache CXF xmlbeans-2.6.0.jar )
+xmlbeans-2.6.0.jar
 stax-api-1.0.1.jar
 curvesapi-1.04.jar
 
@@ -173,7 +173,7 @@ hamcrest-core-1.3.jar
 HikariCP
 https://github.com/brettwooldridge/HikariCP
 -------------------------
-HikariCP-3.2.0.jar
+HikariCP-3.2.7.jar
 
 
 ASM	*** Must be compatible with the version of Apache-CXF & CGLIB ***
@@ -186,75 +186,74 @@ asm-tree-5.2.jar
 
 Apache CXF with require	
 -------------------------
-cxf-core-3.2.0.jar
+cxf-core-3.2.7.jar
 cxf-manifest.jar
-cxf-rt-bindings-coloc-3.2.0.jar
-cxf-rt-bindings-corba-3.2.0.jar
-cxf-rt-bindings-soap-3.2.0.jar
-cxf-rt-bindings-xml-3.2.0.jar
-cxf-rt-databinding-aegis-3.2.0.jar
-cxf-rt-databinding-jaxb-3.2.0.jar
-cxf-rt-features-clustering-3.2.0.jar
-cxf-rt-frontend-jaxrs-3.2.0.jar
-cxf-rt-frontend-jaxws-3.2.0.jar
-cxf-rt-frontend-js-3.2.0.jar
-cxf-rt-frontend-simple-3.2.0.jar
-cxf-rt-javascript-3.2.0.jar
-cxf-rt-management-3.2.0.jar
-cxf-rt-rs-client-3.2.0.jar
-cxf-rt-rs-extension-providers-3.2.0.jar
-cxf-rt-rs-extension-search-3.2.0.jar
-cxf-rt-rs-json-basic-3.2.0.jar
-cxf-rt-rs-security-cors-3.2.0.jar
-cxf-rt-rs-security-jose-3.2.0.jar
-cxf-rt-rs-security-jose-jaxrs-3.2.0.jar
-cxf-rt-rs-security-oauth-3.2.0.jar
-cxf-rt-rs-security-oauth2-3.2.0.jar
-cxf-rt-rs-security-sso-saml-3.2.0.jar
-cxf-rt-rs-security-xml-3.2.0.jar
-cxf-rt-rs-service-description-3.2.0.jar
-cxf-rt-rs-sse-3.2.0.jar
-cxf-rt-security-3.2.0.jar
-cxf-rt-security-saml-3.2.0.jar
-cxf-rt-transports-http-3.2.0.jar
-cxf-rt-transports-http-hc-3.2.0.jar
-cxf-rt-transports-http-jetty-3.2.0.jar
-cxf-rt-transports-http-netty-client-3.2.0.jar
-cxf-rt-transports-http-netty-server-3.2.0.jar
-cxf-rt-transports-jms-3.2.0.jar
-cxf-rt-transports-local-3.2.0.jar
-cxf-rt-transports-udp-3.2.0.jar
-cxf-rt-ws-addr-3.2.0.jar
-cxf-rt-ws-mex-3.2.0.jar
-cxf-rt-ws-policy-3.2.0.jar
-cxf-rt-ws-rm-3.2.0.jar
-cxf-rt-ws-security-3.2.0.jar
-cxf-rt-wsdl-3.2.0.jar
-cxf-services-sts-core-3.2.0.jar
-cxf-services-wsn-api-3.2.0.jar
-cxf-services-wsn-core-3.2.0.jar
-cxf-xjc-boolean-3.2.0.jar
-cxf-xjc-bug671-3.2.0.jar
-cxf-xjc-dv-3.2.0.jar
-cxf-xjc-javadoc-3.2.0.jar
-cxf-xjc-runtime-3.2.0.jar
-cxf-xjc-ts-3.2.0.jar
+cxf-rt-bindings-coloc-3.2.7.jar
+cxf-rt-bindings-corba-3.2.7.jar
+cxf-rt-bindings-soap-3.2.7.jar
+cxf-rt-bindings-xml-3.2.7.jar
+cxf-rt-databinding-aegis-3.2.7.jar
+cxf-rt-databinding-jaxb-3.2.7.jar
+cxf-rt-features-clustering-3.2.7.jar
+cxf-rt-frontend-jaxrs-3.2.7.jar
+cxf-rt-frontend-jaxws-3.2.7.jar
+cxf-rt-frontend-js-3.2.7.jar
+cxf-rt-frontend-simple-3.2.7.jar
+cxf-rt-javascript-3.2.7.jar
+cxf-rt-management-3.2.7.jar
+cxf-rt-rs-client-3.2.7.jar
+cxf-rt-rs-extension-providers-3.2.7.jar
+cxf-rt-rs-extension-search-3.2.7.jar
+cxf-rt-rs-json-basic-3.2.7.jar
+cxf-rt-rs-security-cors-3.2.7.jar
+cxf-rt-rs-security-jose-3.2.7.jar
+cxf-rt-rs-security-jose-jaxrs-3.2.7.jar
+cxf-rt-rs-security-oauth-3.2.7.jar
+cxf-rt-rs-security-oauth2-3.2.7.jar
+cxf-rt-rs-security-sso-saml-3.2.7.jar
+cxf-rt-rs-security-xml-3.2.7.jar
+cxf-rt-rs-service-description-3.2.7.jar
+cxf-rt-rs-sse-3.2.7.jar
+cxf-rt-security-3.2.7.jar
+cxf-rt-security-saml-3.2.7.jar
+cxf-rt-transports-http-3.2.7.jar
+cxf-rt-transports-http-hc-3.2.7.jar
+cxf-rt-transports-http-jetty-3.2.7.jar
+cxf-rt-transports-http-netty-client-3.2.7.jar
+cxf-rt-transports-http-netty-server-3.2.7.jar
+cxf-rt-transports-jms-3.2.7.jar
+cxf-rt-transports-local-3.2.7.jar
+cxf-rt-transports-udp-3.2.7.jar
+cxf-rt-ws-addr-3.2.7.jar
+cxf-rt-ws-mex-3.2.7.jar
+cxf-rt-ws-policy-3.2.7.jar
+cxf-rt-ws-rm-3.2.7.jar
+cxf-rt-ws-security-3.2.7.jar
+cxf-rt-wsdl-3.2.7.jar
+cxf-services-sts-core-3.2.7.jar
+cxf-services-wsn-api-3.2.7.jar
+cxf-services-wsn-core-3.2.7.jar
+cxf-xjc-boolean-3.2.7.jar
+cxf-xjc-bug671-3.2.7.jar
+cxf-xjc-dv-3.2.7.jar
+cxf-xjc-javadoc-3.2.7.jar
+cxf-xjc-runtime-3.2.7.jar
+cxf-xjc-ts-3.2.7.jar
 jaxb-core-2.2.11.jar
 jaxb-impl-2.2.11.jar
 jaxb-xjc-2.2.11.jar
-jettison-1.3.8.jar
+jettison-1.4.0.jar
 joda-time-2.9.jar
-neethi-3.1.0.jar
+neethi-3.1.1.jar
 stax2-api-3.1.4.jar
-woodstox-core-asl-4.4.1.jar
+woodstox-core-5.0.3.jar
 wsdl4j-1.6.3.jar
 xml-resolver-1.2.jar
-xmlbeans-2.6.0.jar
-xmlschema-core-2.2.2.jar
-xmlsec-2.1.0.jar
-ehcache-2.10.2.jar (is found)
-cxf-services-ws-discovery-api-3.2.0.jar (REMOVE 不需要)
-cxf-services-ws-discovery-service-3.2.0.jar (REMOVE 不需要)
+xmlschema-core-2.2.3.jar
+xmlsec-2.1.2.jar
+ehcache-2.10.5.jar (is found)
+cxf-services-ws-discovery-api-3.2.7.jar (REMOVE 不需要)
+cxf-services-ws-discovery-service-3.2.7.jar (REMOVE 不需要)
 
 
 JSR370
