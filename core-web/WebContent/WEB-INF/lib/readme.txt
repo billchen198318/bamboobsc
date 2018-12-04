@@ -61,10 +61,9 @@ MySQL
 mysql-connector-java-5.1.47.jar
 
 
-http://code.google.com/p/beanshell2/
-http://www.beanshell.org/
+https://github.com/beanshell/beanshell
 -------------------------
-bsh-2.1.8.jar
+bsh-2.0b6.jar
 
 
 MYBATIS(iBATIS)  *** Must be compatible with the version of Activiti ***
