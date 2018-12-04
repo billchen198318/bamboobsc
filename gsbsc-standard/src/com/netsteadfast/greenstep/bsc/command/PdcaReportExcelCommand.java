@@ -121,8 +121,8 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		// --------------------------------------------------------------------------------------
 		
-		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#d8d8d8") );
-		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000") );
+		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#d8d8d8"), null );
+		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000"), null );
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
@@ -153,7 +153,7 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		// --------------------------------------------------------------------------------------
 		
-		XSSFColor bgLabelColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2") );
+		XSSFColor bgLabelColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2"), null );
 		
 		XSSFCellStyle cellLabelStyle = wb.createCellStyle();
 		cellLabelStyle.setFillForegroundColor( bgLabelColor );
@@ -173,7 +173,7 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 		
 		// --------------------------------------------------------------------------------------
 
-		XSSFColor bgNormalColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#ffffff") );
+		XSSFColor bgNormalColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#ffffff"), null );
 		
 		XSSFCellStyle cellNormalStyle = wb.createCellStyle();
 		cellNormalStyle.setFillForegroundColor( bgNormalColor );
@@ -402,8 +402,8 @@ public class PdcaReportExcelCommand extends BaseChainCommandSupport implements C
 	
 	private int createPdcaItem(XSSFWorkbook wb, XSSFSheet sh, int row, XSSFCellStyle cellNormalStyle, List<PdcaItemVO> items, PdcaAuditVO audit) throws Exception {
 		
-		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000") );		
-		XSSFColor bgLabelColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2") );
+		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000"), null );		
+		XSSFColor bgLabelColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2"), null );
 		
 		XSSFCellStyle cellLabelStyle = wb.createCellStyle();
 		cellLabelStyle.setFillForegroundColor( bgLabelColor );

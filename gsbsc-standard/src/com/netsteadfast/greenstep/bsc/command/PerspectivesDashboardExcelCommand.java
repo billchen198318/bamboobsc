@@ -98,7 +98,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		VisionVO vision = treeObj.getVisions().get(0);
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( BscReportPropertyUtils.getBackgroundColor() ) ) );
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( BscReportPropertyUtils.getBackgroundColor() ), null ) );
 		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
 		cellHeadStyle.setBorderBottom(BorderStyle.THIN);
 		cellHeadStyle.setBorderTop(BorderStyle.THIN);
@@ -106,7 +106,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		cellHeadStyle.setBorderLeft(BorderStyle.THIN);		
 		XSSFFont cellHeadFont = wb.createFont();
 		cellHeadFont.setBold(true);		
-		cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( BscReportPropertyUtils.getFontColor() ) ) ); 
+		cellHeadFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( BscReportPropertyUtils.getFontColor() ), null ) ); 
 		cellHeadStyle.setFont( cellHeadFont );
 		
 		sh.setColumnWidth(0, 12000);	
@@ -149,7 +149,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		
 		// perspective and date range score
 		XSSFCellStyle cellStyle = wb.createCellStyle();
-		cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ) ) );
+		cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ), null ) );
 		cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
 		cellStyle.setBorderBottom(BorderStyle.THIN);
 		cellStyle.setBorderTop(BorderStyle.THIN);
@@ -157,7 +157,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 		cellStyle.setBorderLeft(BorderStyle.THIN);		
 		XSSFFont cellFont = wb.createFont();
 		cellFont.setBold( false );		
-		cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ) ) );
+		cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#000000" ), null ) );
 		cellStyle.setFont( cellFont );		
 		for (int p = 0; p < vision.getPerspectives().size(); p++) {
 			left = 0;
@@ -176,7 +176,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 			cell4 = nowRow.createCell(3);
 			
 			XSSFCellStyle s_cellStyle = wb.createCellStyle();
-			s_cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( perspective.getBgColor() ) ) );
+			s_cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( perspective.getBgColor() ), null ) );
 			s_cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
 			s_cellStyle.setBorderBottom(BorderStyle.THIN);
 			s_cellStyle.setBorderTop(BorderStyle.THIN);
@@ -184,7 +184,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 			s_cellStyle.setBorderLeft(BorderStyle.THIN);		
 			XSSFFont s_cellFont = wb.createFont();
 			s_cellFont.setBold( false );		
-			s_cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( perspective.getFontColor() ) ) );
+			s_cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( perspective.getFontColor() ), null ) );
 			s_cellStyle.setFont( s_cellFont );	
 			
 			cell4.setCellStyle(s_cellStyle);
@@ -193,7 +193,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 			for (DateRangeScoreVO dateRangeScore : perspective.getDateRangeScores()) {
 				
 				XSSFCellStyle drs_cellStyle = wb.createCellStyle();
-				drs_cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( dateRangeScore.getBgColor() ) ) );
+				drs_cellStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( dateRangeScore.getBgColor() ), null ) );
 				drs_cellStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND  );	
 				drs_cellStyle.setBorderBottom(BorderStyle.THIN);
 				drs_cellStyle.setBorderTop(BorderStyle.THIN);
@@ -201,7 +201,7 @@ public class PerspectivesDashboardExcelCommand extends BaseChainCommandSupport i
 				drs_cellStyle.setBorderLeft(BorderStyle.THIN);		
 				XSSFFont drs_cellFont = wb.createFont();
 				drs_cellFont.setBold( false );		
-				drs_cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( dateRangeScore.getFontColor() ) ) );
+				drs_cellFont.setColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( dateRangeScore.getFontColor() ), null ) );
 				drs_cellStyle.setFont( drs_cellFont );				
 				
 				Cell cell = nowRow.createCell( dCol + left );

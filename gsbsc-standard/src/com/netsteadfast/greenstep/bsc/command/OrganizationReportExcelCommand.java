@@ -147,8 +147,8 @@ public class OrganizationReportExcelCommand extends BaseChainCommandSupport impl
 		Row headRow = sh.createRow(row);
 		headRow.setHeight( (short)700 );
 		
-		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2") );
-		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000") );
+		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2"), null );
+		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000"), null );
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
@@ -250,11 +250,11 @@ public class OrganizationReportExcelCommand extends BaseChainCommandSupport impl
 	private int createMainBody(XSSFWorkbook wb, XSSFSheet sh, int row, VisionVO vision) throws Exception {
 		
 		XSSFCellStyle cellStyle = wb.createCellStyle();
-		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#ffffff")) );
+		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#ffffff"), null) );
 		cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 		XSSFFont cellFont = wb.createFont();
 		cellFont.setBold(false);
-		cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#000000")) );
+		cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#000000"), null) );
 		cellStyle.setFont(cellFont);
 		cellStyle.setWrapText(true);
 		cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -301,11 +301,11 @@ public class OrganizationReportExcelCommand extends BaseChainCommandSupport impl
 					DateRangeScoreVO dateRangeScore = kpi.getDateRangeScores().get(0);
 					
 					XSSFCellStyle cellStyle2 = wb.createCellStyle();
-					cellStyle2.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+					cellStyle2.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 					cellStyle2.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 					XSSFFont cellFont2 = wb.createFont();
 					cellFont2.setBold(false);
-					cellFont2.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+					cellFont2.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 					cellStyle2.setFont(cellFont2);
 					cellStyle2.setWrapText(true);
 					cellStyle2.setVerticalAlignment(VerticalAlignment.CENTER);

@@ -100,7 +100,7 @@ public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport impl
 		cellHeadFont.setBold(true);				
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ), null ) );
 		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );	
 		cellHeadStyle.setBorderBottom( BorderStyle.THIN );
 		cellHeadStyle.setBorderTop( BorderStyle.THIN );
@@ -109,11 +109,11 @@ public class TimeSeriesAnalysisExcelCommand extends BaseChainCommandSupport impl
 		cellHeadStyle.setFont( cellHeadFont );
 		
 		XSSFCellStyle cellHeadStyleBlank = wb.createCellStyle();
-		cellHeadStyleBlank.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ) ) );		
+		cellHeadStyleBlank.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ), null ) );		
 		cellHeadStyleBlank.setFont( cellHeadFont );		
 		
 		XSSFCellStyle cellHeadStyle2 = wb.createCellStyle();
-		cellHeadStyle2.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ) ) );
+		cellHeadStyle2.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#ffffff" ), null ) );
 		cellHeadStyle2.setFillPattern( FillPatternType.SOLID_FOREGROUND );	
 		cellHeadStyle2.setBorderBottom( BorderStyle.THIN );
 		cellHeadStyle2.setBorderTop( BorderStyle.THIN );

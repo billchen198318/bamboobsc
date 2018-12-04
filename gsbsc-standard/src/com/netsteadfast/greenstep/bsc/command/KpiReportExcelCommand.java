@@ -173,8 +173,8 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		
 		int cell=0;
 		
-		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(vision.getBgColor()) );
-		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(vision.getFontColor()) );
+		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(vision.getBgColor()), null );
+		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(vision.getFontColor()), null );
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
@@ -205,8 +205,8 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		
 		
 		// ------------------------------------------------------------------------
-		bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getBackgroundColor()) );
-		fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getFontColor()) );
+		bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getBackgroundColor()), null );
+		fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getFontColor()), null );
 		
 		cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
@@ -280,11 +280,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 								perspective.getTarget(), 
 								perspective.getMin());
 						XSSFCellStyle cellStyle = wb.createCellStyle();
-						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getBgColor())) );
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getBgColor()), null) );
 						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 						XSSFFont cellFont = wb.createFont();
 						cellFont.setBold(false);
-						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getFontColor())) );
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getFontColor()), null) );
 						cellStyle.setFont(cellFont);
 						cellStyle.setWrapText(true);
 						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -319,11 +319,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 								objective.getTarget(), 
 								objective.getMin());						
 						XSSFCellStyle cellStyle = wb.createCellStyle();
-						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getBgColor())) );
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getBgColor()), null) );
 						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 						XSSFFont cellFont = wb.createFont();
 						cellFont.setBold(false);
-						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getFontColor())) );
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getFontColor()), null) );
 						cellStyle.setFont(cellFont);
 						cellStyle.setWrapText(true);
 						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -354,11 +354,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						//String content = this.getKpisContent(kpi, managementMap, calculationMap);
 						String content = this.getKpisContent(kpi, managementMap);
 						XSSFCellStyle cellStyle = wb.createCellStyle();
-						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getBgColor())) );
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getBgColor()), null) );
 						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 						XSSFFont cellFont = wb.createFont();
 						cellFont.setBold(false);
-						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getFontColor())) );
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getFontColor()), null) );
 						cellStyle.setFont(cellFont);
 						cellStyle.setWrapText(true);
 						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -430,11 +430,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 		this.fillHeadContent(context, headContentMap);
 		
 		XSSFCellStyle cellStyleLabel = wb.createCellStyle();
-		cellStyleLabel.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getBackgroundColor())) );
+		cellStyleLabel.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getBackgroundColor()), null) );
 		cellStyleLabel.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 		XSSFFont cellFontLabel = wb.createFont();
 		cellFontLabel.setBold(false);
-		cellFontLabel.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getFontColor())) );
+		cellFontLabel.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(BscReportPropertyUtils.getFontColor()), null) );
 		cellStyleLabel.setFont(cellFontLabel);
 		cellStyleLabel.setWrapText(true);
 		cellStyleLabel.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -484,11 +484,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 			
 			for (int c=0; c<drCols; c++) {							
 				XSSFCellStyle cellStyle = wb.createCellStyle();
-				cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(vision.getBgColor())) );
+				cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(vision.getBgColor()), null) );
 				cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 				XSSFFont cellFont = wb.createFont();
 				cellFont.setBold(false);
-				cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(vision.getFontColor())) );
+				cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(vision.getFontColor()), null) );
 				cellStyle.setFont(cellFont);
 				cellStyle.setWrapText(true);
 				cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -508,11 +508,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 				for (int d=0; d<vision.getDateRangeScores().size(); d++) {
 					DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(d);
 					XSSFCellStyle cellStyle = wb.createCellStyle();
-					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 					cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 					XSSFFont cellFont = wb.createFont();
 					cellFont.setBold(false);
-					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 					cellStyle.setFont(cellFont);
 					cellStyle.setWrapText(true);
 					cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -531,11 +531,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 				for (int d=0; d<vision.getDateRangeScores().size(); d++) {
 					DateRangeScoreVO dateRangeScore = vision.getDateRangeScores().get(d);
 					XSSFCellStyle cellStyle = wb.createCellStyle();
-					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 					cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 					XSSFFont cellFont = wb.createFont();
 					cellFont.setBold(false);
-					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 					cellStyle.setFont(cellFont);
 					cellStyle.setWrapText(true);
 					cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -577,11 +577,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 				
 				for (int c=0; c<drCols; c++) {							
 					XSSFCellStyle cellStyle = wb.createCellStyle();
-					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getBgColor())) );
+					cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getBgColor()), null) );
 					cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 					XSSFFont cellFont = wb.createFont();
 					cellFont.setBold(false);
-					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getFontColor())) );
+					cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(perspective.getFontColor()), null) );
 					cellStyle.setFont(cellFont);
 					cellStyle.setWrapText(true);
 					cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -601,11 +601,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 					for (int d=0; d<perspective.getDateRangeScores().size(); d++) {
 						DateRangeScoreVO dateRangeScore = perspective.getDateRangeScores().get(d);
 						XSSFCellStyle cellStyle = wb.createCellStyle();
-						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 						XSSFFont cellFont = wb.createFont();
 						cellFont.setBold(false);
-						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 						cellStyle.setFont(cellFont);
 						cellStyle.setWrapText(true);
 						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -624,11 +624,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 					for (int d=0; d<perspective.getDateRangeScores().size(); d++) {
 						DateRangeScoreVO dateRangeScore = perspective.getDateRangeScores().get(d);
 						XSSFCellStyle cellStyle = wb.createCellStyle();
-						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 						XSSFFont cellFont = wb.createFont();
 						cellFont.setBold(false);
-						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 						cellStyle.setFont(cellFont);
 						cellStyle.setWrapText(true);
 						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -672,11 +672,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 					
 					for (int c=0; c<drCols; c++) {							
 						XSSFCellStyle cellStyle = wb.createCellStyle();
-						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getBgColor())) );
+						cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getBgColor()), null) );
 						cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 						XSSFFont cellFont = wb.createFont();
 						cellFont.setBold(false);
-						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getFontColor())) );
+						cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(objective.getFontColor()), null) );
 						cellStyle.setFont(cellFont);
 						cellStyle.setWrapText(true);
 						cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -696,11 +696,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						for (int d=0; d<objective.getDateRangeScores().size(); d++) {
 							DateRangeScoreVO dateRangeScore = objective.getDateRangeScores().get(d);
 							XSSFCellStyle cellStyle = wb.createCellStyle();
-							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 							cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 							XSSFFont cellFont = wb.createFont();
 							cellFont.setBold(false);
-							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 							cellStyle.setFont(cellFont);
 							cellStyle.setWrapText(true);
 							cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -719,11 +719,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						for (int d=0; d<objective.getDateRangeScores().size(); d++) {
 							DateRangeScoreVO dateRangeScore = objective.getDateRangeScores().get(d);
 							XSSFCellStyle cellStyle = wb.createCellStyle();
-							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 							cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 							XSSFFont cellFont = wb.createFont();
 							cellFont.setBold(false);
-							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 							cellStyle.setFont(cellFont);
 							cellStyle.setWrapText(true);
 							cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -771,11 +771,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 						
 						for (int c=0; c<drCols; c++) {							
 							XSSFCellStyle cellStyle = wb.createCellStyle();
-							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getBgColor())) );
+							cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getBgColor()), null) );
 							cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 							XSSFFont cellFont = wb.createFont();
 							cellFont.setBold(false);
-							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getFontColor())) );
+							cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(kpi.getFontColor()), null) );
 							cellStyle.setFont(cellFont);
 							cellStyle.setWrapText(true);
 							cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -795,11 +795,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 							for (int d=0; d<kpi.getDateRangeScores().size(); d++) {
 								DateRangeScoreVO dateRangeScore = kpi.getDateRangeScores().get(d);
 								XSSFCellStyle cellStyle = wb.createCellStyle();
-								cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+								cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 								cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 								XSSFFont cellFont = wb.createFont();
 								cellFont.setBold(false);
-								cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+								cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 								cellStyle.setFont(cellFont);
 								cellStyle.setWrapText(true);
 								cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -818,11 +818,11 @@ public class KpiReportExcelCommand extends BaseChainCommandSupport implements Co
 							for (int d=0; d<kpi.getDateRangeScores().size(); d++) {
 								DateRangeScoreVO dateRangeScore = kpi.getDateRangeScores().get(d);
 								XSSFCellStyle cellStyle = wb.createCellStyle();
-								cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+								cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 								cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);	
 								XSSFFont cellFont = wb.createFont();
 								cellFont.setBold(false);
-								cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+								cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 								cellStyle.setFont(cellFont);
 								cellStyle.setWrapText(true);
 								cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);

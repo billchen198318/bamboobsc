@@ -167,8 +167,8 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		Row headRow = sh.createRow(row);
 		headRow.setHeight( (short)700 );
 		
-		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2") );
-		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000") );
+		XSSFColor bgColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#F2F2F2"), null );
+		XSSFColor fnColor = new XSSFColor( SimpleUtils.getColorRGB4POIColor("#000000"), null );
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
 		cellHeadStyle.setFillForegroundColor( bgColor );
@@ -289,7 +289,7 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		XSSFCellStyle titleStyle = wb.createCellStyle();
 		titleStyle.setFillForegroundColor( bgColor );
 		titleStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );		
-		titleStyle.setFillForegroundColor(  new XSSFColor(SimpleUtils.getColorRGB4POIColor("#F5F4F4")) );
+		titleStyle.setFillForegroundColor(  new XSSFColor(SimpleUtils.getColorRGB4POIColor("#F5F4F4"), null) );
 		titleStyle.setFont(cellHeadFont);		
 		titleStyle.setBorderBottom(BorderStyle.THIN);
 		titleStyle.setBorderTop(BorderStyle.THIN);
@@ -314,12 +314,12 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		int mrRow = row;
 		
 		XSSFCellStyle cellStyle = wb.createCellStyle();
-		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#ffffff")) );
+		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#ffffff"), null) );
 		cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		
 		XSSFFont cellFont = wb.createFont();
 		cellFont.setBold(false);
-		cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#000000")) );
+		cellFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#000000"), null) );
 		cellStyle.setFont(cellFont);				
 		cellStyle.setWrapText(true);
 		cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -363,12 +363,12 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 					DateRangeScoreVO dateRangeScore = kpi.getDateRangeScores().get(0); // 只顯示一筆日期分數資料
 					
 					XSSFCellStyle cellStyleScore=wb.createCellStyle();
-					cellStyleScore.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor())) );
+					cellStyleScore.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getBgColor()), null) );
 					cellStyleScore.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 					
 					XSSFFont cellScoreFont=wb.createFont();
 					cellScoreFont.setBold(false);
-					cellScoreFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor())) );
+					cellScoreFont.setColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor(dateRangeScore.getFontColor()), null) );
 					cellStyleScore.setFont(cellScoreFont);				
 					cellStyleScore.setWrapText(true);
 					cellStyleScore.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -412,7 +412,7 @@ public class PersonalReportExcelCommand extends BaseChainCommandSupport implemen
 		Row footRowB=sh.createRow(row+1);
 		XSSFCellStyle cellStyle=wb.createCellStyle();
 		
-		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#FFFFFF")) );
+		cellStyle.setFillForegroundColor( new XSSFColor(SimpleUtils.getColorRGB4POIColor("#FFFFFF"), null) );
 		cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);		
 		cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 		cellStyle.setBorderBottom(BorderStyle.THIN);

@@ -83,7 +83,7 @@ public class KpiPeriodTrendsExcelCommand extends BaseChainCommandSupport impleme
 	private void putTables(XSSFWorkbook wb, XSSFSheet sh, Context context) throws Exception {
 		
 		XSSFCellStyle cellHeadStyle = wb.createCellStyle();
-		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ) ) );
+		cellHeadStyle.setFillForegroundColor( new XSSFColor( SimpleUtils.getColorRGB4POIColor( "#f5f5f5" ), null ) );
 		cellHeadStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );	
 		cellHeadStyle.setBorderBottom( BorderStyle.THIN );
 		cellHeadStyle.setBorderTop( BorderStyle.THIN );
