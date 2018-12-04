@@ -5,11 +5,11 @@ commons-io-2.5.jar
 commons-fileupload-1.3.3.jar
 freemarker-2.3.26-incubating.jar
 ognl-3.1.15.jar
-struts2-core-2.5.15.jar
-struts2-jasperreports-plugin-2.5.15.jar
-struts2-jfreechart-plugin-2.5.15.jar
-struts2-json-plugin-2.5.15.jar
-struts2-spring-plugin-2.5.15.jar
+struts2-core-2.5.18.jar
+struts2-jasperreports-plugin-2.5.18.jar
+struts2-jfreechart-plugin-2.5.18.jar
+struts2-json-plugin-2.5.18.jar
+struts2-spring-plugin-2.5.18.jar
 
 
 Spring4
@@ -388,16 +388,16 @@ itextpdf-5.5.1.jar
 jackson
 https://github.com/FasterXML
 -------------------------
-jackson-annotations-2.8.4.jar
-jackson-core-2.8.4.jar
-jackson-databind-2.8.4.jar
+jackson-annotations-2.9.7.jar
+jackson-core-2.9.7.jar
+jackson-databind-2.9.7.jar
 
 
 jackson for jaxrs
 -------------------------
-jackson-jaxrs-base-2.8.4.jar
-jackson-jaxrs-json-provider-2.8.4.jar
-jackson-module-jaxb-annotations-2.8.4.jar
+jackson-jaxrs-base-2.9.7.jar
+jackson-jaxrs-json-provider-2.9.7.jar
+jackson-module-jaxb-annotations-2.9.7.jar
 
 
 Apache Shiro
