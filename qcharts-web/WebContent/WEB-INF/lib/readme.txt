@@ -80,12 +80,12 @@ jfreechart-1.0.19.jar
 
 Hibernate
 -------------------------
-dom4j-1.6.1.jar
+dom4j-2.1.1.jar
 antlr-2.7.7.jar
 hibernate-commons-annotations-5.0.1.Final.jar
-hibernate-core-5.1.12.Final.jar
-hibernate-entitymanager-5.1.12.Final.jar
-hibernate-envers-5.1.12.Final.jar
+hibernate-core-5.1.17.Final.jar
+hibernate-entitymanager-5.1.17.Final.jar
+hibernate-envers-5.1.17.Final.jar
 hibernate-jpa-2.1-api-1.0.0.Final.jar
 jandex-2.0.3.Final.jar
 jboss-logging-3.3.0.Final.jar
