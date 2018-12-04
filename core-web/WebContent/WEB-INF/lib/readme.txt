@@ -119,12 +119,12 @@ jsr107cache-1.1.jar
 
 POI
 -------------------------
-poi-3.16.jar
-poi-examples-3.16.jar
-poi-excelant-3.16.jar
-poi-ooxml-3.16.jar
-poi-ooxml-schemas-3.16.jar
-poi-scratchpad-3.16.jar
+poi-3.17.jar
+poi-examples-3.17.jar
+poi-excelant-3.17.jar
+poi-ooxml-3.17.jar
+poi-ooxml-schemas-3.17.jar
+poi-scratchpad-3.17.jar
 xmlbeans-2.6.0.jar
 stax-api-1.0.1.jar
 curvesapi-1.04.jar
