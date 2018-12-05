@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netsteadfast.greenstep.base.Constants;
@@ -35,6 +36,7 @@ import com.netsteadfast.greenstep.base.model.YesNo;
 import com.netsteadfast.greenstep.model.UploadTypes;
 
 public class JFreeChartDataMapperUtils {
+	protected static Logger logger = Logger.getLogger(JFreeChartDataMapperUtils.class);
 	
 	private static String createUploadData(Map<String, Object> dataMap) throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -110,8 +112,16 @@ public class JFreeChartDataMapperUtils {
 	
 	public static Map<String, Object> fillMeterDataMap(String title, float value, int lowerBound, int upperBound, 
 			int width, int height) throws Exception {
-		if (null == title || lowerBound >= upperBound) {
+		if (null == title) {
 			throw new Exception( SysMessageUtil.get(GreenStepSysMsgConstants.PARAMS_INCORRECT) );
+		}
+		if (lowerBound >= upperBound) {
+			logger.warn("fillMeterDataMap variable lowerBound(args): " + lowerBound);
+			logger.warn("fillMeterDataMap variable upperBound(args): " + upperBound);
+			lowerBound = 0;
+			upperBound = 100;
+			logger.warn("fillMeterDataMap variable lowerBound(replace-to): " + lowerBound);
+			logger.warn("fillMeterDataMap variable upperBound(replace-to): " + upperBound);			
 		}
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("title", title);		
