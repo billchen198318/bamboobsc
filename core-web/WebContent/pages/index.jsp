@@ -55,6 +55,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>/js/core.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
     <script type="text/javascript" src="<%=basePath%>/js/page.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
     
+    <s:if test=" \"Y\" == googleMapEnable ">
+    <!-- 
+    <script type="text/javascript" src="http://www.google.com/jsapi?key=${googleMapKey}"></script>
+    -->
+    <script type="text/javascript" src="${googleMapUrl}/maps/api/js?key=${googleMapKey}&sensor=false&language=${googleMapLanguage}"></script>       
+    </s:if>
+    <s:else>
+    <!-- modify applicationContext-appSettings.properties settings googleMap.enable=Y -->
+    </s:else>    
+    
     <script type="text/javascript" src="<%=basePath%>/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/html2canvas/html2canvas.js"></script>
     <script type="text/javascript" src="<%=basePath%>/html2canvas/html2canvas.svg.js"></script>	    
