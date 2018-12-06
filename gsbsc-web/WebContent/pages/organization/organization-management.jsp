@@ -65,11 +65,12 @@ function BSC_PROG001D0002Q_clear(reloadTree) {
 	dijit.byId('BSC_PROG001D0002Q_address').set("value", "");
 	dijit.byId('BSC_PROG001D0002Q_description').set("value", "");
 	dojo.byId('BSC_PROG001D0002Q_oid').value = "";
-	dojo.byId('BSC_PROG001D0002Q_lat').value = "${googleMapDefaultLat}";
-	dojo.byId('BSC_PROG001D0002Q_lng').value = "${googleMapDefaultLng}";	
-	var latlng = new google.maps.LatLng(${googleMapDefaultLat}, ${googleMapDefaultLng});
-	${programId}_marker.setPosition(latlng);
-    ${programId}_map.setCenter( ${programId}_marker.getPosition() );
+	dojo.byId('BSC_PROG001D0002Q_lat').value = "${leafletMapDefaultLat}";
+	dojo.byId('BSC_PROG001D0002Q_lng').value = "${leafletMapDefaultLng}";	
+    var newLatLng = new L.LatLng(_gscore_leafletMapDefaultLat, _gscore_leafletMapDefaultLng);
+    ${programId}_marker.setLatLng(newLatLng); 
+    ${programId}_map.panTo( newLatLng );
+    
     if (reloadTree) {
     	BSC_PROG001D0002Q_reOrganizationTree();
     }    
@@ -159,9 +160,10 @@ function BSC_PROG001D0002Q_getOrganizationData(oid) {
 				dojo.byId('BSC_PROG001D0002Q_oid').value = oid;
 				dojo.byId('BSC_PROG001D0002Q_lat').value = data.organization.lat;
 				dojo.byId('BSC_PROG001D0002Q_lng').value = data.organization.lng;
-				var latlng = new google.maps.LatLng(data.organization.lat, data.organization.lng);
-				${programId}_marker.setPosition(latlng);
-			    ${programId}_map.setCenter( ${programId}_marker.getPosition() );				
+			    var newLatLng = new L.LatLng(data.organization.lat, data.organization.lng);
+			    ${programId}_marker.setLatLng(newLatLng); 
+			    ${programId}_map.panTo( newLatLng );
+			    
 			}, 
 			function(error) {
 				alert(error);
@@ -229,70 +231,50 @@ function BSC_PROG001D0002Q_delete() {
 var ${programId}_map = null;
 var ${programId}_marker = null;
 function ${programId}_map_initialize() {
-	var geocoder = new google.maps.Geocoder();
-	var lat = _gscore_googleMapDefaultLat;
-	var lng = _gscore_googleMapDefaultLng;
-	if ('Y' == _gscore_googleMapClientLocationEnable) {
-		if (google.loader.ClientLocation) {
-			lat = google.loader.ClientLocation.latitude;
-			lng = google.loader.ClientLocation.longitude;
-		}			
-	}
+	${programId}_map  = L.map('${programId}_map_canvas').setView([_gscore_leafletMapDefaultLat, _gscore_leafletMapDefaultLng], 13);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + _gscore_mapBoxAccessToken, {
+		maxZoom: 20,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox.streets',
+	    noWrap: true
+	}).addTo(${programId}_map);
+	${programId}_marker = L.marker([_gscore_leafletMapDefaultLat, _gscore_leafletMapDefaultLng], {draggable: true}).addTo( ${programId}_map ).bindPopup('<font color="RED"><s:property value="getText('BSC_PROG001D0002Q_mapInfoWindowContent')" escapeJavaScript="true"/></font>').openPopup();
+	var popup = L.popup();
 	
-	var mapOptions = {
-			zoom: 10,
-			center: new google.maps.LatLng(lat, lng),
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-	
-	${programId}_map = new google.maps.Map(
-			document.getElementById('${programId}_map_canvas'), 
-			mapOptions);
-	
-	var ${programId}_infowindow = new google.maps.InfoWindow({
-		content: '<font color="RED"><s:property value="getText('BSC_PROG001D0002Q_mapInfoWindowContent')" escapeJavaScript="true"/></font>',
-		maxWidth: 400
-	});		
-	
-	${programId}_marker = new google.maps.Marker({
-		position: ${programId}_map.getCenter(),
-	    map: ${programId}_map,
-	    title: 'organization location',
-	    draggable: true
-	});
-	
-	google.maps.event.addListener(${programId}_marker, 'dragend', function(event) {		
-		getGoogleMapAddressName(
-				event.latLng.lat(), 
-				event.latLng.lng(),
-				function(data){
-					dijit.byId('BSC_PROG001D0002Q_address').set("value", "");
-		     		if (data!=null || data.results.length>0) {
-		     			if (data.results[0]!=null && data.results[0].formatted_address!=null) {
-		     				dijit.byId('BSC_PROG001D0002Q_address').set("value", data.results[0].formatted_address );
-		     			}		     			
-		     		}					
-				}
-		);
-		dojo.byId('BSC_PROG001D0002Q_lat').value = event.latLng.lat();
-		dojo.byId('BSC_PROG001D0002Q_lng').value = event.latLng.lng();		
+	${programId}_marker.on('dragend', function (e) {
+		dojo.byId('BSC_PROG001D0002Q_lat').value = ${programId}_marker.getLatLng().lat;
+		dojo.byId('BSC_PROG001D0002Q_lng').value = ${programId}_marker.getLatLng().lng;				
+		getOpenStreetMapAddressDisplayName_BSC_PROG001D0002Q(${programId}_marker.getLatLng().lat, ${programId}_marker.getLatLng().lng);
 	});	
 	
-	${programId}_infowindow.open(${programId}_map, ${programId}_marker);
+	getOpenStreetMapAddressDisplayName_BSC_PROG001D0002Q(_gscore_leafletMapDefaultLat, _gscore_leafletMapDefaultLng);
 	
-	getGoogleMapAddressName(
-			'${googleMapDefaultLat}', 
-			'${googleMapDefaultLng}',
-			function(data){
-				dijit.byId('BSC_PROG001D0002Q_address').set("value", "");
-	     		if (data!=null || data.results.length>0) {
-	     			if (data.results[0]!=null && data.results[0].formatted_address!=null) {
-	     				dijit.byId('BSC_PROG001D0002Q_address').set("value", data.results[0].formatted_address );
-	     			}
-	     		}					
-			}
-	);	
-	
+}
+
+function getOpenStreetMapAddressDisplayName_BSC_PROG001D0002Q(lat, lng) {
+	$.ajax({
+		  url: 'https://nominatim.openstreetmap.org/reverse',
+	      method: 'get',
+	      crossOrigin: true,
+	      type: 'json',
+	      async: false,
+	      cache: false,
+	      data: {		  
+	          format: 'json',
+	          lat: lat,
+	          lon: lng
+	      }
+
+	  }).then(function (response) {
+		if (null == response || null == response.display_name) {
+			return;
+		}
+		dijit.byId('BSC_PROG001D0002Q_address').set("value", response.display_name );
+	  }).fail(function (err, msg) {
+			alert(msg);
+	  });
 }
 
 //------------------------------------------------------------------------------
@@ -324,8 +306,8 @@ function ${programId}_page_message() {
 	<jsp:include page="../header.jsp"></jsp:include>		
 
 <input type="hidden" name="BSC_PROG001D0002Q_oid" id="BSC_PROG001D0002Q_oid" value="" />
-<input type="hidden" name="BSC_PROG001D0002Q_lat" id="BSC_PROG001D0002Q_lat" value="${googleMapDefaultLat}" />
-<input type="hidden" name="BSC_PROG001D0002Q_lng" id="BSC_PROG001D0002Q_lng" value="${googleMapDefaultLng}" />	
+<input type="hidden" name="BSC_PROG001D0002Q_lat" id="BSC_PROG001D0002Q_lat" value="${leafletMapDefaultLat}" />
+<input type="hidden" name="BSC_PROG001D0002Q_lng" id="BSC_PROG001D0002Q_lng" value="${leafletMapDefaultLng}" />	
 <table border="0" width="100%" height="600px" cellpadding="1" cellspacing="0" >
 	<tr>
 		<td width="25%" valign="top">

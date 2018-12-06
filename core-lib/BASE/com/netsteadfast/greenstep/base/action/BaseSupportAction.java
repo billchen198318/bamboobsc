@@ -104,6 +104,9 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 	private String googleMapDefaultLng = SimpleUtils.getStr((String)settingsMap.get("googleMap.defaultLng"), "121.516900");
 	private String googleMapLanguage = SimpleUtils.getStr((String)settingsMap.get("googleMap.language"), "en");
 	private String googleMapClientLocationEnable = SimpleUtils.getStr((String)settingsMap.get("googleMap.clientLocationEnable"), YesNo.NO).toUpperCase();
+	private String leafletMapDefaultLat = SimpleUtils.getStr((String)settingsMap.get("leafletMap.defaultLat"), "25.047795");
+	private String leafletMapDefaultLng = SimpleUtils.getStr((String)settingsMap.get("leafletMap.defaultLng"), "121.516900");
+	private String mapBoxAccessToken = SimpleUtils.getStr((String)settingsMap.get("mapBox.accessToken"), "pk.eyJ1IjoiYmlsbGNoZW4xOTgzMTgiLCJhIjoiY2pwYzhvZGdmMGlrYzNwcGhweXF3MTJmZiJ9.53RSFBaeFNNGqTUtWKuN4A");
 	private String twitterEnable = SimpleUtils.getStr((String)settingsMap.get("twitter.enable"), YesNo.NO).toUpperCase();	
 	
 	public BaseSupportAction() {
@@ -339,6 +342,18 @@ public class BaseSupportAction extends BaseAction implements ServletRequestAware
 
 	public String getGoogleMapClientLocationEnable() {
 		return googleMapClientLocationEnable;
+	}
+	
+	public String getLeafletMapDefaultLat() {
+		return leafletMapDefaultLat;
+	}
+
+	public String getLeafletMapDefaultLng() {
+		return leafletMapDefaultLng;
+	}
+
+	public String getMapBoxAccessToken() {
+		return mapBoxAccessToken;
 	}
 
 	public String getTwitterEnable() {

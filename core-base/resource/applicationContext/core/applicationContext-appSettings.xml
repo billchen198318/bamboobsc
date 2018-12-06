@@ -32,6 +32,9 @@
 				<entry key="googleMap.defaultLng" 						value="${googleMap.defaultLng}" />
 				<entry key="googleMap.language" 						value="${googleMap.language}" />
 				<entry key="googleMap.clientLocationEnable" 			value="${googleMap.clientLocationEnable}" />
+				<entry key="leafletMap.defaultLat"			value="${leafletMap.defaultLat}" />
+				<entry key="leafletMap.defaultLng"			value="${leafletMap.defaultLng}" />
+				<entry key="mapBox.accessToken"			value="${mapBox.accessToken}" />
 				<entry key="twitter.enable" 							value="${twitter.enable}" />
 				<entry key="base.loginCaptchaCodeEnable" 				value="${base.loginCaptchaCodeEnable}" />
 				<entry key="base.applicationSiteHostUpdateMode" 		value="${base.applicationSiteHostUpdateMode}" />

@@ -88,6 +88,9 @@ public class ConfigJsAction extends BaseSupportAction {
 		sb.append("var _gscore_googleMapDefaultLng=").append(super.getGoogleMapDefaultLng()).append(";\n");
 		sb.append("var _gscore_googleMapLanguage='").append(super.getGoogleMapLanguage()).append("';\n");	
 		sb.append("var _gscore_googleMapClientLocationEnable='").append(super.getGoogleMapClientLocationEnable()).append("';\n");
+		sb.append("var _gscore_leafletMapDefaultLat=").append(super.getLeafletMapDefaultLat()).append(";\n");
+		sb.append("var _gscore_leafletMapDefaultLng=").append(super.getLeafletMapDefaultLng()).append(";\n");
+		sb.append("var _gscore_mapBoxAccessToken='").append(super.getMapBoxAccessToken()).append("';\n");
 		sb.append("var _gscore_common_upload_dialog_action='core.commonUploadAction.action';\n");
 		sb.append("var _gscore_common_upload_dialog_id='CORE_PROGCOMM0002Q_Dlg';\n");
 		sb.append("var _gscore_common_signature_dialog_action='core.commonSignatureAction.action';\n");
