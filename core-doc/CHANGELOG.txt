@@ -1,3 +1,13 @@
+0.7.5
+-----------------------------------------------------------
+1. Update upgrade thirdparty lib files, extend the software lifecycle.
+2. Update dojo version 1.14.2. and update bootstrap-v4 version.
+3. Add new class GreenStepBaseAuthorizingActiveDirectoryRealm and GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm replace current class GreenStepBaseAuthorizingLdapRealm .
+4. Google MAP API need credit-card license, chnage to Leaflet (Organization/department management location map)
+5. Fix Bug, fix no show more than 4 perspectives at Strategy Map
+6. Modify formula add prarmeter KPI(max/target/min/weight)
+
+
 0.7.4
 -----------------------------------------------------------
 1. Update upgrade thirdparty lib files, extend the software lifecycle.
