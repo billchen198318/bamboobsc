@@ -401,7 +401,7 @@ jackson-module-jaxb-annotations-2.9.7.jar
 
 Apache Shiro
 -------------------------
-shiro-all-1.4.0.jar
+shiro-all-1.3.2.jar
 
 
 https://code.google.com/p/kaptcha/
@@ -492,10 +492,10 @@ https://mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core
 cassandra-driver-core-3.3.0.jar
 
 
-DOJO release 1.14.2 ( package file by self )
+DOJO release 1.13.0 ( package file by self )
 *** Note: only for CORE-WEB ***
 -------------------------
-dojo-release-1.14.2.jar
+dojo-release-1.13.0.jar
 
 
 ---------------------------------------------------------------------------------------
