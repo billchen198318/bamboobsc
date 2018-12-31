@@ -10,5 +10,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/core-export-lib/core-persistence.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
