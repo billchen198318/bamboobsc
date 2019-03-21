@@ -29,6 +29,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,12 +44,28 @@ public class CharsetFilter implements Filter {
 	public void destroy() {
 		
 	}
+	
+	/**
+	 * BUG FIX, run on newer than Tomcat 8.5.35 or Tomcat-9 version, will error :
+	 * Resource interpreted as Stylesheet but transferred with MIME type text/html
+	 */
+	private void resetCssAndJavascriptContentType(ServletRequest request, ServletResponse response) {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+		String requestUrl = httpServletRequest.getRequestURL().toString();
+		if (requestUrl.contains(".css")) {
+			response.setContentType("text/css; charset=" + Constants.BASE_ENCODING);
+		}
+		if (requestUrl.contains(".js")) {
+			response.setContentType("application/javascript; charset=" + Constants.BASE_ENCODING);
+		}
+	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, 
 			FilterChain chain) throws IOException, ServletException {
 		response.setContentType(this.contentType);
 		response.setCharacterEncoding(this.encoding);
+		this.resetCssAndJavascriptContentType(request, response);
 		chain.doFilter(request, response);
 	}
 
