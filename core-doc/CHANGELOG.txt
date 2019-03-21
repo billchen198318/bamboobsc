@@ -1,6 +1,7 @@
 0.7.7
 -----------------------------------------------------------
 1. Update dojo version to 1.15.0
+2. BUG FIX, run on newer than Tomcat 8.5.35 or Tomcat-9 version, will error Resource interpreted on browser.
 
 
 0.7.6
