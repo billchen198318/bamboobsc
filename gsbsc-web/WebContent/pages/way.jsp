@@ -1,9 +1,7 @@
 <%@page import="com.netsteadfast.greenstep.base.Constants"%>
 <%@page import="com.netsteadfast.greenstep.util.ApplicationSiteUtils"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags" prefix="s" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="gs" uri="http://www.gsweb.org/controller/tag" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
