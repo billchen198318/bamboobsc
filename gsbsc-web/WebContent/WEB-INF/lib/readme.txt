@@ -1,15 +1,15 @@
 Struts2
 -------------------------
 commons-logging-1.1.3.jar
-commons-io-2.5.jar
-commons-fileupload-1.3.3.jar
-freemarker-2.3.26-incubating.jar
-ognl-3.1.15.jar
-struts2-core-2.5.18.jar
-struts2-jasperreports-plugin-2.5.18.jar
-struts2-jfreechart-plugin-2.5.18.jar
-struts2-json-plugin-2.5.18.jar
-struts2-spring-plugin-2.5.18.jar
+commons-fileupload-1.4.jar
+commons-io-2.6.jar
+freemarker-2.3.28.jar
+ognl-3.1.21.jar
+struts2-core-2.5.20.jar
+struts2-jasperreports-plugin-2.5.20.jar
+struts2-jfreechart-plugin-2.5.20.jar
+struts2-json-plugin-2.5.20.jar
+struts2-spring-plugin-2.5.20.jar
 
 
 Spring4
@@ -58,7 +58,7 @@ json-lib-2.4-jdk15.jar
 
 MySQL
 -------------------------
-mysql-connector-java-5.1.47.jar
+mysql-connector-java-8.0.15.jar
 
 
 https://github.com/beanshell/beanshell
@@ -134,7 +134,7 @@ Apache - common
 -------------------------
 commons-codec-1.10.jar
 commons-email-1.4.jar
-commons-lang3-3.6.jar
+commons-lang3-3.8.1.jar
 commons-beanutils-1.9.3.jar
 commons-beanutils-core-1.8.3.jar
 commons-beanutils-bean-collections-1.8.3.jar
@@ -173,7 +173,7 @@ hamcrest-core-1.3.jar
 HikariCP
 https://github.com/brettwooldridge/HikariCP
 -------------------------
-HikariCP-3.2.7.jar
+HikariCP-3.3.1.jar
 
 
 ASM	*** Must be compatible with the version of Apache-CXF & CGLIB ***
@@ -339,7 +339,7 @@ guava-23.0.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.15-indy.jar
+groovy-all-2.4.16-indy.jar
 
 
 Apache ActiveMQ
@@ -445,7 +445,7 @@ olap4j-tck-1.2.0.jar
 olap4j-xmla-1.2.0.jar
 olap4j-xmlaserver-1.2.0.jar
 pivot4j-core-0.9.jar
-freemarker-2.3.21.jar ( change struts2 freemarker-2.3.26-incubating.jar )
+freemarker-2.3.21.jar ( change struts2 freemarker-2.3.28.jar )
 java-cup-11b.jar
 java-cup-11b-runtime.jar
 
