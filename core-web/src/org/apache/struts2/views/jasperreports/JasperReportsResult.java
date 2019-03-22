@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -18,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.apache.struts2.views.jasperreports;
 
 import com.netsteadfast.greenstep.base.Constants;
@@ -289,7 +286,7 @@ public class JasperReportsResult extends StrutsResultSupport implements JasperRe
         // TODO 更改 systemId 的位址
         if (Constants.JASPER_REPORTS_RESULT_LOCATION_REPLACE_MODE) {
         	systemId = finalLocation;
-        }        
+        }                
         
         Map parameters = new ValueStackShadowMap(stack);
         File directory = new File(systemId.substring(0, systemId.lastIndexOf(File.separator)));
@@ -361,7 +358,7 @@ public class JasperReportsResult extends StrutsResultSupport implements JasperRe
 
                 Map imagesMap = new HashMap();
                 request.getSession(true).setAttribute("IMAGES_MAP", imagesMap);
-                
+
                 // TODO : 改為jasperreport-6.5.1 版本使用的HtmlExporter  , 原本: exporter = new JRHtmlExporter();
                 exporter = new HtmlExporter();
                 exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP, imagesMap);
@@ -395,7 +392,10 @@ public class JasperReportsResult extends StrutsResultSupport implements JasperRe
             throw new ServletException(e.getMessage(), e);
         } finally {
             try {
-                conn.close();
+                if (conn != null) {
+                    // avoid NPE if connection was not used for the report
+                    conn.close();
+                }
             } catch (Exception e) {
                 LOG.warn("Could not close db connection properly", e);
             }
