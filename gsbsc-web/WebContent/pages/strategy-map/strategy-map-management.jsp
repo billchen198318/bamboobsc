@@ -28,21 +28,21 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
 	
-	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/main.css">
-	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsPlumbToolkit-defaults.css">
-	<link rel="stylesheet" href="<%=mainSysBasePath%>/jsPlumb/css/jsPlumbToolkit-demo.css">        	
+	<link rel="stylesheet" href="<%=mainSysBasePath%>jsPlumb/css/main.css">
+	<link rel="stylesheet" href="<%=mainSysBasePath%>jsPlumb/css/jsPlumbToolkit-defaults.css">
+	<link rel="stylesheet" href="<%=mainSysBasePath%>jsPlumb/css/jsPlumbToolkit-demo.css">        	
 	
-	<link href="<%=mainSysBasePath%>/toastr/toastr.min.css" rel="stylesheet"/>
+	<link href="<%=mainSysBasePath%>toastr/toastr.min.css" rel="stylesheet"/>
 	
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
-	<script src="<%=mainSysBasePath%>/jquery/jquery-3.2.1.min.js"></script>
-	<script src="<%=mainSysBasePath%>/jquery/jquery.blockUI.js"></script>
+	<script src="<%=mainSysBasePath%>jquery/jquery-3.2.1.min.js"></script>
+	<script src="<%=mainSysBasePath%>jquery/jquery.blockUI.js"></script>
 	
-    <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
-    <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	   	
+    <script type="text/javascript" src="<%=mainSysBasePath%>html2canvas/html2canvas.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>html2canvas/html2canvas.svg.js"></script>	   	
 	
-	<script src="<%=mainSysBasePath%>/toastr/toastr.min.js"></script>
+	<script src="<%=mainSysBasePath%>toastr/toastr.min.js"></script>
 	
 <style type="text/css">
 
@@ -186,7 +186,7 @@ path, .jsplumb-endpoint { cursor:pointer; }
     background-color:white;
 <s:if test=" null != backgroundOid && \"\" != backgroundOid ">
     /* 2017-07-11 增加背景圖  */
-    background-image: url(<%=mainSysBasePath%>/core.commonLoadUploadFileAction.action?type=view&oid=${backgroundOid});
+    background-image: url(<%=mainSysBasePath%>core.commonLoadUploadFileAction.action?type=view&oid=${backgroundOid});
     background-repeat:repeat;
 </s:if>
 <s:else>
@@ -269,7 +269,7 @@ function ${programId}_page_message() {
         </div>
         
         
-        <script src="<%=mainSysBasePath%>/jsPlumb/js/jsPlumb-2.1.8.js"></script>
+        <script src="<%=mainSysBasePath%>jsPlumb/js/jsPlumb-2.1.8.js"></script>
         
         
 <script type="text/javascript">
@@ -384,7 +384,7 @@ jsPlumb.ready(function () {
     }	
     
     $("#visionOid").change(function(){
-    	window.location = "<%=basePath%>/bsc.strategyMapManagementAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
+    	window.location = "<%=basePath%>bsc.strategyMapManagementAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
     });
 	
     $("#new").click(function (e) {
@@ -393,7 +393,7 @@ jsPlumb.ready(function () {
     		return;
     	}
     	$.blockUI();
-    	window.location = "<%=basePath%>/bsc.strategyMapLoadNewAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
+    	window.location = "<%=basePath%>bsc.strategyMapLoadNewAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
     });
     
     $("#load").click(function (e) {
@@ -402,7 +402,7 @@ jsPlumb.ready(function () {
     		return;
     	}
     	$.blockUI();
-    	window.location = "<%=basePath%>/bsc.strategyMapLoadRecordAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
+    	window.location = "<%=basePath%>bsc.strategyMapLoadRecordAction.action?visionOid=" + $("#visionOid").val() + "&<%=Constants.IS_IFRAME_MODE%>=Y";
     });    
     
     $("#save").click(function (e) {
@@ -420,7 +420,7 @@ jsPlumb.ready(function () {
         	async	: !_gscore_dojo_ajax_sync,
         	timeout	: _gscore_dojo_ajax_timeout,
         	cache	: false,
-        	url		: '<%=basePath%>/bsc.strategyMapSaveAction.action',
+        	url		: '<%=basePath%>bsc.strategyMapSaveAction.action',
         	data	: { 
         		'fields.mapData'	: mapData,
         		'fields.visionOid'	: $("#visionOid").val()
@@ -465,7 +465,7 @@ jsPlumb.ready(function () {
     
     $("#print").click(function (e) {
     	
-    	var url = "<%=basePath%>/bsc.strategyMapOpenWinDlgAction.action?visionOid=" + $("#visionOid").val();
+    	var url = "<%=basePath%>bsc.strategyMapOpenWinDlgAction.action?visionOid=" + $("#visionOid").val();
     	<s:if test=" null != mapHeight && \"\" != mapHeight ">   </s:if>
     	window.open(url, "Strategy Map print", "width=1024", "height=${mapHeight}");
     	<s:else>

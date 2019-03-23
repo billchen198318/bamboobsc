@@ -122,17 +122,24 @@ public class MenuSupportUtils {
 		}
 		return tbSysProg;
 	}
-
+	
+	private static String getUrlPath(String url, String slash) {
+		if (url.endsWith(slash)) {
+			return url;
+		}
+		return url + slash;
+	}
+	
 	public static String getUrl(String basePath, TbSys sys, TbSysProg sysProg, String jsessionId) throws Exception {
 		String url = "";
 		if (YesNo.YES.equals(sys.getIsLocal())) {
-			url = basePath + "/" + sysProg.getUrl() + ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
+			url = getUrlPath(basePath, "/") + sysProg.getUrl() + ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
 		} else {
 			String head = "http://";
 			if (basePath.startsWith("https")) {
 				head = "https://";
 			}
-			url = head + sys.getHost() + "/" + sys.getContextPath() + "/" + sysProg.getUrl()
+			url = head + getUrlPath(sys.getHost(), "/") + getUrlPath(sys.getContextPath(), "/") + sysProg.getUrl()
 					+ ( (sysProg.getUrl().indexOf("?")>0 || sysProg.getUrl().indexOf("&")>0) ? "&" : "?" ) + Constants.IS_DOJOX_CONTENT_PANE_XHR_LOAD + "=" + YesNo.YES;
 					//+ "&" + Constants.APP_SITE_CROSS_JSESS_ID_PARAM + "=" + jsessionId;
 			

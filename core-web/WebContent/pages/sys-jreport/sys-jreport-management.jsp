@@ -62,7 +62,7 @@ function CORE_PROG001D0008Q_edit(oid) {
 }
 
 function CORE_PROG001D0008Q_downloadFile(oid) {
-	var url = "<%=basePath%>/core.systemJreportExportAction.action?fields.oid=" + oid;
+	var url = "<%=basePath%>core.systemJreportExportAction.action?fields.oid=" + oid;
 	openCommonLoadUpload( 'download', '', { "url": url } );	
 }
 

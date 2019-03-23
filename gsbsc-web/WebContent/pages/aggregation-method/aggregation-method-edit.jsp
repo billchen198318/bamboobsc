@@ -148,7 +148,7 @@ function ${programId}_page_message() {
 		    		<gs:label text="${action.getText('BSC_PROG001D0008E_iframe1')}" id="BSC_PROG001D0008E_iframe1" requiredFlag="Y"></gs:label>
 		    		<gs:inputfieldNoticeMsgLabel id="BSC_PROG001D0008E_expression1_noticeMsgLabelOnly"></gs:inputfieldNoticeMsgLabel>
 		    		<br/>
-		    		<iframe name="BSC_PROG001D0008E_iframe1" id="BSC_PROG001D0008E_iframe1" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=mainSysBasePath%>/core.commonCodeEditorAction.action?oid=${uploadExprOid1}&<%=Constants.IS_IFRAME_MODE%>=Y'></iframe>
+		    		<iframe name="BSC_PROG001D0008E_iframe1" id="BSC_PROG001D0008E_iframe1" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=mainSysBasePath%>core.commonCodeEditorAction.action?oid=${uploadExprOid1}&<%=Constants.IS_IFRAME_MODE%>=Y'></iframe>
 		    		
 		    		</div>
 		    	</div>
@@ -166,7 +166,7 @@ function ${programId}_page_message() {
 		    		<gs:label text="${action.getText('BSC_PROG001D0008E_iframe2')}" id="BSC_PROG001D0008E_iframe2" requiredFlag="Y"></gs:label>
 		    		<gs:inputfieldNoticeMsgLabel id="BSC_PROG001D0008E_expression2_noticeMsgLabelOnly"></gs:inputfieldNoticeMsgLabel>
 		    		<br/>
-		    		<iframe name="BSC_PROG001D0008E_iframe2" id="BSC_PROG001D0008E_iframe2" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=mainSysBasePath%>/core.commonCodeEditorAction.action?oid=${uploadExprOid2}&<%=Constants.IS_IFRAME_MODE%>=Y'></iframe>
+		    		<iframe name="BSC_PROG001D0008E_iframe2" id="BSC_PROG001D0008E_iframe2" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=mainSysBasePath%>core.commonCodeEditorAction.action?oid=${uploadExprOid2}&<%=Constants.IS_IFRAME_MODE%>=Y'></iframe>
 		    		
 		    		</div>
 		    	</div>	

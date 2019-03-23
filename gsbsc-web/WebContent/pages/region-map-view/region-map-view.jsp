@@ -73,7 +73,7 @@ function BSC_PROG001D0006Q_map_initialize() {
 			BSC_PROG001D0006Q_infowindow.close();
 		}
 		BSC_PROG001D0006Q_infowindow = new google.maps.InfoWindow({
-			//content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
+			//content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1"><iframe frameborder="1" width="640px" height="500px" src="<%=basePath%>bsc.regionMapViewGetInfowindowContent.action?fields.orgId=${orgId}&fields.year=' + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value") + '" ></iframe>',
 			content: '<font size="2"><b><s:property value="name" escapeJavaScript="true" /></b></font>' + new_win_href_${orgId} + '<hr size="1">',
 			maxWidth: 1024
 		});
@@ -161,12 +161,12 @@ function BSC_PROG001D0006Q_map_initialize() {
 function BSC_PROG001D0006Q_openNew(orgId) {	
 	/*
 	window.open(			
-			"<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=" + orgId + "&fields.year=" + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value"),		
+			"<%=basePath%>bsc.regionMapViewGetInfowindowContent.action?fields.orgId=" + orgId + "&fields.year=" + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value"),		
 			"KPI-Report",
             "resizable=yes,scrollbars=yes,status=yes,width=1280,height=800");	
 	*/
 	
-	var url = "<%=basePath%>/bsc.regionMapViewGetInfowindowContent.action?fields.orgId=" + orgId + "&fields.year=" + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value");
+	var url = "<%=basePath%>bsc.regionMapViewGetInfowindowContent.action?fields.orgId=" + orgId + "&fields.year=" + dijit.byId("BSC_PROG001D0006Q_yearHorizontalSlider").get("value");
 	
 	openCommonLoadUpload(
 			'view', 

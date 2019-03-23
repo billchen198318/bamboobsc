@@ -30,30 +30,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath%>${dojoLocal}/dijit/themes/flat/flat.css?ver=${jsVerBuild}">
 		
 	
-	<link rel="stylesheet" href="<%=basePath%>/css/core.css?ver=${jsVerBuild}" media="screen">
+	<link rel="stylesheet" href="<%=basePath%>css/core.css?ver=${jsVerBuild}" media="screen">
 	
-	<link rel="stylesheet" href="<%=basePath%>/d3/nv.d3.css">
+	<link rel="stylesheet" href="<%=basePath%>d3/nv.d3.css">
 	
-	<link rel="stylesheet" href="<%=basePath%>/leaflet/leaflet.css?ver=${jsVerBuild}" />
+	<link rel="stylesheet" href="<%=basePath%>leaflet/leaflet.css?ver=${jsVerBuild}" />
 	
     <script type="text/javascript" src="<%=basePath%>core.configJsAction.action?ver=${jsVerBuild}&lc=${LocaleCode}&refreshUUID=${uuid}"></script>
     <script type="text/javascript" src="<%=basePath%>core.generateMenuJs.action?ver=${jsVerBuild}&lc=${LocaleCode}&refreshUUID=${uuid}"></script>
     
-	<script src="<%=basePath%>/leaflet/leaflet.js?ver=${jsVerBuild}"></script>
+	<script src="<%=basePath%>leaflet/leaflet.js?ver=${jsVerBuild}"></script>
     
 	<script>
 		var dojoConfig = {
 			parseOnLoad: true,
 		    packages: [
-				{ name: "d3", 		location: "<%=basePath%>/d3/",	main: "d3" 		},
-				{ name: "nv",		location: "<%=basePath%>/d3/",	main: "nv.d3"	}
+				{ name: "d3", 		location: "<%=basePath%>d3/",	main: "d3" 		},
+				{ name: "nv",		location: "<%=basePath%>d3/",	main: "nv.d3"	}
 		    ]	
 	    };
 	</script>	    
     <script type="text/javascript" src="<%=basePath%>${dojoLocal}/dojo/dojo.js?ver=${jsVerBuild}"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/home.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/core.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/page.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
+    <script type="text/javascript" src="<%=basePath%>js/home.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
+    <script type="text/javascript" src="<%=basePath%>js/core.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
+    <script type="text/javascript" src="<%=basePath%>js/page.js?ver=${jsVerBuild}" djConfig="parseOnLoad: true"></script>
     
     <s:if test=" \"Y\" == googleMapEnable ">
     <!-- 
@@ -65,49 +65,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- modify applicationContext-appSettings.properties settings googleMap.enable=Y -->
     </s:else>    
     
-    <script type="text/javascript" src="<%=basePath%>/jquery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/html2canvas/html2canvas.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/html2canvas/html2canvas.svg.js"></script>	    
+    <script type="text/javascript" src="<%=basePath%>jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>html2canvas/html2canvas.js"></script>
+    <script type="text/javascript" src="<%=basePath%>html2canvas/html2canvas.svg.js"></script>	    
 	
-	<script type="text/javascript" src="<%=basePath%>/canvg/canvg.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/canvg/rgbcolor.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/canvg/StackBlur.js"></script>
+	<script type="text/javascript" src="<%=basePath%>canvg/canvg.js"></script>
+	<script type="text/javascript" src="<%=basePath%>canvg/rgbcolor.js"></script>
+	<script type="text/javascript" src="<%=basePath%>canvg/StackBlur.js"></script>
 	
 	
-	<script type="text/javascript" src="<%=basePath%>/signature_pad/signature_pad.js"></script>
+	<script type="text/javascript" src="<%=basePath%>signature_pad/signature_pad.js"></script>
 	
 	
 	<!-- Highcharts -->
-	<script src="<%=basePath%>/highcharts/js/highcharts.js"></script>
-	<script src="<%=basePath%>/highcharts/js/highcharts-3d.js"></script>
-	<script src="<%=basePath%>/highcharts/js/highcharts-more.js"></script>
-	<script src="<%=basePath%>/highcharts/js/modules/heatmap.js"></script>
-	<script src="<%=basePath%>/highcharts/js/modules/exporting.js"></script>	
-	<script src="<%=basePath%>/highcharts/js/modules/solid-gauge.js"></script>
+	<script src="<%=basePath%>highcharts/js/highcharts.js"></script>
+	<script src="<%=basePath%>highcharts/js/highcharts-3d.js"></script>
+	<script src="<%=basePath%>highcharts/js/highcharts-more.js"></script>
+	<script src="<%=basePath%>highcharts/js/modules/heatmap.js"></script>
+	<script src="<%=basePath%>highcharts/js/modules/exporting.js"></script>	
+	<script src="<%=basePath%>highcharts/js/modules/solid-gauge.js"></script>
 	
 	
 	<!-- ################################################################################ -->
 	<!-- jqPlot -->
-	<script type="text/javascript" src="<%=basePath%>/jqplot/jquery.jqplot.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.meterGaugeRenderer.js"></script>	
+	<script type="text/javascript" src="<%=basePath%>jqplot/jquery.jqplot.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.meterGaugeRenderer.js"></script>	
 	
 	<!-- jqPlot plugins -->
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.barRenderer.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.pointLabels.js"></script>	
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.barRenderer.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.pointLabels.js"></script>	
 	
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.dateAxisRenderer.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.canvasTextRenderer.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/jqplot/plugins/jqplot.canvasAxisTickRenderer.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.dateAxisRenderer.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.canvasTextRenderer.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jqplot/plugins/jqplot.canvasAxisTickRenderer.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/jqplot/jquery.jqplot.css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>jqplot/jquery.jqplot.css" />
 	<!-- ################################################################################ -->
 	
 	
 	<!-- ################################################################################ -->
 	<!-- OrgChart -->
-	<script type="text/javascript" src="<%=basePath%>/OrgChart/jquery.orgchart.js"></script>
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/OrgChart/jquery.orgchart.css" />
+	<script type="text/javascript" src="<%=basePath%>OrgChart/jquery.orgchart.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>OrgChart/jquery.orgchart.css" />
 	<!-- ################################################################################ -->
 		
 <style type="text/css">

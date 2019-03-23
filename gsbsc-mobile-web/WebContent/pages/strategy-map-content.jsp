@@ -17,9 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <jsp:include page="common-include.jsp"></jsp:include>
 
-<link rel="stylesheet" href="<%=basePath%>/jsPlumb/css/main.css">
-<link rel="stylesheet" href="<%=basePath%>/jsPlumb/css/jsPlumbToolkit-defaults.css">
-<link rel="stylesheet" href="<%=basePath%>/jsPlumb/css/jsPlumbToolkit-demo.css">        	
+<link rel="stylesheet" href="<%=basePath%>jsPlumb/css/main.css">
+<link rel="stylesheet" href="<%=basePath%>jsPlumb/css/jsPlumbToolkit-defaults.css">
+<link rel="stylesheet" href="<%=basePath%>jsPlumb/css/jsPlumbToolkit-demo.css">        	
 
 <style type="text/css">
 
@@ -181,7 +181,7 @@ path, .jsplumb-endpoint { cursor:pointer; }
         </div>
         
         
-        <script src="<%=basePath%>/jsPlumb/js/jsPlumb-2.1.8.js"></script>
+        <script src="<%=basePath%>jsPlumb/js/jsPlumb-2.1.8.js"></script>
 
 <script type="text/javascript">
 

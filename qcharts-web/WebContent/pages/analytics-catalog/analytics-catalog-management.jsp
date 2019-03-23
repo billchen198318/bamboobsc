@@ -87,7 +87,7 @@ function QCHARTS_PROG001D0004Q_confirmDelete(oid) {
 
 function QCHARTS_PROG001D0004Q_downloadFile(oid) {
 	window.open(
-			"<%=basePath%>/qcharts.analyticsCatalogExportAction.action?fields.oid=" + oid,
+			"<%=basePath%>qcharts.analyticsCatalogExportAction.action?fields.oid=" + oid,
 			"Catalog-export",
             "resizable=yes,scrollbars=yes,status=yes,width=400,height=200");    		
 }

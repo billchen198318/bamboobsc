@@ -45,17 +45,17 @@ if (!StringUtils.isBlank(uploadOid)) {
 	<meta http-equiv="description" content="bambooCORE">
 	
 	
-	<link href="<%=mainSysBasePath%>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=mainSysBasePath%>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	
 	
-    <script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>jquery/jquery-3.2.1.min.js"></script>
     
     
 	 <!-- Include Editor style. -->
-	<link href="<%=mainSysBasePath%>/froala_editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-	<link href="<%=mainSysBasePath%>/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=mainSysBasePath%>froala_editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=mainSysBasePath%>froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 	<!-- Include Editor JS files. -->
-	<script type="text/javascript" src="<%=mainSysBasePath%>/froala_editor/js/froala_editor.pkgd.min.js"></script>   
+	<script type="text/javascript" src="<%=mainSysBasePath%>froala_editor/js/froala_editor.pkgd.min.js"></script>   
     
     
 <script type="text/javascript">

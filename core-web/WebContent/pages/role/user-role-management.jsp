@@ -25,14 +25,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <style type="text/css">
 
 .buttonBackNav {
-  background-image: url(<%=basePath%>/icons/stock_left.png);
+  background-image: url(<%=basePath%>icons/stock_left.png);
   background-repeat: no-repeat;
   width: 16px;
   height: 16px;
   text-align: center;
 }
 .buttonForwardNav {
-  background-image: url(<%=basePath%>/icons/stock_right.png);
+  background-image: url(<%=basePath%>icons/stock_right.png);
   background-repeat: no-repeat;
   width: 16px;
   height: 16px;

@@ -128,7 +128,7 @@ function ${programId}_page_message() {
     					<gs:label text="${action.getText('CORE_PROG003D0002A_iframe1')}" id="CORE_PROG003D0002A_iframe1" requiredFlag="Y"></gs:label>
     					<gs:inputfieldNoticeMsgLabel id="CORE_PROG003D0002A_content_noticeMsgLabelOnly"></gs:inputfieldNoticeMsgLabel>
     					<br/>
-    					<iframe name="CORE_PROG003D0002A_iframe1" id="CORE_PROG003D0002A_iframe1" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=basePath%>/core.commonCodeEditorAction.action'></iframe>
+    					<iframe name="CORE_PROG003D0002A_iframe1" id="CORE_PROG003D0002A_iframe1" style='width:100%;height:300px;border:0px' border='0' scrolling='no' src='<%=basePath%>core.commonCodeEditorAction.action'></iframe>
 					
 					</div>
 				</div>

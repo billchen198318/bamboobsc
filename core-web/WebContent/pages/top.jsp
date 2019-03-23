@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							${comboButtonMenuData}	
 					
 							<div dojoType="dijit.MenuSeparator"></div>
-							<div dojoType="dijit.MenuItem" jsId="backHome" data-dojo-props='onClick:function(){ window.location="<%=basePath%>/pages/way.jsp"; }' ><img src="./icons/view-refresh.png" border="0">&nbsp;<s:property value="getText('IndexAction_refreshPage')"/></div>
+							<div dojoType="dijit.MenuItem" jsId="backHome" data-dojo-props='onClick:function(){ window.location="<%=basePath%>pages/way.jsp"; }' ><img src="./icons/view-refresh.png" border="0">&nbsp;<s:property value="getText('IndexAction_refreshPage')"/></div>
 							
 					</div>					
 				</div>			
@@ -66,7 +66,7 @@ ${dialogData}
 			<table border="0" width="100%" cellpadding="0" cellspacing="0">
 				<tr valign="top">
 					<td align="left" valign="middle" bgcolor="#F5F5F5">
-						<img src="<%=basePath%>/images/head_logo.jpg" border="0" alt="logo" style="vertical-align:middle;margin-top:0.25em"/><b><font size='2' color='#394045' style="vertical-align:middle;margin-top:0.25em">&nbsp;Process ...</font></b>
+						<img src="<%=basePath%>images/head_logo.jpg" border="0" alt="logo" style="vertical-align:middle;margin-top:0.25em"/><b><font size='2' color='#394045' style="vertical-align:middle;margin-top:0.25em">&nbsp;Process ...</font></b>
 						<br/>
 						<hr color="#3794E5" size="2">
 					</td>

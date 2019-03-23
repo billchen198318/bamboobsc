@@ -326,7 +326,7 @@ function BSC_PROG003D0001Q_uploadSignatureClear() {
 }
 
 function BSC_PROG003D0001Q_getOpenWindowUrl(nextType, id) {
-	var url = "<%=basePath%>/bsc.kpiReportOpenWindowAction.action";
+	var url = "<%=basePath%>bsc.kpiReportOpenWindowAction.action";
 	url += "?fields.opw_visionOid=" 	+ dijit.byId("BSC_PROG003D0001Q_visionOid").get("value");
 	url += "&fields.opw_startYearDate=" + dijit.byId("BSC_PROG003D0001Q_startYearDate").get('displayedValue');
 	url += "&fields.opw_endYearDate=" 	+ dijit.byId("BSC_PROG003D0001Q_endYearDate").get('displayedValue');
@@ -342,7 +342,7 @@ function BSC_PROG003D0001Q_getOpenWindowUrl(nextType, id) {
 }
 
 function BSC_PROG003D0001Q_getCoffeeChartOpenWindowUrl() {
-	var url = "<%=basePath%>/bsc.kpiReportCoffeeChartOpenWindowAction.action";
+	var url = "<%=basePath%>bsc.kpiReportCoffeeChartOpenWindowAction.action";
 	url += "?fields.opw_visionOid=" 	+ dijit.byId("BSC_PROG003D0001Q_visionOid").get("value");
 	url += "&fields.opw_startYearDate=" + dijit.byId("BSC_PROG003D0001Q_startYearDate").get('displayedValue');
 	url += "&fields.opw_endYearDate=" 	+ dijit.byId("BSC_PROG003D0001Q_endYearDate").get('displayedValue');

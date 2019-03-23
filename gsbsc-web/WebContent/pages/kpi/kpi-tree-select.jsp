@@ -47,7 +47,7 @@ String reloadLabelFn = sysParam[1];
 function BSC_PROG002D0004Q_S00_getKpiTree() {
 	
 	var store = new dojo.data.ItemFileWriteStore({
-		url: "<%=basePath%>/bsc.kpiTreeJsonAction.action"
+		url: "<%=basePath%>bsc.kpiTreeJsonAction.action"
 	});
 
 	var treeModel = new dijit.tree.ForestStoreModel({
@@ -120,7 +120,7 @@ function BSC_PROG002D0004Q_S00_getKpiData(checkBoxId,oid) {
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr valign="top">
 			<td align="left" valign="middle" bgcolor="#F5F5F5">
-				<img src="<%=basePath%>/images/head_logo.jpg" border="0" alt="logo" style="vertical-align:middle;margin-top:0.25em"/>&nbsp;&nbsp;<font size='2' color='#394045' style="vertical-align:middle;margin-top:0.25em"><b>KPIs tree select</b></font>
+				<img src="<%=basePath%>images/head_logo.jpg" border="0" alt="logo" style="vertical-align:middle;margin-top:0.25em"/>&nbsp;&nbsp;<font size='2' color='#394045' style="vertical-align:middle;margin-top:0.25em"><b>KPIs tree select</b></font>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size='1' color="#F5F5F5">ID:&nbsp;BSC_PROG002D0004Q_S00</font>
 				<br/>
 				<hr color="#3794E5" size="2">

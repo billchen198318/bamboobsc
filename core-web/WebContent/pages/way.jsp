@@ -35,9 +35,9 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 </head>
 
 <body>
-<a href="<%=mainSysBasePath%>/index.action">bambooBSC</a>
+<a href="<%=mainSysBasePath%>index.action">bambooBSC</a>
 <script type="text/javascript">
-window.location = "<%=mainSysBasePath%>/index.action";
+window.location = "<%=mainSysBasePath%>index.action";
 </script>
 </body>
 </html>

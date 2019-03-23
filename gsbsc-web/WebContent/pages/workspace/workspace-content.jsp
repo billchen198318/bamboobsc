@@ -28,23 +28,23 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 	<!-- this page will load at workspace-base.jsp in iframe mode, it need include js/css -->
 	
-	<link rel="stylesheet" href="<%=mainSysBasePath%>/d3/nv.d3.css">
+	<link rel="stylesheet" href="<%=mainSysBasePath%>d3/nv.d3.css">
 	
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="<%=mainSysBasePath%>/d3/d3.js"></script>
-	<script type="text/javascript" src="<%=mainSysBasePath%>/d3/nv.d3.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>d3/d3.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>d3/nv.d3.js"></script>
 	
 	<!-- jqPlot -->
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/jquery.jqplot.js"></script>	
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.dateAxisRenderer.js"></script>	
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.canvasTextRenderer.js"></script>
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
-	<script type="text/javascript" src="<%=mainSysBasePath%>/jqplot/plugins/jqplot.enhancedLegendRenderer.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>jqplot/jquery.jqplot.js"></script>	
+	<script type="text/javascript" src="<%=mainSysBasePath%>jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>jqplot/plugins/jqplot.dateAxisRenderer.js"></script>	
+	<script type="text/javascript" src="<%=mainSysBasePath%>jqplot/plugins/jqplot.canvasTextRenderer.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>jqplot/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+	<script type="text/javascript" src="<%=mainSysBasePath%>jqplot/plugins/jqplot.enhancedLegendRenderer.js"></script>
 		
-	<link rel="stylesheet" type="text/css" href="<%=mainSysBasePath%>/jqplot/jquery.jqplot.css" />		
+	<link rel="stylesheet" type="text/css" href="<%=mainSysBasePath%>jqplot/jquery.jqplot.css" />		
 	
 <style type="text/css">
 

@@ -56,10 +56,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 function refresh_map() {
 	if ( 'all' == $("#visionOid").val() || '' == $("#visionOid").val() ) {    		
 		//bootbox.alert( 'Please select vision!' );
-		document.getElementById('map-iframe').src = "<%=basePath%>/strategymapContent.action";
+		document.getElementById('map-iframe').src = "<%=basePath%>strategymapContent.action";
 		return;
 	}
-	document.getElementById('map-iframe').src = "<%=basePath%>/strategymapContent.action?fields.visionOid=" + $("#visionOid").val();
+	document.getElementById('map-iframe').src = "<%=basePath%>strategymapContent.action?fields.visionOid=" + $("#visionOid").val();
 }
 
 
@@ -85,7 +85,7 @@ function refresh_map() {
   </div>
 
  <div id="my-iframe" class="wrap" style="-webkit-overflow-scrolling: touch;  overflow: auto; height: 100vh;" align="center">
-	<iframe id="map-iframe" class="frame" style='width:100%; height: 100%;' src="<%=basePath%>/strategymapContent.action" align="center">
+	<iframe id="map-iframe" class="frame" style='width:100%; height: 100%;' src="<%=basePath%>strategymapContent.action" align="center">
 	</iframe>
 </div>
 

@@ -30,9 +30,9 @@ String mainSysBasePath = ApplicationSiteUtils.getBasePath(Constants.getMainSyste
 	
 	<script type="text/javascript" src="<%=mainSysBasePath%>core.configJsAction.action?ver=${jsVerBuild}"></script>
 	
-    <script type="text/javascript" src="<%=mainSysBasePath%>/jquery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.js"></script>
-    <script type="text/javascript" src="<%=mainSysBasePath%>/html2canvas/html2canvas.svg.js"></script>	  
+    <script type="text/javascript" src="<%=mainSysBasePath%>jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>html2canvas/html2canvas.js"></script>
+    <script type="text/javascript" src="<%=mainSysBasePath%>html2canvas/html2canvas.svg.js"></script>	  
     	
 <style type="text/css">
 
@@ -75,7 +75,7 @@ function BSC_PROG003D0001Q_getOpenWindowView() {
     	async	: !_gscore_dojo_ajax_sync,
     	timeout	: _gscore_dojo_ajax_timeout,
     	cache	: false,
-    	url		: '<%=basePath%>/bsc.kpiReportContentQueryAction.action',
+    	url		: '<%=basePath%>bsc.kpiReportContentQueryAction.action',
     	data	: { 
 			'fields.visionOid' 					: 	'${fields.opw_visionOid}',
 			'fields.startYearDate'				:	'${fields.opw_startYearDate}',
