@@ -20,11 +20,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <!-- Highcharts -->
-<script src="<%=basePath%>highcharts/js/highcharts.js"></script>
-<script src="<%=basePath%>highcharts/js/highcharts-3d.js"></script>
-<script src="<%=basePath%>highcharts/js/highcharts-more.js"></script>
-<script src="<%=basePath%>highcharts/js/modules/exporting.js"></script>	
-<script src="<%=basePath%>highcharts/js/modules/solid-gauge.js"></script>
+<script src="<%=basePath%>highcharts/code/highcharts.js"></script>
+<script src="<%=basePath%>highcharts/code/highcharts-3d.js"></script>
+<script src="<%=basePath%>highcharts/code/highcharts-more.js"></script>
+<script src="<%=basePath%>highcharts/code/modules/exporting.js"></script>	
+<script src="<%=basePath%>highcharts/code/modules/solid-gauge.js"></script>
 
 
 <script type="text/javascript">
