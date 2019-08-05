@@ -382,6 +382,7 @@ iText 5.5.1
 itext-pdfa-5.5.1.jar
 itext-xtra-5.5.1.jar
 itextpdf-5.5.1.jar
+bcprov-jdk16-1.46.jar (set Owner / User need)
 
 
 jackson
