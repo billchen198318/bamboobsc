@@ -30,7 +30,8 @@
     	<property name="dataSource" ref="dataSource"/> 
     	<property name="transactionManager" ref="transactionManager"/>        
     	<property name="overwriteExistingJobs" value="true"/>        
-    	<property name="autoStartup" value="true" />        	
+    	<property name="autoStartup" value="true" />
+    	<property name="startupDelay" value="10" />
 		<property name="triggers">
 	    	<list>
 				<ref bean="qcharts.job.SysExpressionJobCronTrigger" />
