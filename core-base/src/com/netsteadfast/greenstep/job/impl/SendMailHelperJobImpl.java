@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -43,6 +44,7 @@ import com.netsteadfast.greenstep.util.MailClientUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 import com.netsteadfast.greenstep.vo.SysMailHelperVO;
 
+@DisallowConcurrentExecution
 public class SendMailHelperJobImpl extends BaseJob implements Job {
 	protected static Logger log = Logger.getLogger(SendMailHelperJobImpl.class);
 	
@@ -57,6 +59,10 @@ public class SendMailHelperJobImpl extends BaseJob implements Job {
 			return;
 		}		
 		//log.info("begin....");		
+		if (this.checkCurrentlyExecutingJobs(context, this)) {
+			log.warn("Same schedule job, current working...");
+			return;
+		}		
 		try {
 			this.loginForBackgroundProgram();
 			//log.info("Background Program userId: " + this.getAccountId());

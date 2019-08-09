@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -39,6 +40,7 @@ import com.netsteadfast.greenstep.util.ApplicationSiteUtils;
 import com.netsteadfast.greenstep.util.UploadSupportUtils;
 import com.netsteadfast.greenstep.vo.SysVO;
 
+@DisallowConcurrentExecution
 public class ClearTempDataJobImpl extends BaseJob implements Job {
 	protected static Logger log = Logger.getLogger(ClearTempDataJobImpl.class);
 	
@@ -53,6 +55,10 @@ public class ClearTempDataJobImpl extends BaseJob implements Job {
 			return;
 		}		
 		log.info("begin....");
+		if (this.checkCurrentlyExecutingJobs(context, this)) {
+			log.warn("Same schedule job, current working...");
+			return;
+		}
 		try {
 			
 			/**

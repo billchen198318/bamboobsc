@@ -21,13 +21,40 @@
  */
 package com.netsteadfast.greenstep.job;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
+import org.quartz.JobExecutionContext;
+import org.quartz.SchedulerException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.netsteadfast.greenstep.sys.BackgroundProgramUserUtils;
 import com.netsteadfast.greenstep.util.SimpleUtils;
 
 public abstract class BaseJob extends QuartzJobBean {
+	
+	/**
+	 * check before job in working.
+	 * 
+	 * @param context
+	 * @param currentJob
+	 * @return
+	 */
+	protected boolean checkCurrentlyExecutingJobs(JobExecutionContext context, QuartzJobBean currentJob) {
+		boolean beofreJobWork = false;
+		try {
+			List<JobExecutionContext> jobs = context.getScheduler().getCurrentlyExecutingJobs();
+			for (int j = 0; (jobs != null && !jobs.isEmpty()) && j < jobs.size() && !beofreJobWork; j++) {
+				JobExecutionContext job = jobs.get(j);
+				if (job.getTrigger().equals(context.getTrigger()) && !job.getJobInstance().equals(currentJob)) {
+					beofreJobWork = true;
+				}
+			}
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+		return beofreJobWork;
+	}
 	
 	public String getAccountId() {		
 		return StringUtils.defaultString( (String)BackgroundProgramUserUtils.getSubject().getPrincipal() );		

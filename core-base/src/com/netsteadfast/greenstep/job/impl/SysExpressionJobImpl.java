@@ -22,6 +22,7 @@
 package com.netsteadfast.greenstep.job.impl;
 
 import org.apache.log4j.Logger;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -35,6 +36,7 @@ import com.netsteadfast.greenstep.util.SystemExpressionJobUtils;
  * 注意: 這個Job 在 Quartz 中的設定, 要每分鐘都需執行處理
  *
  */
+@DisallowConcurrentExecution
 public class SysExpressionJobImpl extends BaseJob implements Job {
 	protected static Logger log = Logger.getLogger(SysExpressionJobImpl.class);
 	
@@ -44,6 +46,10 @@ public class SysExpressionJobImpl extends BaseJob implements Job {
 			log.warn( "ApplicationContext no completed, AppContext.getApplicationContext() == null" );			
 			return;
 		}
+		if (this.checkCurrentlyExecutingJobs(context, this)) {
+			log.warn("Same schedule job, current working...");
+			return;
+		}		
 		try {
 			this.loginForBackgroundProgram();
 			/*
