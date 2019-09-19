@@ -175,6 +175,7 @@ public class SendMailHelperJobImpl extends BaseJob implements Job {
 				
 			}			
 			this.flag = null;	
+			MailClientUtils.clearThreadLocal();
 		}
 		
 	}

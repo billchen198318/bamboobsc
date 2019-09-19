@@ -50,6 +50,12 @@ public class ScriptExpressionUtils {
 		groovyCompilerConfig.getOptimizationOptions().put("int", false);		
 	}
 	
+	public static void clearThreadLocal() {
+		bshInterpreterTL.remove();
+		groovyShellTL.remove();
+		renjinScriptEngineTL.remove();
+	}
+	
 	public static Interpreter buildBshInterpreter(boolean clean) {
 		Interpreter bshInterpreter = null;
 		if ((bshInterpreter=bshInterpreterTL.get()) == null) {

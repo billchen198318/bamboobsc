@@ -73,6 +73,13 @@ public class BscReportSupportUtils {
 				AppContext.getBean("bsc.service.OrganizationService");
 	}
 	
+	public static void clearThreadLocal() {
+		exprThreadLocal01.remove();
+		exprThreadLocal02.remove();
+		exprThreadLocal03.remove();
+		exprThreadLocal04.remove();
+	}
+	
 	public static void loadExpression() throws ServiceException, Exception {
 		loadExpression(exprThreadLocal01, REPORT_UP_DOWN_HTML_ICON_STATUS_EXPR_ID);
 		loadExpression(exprThreadLocal02, REPORT_UP_DOWN_BYTE_ICON_STATUS_EXPR_ID);

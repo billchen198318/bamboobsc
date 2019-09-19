@@ -103,7 +103,7 @@ public class QueryManagementAction extends BaseSupportAction implements IBaseAdd
 	}
 
 	private void initData() throws ServiceException, Exception {
-		ManualJdbcTemplateFactory.clear();
+		ManualJdbcTemplateFactory.clearTreadLocal();
 		this.confMap = this.dataSourceConfService.findForMap(true);
 		this.mapperMap = this.dataQueryMapperService.findForMap(true);
 		this.queryHistoryMap = this.dataQueryService.findForMap(true);

@@ -48,8 +48,13 @@ public class AggregationMethodUtils {
 	static {
 		aggregationMethodService = (IAggregationMethodService<AggregationMethodVO, BbAggregationMethod, String>)
 				AppContext.getBean("bsc.service.AggregationMethodService");
-		aggrMethodPkThreadLocal.set( new HashMap<String, AggregationMethodVO>() );
-		aggrMethodUkThreadLocal.set( new HashMap<String, AggregationMethodVO>() );			
+		//aggrMethodPkThreadLocal.set( new HashMap<String, AggregationMethodVO>() );
+		//aggrMethodUkThreadLocal.set( new HashMap<String, AggregationMethodVO>() );			
+	}
+	
+	public static void clearThreadLocal() {
+		aggrMethodPkThreadLocal.remove();
+		aggrMethodUkThreadLocal.remove();
 	}
 	
 	private static AggregationMethodVO findAggregationMethod(String oid) throws ServiceException, Exception {
@@ -66,6 +71,9 @@ public class AggregationMethodUtils {
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}
 		aggr = result.getValue();
+		if (null == aggrMethodPkThreadLocal.get()) {
+			aggrMethodPkThreadLocal.set( new HashMap<String, AggregationMethodVO>() );
+		}
 		aggrMethodPkThreadLocal.get().put(oid, aggr);
 		return aggr;
 	}
@@ -84,6 +92,9 @@ public class AggregationMethodUtils {
 			throw new ServiceException( result.getSystemMessage().getValue() );
 		}
 		aggr = result.getValue();
+		if (null == aggrMethodUkThreadLocal.get()) {
+			aggrMethodUkThreadLocal.set( new HashMap<String, AggregationMethodVO>() );	
+		}
 		aggrMethodUkThreadLocal.get().put(id, aggr);
 		return aggr;
 	}	

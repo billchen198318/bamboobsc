@@ -57,6 +57,11 @@ public class MailClientUtils {
 		return StringUtils.defaultString( enableTL.get() ).trim().equals(YesNo.YES);		
 	}	
 	
+	public static void clearThreadLocal() {
+		formTL.remove();
+		enableTL.remove();
+	}
+	
 	public static void send(
 			String from, String to, 
 			String subject, String text) throws MailException, Exception {

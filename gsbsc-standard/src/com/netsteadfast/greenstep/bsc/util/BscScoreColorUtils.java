@@ -41,6 +41,10 @@ public class BscScoreColorUtils {
 				AppContext.getBean("bsc.service.ScoreColorService");
 	}
 	
+	public static void clearThreadLocal() {
+		scoreColorsThreadLocal.remove();
+	}
+	
 	public static void loadScoreColors() throws ServiceException, Exception {
 		if ( scoreColorsThreadLocal.get()!=null && scoreColorsThreadLocal.get().size()>0 ) { // 2015-04-10 add
 			return;

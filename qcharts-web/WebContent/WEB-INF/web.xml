@@ -21,7 +21,7 @@
   	
   	<!-- Custom -->  		
 	<listener>
-		<listener-class>com.netsteadfast.greenstep.base.sys.WebSystemHttpSessionListenerForGeneralPackage</listener-class>
+		<listener-class>com.netsteadfast.greenstep.qcharts.sys.QChartsWebSystemHttpSessionListenerForGeneralPackage</listener-class>
 	</listener>    	
 	
 	<!-- 訊息發送的listener -->
@@ -85,21 +85,6 @@
   		<filter-name>MDCUserServletFilter</filter-name>
   		<url-pattern>/*</url-pattern>
  	</filter-mapping>  
- 	
-    
-	<!-- struts 2.x filter -->
-	<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>*.action</url-pattern>
-		<!-- 
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		-->
-	</filter-mapping>    
     
     <!--  
  	<filter>
@@ -128,14 +113,33 @@
  	</filter>	    
  	<filter-mapping>
   		<filter-name>CharsetFilter</filter-name>
-  		<url-pattern>*.action</url-pattern>
-  		<url-pattern>*.html</url-pattern>
-  		<url-pattern>*.htm</url-pattern>
-  		<url-pattern>*.js</url-pattern>
-  		<url-pattern>*.css</url-pattern>
- 	</filter-mapping>  	
+  		<url-pattern>/*</url-pattern>
+ 	</filter-mapping>     
  	
- 	
+	<filter>
+		<filter-name>QChartsThreadLocalClearServletFilter</filter-name>
+		<filter-class>com.netsteadfast.greenstep.qcharts.filter.QChartsThreadLocalClearServletFilter</filter-class>
+		<async-supported>true</async-supported>
+	</filter>
+	<filter-mapping>
+		<filter-name>QChartsThreadLocalClearServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>    
+	
+	<!-- struts 2.x filter -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<!-- 
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		-->
+	</filter-mapping>    	
+	 	
  	<!-- 訊息發送的servlet -->
 	<servlet>
 		<servlet-name>WebMessagePublishServlet</servlet-name>		

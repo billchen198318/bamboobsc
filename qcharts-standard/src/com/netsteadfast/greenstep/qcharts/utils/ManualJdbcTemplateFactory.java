@@ -78,8 +78,9 @@ public class ManualJdbcTemplateFactory {
 		return jdbcTemplate;
 	}
 	
-	public static void clear() {
+	public static void clearTreadLocal() {
 		jdbcTemplateTreadLocal.set(null);
+		jdbcTemplateTreadLocal.remove();
 	}
 	
 	private static class DataProperty {

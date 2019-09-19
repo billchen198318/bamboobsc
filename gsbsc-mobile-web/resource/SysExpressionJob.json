@@ -1,0 +1,4 @@
+{
+	"finalProcessClass"	: "com.netsteadfast.greenstep.bsc.support.BSCThreadLocalClear",
+	"method" : "clear"
+}

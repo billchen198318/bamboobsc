@@ -49,9 +49,7 @@ public class CharsetFilter implements Filter {
 	 * BUG FIX, run on newer than Tomcat 8.5.35 or Tomcat-9 version, will error :
 	 * Resource interpreted as Stylesheet but transferred with MIME type text/html
 	 */
-	private void resetCssAndJavascriptContentType(ServletRequest request, ServletResponse response) {
-		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-		String requestUrl = httpServletRequest.getRequestURL().toString();
+	private void resetCssAndJavascriptContentType(ServletRequest request, ServletResponse response, String requestUrl) {
 		if (requestUrl.contains(".css")) {
 			response.setContentType("text/css; charset=" + Constants.BASE_ENCODING);
 		}
@@ -61,11 +59,14 @@ public class CharsetFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, 
-			FilterChain chain) throws IOException, ServletException {
-		response.setContentType(this.contentType);
-		response.setCharacterEncoding(this.encoding);
-		this.resetCssAndJavascriptContentType(request, response);
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+		String requestUrl = httpServletRequest.getRequestURL().toString();
+		if (requestUrl.contains(".html") || requestUrl.contains(".htm")) {
+			response.setContentType(this.contentType);
+			response.setCharacterEncoding(this.encoding);			
+		}
+		this.resetCssAndJavascriptContentType(request, response, requestUrl);
 		chain.doFilter(request, response);
 	}
 

@@ -1,0 +1,4 @@
+{
+	"finalProcessClass"	: "com.netsteadfast.greenstep.qcharts.support.QChartsThreadLocalClear",
+	"method" : "clear"
+}

@@ -21,6 +21,16 @@
  */
 package com.netsteadfast.greenstep.job.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
@@ -28,9 +38,13 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.web.context.ContextLoader;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netsteadfast.greenstep.base.Constants;
 import com.netsteadfast.greenstep.base.exception.ServiceException;
 import com.netsteadfast.greenstep.job.BaseJob;
 import com.netsteadfast.greenstep.util.SystemExpressionJobUtils;
+
+import javassist.Modifier;
 
 /**
  * 注意: 這個Job 在 Quartz 中的設定, 要每分鐘都需執行處理
@@ -39,6 +53,37 @@ import com.netsteadfast.greenstep.util.SystemExpressionJobUtils;
 @DisallowConcurrentExecution
 public class SysExpressionJobImpl extends BaseJob implements Job {
 	protected static Logger log = Logger.getLogger(SysExpressionJobImpl.class);
+	
+	private static final String _CONFIG = "SysExpressionJob.json";
+	private static String _datas = " { } ";
+	private static Map<String, Object> _configDataMap;	
+	
+	static {
+		try {
+			InputStream is = SysExpressionJobImpl.class.getClassLoader().getResource( _CONFIG ).openStream();
+			_datas = IOUtils.toString(is, Constants.BASE_ENCODING);
+			is.close();
+			is = null;
+			_configDataMap = loadDatas();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (null==_configDataMap) {
+				_configDataMap = new HashMap<String, Object>();
+			}
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Map<String, Object> loadDatas() {
+		Map<String, Object> datas = null;
+		try {
+			datas = (Map<String, Object>)new ObjectMapper().readValue( _datas, LinkedHashMap.class );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return datas;
+	}	
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
@@ -74,8 +119,36 @@ public class SysExpressionJobImpl extends BaseJob implements Job {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}			
+			this.finalProcess();
 		}
 		
+	}
+	
+	private void finalProcess() {
+		String finalProcessClassName = "";
+		String methodName = "";
+		if (null != _configDataMap && !StringUtils.isBlank(finalProcessClassName = (String)_configDataMap.get("finalProcessClass"))) {
+			methodName = StringUtils.defaultString( (String) _configDataMap.get("method") );
+			try {
+				Class<?> finalProcessClass = Class.forName(finalProcessClassName);
+				Method[] methods = finalProcessClass.getMethods();
+				for (Method method : methods) {
+					if (method.getName().equals(methodName) && Modifier.isStatic(method.getModifiers())) {
+						try {
+							method.invoke(finalProcessClass);
+						} catch (IllegalAccessException e) {
+							e.printStackTrace();
+						} catch (IllegalArgumentException e) {
+							e.printStackTrace();
+						} catch (InvocationTargetException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 	
 	/*

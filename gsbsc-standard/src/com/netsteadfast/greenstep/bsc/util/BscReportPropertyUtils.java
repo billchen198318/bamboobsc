@@ -44,6 +44,10 @@ public class BscReportPropertyUtils {
 				AppContext.getBean("core.service.SysCodeService");
 	}
 	
+	public static void clearThreadLocal() {
+		sysCodeThreadLocal.remove();
+	}
+	
 	public static void loadData() throws ServiceException, Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", BscReportCode.CODE_TYPE);

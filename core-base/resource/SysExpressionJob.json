@@ -1,0 +1,4 @@
+{
+	"finalProcessClass"	: "com.netsteadfast.greenstep.support.CoreThreadLocalClear",
+	"method" : "clear"
+}
