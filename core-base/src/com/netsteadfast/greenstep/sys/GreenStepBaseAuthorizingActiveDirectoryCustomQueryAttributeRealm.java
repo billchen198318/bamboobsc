@@ -27,10 +27,13 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
 import org.apache.shiro.realm.ldap.LdapUtils;
+
+import com.netsteadfast.greenstep.base.Constants;
 
 public class GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm extends GreenStepBaseAuthorizingActiveDirectoryRealm {
 	
@@ -42,6 +45,7 @@ public class GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm ex
     protected AuthenticationInfo queryForAuthenticationInfo(AuthenticationToken token, LdapContextFactory ldapContextFactory) throws NamingException {
         final GreenStepBaseUsernamePasswordToken usernamePasswordToken = (GreenStepBaseUsernamePasswordToken) token;
         LdapContext ctx = null;
+        /*
         try {
         	ctx = ldapContextFactory.getSystemLdapContext();
             final String attribName = "userPrincipalName";
@@ -68,6 +72,43 @@ public class GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm ex
         } finally {
             LdapUtils.closeContext(ctx);
         }
+        */
+        String searchBaseArr[] = StringUtils.defaultString(searchBase).split( Constants.ID_DELIMITER );
+        boolean searchUser = false;
+        for (int i = 0; searchBaseArr != null && !searchUser && i<searchBaseArr.length; i++) {
+            try {
+            	ctx = ldapContextFactory.getSystemLdapContext();
+                final String attribName = "userPrincipalName";
+                final SearchControls searchControls = new SearchControls(SearchControls.SUBTREE_SCOPE, 1, 0, new String[] { attribName }, false, false);
+                final NamingEnumeration<SearchResult> search = ctx.search(searchBaseArr[i], this.getCustomQueryAttributeValue(), new Object[] { usernamePasswordToken.getPrincipal() }, searchControls);
+                if (search.hasMore()) {
+                	searchUser = true;
+                	final SearchResult next = search.next();
+                    String loginUser= next.getAttributes().get(attribName).get().toString();
+                    if (search.hasMore()) {
+                        throw new RuntimeException("More than one user matching: "+usernamePasswordToken.getPrincipal());
+                    } else {
+                        try {
+                        	ldapContextFactory.getLdapContext(loginUser, usernamePasswordToken.getPassword());
+                        } catch (Exception ex) {
+                            throw ex;
+                        }
+                    }
+                }
+                /*
+                else {
+                    throw new RuntimeException("No user matching: " + usernamePasswordToken.getPrincipal());
+                }
+                */
+            } catch (NamingException ne) {
+                throw ne;
+            } finally {
+                LdapUtils.closeContext(ctx);
+            }        	
+        }
+        if (!searchUser) {
+        	throw new RuntimeException("No user matching: " + usernamePasswordToken.getPrincipal());
+        }        
         return buildAuthenticationInfo(usernamePasswordToken.getUsername(), usernamePasswordToken.getPassword());
     }		
     

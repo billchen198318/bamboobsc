@@ -30,7 +30,14 @@
    		<property name="rolePermissionService" ref="core.service.RolePermissionService"/>	
 		<property name="cacheManager" ref="shiroCacheManager"/>
     	<property name="ldapContextFactory" ref="ldapContextFactory" />
+    	
+    	<!-- 
+    	searchBase value can input many use ";" char to separate, 
+    	etc: OU=nsgroup,DC=netsteadfast,DC=com;OU=HR,DC=netsteadfast,DC=com;OU=MIS,DC=netsteadfast,DC=com;OU=FIN,DC=netsteadfast,DC=com
+    	only change class "GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm" will effective
+    	-->
     	<property name="searchBase" value="OU=nsgroup,DC=netsteadfast,DC=com" />   
+    	
     	<!-- "customQueryAttributeValue" property, only change class "GreenStepBaseAuthorizingActiveDirectoryCustomQueryAttributeRealm" will effective -->
     	<property name="customQueryAttributeValue" value="sAMAccountName={0}" />
 	</bean> 	
