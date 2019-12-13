@@ -112,14 +112,11 @@ function ${programId}_page_message() {
 <body class="flat">	
 
 <jsp:include page="../header.jsp"></jsp:include>
-<table border="0" width="100%" height="600px" cellpadding="1" cellspacing="0" >
-	<tr>
-		<td width="100%" valign="top" >
-			<div id="BSC_PROG001D0002Q_S00_tree" ></div>
-		</td>
-	</tr>	
-</table>					
-	
+
+	<div dojoType="dijit.layout.ContentPane" region="left" splitter="false" style="width:97%;height:410px;">
+		<div id="BSC_PROG001D0002Q_S00_tree" ></div>						
+	</div>
+
 <script type="text/javascript">
 ${programId}_page_message(); 
 setTimeout("BSC_PROG001D0002Q_S00_getOrganizationTree();", 500);
