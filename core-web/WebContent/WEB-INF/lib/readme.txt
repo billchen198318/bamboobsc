@@ -1,15 +1,15 @@
 Struts2
 -------------------------
-commons-logging-1.1.3.jar
+commons-logging-1.2.jar
 commons-fileupload-1.4.jar
 commons-io-2.6.jar
 freemarker-2.3.28.jar
-ognl-3.1.21.jar
-struts2-core-2.5.20.jar
-struts2-jasperreports-plugin-2.5.20.jar
-struts2-jfreechart-plugin-2.5.20.jar
-struts2-json-plugin-2.5.20.jar
-struts2-spring-plugin-2.5.20.jar
+ognl-3.1.26.jar
+struts2-core-2.5.22.jar
+struts2-jasperreports-plugin-2.5.22.jar
+struts2-jfreechart-plugin-2.5.22.jar
+struts2-json-plugin-2.5.22.jar
+struts2-spring-plugin-2.5.22.jar
 
 
 Spring4
@@ -56,9 +56,9 @@ json
 json-lib-2.4-jdk15.jar
 
 
-MySQL
+MariaDB JDBC Driver
 -------------------------
-mysql-connector-java-8.0.15.jar
+mariadb-java-client-2.6.1.jar
 
 
 https://github.com/beanshell/beanshell
@@ -173,7 +173,7 @@ hamcrest-core-1.3.jar
 HikariCP
 https://github.com/brettwooldridge/HikariCP
 -------------------------
-HikariCP-3.3.1.jar
+HikariCP-3.4.5.jar
 
 
 ASM	*** Must be compatible with the version of Apache-CXF & CGLIB ***
@@ -339,7 +339,7 @@ guava-23.0.jar
 
 Groovy
 -------------------------
-groovy-all-2.4.16-indy.jar
+groovy-all-2.4.19-indy.jar
 
 
 Apache ActiveMQ
@@ -493,10 +493,10 @@ https://mvnrepository.com/artifact/com.datastax.cassandra/cassandra-driver-core
 cassandra-driver-core-3.3.0.jar
 
 
-DOJO release 1.16.2 ( package file by self )
+DOJO release 1.16.3 ( package file by self )
 *** Note: only for CORE-WEB ***
 -------------------------
-dojo-release-1.16.2.jar
+dojo-release-1.16.3.jar
 
 
 ---------------------------------------------------------------------------------------
