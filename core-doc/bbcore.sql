@@ -2694,7 +2694,7 @@ CREATE TABLE `qc_data_source_conf` (
 
 LOCK TABLES `qc_data_source_conf` WRITE;
 /*!40000 ALTER TABLE `qc_data_source_conf` DISABLE KEYS */;
-INSERT INTO `qc_data_source_conf` VALUES ('a80f84b5-b716-4ad0-9c7b-f9f5416522a2','BBCORE01','datasource-01','MYSQL','jdbc:mysql://localhost/bbcore?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull','root','password','test','admin','2015-01-12 13:12:50','admin','2015-01-13 11:33:54');
+INSERT INTO `qc_data_source_conf` VALUES ('a80f84b5-b716-4ad0-9c7b-f9f5416522a2','BBCORE01','datasource-01','MYSQL','jdbc:mariadb://localhost/bbcore?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull','root','password','test','admin','2015-01-12 13:12:50','admin','2015-01-13 11:33:54');
 /*!40000 ALTER TABLE `qc_data_source_conf` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2791,7 +2791,7 @@ CREATE TABLE `qc_olap_conf` (
 
 LOCK TABLES `qc_olap_conf` WRITE;
 /*!40000 ALTER TABLE `qc_olap_conf` DISABLE KEYS */;
-INSERT INTO `qc_olap_conf` VALUES ('ed303713-e520-4de6-bf20-7cd572637111','SOURCE01','Config-01','com.mysql.cj.jdbc.Driver','jdbc:mysql://localhost:3306/bbcore?user=root&password=password&useUnicode=true&characterEncoding=utf8','for test !','admin','2015-03-03 14:02:59','admin','2015-03-03 20:04:04');
+INSERT INTO `qc_olap_conf` VALUES ('ed303713-e520-4de6-bf20-7cd572637111','SOURCE01','Config-01','org.mariadb.jdbc.Driver','jdbc:mariadb://localhost:3306/bbcore?user=root&password=password&useUnicode=true&characterEncoding=utf8','for test !','admin','2015-03-03 14:02:59','admin','2015-03-03 20:04:04');
 /*!40000 ALTER TABLE `qc_olap_conf` ENABLE KEYS */;
 UNLOCK TABLES;
 
