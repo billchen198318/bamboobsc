@@ -29,7 +29,7 @@ import java.util.Enumeration;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
+//import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 
 /**
  * shutdown tomcat 時, 產生 the JDBC Driver has been forcibly unregistered 問題處理
@@ -60,7 +60,7 @@ public class ContainerContextClosedMySqlDriversHandlerListener implements Servle
 			e.printStackTrace();
 		}		
 		*/
-		AbandonedConnectionCleanupThread.checkedShutdown();
+		//AbandonedConnectionCleanupThread.checkedShutdown();
 	}
 	
 }

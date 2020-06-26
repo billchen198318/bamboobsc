@@ -154,7 +154,7 @@ public class Pivot4JUtils {
 	
 //  public static void main(String args[]) throws Exception { // 產EXCEL範例
 //		String url = "jdbc:mondrian:";
-//		url += "Jdbc='jdbc:mysql://localhost:3306/bbcore?user=root&password=password&useUnicode=true&characterEncoding=utf8';";
+//		url += "Jdbc='jdbc:mariadb://localhost:3306/bbcore?user=root&password=password&useUnicode=true&characterEncoding=utf8';";
 //		url += "Catalog='file://Measure.xml';";
 //		url += "JdbcDrivers=com.mysql.jdbc.Driver;";
 //		OlapConnection connection = getConnection(url);

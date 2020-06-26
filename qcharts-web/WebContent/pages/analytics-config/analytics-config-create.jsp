@@ -117,7 +117,7 @@ function ${programId}_page_message() {
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_jdbcDrivers'">
     				Input jdbc Driver.<BR/>
     				Example:<BR/>
-    				&nbsp;&nbsp;MySQL: com.mysql.cj.jdbc.Driver <BR/>
+    				&nbsp;&nbsp;MySQL: org.mariadb.jdbc.Driver <BR/>
     				&nbsp;&nbsp;PostgreSQL: org.postgresql.Driver <a href="https://jdbc.postgresql.org/">download</a><BR/>
     				&nbsp;&nbsp;SQL-Server: com.microsoft.sqlserver.jdbc.SQLServerDriver <a href="https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx">download</a><BR/>
     				&nbsp;&nbsp;Oracle: oracle.jdbc.OracleDriver <a href="http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html">download</a> <BR/>    				
@@ -136,7 +136,7 @@ function ${programId}_page_message() {
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0003A_jdbcUrl'">
     				Input jdbc url.<BR/>
     				Example:<BR/>
-    				jdbc:mysql://localhost:3306/testdb?user=root&password=pwd123
+    				jdbc:mariadb://localhost:3306/testdb?user=root&password=pwd123
     				<BR/>
     				<BR/>
     				<a href="http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html">Reference</a>

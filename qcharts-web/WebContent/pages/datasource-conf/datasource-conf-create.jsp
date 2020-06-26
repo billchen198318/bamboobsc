@@ -141,7 +141,7 @@ function ${programId}_page_message() {
 				<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'QCHARTS_PROG001D0001A_jdbcUrl'">
     				Input jdbc url.<BR/>
     				Example:<BR/>
-    				jdbc:mysql://localhost:3306/testdb
+    				jdbc:mariadb://localhost:3306/testdb
     				<BR/>
     				<BR/>
     				<a href="http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html">Reference</a>
