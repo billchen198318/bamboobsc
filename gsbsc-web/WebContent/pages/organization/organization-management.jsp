@@ -232,12 +232,12 @@ var ${programId}_map = null;
 var ${programId}_marker = null;
 function ${programId}_map_initialize() {
 	${programId}_map  = L.map('${programId}_map_canvas').setView([_gscore_leafletMapDefaultLat, _gscore_leafletMapDefaultLng], 13);
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + _gscore_mapBoxAccessToken, {
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + _gscore_mapBoxAccessToken, {
 		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
 			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox.streets',
+		id: 'mapbox/streets-v11',
 	    noWrap: true
 	}).addTo(${programId}_map);
 	${programId}_marker = L.marker([_gscore_leafletMapDefaultLat, _gscore_leafletMapDefaultLng], {draggable: true}).addTo( ${programId}_map ).bindPopup('<font color="RED"><s:property value="getText('BSC_PROG001D0002Q_mapInfoWindowContent')" escapeJavaScript="true"/></font>').openPopup();
