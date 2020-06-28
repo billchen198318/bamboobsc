@@ -42,10 +42,10 @@ bambooBSC is released under version 2.0 of the Apache Version 2.0
 <br/><br/>
 <h2>Download:</h2>
 VM version( need with VirtualBox ):
-https://github.com/billchen198318/bamboobsc/releases/download/v0.7.7/bamboobsc-0.7.7-RELEASE-VM.7z
+https://github.com/billchen198318/bamboobsc/releases/download/v0.7.8/bamboobsc-0.7.8-RELEASE-VM.7z
 <br/>
 Manual install version:
-https://github.com/billchen198318/bamboobsc/releases/download/v0.7.7/bamboobsc-0.7.7-RELEASE.7z
+https://github.com/billchen198318/bamboobsc/releases/download/v0.7.8/bamboobsc-0.7.8-RELEASE.7z
 <br/><br/>
 contact: chen.xin.nien@gmail.com
 <br/><br/>
@@ -103,9 +103,9 @@ contact: chen.xin.nien@gmail.com
 <br/>
 
 ### Install on Linux
-### 1. must first install the MySQL and JDK8
+### 1. must first install the MariaDB and JDK8 (JAVA8)
 ```
-# apt-get install mysql-server
+
 # apt-get install oracle-java8-jdk
 # java -version
 ```
@@ -114,12 +114,12 @@ Java(TM) SE Runtime Environment (build 1.8.0-b132)
 Java HotSpot(TM) Client VM (build 25.0-b70, mixed mode)
 
 
-### config MySQL root account's password
+### config MariaDB root account's password
 ```
 # mysqladmin -u root -p password
 ```
 
-### 2. Config MySQL enable lower_case_table_names=1
+### 2. Config MariaDB enable lower_case_table_names=1
 ```
 # service mysql stop
 # vi /etc/mysql/my.cnf
@@ -138,7 +138,7 @@ and save my.cnf
 ### 3. Get bambooBSC environment file
 ```
 # cd /home
-# wget --no-check-certificate https://github.com/billchen198318/bamboobsc/releases/download/v0.7.7/bamboobsc-0.7.7-RELEASE.7z
+# wget --no-check-certificate https://github.com/billchen198318/bamboobsc/releases/download/v0.7.8/bamboobsc-0.7.8-RELEASE.7z
 ```
 
 ### 4. Install P7ZIP
@@ -148,10 +148,10 @@ and save my.cnf
 
 ### 5. Extract the archive
 ```
-# p7zip -d bamboobsc-0.7.7-RELEASE.7z
+# p7zip -d bamboobsc-0.7.8-RELEASE.7z
 ```
 
-### 6. Import bbcore.sql to MySQL
+### 6. Import bbcore.sql to MariaDB
 ```
 # cd /home/bamboobsc-07/
 # mysql -u root -p
@@ -172,8 +172,8 @@ config C (Simple OLAP system ).<br/> /home/bamboobsc-07/apache-tomcat-8.5.39/web
 config D (Mobile web ).<br/> /home/bamboobsc-07/apache-tomcat-8.5.39/webapps/<b>gsbsc-mobile-web</b>/WEB-INF/classes/applicationContext/conf/applicationContext-dataSource.properties<br/>
 <br/>
 settings <b>dataSource.user</b> and <b>dataSource.password</b> <br/>
-dataSource.user is MySQL account<br/>
-dataSource.password is MySQL password<br/>
+dataSource.user is MariaDB account<br/>
+dataSource.password is MariaDB password<br/>
 
 example:
 ```
@@ -212,7 +212,7 @@ the log file on /tmp/
 
 ### Install on Amazon EC2 Failed to get local InetAddress for VMID
 
-cannot connect to MySQL database<br/>
+cannot connect to MariaDB database<br/>
 Please refer to:<br/>
 http://stackoverflow.com/questions/603351/can-we-set-easy-to-remember-hostnames-for-ec2-instances
 
