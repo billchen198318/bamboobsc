@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.19, for FreeBSD11.0 (amd64)
+-- MariaDB dump 10.17  Distrib 10.4.13-MariaDB, for FreeBSD12.1 (amd64)
 --
 -- Host: localhost    Database: bbcore
 -- ------------------------------------------------------
--- Server version	5.7.19-log
+-- Server version	10.4.13-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -29,12 +29,12 @@ CREATE TABLE `act_evt_log` (
   `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-  `TIME_STAMP_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  `TIME_STAMP_` timestamp(3) NOT NULL DEFAULT current_timestamp(3) ON UPDATE current_timestamp(3),
   `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `DATA_` longblob,
+  `DATA_` longblob DEFAULT NULL,
   `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `IS_PROCESSED_` tinyint(4) DEFAULT '0',
+  `IS_PROCESSED_` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`LOG_NR_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,7 +60,7 @@ CREATE TABLE `act_ge_bytearray` (
   `REV_` int(11) DEFAULT NULL,
   `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-  `BYTES_` longblob,
+  `BYTES_` longblob DEFAULT NULL,
   `GENERATED_` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`ID_`),
   KEY `ACT_FK_BYTEARR_DEPL` (`DEPLOYMENT_ID_`),
@@ -191,7 +191,7 @@ CREATE TABLE `act_hi_comment` (
   `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `ACTION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `MESSAGE_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
-  `FULL_MSG_` longblob,
+  `FULL_MSG_` longblob DEFAULT NULL,
   PRIMARY KEY (`ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -433,7 +433,7 @@ CREATE TABLE `act_id_info` (
   `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `VALUE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `PASSWORD_` longblob,
+  `PASSWORD_` longblob DEFAULT NULL,
   `PARENT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -698,7 +698,7 @@ CREATE TABLE `act_ru_event_subscr` (
   `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `ACTIVITY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `CONFIGURATION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `CREATED_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `CREATED_` timestamp(3) NOT NULL DEFAULT current_timestamp(3),
   `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
   PRIMARY KEY (`ID_`),
@@ -1360,7 +1360,7 @@ CREATE TABLE `bb_formula` (
 
 LOCK TABLES `bb_formula` WRITE;
 /*!40000 ALTER TABLE `bb_formula` DISABLE KEYS */;
-INSERT INTO `bb_formula` VALUES ('3253a746-a50e-457f-bd38-9647e159e5dd','F888','F888 Example for R','R','N','D','','if(actual<1) {\n    ans <- 0\n} else if (actual>target) {\n    ans <- target\n} else ans <- ( sum( rnorm(100, mean=actual, sd=3) ) / (target*100)   ) * 100','is a sample for R language!','admin','2016-11-15 19:54:17','admin','2016-11-15 19:54:46'),('b58b87cc-e938-4538-9617-4656788492cb','F777','KPI trends change(%)','BSH','Y','C','ans','if ( (float)cv!=0.0 && (float)pv!=0.0 ) {\n    ans = ( cv ÷ pv - 1 ) × 100.0;\n    return;\n}\nif ( (float)cv==0.0 ) {\n    ans = pv * -1.0;   \n    return;\n}\nif ( (float)pv==0.0 ) {\n    ans = cv;\n    return;\n}\nans = 0.0;\n\n','for KPI peroid current/previous score change(%)','admin','2015-10-15 16:09:02','admin','2015-10-17 12:18:19'),('bfc7c7df-0e7a-448b-b666-a9a2f7a7f950','F999','F999 Example for jython','PYTHON','N','C','ans','import math;\nans = math.sqrt( actual ÷ target ) × 100','is a sample!','admin','2014-11-20 10:03:12','admin','2014-11-20 15:49:10'),('d382b6ab-fe55-4c93-8c8e-79896ed09f7a','F001','F001 percent of target','GROOVY','N','C','ans','import org.apache.commons.lang3.math.*;\nimport java.lang.*;\n\nif (actual > 0 && target > 0 ) {\n    ans = Math.max( actual ÷ target ,  0 ) × 100;\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (\n    (actual <= 0 && target < 0 && actual >= target)\n    ||\n    (actual <= 0 && target < 0 && actual < target)\n    ||\n    (actual > 0 && target < 0 )\n) {\n    ans = ((((target - actual) ÷ target) × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual < 0 && target > 0 ) {\n    ans = ((((actual - target) ÷ target) × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual == 0 && target > 0 ) {\n    ans = 0;\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual >= 0 && target == 0 ) {\n    ans = ((actual × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual < 0 && target == 0 ) {\n    ans = ((actual × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nans = 0;\nans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\nreturn ans;','Calculating percent of target.','admin','2014-11-19 11:39:03','admin','2016-05-10 19:13:34'),('e2d2dc04-ed37-471b-ac73-7de51dfa4721','F002','F002 for return actual','BSH','N','D','','actual','for return actual !','admin','2014-11-19 11:45:13',NULL,NULL);
+INSERT INTO `bb_formula` VALUES ('3253a746-a50e-457f-bd38-9647e159e5dd','F888','F888 Example for R','R','N','D','','if(actual<1) {\n    ans <- 0\n} else if (actual>target) {\n    ans <- target\n} else ans <- ( sum( rnorm(100, mean=actual, sd=3) ) / (target*100)   ) * 100','is a sample for R language!','admin','2016-11-15 19:54:17','admin','2016-11-15 19:54:46'),('b58b87cc-e938-4538-9617-4656788492cb','F777','KPI trends change(%)','GROOVY','Y','C','ans','if ( (float)cv!=0.0 && (float)pv!=0.0 ) {\n    ans = ( cv ÷ pv - 1 ) × 100.0;\n    return;\n}\nif ( (float)cv==0.0 ) {\n    ans = pv * -1.0;   \n    return;\n}\nif ( (float)pv==0.0 ) {\n    ans = cv;\n    return;\n}\nans = 0.0;\n\n','for KPI peroid current/previous score change(%)','admin','2015-10-15 16:09:02','admin','2020-06-28 15:49:18'),('bfc7c7df-0e7a-448b-b666-a9a2f7a7f950','F999','F999 Example for jython','PYTHON','N','C','ans','import math;\nans = math.sqrt( actual ÷ target ) × 100','is a sample!','admin','2014-11-20 10:03:12','admin','2014-11-20 15:49:10'),('d382b6ab-fe55-4c93-8c8e-79896ed09f7a','F001','F001 percent of target','GROOVY','N','C','ans','import org.apache.commons.lang3.math.*;\nimport java.lang.*;\n\nif (actual > 0 && target > 0 ) {\n    ans = Math.max( actual ÷ target ,  0 ) × 100;\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (\n    (actual <= 0 && target < 0 && actual >= target)\n    ||\n    (actual <= 0 && target < 0 && actual < target)\n    ||\n    (actual > 0 && target < 0 )\n) {\n    ans = ((((target - actual) ÷ target) × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual < 0 && target > 0 ) {\n    ans = ((((actual - target) ÷ target) × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual == 0 && target > 0 ) {\n    ans = 0;\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual >= 0 && target == 0 ) {\n    ans = ((actual × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nif (actual < 0 && target == 0 ) {\n    ans = ((actual × 100) + 100);\n    ans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\n    return ans;\n}\nans = 0;\nans = NumberUtils.toFloat( String.valueOf(ans), 0.0f);\nreturn ans;','Calculating percent of target.','admin','2014-11-19 11:39:03','admin','2016-05-10 19:13:34'),('e2d2dc04-ed37-471b-ac73-7de51dfa4721','F002','F002 for return actual','BSH','N','D','','actual','for return actual !','admin','2014-11-19 11:45:13',NULL,NULL);
 /*!40000 ALTER TABLE `bb_formula` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1390,7 +1390,7 @@ CREATE TABLE `bb_kpi` (
   `DATA_TYPE` varchar(1) NOT NULL DEFAULT '1',
   `ORGA_MEASURE_SEPARATE` varchar(1) NOT NULL DEFAULT 'N',
   `USER_MEASURE_SEPARATE` varchar(1) NOT NULL DEFAULT 'N',
-  `QUASI_RANGE` int(3) NOT NULL DEFAULT '0',
+  `QUASI_RANGE` int(3) NOT NULL DEFAULT 0,
   `ACTIVATE` varchar(1) NOT NULL DEFAULT 'Y',
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -1516,8 +1516,8 @@ CREATE TABLE `bb_measure_data` (
   `OID` char(36) NOT NULL,
   `KPI_ID` varchar(14) NOT NULL,
   `DATE` varchar(8) NOT NULL,
-  `TARGET` float(9,2) NOT NULL DEFAULT '0.00',
-  `ACTUAL` float(9,2) NOT NULL DEFAULT '0.00',
+  `TARGET` float(9,2) NOT NULL DEFAULT 0.00,
+  `ACTUAL` float(9,2) NOT NULL DEFAULT 0.00,
   `FREQUENCY` varchar(1) NOT NULL,
   `ORG_ID` varchar(10) NOT NULL DEFAULT '*',
   `EMP_ID` varchar(10) NOT NULL DEFAULT '*',
@@ -2289,7 +2289,7 @@ CREATE TABLE `bb_tsa` (
   `OID` char(36) NOT NULL,
   `NAME` varchar(100) NOT NULL,
   `DESCRIPTION` varchar(500) DEFAULT NULL,
-  `INTEGRATION_ORDER` int(1) NOT NULL DEFAULT '1',
+  `INTEGRATION_ORDER` int(1) NOT NULL DEFAULT 1,
   `FORECAST_NEXT` int(2) NOT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -2321,7 +2321,7 @@ CREATE TABLE `bb_tsa_ma_coefficients` (
   `OID` char(36) NOT NULL,
   `TSA_OID` char(36) NOT NULL,
   `SEQ` int(2) NOT NULL,
-  `SEQ_VALUE` float(3,2) NOT NULL DEFAULT '0.00',
+  `SEQ_VALUE` float(3,2) NOT NULL DEFAULT 0.00,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
@@ -2387,7 +2387,7 @@ CREATE TABLE `bb_vision` (
   `OID` char(50) NOT NULL,
   `VIS_ID` varchar(14) NOT NULL,
   `TITLE` varchar(100) NOT NULL,
-  `CONTENT` blob,
+  `CONTENT` blob DEFAULT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
@@ -2741,7 +2741,7 @@ CREATE TABLE `qc_olap_catalog` (
   `OID` char(36) NOT NULL,
   `ID` varchar(20) NOT NULL,
   `NAME` varchar(150) NOT NULL,
-  `CONTENT` blob,
+  `CONTENT` blob DEFAULT NULL,
   `DESCRIPTION` varchar(500) DEFAULT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -2840,7 +2840,7 @@ CREATE TABLE `qrtz_blob_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `BLOB_DATA` blob,
+  `BLOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
@@ -2945,6 +2945,7 @@ CREATE TABLE `qrtz_fired_triggers` (
 
 LOCK TABLES `qrtz_fired_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_fired_triggers` VALUES ('scheduler','localX8615933303174451593330317377','core.job.SysExpressionJobCronTrigger','DEFAULT','localX861593330317445',1593330653164,1593330660000,0,'ACQUIRED',NULL,NULL,'0','0');
 /*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2965,7 +2966,7 @@ CREATE TABLE `qrtz_job_details` (
   `IS_NONCONCURRENT` varchar(1) NOT NULL,
   `IS_UPDATE_DATA` varchar(1) NOT NULL,
   `REQUESTS_RECOVERY` varchar(1) NOT NULL,
-  `JOB_DATA` blob,
+  `JOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
   KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
   KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
@@ -2978,7 +2979,7 @@ CREATE TABLE `qrtz_job_details` (
 
 LOCK TABLES `qrtz_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
-INSERT INTO `qrtz_job_details` VALUES ('scheduler','core.job.ClearTempDataJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.ClearTempDataJobImpl','1','0','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800),('scheduler','core.job.SendMailHelperJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.SendMailHelperJobImpl','1','0','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800),('scheduler','core.job.SysExpressionJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.SysExpressionJobImpl','1','0','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800);
+INSERT INTO `qrtz_job_details` VALUES ('scheduler','core.job.ClearTempDataJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.ClearTempDataJobImpl','1','1','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800),('scheduler','core.job.SendMailHelperJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.SendMailHelperJobImpl','1','1','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800),('scheduler','core.job.SysExpressionJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.SysExpressionJobImpl','1','1','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800);
 /*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3051,7 +3052,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861519550306420',1519551073840,7500);
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler','localX861593330317445',1593330652639,7500);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3142,7 +3143,7 @@ CREATE TABLE `qrtz_triggers` (
   `END_TIME` bigint(13) DEFAULT NULL,
   `CALENDAR_NAME` varchar(200) DEFAULT NULL,
   `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
-  `JOB_DATA` blob,
+  `JOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `IDX_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
   KEY `IDX_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
@@ -3166,7 +3167,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.ClearTempDataJobCronTrigger','DEFAULT','core.job.ClearTempDataJob','DEFAULT',NULL,1519587001000,-1,0,'WAITING','CRON',1519550306000,0,NULL,0,''),('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1519551120000,1519551000000,0,'WAITING','CRON',1519550306000,0,NULL,0,''),('scheduler','core.job.SysExpressionJobCronTrigger','DEFAULT','core.job.SysExpressionJob','DEFAULT',NULL,1519551120000,1519551060000,0,'WAITING','CRON',1519550306000,0,NULL,0,'');
+INSERT INTO `qrtz_triggers` VALUES ('scheduler','core.job.ClearTempDataJobCronTrigger','DEFAULT','core.job.ClearTempDataJob','DEFAULT',NULL,1593372601000,-1,0,'WAITING','CRON',1593330317000,0,NULL,0,''),('scheduler','core.job.SendMailHelperJobCronTrigger','DEFAULT','core.job.SendMailHelperJob','DEFAULT',NULL,1593330720000,1593330600000,0,'WAITING','CRON',1593330317000,0,NULL,0,''),('scheduler','core.job.SysExpressionJobCronTrigger','DEFAULT','core.job.SysExpressionJob','DEFAULT',NULL,1593330660000,1593330600000,0,'ACQUIRED','CRON',1593330317000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3181,7 +3182,7 @@ CREATE TABLE `qrtz_z_bsc_blob_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `BLOB_DATA` blob,
+  `BLOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_z_bsc_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_z_bsc_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
@@ -3306,7 +3307,7 @@ CREATE TABLE `qrtz_z_bsc_job_details` (
   `IS_NONCONCURRENT` varchar(1) NOT NULL,
   `IS_UPDATE_DATA` varchar(1) NOT NULL,
   `REQUESTS_RECOVERY` varchar(1) NOT NULL,
-  `JOB_DATA` blob,
+  `JOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
   KEY `IDX_QRTZ_Z_BSC_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
   KEY `IDX_QRTZ_Z_BSC_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
@@ -3319,7 +3320,7 @@ CREATE TABLE `qrtz_z_bsc_job_details` (
 
 LOCK TABLES `qrtz_z_bsc_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_z_bsc_job_details` DISABLE KEYS */;
-INSERT INTO `qrtz_z_bsc_job_details` VALUES ('scheduler','bsc.job.SysExpressionJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.SysExpressionJobImpl','1','0','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800);
+INSERT INTO `qrtz_z_bsc_job_details` VALUES ('scheduler','bsc.job.SysExpressionJob','DEFAULT',NULL,'com.netsteadfast.greenstep.job.impl.SysExpressionJobImpl','1','1','0','0',0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787000737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F40000000000010770800000010000000007800);
 /*!40000 ALTER TABLE `qrtz_z_bsc_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3392,7 +3393,7 @@ CREATE TABLE `qrtz_z_bsc_scheduler_state` (
 
 LOCK TABLES `qrtz_z_bsc_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_z_bsc_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_z_bsc_scheduler_state` VALUES ('scheduler','localX861519550359291',1519551073902,7500);
+INSERT INTO `qrtz_z_bsc_scheduler_state` VALUES ('scheduler','localX861593330396599',1593330648819,7500);
 /*!40000 ALTER TABLE `qrtz_z_bsc_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3483,7 +3484,7 @@ CREATE TABLE `qrtz_z_bsc_triggers` (
   `END_TIME` bigint(13) DEFAULT NULL,
   `CALENDAR_NAME` varchar(200) DEFAULT NULL,
   `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
-  `JOB_DATA` blob,
+  `JOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `IDX_QRTZ_Z_BSC_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
   KEY `IDX_QRTZ_Z_BSC_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
@@ -3507,7 +3508,7 @@ CREATE TABLE `qrtz_z_bsc_triggers` (
 
 LOCK TABLES `qrtz_z_bsc_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_z_bsc_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_z_bsc_triggers` VALUES ('scheduler','bsc.job.SysExpressionJobCronTrigger','DEFAULT','bsc.job.SysExpressionJob','DEFAULT',NULL,1519551120000,1519551060000,0,'WAITING','CRON',1519550359000,0,NULL,0,'');
+INSERT INTO `qrtz_z_bsc_triggers` VALUES ('scheduler','bsc.job.SysExpressionJobCronTrigger','DEFAULT','bsc.job.SysExpressionJob','DEFAULT',NULL,1593330660000,1593330600000,0,'WAITING','CRON',1593330396000,0,NULL,0,'');
 /*!40000 ALTER TABLE `qrtz_z_bsc_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3522,7 +3523,7 @@ CREATE TABLE `qrtz_z_qcharts_blob_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
-  `BLOB_DATA` blob,
+  `BLOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_z_qcharts_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_z_qcharts_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
@@ -3647,7 +3648,7 @@ CREATE TABLE `qrtz_z_qcharts_job_details` (
   `IS_NONCONCURRENT` varchar(1) NOT NULL,
   `IS_UPDATE_DATA` varchar(1) NOT NULL,
   `REQUESTS_RECOVERY` varchar(1) NOT NULL,
-  `JOB_DATA` blob,
+  `JOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
   KEY `IDX_QRTZ_Z_QCHARTS_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
   KEY `IDX_QRTZ_Z_QCHARTS_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
@@ -3824,7 +3825,7 @@ CREATE TABLE `qrtz_z_qcharts_triggers` (
   `END_TIME` bigint(13) DEFAULT NULL,
   `CALENDAR_NAME` varchar(200) DEFAULT NULL,
   `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
-  `JOB_DATA` blob,
+  `JOB_DATA` blob DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `IDX_QRTZ_Z_QCHARTS_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
   KEY `IDX_QRTZ_Z_QCHARTS_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
@@ -4057,7 +4058,7 @@ CREATE TABLE `tb_sys_bean_help_expr_map` (
   `HELP_EXPR_OID` char(36) NOT NULL,
   `METHOD_RESULT_FLAG` varchar(1) NOT NULL DEFAULT 'N',
   `METHOD_PARAM_CLASS` varchar(255) NOT NULL DEFAULT ' ',
-  `METHOD_PARAM_INDEX` int(3) NOT NULL DEFAULT '0',
+  `METHOD_PARAM_INDEX` int(3) NOT NULL DEFAULT 0,
   `VAR_NAME` varchar(255) NOT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -4091,7 +4092,7 @@ CREATE TABLE `tb_sys_bpmn_resource` (
   `ID` varchar(100) NOT NULL,
   `DEPLOYMENT_ID` varchar(64) DEFAULT NULL,
   `NAME` varchar(255) NOT NULL,
-  `CONTENT` mediumblob,
+  `CONTENT` mediumblob DEFAULT NULL,
   `DESCRIPTION` varchar(500) DEFAULT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -4319,7 +4320,7 @@ CREATE TABLE `tb_sys_expr_job` (
 
 LOCK TABLES `tb_sys_expr_job` WRITE;
 /*!40000 ALTER TABLE `tb_sys_expr_job` DISABLE KEYS */;
-INSERT INTO `tb_sys_expr_job` VALUES ('35dc2335-4c56-492b-b65b-462ce2ff0fd1','BSC','BSC_JOB_002','Monitor score JOB for HALF-OF-YEAR(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR002','*','*','11','0','','admin','2016-10-06 19:37:53','system','2017-02-20 09:11:07'),('5e0caf5d-e503-4432-8204-f06a6f5cdeb1','BSC','BSC_JOB_001','Monitor score JOB for YEAR(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR001','*','*','1','0','','admin','2016-10-06 19:36:26','system','2017-01-11 22:01:11'),('7d1517f2-8e1c-4125-aefc-499fba00f157','BSC','BSC_JOB_006','Monitor score JOB for DAY(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR006','*','*','51','0','','admin','2016-10-06 19:43:23','system','2017-01-17 19:51:09'),('8c3ffb0f-46fd-48b4-9b68-7fc122dfb1b7','BSC','BSC_JOB_801','Send notice mail for monitor score history data','Y','Please not modify!','Y','N','BSC_JOB_EXPR801','*','1','30','0','','admin','2016-12-14 19:29:02','admin','2016-12-14 19:33:13'),('97866344-cc84-45f1-8a12-7851ac66e505','BSC','BSC_JOB_003','Monitor score JOB for QUARTER(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR003','*','*','21','0','','admin','2016-10-06 19:38:59','system','2018-02-25 17:21:12'),('97c9c756-5a91-4f0a-9626-82085a9744f6','BSC','BSC_JOB_004','Monitor score JOB for MONTH(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR004','*','*','31','0','','admin','2016-10-06 19:41:15','system','2018-02-25 17:31:05'),('b18a8fbb-c946-462e-aa51-a857b6839873','BSC','BSC_JOB_901','Delete historical data JOB for score data 90-day','Y','Please not modify!','Y','N','BSC_JOB_EXPR901','*','2','30','0','','admin','2016-10-08 12:05:57','system','2016-10-18 20:15:01'),('fb828013-401b-419a-911b-c4e6f57dd982','BSC','BSC_JOB_005','Monitor score JOB for WEEK(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR005','*','*','41','0','','admin','2016-10-06 19:42:22','system','2017-01-11 22:41:12');
+INSERT INTO `tb_sys_expr_job` VALUES ('35dc2335-4c56-492b-b65b-462ce2ff0fd1','BSC','BSC_JOB_002','Monitor score JOB for HALF-OF-YEAR(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR002','*','*','11','0','','admin','2016-10-06 19:37:53','system','2017-02-20 09:11:07'),('5e0caf5d-e503-4432-8204-f06a6f5cdeb1','BSC','BSC_JOB_001','Monitor score JOB for YEAR(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR001','*','*','1','0','','admin','2016-10-06 19:36:26','system','2017-01-11 22:01:11'),('7d1517f2-8e1c-4125-aefc-499fba00f157','BSC','BSC_JOB_006','Monitor score JOB for DAY(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR006','*','*','51','0','','admin','2016-10-06 19:43:23','system','2017-01-17 19:51:09'),('8c3ffb0f-46fd-48b4-9b68-7fc122dfb1b7','BSC','BSC_JOB_801','Send notice mail for monitor score history data','Y','Please not modify!','Y','N','BSC_JOB_EXPR801','*','1','30','0','','admin','2016-12-14 19:29:02','admin','2016-12-14 19:33:13'),('97866344-cc84-45f1-8a12-7851ac66e505','BSC','BSC_JOB_003','Monitor score JOB for QUARTER(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR003','*','*','21','0','','admin','2016-10-06 19:38:59','system','2018-02-25 17:21:12'),('97c9c756-5a91-4f0a-9626-82085a9744f6','BSC','BSC_JOB_004','Monitor score JOB for MONTH(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR004','*','*','31','0','','admin','2016-10-06 19:41:15','system','2018-02-25 17:31:05'),('b18a8fbb-c946-462e-aa51-a857b6839873','BSC','BSC_JOB_901','Delete historical data JOB for score data 90-day','Y','Please not modify!','Y','N','BSC_JOB_EXPR901','*','2','30','0','','admin','2016-10-08 12:05:57','system','2016-10-18 20:15:01'),('fb828013-401b-419a-911b-c4e6f57dd982','BSC','BSC_JOB_005','Monitor score JOB for WEEK(all)','Y','Please not modify!','Y','N','BSC_JOB_EXPR005','*','*','41','0','','admin','2016-10-06 19:42:22','system','2020-06-28 15:41:15');
 /*!40000 ALTER TABLE `tb_sys_expr_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4502,7 +4503,7 @@ CREATE TABLE `tb_sys_ftp` (
   `ID` varchar(10) NOT NULL,
   `ADDRESS` varchar(50) NOT NULL,
   `NAME` varchar(20) NOT NULL,
-  `PORT` int(5) NOT NULL DEFAULT '0',
+  `PORT` int(5) NOT NULL DEFAULT 0,
   `USER` varchar(50) NOT NULL,
   `PASS` varchar(50) NOT NULL,
   `DESCRIPTION` varchar(500) NOT NULL,
@@ -4547,7 +4548,7 @@ CREATE TABLE `tb_sys_ftp_tran` (
   `EXPR_TYPE` varchar(10) NOT NULL,
   `NAME_EXPRESSION` varchar(8000) NOT NULL,
   `HELP_EXPRESSION` varchar(8000) NOT NULL,
-  `BEGIN_LEN` int(1) NOT NULL DEFAULT '0',
+  `BEGIN_LEN` int(1) NOT NULL DEFAULT 0,
   `DESCRIPTION` varchar(500) NOT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -4581,8 +4582,8 @@ CREATE TABLE `tb_sys_ftp_tran_segm` (
   `FTP_ID` varchar(10) NOT NULL,
   `TRAN_ID` varchar(10) NOT NULL,
   `NAME` varchar(50) NOT NULL,
-  `BEGIN` int(4) NOT NULL DEFAULT '0',
-  `END` int(4) NOT NULL DEFAULT '0',
+  `BEGIN` int(4) NOT NULL DEFAULT 0,
+  `END` int(4) NOT NULL DEFAULT 0,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
@@ -4737,7 +4738,7 @@ CREATE TABLE `tb_sys_mail_helper` (
   `OID` char(36) NOT NULL,
   `MAIL_ID` varchar(17) NOT NULL,
   `SUBJECT` varchar(200) NOT NULL,
-  `TEXT` blob,
+  `TEXT` blob DEFAULT NULL,
   `MAIL_FROM` varchar(100) NOT NULL,
   `MAIL_TO` varchar(100) NOT NULL,
   `MAIL_CC` varchar(1000) DEFAULT NULL,
@@ -4941,8 +4942,8 @@ CREATE TABLE `tb_sys_prog` (
   `EDIT_MODE` varchar(1) NOT NULL DEFAULT 'N',
   `IS_DIALOG` varchar(1) NOT NULL DEFAULT 'N',
   `IS_WINDOW` varchar(1) NOT NULL DEFAULT 'N',
-  `DIALOG_W` int(4) NOT NULL DEFAULT '0',
-  `DIALOG_H` int(4) NOT NULL DEFAULT '0',
+  `DIALOG_W` int(4) NOT NULL DEFAULT 0,
+  `DIALOG_H` int(4) NOT NULL DEFAULT 0,
   `PROG_SYSTEM` varchar(10) NOT NULL,
   `ITEM_TYPE` varchar(10) NOT NULL,
   `ICON` varchar(20) NOT NULL,
@@ -5108,7 +5109,7 @@ CREATE TABLE `tb_sys_twitter` (
   `SYSTEM` varchar(10) NOT NULL,
   `TITLE` varchar(30) NOT NULL,
   `ENABLE_FLAG` varchar(1) NOT NULL,
-  `CONTENT` blob,
+  `CONTENT` blob DEFAULT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
@@ -5143,7 +5144,7 @@ CREATE TABLE `tb_sys_upload` (
   `FILE_NAME` varchar(50) NOT NULL,
   `SHOW_NAME` varchar(255) NOT NULL,
   `IS_FILE` varchar(1) NOT NULL DEFAULT 'Y',
-  `CONTENT` mediumblob,
+  `CONTENT` mediumblob DEFAULT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
   `UUSERID` varchar(24) DEFAULT NULL,
@@ -5177,7 +5178,7 @@ CREATE TABLE `tb_sys_upload_tran` (
   `ENCODING` varchar(10) NOT NULL,
   `EXPR_TYPE` varchar(10) NOT NULL,
   `HELP_EXPRESSION` varchar(8000) NOT NULL,
-  `BEGIN_LEN` int(1) NOT NULL DEFAULT '0',
+  `BEGIN_LEN` int(1) NOT NULL DEFAULT 0,
   `DESCRIPTION` varchar(500) NOT NULL,
   `CUSERID` varchar(24) NOT NULL,
   `CDATE` datetime NOT NULL,
@@ -5369,4 +5370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-25 17:58:07
+-- Dump completed on 2020-06-28 15:56:29
