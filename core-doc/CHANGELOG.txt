@@ -1,14 +1,18 @@
 0.7.8
 -----------------------------------------------------------
-1. Update Highcharts version to 6.0.7
-2. Update thirdparty lib files
+1. Update thirdparty lib files
+2. Update Mapbox version
+3. Update DOJO & Highcharts version
+4. BUG FIX, fix cannot select department item. 
+5. JDBC Driver MySQL change to MariaDB
+6. SQL script file bbcore.sql, default change to MariaDB.
 
 
 0.7.7
 -----------------------------------------------------------
 1. Update dojo version to 1.15.0
 2. BUG FIX, run on newer than Tomcat 8.5.35 or Tomcat-9 version, will error Resource interpreted on browser.
-3. MySQL jdbc drive com.mysql.jdbc.Driver change com.mysql.cj.jdbc.Driver
+3. MySQL jdbc drive com.mysql.jdbc.Driver change org.mariadb.jdbc.Driver
 
 
 0.7.6
