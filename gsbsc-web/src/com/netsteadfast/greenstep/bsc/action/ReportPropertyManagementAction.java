@@ -56,7 +56,7 @@ public class ReportPropertyManagementAction extends BaseSupportAction implements
 		this.getFields().put("weightLabel", BscReportPropertyUtils.getWeightLabel() );
 		this.getFields().put("maxLabel", BscReportPropertyUtils.getMaxLabel() );
 		this.getFields().put("targetLabel", BscReportPropertyUtils.getTargetLabel() );
-		this.getFields().put("minLabel", BscReportPropertyUtils.getMaxLabel() );
+		this.getFields().put("minLabel", BscReportPropertyUtils.getMinLabel() );
 		this.getFields().put("managementLabel", BscReportPropertyUtils.getManagementLabel() );
 		this.getFields().put("calculationLabel", BscReportPropertyUtils.getCalculationLabel() );
 		this.getFields().put("unitLabel", BscReportPropertyUtils.getUnitLabel() );
