@@ -1,3 +1,7 @@
+### next version move to https://github.com/billchen198318/hillfog
+
+<br>
+
 <h2>bambooBSC is an opensource Balanced Scorecard (BSC) Business Intelligence</h2>
 <img src="https://raw.githubusercontent.com/billchen198318/bamboobsc/master/core-doc/bamboobsc-logo.png" alt="logo"/>
 
